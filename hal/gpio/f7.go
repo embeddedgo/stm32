@@ -1,0 +1,78 @@
+// Copyright 2019 Michal Derkacz. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+// +build stm32f7x6
+
+package gpio
+
+const (
+	AF1_TIM1 = AF1
+	AF1_TIM2 = AF1
+
+	AF2_TIM3 = AF2
+	AF2_TIM4 = AF2
+	AF2_TIM5 = AF2
+
+	AF3_TIM8   = AF3
+	AF3_TIM9   = AF3
+	AF3_TIM10  = AF3
+	AF3_TIM11  = AF3
+	AF3_LPTIM1 = AF3
+	AF3_CEC    = AF3
+
+	AF4_I2C1 = AF4
+	AF4_I2C2 = AF4
+	AF4_I2C3 = AF4
+	AF4_I2C4 = AF4
+	AF4_CEC  = AF4
+
+	AF5_SPI1 = AF5
+	AF5_SPI2 = AF5
+	AF5_SPI4 = AF5
+	AF5_SPI5 = AF5
+	AF5_SPI6 = AF5
+
+	AF6_SPI3 = AF6
+	AF6_SAI1 = AF6
+
+	AF7_SPI2    = AF7
+	AF7_SPI3    = AF7
+	AF7_USART1  = AF7
+	AF7_USART2  = AF7
+	AF7_USART3  = AF7
+	AF7_UART5   = AF7
+	AF7_SPDIFRX = AF7
+
+	AF8_SAI2    = AF8
+	AF8_USART6  = AF8
+	AF8_UART4   = AF8
+	AF8_UART55  = AF8
+	AF8_UART7   = AF8
+	AF8_UART8   = AF8
+	AF8_SPDIFRX = AF8
+
+	AF9_CAN1    = AF9
+	AF9_CAN2    = AF9
+	AF9_TIM12   = AF9
+	AF9_TIM13   = AF9
+	AF9_TIM14   = AF9
+	AF9_QUADSPI = AF9
+	AF9_LCD     = AF9
+
+	AF10_SAI2    = AF10
+	AF10_QUADSPI = AF10
+	AF10_OTG2HS  = AF10
+	AF10_OTG1FS  = AF10
+
+	AF11_ETH    = AF11
+	AF11_OTG1FS = AF11
+
+	AF12_FMC    = AF12
+	AF12_SDMMS1 = AF12
+	AF12_OTG2FS = AF12
+
+	AF13_DCMI = AF13
+
+	AF14_LCD = AF14
+)
