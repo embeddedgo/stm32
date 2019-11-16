@@ -7,7 +7,7 @@ package main
 
 import (
 	"github.com/embeddedgo/stm32/devboard/nucleo-l496zg/board"
-	"github.com/embeddedgo/time"
+	"github.com/embeddedgo/x/time"
 )
 
 func delay() {

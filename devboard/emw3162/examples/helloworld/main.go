@@ -6,7 +6,7 @@ package main
 
 import (
 	"github.com/embeddedgo/stm32/devboard/emw3162/board"
-	"github.com/embeddedgo/time"
+	"github.com/embeddedgo/x/time"
 )
 
 func main() {
