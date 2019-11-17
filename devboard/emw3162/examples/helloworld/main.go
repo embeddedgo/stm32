@@ -10,11 +10,9 @@ import (
 )
 
 func main() {
-	board.Setup()
+	board.Setup(true)
 	for {
-		board.Red.SetOn()
 		println("Hello World!")
-		board.Red.SetOff()
 		time.Sleep(time.Second / 4)
 	}
 }
