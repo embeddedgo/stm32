@@ -12,7 +12,7 @@ There is also _doc_ subdirectory that contain useful information and other resou
 
 ### Supported boards
 
-[emw3162](emw3162): MXCHIP EMW3162 ([STM32F205RGT6](https://www.st.com/en/microcontrollers/stm32f205rg.html) + [BCM43362](http://www.cypress.com/products/wi-fi)), [website](http://en.mxchip.com/product/wifi_product/39)
+[emw3162](emw3162): MXCHIP EMW3162 ([STM32F205RGT6](https://www.st.com/en/microcontrollers/stm32f205rg.html) + [BCM43362](http://www.cypress.com/products/wi-fi)), [website](https://en.mxchip.com/productinfo/244895.html)
 
 ![EMW3162](emw3162/doc/board.jpg)
 
