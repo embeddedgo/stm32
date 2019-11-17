@@ -14,13 +14,15 @@ import (
 func main() {
 	board.Setup(true)
 	for i := 0; i < 3; i++ {
-		println(time.Now().String())
+		println("before set:", time.Now().String())
 		time.Sleep(time.Second)
 	}
 	time.Local = &tz.EuropeWarsaw
-	time.Set(time.Date(2019, 11, 17, 11, 44, 35, 9991, time.Local))
+	set := time.Date(2019, 11, 17, 11, 44, 35, 9991, time.Local)
+	time.Set(set)
+	println("set: ", set.String())
 	for {
-		println(time.Now().String())
+		println("after set:", time.Now().String())
 		time.Sleep(time.Second)
 	}
 }
