@@ -19,4 +19,8 @@ func main() {
 	}
 	time.Local = &tz.EuropeWarsaw
 	time.Set(time.Date(2019, 11, 17, 11, 44, 35, 9991, time.Local))
+	for {
+		println(time.Now().String())
+		time.Sleep(time.Second)
+	}
 }
