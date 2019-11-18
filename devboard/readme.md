@@ -20,10 +20,10 @@ There is also _doc_ subdirectory that contain useful information and other resou
 
 ![STM32F4-Discovery](f4-discovery/doc/board.jpg)
 
-[nucleo-l476rg](nucleo-l476rg]): NUCLEO-L476RG, [website](https://www.st.com/en/evaluation-tools/nucleo-l476rg.html)
+[nucleo-l476rg](nucleo-l476rg): NUCLEO-L476RG, [website](https://www.st.com/en/evaluation-tools/nucleo-l476rg.html)
 
 ![NUCLEO-L476RG](nucleo-l476rg/doc/board.jpg)
 
-[nucleo-l496zg](nucleo-l496zg]): NUCLEO-L496ZG, [website](https://www.st.com/en/evaluation-tools/nucleo-l496zg.html)
+[nucleo-l496zg](nucleo-l496zg): NUCLEO-L496ZG, [website](https://www.st.com/en/evaluation-tools/nucleo-l496zg.html)
 
 ![NUCLEO-L496ZG](nucleo-l496zg/doc/board.jpg)
