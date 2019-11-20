@@ -8,37 +8,10 @@
 //  DMA1  DMA1_BASE  AHB1  DMA1_CH1,DMA1_CH2,DMA1_CH3,DMA1_CH4,DMA1_CH5,DMA1_CH6,DMA1_CH7  Direct memory access controller
 //  DMA2  DMA2_BASE  AHB1  DMA2_CH1,DMA2_CH2,DMA2_CH3,DMA2_CH4,DMA2_CH5,DMA2_CH6,DMA2_CH7  Direct memory access controller
 // Registers:
-//  0x000 32  ISR     interrupt status register
-//  0x004 32  IFCR    interrupt flag clear register
-//  0x008 32  CCR1    channel x configuration register
-//  0x00C 32  CNDTR1  channel x number of data register
-//  0x010 32  CPAR1   channel x peripheral address register
-//  0x014 32  CMAR1   channel x memory address register
-//  0x01C 32  CCR2    channel x configuration register
-//  0x020 32  CNDTR2  channel x number of data register
-//  0x024 32  CPAR2   channel x peripheral address register
-//  0x028 32  CMAR2   channel x memory address register
-//  0x030 32  CCR3    channel x configuration register
-//  0x034 32  CNDTR3  channel x number of data register
-//  0x038 32  CPAR3   channel x peripheral address register
-//  0x03C 32  CMAR3   channel x memory address register
-//  0x044 32  CCR4    channel x configuration register
-//  0x048 32  CNDTR4  channel x number of data register
-//  0x04C 32  CPAR4   channel x peripheral address register
-//  0x050 32  CMAR4   channel x memory address register
-//  0x058 32  CCR5    channel x configuration register
-//  0x05C 32  CNDTR5  channel x number of data register
-//  0x060 32  CPAR5   channel x peripheral address register
-//  0x064 32  CMAR5   channel x memory address register
-//  0x06C 32  CCR6    channel x configuration register
-//  0x070 32  CNDTR6  channel x number of data register
-//  0x074 32  CPAR6   channel x peripheral address register
-//  0x078 32  CMAR6   channel x memory address register
-//  0x080 32  CCR7    channel x configuration register
-//  0x084 32  CNDTR7  channel x number of data register
-//  0x088 32  CPAR7   channel x peripheral address register
-//  0x08C 32  CMAR7   channel x memory address register
-//  0x0A8 32  CSELR   channel selection register
+//  0x000 32  ISR                    interrupt status register
+//  0x004 32  IFCR                   interrupt flag clear register
+//  0x008 32  C{CR,NDTR,PAR,MAR}[7]  channel configuration and controll registers
+//  0x0A8 32  CSELR                  channel selection register
 // Import:
 //  github.com/embeddedgo/stm32/p/bus
 //  github.com/embeddedgo/stm32/p/mmap
@@ -169,18 +142,18 @@ const (
 )
 
 const (
-	EN      CCR1 = 0x01 << 0  //+ Channel enable
-	TCIE    CCR1 = 0x01 << 1  //+ Transfer complete interrupt enable
-	HTIE    CCR1 = 0x01 << 2  //+ Half transfer interrupt enable
-	TEIE    CCR1 = 0x01 << 3  //+ Transfer error interrupt enable
-	DIR     CCR1 = 0x01 << 4  //+ Data transfer direction
-	CIRC    CCR1 = 0x01 << 5  //+ Circular mode
-	PINC    CCR1 = 0x01 << 6  //+ Peripheral increment mode
-	MINC    CCR1 = 0x01 << 7  //+ Memory increment mode
-	PSIZE   CCR1 = 0x03 << 8  //+ Peripheral size
-	MSIZE   CCR1 = 0x03 << 10 //+ Memory size
-	PL      CCR1 = 0x03 << 12 //+ Channel priority level
-	MEM2MEM CCR1 = 0x01 << 14 //+ Memory to memory mode
+	EN      CR = 0x01 << 0  //+ Channel enable
+	TCIE    CR = 0x01 << 1  //+ Transfer complete interrupt enable
+	HTIE    CR = 0x01 << 2  //+ Half transfer interrupt enable
+	TEIE    CR = 0x01 << 3  //+ Transfer error interrupt enable
+	DIR     CR = 0x01 << 4  //+ Data transfer direction
+	CIRC    CR = 0x01 << 5  //+ Circular mode
+	PINC    CR = 0x01 << 6  //+ Peripheral increment mode
+	MINC    CR = 0x01 << 7  //+ Memory increment mode
+	PSIZE   CR = 0x03 << 8  //+ Peripheral size
+	MSIZE   CR = 0x03 << 10 //+ Memory size
+	PL      CR = 0x03 << 12 //+ Channel priority level
+	MEM2MEM CR = 0x01 << 14 //+ Memory to memory mode
 )
 
 const (
@@ -199,7 +172,7 @@ const (
 )
 
 const (
-	NDT CNDTR1 = 0xFFFF << 0 //+ Number of data to transfer
+	NDT NDTR = 0xFFFF << 0 //+ Number of data to transfer
 )
 
 const (
@@ -207,7 +180,7 @@ const (
 )
 
 const (
-	PA CPAR1 = 0xFFFFFFFF << 0 //+ Peripheral address
+	PA PAR = 0xFFFFFFFF << 0 //+ Peripheral address
 )
 
 const (
@@ -215,331 +188,7 @@ const (
 )
 
 const (
-	MA CMAR1 = 0xFFFFFFFF << 0 //+ Memory address
-)
-
-const (
-	MAn = 0
-)
-
-const (
-	EN      CCR2 = 0x01 << 0  //+ Channel enable
-	TCIE    CCR2 = 0x01 << 1  //+ Transfer complete interrupt enable
-	HTIE    CCR2 = 0x01 << 2  //+ Half transfer interrupt enable
-	TEIE    CCR2 = 0x01 << 3  //+ Transfer error interrupt enable
-	DIR     CCR2 = 0x01 << 4  //+ Data transfer direction
-	CIRC    CCR2 = 0x01 << 5  //+ Circular mode
-	PINC    CCR2 = 0x01 << 6  //+ Peripheral increment mode
-	MINC    CCR2 = 0x01 << 7  //+ Memory increment mode
-	PSIZE   CCR2 = 0x03 << 8  //+ Peripheral size
-	MSIZE   CCR2 = 0x03 << 10 //+ Memory size
-	PL      CCR2 = 0x03 << 12 //+ Channel priority level
-	MEM2MEM CCR2 = 0x01 << 14 //+ Memory to memory mode
-)
-
-const (
-	ENn      = 0
-	TCIEn    = 1
-	HTIEn    = 2
-	TEIEn    = 3
-	DIRn     = 4
-	CIRCn    = 5
-	PINCn    = 6
-	MINCn    = 7
-	PSIZEn   = 8
-	MSIZEn   = 10
-	PLn      = 12
-	MEM2MEMn = 14
-)
-
-const (
-	NDT CNDTR2 = 0xFFFF << 0 //+ Number of data to transfer
-)
-
-const (
-	NDTn = 0
-)
-
-const (
-	PA CPAR2 = 0xFFFFFFFF << 0 //+ Peripheral address
-)
-
-const (
-	PAn = 0
-)
-
-const (
-	MA CMAR2 = 0xFFFFFFFF << 0 //+ Memory address
-)
-
-const (
-	MAn = 0
-)
-
-const (
-	EN      CCR3 = 0x01 << 0  //+ Channel enable
-	TCIE    CCR3 = 0x01 << 1  //+ Transfer complete interrupt enable
-	HTIE    CCR3 = 0x01 << 2  //+ Half transfer interrupt enable
-	TEIE    CCR3 = 0x01 << 3  //+ Transfer error interrupt enable
-	DIR     CCR3 = 0x01 << 4  //+ Data transfer direction
-	CIRC    CCR3 = 0x01 << 5  //+ Circular mode
-	PINC    CCR3 = 0x01 << 6  //+ Peripheral increment mode
-	MINC    CCR3 = 0x01 << 7  //+ Memory increment mode
-	PSIZE   CCR3 = 0x03 << 8  //+ Peripheral size
-	MSIZE   CCR3 = 0x03 << 10 //+ Memory size
-	PL      CCR3 = 0x03 << 12 //+ Channel priority level
-	MEM2MEM CCR3 = 0x01 << 14 //+ Memory to memory mode
-)
-
-const (
-	ENn      = 0
-	TCIEn    = 1
-	HTIEn    = 2
-	TEIEn    = 3
-	DIRn     = 4
-	CIRCn    = 5
-	PINCn    = 6
-	MINCn    = 7
-	PSIZEn   = 8
-	MSIZEn   = 10
-	PLn      = 12
-	MEM2MEMn = 14
-)
-
-const (
-	NDT CNDTR3 = 0xFFFF << 0 //+ Number of data to transfer
-)
-
-const (
-	NDTn = 0
-)
-
-const (
-	PA CPAR3 = 0xFFFFFFFF << 0 //+ Peripheral address
-)
-
-const (
-	PAn = 0
-)
-
-const (
-	MA CMAR3 = 0xFFFFFFFF << 0 //+ Memory address
-)
-
-const (
-	MAn = 0
-)
-
-const (
-	EN      CCR4 = 0x01 << 0  //+ Channel enable
-	TCIE    CCR4 = 0x01 << 1  //+ Transfer complete interrupt enable
-	HTIE    CCR4 = 0x01 << 2  //+ Half transfer interrupt enable
-	TEIE    CCR4 = 0x01 << 3  //+ Transfer error interrupt enable
-	DIR     CCR4 = 0x01 << 4  //+ Data transfer direction
-	CIRC    CCR4 = 0x01 << 5  //+ Circular mode
-	PINC    CCR4 = 0x01 << 6  //+ Peripheral increment mode
-	MINC    CCR4 = 0x01 << 7  //+ Memory increment mode
-	PSIZE   CCR4 = 0x03 << 8  //+ Peripheral size
-	MSIZE   CCR4 = 0x03 << 10 //+ Memory size
-	PL      CCR4 = 0x03 << 12 //+ Channel priority level
-	MEM2MEM CCR4 = 0x01 << 14 //+ Memory to memory mode
-)
-
-const (
-	ENn      = 0
-	TCIEn    = 1
-	HTIEn    = 2
-	TEIEn    = 3
-	DIRn     = 4
-	CIRCn    = 5
-	PINCn    = 6
-	MINCn    = 7
-	PSIZEn   = 8
-	MSIZEn   = 10
-	PLn      = 12
-	MEM2MEMn = 14
-)
-
-const (
-	NDT CNDTR4 = 0xFFFF << 0 //+ Number of data to transfer
-)
-
-const (
-	NDTn = 0
-)
-
-const (
-	PA CPAR4 = 0xFFFFFFFF << 0 //+ Peripheral address
-)
-
-const (
-	PAn = 0
-)
-
-const (
-	MA CMAR4 = 0xFFFFFFFF << 0 //+ Memory address
-)
-
-const (
-	MAn = 0
-)
-
-const (
-	EN      CCR5 = 0x01 << 0  //+ Channel enable
-	TCIE    CCR5 = 0x01 << 1  //+ Transfer complete interrupt enable
-	HTIE    CCR5 = 0x01 << 2  //+ Half transfer interrupt enable
-	TEIE    CCR5 = 0x01 << 3  //+ Transfer error interrupt enable
-	DIR     CCR5 = 0x01 << 4  //+ Data transfer direction
-	CIRC    CCR5 = 0x01 << 5  //+ Circular mode
-	PINC    CCR5 = 0x01 << 6  //+ Peripheral increment mode
-	MINC    CCR5 = 0x01 << 7  //+ Memory increment mode
-	PSIZE   CCR5 = 0x03 << 8  //+ Peripheral size
-	MSIZE   CCR5 = 0x03 << 10 //+ Memory size
-	PL      CCR5 = 0x03 << 12 //+ Channel priority level
-	MEM2MEM CCR5 = 0x01 << 14 //+ Memory to memory mode
-)
-
-const (
-	ENn      = 0
-	TCIEn    = 1
-	HTIEn    = 2
-	TEIEn    = 3
-	DIRn     = 4
-	CIRCn    = 5
-	PINCn    = 6
-	MINCn    = 7
-	PSIZEn   = 8
-	MSIZEn   = 10
-	PLn      = 12
-	MEM2MEMn = 14
-)
-
-const (
-	NDT CNDTR5 = 0xFFFF << 0 //+ Number of data to transfer
-)
-
-const (
-	NDTn = 0
-)
-
-const (
-	PA CPAR5 = 0xFFFFFFFF << 0 //+ Peripheral address
-)
-
-const (
-	PAn = 0
-)
-
-const (
-	MA CMAR5 = 0xFFFFFFFF << 0 //+ Memory address
-)
-
-const (
-	MAn = 0
-)
-
-const (
-	EN      CCR6 = 0x01 << 0  //+ Channel enable
-	TCIE    CCR6 = 0x01 << 1  //+ Transfer complete interrupt enable
-	HTIE    CCR6 = 0x01 << 2  //+ Half transfer interrupt enable
-	TEIE    CCR6 = 0x01 << 3  //+ Transfer error interrupt enable
-	DIR     CCR6 = 0x01 << 4  //+ Data transfer direction
-	CIRC    CCR6 = 0x01 << 5  //+ Circular mode
-	PINC    CCR6 = 0x01 << 6  //+ Peripheral increment mode
-	MINC    CCR6 = 0x01 << 7  //+ Memory increment mode
-	PSIZE   CCR6 = 0x03 << 8  //+ Peripheral size
-	MSIZE   CCR6 = 0x03 << 10 //+ Memory size
-	PL      CCR6 = 0x03 << 12 //+ Channel priority level
-	MEM2MEM CCR6 = 0x01 << 14 //+ Memory to memory mode
-)
-
-const (
-	ENn      = 0
-	TCIEn    = 1
-	HTIEn    = 2
-	TEIEn    = 3
-	DIRn     = 4
-	CIRCn    = 5
-	PINCn    = 6
-	MINCn    = 7
-	PSIZEn   = 8
-	MSIZEn   = 10
-	PLn      = 12
-	MEM2MEMn = 14
-)
-
-const (
-	NDT CNDTR6 = 0xFFFF << 0 //+ Number of data to transfer
-)
-
-const (
-	NDTn = 0
-)
-
-const (
-	PA CPAR6 = 0xFFFFFFFF << 0 //+ Peripheral address
-)
-
-const (
-	PAn = 0
-)
-
-const (
-	MA CMAR6 = 0xFFFFFFFF << 0 //+ Memory address
-)
-
-const (
-	MAn = 0
-)
-
-const (
-	EN      CCR7 = 0x01 << 0  //+ Channel enable
-	TCIE    CCR7 = 0x01 << 1  //+ Transfer complete interrupt enable
-	HTIE    CCR7 = 0x01 << 2  //+ Half transfer interrupt enable
-	TEIE    CCR7 = 0x01 << 3  //+ Transfer error interrupt enable
-	DIR     CCR7 = 0x01 << 4  //+ Data transfer direction
-	CIRC    CCR7 = 0x01 << 5  //+ Circular mode
-	PINC    CCR7 = 0x01 << 6  //+ Peripheral increment mode
-	MINC    CCR7 = 0x01 << 7  //+ Memory increment mode
-	PSIZE   CCR7 = 0x03 << 8  //+ Peripheral size
-	MSIZE   CCR7 = 0x03 << 10 //+ Memory size
-	PL      CCR7 = 0x03 << 12 //+ Channel priority level
-	MEM2MEM CCR7 = 0x01 << 14 //+ Memory to memory mode
-)
-
-const (
-	ENn      = 0
-	TCIEn    = 1
-	HTIEn    = 2
-	TEIEn    = 3
-	DIRn     = 4
-	CIRCn    = 5
-	PINCn    = 6
-	MINCn    = 7
-	PSIZEn   = 8
-	MSIZEn   = 10
-	PLn      = 12
-	MEM2MEMn = 14
-)
-
-const (
-	NDT CNDTR7 = 0xFFFF << 0 //+ Number of data to transfer
-)
-
-const (
-	NDTn = 0
-)
-
-const (
-	PA CPAR7 = 0xFFFFFFFF << 0 //+ Peripheral address
-)
-
-const (
-	PAn = 0
-)
-
-const (
-	MA CMAR7 = 0xFFFFFFFF << 0 //+ Memory address
+	MA MAR = 0xFFFFFFFF << 0 //+ Memory address
 )
 
 const (

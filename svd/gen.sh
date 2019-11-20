@@ -7,7 +7,7 @@ rm -rf *
 
 svdxgen github.com/embeddedgo/stm32/p ../svd/*.svd
 
-for p in gpio flash pwr rcc syscfg exti; do
+for p in dma exti flash gpio pwr rcc syscfg; do
 	cd $p
 	xgen *.go
 	cd ..

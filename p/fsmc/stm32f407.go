@@ -7,42 +7,42 @@
 // Instances:
 //  FSMC  FSMC_BASE  AHB3  FSMC  Flexible static memory controller
 // Registers:
-//  0x000 32  BCT{BCR,BTR}[4]  chip-select control/timing register
-//  0x060 32  PCR2             PC Card/NAND Flash control register 2
-//  0x064 32  SR2              FIFO status and interrupt register 2
-//  0x068 32  PMEM2            Common memory space timing register 2
-//  0x06C 32  PATT2            Attribute memory space timing register 2
-//  0x074 32  ECCR2            ECC result register 2
-//  0x080 32  PCR3             PC Card/NAND Flash control register 3
-//  0x084 32  SR3              FIFO status and interrupt register 3
-//  0x088 32  PMEM3            Common memory space timing register 3
-//  0x08C 32  PATT3            Attribute memory space timing register 3
-//  0x094 32  ECCR3            ECC result register 3
-//  0x0A0 32  PCR4             PC Card/NAND Flash control register 4
-//  0x0A4 32  SR4              FIFO status and interrupt register 4
-//  0x0A8 32  PMEM4            Common memory space timing register 4
-//  0x0AC 32  PATT4            Attribute memory space timing register 4
-//  0x0B0 32  PIO4             I/O space timing register 4
-//  0x104 32  BWTR[4]          write timing registers
+//  0x000 32  BCT{CR,TR}[4]  chip-select control and timing registers
+//  0x060 32  PCR2           PC Card/NAND Flash control register 2
+//  0x064 32  SR2            FIFO status and interrupt register 2
+//  0x068 32  PMEM2          Common memory space timing register 2
+//  0x06C 32  PATT2          Attribute memory space timing register 2
+//  0x074 32  ECCR2          ECC result register 2
+//  0x080 32  PCR3           PC Card/NAND Flash control register 3
+//  0x084 32  SR3            FIFO status and interrupt register 3
+//  0x088 32  PMEM3          Common memory space timing register 3
+//  0x08C 32  PATT3          Attribute memory space timing register 3
+//  0x094 32  ECCR3          ECC result register 3
+//  0x0A0 32  PCR4           PC Card/NAND Flash control register 4
+//  0x0A4 32  SR4            FIFO status and interrupt register 4
+//  0x0A8 32  PMEM4          Common memory space timing register 4
+//  0x0AC 32  PATT4          Attribute memory space timing register 4
+//  0x0B0 32  PIO4           I/O space timing register 4
+//  0x104 32  BWTR[4]        write timing registers
 // Import:
 //  github.com/embeddedgo/stm32/p/bus
 //  github.com/embeddedgo/stm32/p/mmap
 package fsmc
 
 const (
-	MBKEN     BCR = 0x01 << 0  //+ MBKEN
-	MUXEN     BCR = 0x01 << 1  //+ MUXEN
-	MTYP      BCR = 0x03 << 2  //+ MTYP
-	MWID      BCR = 0x03 << 4  //+ MWID
-	FACCEN    BCR = 0x01 << 6  //+ FACCEN
-	BURSTEN   BCR = 0x01 << 8  //+ BURSTEN
-	WAITPOL   BCR = 0x01 << 9  //+ WAITPOL
-	WAITCFG   BCR = 0x01 << 11 //+ WAITCFG
-	WREN      BCR = 0x01 << 12 //+ WREN
-	WAITEN    BCR = 0x01 << 13 //+ WAITEN
-	EXTMOD    BCR = 0x01 << 14 //+ EXTMOD
-	ASYNCWAIT BCR = 0x01 << 15 //+ ASYNCWAIT
-	CBURSTRW  BCR = 0x01 << 19 //+ CBURSTRW
+	MBKEN     CR = 0x01 << 0  //+ MBKEN
+	MUXEN     CR = 0x01 << 1  //+ MUXEN
+	MTYP      CR = 0x03 << 2  //+ MTYP
+	MWID      CR = 0x03 << 4  //+ MWID
+	FACCEN    CR = 0x01 << 6  //+ FACCEN
+	BURSTEN   CR = 0x01 << 8  //+ BURSTEN
+	WAITPOL   CR = 0x01 << 9  //+ WAITPOL
+	WAITCFG   CR = 0x01 << 11 //+ WAITCFG
+	WREN      CR = 0x01 << 12 //+ WREN
+	WAITEN    CR = 0x01 << 13 //+ WAITEN
+	EXTMOD    CR = 0x01 << 14 //+ EXTMOD
+	ASYNCWAIT CR = 0x01 << 15 //+ ASYNCWAIT
+	CBURSTRW  CR = 0x01 << 19 //+ CBURSTRW
 )
 
 const (
@@ -62,13 +62,13 @@ const (
 )
 
 const (
-	ADDSET  BTR = 0x0F << 0  //+ ADDSET
-	ADDHLD  BTR = 0x0F << 4  //+ ADDHLD
-	DATAST  BTR = 0xFF << 8  //+ DATAST
-	BUSTURN BTR = 0x0F << 16 //+ BUSTURN
-	CLKDIV  BTR = 0x0F << 20 //+ CLKDIV
-	DATLAT  BTR = 0x0F << 24 //+ DATLAT
-	ACCMOD  BTR = 0x03 << 28 //+ ACCMOD
+	ADDSET  TR = 0x0F << 0  //+ ADDSET
+	ADDHLD  TR = 0x0F << 4  //+ ADDHLD
+	DATAST  TR = 0xFF << 8  //+ DATAST
+	BUSTURN TR = 0x0F << 16 //+ BUSTURN
+	CLKDIV  TR = 0x0F << 20 //+ CLKDIV
+	DATLAT  TR = 0x0F << 24 //+ DATLAT
+	ACCMOD  TR = 0x03 << 28 //+ ACCMOD
 )
 
 const (

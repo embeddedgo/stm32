@@ -8,84 +8,35 @@
 //  DMA1  DMA1_BASE  AHB1  DMA1_Stream0,DMA1_Stream1,DMA1_Stream2,DMA1_Stream3,DMA1_Stream4,DMA1_Stream5,DMA1_Stream6,DMA1_Stream7  DMA controller
 //  DMA2  DMA2_BASE  AHB1  DMA2_Stream0,DMA2_Stream1,DMA2_Stream2,DMA2_Stream3,DMA2_Stream4,DMA2_Stream5,DMA2_Stream6,DMA2_Stream7  DMA controller
 // Registers:
-//  0x000 32  LISR    low interrupt status register
-//  0x004 32  HISR    high interrupt status register
-//  0x008 32  LIFCR   low interrupt flag clear register
-//  0x00C 32  HIFCR   high interrupt flag clear register
-//  0x010 32  S0CR    stream x configuration register
-//  0x014 32  S0NDTR  stream x number of data register
-//  0x018 32  S0PAR   stream x peripheral address register
-//  0x01C 32  S0M0AR  stream x memory 0 address register
-//  0x020 32  S0M1AR  stream x memory 1 address register
-//  0x024 32  S0FCR   stream x FIFO control register
-//  0x028 32  S1CR    stream x configuration register
-//  0x02C 32  S1NDTR  stream x number of data register
-//  0x030 32  S1PAR   stream x peripheral address register
-//  0x034 32  S1M0AR  stream x memory 0 address register
-//  0x038 32  S1M1AR  stream x memory 1 address register
-//  0x03C 32  S1FCR   stream x FIFO control register
-//  0x040 32  S2CR    stream x configuration register
-//  0x044 32  S2NDTR  stream x number of data register
-//  0x048 32  S2PAR   stream x peripheral address register
-//  0x04C 32  S2M0AR  stream x memory 0 address register
-//  0x050 32  S2M1AR  stream x memory 1 address register
-//  0x054 32  S2FCR   stream x FIFO control register
-//  0x058 32  S3CR    stream x configuration register
-//  0x05C 32  S3NDTR  stream x number of data register
-//  0x060 32  S3PAR   stream x peripheral address register
-//  0x064 32  S3M0AR  stream x memory 0 address register
-//  0x068 32  S3M1AR  stream x memory 1 address register
-//  0x06C 32  S3FCR   stream x FIFO control register
-//  0x070 32  S4CR    stream x configuration register
-//  0x074 32  S4NDTR  stream x number of data register
-//  0x078 32  S4PAR   stream x peripheral address register
-//  0x07C 32  S4M0AR  stream x memory 0 address register
-//  0x080 32  S4M1AR  stream x memory 1 address register
-//  0x084 32  S4FCR   stream x FIFO control register
-//  0x088 32  S5CR    stream x configuration register
-//  0x08C 32  S5NDTR  stream x number of data register
-//  0x090 32  S5PAR   stream x peripheral address register
-//  0x094 32  S5M0AR  stream x memory 0 address register
-//  0x098 32  S5M1AR  stream x memory 1 address register
-//  0x09C 32  S5FCR   stream x FIFO control register
-//  0x0A0 32  S6CR    stream x configuration register
-//  0x0A4 32  S6NDTR  stream x number of data register
-//  0x0A8 32  S6PAR   stream x peripheral address register
-//  0x0AC 32  S6M0AR  stream x memory 0 address register
-//  0x0B0 32  S6M1AR  stream x memory 1 address register
-//  0x0B4 32  S6FCR   stream x FIFO control register
-//  0x0B8 32  S7CR    stream x configuration register
-//  0x0BC 32  S7NDTR  stream x number of data register
-//  0x0C0 32  S7PAR   stream x peripheral address register
-//  0x0C4 32  S7M0AR  stream x memory 0 address register
-//  0x0C8 32  S7M1AR  stream x memory 1 address register
-//  0x0CC 32  S7FCR   stream x FIFO control register
+//  0x000 32  ISR[2]                           interrupt status register
+//  0x008 32  IFCR[2]                          interrupt flag clear register
+//  0x010 32  S{CR,NDTR,PAR,M0AR,M1AR,FCR}[8]  stream configuration and controll registers
 // Import:
 //  github.com/embeddedgo/stm32/p/bus
 //  github.com/embeddedgo/stm32/p/mmap
 package dma
 
 const (
-	FEIF0  LISR = 0x01 << 0  //+ Stream x FIFO error interrupt flag (x=3..0)
-	DMEIF0 LISR = 0x01 << 2  //+ Stream x direct mode error interrupt flag (x=3..0)
-	TEIF0  LISR = 0x01 << 3  //+ Stream x transfer error interrupt flag (x=3..0)
-	HTIF0  LISR = 0x01 << 4  //+ Stream x half transfer interrupt flag (x=3..0)
-	TCIF0  LISR = 0x01 << 5  //+ Stream x transfer complete interrupt flag (x = 3..0)
-	FEIF1  LISR = 0x01 << 6  //+ Stream x FIFO error interrupt flag (x=3..0)
-	DMEIF1 LISR = 0x01 << 8  //+ Stream x direct mode error interrupt flag (x=3..0)
-	TEIF1  LISR = 0x01 << 9  //+ Stream x transfer error interrupt flag (x=3..0)
-	HTIF1  LISR = 0x01 << 10 //+ Stream x half transfer interrupt flag (x=3..0)
-	TCIF1  LISR = 0x01 << 11 //+ Stream x transfer complete interrupt flag (x = 3..0)
-	FEIF2  LISR = 0x01 << 16 //+ Stream x FIFO error interrupt flag (x=3..0)
-	DMEIF2 LISR = 0x01 << 18 //+ Stream x direct mode error interrupt flag (x=3..0)
-	TEIF2  LISR = 0x01 << 19 //+ Stream x transfer error interrupt flag (x=3..0)
-	HTIF2  LISR = 0x01 << 20 //+ Stream x half transfer interrupt flag (x=3..0)
-	TCIF2  LISR = 0x01 << 21 //+ Stream x transfer complete interrupt flag (x = 3..0)
-	FEIF3  LISR = 0x01 << 22 //+ Stream x FIFO error interrupt flag (x=3..0)
-	DMEIF3 LISR = 0x01 << 24 //+ Stream x direct mode error interrupt flag (x=3..0)
-	TEIF3  LISR = 0x01 << 25 //+ Stream x transfer error interrupt flag (x=3..0)
-	HTIF3  LISR = 0x01 << 26 //+ Stream x half transfer interrupt flag (x=3..0)
-	TCIF3  LISR = 0x01 << 27 //+ Stream x transfer complete interrupt flag (x = 3..0)
+	FEIF0  ISR = 0x01 << 0  //+ Stream x FIFO error interrupt flag (x=3..0)
+	DMEIF0 ISR = 0x01 << 2  //+ Stream x direct mode error interrupt flag (x=3..0)
+	TEIF0  ISR = 0x01 << 3  //+ Stream x transfer error interrupt flag (x=3..0)
+	HTIF0  ISR = 0x01 << 4  //+ Stream x half transfer interrupt flag (x=3..0)
+	TCIF0  ISR = 0x01 << 5  //+ Stream x transfer complete interrupt flag (x = 3..0)
+	FEIF1  ISR = 0x01 << 6  //+ Stream x FIFO error interrupt flag (x=3..0)
+	DMEIF1 ISR = 0x01 << 8  //+ Stream x direct mode error interrupt flag (x=3..0)
+	TEIF1  ISR = 0x01 << 9  //+ Stream x transfer error interrupt flag (x=3..0)
+	HTIF1  ISR = 0x01 << 10 //+ Stream x half transfer interrupt flag (x=3..0)
+	TCIF1  ISR = 0x01 << 11 //+ Stream x transfer complete interrupt flag (x = 3..0)
+	FEIF2  ISR = 0x01 << 16 //+ Stream x FIFO error interrupt flag (x=3..0)
+	DMEIF2 ISR = 0x01 << 18 //+ Stream x direct mode error interrupt flag (x=3..0)
+	TEIF2  ISR = 0x01 << 19 //+ Stream x transfer error interrupt flag (x=3..0)
+	HTIF2  ISR = 0x01 << 20 //+ Stream x half transfer interrupt flag (x=3..0)
+	TCIF2  ISR = 0x01 << 21 //+ Stream x transfer complete interrupt flag (x = 3..0)
+	FEIF3  ISR = 0x01 << 22 //+ Stream x FIFO error interrupt flag (x=3..0)
+	DMEIF3 ISR = 0x01 << 24 //+ Stream x direct mode error interrupt flag (x=3..0)
+	TEIF3  ISR = 0x01 << 25 //+ Stream x transfer error interrupt flag (x=3..0)
+	HTIF3  ISR = 0x01 << 26 //+ Stream x half transfer interrupt flag (x=3..0)
+	TCIF3  ISR = 0x01 << 27 //+ Stream x transfer complete interrupt flag (x = 3..0)
 )
 
 const (
@@ -112,72 +63,26 @@ const (
 )
 
 const (
-	FEIF4  HISR = 0x01 << 0  //+ Stream x FIFO error interrupt flag (x=7..4)
-	DMEIF4 HISR = 0x01 << 2  //+ Stream x direct mode error interrupt flag (x=7..4)
-	TEIF4  HISR = 0x01 << 3  //+ Stream x transfer error interrupt flag (x=7..4)
-	HTIF4  HISR = 0x01 << 4  //+ Stream x half transfer interrupt flag (x=7..4)
-	TCIF4  HISR = 0x01 << 5  //+ Stream x transfer complete interrupt flag (x=7..4)
-	FEIF5  HISR = 0x01 << 6  //+ Stream x FIFO error interrupt flag (x=7..4)
-	DMEIF5 HISR = 0x01 << 8  //+ Stream x direct mode error interrupt flag (x=7..4)
-	TEIF5  HISR = 0x01 << 9  //+ Stream x transfer error interrupt flag (x=7..4)
-	HTIF5  HISR = 0x01 << 10 //+ Stream x half transfer interrupt flag (x=7..4)
-	TCIF5  HISR = 0x01 << 11 //+ Stream x transfer complete interrupt flag (x=7..4)
-	FEIF6  HISR = 0x01 << 16 //+ Stream x FIFO error interrupt flag (x=7..4)
-	DMEIF6 HISR = 0x01 << 18 //+ Stream x direct mode error interrupt flag (x=7..4)
-	TEIF6  HISR = 0x01 << 19 //+ Stream x transfer error interrupt flag (x=7..4)
-	HTIF6  HISR = 0x01 << 20 //+ Stream x half transfer interrupt flag (x=7..4)
-	TCIF6  HISR = 0x01 << 21 //+ Stream x transfer complete interrupt flag (x=7..4)
-	FEIF7  HISR = 0x01 << 22 //+ Stream x FIFO error interrupt flag (x=7..4)
-	DMEIF7 HISR = 0x01 << 24 //+ Stream x direct mode error interrupt flag (x=7..4)
-	TEIF7  HISR = 0x01 << 25 //+ Stream x transfer error interrupt flag (x=7..4)
-	HTIF7  HISR = 0x01 << 26 //+ Stream x half transfer interrupt flag (x=7..4)
-	TCIF7  HISR = 0x01 << 27 //+ Stream x transfer complete interrupt flag (x=7..4)
-)
-
-const (
-	FEIF4n  = 0
-	DMEIF4n = 2
-	TEIF4n  = 3
-	HTIF4n  = 4
-	TCIF4n  = 5
-	FEIF5n  = 6
-	DMEIF5n = 8
-	TEIF5n  = 9
-	HTIF5n  = 10
-	TCIF5n  = 11
-	FEIF6n  = 16
-	DMEIF6n = 18
-	TEIF6n  = 19
-	HTIF6n  = 20
-	TCIF6n  = 21
-	FEIF7n  = 22
-	DMEIF7n = 24
-	TEIF7n  = 25
-	HTIF7n  = 26
-	TCIF7n  = 27
-)
-
-const (
-	CFEIF0  LIFCR = 0x01 << 0  //+ Stream x clear FIFO error interrupt flag (x = 3..0)
-	CDMEIF0 LIFCR = 0x01 << 2  //+ Stream x clear direct mode error interrupt flag (x = 3..0)
-	CTEIF0  LIFCR = 0x01 << 3  //+ Stream x clear transfer error interrupt flag (x = 3..0)
-	CHTIF0  LIFCR = 0x01 << 4  //+ Stream x clear half transfer interrupt flag (x = 3..0)
-	CTCIF0  LIFCR = 0x01 << 5  //+ Stream x clear transfer complete interrupt flag (x = 3..0)
-	CFEIF1  LIFCR = 0x01 << 6  //+ Stream x clear FIFO error interrupt flag (x = 3..0)
-	CDMEIF1 LIFCR = 0x01 << 8  //+ Stream x clear direct mode error interrupt flag (x = 3..0)
-	CTEIF1  LIFCR = 0x01 << 9  //+ Stream x clear transfer error interrupt flag (x = 3..0)
-	CHTIF1  LIFCR = 0x01 << 10 //+ Stream x clear half transfer interrupt flag (x = 3..0)
-	CTCIF1  LIFCR = 0x01 << 11 //+ Stream x clear transfer complete interrupt flag (x = 3..0)
-	CFEIF2  LIFCR = 0x01 << 16 //+ Stream x clear FIFO error interrupt flag (x = 3..0)
-	CDMEIF2 LIFCR = 0x01 << 18 //+ Stream x clear direct mode error interrupt flag (x = 3..0)
-	CTEIF2  LIFCR = 0x01 << 19 //+ Stream x clear transfer error interrupt flag (x = 3..0)
-	CHTIF2  LIFCR = 0x01 << 20 //+ Stream x clear half transfer interrupt flag (x = 3..0)
-	CTCIF2  LIFCR = 0x01 << 21 //+ Stream x clear transfer complete interrupt flag (x = 3..0)
-	CFEIF3  LIFCR = 0x01 << 22 //+ Stream x clear FIFO error interrupt flag (x = 3..0)
-	CDMEIF3 LIFCR = 0x01 << 24 //+ Stream x clear direct mode error interrupt flag (x = 3..0)
-	CTEIF3  LIFCR = 0x01 << 25 //+ Stream x clear transfer error interrupt flag (x = 3..0)
-	CHTIF3  LIFCR = 0x01 << 26 //+ Stream x clear half transfer interrupt flag (x = 3..0)
-	CTCIF3  LIFCR = 0x01 << 27 //+ Stream x clear transfer complete interrupt flag (x = 3..0)
+	CFEIF0  IFCR = 0x01 << 0  //+ Stream x clear FIFO error interrupt flag (x = 3..0)
+	CDMEIF0 IFCR = 0x01 << 2  //+ Stream x clear direct mode error interrupt flag (x = 3..0)
+	CTEIF0  IFCR = 0x01 << 3  //+ Stream x clear transfer error interrupt flag (x = 3..0)
+	CHTIF0  IFCR = 0x01 << 4  //+ Stream x clear half transfer interrupt flag (x = 3..0)
+	CTCIF0  IFCR = 0x01 << 5  //+ Stream x clear transfer complete interrupt flag (x = 3..0)
+	CFEIF1  IFCR = 0x01 << 6  //+ Stream x clear FIFO error interrupt flag (x = 3..0)
+	CDMEIF1 IFCR = 0x01 << 8  //+ Stream x clear direct mode error interrupt flag (x = 3..0)
+	CTEIF1  IFCR = 0x01 << 9  //+ Stream x clear transfer error interrupt flag (x = 3..0)
+	CHTIF1  IFCR = 0x01 << 10 //+ Stream x clear half transfer interrupt flag (x = 3..0)
+	CTCIF1  IFCR = 0x01 << 11 //+ Stream x clear transfer complete interrupt flag (x = 3..0)
+	CFEIF2  IFCR = 0x01 << 16 //+ Stream x clear FIFO error interrupt flag (x = 3..0)
+	CDMEIF2 IFCR = 0x01 << 18 //+ Stream x clear direct mode error interrupt flag (x = 3..0)
+	CTEIF2  IFCR = 0x01 << 19 //+ Stream x clear transfer error interrupt flag (x = 3..0)
+	CHTIF2  IFCR = 0x01 << 20 //+ Stream x clear half transfer interrupt flag (x = 3..0)
+	CTCIF2  IFCR = 0x01 << 21 //+ Stream x clear transfer complete interrupt flag (x = 3..0)
+	CFEIF3  IFCR = 0x01 << 22 //+ Stream x clear FIFO error interrupt flag (x = 3..0)
+	CDMEIF3 IFCR = 0x01 << 24 //+ Stream x clear direct mode error interrupt flag (x = 3..0)
+	CTEIF3  IFCR = 0x01 << 25 //+ Stream x clear transfer error interrupt flag (x = 3..0)
+	CHTIF3  IFCR = 0x01 << 26 //+ Stream x clear half transfer interrupt flag (x = 3..0)
+	CTCIF3  IFCR = 0x01 << 27 //+ Stream x clear transfer complete interrupt flag (x = 3..0)
 )
 
 const (
@@ -204,71 +109,25 @@ const (
 )
 
 const (
-	CFEIF4  HIFCR = 0x01 << 0  //+ Stream x clear FIFO error interrupt flag (x = 7..4)
-	CDMEIF4 HIFCR = 0x01 << 2  //+ Stream x clear direct mode error interrupt flag (x = 7..4)
-	CTEIF4  HIFCR = 0x01 << 3  //+ Stream x clear transfer error interrupt flag (x = 7..4)
-	CHTIF4  HIFCR = 0x01 << 4  //+ Stream x clear half transfer interrupt flag (x = 7..4)
-	CTCIF4  HIFCR = 0x01 << 5  //+ Stream x clear transfer complete interrupt flag (x = 7..4)
-	CFEIF5  HIFCR = 0x01 << 6  //+ Stream x clear FIFO error interrupt flag (x = 7..4)
-	CDMEIF5 HIFCR = 0x01 << 8  //+ Stream x clear direct mode error interrupt flag (x = 7..4)
-	CTEIF5  HIFCR = 0x01 << 9  //+ Stream x clear transfer error interrupt flag (x = 7..4)
-	CHTIF5  HIFCR = 0x01 << 10 //+ Stream x clear half transfer interrupt flag (x = 7..4)
-	CTCIF5  HIFCR = 0x01 << 11 //+ Stream x clear transfer complete interrupt flag (x = 7..4)
-	CFEIF6  HIFCR = 0x01 << 16 //+ Stream x clear FIFO error interrupt flag (x = 7..4)
-	CDMEIF6 HIFCR = 0x01 << 18 //+ Stream x clear direct mode error interrupt flag (x = 7..4)
-	CTEIF6  HIFCR = 0x01 << 19 //+ Stream x clear transfer error interrupt flag (x = 7..4)
-	CHTIF6  HIFCR = 0x01 << 20 //+ Stream x clear half transfer interrupt flag (x = 7..4)
-	CTCIF6  HIFCR = 0x01 << 21 //+ Stream x clear transfer complete interrupt flag (x = 7..4)
-	CFEIF7  HIFCR = 0x01 << 22 //+ Stream x clear FIFO error interrupt flag (x = 7..4)
-	CDMEIF7 HIFCR = 0x01 << 24 //+ Stream x clear direct mode error interrupt flag (x = 7..4)
-	CTEIF7  HIFCR = 0x01 << 25 //+ Stream x clear transfer error interrupt flag (x = 7..4)
-	CHTIF7  HIFCR = 0x01 << 26 //+ Stream x clear half transfer interrupt flag (x = 7..4)
-	CTCIF7  HIFCR = 0x01 << 27 //+ Stream x clear transfer complete interrupt flag (x = 7..4)
-)
-
-const (
-	CFEIF4n  = 0
-	CDMEIF4n = 2
-	CTEIF4n  = 3
-	CHTIF4n  = 4
-	CTCIF4n  = 5
-	CFEIF5n  = 6
-	CDMEIF5n = 8
-	CTEIF5n  = 9
-	CHTIF5n  = 10
-	CTCIF5n  = 11
-	CFEIF6n  = 16
-	CDMEIF6n = 18
-	CTEIF6n  = 19
-	CHTIF6n  = 20
-	CTCIF6n  = 21
-	CFEIF7n  = 22
-	CDMEIF7n = 24
-	CTEIF7n  = 25
-	CHTIF7n  = 26
-	CTCIF7n  = 27
-)
-
-const (
-	EN     S0CR = 0x01 << 0  //+ Stream enable / flag stream ready when read low
-	DMEIE  S0CR = 0x01 << 1  //+ Direct mode error interrupt enable
-	TEIE   S0CR = 0x01 << 2  //+ Transfer error interrupt enable
-	HTIE   S0CR = 0x01 << 3  //+ Half transfer interrupt enable
-	TCIE   S0CR = 0x01 << 4  //+ Transfer complete interrupt enable
-	PFCTRL S0CR = 0x01 << 5  //+ Peripheral flow controller
-	DIR    S0CR = 0x03 << 6  //+ Data transfer direction
-	CIRC   S0CR = 0x01 << 8  //+ Circular mode
-	PINC   S0CR = 0x01 << 9  //+ Peripheral increment mode
-	MINC   S0CR = 0x01 << 10 //+ Memory increment mode
-	PSIZE  S0CR = 0x03 << 11 //+ Peripheral data size
-	MSIZE  S0CR = 0x03 << 13 //+ Memory data size
-	PINCOS S0CR = 0x01 << 15 //+ Peripheral increment offset size
-	PL     S0CR = 0x03 << 16 //+ Priority level
-	DBM    S0CR = 0x01 << 18 //+ Double buffer mode
-	CT     S0CR = 0x01 << 19 //+ Current target (only in double buffer mode)
-	PBURST S0CR = 0x03 << 21 //+ Peripheral burst transfer configuration
-	MBURST S0CR = 0x03 << 23 //+ Memory burst transfer configuration
-	CHSEL  S0CR = 0x07 << 25 //+ Channel selection
+	EN     CR = 0x01 << 0  //+ Stream enable / flag stream ready when read low
+	DMEIE  CR = 0x01 << 1  //+ Direct mode error interrupt enable
+	TEIE   CR = 0x01 << 2  //+ Transfer error interrupt enable
+	HTIE   CR = 0x01 << 3  //+ Half transfer interrupt enable
+	TCIE   CR = 0x01 << 4  //+ Transfer complete interrupt enable
+	PFCTRL CR = 0x01 << 5  //+ Peripheral flow controller
+	DIR    CR = 0x03 << 6  //+ Data transfer direction
+	CIRC   CR = 0x01 << 8  //+ Circular mode
+	PINC   CR = 0x01 << 9  //+ Peripheral increment mode
+	MINC   CR = 0x01 << 10 //+ Memory increment mode
+	PSIZE  CR = 0x03 << 11 //+ Peripheral data size
+	MSIZE  CR = 0x03 << 13 //+ Memory data size
+	PINCOS CR = 0x01 << 15 //+ Peripheral increment offset size
+	PL     CR = 0x03 << 16 //+ Priority level
+	DBM    CR = 0x01 << 18 //+ Double buffer mode
+	CT     CR = 0x01 << 19 //+ Current target (only in double buffer mode)
+	PBURST CR = 0x03 << 21 //+ Peripheral burst transfer configuration
+	MBURST CR = 0x03 << 23 //+ Memory burst transfer configuration
+	CHSEL  CR = 0x07 << 25 //+ Channel selection
 )
 
 const (
@@ -294,7 +153,7 @@ const (
 )
 
 const (
-	NDT S0NDTR = 0xFFFF << 0 //+ Number of data items to transfer
+	NDT NDTR = 0xFFFF << 0 //+ Number of data items to transfer
 )
 
 const (
@@ -302,7 +161,7 @@ const (
 )
 
 const (
-	PA S0PAR = 0xFFFFFFFF << 0 //+ Peripheral address
+	PA PAR = 0xFFFFFFFF << 0 //+ Peripheral address
 )
 
 const (
@@ -310,7 +169,7 @@ const (
 )
 
 const (
-	M0A S0M0AR = 0xFFFFFFFF << 0 //+ Memory 0 address
+	M0A M0AR = 0xFFFFFFFF << 0 //+ Memory 0 address
 )
 
 const (
@@ -318,7 +177,7 @@ const (
 )
 
 const (
-	M1A S0M1AR = 0xFFFFFFFF << 0 //+ Memory 1 address (used in case of Double buffer mode)
+	M1A M1AR = 0xFFFFFFFF << 0 //+ Memory 1 address (used in case of Double buffer mode)
 )
 
 const (
@@ -326,640 +185,10 @@ const (
 )
 
 const (
-	FTH   S0FCR = 0x03 << 0 //+ FIFO threshold selection
-	DMDIS S0FCR = 0x01 << 2 //+ Direct mode disable
-	FS    S0FCR = 0x07 << 3 //+ FIFO status
-	FEIE  S0FCR = 0x01 << 7 //+ FIFO error interrupt enable
-)
-
-const (
-	FTHn   = 0
-	DMDISn = 2
-	FSn    = 3
-	FEIEn  = 7
-)
-
-const (
-	EN     S1CR = 0x01 << 0  //+ Stream enable / flag stream ready when read low
-	DMEIE  S1CR = 0x01 << 1  //+ Direct mode error interrupt enable
-	TEIE   S1CR = 0x01 << 2  //+ Transfer error interrupt enable
-	HTIE   S1CR = 0x01 << 3  //+ Half transfer interrupt enable
-	TCIE   S1CR = 0x01 << 4  //+ Transfer complete interrupt enable
-	PFCTRL S1CR = 0x01 << 5  //+ Peripheral flow controller
-	DIR    S1CR = 0x03 << 6  //+ Data transfer direction
-	CIRC   S1CR = 0x01 << 8  //+ Circular mode
-	PINC   S1CR = 0x01 << 9  //+ Peripheral increment mode
-	MINC   S1CR = 0x01 << 10 //+ Memory increment mode
-	PSIZE  S1CR = 0x03 << 11 //+ Peripheral data size
-	MSIZE  S1CR = 0x03 << 13 //+ Memory data size
-	PINCOS S1CR = 0x01 << 15 //+ Peripheral increment offset size
-	PL     S1CR = 0x03 << 16 //+ Priority level
-	DBM    S1CR = 0x01 << 18 //+ Double buffer mode
-	CT     S1CR = 0x01 << 19 //+ Current target (only in double buffer mode)
-	PBURST S1CR = 0x03 << 21 //+ Peripheral burst transfer configuration
-	MBURST S1CR = 0x03 << 23 //+ Memory burst transfer configuration
-	CHSEL  S1CR = 0x07 << 25 //+ Channel selection
-)
-
-const (
-	ENn     = 0
-	DMEIEn  = 1
-	TEIEn   = 2
-	HTIEn   = 3
-	TCIEn   = 4
-	PFCTRLn = 5
-	DIRn    = 6
-	CIRCn   = 8
-	PINCn   = 9
-	MINCn   = 10
-	PSIZEn  = 11
-	MSIZEn  = 13
-	PINCOSn = 15
-	PLn     = 16
-	DBMn    = 18
-	CTn     = 19
-	PBURSTn = 21
-	MBURSTn = 23
-	CHSELn  = 25
-)
-
-const (
-	NDT S1NDTR = 0xFFFF << 0 //+ Number of data items to transfer
-)
-
-const (
-	NDTn = 0
-)
-
-const (
-	PA S1PAR = 0xFFFFFFFF << 0 //+ Peripheral address
-)
-
-const (
-	PAn = 0
-)
-
-const (
-	M0A S1M0AR = 0xFFFFFFFF << 0 //+ Memory 0 address
-)
-
-const (
-	M0An = 0
-)
-
-const (
-	M1A S1M1AR = 0xFFFFFFFF << 0 //+ Memory 1 address (used in case of Double buffer mode)
-)
-
-const (
-	M1An = 0
-)
-
-const (
-	FTH   S1FCR = 0x03 << 0 //+ FIFO threshold selection
-	DMDIS S1FCR = 0x01 << 2 //+ Direct mode disable
-	FS    S1FCR = 0x07 << 3 //+ FIFO status
-	FEIE  S1FCR = 0x01 << 7 //+ FIFO error interrupt enable
-)
-
-const (
-	FTHn   = 0
-	DMDISn = 2
-	FSn    = 3
-	FEIEn  = 7
-)
-
-const (
-	EN     S2CR = 0x01 << 0  //+ Stream enable / flag stream ready when read low
-	DMEIE  S2CR = 0x01 << 1  //+ Direct mode error interrupt enable
-	TEIE   S2CR = 0x01 << 2  //+ Transfer error interrupt enable
-	HTIE   S2CR = 0x01 << 3  //+ Half transfer interrupt enable
-	TCIE   S2CR = 0x01 << 4  //+ Transfer complete interrupt enable
-	PFCTRL S2CR = 0x01 << 5  //+ Peripheral flow controller
-	DIR    S2CR = 0x03 << 6  //+ Data transfer direction
-	CIRC   S2CR = 0x01 << 8  //+ Circular mode
-	PINC   S2CR = 0x01 << 9  //+ Peripheral increment mode
-	MINC   S2CR = 0x01 << 10 //+ Memory increment mode
-	PSIZE  S2CR = 0x03 << 11 //+ Peripheral data size
-	MSIZE  S2CR = 0x03 << 13 //+ Memory data size
-	PINCOS S2CR = 0x01 << 15 //+ Peripheral increment offset size
-	PL     S2CR = 0x03 << 16 //+ Priority level
-	DBM    S2CR = 0x01 << 18 //+ Double buffer mode
-	CT     S2CR = 0x01 << 19 //+ Current target (only in double buffer mode)
-	PBURST S2CR = 0x03 << 21 //+ Peripheral burst transfer configuration
-	MBURST S2CR = 0x03 << 23 //+ Memory burst transfer configuration
-	CHSEL  S2CR = 0x07 << 25 //+ Channel selection
-)
-
-const (
-	ENn     = 0
-	DMEIEn  = 1
-	TEIEn   = 2
-	HTIEn   = 3
-	TCIEn   = 4
-	PFCTRLn = 5
-	DIRn    = 6
-	CIRCn   = 8
-	PINCn   = 9
-	MINCn   = 10
-	PSIZEn  = 11
-	MSIZEn  = 13
-	PINCOSn = 15
-	PLn     = 16
-	DBMn    = 18
-	CTn     = 19
-	PBURSTn = 21
-	MBURSTn = 23
-	CHSELn  = 25
-)
-
-const (
-	NDT S2NDTR = 0xFFFF << 0 //+ Number of data items to transfer
-)
-
-const (
-	NDTn = 0
-)
-
-const (
-	PA S2PAR = 0xFFFFFFFF << 0 //+ Peripheral address
-)
-
-const (
-	PAn = 0
-)
-
-const (
-	M0A S2M0AR = 0xFFFFFFFF << 0 //+ Memory 0 address
-)
-
-const (
-	M0An = 0
-)
-
-const (
-	M1A S2M1AR = 0xFFFFFFFF << 0 //+ Memory 1 address (used in case of Double buffer mode)
-)
-
-const (
-	M1An = 0
-)
-
-const (
-	FTH   S2FCR = 0x03 << 0 //+ FIFO threshold selection
-	DMDIS S2FCR = 0x01 << 2 //+ Direct mode disable
-	FS    S2FCR = 0x07 << 3 //+ FIFO status
-	FEIE  S2FCR = 0x01 << 7 //+ FIFO error interrupt enable
-)
-
-const (
-	FTHn   = 0
-	DMDISn = 2
-	FSn    = 3
-	FEIEn  = 7
-)
-
-const (
-	EN     S3CR = 0x01 << 0  //+ Stream enable / flag stream ready when read low
-	DMEIE  S3CR = 0x01 << 1  //+ Direct mode error interrupt enable
-	TEIE   S3CR = 0x01 << 2  //+ Transfer error interrupt enable
-	HTIE   S3CR = 0x01 << 3  //+ Half transfer interrupt enable
-	TCIE   S3CR = 0x01 << 4  //+ Transfer complete interrupt enable
-	PFCTRL S3CR = 0x01 << 5  //+ Peripheral flow controller
-	DIR    S3CR = 0x03 << 6  //+ Data transfer direction
-	CIRC   S3CR = 0x01 << 8  //+ Circular mode
-	PINC   S3CR = 0x01 << 9  //+ Peripheral increment mode
-	MINC   S3CR = 0x01 << 10 //+ Memory increment mode
-	PSIZE  S3CR = 0x03 << 11 //+ Peripheral data size
-	MSIZE  S3CR = 0x03 << 13 //+ Memory data size
-	PINCOS S3CR = 0x01 << 15 //+ Peripheral increment offset size
-	PL     S3CR = 0x03 << 16 //+ Priority level
-	DBM    S3CR = 0x01 << 18 //+ Double buffer mode
-	CT     S3CR = 0x01 << 19 //+ Current target (only in double buffer mode)
-	PBURST S3CR = 0x03 << 21 //+ Peripheral burst transfer configuration
-	MBURST S3CR = 0x03 << 23 //+ Memory burst transfer configuration
-	CHSEL  S3CR = 0x07 << 25 //+ Channel selection
-)
-
-const (
-	ENn     = 0
-	DMEIEn  = 1
-	TEIEn   = 2
-	HTIEn   = 3
-	TCIEn   = 4
-	PFCTRLn = 5
-	DIRn    = 6
-	CIRCn   = 8
-	PINCn   = 9
-	MINCn   = 10
-	PSIZEn  = 11
-	MSIZEn  = 13
-	PINCOSn = 15
-	PLn     = 16
-	DBMn    = 18
-	CTn     = 19
-	PBURSTn = 21
-	MBURSTn = 23
-	CHSELn  = 25
-)
-
-const (
-	NDT S3NDTR = 0xFFFF << 0 //+ Number of data items to transfer
-)
-
-const (
-	NDTn = 0
-)
-
-const (
-	PA S3PAR = 0xFFFFFFFF << 0 //+ Peripheral address
-)
-
-const (
-	PAn = 0
-)
-
-const (
-	M0A S3M0AR = 0xFFFFFFFF << 0 //+ Memory 0 address
-)
-
-const (
-	M0An = 0
-)
-
-const (
-	M1A S3M1AR = 0xFFFFFFFF << 0 //+ Memory 1 address (used in case of Double buffer mode)
-)
-
-const (
-	M1An = 0
-)
-
-const (
-	FTH   S3FCR = 0x03 << 0 //+ FIFO threshold selection
-	DMDIS S3FCR = 0x01 << 2 //+ Direct mode disable
-	FS    S3FCR = 0x07 << 3 //+ FIFO status
-	FEIE  S3FCR = 0x01 << 7 //+ FIFO error interrupt enable
-)
-
-const (
-	FTHn   = 0
-	DMDISn = 2
-	FSn    = 3
-	FEIEn  = 7
-)
-
-const (
-	EN     S4CR = 0x01 << 0  //+ Stream enable / flag stream ready when read low
-	DMEIE  S4CR = 0x01 << 1  //+ Direct mode error interrupt enable
-	TEIE   S4CR = 0x01 << 2  //+ Transfer error interrupt enable
-	HTIE   S4CR = 0x01 << 3  //+ Half transfer interrupt enable
-	TCIE   S4CR = 0x01 << 4  //+ Transfer complete interrupt enable
-	PFCTRL S4CR = 0x01 << 5  //+ Peripheral flow controller
-	DIR    S4CR = 0x03 << 6  //+ Data transfer direction
-	CIRC   S4CR = 0x01 << 8  //+ Circular mode
-	PINC   S4CR = 0x01 << 9  //+ Peripheral increment mode
-	MINC   S4CR = 0x01 << 10 //+ Memory increment mode
-	PSIZE  S4CR = 0x03 << 11 //+ Peripheral data size
-	MSIZE  S4CR = 0x03 << 13 //+ Memory data size
-	PINCOS S4CR = 0x01 << 15 //+ Peripheral increment offset size
-	PL     S4CR = 0x03 << 16 //+ Priority level
-	DBM    S4CR = 0x01 << 18 //+ Double buffer mode
-	CT     S4CR = 0x01 << 19 //+ Current target (only in double buffer mode)
-	PBURST S4CR = 0x03 << 21 //+ Peripheral burst transfer configuration
-	MBURST S4CR = 0x03 << 23 //+ Memory burst transfer configuration
-	CHSEL  S4CR = 0x07 << 25 //+ Channel selection
-)
-
-const (
-	ENn     = 0
-	DMEIEn  = 1
-	TEIEn   = 2
-	HTIEn   = 3
-	TCIEn   = 4
-	PFCTRLn = 5
-	DIRn    = 6
-	CIRCn   = 8
-	PINCn   = 9
-	MINCn   = 10
-	PSIZEn  = 11
-	MSIZEn  = 13
-	PINCOSn = 15
-	PLn     = 16
-	DBMn    = 18
-	CTn     = 19
-	PBURSTn = 21
-	MBURSTn = 23
-	CHSELn  = 25
-)
-
-const (
-	NDT S4NDTR = 0xFFFF << 0 //+ Number of data items to transfer
-)
-
-const (
-	NDTn = 0
-)
-
-const (
-	PA S4PAR = 0xFFFFFFFF << 0 //+ Peripheral address
-)
-
-const (
-	PAn = 0
-)
-
-const (
-	M0A S4M0AR = 0xFFFFFFFF << 0 //+ Memory 0 address
-)
-
-const (
-	M0An = 0
-)
-
-const (
-	M1A S4M1AR = 0xFFFFFFFF << 0 //+ Memory 1 address (used in case of Double buffer mode)
-)
-
-const (
-	M1An = 0
-)
-
-const (
-	FTH   S4FCR = 0x03 << 0 //+ FIFO threshold selection
-	DMDIS S4FCR = 0x01 << 2 //+ Direct mode disable
-	FS    S4FCR = 0x07 << 3 //+ FIFO status
-	FEIE  S4FCR = 0x01 << 7 //+ FIFO error interrupt enable
-)
-
-const (
-	FTHn   = 0
-	DMDISn = 2
-	FSn    = 3
-	FEIEn  = 7
-)
-
-const (
-	EN     S5CR = 0x01 << 0  //+ Stream enable / flag stream ready when read low
-	DMEIE  S5CR = 0x01 << 1  //+ Direct mode error interrupt enable
-	TEIE   S5CR = 0x01 << 2  //+ Transfer error interrupt enable
-	HTIE   S5CR = 0x01 << 3  //+ Half transfer interrupt enable
-	TCIE   S5CR = 0x01 << 4  //+ Transfer complete interrupt enable
-	PFCTRL S5CR = 0x01 << 5  //+ Peripheral flow controller
-	DIR    S5CR = 0x03 << 6  //+ Data transfer direction
-	CIRC   S5CR = 0x01 << 8  //+ Circular mode
-	PINC   S5CR = 0x01 << 9  //+ Peripheral increment mode
-	MINC   S5CR = 0x01 << 10 //+ Memory increment mode
-	PSIZE  S5CR = 0x03 << 11 //+ Peripheral data size
-	MSIZE  S5CR = 0x03 << 13 //+ Memory data size
-	PINCOS S5CR = 0x01 << 15 //+ Peripheral increment offset size
-	PL     S5CR = 0x03 << 16 //+ Priority level
-	DBM    S5CR = 0x01 << 18 //+ Double buffer mode
-	CT     S5CR = 0x01 << 19 //+ Current target (only in double buffer mode)
-	PBURST S5CR = 0x03 << 21 //+ Peripheral burst transfer configuration
-	MBURST S5CR = 0x03 << 23 //+ Memory burst transfer configuration
-	CHSEL  S5CR = 0x07 << 25 //+ Channel selection
-)
-
-const (
-	ENn     = 0
-	DMEIEn  = 1
-	TEIEn   = 2
-	HTIEn   = 3
-	TCIEn   = 4
-	PFCTRLn = 5
-	DIRn    = 6
-	CIRCn   = 8
-	PINCn   = 9
-	MINCn   = 10
-	PSIZEn  = 11
-	MSIZEn  = 13
-	PINCOSn = 15
-	PLn     = 16
-	DBMn    = 18
-	CTn     = 19
-	PBURSTn = 21
-	MBURSTn = 23
-	CHSELn  = 25
-)
-
-const (
-	NDT S5NDTR = 0xFFFF << 0 //+ Number of data items to transfer
-)
-
-const (
-	NDTn = 0
-)
-
-const (
-	PA S5PAR = 0xFFFFFFFF << 0 //+ Peripheral address
-)
-
-const (
-	PAn = 0
-)
-
-const (
-	M0A S5M0AR = 0xFFFFFFFF << 0 //+ Memory 0 address
-)
-
-const (
-	M0An = 0
-)
-
-const (
-	M1A S5M1AR = 0xFFFFFFFF << 0 //+ Memory 1 address (used in case of Double buffer mode)
-)
-
-const (
-	M1An = 0
-)
-
-const (
-	FTH   S5FCR = 0x03 << 0 //+ FIFO threshold selection
-	DMDIS S5FCR = 0x01 << 2 //+ Direct mode disable
-	FS    S5FCR = 0x07 << 3 //+ FIFO status
-	FEIE  S5FCR = 0x01 << 7 //+ FIFO error interrupt enable
-)
-
-const (
-	FTHn   = 0
-	DMDISn = 2
-	FSn    = 3
-	FEIEn  = 7
-)
-
-const (
-	EN     S6CR = 0x01 << 0  //+ Stream enable / flag stream ready when read low
-	DMEIE  S6CR = 0x01 << 1  //+ Direct mode error interrupt enable
-	TEIE   S6CR = 0x01 << 2  //+ Transfer error interrupt enable
-	HTIE   S6CR = 0x01 << 3  //+ Half transfer interrupt enable
-	TCIE   S6CR = 0x01 << 4  //+ Transfer complete interrupt enable
-	PFCTRL S6CR = 0x01 << 5  //+ Peripheral flow controller
-	DIR    S6CR = 0x03 << 6  //+ Data transfer direction
-	CIRC   S6CR = 0x01 << 8  //+ Circular mode
-	PINC   S6CR = 0x01 << 9  //+ Peripheral increment mode
-	MINC   S6CR = 0x01 << 10 //+ Memory increment mode
-	PSIZE  S6CR = 0x03 << 11 //+ Peripheral data size
-	MSIZE  S6CR = 0x03 << 13 //+ Memory data size
-	PINCOS S6CR = 0x01 << 15 //+ Peripheral increment offset size
-	PL     S6CR = 0x03 << 16 //+ Priority level
-	DBM    S6CR = 0x01 << 18 //+ Double buffer mode
-	CT     S6CR = 0x01 << 19 //+ Current target (only in double buffer mode)
-	PBURST S6CR = 0x03 << 21 //+ Peripheral burst transfer configuration
-	MBURST S6CR = 0x03 << 23 //+ Memory burst transfer configuration
-	CHSEL  S6CR = 0x07 << 25 //+ Channel selection
-)
-
-const (
-	ENn     = 0
-	DMEIEn  = 1
-	TEIEn   = 2
-	HTIEn   = 3
-	TCIEn   = 4
-	PFCTRLn = 5
-	DIRn    = 6
-	CIRCn   = 8
-	PINCn   = 9
-	MINCn   = 10
-	PSIZEn  = 11
-	MSIZEn  = 13
-	PINCOSn = 15
-	PLn     = 16
-	DBMn    = 18
-	CTn     = 19
-	PBURSTn = 21
-	MBURSTn = 23
-	CHSELn  = 25
-)
-
-const (
-	NDT S6NDTR = 0xFFFF << 0 //+ Number of data items to transfer
-)
-
-const (
-	NDTn = 0
-)
-
-const (
-	PA S6PAR = 0xFFFFFFFF << 0 //+ Peripheral address
-)
-
-const (
-	PAn = 0
-)
-
-const (
-	M0A S6M0AR = 0xFFFFFFFF << 0 //+ Memory 0 address
-)
-
-const (
-	M0An = 0
-)
-
-const (
-	M1A S6M1AR = 0xFFFFFFFF << 0 //+ Memory 1 address (used in case of Double buffer mode)
-)
-
-const (
-	M1An = 0
-)
-
-const (
-	FTH   S6FCR = 0x03 << 0 //+ FIFO threshold selection
-	DMDIS S6FCR = 0x01 << 2 //+ Direct mode disable
-	FS    S6FCR = 0x07 << 3 //+ FIFO status
-	FEIE  S6FCR = 0x01 << 7 //+ FIFO error interrupt enable
-)
-
-const (
-	FTHn   = 0
-	DMDISn = 2
-	FSn    = 3
-	FEIEn  = 7
-)
-
-const (
-	EN     S7CR = 0x01 << 0  //+ Stream enable / flag stream ready when read low
-	DMEIE  S7CR = 0x01 << 1  //+ Direct mode error interrupt enable
-	TEIE   S7CR = 0x01 << 2  //+ Transfer error interrupt enable
-	HTIE   S7CR = 0x01 << 3  //+ Half transfer interrupt enable
-	TCIE   S7CR = 0x01 << 4  //+ Transfer complete interrupt enable
-	PFCTRL S7CR = 0x01 << 5  //+ Peripheral flow controller
-	DIR    S7CR = 0x03 << 6  //+ Data transfer direction
-	CIRC   S7CR = 0x01 << 8  //+ Circular mode
-	PINC   S7CR = 0x01 << 9  //+ Peripheral increment mode
-	MINC   S7CR = 0x01 << 10 //+ Memory increment mode
-	PSIZE  S7CR = 0x03 << 11 //+ Peripheral data size
-	MSIZE  S7CR = 0x03 << 13 //+ Memory data size
-	PINCOS S7CR = 0x01 << 15 //+ Peripheral increment offset size
-	PL     S7CR = 0x03 << 16 //+ Priority level
-	DBM    S7CR = 0x01 << 18 //+ Double buffer mode
-	CT     S7CR = 0x01 << 19 //+ Current target (only in double buffer mode)
-	PBURST S7CR = 0x03 << 21 //+ Peripheral burst transfer configuration
-	MBURST S7CR = 0x03 << 23 //+ Memory burst transfer configuration
-	CHSEL  S7CR = 0x07 << 25 //+ Channel selection
-)
-
-const (
-	ENn     = 0
-	DMEIEn  = 1
-	TEIEn   = 2
-	HTIEn   = 3
-	TCIEn   = 4
-	PFCTRLn = 5
-	DIRn    = 6
-	CIRCn   = 8
-	PINCn   = 9
-	MINCn   = 10
-	PSIZEn  = 11
-	MSIZEn  = 13
-	PINCOSn = 15
-	PLn     = 16
-	DBMn    = 18
-	CTn     = 19
-	PBURSTn = 21
-	MBURSTn = 23
-	CHSELn  = 25
-)
-
-const (
-	NDT S7NDTR = 0xFFFF << 0 //+ Number of data items to transfer
-)
-
-const (
-	NDTn = 0
-)
-
-const (
-	PA S7PAR = 0xFFFFFFFF << 0 //+ Peripheral address
-)
-
-const (
-	PAn = 0
-)
-
-const (
-	M0A S7M0AR = 0xFFFFFFFF << 0 //+ Memory 0 address
-)
-
-const (
-	M0An = 0
-)
-
-const (
-	M1A S7M1AR = 0xFFFFFFFF << 0 //+ Memory 1 address (used in case of Double buffer mode)
-)
-
-const (
-	M1An = 0
-)
-
-const (
-	FTH   S7FCR = 0x03 << 0 //+ FIFO threshold selection
-	DMDIS S7FCR = 0x01 << 2 //+ Direct mode disable
-	FS    S7FCR = 0x07 << 3 //+ FIFO status
-	FEIE  S7FCR = 0x01 << 7 //+ FIFO error interrupt enable
+	FTH   FCR = 0x03 << 0 //+ FIFO threshold selection
+	DMDIS FCR = 0x01 << 2 //+ Direct mode disable
+	FS    FCR = 0x07 << 3 //+ FIFO status
+	FEIE  FCR = 0x01 << 7 //+ FIFO error interrupt enable
 )
 
 const (

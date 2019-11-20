@@ -7,34 +7,34 @@
 // Instances:
 //  FMC  FMC_BASE  AHB3  FMC,FPU*  Flexible memory controller
 // Registers:
-//  0x000 32  BCT{BCR,BTR}[4]  chip-select control/timing register
-//  0x080 32  PCR              PC Card/NAND Flash control register 3
-//  0x084 32  SR               FIFO status and interrupt register 3
-//  0x088 32  PMEM             Common memory space timing register 3
-//  0x08C 32  PATT             Attribute memory space timing register 3
-//  0x094 32  ECCR             ECC result register 3
-//  0x104 32  BWTR[4]          write timing registers
+//  0x000 32  BCT{CR,TR}[4]  chip-select control and timing registers
+//  0x080 32  PCR            PC Card/NAND Flash control register 3
+//  0x084 32  SR             FIFO status and interrupt register 3
+//  0x088 32  PMEM           Common memory space timing register 3
+//  0x08C 32  PATT           Attribute memory space timing register 3
+//  0x094 32  ECCR           ECC result register 3
+//  0x104 32  BWTR[4]        write timing registers
 // Import:
 //  github.com/embeddedgo/stm32/p/bus
 //  github.com/embeddedgo/stm32/p/mmap
 package fmc
 
 const (
-	MBKEN     BCR = 0x01 << 0  //+ MBKEN
-	MUXEN     BCR = 0x01 << 1  //+ MUXEN
-	MTYP      BCR = 0x03 << 2  //+ MTYP
-	MWID      BCR = 0x03 << 4  //+ MWID
-	FACCEN    BCR = 0x01 << 6  //+ FACCEN
-	BURSTEN   BCR = 0x01 << 8  //+ BURSTEN
-	WAITPOL   BCR = 0x01 << 9  //+ WAITPOL
-	WAITCFG   BCR = 0x01 << 11 //+ WAITCFG
-	WREN      BCR = 0x01 << 12 //+ WREN
-	WAITEN    BCR = 0x01 << 13 //+ WAITEN
-	EXTMOD    BCR = 0x01 << 14 //+ EXTMOD
-	ASYNCWAIT BCR = 0x01 << 15 //+ ASYNCWAIT
-	CBURSTRW  BCR = 0x01 << 19 //+ CBURSTRW
-	CCLKEN    BCR = 0x01 << 20 //+ CCLKEN
-	WFDIS     BCR = 0x01 << 21 //+ Write FIFO Disable
+	MBKEN     CR = 0x01 << 0  //+ MBKEN
+	MUXEN     CR = 0x01 << 1  //+ MUXEN
+	MTYP      CR = 0x03 << 2  //+ MTYP
+	MWID      CR = 0x03 << 4  //+ MWID
+	FACCEN    CR = 0x01 << 6  //+ FACCEN
+	BURSTEN   CR = 0x01 << 8  //+ BURSTEN
+	WAITPOL   CR = 0x01 << 9  //+ WAITPOL
+	WAITCFG   CR = 0x01 << 11 //+ WAITCFG
+	WREN      CR = 0x01 << 12 //+ WREN
+	WAITEN    CR = 0x01 << 13 //+ WAITEN
+	EXTMOD    CR = 0x01 << 14 //+ EXTMOD
+	ASYNCWAIT CR = 0x01 << 15 //+ ASYNCWAIT
+	CBURSTRW  CR = 0x01 << 19 //+ CBURSTRW
+	CCLKEN    CR = 0x01 << 20 //+ CCLKEN
+	WFDIS     CR = 0x01 << 21 //+ Write FIFO Disable
 )
 
 const (
@@ -56,13 +56,13 @@ const (
 )
 
 const (
-	ADDSET  BTR = 0x0F << 0  //+ ADDSET
-	ADDHLD  BTR = 0x0F << 4  //+ ADDHLD
-	DATAST  BTR = 0xFF << 8  //+ DATAST
-	BUSTURN BTR = 0x0F << 16 //+ BUSTURN
-	CLKDIV  BTR = 0x0F << 20 //+ CLKDIV
-	DATLAT  BTR = 0x0F << 24 //+ DATLAT
-	ACCMOD  BTR = 0x03 << 28 //+ ACCMOD
+	ADDSET  TR = 0x0F << 0  //+ ADDSET
+	ADDHLD  TR = 0x0F << 4  //+ ADDHLD
+	DATAST  TR = 0xFF << 8  //+ DATAST
+	BUSTURN TR = 0x0F << 16 //+ BUSTURN
+	CLKDIV  TR = 0x0F << 20 //+ CLKDIV
+	DATLAT  TR = 0x0F << 24 //+ DATLAT
+	ACCMOD  TR = 0x03 << 28 //+ ACCMOD
 )
 
 const (
