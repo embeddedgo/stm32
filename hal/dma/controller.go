@@ -1,0 +1,231 @@
+// Copyright 2019 Michal Derkacz. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+package dma
+
+import (
+	"unsafe"
+
+	"github.com/embeddedgo/stm32/p/dma"
+)
+
+type Controller struct {
+	p dma.Periph
+}
+
+// DMA returns n-th DMA controller. The first controller number is 1.
+func DMA(n int) *Controller {
+	return controller(n)
+}
+
+// EnableClock enables clock for port p.
+// lp determines whether the clock remains on in low power (sleep) mode.
+func (d *Controller) EnableClock(lp bool) {
+	d.enableClock(lp)
+}
+
+func (d *Controller) DisableClock() {
+	d.disableClock()
+}
+
+func (d *Controller) Reset() {
+	d.reset()
+}
+
+// Channel returns the value that represents sn-th stream (channel in F1/Lx
+// series nomenclature) with cn-th request channel set (ignored in case of F1/Lx
+// series). Channels with the same sn points to the same DMA stream so they can
+// not be used concurently.
+func (d *Controller) Channel(sn, cn int) Channel {
+	return d.channel(sn, cn)
+}
+
+type Channel struct {
+	h uintptr
+}
+
+type Event uint8
+
+const (
+	Complete     Event = trce // Transfer Complete Event.
+	HalfComplete Event = htce // Half Transfer Complete Event.
+
+	EvAll = Complete | HalfComplete
+)
+
+type Error uint8
+
+const (
+	ErrTransfer   Error = trerr // Transfer Error.
+	ErrDirectMode Error = dmerr // Direct Mode Error.
+	ErrFIFO       Error = fferr // FIFO Error.
+
+	ErrAll = ErrTransfer | ErrDirectMode | ErrFIFO
+)
+
+func (err Error) Error() string {
+	var (
+		s string
+		d Error
+	)
+	switch {
+	case err&ErrTransfer != 0:
+		d = ErrTransfer
+		s = "DMA transfer+"
+	case err&ErrDirectMode != 0:
+		d = ErrDirectMode
+		s = "DMA direct mode+"
+	case err&ErrFIFO != 0:
+		d = ErrFIFO
+		s = "DMA FIFO+"
+	default:
+		return ""
+	}
+	if err == d {
+		s = s[:len(s)-1]
+	}
+	return s
+}
+
+// Status returns current event and error flags.
+func (c Channel) Status() (Event, Error) {
+	flags := c.status()
+	return Event(flags) & EvAll, Error(flags) & ErrAll
+}
+
+// Clear clears specified flags.
+func (c Channel) Clear(ev Event, err Error) {
+	c.clear(byte(ev) | byte(err))
+}
+
+// Enable enables the channel c. All events and errors should be cleared
+// before call this method.
+func (c Channel) Enable() {
+	c.enable()
+}
+
+// Disable disables channel.
+func (c Channel) Disable() {
+	c.disable()
+}
+
+// Returns true if channel is enabled.
+func (c Channel) Enabled() bool {
+	return c.enabled()
+}
+
+// IRQEnabled returns events that are enabled to generate interrupt requests.
+func (c Channel) IRQEnabled() (Event, Error) {
+	flags := c.irqEnabled()
+	return Event(flags) & EvAll, Error(flags) & ErrAll
+}
+
+// EnableIRQ enables generation of IRQs by ev, err. Documentation does not
+// mention it, but IRQ can be not generated if an event was asserted before
+// enable IRQ for it. So always enable IRQs before channel. Typically, the
+// correct sequence is as follows:
+//	c.Clear(EvAll, ErrAll)
+//	c.EnableIRQ(ev, err)
+//	c.Enable()
+func (c Channel) EnableIRQ(ev Event, err Error) {
+	c.enableIRQ(byte(ev) | byte(err))
+}
+
+// DisableIRQ disables IRQs generation by ev, err.
+func (c Channel) DisableIRQ(ev Event, err Error) {
+	c.disableIRQ(byte(ev) | byte(err))
+}
+
+type Mode uint32
+
+const (
+	PTM Mode = 0   // Read from peripheral, write to memory.
+	MTP Mode = mtp // Read from memory, write to peripheral.
+	MTM Mode = mtm // Read from memory (AddrP), write to memory.
+
+	Circ Mode = circ // Enable circular mode.
+	IncP Mode = incP // Peripheral increment mode.
+	IncM Mode = incM // Memory increment mode.
+	PFC  Mode = pfc  // Peripheral flow controller.
+
+	FT1 Mode = ft1 // FIFO mode, threshold 1/4.
+	FT2 Mode = ft2 // FIFO mode, threshold 2/4.
+	FT3 Mode = ft3 // FIFO mode, threshold 3/4.
+	FT4 Mode = ft4 // FIFO mode, threshold 4/4.
+
+	PB4  Mode = pb4  // Perepheral burst transfer, 4 beats.
+	PB8  Mode = pb8  // Perepheral burst transfer, 8 beats.
+	PB16 Mode = pb16 // Perepheral burst transfer, 16 beats.
+	MB4  Mode = mb4  // Memory burst transfer, 4 beats.
+	MB8  Mode = mb4  // Memory burst transfer, 4 beats.
+	MB16 Mode = mb4  // Memory burst transfer, 4 beats.
+)
+
+// Setup configures channel.
+func (c Channel) Setup(m Mode) {
+	c.setup(m)
+}
+
+// Prio describes DMA stream priority level.
+type Prio uint8
+
+const (
+	Low      Prio = 0     // Low priority.
+	Medium   Prio = prioM // Medium priority.
+	High     Prio = prioH // High priority.
+	VeryHigh Prio = prioV // Very high priority.
+)
+
+func (c Channel) SetPrio(prio Prio) {
+	c.setPrio(prio)
+}
+
+func (c Channel) Prio() Prio {
+	return c.prio()
+}
+
+// WordSize returns the current word size (in bytes) for peripheral and memory
+// side of transfer.
+func (c Channel) WordSize() (p, m uintptr) {
+	return c.wordSize()
+}
+
+// SetWordSize sets the word size (in bytes) for peripheral and memory side of
+// transfer.
+func (c Channel) SetWordSize(p, m uintptr) {
+	c.setWordSize(p, m)
+}
+
+// Len returns current number of words to transfer.
+func (c Channel) Len() int {
+	return c.len()
+}
+
+// SetLen sets number of words to transfer (n <= 65535).
+func (c Channel) SetLen(n int) {
+	c.setLen(n)
+}
+
+// SetAddrP sets peripheral address (or memory source address in case of MTM).
+func (c Channel) SetAddrP(a unsafe.Pointer) {
+	c.setAddrP(a)
+}
+
+// SetAddrM sets memory address.
+func (c Channel) SetAddrM(a unsafe.Pointer) {
+	c.setAddrM(a)
+}
+
+// Request represents request number for DMA channel.
+type Request int8
+
+// Request returns current request source.
+func (c Channel) Request() Request {
+	return c.request()
+}
+
+// SetRequest selects request source for channel.
+func (c Channel) SetRequest(req Request) {
+	c.setRequest(req)
+}
