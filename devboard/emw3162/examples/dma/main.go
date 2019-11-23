@@ -11,12 +11,12 @@ import (
 	"embedded/rtos"
 	"unsafe"
 
-	"github.com/embeddedgo/stm32/devboard/f4-discovery/board"
+	"github.com/embeddedgo/stm32/devboard/emw3162/board"
 	"github.com/embeddedgo/stm32/hal/dma"
 	"github.com/embeddedgo/stm32/hal/irq"
 )
 
-const n = 32 * 1024 / 4
+const n = 20 * 1024 / 4
 
 var (
 	ch     dma.Channel
