@@ -5,5 +5,4 @@ GOMEM=0x20000000:320K
 GOTEXT=0x8000000
 IRQNAMES=../../../../hal/irq
 
-. ../../../../../scripts/build.sh
-
+. ../../../../../scripts/build.sh $@
