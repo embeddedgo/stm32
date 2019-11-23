@@ -1,4 +1,8 @@
-// +build f030x6 f030x8
+// Copyright 2019 Michal Derkacz. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+// +build ignore
 
 package dma
 
@@ -8,7 +12,9 @@ import (
 	"stm32/hal/raw/mmap"
 )
 
-//emgo:const
-var (
-	DMA1 = (*DMA)(unsafe.Pointer(mmap.DMA1_BASE))
-)
+func controller(n int) *Controller {
+	if uint(n) != 1 {
+		panic("dma: bad controller number")
+	}
+	return (*Controller)(unsafe.Pointer(mmap.DMA1_BASE)
+}

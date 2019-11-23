@@ -1,19 +1,23 @@
-// +build  f030x6 f030x8
+// Copyright 2019 Michal Derkacz. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+// +build ignore
 
 package dma
 
 import (
-	"stm32/hal/raw/rcc"
+	"github.com/embeddedgo/stm32/hal/internal"
+	"github.com/embeddedgo/stm32/p/rcc"
 )
 
-func (p *DMA) enableClock(_ bool) {
-	bit := bit(p, &rcc.RCC.AHBENR.U32, rcc.DMAENn)
-	bit.Set()
-	bit.Load() // RCC delay (workaround for silicon bugs).
+func (d *Controller) enableClock(_ bool) {
+	internal.AtomicSetBits(&rcc.RCC().AHBENR.U32, uint32(1)<<rcc.DMAENn)
+	rcc.RCC().AHBENR.Load() // RCC delay (workaround for silicon bugs)
 }
 
-func (p *DMA) disableClock() {
-	bit(p, &rcc.RCC.AHBENR.U32, rcc.DMAENn).Clear()
+func (d *Controller) disableClock() {
+	internal.AtomicClearBits(&rcc.RCC().AHBENR.U32, uint32(1)<<rcc.DMAENn)
 }
 
-func (p *DMA) reset() {}
+func (d *Controller) reset() {}

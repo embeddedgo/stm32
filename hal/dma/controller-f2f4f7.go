@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// +build stm32f407
+// +build stm32f215 stm32f407 stm32f7x6
 
 package dma
 
@@ -33,7 +33,7 @@ func (c Channel) stream() *dma.RS {
 func (c Channel) snum() uintptr {
 	off := c.h & 0x3ff
 	step := unsafe.Sizeof(dma.RS{})
-	return (off - unsafe.Sizeof(dma.Periph{})) / step
+	return (off - 0x10) / step
 }
 
 func (c Channel) cnum() int {
@@ -92,7 +92,7 @@ func (c Channel) irqEnabled() byte {
 func (c Channel) enableIRQ(flags byte) {
 	s := c.stream()
 	s.CR.SetBits(dma.CR(flags) >> 1 & 0x1e)
-	//s.FCR..SetBits(dma.FCR(flags) & 1 << 7) do not use
+	//s.FCR.SetBits(dma.FCR(flags) & 1 << 7) do not use
 }
 
 func (c Channel) disableIRQ(flags byte) {

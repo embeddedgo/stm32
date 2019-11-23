@@ -2,8 +2,9 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// This example forces the garbage collector to work hard and periodically
-// prints statistics of the memory allocator.
+// This example tests different ways of coping memory. It also shows how to use
+// DMA for memory to memory transfers. In case of STM32 F2/F4/F7 only DMA2
+// supports MTM transfer.
 package main
 
 import (
@@ -15,7 +16,7 @@ import (
 	"github.com/embeddedgo/stm32/hal/irq"
 )
 
-const n = 16 * 1024 / 4
+const n = 32 * 1024 / 4
 
 var (
 	ch     dma.Channel
@@ -40,6 +41,22 @@ func copyDMA(mode dma.Mode) {
 	}
 }
 
+func printSpeed(t int64, check bool) {
+	t1 := rtos.Nanotime()
+	t2 := rtos.Nanotime()
+	dt := (t1 - t) - (t2 - t1)
+	if check {
+		for i := range dst {
+			if dst[i] != uint32(i) {
+				println(" dst != src\n")
+				return
+			}
+			dst[i] = 0
+		}
+	}
+	println("", (int64(n*unsafe.Sizeof(dst[0]))*1e6+dt/2)/dt, "kB/s")
+}
+
 func check() {
 	for i := range dst {
 		if dst[i] != uint32(i) {
@@ -54,44 +71,67 @@ var p *int
 
 func main() {
 	board.Setup(true)
-	
-	a := *p
 
 	d := dma.DMA(2)
 	d.EnableClock(true)
-	ch = d.Channel(0, a)
+	ch = d.Channel(0, 0)
 	ch.EnableIRQ(dma.Complete, dma.ErrAll)
 	irq.DMA2_Stream0.Enable(rtos.IntPrioLow)
 
-	println("Initialize src")
-	for i := range src {
-		src[i] = uint32(i)
-	}
-
 	for {
-		println("DMA")
+		print("Initialize src                        ")
+		t := rtos.Nanotime()
+		for i := range src {
+			src[i] = uint32(i)
+		}
+		printSpeed(t, false)
+
+		print("for i := range src { dst[i] = src[i] }")
+		t = rtos.Nanotime()
+		for i := range src {
+			dst[i] = src[i]
+		}
+		printSpeed(t, true)
+
+		print("copy(dst, src)                        ")
+		t = rtos.Nanotime()
+		copy(dst, src)
+		printSpeed(t, true)
+
+		print("DMA                                   ")
+		t = rtos.Nanotime()
 		copyDMA(0)
-		check()
+		printSpeed(t, true)
 
-		println("DMA FT1")
+		print("DMA FT1                               ")
+		t = rtos.Nanotime()
 		copyDMA(dma.FT1)
-		check()
+		printSpeed(t, true)
 
-		println("DMA FT2")
+		print("DMA FT2                               ")
+		t = rtos.Nanotime()
 		copyDMA(dma.FT2)
-		check()
+		printSpeed(t, true)
 
-		println("DMA FT3")
+		print("DMA FT3                               ")
+		t = rtos.Nanotime()
 		copyDMA(dma.FT3)
-		check()
+		printSpeed(t, true)
 
-		println("DMA FT4")
+		print("DMA FT4                               ")
+		t = rtos.Nanotime()
 		copyDMA(dma.FT4)
-		check()
+		printSpeed(t, true)
 
-		println("DMA FT4 PB4 MB4")
+		print("DMA FT4 PB4 MB4                       ")
+		t = rtos.Nanotime()
 		copyDMA(dma.FT4 | dma.PB4 | dma.MB4)
-		check()
+		printSpeed(t, true)
+
+		var delay rtos.Note
+		delay.Clear()
+		delay.Sleep(2e9)
+		println()
 	}
 }
 

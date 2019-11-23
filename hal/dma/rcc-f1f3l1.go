@@ -1,4 +1,8 @@
-// +build  f10x_ld f10x_ld_vl f10x_md f10x_md_vl f10x_hd f10x_hd_vl f10x_xl f10x_cl f303xe l1xx_md l1xx_mdp l1xx_hd l1xx_xl
+// Copyright 2019 Michal Derkacz. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
+// +build ignore
 
 package dma
 
@@ -7,13 +11,12 @@ import (
 )
 
 func (p *DMA) enableClock(_ bool) {
-	bit := bit(p, &rcc.RCC.AHBENR.U32, rcc.DMA1ENn)
-	bit.Set()
-	bit.Load() // RCC delay (workaround for silicon bugs).
+	internal.AtomicSetBits(&rcc.RCC().AHBENR.U32, 1<<(rcc.DMA1ENn+d.num()))
+	rcc.RCC().AHBENR.Load() // RCC delay (workaround for silicon bugs)
 }
 
 func (p *DMA) disableClock() {
-	bit(p, &rcc.RCC.AHBENR.U32, rcc.DMA1ENn).Clear()
+	internal.AtomicClearBits(&rcc.RCC().AHBENR.U32, 1<<(rcc.DMA1ENn+d.num()))
 }
 
 func (p *DMA) reset() {}

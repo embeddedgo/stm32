@@ -154,9 +154,9 @@ const (
 	FT3 Mode = ft3 // FIFO mode, threshold 3/4.
 	FT4 Mode = ft4 // FIFO mode, threshold 4/4.
 
-	PB4  Mode = pb4  // Perepheral burst transfer, 4 beats.
-	PB8  Mode = pb8  // Perepheral burst transfer, 8 beats.
-	PB16 Mode = pb16 // Perepheral burst transfer, 16 beats.
+	PB4  Mode = pb4  // Peripheral burst transfer, 4 beats.
+	PB8  Mode = pb8  // Peripheral burst transfer, 8 beats.
+	PB16 Mode = pb16 // Peripheral burst transfer, 16 beats.
 	MB4  Mode = mb4  // Memory burst transfer, 4 beats.
 	MB8  Mode = mb4  // Memory burst transfer, 4 beats.
 	MB16 Mode = mb4  // Memory burst transfer, 4 beats.
