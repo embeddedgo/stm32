@@ -80,7 +80,7 @@ func (c Channel) disable() {
 }
 
 func (c Channel) enabled() bool {
-	return c.stream().CR.Bits(dma.EN) != 0
+	return c.stream().CR.LoadBits(dma.EN) != 0
 }
 
 func (c Channel) irqEnabled() byte {
@@ -146,7 +146,7 @@ func (c Channel) setPrio(prio Prio) {
 }
 
 func (c Channel) prio() Prio {
-	return Prio(c.stream().CR.Bits(dma.PL) >> dma.PLn)
+	return Prio(c.stream().CR.LoadBits(dma.PL) >> dma.PLn)
 }
 
 func (c Channel) wordSize() (p, m uintptr) {

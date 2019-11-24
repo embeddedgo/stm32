@@ -34,12 +34,12 @@ type MEMRM uint32
 
 type RMEMRM struct{ mmio.U32 }
 
-func (r *RMEMRM) Bits(mask MEMRM) MEMRM   { return MEMRM(r.U32.Bits(uint32(mask))) }
-func (r *RMEMRM) StoreBits(mask, b MEMRM) { r.U32.StoreBits(uint32(mask), uint32(b)) }
-func (r *RMEMRM) SetBits(mask MEMRM)      { r.U32.SetBits(uint32(mask)) }
-func (r *RMEMRM) ClearBits(mask MEMRM)    { r.U32.ClearBits(uint32(mask)) }
-func (r *RMEMRM) Load() MEMRM             { return MEMRM(r.U32.Load()) }
-func (r *RMEMRM) Store(b MEMRM)           { r.U32.Store(uint32(b)) }
+func (r *RMEMRM) LoadBits(mask MEMRM) MEMRM { return MEMRM(r.U32.LoadBits(uint32(mask))) }
+func (r *RMEMRM) StoreBits(mask, b MEMRM)   { r.U32.StoreBits(uint32(mask), uint32(b)) }
+func (r *RMEMRM) SetBits(mask MEMRM)        { r.U32.SetBits(uint32(mask)) }
+func (r *RMEMRM) ClearBits(mask MEMRM)      { r.U32.ClearBits(uint32(mask)) }
+func (r *RMEMRM) Load() MEMRM               { return MEMRM(r.U32.Load()) }
+func (r *RMEMRM) Store(b MEMRM)             { r.U32.Store(uint32(b)) }
 
 type RMMEMRM struct{ mmio.UM32 }
 
@@ -54,7 +54,7 @@ type PMC uint32
 
 type RPMC struct{ mmio.U32 }
 
-func (r *RPMC) Bits(mask PMC) PMC     { return PMC(r.U32.Bits(uint32(mask))) }
+func (r *RPMC) LoadBits(mask PMC) PMC { return PMC(r.U32.LoadBits(uint32(mask))) }
 func (r *RPMC) StoreBits(mask, b PMC) { r.U32.StoreBits(uint32(mask), uint32(b)) }
 func (r *RPMC) SetBits(mask PMC)      { r.U32.SetBits(uint32(mask)) }
 func (r *RPMC) ClearBits(mask PMC)    { r.U32.ClearBits(uint32(mask)) }
@@ -74,12 +74,12 @@ type EXTICR uint32
 
 type REXTICR struct{ mmio.U32 }
 
-func (r *REXTICR) Bits(mask EXTICR) EXTICR  { return EXTICR(r.U32.Bits(uint32(mask))) }
-func (r *REXTICR) StoreBits(mask, b EXTICR) { r.U32.StoreBits(uint32(mask), uint32(b)) }
-func (r *REXTICR) SetBits(mask EXTICR)      { r.U32.SetBits(uint32(mask)) }
-func (r *REXTICR) ClearBits(mask EXTICR)    { r.U32.ClearBits(uint32(mask)) }
-func (r *REXTICR) Load() EXTICR             { return EXTICR(r.U32.Load()) }
-func (r *REXTICR) Store(b EXTICR)           { r.U32.Store(uint32(b)) }
+func (r *REXTICR) LoadBits(mask EXTICR) EXTICR { return EXTICR(r.U32.LoadBits(uint32(mask))) }
+func (r *REXTICR) StoreBits(mask, b EXTICR)    { r.U32.StoreBits(uint32(mask), uint32(b)) }
+func (r *REXTICR) SetBits(mask EXTICR)         { r.U32.SetBits(uint32(mask)) }
+func (r *REXTICR) ClearBits(mask EXTICR)       { r.U32.ClearBits(uint32(mask)) }
+func (r *REXTICR) Load() EXTICR                { return EXTICR(r.U32.Load()) }
+func (r *REXTICR) Store(b EXTICR)              { r.U32.Store(uint32(b)) }
 
 type RMEXTICR struct{ mmio.UM32 }
 
@@ -90,12 +90,12 @@ type CMPCR uint32
 
 type RCMPCR struct{ mmio.U32 }
 
-func (r *RCMPCR) Bits(mask CMPCR) CMPCR   { return CMPCR(r.U32.Bits(uint32(mask))) }
-func (r *RCMPCR) StoreBits(mask, b CMPCR) { r.U32.StoreBits(uint32(mask), uint32(b)) }
-func (r *RCMPCR) SetBits(mask CMPCR)      { r.U32.SetBits(uint32(mask)) }
-func (r *RCMPCR) ClearBits(mask CMPCR)    { r.U32.ClearBits(uint32(mask)) }
-func (r *RCMPCR) Load() CMPCR             { return CMPCR(r.U32.Load()) }
-func (r *RCMPCR) Store(b CMPCR)           { r.U32.Store(uint32(b)) }
+func (r *RCMPCR) LoadBits(mask CMPCR) CMPCR { return CMPCR(r.U32.LoadBits(uint32(mask))) }
+func (r *RCMPCR) StoreBits(mask, b CMPCR)   { r.U32.StoreBits(uint32(mask), uint32(b)) }
+func (r *RCMPCR) SetBits(mask CMPCR)        { r.U32.SetBits(uint32(mask)) }
+func (r *RCMPCR) ClearBits(mask CMPCR)      { r.U32.ClearBits(uint32(mask)) }
+func (r *RCMPCR) Load() CMPCR               { return CMPCR(r.U32.Load()) }
+func (r *RCMPCR) Store(b CMPCR)             { r.U32.Store(uint32(b)) }
 
 type RMCMPCR struct{ mmio.UM32 }
 

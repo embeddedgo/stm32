@@ -6,12 +6,12 @@ package gpio
 
 // Pins returns input value of pins.
 func (p *Port) Pins(pins Pins) Pins {
-	return Pins(p.idr.Bits(uint16(pins)))
+	return Pins(p.idr.LoadBits(uint16(pins)))
 }
 
 // PinsOut returns output value of pins.
 func (p *Port) PinsOut(pins Pins) Pins {
-	return Pins(p.odr.Bits(uint16(pins)))
+	return Pins(p.odr.LoadBits(uint16(pins)))
 }
 
 // SetPins sets output value of pins to 1 in one atomic operation.

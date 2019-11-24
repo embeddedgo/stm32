@@ -63,7 +63,7 @@ func (c Channel) disable() {
 }
 
 func (c Channel) enabled() bool {
-	return c.channel().CR.Bits(dma.EN) != 0
+	return c.channel().CR.LoadBits(dma.EN) != 0
 }
 
 func (c Channel) irqEnabled() byte {
@@ -117,7 +117,7 @@ func (c Channel) setPrio(prio Prio) {
 }
 
 func (c Channel) prio() Prio {
-	return Prio(c.channel().CR.Bits(dma.PL) >> dma.PLn)
+	return Prio(c.channel().CR.LoadBits(dma.PL) >> dma.PLn)
 }
 
 func (c Channel) wordSize() (p, m uintptr) {
@@ -150,7 +150,7 @@ func (c Channel) setAddrM(a unsafe.Pointer) {
 
 func (c Channel) request() Request {
 	n := c.num() * 4
-	return Request(c.periph().CSELR.Bits(0xf << n))
+	return Request(c.periph().CSELR.LoadBits(0xf << n))
 }
 
 func (c Channel) setRequest(req Request) {

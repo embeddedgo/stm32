@@ -54,7 +54,7 @@ type CR uint32
 
 type RCR struct{ mmio.U32 }
 
-func (r *RCR) Bits(mask CR) CR      { return CR(r.U32.Bits(uint32(mask))) }
+func (r *RCR) LoadBits(mask CR) CR  { return CR(r.U32.LoadBits(uint32(mask))) }
 func (r *RCR) StoreBits(mask, b CR) { r.U32.StoreBits(uint32(mask), uint32(b)) }
 func (r *RCR) SetBits(mask CR)      { r.U32.SetBits(uint32(mask)) }
 func (r *RCR) ClearBits(mask CR)    { r.U32.ClearBits(uint32(mask)) }
@@ -118,12 +118,12 @@ type PLLCFGR uint32
 
 type RPLLCFGR struct{ mmio.U32 }
 
-func (r *RPLLCFGR) Bits(mask PLLCFGR) PLLCFGR { return PLLCFGR(r.U32.Bits(uint32(mask))) }
-func (r *RPLLCFGR) StoreBits(mask, b PLLCFGR) { r.U32.StoreBits(uint32(mask), uint32(b)) }
-func (r *RPLLCFGR) SetBits(mask PLLCFGR)      { r.U32.SetBits(uint32(mask)) }
-func (r *RPLLCFGR) ClearBits(mask PLLCFGR)    { r.U32.ClearBits(uint32(mask)) }
-func (r *RPLLCFGR) Load() PLLCFGR             { return PLLCFGR(r.U32.Load()) }
-func (r *RPLLCFGR) Store(b PLLCFGR)           { r.U32.Store(uint32(b)) }
+func (r *RPLLCFGR) LoadBits(mask PLLCFGR) PLLCFGR { return PLLCFGR(r.U32.LoadBits(uint32(mask))) }
+func (r *RPLLCFGR) StoreBits(mask, b PLLCFGR)     { r.U32.StoreBits(uint32(mask), uint32(b)) }
+func (r *RPLLCFGR) SetBits(mask PLLCFGR)          { r.U32.SetBits(uint32(mask)) }
+func (r *RPLLCFGR) ClearBits(mask PLLCFGR)        { r.U32.ClearBits(uint32(mask)) }
+func (r *RPLLCFGR) Load() PLLCFGR                 { return PLLCFGR(r.U32.Load()) }
+func (r *RPLLCFGR) Store(b PLLCFGR)               { r.U32.Store(uint32(b)) }
 
 type RMPLLCFGR struct{ mmio.UM32 }
 
@@ -154,12 +154,12 @@ type CFGR uint32
 
 type RCFGR struct{ mmio.U32 }
 
-func (r *RCFGR) Bits(mask CFGR) CFGR    { return CFGR(r.U32.Bits(uint32(mask))) }
-func (r *RCFGR) StoreBits(mask, b CFGR) { r.U32.StoreBits(uint32(mask), uint32(b)) }
-func (r *RCFGR) SetBits(mask CFGR)      { r.U32.SetBits(uint32(mask)) }
-func (r *RCFGR) ClearBits(mask CFGR)    { r.U32.ClearBits(uint32(mask)) }
-func (r *RCFGR) Load() CFGR             { return CFGR(r.U32.Load()) }
-func (r *RCFGR) Store(b CFGR)           { r.U32.Store(uint32(b)) }
+func (r *RCFGR) LoadBits(mask CFGR) CFGR { return CFGR(r.U32.LoadBits(uint32(mask))) }
+func (r *RCFGR) StoreBits(mask, b CFGR)  { r.U32.StoreBits(uint32(mask), uint32(b)) }
+func (r *RCFGR) SetBits(mask CFGR)       { r.U32.SetBits(uint32(mask)) }
+func (r *RCFGR) ClearBits(mask CFGR)     { r.U32.ClearBits(uint32(mask)) }
+func (r *RCFGR) Load() CFGR              { return CFGR(r.U32.Load()) }
+func (r *RCFGR) Store(b CFGR)            { r.U32.Store(uint32(b)) }
 
 type RMCFGR struct{ mmio.UM32 }
 
@@ -214,7 +214,7 @@ type CIR uint32
 
 type RCIR struct{ mmio.U32 }
 
-func (r *RCIR) Bits(mask CIR) CIR     { return CIR(r.U32.Bits(uint32(mask))) }
+func (r *RCIR) LoadBits(mask CIR) CIR { return CIR(r.U32.LoadBits(uint32(mask))) }
 func (r *RCIR) StoreBits(mask, b CIR) { r.U32.StoreBits(uint32(mask), uint32(b)) }
 func (r *RCIR) SetBits(mask CIR)      { r.U32.SetBits(uint32(mask)) }
 func (r *RCIR) ClearBits(mask CIR)    { r.U32.ClearBits(uint32(mask)) }
@@ -310,12 +310,12 @@ type AHB1RSTR uint32
 
 type RAHB1RSTR struct{ mmio.U32 }
 
-func (r *RAHB1RSTR) Bits(mask AHB1RSTR) AHB1RSTR { return AHB1RSTR(r.U32.Bits(uint32(mask))) }
-func (r *RAHB1RSTR) StoreBits(mask, b AHB1RSTR)  { r.U32.StoreBits(uint32(mask), uint32(b)) }
-func (r *RAHB1RSTR) SetBits(mask AHB1RSTR)       { r.U32.SetBits(uint32(mask)) }
-func (r *RAHB1RSTR) ClearBits(mask AHB1RSTR)     { r.U32.ClearBits(uint32(mask)) }
-func (r *RAHB1RSTR) Load() AHB1RSTR              { return AHB1RSTR(r.U32.Load()) }
-func (r *RAHB1RSTR) Store(b AHB1RSTR)            { r.U32.Store(uint32(b)) }
+func (r *RAHB1RSTR) LoadBits(mask AHB1RSTR) AHB1RSTR { return AHB1RSTR(r.U32.LoadBits(uint32(mask))) }
+func (r *RAHB1RSTR) StoreBits(mask, b AHB1RSTR)      { r.U32.StoreBits(uint32(mask), uint32(b)) }
+func (r *RAHB1RSTR) SetBits(mask AHB1RSTR)           { r.U32.SetBits(uint32(mask)) }
+func (r *RAHB1RSTR) ClearBits(mask AHB1RSTR)         { r.U32.ClearBits(uint32(mask)) }
+func (r *RAHB1RSTR) Load() AHB1RSTR                  { return AHB1RSTR(r.U32.Load()) }
+func (r *RAHB1RSTR) Store(b AHB1RSTR)                { r.U32.Store(uint32(b)) }
 
 type RMAHB1RSTR struct{ mmio.UM32 }
 
@@ -382,12 +382,12 @@ type AHB2RSTR uint32
 
 type RAHB2RSTR struct{ mmio.U32 }
 
-func (r *RAHB2RSTR) Bits(mask AHB2RSTR) AHB2RSTR { return AHB2RSTR(r.U32.Bits(uint32(mask))) }
-func (r *RAHB2RSTR) StoreBits(mask, b AHB2RSTR)  { r.U32.StoreBits(uint32(mask), uint32(b)) }
-func (r *RAHB2RSTR) SetBits(mask AHB2RSTR)       { r.U32.SetBits(uint32(mask)) }
-func (r *RAHB2RSTR) ClearBits(mask AHB2RSTR)     { r.U32.ClearBits(uint32(mask)) }
-func (r *RAHB2RSTR) Load() AHB2RSTR              { return AHB2RSTR(r.U32.Load()) }
-func (r *RAHB2RSTR) Store(b AHB2RSTR)            { r.U32.Store(uint32(b)) }
+func (r *RAHB2RSTR) LoadBits(mask AHB2RSTR) AHB2RSTR { return AHB2RSTR(r.U32.LoadBits(uint32(mask))) }
+func (r *RAHB2RSTR) StoreBits(mask, b AHB2RSTR)      { r.U32.StoreBits(uint32(mask), uint32(b)) }
+func (r *RAHB2RSTR) SetBits(mask AHB2RSTR)           { r.U32.SetBits(uint32(mask)) }
+func (r *RAHB2RSTR) ClearBits(mask AHB2RSTR)         { r.U32.ClearBits(uint32(mask)) }
+func (r *RAHB2RSTR) Load() AHB2RSTR                  { return AHB2RSTR(r.U32.Load()) }
+func (r *RAHB2RSTR) Store(b AHB2RSTR)                { r.U32.Store(uint32(b)) }
 
 type RMAHB2RSTR struct{ mmio.UM32 }
 
@@ -414,12 +414,12 @@ type AHB3RSTR uint32
 
 type RAHB3RSTR struct{ mmio.U32 }
 
-func (r *RAHB3RSTR) Bits(mask AHB3RSTR) AHB3RSTR { return AHB3RSTR(r.U32.Bits(uint32(mask))) }
-func (r *RAHB3RSTR) StoreBits(mask, b AHB3RSTR)  { r.U32.StoreBits(uint32(mask), uint32(b)) }
-func (r *RAHB3RSTR) SetBits(mask AHB3RSTR)       { r.U32.SetBits(uint32(mask)) }
-func (r *RAHB3RSTR) ClearBits(mask AHB3RSTR)     { r.U32.ClearBits(uint32(mask)) }
-func (r *RAHB3RSTR) Load() AHB3RSTR              { return AHB3RSTR(r.U32.Load()) }
-func (r *RAHB3RSTR) Store(b AHB3RSTR)            { r.U32.Store(uint32(b)) }
+func (r *RAHB3RSTR) LoadBits(mask AHB3RSTR) AHB3RSTR { return AHB3RSTR(r.U32.LoadBits(uint32(mask))) }
+func (r *RAHB3RSTR) StoreBits(mask, b AHB3RSTR)      { r.U32.StoreBits(uint32(mask), uint32(b)) }
+func (r *RAHB3RSTR) SetBits(mask AHB3RSTR)           { r.U32.SetBits(uint32(mask)) }
+func (r *RAHB3RSTR) ClearBits(mask AHB3RSTR)         { r.U32.ClearBits(uint32(mask)) }
+func (r *RAHB3RSTR) Load() AHB3RSTR                  { return AHB3RSTR(r.U32.Load()) }
+func (r *RAHB3RSTR) Store(b AHB3RSTR)                { r.U32.Store(uint32(b)) }
 
 type RMAHB3RSTR struct{ mmio.UM32 }
 
@@ -434,12 +434,12 @@ type APB1RSTR uint32
 
 type RAPB1RSTR struct{ mmio.U32 }
 
-func (r *RAPB1RSTR) Bits(mask APB1RSTR) APB1RSTR { return APB1RSTR(r.U32.Bits(uint32(mask))) }
-func (r *RAPB1RSTR) StoreBits(mask, b APB1RSTR)  { r.U32.StoreBits(uint32(mask), uint32(b)) }
-func (r *RAPB1RSTR) SetBits(mask APB1RSTR)       { r.U32.SetBits(uint32(mask)) }
-func (r *RAPB1RSTR) ClearBits(mask APB1RSTR)     { r.U32.ClearBits(uint32(mask)) }
-func (r *RAPB1RSTR) Load() APB1RSTR              { return APB1RSTR(r.U32.Load()) }
-func (r *RAPB1RSTR) Store(b APB1RSTR)            { r.U32.Store(uint32(b)) }
+func (r *RAPB1RSTR) LoadBits(mask APB1RSTR) APB1RSTR { return APB1RSTR(r.U32.LoadBits(uint32(mask))) }
+func (r *RAPB1RSTR) StoreBits(mask, b APB1RSTR)      { r.U32.StoreBits(uint32(mask), uint32(b)) }
+func (r *RAPB1RSTR) SetBits(mask APB1RSTR)           { r.U32.SetBits(uint32(mask)) }
+func (r *RAPB1RSTR) ClearBits(mask APB1RSTR)         { r.U32.ClearBits(uint32(mask)) }
+func (r *RAPB1RSTR) Load() APB1RSTR                  { return APB1RSTR(r.U32.Load()) }
+func (r *RAPB1RSTR) Store(b APB1RSTR)                { r.U32.Store(uint32(b)) }
 
 type RMAPB1RSTR struct{ mmio.UM32 }
 
@@ -550,12 +550,12 @@ type APB2RSTR uint32
 
 type RAPB2RSTR struct{ mmio.U32 }
 
-func (r *RAPB2RSTR) Bits(mask APB2RSTR) APB2RSTR { return APB2RSTR(r.U32.Bits(uint32(mask))) }
-func (r *RAPB2RSTR) StoreBits(mask, b APB2RSTR)  { r.U32.StoreBits(uint32(mask), uint32(b)) }
-func (r *RAPB2RSTR) SetBits(mask APB2RSTR)       { r.U32.SetBits(uint32(mask)) }
-func (r *RAPB2RSTR) ClearBits(mask APB2RSTR)     { r.U32.ClearBits(uint32(mask)) }
-func (r *RAPB2RSTR) Load() APB2RSTR              { return APB2RSTR(r.U32.Load()) }
-func (r *RAPB2RSTR) Store(b APB2RSTR)            { r.U32.Store(uint32(b)) }
+func (r *RAPB2RSTR) LoadBits(mask APB2RSTR) APB2RSTR { return APB2RSTR(r.U32.LoadBits(uint32(mask))) }
+func (r *RAPB2RSTR) StoreBits(mask, b APB2RSTR)      { r.U32.StoreBits(uint32(mask), uint32(b)) }
+func (r *RAPB2RSTR) SetBits(mask APB2RSTR)           { r.U32.SetBits(uint32(mask)) }
+func (r *RAPB2RSTR) ClearBits(mask APB2RSTR)         { r.U32.ClearBits(uint32(mask)) }
+func (r *RAPB2RSTR) Load() APB2RSTR                  { return APB2RSTR(r.U32.Load()) }
+func (r *RAPB2RSTR) Store(b APB2RSTR)                { r.U32.Store(uint32(b)) }
 
 type RMAPB2RSTR struct{ mmio.UM32 }
 
@@ -610,12 +610,12 @@ type AHB1ENR uint32
 
 type RAHB1ENR struct{ mmio.U32 }
 
-func (r *RAHB1ENR) Bits(mask AHB1ENR) AHB1ENR { return AHB1ENR(r.U32.Bits(uint32(mask))) }
-func (r *RAHB1ENR) StoreBits(mask, b AHB1ENR) { r.U32.StoreBits(uint32(mask), uint32(b)) }
-func (r *RAHB1ENR) SetBits(mask AHB1ENR)      { r.U32.SetBits(uint32(mask)) }
-func (r *RAHB1ENR) ClearBits(mask AHB1ENR)    { r.U32.ClearBits(uint32(mask)) }
-func (r *RAHB1ENR) Load() AHB1ENR             { return AHB1ENR(r.U32.Load()) }
-func (r *RAHB1ENR) Store(b AHB1ENR)           { r.U32.Store(uint32(b)) }
+func (r *RAHB1ENR) LoadBits(mask AHB1ENR) AHB1ENR { return AHB1ENR(r.U32.LoadBits(uint32(mask))) }
+func (r *RAHB1ENR) StoreBits(mask, b AHB1ENR)     { r.U32.StoreBits(uint32(mask), uint32(b)) }
+func (r *RAHB1ENR) SetBits(mask AHB1ENR)          { r.U32.SetBits(uint32(mask)) }
+func (r *RAHB1ENR) ClearBits(mask AHB1ENR)        { r.U32.ClearBits(uint32(mask)) }
+func (r *RAHB1ENR) Load() AHB1ENR                 { return AHB1ENR(r.U32.Load()) }
+func (r *RAHB1ENR) Store(b AHB1ENR)               { r.U32.Store(uint32(b)) }
 
 type RMAHB1ENR struct{ mmio.UM32 }
 
@@ -702,12 +702,12 @@ type AHB2ENR uint32
 
 type RAHB2ENR struct{ mmio.U32 }
 
-func (r *RAHB2ENR) Bits(mask AHB2ENR) AHB2ENR { return AHB2ENR(r.U32.Bits(uint32(mask))) }
-func (r *RAHB2ENR) StoreBits(mask, b AHB2ENR) { r.U32.StoreBits(uint32(mask), uint32(b)) }
-func (r *RAHB2ENR) SetBits(mask AHB2ENR)      { r.U32.SetBits(uint32(mask)) }
-func (r *RAHB2ENR) ClearBits(mask AHB2ENR)    { r.U32.ClearBits(uint32(mask)) }
-func (r *RAHB2ENR) Load() AHB2ENR             { return AHB2ENR(r.U32.Load()) }
-func (r *RAHB2ENR) Store(b AHB2ENR)           { r.U32.Store(uint32(b)) }
+func (r *RAHB2ENR) LoadBits(mask AHB2ENR) AHB2ENR { return AHB2ENR(r.U32.LoadBits(uint32(mask))) }
+func (r *RAHB2ENR) StoreBits(mask, b AHB2ENR)     { r.U32.StoreBits(uint32(mask), uint32(b)) }
+func (r *RAHB2ENR) SetBits(mask AHB2ENR)          { r.U32.SetBits(uint32(mask)) }
+func (r *RAHB2ENR) ClearBits(mask AHB2ENR)        { r.U32.ClearBits(uint32(mask)) }
+func (r *RAHB2ENR) Load() AHB2ENR                 { return AHB2ENR(r.U32.Load()) }
+func (r *RAHB2ENR) Store(b AHB2ENR)               { r.U32.Store(uint32(b)) }
 
 type RMAHB2ENR struct{ mmio.UM32 }
 
@@ -734,12 +734,12 @@ type AHB3ENR uint32
 
 type RAHB3ENR struct{ mmio.U32 }
 
-func (r *RAHB3ENR) Bits(mask AHB3ENR) AHB3ENR { return AHB3ENR(r.U32.Bits(uint32(mask))) }
-func (r *RAHB3ENR) StoreBits(mask, b AHB3ENR) { r.U32.StoreBits(uint32(mask), uint32(b)) }
-func (r *RAHB3ENR) SetBits(mask AHB3ENR)      { r.U32.SetBits(uint32(mask)) }
-func (r *RAHB3ENR) ClearBits(mask AHB3ENR)    { r.U32.ClearBits(uint32(mask)) }
-func (r *RAHB3ENR) Load() AHB3ENR             { return AHB3ENR(r.U32.Load()) }
-func (r *RAHB3ENR) Store(b AHB3ENR)           { r.U32.Store(uint32(b)) }
+func (r *RAHB3ENR) LoadBits(mask AHB3ENR) AHB3ENR { return AHB3ENR(r.U32.LoadBits(uint32(mask))) }
+func (r *RAHB3ENR) StoreBits(mask, b AHB3ENR)     { r.U32.StoreBits(uint32(mask), uint32(b)) }
+func (r *RAHB3ENR) SetBits(mask AHB3ENR)          { r.U32.SetBits(uint32(mask)) }
+func (r *RAHB3ENR) ClearBits(mask AHB3ENR)        { r.U32.ClearBits(uint32(mask)) }
+func (r *RAHB3ENR) Load() AHB3ENR                 { return AHB3ENR(r.U32.Load()) }
+func (r *RAHB3ENR) Store(b AHB3ENR)               { r.U32.Store(uint32(b)) }
 
 type RMAHB3ENR struct{ mmio.UM32 }
 
@@ -754,12 +754,12 @@ type APB1ENR uint32
 
 type RAPB1ENR struct{ mmio.U32 }
 
-func (r *RAPB1ENR) Bits(mask APB1ENR) APB1ENR { return APB1ENR(r.U32.Bits(uint32(mask))) }
-func (r *RAPB1ENR) StoreBits(mask, b APB1ENR) { r.U32.StoreBits(uint32(mask), uint32(b)) }
-func (r *RAPB1ENR) SetBits(mask APB1ENR)      { r.U32.SetBits(uint32(mask)) }
-func (r *RAPB1ENR) ClearBits(mask APB1ENR)    { r.U32.ClearBits(uint32(mask)) }
-func (r *RAPB1ENR) Load() APB1ENR             { return APB1ENR(r.U32.Load()) }
-func (r *RAPB1ENR) Store(b APB1ENR)           { r.U32.Store(uint32(b)) }
+func (r *RAPB1ENR) LoadBits(mask APB1ENR) APB1ENR { return APB1ENR(r.U32.LoadBits(uint32(mask))) }
+func (r *RAPB1ENR) StoreBits(mask, b APB1ENR)     { r.U32.StoreBits(uint32(mask), uint32(b)) }
+func (r *RAPB1ENR) SetBits(mask APB1ENR)          { r.U32.SetBits(uint32(mask)) }
+func (r *RAPB1ENR) ClearBits(mask APB1ENR)        { r.U32.ClearBits(uint32(mask)) }
+func (r *RAPB1ENR) Load() APB1ENR                 { return APB1ENR(r.U32.Load()) }
+func (r *RAPB1ENR) Store(b APB1ENR)               { r.U32.Store(uint32(b)) }
 
 type RMAPB1ENR struct{ mmio.UM32 }
 
@@ -870,12 +870,12 @@ type APB2ENR uint32
 
 type RAPB2ENR struct{ mmio.U32 }
 
-func (r *RAPB2ENR) Bits(mask APB2ENR) APB2ENR { return APB2ENR(r.U32.Bits(uint32(mask))) }
-func (r *RAPB2ENR) StoreBits(mask, b APB2ENR) { r.U32.StoreBits(uint32(mask), uint32(b)) }
-func (r *RAPB2ENR) SetBits(mask APB2ENR)      { r.U32.SetBits(uint32(mask)) }
-func (r *RAPB2ENR) ClearBits(mask APB2ENR)    { r.U32.ClearBits(uint32(mask)) }
-func (r *RAPB2ENR) Load() APB2ENR             { return APB2ENR(r.U32.Load()) }
-func (r *RAPB2ENR) Store(b APB2ENR)           { r.U32.Store(uint32(b)) }
+func (r *RAPB2ENR) LoadBits(mask APB2ENR) APB2ENR { return APB2ENR(r.U32.LoadBits(uint32(mask))) }
+func (r *RAPB2ENR) StoreBits(mask, b APB2ENR)     { r.U32.StoreBits(uint32(mask), uint32(b)) }
+func (r *RAPB2ENR) SetBits(mask APB2ENR)          { r.U32.SetBits(uint32(mask)) }
+func (r *RAPB2ENR) ClearBits(mask APB2ENR)        { r.U32.ClearBits(uint32(mask)) }
+func (r *RAPB2ENR) Load() APB2ENR                 { return APB2ENR(r.U32.Load()) }
+func (r *RAPB2ENR) Store(b APB2ENR)               { r.U32.Store(uint32(b)) }
 
 type RMAPB2ENR struct{ mmio.UM32 }
 
@@ -938,12 +938,14 @@ type AHB1LPENR uint32
 
 type RAHB1LPENR struct{ mmio.U32 }
 
-func (r *RAHB1LPENR) Bits(mask AHB1LPENR) AHB1LPENR { return AHB1LPENR(r.U32.Bits(uint32(mask))) }
-func (r *RAHB1LPENR) StoreBits(mask, b AHB1LPENR)   { r.U32.StoreBits(uint32(mask), uint32(b)) }
-func (r *RAHB1LPENR) SetBits(mask AHB1LPENR)        { r.U32.SetBits(uint32(mask)) }
-func (r *RAHB1LPENR) ClearBits(mask AHB1LPENR)      { r.U32.ClearBits(uint32(mask)) }
-func (r *RAHB1LPENR) Load() AHB1LPENR               { return AHB1LPENR(r.U32.Load()) }
-func (r *RAHB1LPENR) Store(b AHB1LPENR)             { r.U32.Store(uint32(b)) }
+func (r *RAHB1LPENR) LoadBits(mask AHB1LPENR) AHB1LPENR {
+	return AHB1LPENR(r.U32.LoadBits(uint32(mask)))
+}
+func (r *RAHB1LPENR) StoreBits(mask, b AHB1LPENR) { r.U32.StoreBits(uint32(mask), uint32(b)) }
+func (r *RAHB1LPENR) SetBits(mask AHB1LPENR)      { r.U32.SetBits(uint32(mask)) }
+func (r *RAHB1LPENR) ClearBits(mask AHB1LPENR)    { r.U32.ClearBits(uint32(mask)) }
+func (r *RAHB1LPENR) Load() AHB1LPENR             { return AHB1LPENR(r.U32.Load()) }
+func (r *RAHB1LPENR) Store(b AHB1LPENR)           { r.U32.Store(uint32(b)) }
 
 type RMAHB1LPENR struct{ mmio.UM32 }
 
@@ -1042,12 +1044,14 @@ type AHB2LPENR uint32
 
 type RAHB2LPENR struct{ mmio.U32 }
 
-func (r *RAHB2LPENR) Bits(mask AHB2LPENR) AHB2LPENR { return AHB2LPENR(r.U32.Bits(uint32(mask))) }
-func (r *RAHB2LPENR) StoreBits(mask, b AHB2LPENR)   { r.U32.StoreBits(uint32(mask), uint32(b)) }
-func (r *RAHB2LPENR) SetBits(mask AHB2LPENR)        { r.U32.SetBits(uint32(mask)) }
-func (r *RAHB2LPENR) ClearBits(mask AHB2LPENR)      { r.U32.ClearBits(uint32(mask)) }
-func (r *RAHB2LPENR) Load() AHB2LPENR               { return AHB2LPENR(r.U32.Load()) }
-func (r *RAHB2LPENR) Store(b AHB2LPENR)             { r.U32.Store(uint32(b)) }
+func (r *RAHB2LPENR) LoadBits(mask AHB2LPENR) AHB2LPENR {
+	return AHB2LPENR(r.U32.LoadBits(uint32(mask)))
+}
+func (r *RAHB2LPENR) StoreBits(mask, b AHB2LPENR) { r.U32.StoreBits(uint32(mask), uint32(b)) }
+func (r *RAHB2LPENR) SetBits(mask AHB2LPENR)      { r.U32.SetBits(uint32(mask)) }
+func (r *RAHB2LPENR) ClearBits(mask AHB2LPENR)    { r.U32.ClearBits(uint32(mask)) }
+func (r *RAHB2LPENR) Load() AHB2LPENR             { return AHB2LPENR(r.U32.Load()) }
+func (r *RAHB2LPENR) Store(b AHB2LPENR)           { r.U32.Store(uint32(b)) }
 
 type RMAHB2LPENR struct{ mmio.UM32 }
 
@@ -1070,12 +1074,14 @@ type AHB3LPENR uint32
 
 type RAHB3LPENR struct{ mmio.U32 }
 
-func (r *RAHB3LPENR) Bits(mask AHB3LPENR) AHB3LPENR { return AHB3LPENR(r.U32.Bits(uint32(mask))) }
-func (r *RAHB3LPENR) StoreBits(mask, b AHB3LPENR)   { r.U32.StoreBits(uint32(mask), uint32(b)) }
-func (r *RAHB3LPENR) SetBits(mask AHB3LPENR)        { r.U32.SetBits(uint32(mask)) }
-func (r *RAHB3LPENR) ClearBits(mask AHB3LPENR)      { r.U32.ClearBits(uint32(mask)) }
-func (r *RAHB3LPENR) Load() AHB3LPENR               { return AHB3LPENR(r.U32.Load()) }
-func (r *RAHB3LPENR) Store(b AHB3LPENR)             { r.U32.Store(uint32(b)) }
+func (r *RAHB3LPENR) LoadBits(mask AHB3LPENR) AHB3LPENR {
+	return AHB3LPENR(r.U32.LoadBits(uint32(mask)))
+}
+func (r *RAHB3LPENR) StoreBits(mask, b AHB3LPENR) { r.U32.StoreBits(uint32(mask), uint32(b)) }
+func (r *RAHB3LPENR) SetBits(mask AHB3LPENR)      { r.U32.SetBits(uint32(mask)) }
+func (r *RAHB3LPENR) ClearBits(mask AHB3LPENR)    { r.U32.ClearBits(uint32(mask)) }
+func (r *RAHB3LPENR) Load() AHB3LPENR             { return AHB3LPENR(r.U32.Load()) }
+func (r *RAHB3LPENR) Store(b AHB3LPENR)           { r.U32.Store(uint32(b)) }
 
 type RMAHB3LPENR struct{ mmio.UM32 }
 
@@ -1090,12 +1096,14 @@ type APB1LPENR uint32
 
 type RAPB1LPENR struct{ mmio.U32 }
 
-func (r *RAPB1LPENR) Bits(mask APB1LPENR) APB1LPENR { return APB1LPENR(r.U32.Bits(uint32(mask))) }
-func (r *RAPB1LPENR) StoreBits(mask, b APB1LPENR)   { r.U32.StoreBits(uint32(mask), uint32(b)) }
-func (r *RAPB1LPENR) SetBits(mask APB1LPENR)        { r.U32.SetBits(uint32(mask)) }
-func (r *RAPB1LPENR) ClearBits(mask APB1LPENR)      { r.U32.ClearBits(uint32(mask)) }
-func (r *RAPB1LPENR) Load() APB1LPENR               { return APB1LPENR(r.U32.Load()) }
-func (r *RAPB1LPENR) Store(b APB1LPENR)             { r.U32.Store(uint32(b)) }
+func (r *RAPB1LPENR) LoadBits(mask APB1LPENR) APB1LPENR {
+	return APB1LPENR(r.U32.LoadBits(uint32(mask)))
+}
+func (r *RAPB1LPENR) StoreBits(mask, b APB1LPENR) { r.U32.StoreBits(uint32(mask), uint32(b)) }
+func (r *RAPB1LPENR) SetBits(mask APB1LPENR)      { r.U32.SetBits(uint32(mask)) }
+func (r *RAPB1LPENR) ClearBits(mask APB1LPENR)    { r.U32.ClearBits(uint32(mask)) }
+func (r *RAPB1LPENR) Load() APB1LPENR             { return APB1LPENR(r.U32.Load()) }
+func (r *RAPB1LPENR) Store(b APB1LPENR)           { r.U32.Store(uint32(b)) }
 
 type RMAPB1LPENR struct{ mmio.UM32 }
 
@@ -1198,12 +1206,14 @@ type APB2LPENR uint32
 
 type RAPB2LPENR struct{ mmio.U32 }
 
-func (r *RAPB2LPENR) Bits(mask APB2LPENR) APB2LPENR { return APB2LPENR(r.U32.Bits(uint32(mask))) }
-func (r *RAPB2LPENR) StoreBits(mask, b APB2LPENR)   { r.U32.StoreBits(uint32(mask), uint32(b)) }
-func (r *RAPB2LPENR) SetBits(mask APB2LPENR)        { r.U32.SetBits(uint32(mask)) }
-func (r *RAPB2LPENR) ClearBits(mask APB2LPENR)      { r.U32.ClearBits(uint32(mask)) }
-func (r *RAPB2LPENR) Load() APB2LPENR               { return APB2LPENR(r.U32.Load()) }
-func (r *RAPB2LPENR) Store(b APB2LPENR)             { r.U32.Store(uint32(b)) }
+func (r *RAPB2LPENR) LoadBits(mask APB2LPENR) APB2LPENR {
+	return APB2LPENR(r.U32.LoadBits(uint32(mask)))
+}
+func (r *RAPB2LPENR) StoreBits(mask, b APB2LPENR) { r.U32.StoreBits(uint32(mask), uint32(b)) }
+func (r *RAPB2LPENR) SetBits(mask APB2LPENR)      { r.U32.SetBits(uint32(mask)) }
+func (r *RAPB2LPENR) ClearBits(mask APB2LPENR)    { r.U32.ClearBits(uint32(mask)) }
+func (r *RAPB2LPENR) Load() APB2LPENR             { return APB2LPENR(r.U32.Load()) }
+func (r *RAPB2LPENR) Store(b APB2LPENR)           { r.U32.Store(uint32(b)) }
 
 type RMAPB2LPENR struct{ mmio.UM32 }
 
@@ -1266,12 +1276,12 @@ type BDCR uint32
 
 type RBDCR struct{ mmio.U32 }
 
-func (r *RBDCR) Bits(mask BDCR) BDCR    { return BDCR(r.U32.Bits(uint32(mask))) }
-func (r *RBDCR) StoreBits(mask, b BDCR) { r.U32.StoreBits(uint32(mask), uint32(b)) }
-func (r *RBDCR) SetBits(mask BDCR)      { r.U32.SetBits(uint32(mask)) }
-func (r *RBDCR) ClearBits(mask BDCR)    { r.U32.ClearBits(uint32(mask)) }
-func (r *RBDCR) Load() BDCR             { return BDCR(r.U32.Load()) }
-func (r *RBDCR) Store(b BDCR)           { r.U32.Store(uint32(b)) }
+func (r *RBDCR) LoadBits(mask BDCR) BDCR { return BDCR(r.U32.LoadBits(uint32(mask))) }
+func (r *RBDCR) StoreBits(mask, b BDCR)  { r.U32.StoreBits(uint32(mask), uint32(b)) }
+func (r *RBDCR) SetBits(mask BDCR)       { r.U32.SetBits(uint32(mask)) }
+func (r *RBDCR) ClearBits(mask BDCR)     { r.U32.ClearBits(uint32(mask)) }
+func (r *RBDCR) Load() BDCR              { return BDCR(r.U32.Load()) }
+func (r *RBDCR) Store(b BDCR)            { r.U32.Store(uint32(b)) }
 
 type RMBDCR struct{ mmio.UM32 }
 
@@ -1310,7 +1320,7 @@ type CSR uint32
 
 type RCSR struct{ mmio.U32 }
 
-func (r *RCSR) Bits(mask CSR) CSR     { return CSR(r.U32.Bits(uint32(mask))) }
+func (r *RCSR) LoadBits(mask CSR) CSR { return CSR(r.U32.LoadBits(uint32(mask))) }
 func (r *RCSR) StoreBits(mask, b CSR) { r.U32.StoreBits(uint32(mask), uint32(b)) }
 func (r *RCSR) SetBits(mask CSR)      { r.U32.SetBits(uint32(mask)) }
 func (r *RCSR) ClearBits(mask CSR)    { r.U32.ClearBits(uint32(mask)) }
@@ -1366,12 +1376,12 @@ type SSCGR uint32
 
 type RSSCGR struct{ mmio.U32 }
 
-func (r *RSSCGR) Bits(mask SSCGR) SSCGR   { return SSCGR(r.U32.Bits(uint32(mask))) }
-func (r *RSSCGR) StoreBits(mask, b SSCGR) { r.U32.StoreBits(uint32(mask), uint32(b)) }
-func (r *RSSCGR) SetBits(mask SSCGR)      { r.U32.SetBits(uint32(mask)) }
-func (r *RSSCGR) ClearBits(mask SSCGR)    { r.U32.ClearBits(uint32(mask)) }
-func (r *RSSCGR) Load() SSCGR             { return SSCGR(r.U32.Load()) }
-func (r *RSSCGR) Store(b SSCGR)           { r.U32.Store(uint32(b)) }
+func (r *RSSCGR) LoadBits(mask SSCGR) SSCGR { return SSCGR(r.U32.LoadBits(uint32(mask))) }
+func (r *RSSCGR) StoreBits(mask, b SSCGR)   { r.U32.StoreBits(uint32(mask), uint32(b)) }
+func (r *RSSCGR) SetBits(mask SSCGR)        { r.U32.SetBits(uint32(mask)) }
+func (r *RSSCGR) ClearBits(mask SSCGR)      { r.U32.ClearBits(uint32(mask)) }
+func (r *RSSCGR) Load() SSCGR               { return SSCGR(r.U32.Load()) }
+func (r *RSSCGR) Store(b SSCGR)             { r.U32.Store(uint32(b)) }
 
 type RMSSCGR struct{ mmio.UM32 }
 
@@ -1398,12 +1408,14 @@ type PLLI2SCFGR uint32
 
 type RPLLI2SCFGR struct{ mmio.U32 }
 
-func (r *RPLLI2SCFGR) Bits(mask PLLI2SCFGR) PLLI2SCFGR { return PLLI2SCFGR(r.U32.Bits(uint32(mask))) }
-func (r *RPLLI2SCFGR) StoreBits(mask, b PLLI2SCFGR)    { r.U32.StoreBits(uint32(mask), uint32(b)) }
-func (r *RPLLI2SCFGR) SetBits(mask PLLI2SCFGR)         { r.U32.SetBits(uint32(mask)) }
-func (r *RPLLI2SCFGR) ClearBits(mask PLLI2SCFGR)       { r.U32.ClearBits(uint32(mask)) }
-func (r *RPLLI2SCFGR) Load() PLLI2SCFGR                { return PLLI2SCFGR(r.U32.Load()) }
-func (r *RPLLI2SCFGR) Store(b PLLI2SCFGR)              { r.U32.Store(uint32(b)) }
+func (r *RPLLI2SCFGR) LoadBits(mask PLLI2SCFGR) PLLI2SCFGR {
+	return PLLI2SCFGR(r.U32.LoadBits(uint32(mask)))
+}
+func (r *RPLLI2SCFGR) StoreBits(mask, b PLLI2SCFGR) { r.U32.StoreBits(uint32(mask), uint32(b)) }
+func (r *RPLLI2SCFGR) SetBits(mask PLLI2SCFGR)      { r.U32.SetBits(uint32(mask)) }
+func (r *RPLLI2SCFGR) ClearBits(mask PLLI2SCFGR)    { r.U32.ClearBits(uint32(mask)) }
+func (r *RPLLI2SCFGR) Load() PLLI2SCFGR             { return PLLI2SCFGR(r.U32.Load()) }
+func (r *RPLLI2SCFGR) Store(b PLLI2SCFGR)           { r.U32.Store(uint32(b)) }
 
 type RMPLLI2SCFGR struct{ mmio.UM32 }
 

@@ -30,7 +30,7 @@ type ACR uint32
 
 type RACR struct{ mmio.U32 }
 
-func (r *RACR) Bits(mask ACR) ACR     { return ACR(r.U32.Bits(uint32(mask))) }
+func (r *RACR) LoadBits(mask ACR) ACR { return ACR(r.U32.LoadBits(uint32(mask))) }
 func (r *RACR) StoreBits(mask, b ACR) { r.U32.StoreBits(uint32(mask), uint32(b)) }
 func (r *RACR) SetBits(mask ACR)      { r.U32.SetBits(uint32(mask)) }
 func (r *RACR) ClearBits(mask ACR)    { r.U32.ClearBits(uint32(mask)) }
@@ -70,12 +70,12 @@ type KEYR uint32
 
 type RKEYR struct{ mmio.U32 }
 
-func (r *RKEYR) Bits(mask KEYR) KEYR    { return KEYR(r.U32.Bits(uint32(mask))) }
-func (r *RKEYR) StoreBits(mask, b KEYR) { r.U32.StoreBits(uint32(mask), uint32(b)) }
-func (r *RKEYR) SetBits(mask KEYR)      { r.U32.SetBits(uint32(mask)) }
-func (r *RKEYR) ClearBits(mask KEYR)    { r.U32.ClearBits(uint32(mask)) }
-func (r *RKEYR) Load() KEYR             { return KEYR(r.U32.Load()) }
-func (r *RKEYR) Store(b KEYR)           { r.U32.Store(uint32(b)) }
+func (r *RKEYR) LoadBits(mask KEYR) KEYR { return KEYR(r.U32.LoadBits(uint32(mask))) }
+func (r *RKEYR) StoreBits(mask, b KEYR)  { r.U32.StoreBits(uint32(mask), uint32(b)) }
+func (r *RKEYR) SetBits(mask KEYR)       { r.U32.SetBits(uint32(mask)) }
+func (r *RKEYR) ClearBits(mask KEYR)     { r.U32.ClearBits(uint32(mask)) }
+func (r *RKEYR) Load() KEYR              { return KEYR(r.U32.Load()) }
+func (r *RKEYR) Store(b KEYR)            { r.U32.Store(uint32(b)) }
 
 type RMKEYR struct{ mmio.UM32 }
 
@@ -86,12 +86,12 @@ type OPTKEYR uint32
 
 type ROPTKEYR struct{ mmio.U32 }
 
-func (r *ROPTKEYR) Bits(mask OPTKEYR) OPTKEYR { return OPTKEYR(r.U32.Bits(uint32(mask))) }
-func (r *ROPTKEYR) StoreBits(mask, b OPTKEYR) { r.U32.StoreBits(uint32(mask), uint32(b)) }
-func (r *ROPTKEYR) SetBits(mask OPTKEYR)      { r.U32.SetBits(uint32(mask)) }
-func (r *ROPTKEYR) ClearBits(mask OPTKEYR)    { r.U32.ClearBits(uint32(mask)) }
-func (r *ROPTKEYR) Load() OPTKEYR             { return OPTKEYR(r.U32.Load()) }
-func (r *ROPTKEYR) Store(b OPTKEYR)           { r.U32.Store(uint32(b)) }
+func (r *ROPTKEYR) LoadBits(mask OPTKEYR) OPTKEYR { return OPTKEYR(r.U32.LoadBits(uint32(mask))) }
+func (r *ROPTKEYR) StoreBits(mask, b OPTKEYR)     { r.U32.StoreBits(uint32(mask), uint32(b)) }
+func (r *ROPTKEYR) SetBits(mask OPTKEYR)          { r.U32.SetBits(uint32(mask)) }
+func (r *ROPTKEYR) ClearBits(mask OPTKEYR)        { r.U32.ClearBits(uint32(mask)) }
+func (r *ROPTKEYR) Load() OPTKEYR                 { return OPTKEYR(r.U32.Load()) }
+func (r *ROPTKEYR) Store(b OPTKEYR)               { r.U32.Store(uint32(b)) }
 
 type RMOPTKEYR struct{ mmio.UM32 }
 
@@ -102,7 +102,7 @@ type SR uint32
 
 type RSR struct{ mmio.U32 }
 
-func (r *RSR) Bits(mask SR) SR      { return SR(r.U32.Bits(uint32(mask))) }
+func (r *RSR) LoadBits(mask SR) SR  { return SR(r.U32.LoadBits(uint32(mask))) }
 func (r *RSR) StoreBits(mask, b SR) { r.U32.StoreBits(uint32(mask), uint32(b)) }
 func (r *RSR) SetBits(mask SR)      { r.U32.SetBits(uint32(mask)) }
 func (r *RSR) ClearBits(mask SR)    { r.U32.ClearBits(uint32(mask)) }
@@ -146,7 +146,7 @@ type CR uint32
 
 type RCR struct{ mmio.U32 }
 
-func (r *RCR) Bits(mask CR) CR      { return CR(r.U32.Bits(uint32(mask))) }
+func (r *RCR) LoadBits(mask CR) CR  { return CR(r.U32.LoadBits(uint32(mask))) }
 func (r *RCR) StoreBits(mask, b CR) { r.U32.StoreBits(uint32(mask), uint32(b)) }
 func (r *RCR) SetBits(mask CR)      { r.U32.SetBits(uint32(mask)) }
 func (r *RCR) ClearBits(mask CR)    { r.U32.ClearBits(uint32(mask)) }
@@ -198,12 +198,12 @@ type OPTCR uint32
 
 type ROPTCR struct{ mmio.U32 }
 
-func (r *ROPTCR) Bits(mask OPTCR) OPTCR   { return OPTCR(r.U32.Bits(uint32(mask))) }
-func (r *ROPTCR) StoreBits(mask, b OPTCR) { r.U32.StoreBits(uint32(mask), uint32(b)) }
-func (r *ROPTCR) SetBits(mask OPTCR)      { r.U32.SetBits(uint32(mask)) }
-func (r *ROPTCR) ClearBits(mask OPTCR)    { r.U32.ClearBits(uint32(mask)) }
-func (r *ROPTCR) Load() OPTCR             { return OPTCR(r.U32.Load()) }
-func (r *ROPTCR) Store(b OPTCR)           { r.U32.Store(uint32(b)) }
+func (r *ROPTCR) LoadBits(mask OPTCR) OPTCR { return OPTCR(r.U32.LoadBits(uint32(mask))) }
+func (r *ROPTCR) StoreBits(mask, b OPTCR)   { r.U32.StoreBits(uint32(mask), uint32(b)) }
+func (r *ROPTCR) SetBits(mask OPTCR)        { r.U32.SetBits(uint32(mask)) }
+func (r *ROPTCR) ClearBits(mask OPTCR)      { r.U32.ClearBits(uint32(mask)) }
+func (r *ROPTCR) Load() OPTCR               { return OPTCR(r.U32.Load()) }
+func (r *ROPTCR) Store(b OPTCR)             { r.U32.Store(uint32(b)) }
 
 type RMOPTCR struct{ mmio.UM32 }
 

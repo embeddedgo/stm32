@@ -31,7 +31,7 @@ type CR uint32
 
 type RCR struct{ mmio.U32 }
 
-func (r *RCR) Bits(mask CR) CR      { return CR(r.U32.Bits(uint32(mask))) }
+func (r *RCR) LoadBits(mask CR) CR  { return CR(r.U32.LoadBits(uint32(mask))) }
 func (r *RCR) StoreBits(mask, b CR) { r.U32.StoreBits(uint32(mask), uint32(b)) }
 func (r *RCR) SetBits(mask CR)      { r.U32.SetBits(uint32(mask)) }
 func (r *RCR) ClearBits(mask CR)    { r.U32.ClearBits(uint32(mask)) }
@@ -79,7 +79,7 @@ type CSR uint32
 
 type RCSR struct{ mmio.U32 }
 
-func (r *RCSR) Bits(mask CSR) CSR     { return CSR(r.U32.Bits(uint32(mask))) }
+func (r *RCSR) LoadBits(mask CSR) CSR { return CSR(r.U32.LoadBits(uint32(mask))) }
 func (r *RCSR) StoreBits(mask, b CSR) { r.U32.StoreBits(uint32(mask), uint32(b)) }
 func (r *RCSR) SetBits(mask CSR)      { r.U32.SetBits(uint32(mask)) }
 func (r *RCSR) ClearBits(mask CSR)    { r.U32.ClearBits(uint32(mask)) }
