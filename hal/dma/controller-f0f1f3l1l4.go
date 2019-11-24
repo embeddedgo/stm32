@@ -36,6 +36,8 @@ func (c Channel) num() uintptr {
 }
 
 const (
+	//gif = 1<<0  do not use global interrupt flag bacause of silicon bugs
+
 	trce = 1 << 1
 	htce = 1 << 2
 

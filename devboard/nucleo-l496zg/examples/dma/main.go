@@ -11,13 +11,13 @@ import (
 	"embedded/rtos"
 	"unsafe"
 
-	"github.com/embeddedgo/stm32/devboard/nucleo-l476rg/board"
+	"github.com/embeddedgo/stm32/devboard/nucleo-l496zg/board"
 	"github.com/embeddedgo/stm32/hal/dma"
 	"github.com/embeddedgo/stm32/hal/irq"
 )
 
 var (
-	src, dst [5000]uint32
+	src, dst [20000]uint32
 	ch       dma.Channel
 	tce      rtos.Note
 )
@@ -64,7 +64,7 @@ func main() {
 	irq.DMA1_CH1.Enable(rtos.IntPrioLow)
 
 	for {
-		for n := 1000; n <= len(src); n += 1000 {
+		for n := 2000; n <= len(src); n += 2000 {
 			println("\nTransfer length:", n, "words\n")
 
 			print("Initialize src                      ")
