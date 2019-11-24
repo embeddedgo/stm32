@@ -7,6 +7,7 @@
 package main
 
 import (
+	"embedded/mmio"
 	"embedded/rtos"
 
 	"github.com/embeddedgo/stm32/devboard/f4-discovery/board"
@@ -58,6 +59,7 @@ func waitBtn(state int) {
 	line := exti.Lines(1 << board.UserBtn.Pin().Index())
 	for {
 		note.Clear()
+		mmio.MB() // ensure note.Clear() happens before IRQ in multicore system
 		line.EnableIRQ()
 		wait := int64(-1)
 		if board.UserBtn.Read() == state {
