@@ -11,16 +11,16 @@ import (
 	"github.com/embeddedgo/stm32/p/rcc"
 )
 
-func (p *DMA) enableClock(_ bool) {
+func (d *Controller) enableClock(_ bool) {
 	internal.AtomicSetBits(&rcc.RCC().AHB1ENR.U32, 1<<(rcc.DMA1ENn+d.num()))
 	rcc.RCC().AHB1ENR.Load() // RCC delay (workaround for silicon bugs)
 }
 
-func (p *DMA) disableClock() {
+func (d *Controller) disableClock() {
 	internal.AtomicClearBits(&rcc.RCC().AHB1ENR.U32, 1<<(rcc.DMA1ENn+d.num()))
 }
 
-func (p *DMA) reset() {
+func (d *Controller) reset() {
 	mask := uint32(1) << (rcc.DMA1RSTn + d.num())
 	internal.AtomicSetBits(&rcc.RCC().AHB1RSTR.U32, mask)
 	internal.AtomicClearBits(&rcc.RCC().AHB1RSTR.U32, mask)

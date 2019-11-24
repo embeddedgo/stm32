@@ -2,53 +2,37 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// +build ignore
+// +build stm32l4x6
 
 package dma
 
 import (
-	"mmio"
 	"unsafe"
 
-	"stm32/hal/raw/dma"
+	"github.com/embeddedgo/stm32/hal/internal"
+	"github.com/embeddedgo/stm32/p/dma"
 )
 
-type chanregs struct {
-	raw dma.DMA_Channel_Periph
-	_   uint32
-}
-
-type dmaperiph struct {
-	raw   dma.DMA_Periph
-	chs   [7]chanregs
-	_     [5]uint32
-	cselr mmio.U32
-}
-
-type channel struct {
-	chanregs
-	_ [1<<31 - unsafe.Sizeof(chanregs{}) - 4]byte // Prevent allocation.
-}
-
-func (p *DMA) getChannel(n, _ int) *Channel {
-	n--
-	dman := dmanum(p)
-	if dman == 0 && uint(n) > 6 || dman != 0 && uint(n) > 4 {
-		panic(badStream)
+func (d *Controller) channel(n, _ int) Channel {
+	n-- // channels are numbered from 1
+	if uint(n) > 7 {
+		panic("dma: bad stream")
 	}
-	return (*Channel)(unsafe.Pointer(&p.chs[n]))
+	return Channel{uintptr(unsafe.Pointer(&d.p.C[n]))}
 }
 
-func sdma(ch *Channel) *dmaperiph {
-	addr := uintptr(unsafe.Pointer(ch)) &^ 0x3ff
-	return (*dmaperiph)(unsafe.Pointer(addr))
+func (c Channel) periph() *dma.Periph {
+	return (*dma.Periph)(unsafe.Pointer(c.h &^ 0x3ff))
 }
 
-// snum returns stream number - 1, eg. 0 for fisrt stream.
-func snum(ch *Channel) uintptr {
-	off := uintptr(unsafe.Pointer(ch)) & 0x3ff
-	step := unsafe.Sizeof(chanregs{})
-	return (off - unsafe.Sizeof(dma.DMA_Periph{})) / step
+func (c Channel) channel() *dma.RC {
+	return (*dma.RC)(unsafe.Pointer(c.h))
+}
+
+func (c Channel) num() uintptr {
+	off := c.h & 0x3ff
+	step := unsafe.Sizeof(dma.RC{})
+	return (off - 8) / step
 }
 
 const (
@@ -60,38 +44,38 @@ const (
 	dmerr = 0
 )
 
-func (ch *Channel) status() byte {
-	isr := sdma(ch).raw.ISR.U32.Load()
-	return byte(isr >> (snum(ch) * 4) & 0xf)
+func (c Channel) status() byte {
+	isr := c.periph().ISR.Load()
+	return byte(isr >> (c.num() * 4) & 0xf)
 }
 
-func (ch *Channel) clear(flags byte) {
-	mask := uint32(flags&0xf) << (snum(ch) * 4)
-	sdma(ch).raw.IFCR.U32.Store(mask)
+func (c Channel) clear(flags byte) {
+	mask := dma.IFCR(flags&0xf) << (c.num() * 4)
+	c.periph().IFCR.Store(mask)
 }
 
-func (ch *Channel) enable() {
-	ch.raw.EN().Set()
+func (c Channel) enable() {
+	c.channel().CR.SetBits(dma.EN)
 }
 
-func (ch *Channel) disable() {
-	ch.raw.EN().Clear()
+func (c Channel) disable() {
+	c.channel().CR.ClearBits(dma.EN)
 }
 
-func (ch *Channel) enabled() bool {
-	return ch.raw.EN().Load() != 0
+func (c Channel) enabled() bool {
+	return c.channel().CR.Bits(dma.EN) != 0
 }
 
-func (ch *Channel) irqEnabled() byte {
-	return byte(ch.raw.CCR.U32.Load() & 0xe)
+func (c Channel) irqEnabled() byte {
+	return byte(c.channel().CR.Load() & 0xe)
 }
 
-func (ch *Channel) enableIRQ(flags byte) {
-	ch.raw.CCR.U32.SetBits(uint32(flags) & 0xe)
+func (c Channel) enableIRQ(flags byte) {
+	c.channel().CR.SetBits(dma.CR(flags) & 0xe)
 }
 
-func (ch *Channel) disableIRQ(flags byte) {
-	ch.raw.CCR.U32.ClearBits(uint32(flags) & 0xe)
+func (c Channel) disableIRQ(flags byte) {
+	c.channel().CR.ClearBits(dma.CR(flags) & 0xe)
 }
 
 const (
@@ -117,9 +101,9 @@ const (
 	pfc = 0
 )
 
-func (ch *Channel) setup(m Mode) {
+func (c Channel) setup(m Mode) {
 	mask := dma.DIR | dma.MEM2MEM | dma.CIRC | dma.PINC | dma.MINC | dma.PL
-	ch.raw.CCR.StoreBits(mask, dma.CCR(m))
+	c.channel().CR.StoreBits(mask, dma.CR(m))
 }
 
 const (
@@ -128,48 +112,48 @@ const (
 	prioV = 3
 )
 
-func (ch *Channel) setPrio(prio Prio) {
-	ch.raw.PL().Store(dma.CCR(prio) << dma.PLn)
+func (c Channel) setPrio(prio Prio) {
+	c.channel().CR.StoreBits(dma.PL, dma.CR(prio)<<dma.PLn)
 }
 
-func (ch *Channel) prio() Prio {
-	return Prio(ch.raw.PL().Load() >> dma.PLn)
+func (c Channel) prio() Prio {
+	return Prio(c.channel().CR.Bits(dma.PL) >> dma.PLn)
 }
 
-func (ch *Channel) wordSize() (p, m uintptr) {
-	ccr := uintptr(ch.raw.CCR.Load())
+func (c Channel) wordSize() (p, m uintptr) {
+	ccr := uintptr(c.channel().CR.Load())
 	p = 1 << (ccr >> 8 & 3)
 	m = 1 << (ccr >> 10 & 3)
 	return
 }
 
-func (ch *Channel) setWordSize(p, m uintptr) {
-	ccr := p&6<<7 | m&6<<9
-	ch.raw.CCR.U32.StoreBits(0xf00, uint32(ccr))
+func (c Channel) setWordSize(p, m uintptr) {
+	pm := dma.CR(p&6<<7 | m&6<<9)
+	c.channel().CR.StoreBits(0xf00, dma.CR(pm))
 }
 
-func (ch *Channel) len() int {
-	return int(ch.raw.NDT().Load())
+func (c Channel) len() int {
+	return int(c.channel().NDTR.Load() & 0xFFFF)
 }
 
-func (ch *Channel) setLen(n int) {
-	ch.raw.NDT().UM32.Store(uint32(n))
+func (c Channel) setLen(n int) {
+	c.channel().NDTR.Store(dma.NDTR(n) & 0xFFFF)
 }
 
-func (ch *Channel) setAddrP(a unsafe.Pointer) {
-	ch.raw.CPAR.U32.Store(uint32(uintptr(a)))
+func (c Channel) setAddrP(a unsafe.Pointer) {
+	c.channel().PAR.Store(dma.PAR(uintptr(a)))
 }
 
-func (ch *Channel) setAddrM(a unsafe.Pointer) {
-	ch.raw.CMAR.U32.Store(uint32(uintptr(a)))
+func (c Channel) setAddrM(a unsafe.Pointer) {
+	c.channel().MAR.Store(dma.MAR(uintptr(a)))
 }
 
-func (ch *Channel) request() Request {
-	n := snum(ch) * 4
-	return Request(sdma(ch).cselr.Bits(0xf << n))
+func (c Channel) request() Request {
+	n := c.num() * 4
+	return Request(c.periph().CSELR.Bits(0xf << n))
 }
 
-func (ch *Channel) setRequest(req Request) {
-	n := snum(ch) * 4
-	sdma(ch).cselr.AtomicStoreBits(0xf<<n, uint32(req)<<n)
+func (c Channel) setRequest(req Request) {
+	n := c.num() * 4
+	internal.AtomicStoreBits(&c.periph().CSELR.U32, 0xf<<n, uint32(req)<<n)
 }

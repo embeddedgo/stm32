@@ -101,8 +101,6 @@ func (c Channel) disableIRQ(flags byte) {
 	s.FCR.ClearBits(dma.FCR(flags) & 1 << 7)
 }
 
-// Use numbers instead of constants from stm32/hal/raw/dma to see that ftX that
-// are in DMAX_StreamY.FCR don't interfere with others that are in DMAX.CR.
 const (
 	ft1 = 4 << 0
 	ft2 = 5 << 0
@@ -160,7 +158,7 @@ func (c Channel) wordSize() (p, m uintptr) {
 
 func (c Channel) setWordSize(p, m uintptr) {
 	cr := p&6<<10 | m&6<<12
-	c.stream().CR.U32.StoreBits(0x7800, uint32(cr))
+	c.stream().CR.StoreBits(0x7800, dma.CR(cr))
 }
 
 func (c Channel) len() int {
@@ -168,15 +166,15 @@ func (c Channel) len() int {
 }
 
 func (c Channel) setLen(n int) {
-	c.stream().NDTR.U32.Store(uint32(n) & 0xFFFF)
+	c.stream().NDTR.Store(dma.NDTR(n) & 0xFFFF)
 }
 
 func (c Channel) setAddrP(a unsafe.Pointer) {
-	c.stream().PAR.U32.Store(uint32(uintptr(a)))
+	c.stream().PAR.Store(dma.PAR(uintptr(a)))
 }
 
 func (c Channel) setAddrM(a unsafe.Pointer) {
-	c.stream().M0AR.U32.Store(uint32(uintptr(a)))
+	c.stream().M0AR.Store(dma.M0AR(uintptr(a)))
 }
 
 func (c Channel) request() Request     { return -1 }
