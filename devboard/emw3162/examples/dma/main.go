@@ -19,25 +19,26 @@ import (
 const n = 20 * 1024 / 4
 
 var (
-	ch     dma.Channel
-	dmaErr dma.Error
-	tce    rtos.Note
+	ch  dma.Channel
+	tce rtos.Note
 
 	src = make([]uint32, n)
 	dst = make([]uint32, n)
 )
 
 func copyDMA(mode dma.Mode) {
+	tce.Clear()
 	ch.Setup(dma.MTM | dma.IncP | dma.IncM | mode)
 	ch.SetWordSize(unsafe.Sizeof(src[0]), unsafe.Sizeof(dst[0]))
 	ch.SetLen(n)
 	ch.SetAddrP(unsafe.Pointer(&src[0]))
 	ch.SetAddrM(unsafe.Pointer(&dst[0]))
-	tce.Clear()
+	ch.Clear(dma.EvAll, dma.ErrAll)
+	ch.EnableIRQ(dma.Complete, dma.ErrAll)
 	ch.Enable()
 	tce.Sleep(-1)
-	if dmaErr != 0 {
-		println(dmaErr.Error())
+	if _, err := ch.Status(); err != 0 {
+		println(err.Error())
 	}
 }
 
@@ -73,7 +74,6 @@ func main() {
 	d := dma.DMA(2)
 	d.EnableClock(true)
 	ch = d.Channel(0, 0)
-	ch.EnableIRQ(dma.Complete, dma.ErrAll)
 	irq.DMA2_Stream0.Enable(rtos.IntPrioLow)
 
 	for {
@@ -135,10 +135,6 @@ func main() {
 
 //go:interrupthandler
 func DMA2_Stream0_Handler() {
-	ev, err := ch.Status()
-	ch.Clear(ev, err)
-	if ev&dma.Complete != 0 || err != 0 {
-		dmaErr = err
-		tce.Wakeup()
-	}
+	ch.DisableIRQ(dma.EvAll, dma.ErrAll)
+	tce.Wakeup()
 }
