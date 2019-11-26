@@ -8,7 +8,6 @@
 package main
 
 import (
-	"embedded/mmio"
 	"embedded/rtos"
 	"unsafe"
 
@@ -31,7 +30,6 @@ func copyDMA(n int, mode dma.Mode) {
 	ch.SetAddrP(unsafe.Pointer(&src[0]))
 	ch.SetAddrM(unsafe.Pointer(&dst[0]))
 	ch.Clear(dma.EvAll, dma.ErrAll)
-	mmio.MB() // ensure tce.Clear() happens before any DMA IRQ
 	ch.EnableIRQ(dma.Complete, dma.ErrAll)
 	ch.Enable()
 	tce.Sleep(-1)
