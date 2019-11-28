@@ -69,8 +69,7 @@ func EXTI15_10_Handler() {
 	p := exti.Pending() & (exti.L15<<1 - exti.L10)
 	p.DisableIRQ()
 	p.ClearPending()
-	switch {
-	case p>>board.UserBtn.Pin().Index()&1 != 0:
+	if pin := board.UserBtn.Pin(); p>>pin.Index()&1 != 0 {
 		note.Wakeup()
 	}
 }
