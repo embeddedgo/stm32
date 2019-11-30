@@ -2,10 +2,12 @@
 This file slightly diverges from the original one provided by ST. The following
 thinghs were fixed:
 
-CPU:     mpuPresent, fpuPresent set to true
-CFGR:    enums added: SW_MSI..SW_PLL, SWS_MSI..SWS_PLL, HPRE_DIV1..HPRE_DIV512,
-         PPRE1_DIV1..PPRE1_DIV16, PPRE2_DIV1..PPRE2_DIV16
-PLLCFGR: enums added: PLLSRC_NONE, PLLSRC_MSI, PLLSRC_HSI, PLLSRC_HSE
+CPU:        mpuPresent, fpuPresent set to true
+CFGR:       enums added: SW_MSI..SW_PLL, SWS_MSI..SWS_PLL, HPRE_DIV1..HPRE_DIV512,
+            PPRE1_DIV1..PPRE1_DIV16, PPRE2_DIV1..PPRE2_DIV16
+PLLCFGR:    enums added: PLLSRC_NONE, PLLSRC_MSI, PLLSRC_HSI, PLLSRC_HSE
+APB1ENR1:   fix SPI3EN
+APB1SMENR1: fix SPI3SMEN
 -->
 
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
@@ -9596,7 +9598,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <bitWidth>1</bitWidth>
             </field>
             <field>
-              <name>SP3EN</name>
+              <name>SPI3EN</name>
               <description>SPI3 clock enable</description>
               <bitOffset>15</bitOffset>
               <bitWidth>1</bitWidth>
@@ -10107,7 +10109,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <bitWidth>1</bitWidth>
             </field>
             <field>
-              <name>SP3SMEN</name>
+              <name>SPI3SMEN</name>
               <description>SPI3 clocks enable during Sleep and Stop
               modes</description>
               <bitOffset>15</bitOffset>

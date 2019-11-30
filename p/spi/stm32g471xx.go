@@ -2,10 +2,13 @@
 
 // +build stm32g471xx
 
-// Package spi1 provides access to the registers of the SPI1 peripheral.
+// Package spi provides access to the registers of the SPI peripheral.
 //
 // Instances:
 //  SPI1  SPI1_BASE  APB2  SPI1  Serial peripheral interface/Inter-IC sound
+//  SPI2  SPI2_BASE  APB1  SPI2  Serial peripheral interface/Inter-IC sound
+//  SPI3  SPI3_BASE  APB1  SPI3  Serial peripheral interface/Inter-IC sound
+//  SPI4  SPI4_BASE  APB2  SPI4  Serial peripheral interface/Inter-IC sound
 // Registers:
 //  0x000 32  CR1      control register 1
 //  0x004 32  CR2      control register 2
@@ -19,7 +22,7 @@
 // Import:
 //  github.com/embeddedgo/stm32/p/bus
 //  github.com/embeddedgo/stm32/p/mmap
-package spi1
+package spi
 
 const (
 	CPHA     CR1 = 0x01 << 0  //+ Clock phase
@@ -107,14 +110,6 @@ const (
 	TIFRFEn = 8
 	FRLVLn  = 9
 	FTLVLn  = 11
-)
-
-const (
-	DR DR = 0xFFFF << 0 //+ Data register
-)
-
-const (
-	DRn = 0
 )
 
 const (

@@ -5,6 +5,8 @@ thinghs were fixed:
 CPU:      mpuPresent, fpuPresent set to true
 APB1ENR:  fields added: UART7EN, UART8EN
 APB1RSTR: fields added: UART7RST, UART8RST
+APB2ENR:  fields added: SPI4EN, SPI5EN, SPI6EN
+APB2RSTR: fields added: SPI4RST, SPI5RST, SPI6RST
 AHB2ENR:  fields added: CRYPEN
 AHB2RSTR: fields added: CRYPRST
 GPIOJ-K:  removed
@@ -5929,6 +5931,18 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
+              <name>SPI6RST</name>
+              <description>SPI 6 reset</description>
+              <bitOffset>21</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SPI5RST</name>
+              <description>SPI 5 reset</description>
+              <bitOffset>20</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
               <name>TIM11RST</name>
               <description>TIM11 reset</description>
               <bitOffset>18</bitOffset>
@@ -5951,6 +5965,12 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <description>System configuration controller
               reset</description>
               <bitOffset>14</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SPI4RST</name>
+              <description>SPI 4 reset</description>
+              <bitOffset>13</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
             <field>
@@ -6358,6 +6378,24 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
+              <name>SPI6EN</name>
+              <description>SPI6 clock enable</description>
+              <bitOffset>21</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SPI5EN</name>
+              <description>SPI5 clock enable</description>
+              <bitOffset>20</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>TIM11EN</name>
+              <description>TIM11 clock enable</description>
+              <bitOffset>18</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
               <name>TIM11EN</name>
               <description>TIM11 clock enable</description>
               <bitOffset>18</bitOffset>
@@ -6380,6 +6418,12 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <description>System configuration controller clock
               enable</description>
               <bitOffset>14</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>SPI4EN</name>
+              <description>SPI4 clock enable</description>
+              <bitOffset>13</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
             <field>

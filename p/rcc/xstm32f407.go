@@ -590,6 +590,10 @@ func (p *Periph) SPI1RST() RMAPB2RSTR {
 	return RMAPB2RSTR{mmio.UM32{&p.APB2RSTR.U32, uint32(SPI1RST)}}
 }
 
+func (p *Periph) SPI4RST() RMAPB2RSTR {
+	return RMAPB2RSTR{mmio.UM32{&p.APB2RSTR.U32, uint32(SPI4RST)}}
+}
+
 func (p *Periph) SYSCFGRST() RMAPB2RSTR {
 	return RMAPB2RSTR{mmio.UM32{&p.APB2RSTR.U32, uint32(SYSCFGRST)}}
 }
@@ -604,6 +608,14 @@ func (p *Periph) TIM10RST() RMAPB2RSTR {
 
 func (p *Periph) TIM11RST() RMAPB2RSTR {
 	return RMAPB2RSTR{mmio.UM32{&p.APB2RSTR.U32, uint32(TIM11RST)}}
+}
+
+func (p *Periph) SPI5RST() RMAPB2RSTR {
+	return RMAPB2RSTR{mmio.UM32{&p.APB2RSTR.U32, uint32(SPI5RST)}}
+}
+
+func (p *Periph) SPI6RST() RMAPB2RSTR {
+	return RMAPB2RSTR{mmio.UM32{&p.APB2RSTR.U32, uint32(SPI6RST)}}
 }
 
 type AHB1ENR uint32
@@ -918,6 +930,10 @@ func (p *Periph) SPI1EN() RMAPB2ENR {
 	return RMAPB2ENR{mmio.UM32{&p.APB2ENR.U32, uint32(SPI1EN)}}
 }
 
+func (p *Periph) SPI4EN() RMAPB2ENR {
+	return RMAPB2ENR{mmio.UM32{&p.APB2ENR.U32, uint32(SPI4EN)}}
+}
+
 func (p *Periph) SYSCFGEN() RMAPB2ENR {
 	return RMAPB2ENR{mmio.UM32{&p.APB2ENR.U32, uint32(SYSCFGEN)}}
 }
@@ -932,6 +948,18 @@ func (p *Periph) TIM10EN() RMAPB2ENR {
 
 func (p *Periph) TIM11EN() RMAPB2ENR {
 	return RMAPB2ENR{mmio.UM32{&p.APB2ENR.U32, uint32(TIM11EN)}}
+}
+
+func (p *Periph) TIM11EN() RMAPB2ENR {
+	return RMAPB2ENR{mmio.UM32{&p.APB2ENR.U32, uint32(TIM11EN)}}
+}
+
+func (p *Periph) SPI5EN() RMAPB2ENR {
+	return RMAPB2ENR{mmio.UM32{&p.APB2ENR.U32, uint32(SPI5EN)}}
+}
+
+func (p *Periph) SPI6EN() RMAPB2ENR {
+	return RMAPB2ENR{mmio.UM32{&p.APB2ENR.U32, uint32(SPI6EN)}}
 }
 
 type AHB1LPENR uint32

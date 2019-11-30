@@ -2,6 +2,7 @@
 This file slightly diverges from the original one provided by ST. The following
 thinghs were fixed:
 
+APB1ENR: fix name of SPI3EN bit
 AHB2ENR: rename CRYPEN to AESEN, DAC1-4 description
 DAC1-4:  add missing interrupts
 -->
@@ -2944,7 +2945,7 @@ DAC1-4:  add missing interrupts
                      <bitWidth>1</bitWidth>
                   </field>
                   <field>
-                     <name>SP3EN</name>
+                     <name>SPI3EN</name>
                      <description>SPI3 clock enable</description>
                      <bitOffset>15</bitOffset>
                      <bitWidth>1</bitWidth>

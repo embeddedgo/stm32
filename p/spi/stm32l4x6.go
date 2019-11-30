@@ -7,7 +7,7 @@
 // Instances:
 //  SPI1  SPI1_BASE  APB2  SPI1  Serial peripheral interface/Inter-IC sound
 //  SPI2  SPI2_BASE  APB1  SPI2  Serial peripheral interface/Inter-IC sound
-//  SPI3  SPI3_BASE  -     SPI3  Serial peripheral interface/Inter-IC sound
+//  SPI3  SPI3_BASE  APB1  SPI3  Serial peripheral interface/Inter-IC sound
 // Registers:
 //  0x000 32  CR1     control register 1
 //  0x004 32  CR2     control register 2
@@ -107,14 +107,6 @@ const (
 	TIFRFEn = 8
 	FRLVLn  = 9
 	FTLVLn  = 11
-)
-
-const (
-	DR DR = 0xFFFF << 0 //+ Data register
-)
-
-const (
-	DRn = 0
 )
 
 const (

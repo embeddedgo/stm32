@@ -69,22 +69,22 @@ const (
 )
 
 const (
-	OT0  OTYPER = 0x01 << 0  //+ Port x configuration bits (y = 0..15)
-	OT1  OTYPER = 0x01 << 1  //+ Port x configuration bits (y = 0..15)
-	OT2  OTYPER = 0x01 << 2  //+ Port x configuration bits (y = 0..15)
-	OT3  OTYPER = 0x01 << 3  //+ Port x configuration bits (y = 0..15)
-	OT4  OTYPER = 0x01 << 4  //+ Port x configuration bits (y = 0..15)
-	OT5  OTYPER = 0x01 << 5  //+ Port x configuration bits (y = 0..15)
-	OT6  OTYPER = 0x01 << 6  //+ Port x configuration bits (y = 0..15)
-	OT7  OTYPER = 0x01 << 7  //+ Port x configuration bits (y = 0..15)
-	OT8  OTYPER = 0x01 << 8  //+ Port x configuration bits (y = 0..15)
-	OT9  OTYPER = 0x01 << 9  //+ Port x configuration bits (y = 0..15)
-	OT10 OTYPER = 0x01 << 10 //+ Port x configuration bits (y = 0..15)
-	OT11 OTYPER = 0x01 << 11 //+ Port x configuration bits (y = 0..15)
-	OT12 OTYPER = 0x01 << 12 //+ Port x configuration bits (y = 0..15)
-	OT13 OTYPER = 0x01 << 13 //+ Port x configuration bits (y = 0..15)
-	OT14 OTYPER = 0x01 << 14 //+ Port x configuration bits (y = 0..15)
-	OT15 OTYPER = 0x01 << 15 //+ Port x configuration bits (y = 0..15)
+	OT0  OTYPER = 0x01 << 0  //+ Port x configuration bit 0
+	OT1  OTYPER = 0x01 << 1  //+ Port x configuration bit 1
+	OT2  OTYPER = 0x01 << 2  //+ Port x configuration bit 2
+	OT3  OTYPER = 0x01 << 3  //+ Port x configuration bit 3
+	OT4  OTYPER = 0x01 << 4  //+ Port x configuration bit 4
+	OT5  OTYPER = 0x01 << 5  //+ Port x configuration bit 5
+	OT6  OTYPER = 0x01 << 6  //+ Port x configuration bit 6
+	OT7  OTYPER = 0x01 << 7  //+ Port x configuration bit 7
+	OT8  OTYPER = 0x01 << 8  //+ Port x configuration bit 8
+	OT9  OTYPER = 0x01 << 9  //+ Port x configuration bit 9
+	OT10 OTYPER = 0x01 << 10 //+ Port x configuration bit 10
+	OT11 OTYPER = 0x01 << 11 //+ Port x configuration bit 11
+	OT12 OTYPER = 0x01 << 12 //+ Port x configuration bit 12
+	OT13 OTYPER = 0x01 << 13 //+ Port x configuration bit 13
+	OT14 OTYPER = 0x01 << 14 //+ Port x configuration bit 14
+	OT15 OTYPER = 0x01 << 15 //+ Port x configuration bit 15
 )
 
 const (

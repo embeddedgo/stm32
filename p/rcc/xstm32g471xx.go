@@ -913,8 +913,8 @@ func (p *Periph) SPI2EN() RMAPB1ENR1 {
 	return RMAPB1ENR1{mmio.UM32{&p.APB1ENR1.U32, uint32(SPI2EN)}}
 }
 
-func (p *Periph) SP3EN() RMAPB1ENR1 {
-	return RMAPB1ENR1{mmio.UM32{&p.APB1ENR1.U32, uint32(SP3EN)}}
+func (p *Periph) SPI3EN() RMAPB1ENR1 {
+	return RMAPB1ENR1{mmio.UM32{&p.APB1ENR1.U32, uint32(SPI3EN)}}
 }
 
 func (p *Periph) USART2EN() RMAPB1ENR1 {

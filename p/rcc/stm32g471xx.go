@@ -416,7 +416,7 @@ const (
 	RTCAPBEN APB1ENR1 = 0x01 << 10 //+ RTC APB clock enable
 	WWDGEN   APB1ENR1 = 0x01 << 11 //+ Window watchdog clock enable
 	SPI2EN   APB1ENR1 = 0x01 << 14 //+ SPI2 clock enable
-	SP3EN    APB1ENR1 = 0x01 << 15 //+ SPI3 clock enable
+	SPI3EN   APB1ENR1 = 0x01 << 15 //+ SPI3 clock enable
 	USART2EN APB1ENR1 = 0x01 << 17 //+ USART2 clock enable
 	USART3EN APB1ENR1 = 0x01 << 18 //+ USART3 clock enable
 	UART4EN  APB1ENR1 = 0x01 << 19 //+ UART4 clock enable
@@ -441,7 +441,7 @@ const (
 	RTCAPBENn = 10
 	WWDGENn   = 11
 	SPI2ENn   = 14
-	SP3ENn    = 15
+	SPI3ENn   = 15
 	USART2ENn = 17
 	USART3ENn = 18
 	UART4ENn  = 19

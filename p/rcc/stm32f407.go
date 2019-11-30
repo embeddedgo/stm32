@@ -301,10 +301,13 @@ const (
 	ADCRST    APB2RSTR = 0x01 << 8  //+ ADC interface reset (common to all ADCs)
 	SDIORST   APB2RSTR = 0x01 << 11 //+ SDIO reset
 	SPI1RST   APB2RSTR = 0x01 << 12 //+ SPI 1 reset
+	SPI4RST   APB2RSTR = 0x01 << 13 //+ SPI 4 reset
 	SYSCFGRST APB2RSTR = 0x01 << 14 //+ System configuration controller reset
 	TIM9RST   APB2RSTR = 0x01 << 16 //+ TIM9 reset
 	TIM10RST  APB2RSTR = 0x01 << 17 //+ TIM10 reset
 	TIM11RST  APB2RSTR = 0x01 << 18 //+ TIM11 reset
+	SPI5RST   APB2RSTR = 0x01 << 20 //+ SPI 5 reset
+	SPI6RST   APB2RSTR = 0x01 << 21 //+ SPI 6 reset
 )
 
 const (
@@ -315,10 +318,13 @@ const (
 	ADCRSTn    = 8
 	SDIORSTn   = 11
 	SPI1RSTn   = 12
+	SPI4RSTn   = 13
 	SYSCFGRSTn = 14
 	TIM9RSTn   = 16
 	TIM10RSTn  = 17
 	TIM11RSTn  = 18
+	SPI5RSTn   = 20
+	SPI6RSTn   = 21
 )
 
 const (
@@ -453,10 +459,14 @@ const (
 	ADC3EN   APB2ENR = 0x01 << 10 //+ ADC3 clock enable
 	SDIOEN   APB2ENR = 0x01 << 11 //+ SDIO clock enable
 	SPI1EN   APB2ENR = 0x01 << 12 //+ SPI1 clock enable
+	SPI4EN   APB2ENR = 0x01 << 13 //+ SPI4 clock enable
 	SYSCFGEN APB2ENR = 0x01 << 14 //+ System configuration controller clock enable
 	TIM9EN   APB2ENR = 0x01 << 16 //+ TIM9 clock enable
 	TIM10EN  APB2ENR = 0x01 << 17 //+ TIM10 clock enable
 	TIM11EN  APB2ENR = 0x01 << 18 //+ TIM11 clock enable
+	TIM11EN  APB2ENR = 0x01 << 18 //+ TIM11 clock enable
+	SPI5EN   APB2ENR = 0x01 << 20 //+ SPI5 clock enable
+	SPI6EN   APB2ENR = 0x01 << 21 //+ SPI6 clock enable
 )
 
 const (
@@ -469,10 +479,14 @@ const (
 	ADC3ENn   = 10
 	SDIOENn   = 11
 	SPI1ENn   = 12
+	SPI4ENn   = 13
 	SYSCFGENn = 14
 	TIM9ENn   = 16
 	TIM10ENn  = 17
 	TIM11ENn  = 18
+	TIM11ENn  = 18
+	SPI5ENn   = 20
+	SPI6ENn   = 21
 )
 
 const (
