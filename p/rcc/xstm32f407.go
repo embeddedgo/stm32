@@ -950,10 +950,6 @@ func (p *Periph) TIM11EN() RMAPB2ENR {
 	return RMAPB2ENR{mmio.UM32{&p.APB2ENR.U32, uint32(TIM11EN)}}
 }
 
-func (p *Periph) TIM11EN() RMAPB2ENR {
-	return RMAPB2ENR{mmio.UM32{&p.APB2ENR.U32, uint32(TIM11EN)}}
-}
-
 func (p *Periph) SPI5EN() RMAPB2ENR {
 	return RMAPB2ENR{mmio.UM32{&p.APB2ENR.U32, uint32(SPI5EN)}}
 }

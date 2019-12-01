@@ -464,7 +464,6 @@ const (
 	TIM9EN   APB2ENR = 0x01 << 16 //+ TIM9 clock enable
 	TIM10EN  APB2ENR = 0x01 << 17 //+ TIM10 clock enable
 	TIM11EN  APB2ENR = 0x01 << 18 //+ TIM11 clock enable
-	TIM11EN  APB2ENR = 0x01 << 18 //+ TIM11 clock enable
 	SPI5EN   APB2ENR = 0x01 << 20 //+ SPI5 clock enable
 	SPI6EN   APB2ENR = 0x01 << 21 //+ SPI6 clock enable
 )
@@ -483,7 +482,6 @@ const (
 	SYSCFGENn = 14
 	TIM9ENn   = 16
 	TIM10ENn  = 17
-	TIM11ENn  = 18
 	TIM11ENn  = 18
 	SPI5ENn   = 20
 	SPI6ENn   = 21

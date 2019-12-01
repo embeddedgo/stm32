@@ -6396,12 +6396,6 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <bitWidth>1</bitWidth>
             </field>
             <field>
-              <name>TIM11EN</name>
-              <description>TIM11 clock enable</description>
-              <bitOffset>18</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
               <name>TIM10EN</name>
               <description>TIM10 clock enable</description>
               <bitOffset>17</bitOffset>
