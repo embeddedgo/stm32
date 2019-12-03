@@ -5,14 +5,14 @@
 // Package spi provides access to the registers of the SPI1 peripheral.
 //
 // Instances:
-//  I2S2ext  I2S2ext_BASE  -     SPI1+  Serial peripheral interface
-//  I2S3ext  I2S3ext_BASE  -     SPI1+  Serial peripheral interface
+//  I2S2ext  I2S2ext_BASE  APB2  SPI1+  Serial peripheral interface
+//  I2S3ext  I2S3ext_BASE  APB2  SPI1+  Serial peripheral interface
 //  SPI1     SPI1_BASE     APB2  SPI1+  Serial peripheral interface
 //  SPI2     SPI2_BASE     APB1  SPI2   Serial peripheral interface
 //  SPI3     SPI3_BASE     APB1  SPI3+  Serial peripheral interface
-//  SPI4     SPI4_BASE     -     SPI1+  Serial peripheral interface
-//  SPI5     SPI5_BASE     -     SPI1+  Serial peripheral interface
-//  SPI6     SPI6_BASE     -     SPI3+  Serial peripheral interface
+//  SPI4     SPI4_BASE     APB2  SPI1+  Serial peripheral interface
+//  SPI5     SPI5_BASE     APB2  SPI1+  Serial peripheral interface
+//  SPI6     SPI6_BASE     APB2  SPI3+  Serial peripheral interface
 // Registers:
 //  0x000 32  CR1      control register 1
 //  0x004 32  CR2      control register 2
@@ -104,14 +104,6 @@ const (
 	OVRn    = 6
 	BSYn    = 7
 	TIFRFEn = 8
-)
-
-const (
-	DR DR = 0xFFFF << 0 //+ Data register
-)
-
-const (
-	DRn = 0
 )
 
 const (

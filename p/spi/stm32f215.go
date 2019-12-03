@@ -102,14 +102,6 @@ const (
 )
 
 const (
-	DR DR = 0xFFFF << 0 //+ Data register
-)
-
-const (
-	DRn = 0
-)
-
-const (
 	CRCPOLY CRCPR = 0xFFFF << 0 //+ CRC polynomial register
 )
 
