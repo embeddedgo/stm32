@@ -11,9 +11,10 @@ import (
 	"embedded/rtos"
 	"unsafe"
 
-	"github.com/embeddedgo/stm32/devboard/emw3162/board"
 	"github.com/embeddedgo/stm32/hal/dma"
 	"github.com/embeddedgo/stm32/hal/irq"
+
+	_ "github.com/embeddedgo/stm32/devboard/emw3162/board/init"
 )
 
 var (
@@ -55,8 +56,6 @@ func printSpeed(t int64, n int, check bool) {
 }
 
 func main() {
-	board.Setup(true)
-
 	d := dma.DMA(2)
 	d.EnableClock(true)
 	ch = d.Channel(0, 0)

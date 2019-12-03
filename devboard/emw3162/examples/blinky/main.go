@@ -6,19 +6,19 @@
 package main
 
 import (
-	"github.com/embeddedgo/stm32/devboard/emw3162/board"
 	"github.com/embeddedgo/x/time"
+
+	"github.com/embeddedgo/stm32/devboard/emw3162/board/leds"
 )
 
 func main() {
-	board.Setup(true)
 	for {
-		board.Green.SetOff()
-		board.Red.SetOn()
+		leds.Green.SetOff()
+		leds.Red.SetOn()
 		time.Sleep(time.Second / 4)
 
-		board.Red.SetOff()
-		board.Green.SetOn()
+		leds.Red.SetOff()
+		leds.Green.SetOn()
 		time.Sleep(time.Second / 4)
 	}
 }

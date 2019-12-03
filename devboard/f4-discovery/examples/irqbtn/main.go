@@ -9,15 +9,15 @@ package main
 import (
 	"embedded/rtos"
 
-	"github.com/embeddedgo/stm32/devboard/f4-discovery/board"
 	"github.com/embeddedgo/stm32/hal/exti"
 	"github.com/embeddedgo/stm32/hal/irq"
+
+	"github.com/embeddedgo/stm32/devboard/f4-discovery/board/buttons"
+	"github.com/embeddedgo/stm32/devboard/f4-discovery/board/leds"
 )
 
 func main() {
-	board.Setup(true)
-
-	pin := board.UserBtn.Pin() // PA0
+	pin := buttons.User.Pin() // PA0
 	line := exti.Lines(1 << pin.Index())
 	line.Connect(pin.Port())
 	line.EnableRiseTrig()
@@ -26,26 +26,26 @@ func main() {
 	irq.EXTI0.Enable(rtos.IntPrioLow)
 
 	for {
-		board.Green.SetOff()
-		board.Orange.SetOn()
+		leds.Green.SetOff()
+		leds.Orange.SetOn()
 
 		waitBtn(0)
 		waitBtn(1)
 
-		board.Orange.SetOff()
-		board.Red.SetOn()
+		leds.Orange.SetOff()
+		leds.Red.SetOn()
 
 		waitBtn(0)
 		waitBtn(1)
 
-		board.Red.SetOff()
-		board.Blue.SetOn()
+		leds.Red.SetOff()
+		leds.Blue.SetOn()
 
 		waitBtn(0)
 		waitBtn(1)
 
-		board.Blue.SetOff()
-		board.Green.SetOn()
+		leds.Blue.SetOff()
+		leds.Green.SetOn()
 
 		waitBtn(0)
 		waitBtn(1)
@@ -55,12 +55,12 @@ func main() {
 var note rtos.Note
 
 func waitBtn(state int) {
-	line := exti.Lines(1 << board.UserBtn.Pin().Index())
+	line := exti.Lines(1 << buttons.User.Pin().Index())
 	for {
 		note.Clear()
 		line.EnableIRQ()
 		wait := int64(-1)
-		if board.UserBtn.Read() == state {
+		if buttons.User.Read() == state {
 			wait = 50e6 // we want 50 ms of stable state
 		}
 		if !note.Sleep(wait) {
@@ -72,7 +72,7 @@ func waitBtn(state int) {
 
 //go:interrupthandler
 func EXTI0_Handler() {
-	line := exti.Lines(1 << board.UserBtn.Pin().Index())
+	line := exti.Lines(1 << buttons.User.Pin().Index())
 	line.DisableIRQ()
 	line.ClearPending()
 	note.Wakeup()

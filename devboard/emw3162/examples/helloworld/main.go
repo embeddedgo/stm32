@@ -5,12 +5,12 @@
 package main
 
 import (
-	"github.com/embeddedgo/stm32/devboard/emw3162/board"
 	"github.com/embeddedgo/x/time"
+
+	_ "github.com/embeddedgo/stm32/devboard/emw3162/board/init"
 )
 
 func main() {
-	board.Setup(true)
 	for {
 		println("Hello World!")
 		time.Sleep(time.Second / 4)

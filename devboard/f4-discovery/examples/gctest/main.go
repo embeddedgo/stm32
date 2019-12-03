@@ -10,12 +10,10 @@ import (
 	"math/rand"
 	"runtime"
 
-	"github.com/embeddedgo/stm32/devboard/f4-discovery/board"
+	_ "github.com/embeddedgo/stm32/devboard/f4-discovery/board/init"
 )
 
 func main() {
-	board.Setup(true)
-
 	c := make(chan []uint32, 3)
 
 	go func() {

@@ -6,12 +6,14 @@
 package main
 
 import (
-	"github.com/embeddedgo/stm32/devboard/f4-discovery/board"
 	"github.com/embeddedgo/x/time"
+
+	"github.com/embeddedgo/stm32/devboard/f4-discovery/board/buttons"
+	"github.com/embeddedgo/stm32/devboard/f4-discovery/board/leds"
 )
 
 func delay() {
-	if board.UserBtn.Read() != 0 {
+	if buttons.User.Read() != 0 {
 		time.Sleep(time.Second / 8)
 	} else {
 		time.Sleep(time.Second / 2)
@@ -19,22 +21,21 @@ func delay() {
 }
 
 func main() {
-	board.Setup(true)
 	for {
-		board.Green.SetOff()
-		board.Orange.SetOn()
+		leds.Green.SetOff()
+		leds.Orange.SetOn()
 		delay()
 
-		board.Orange.SetOff()
-		board.Red.SetOn()
+		leds.Orange.SetOff()
+		leds.Red.SetOn()
 		delay()
 
-		board.Red.SetOff()
-		board.Blue.SetOn()
+		leds.Red.SetOff()
+		leds.Blue.SetOn()
 		delay()
 
-		board.Blue.SetOff()
-		board.Green.SetOn()
+		leds.Blue.SetOff()
+		leds.Green.SetOn()
 		delay()
 	}
 }

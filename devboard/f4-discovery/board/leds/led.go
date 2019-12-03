@@ -2,28 +2,27 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package board
+package leds
 
-import "github.com/embeddedgo/stm32/hal/gpio"
+import (
+	"github.com/embeddedgo/stm32/hal/gpio"
 
-// LEDs
-const (
-	LD1 LED = 0x27 // PC7
-	LD2 LED = 0x17 // PB7
-	LD3 LED = 0x1E // PB14
-
-	Green = LD1
-	Blue  = LD2
-	Red   = LD3
-
-	UserLED = LD3
+	_ "github.com/embeddedgo/stm32/devboard/f4-discovery/board/init"
 )
 
-// Buttons
+// Onboard LEDs
 const (
-	B1 Button = 0x2D // PC13
+	LD3 LED = 0x3D // PD13
+	LD4 LED = 0x3C // PD12
+	LD5 LED = 0x3E // PD14
+	LD6 LED = 0x3F // PD15
 
-	UserBtn = B1
+	Orange = LD3
+	Green  = LD4
+	Red    = LD5
+	Blue   = LD6
+
+	User = LD3
 )
 
 type LED uint8
@@ -47,14 +46,11 @@ func (d LED) Pin() gpio.Pin {
 	return gpio.P(d.prt()).Pin(int(d.pin()))
 }
 
-type Button uint8
-
-func (b Button) prt() int  { return int(b) >> 4 }
-func (b Button) pin() uint { return uint(b) & 15 }
-
-func (b Button) Read() int {
-	return int(gpio.P(b.prt()).Load()>>b.pin()) & 1
-}
-func (b Button) Pin() gpio.Pin {
-	return gpio.P(b.prt()).Pin(int(b.pin()))
+func init() {
+	gpio.D().EnableClock(true)
+	cfg := &gpio.Config{Mode: gpio.Out, Speed: gpio.Low}
+	LD3.Pin().Setup(cfg)
+	LD4.Pin().Setup(cfg)
+	LD5.Pin().Setup(cfg)
+	LD6.Pin().Setup(cfg)
 }

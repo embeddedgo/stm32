@@ -2,11 +2,15 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package board
+package leds
 
-import "github.com/embeddedgo/stm32/hal/gpio"
+import (
+	"github.com/embeddedgo/stm32/hal/gpio"
 
-// LEDs
+	_ "github.com/embeddedgo/stm32/devboard/emw3162/board/init"
+)
+
+// Onboard LEDs
 const (
 	D1 LED = 0x10 // PB0
 	D2 LED = 0x11 // PB1
@@ -14,7 +18,7 @@ const (
 	Green = D1
 	Red   = D2
 
-	UserLED = D1
+	User = D1
 )
 
 type LED uint8
@@ -44,4 +48,12 @@ func (d LED) Get() int {
 }
 func (d LED) Pin() gpio.Pin {
 	return gpio.P(d.prt()).Pin(int(d.pin()))
+}
+
+func init() {
+	gpio.B().EnableClock(true)
+	cfg := &gpio.Config{Mode: gpio.Out, Speed: gpio.Low}
+	D1.Pin().Setup(cfg)
+	cfg.Driver = gpio.OpenDrain
+	D2.Pin().Setup(cfg)
 }

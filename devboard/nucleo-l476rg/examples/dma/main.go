@@ -10,9 +10,10 @@ import (
 	"embedded/rtos"
 	"unsafe"
 
-	"github.com/embeddedgo/stm32/devboard/nucleo-l476rg/board"
 	"github.com/embeddedgo/stm32/hal/dma"
 	"github.com/embeddedgo/stm32/hal/irq"
+
+	_ "github.com/embeddedgo/stm32/devboard/nucleo-l476rg/board/init"
 )
 
 var (
@@ -54,8 +55,6 @@ func printSpeed(t int64, n int, check bool) {
 }
 
 func main() {
-	board.Setup(true)
-
 	d := dma.DMA(1)
 	d.EnableClock(true)
 	ch = d.Channel(1, 0)

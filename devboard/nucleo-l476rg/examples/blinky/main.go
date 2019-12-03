@@ -6,12 +6,14 @@
 package main
 
 import (
-	"github.com/embeddedgo/stm32/devboard/nucleo-l476rg/board"
 	"github.com/embeddedgo/x/time"
+
+	"github.com/embeddedgo/stm32/devboard/nucleo-l476rg/board/buttons"
+	"github.com/embeddedgo/stm32/devboard/nucleo-l476rg/board/leds"
 )
 
 func delay() {
-	if board.UserBtn.Read() != 0 {
+	if buttons.User.Read() != 0 {
 		time.Sleep(time.Second / 8)
 	} else {
 		time.Sleep(time.Second / 2)
@@ -19,11 +21,10 @@ func delay() {
 }
 
 func main() {
-	board.Setup(true)
 	for {
-		board.UserLED.SetOn()
+		leds.User.SetOn()
 		delay()
-		board.UserLED.SetOff()
+		leds.User.SetOff()
 		delay()
 	}
 }

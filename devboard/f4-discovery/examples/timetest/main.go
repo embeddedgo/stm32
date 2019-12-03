@@ -6,13 +6,13 @@
 package main
 
 import (
-	"github.com/embeddedgo/stm32/devboard/f4-discovery/board"
 	"github.com/embeddedgo/x/time"
 	"github.com/embeddedgo/x/time/tz"
+
+	_ "github.com/embeddedgo/stm32/devboard/f4-discovery/board/init"
 )
 
 func main() {
-	board.Setup(true)
 	for i := 0; i < 3; i++ {
 		println("before set:", time.Now().String())
 		time.Sleep(time.Second)
