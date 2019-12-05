@@ -55,24 +55,34 @@ func (d *Driver) Setup(conf Config, baudrate int) {
 	d.p.SetConfig(conf, baudrate)
 }
 
-// SetBaudrate sis equivalent of d.Periph().SetBaudrate(baudrate)..
+// SetBaudrate calls d.Periph().SetBaudrate(baudrate).
 func (d *Driver) SetBaudrate(baudrate int) {
 	d.p.SetBaudrate(baudrate)
 }
 
-// SetWordSize is equivalent of d.Periph().SetWordSize(size). 
+// SetWordSize calls d.Periph().SetWordSize(size).
 func (d *Driver) SetWordSize(size int) {
 	d.p.setWordSize(size)
 }
 
-// Enable is equivalent of d.Periph().Enable.
+// Enable calls d.Periph().Enable().
 func (d *Driver) Enable() {
 	d.p.Enable()
 }
 
-// Disable is equivalent of d.Periph().Disable.
+// Disable calls d.Periph().Disable().
 func (d *Driver) Disable() {
 	d.p.Disable()
+}
+
+// TwoWireSetRx calls d.Periph().TwoWireSetRx()
+func (d *Driver) TwoWireSetRx() {
+	d.p.TwoWireSetRx()
+}
+
+// TwoWireSetTx calls d.Periph().TwoWireSetTx()
+func (d *Driver) TwoWireSetTx() {
+	d.p.TwoWireSetTx()
 }
 
 func (d *Driver) TxDMA() dma.Channel {

@@ -69,10 +69,10 @@ const (
 	ISSHigh = Config(spi.SSI) // Set NSS internally to high (requires SoftSS).
 
 	ThreeWire = Config(0)            // Three-wire mode (SCK, MOSI, MISO).
-	TwoWire   = Config(spi.BIDIMODE) // Two-wire mode (SCK, MOSI).
+	TwoWire   = Config(spi.BIDIMODE) // Two-wire mode (SCK, MOSI/MISO).
 
-	TWRx = Config(0)          // Two-wire receive-only
-	TWTx = Config(spi.BIDIOE) // Two-wire transmit-only.
+	Rx = Config(0)          // Two-wire receive-only
+	Tx = Config(spi.BIDIOE) // Two-wire transmit-only.
 )
 
 // BR calculates the baud rate bits of configuration. BR guarantees that
@@ -127,6 +127,16 @@ func (p *Periph) WordSize() int {
 // the default reset configuration does not work.
 func (p *Periph) SetWordSize(size int) {
 	p.setWordSize(size)
+}
+
+// TwoWireSetRx sets data direction to recevie in two-wire mode.
+func (p *Periph) TwoWireSetRx() {
+	p.raw.CR1.ClearBits(spi.BIDIOE)
+}
+
+// TwoWireSetTx sets data direction to transmit in two-wire mode.
+func (p *Periph) TwoWireSetTx() {
+	p.raw.CR1.SetBits(spi.BIDIOE)
 }
 
 // Event is a bitfield that encodes possible peripheral events.
