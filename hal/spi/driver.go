@@ -42,8 +42,37 @@ func NewDriver(p *Periph, txdma, rxdma dma.Channel) *Driver {
 	return &Driver{deadline: -1, p: p, rxDMA: rxdma, txDMA: txdma}
 }
 
+// Periph return the internal SPI peripheral used by Driver.
 func (d *Driver) Periph() *Periph {
 	return d.p
+}
+
+// Setup enables clock source, resets peripheral, then calls
+// d.Periph().SetConfig(conf, baudrate) to configure it.
+func (d *Driver) Setup(conf Config, baudrate int) {
+	d.p.EnableClock(true)
+	d.p.Reset()
+	d.p.SetConfig(conf, baudrate)
+}
+
+// SetBaudrate sis equivalent of d.Periph().SetBaudrate(baudrate)..
+func (d *Driver) SetBaudrate(baudrate int) {
+	d.p.SetBaudrate(baudrate)
+}
+
+// SetWordSize is equivalent of d.Periph().SetWordSize(size). 
+func (d *Driver) SetWordSize(size int) {
+	d.p.setWordSize(size)
+}
+
+// Enable is equivalent of d.Periph().Enable.
+func (d *Driver) Enable() {
+	d.p.Enable()
+}
+
+// Disable is equivalent of d.Periph().Disable.
+func (d *Driver) Disable() {
+	d.p.Disable()
 }
 
 func (d *Driver) TxDMA() dma.Channel {

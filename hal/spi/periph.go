@@ -40,40 +40,45 @@ func (p *Periph) Reset() {
 	apb.Reset(unsafe.Pointer(p))
 }
 
-type Conf uint16
+type Config uint16
 
 const (
-	CPHA0  = Conf(0)        // Sample on first edge.
-	CPHA1  = Conf(spi.CPHA) // Sample on second edge.
-	CPOL0  = Conf(0)        // Clock idle state is 0.
-	CPOL1  = Conf(spi.CPOL) // Clock idle state is 1.
-	Slave  = Conf(0)        // Slave mode.
-	Master = Conf(spi.MSTR) // Master mode.
+	CPHA0  = Config(0)        // Sample on first edge.
+	CPHA1  = Config(spi.CPHA) // Sample on second edge.
+	CPOL0  = Config(0)        // Clock idle state is 0.
+	CPOL1  = Config(spi.CPOL) // Clock idle state is 1.
+	Slave  = Config(0)        // Slave mode.
+	Master = Config(spi.MSTR) // Master mode.
 
-	BR2   = Conf(0)            // Baud rate = PCLK/2
-	BR4   = Conf(1 << spi.BRn) // Baud rate = PCLK/4.
-	BR8   = Conf(2 << spi.BRn) // Baud rate = PCLK/8.
-	BR16  = Conf(3 << spi.BRn) // Baud rate = PCLK/16.
-	BR32  = Conf(4 << spi.BRn) // Baud rate = PCLK/32.
-	BR64  = Conf(5 << spi.BRn) // Baud rate = PCLK/64.
-	BR128 = Conf(6 << spi.BRn) // Baud rate = PCLK/128.
-	BR256 = Conf(7 << spi.BRn) // Baud rate = PCLK/256.
+	BR2   = Config(0)            // Baud rate = PCLK/2
+	BR4   = Config(1 << spi.BRn) // Baud rate = PCLK/4.
+	BR8   = Config(2 << spi.BRn) // Baud rate = PCLK/8.
+	BR16  = Config(3 << spi.BRn) // Baud rate = PCLK/16.
+	BR32  = Config(4 << spi.BRn) // Baud rate = PCLK/32.
+	BR64  = Config(5 << spi.BRn) // Baud rate = PCLK/64.
+	BR128 = Config(6 << spi.BRn) // Baud rate = PCLK/128.
+	BR256 = Config(7 << spi.BRn) // Baud rate = PCLK/256.
 
-	MSBF = Conf(0)            // Most significant bit first.
-	LSBF = Conf(spi.LSBFIRST) // Least significant bit first.
+	MSBF = Config(0)            // Most significant bit first.
+	LSBF = Config(spi.LSBFIRST) // Least significant bit first.
 
-	HardSS = Conf(0)       // Hardware slave select.
-	SoftSS = Conf(spi.SSM) // Software slave select (use ISSLow, ISSHigh).
+	HardSS = Config(0)       // Hardware slave select.
+	SoftSS = Config(spi.SSM) // Software slave select (use ISSLow, ISSHigh).
 
-	ISSLow  = Conf(0)       // Set NSS internally to low (requires SoftSS).
-	ISSHigh = Conf(spi.SSI) // Set NSS internally to high (requires SoftSS).
+	ISSLow  = Config(0)       // Set NSS internally to low (requires SoftSS).
+	ISSHigh = Config(spi.SSI) // Set NSS internally to high (requires SoftSS).
+
+	ThreeWire = Config(0)            // Three-wire mode (SCK, MOSI, MISO).
+	TwoWire   = Config(spi.BIDIMODE) // Two-wire mode (SCK, MOSI).
+
+	TWRx = Config(0)          // Two-wire receive-only
+	TWTx = Config(spi.BIDIOE) // Two-wire transmit-only.
 )
 
-// BR calculates baud rate bits of configuration. BR guarantees that returned
-// value will set baud rate to the value closest to but not greater than
-// baudrate. APB1 and APB2 clock in stm32/p/bus package must be set before use
-// this function.
-func (p *Periph) BR(baudrate int) Conf {
+// BR calculates the baud rate bits of configuration. BR guarantees that
+// the returned bits corresponds to the value closest to but not greater than
+// baudrate.
+func (p *Periph) BR(baudrate int) Config {
 	pclk := p.Bus().Clock()
 	div := uint32((pclk + int64(baudrate) - 1) / int64(baudrate))
 	switch {
@@ -83,37 +88,45 @@ func (p *Periph) BR(baudrate int) Conf {
 		div = 256
 	}
 	br := 31 - bits.LeadingZeros32(uint32(div-1))
-	return Conf(br << spi.BRn)
+	return Config(br << spi.BRn)
 }
 
-// Baudrate returns real baudrate [bit/s] that will be set by cfg. APB1 and APB2
-// clock in stm32/hal/system package must be set properly before use this
-// function.
-func (p *Periph) Baudrate(cfg Conf) int {
-	return int(p.Bus().Clock() >> (cfg&BR256>>spi.BRn + 1))
+// Config returns the current p's configuration.
+func (p *Periph) Config() Config {
+	return Config(p.raw.CR1.LoadBits(cr1Mask))
 }
 
-// Conf returns the current configuration.
-func (p *Periph) Conf() Conf {
-	return Conf(p.raw.CR1.LoadBits(cr1Mask))
+// SetConfig configures p (p must be disabled). If baudrate > 0 it replaces the
+// BR bits in conf with the ones calculated from baudrate.
+func (p *Periph) SetConfig(conf Config, baudrate int) {
+	if baudrate != 0 {
+		conf = conf&^BR256 | p.BR(baudrate)
+	}
+	p.raw.CR1.StoreBits(cr1Mask, spi.CR1(conf))
 }
 
-// SetConf configures p.
-func (p *Periph) SetConf(cfg Conf) {
-	p.raw.CR1.StoreBits(cr1Mask, spi.CR1(cfg))
+// Baudrate returns the currently configured baudrate.
+func (p *Periph) Baudrate() int {
+	br := p.raw.CR1.LoadBits(cr1Mask) >> spi.BRn & 7
+	return int(p.Bus().Clock() >> (br + 1))
 }
 
-// SetWordSize sets size of data word. All families support 8 and 16-bit words,
-// F0, F3, L4 supports 4 to 16-bit. Some families require disable peripheral
-// before use this function. SetWordSize is mandatory for F0, F3, L4 if you use
-// Driver because the default reset configuration does not work.
-func (p *Periph) SetWordSize(size int) {
-	p.setWordSize(size)
+// SetBaudrate sets the baudrate (p must be disabled).
+func (p *Periph) SetBaudrate(baudrate int) {
+	p.raw.CR1.StoreBits(spi.CR1(BR256), spi.CR1(p.BR(baudrate)))
 }
 
 // WordSize return currently used word size.
 func (p *Periph) WordSize() int {
 	return p.wordSize()
+}
+
+// SetWordSize sets size of data word. All families support 8 and 16-bit words,
+// F0, F3, L4 supports 4 to 16-bit.  Some families require disabled peripheral
+// before use this function. SetWordSize is mandatory for F0, F3, L4 because
+// the default reset configuration does not work.
+func (p *Periph) SetWordSize(size int) {
+	p.setWordSize(size)
 }
 
 // Event is a bitfield that encodes possible peripheral events.
