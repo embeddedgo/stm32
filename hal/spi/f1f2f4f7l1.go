@@ -6,12 +6,6 @@
 
 package spi
 
-import (
-	"github.com/embeddedgo/stm32/p/spi"
-)
-
-const cr1Mask = ^spi.CR1(spi.DFF | spi.SPE | spi.BIDIMODE | spi.BIDIOE)
-
 func (p *Periph) setWordSize(size int) {
 	if size == 16 {
 		p.raw.DFF().Set()

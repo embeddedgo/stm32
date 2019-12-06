@@ -8,8 +8,6 @@ package spi
 
 import "github.com/embeddedgo/stm32/p/spi"
 
-const cr1Mask = ^spi.CR1(spi.SPE | spi.BIDIMODE | spi.BIDIOE)
-
 func (p *Periph) setWordSize(size int) {
 	ds := spi.CR2((size - 1) & 0xf << spi.DSn)
 	if size <= 8 {

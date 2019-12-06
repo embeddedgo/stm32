@@ -40,7 +40,7 @@ func (p *Periph) Reset() {
 	apb.Reset(unsafe.Pointer(p))
 }
 
-type Config uint16
+type Config uint32
 
 const (
 	CPHA0  = Config(0)        // Sample on first edge.
@@ -65,14 +65,21 @@ const (
 	HardSS = Config(0)       // Hardware slave select.
 	SoftSS = Config(spi.SSM) // Software slave select (use ISSLow, ISSHigh).
 
-	ISSLow  = Config(0)       // Set NSS internally to low (requires SoftSS).
-	ISSHigh = Config(spi.SSI) // Set NSS internally to high (requires SoftSS).
+	ISSLow  = Config(0)       // Set NSS internally to low (used with SoftSS).
+	ISSHigh = Config(spi.SSI) // Set NSS internally to high (used with SoftSS).
+
+	SSInp = Config(0)              // Set NSS as input (used with HardSS).
+	SSOut = Config(spi.SSOE << 16) // set NSS as output (used with HardSS).
 
 	ThreeWire = Config(0)            // Three-wire mode (SCK, MOSI, MISO).
 	TwoWire   = Config(spi.BIDIMODE) // Two-wire mode (SCK, MOSI/MISO).
 
 	Rx = Config(0)          // Two-wire receive-only
 	Tx = Config(spi.BIDIOE) // Two-wire transmit-only.
+
+	cr1mask = spi.CPHA | spi.CPOL | spi.MSTR | 7<<spi.BRn | spi.LSBFIRST |
+		spi.SSM | spi.SSI | spi.BIDIMODE | spi.BIDIOE
+	cr2mask = spi.SSOE
 )
 
 // BR calculates the baud rate bits of configuration. BR guarantees that
@@ -93,7 +100,9 @@ func (p *Periph) BR(baudrate int) Config {
 
 // Config returns the current p's configuration.
 func (p *Periph) Config() Config {
-	return Config(p.raw.CR1.LoadBits(cr1Mask))
+	cr1 := Config(p.raw.CR1.LoadBits(cr1mask))
+	cr2 := Config(p.raw.CR2.LoadBits(cr2mask))
+	return cr1 | cr2<<16
 }
 
 // SetConfig configures p (p must be disabled). If baudrate > 0 it replaces the
@@ -102,12 +111,13 @@ func (p *Periph) SetConfig(conf Config, baudrate int) {
 	if baudrate != 0 {
 		conf = conf&^BR256 | p.BR(baudrate)
 	}
-	p.raw.CR1.StoreBits(cr1Mask, spi.CR1(conf))
+	p.raw.CR1.StoreBits(cr1mask, spi.CR1(conf&0xFFFF))
+	p.raw.CR2.StoreBits(cr2mask, spi.CR2(conf>>16))
 }
 
 // Baudrate returns the currently configured baudrate.
 func (p *Periph) Baudrate() int {
-	br := p.raw.CR1.LoadBits(cr1Mask) >> spi.BRn & 7
+	br := p.raw.CR1.LoadBits(cr1mask) >> spi.BRn & 7
 	return int(p.Bus().Clock() >> (br + 1))
 }
 
