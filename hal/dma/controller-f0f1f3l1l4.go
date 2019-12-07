@@ -13,27 +13,29 @@ import (
 	"github.com/embeddedgo/stm32/p/dma"
 )
 
-func (d *Controller) channel(n, _ int) Channel {
-	n-- // channels are numbered from 1
-	if uint(n) > 7 {
+func (d *Controller) channel(cn, rn int) Channel {
+	cn-- // channels are numbered from 1
+	if uint(cn) > 6 {
 		panic("dma: bad stream")
 	}
-	return Channel{uintptr(unsafe.Pointer(&d.p.C[n]))}
+	if uint(rn) > 15 {
+		panic("dma: bad request")
+	}
+	paddr := uintptr(unsafe.Pointer(&d.p.C[cn])) &^ 0x3ff
+	return Channel{paddr | uintptr(rn)<<4 | 8 | uintptr(cn)}
 }
 
 func (c Channel) periph() *dma.Periph {
-	return (*dma.Periph)(unsafe.Pointer(c.h &^ 0x3ff))
+	return (*dma.Periph)(unsafe.Pointer(c.h &^ 0xff))
 }
 
 func (c Channel) channel() *dma.RC {
-	return (*dma.RC)(unsafe.Pointer(c.h))
+	addr := c.h&^0xf7 + c.h&7*unsafe.Sizeof(dma.RC{})
+	return (*dma.RC)(unsafe.Pointer(addr))
 }
 
-func (c Channel) num() uintptr {
-	off := c.h & 0x3ff
-	step := unsafe.Sizeof(dma.RC{})
-	return (off - 8) / step
-}
+func (c Channel) cnum() uintptr { return c.h & 7 }
+func (c Channel) rnum() uint32  { return uint32(c.h >> 4 & 15) }
 
 const (
 	//gif = 1<<0  do not use global interrupt flag bacause of silicon bugs
@@ -48,11 +50,11 @@ const (
 
 func (c Channel) status() byte {
 	isr := c.periph().ISR.Load()
-	return byte(isr >> (c.num() * 4) & 0xf)
+	return byte(isr >> (c.cnum() * 4) & 0xf)
 }
 
 func (c Channel) clear(flags byte) {
-	mask := dma.IFCR(flags&0xf) << (c.num() * 4)
+	mask := dma.IFCR(flags&0xf) << (c.cnum() * 4)
 	c.periph().IFCR.Store(mask)
 }
 
@@ -106,6 +108,8 @@ const (
 func (c Channel) setup(m Mode) {
 	mask := dma.DIR | dma.MEM2MEM | dma.CIRC | dma.PINC | dma.MINC | dma.PL
 	c.channel().CR.StoreBits(mask, dma.CR(m))
+	n := 4 * c.cnum()
+	internal.AtomicStoreBits(&c.periph().CSELR.U32, 0xf<<n, c.rnum()<<n)
 }
 
 const (
@@ -148,14 +152,4 @@ func (c Channel) setAddrP(a unsafe.Pointer) {
 
 func (c Channel) setAddrM(a unsafe.Pointer) {
 	c.channel().MAR.Store(dma.MAR(uintptr(a)))
-}
-
-func (c Channel) request() Request {
-	n := c.num() * 4
-	return Request(c.periph().CSELR.LoadBits(0xf << n))
-}
-
-func (c Channel) setRequest(req Request) {
-	n := c.num() * 4
-	internal.AtomicStoreBits(&c.periph().CSELR.U32, 0xf<<n, uint32(req)<<n)
 }

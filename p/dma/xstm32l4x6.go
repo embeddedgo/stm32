@@ -16,7 +16,7 @@ type Periph struct {
 	ISR   RISR
 	IFCR  RIFCR
 	C     [7]RC
-	_     [12]uint32
+	_     [5]uint32
 	CSELR RCSELR
 }
 
@@ -29,7 +29,6 @@ func (p *Periph) Bus() bus.Bus {
 }
 
 func DMA1() *Periph { return (*Periph)(unsafe.Pointer(uintptr(mmap.DMA1_BASE))) }
-
 func DMA2() *Periph { return (*Periph)(unsafe.Pointer(uintptr(mmap.DMA2_BASE))) }
 
 type ISR uint32
@@ -293,6 +292,7 @@ type RC struct {
 	NDTR RNDTR
 	PAR  RPAR
 	MAR  RMAR
+	_    uint32
 }
 
 type CR uint32

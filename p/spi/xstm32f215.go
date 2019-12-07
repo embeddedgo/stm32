@@ -31,16 +31,14 @@ func (p *Periph) BaseAddr() uintptr {
 func (p *Periph) Bus() bus.Bus {
 	switch p.BaseAddr() {
 	default:
-		return bus.APB2
-	case mmap.SPI2_BASE, mmap.SPI3_BASE:
 		return bus.APB1
+	case mmap.SPI1_BASE:
+		return bus.APB2
 	}
 }
 
 func SPI1() *Periph { return (*Periph)(unsafe.Pointer(uintptr(mmap.SPI1_BASE))) }
-
 func SPI2() *Periph { return (*Periph)(unsafe.Pointer(uintptr(mmap.SPI2_BASE))) }
-
 func SPI3() *Periph { return (*Periph)(unsafe.Pointer(uintptr(mmap.SPI3_BASE))) }
 
 type CR1 uint32

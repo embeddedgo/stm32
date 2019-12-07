@@ -34,11 +34,11 @@ func (d *Controller) Reset() {
 }
 
 // Channel returns the value that represents sn-th stream (channel in F1/Lx
-// series nomenclature) with cn-th request channel set (ignored in case of F1/Lx
+// series nomenclature) with cn-th request channel (ignored in case of F1/Lx
 // series). Channels with the same sn points to the same DMA stream so they can
 // not be used concurently.
-func (d *Controller) Channel(sn, cn int) Channel {
-	return d.channel(sn, cn)
+func (d *Controller) Channel(sn, rn int) Channel {
+	return d.channel(sn, rn)
 }
 
 type Channel struct {
@@ -215,17 +215,4 @@ func (c Channel) SetAddrP(a unsafe.Pointer) {
 // SetAddrM sets memory address.
 func (c Channel) SetAddrM(a unsafe.Pointer) {
 	c.setAddrM(a)
-}
-
-// Request represents request number for DMA channel.
-type Request int8
-
-// Request returns current request source.
-func (c Channel) Request() Request {
-	return c.request()
-}
-
-// SetRequest selects request source for channel.
-func (c Channel) SetRequest(req Request) {
-	c.setRequest(req)
 }

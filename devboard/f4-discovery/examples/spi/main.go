@@ -15,8 +15,6 @@ import (
 	_ "github.com/embeddedgo/stm32/devboard/f4-discovery/board/init"
 )
 
-var sd *spi.Driver
-
 func main() {
 	// Allocate GPIO pins
 

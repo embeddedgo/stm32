@@ -38,11 +38,8 @@ func (p *Periph) Bus() bus.Bus {
 }
 
 func SPI1() *Periph { return (*Periph)(unsafe.Pointer(uintptr(mmap.SPI1_BASE))) }
-
 func SPI2() *Periph { return (*Periph)(unsafe.Pointer(uintptr(mmap.SPI2_BASE))) }
-
 func SPI3() *Periph { return (*Periph)(unsafe.Pointer(uintptr(mmap.SPI3_BASE))) }
-
 func SPI4() *Periph { return (*Periph)(unsafe.Pointer(uintptr(mmap.SPI4_BASE))) }
 
 type CR1 uint32

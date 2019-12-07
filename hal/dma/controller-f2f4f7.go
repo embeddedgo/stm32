@@ -176,6 +176,3 @@ func (c Channel) setAddrP(a unsafe.Pointer) {
 func (c Channel) setAddrM(a unsafe.Pointer) {
 	c.stream().M0AR.Store(dma.M0AR(uintptr(a)))
 }
-
-func (c Channel) request() Request     { return -1 }
-func (c Channel) setRequest(_ Request) {}
