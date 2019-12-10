@@ -74,11 +74,14 @@ const (
 	ThreeWire = Config(0)            // Three-wire mode (SCK, MOSI, MISO).
 	TwoWire   = Config(spi.BIDIMODE) // Two-wire mode (SCK, MOSI/MISO).
 
-	Rx = Config(0)          // Two-wire receive-only
+	TxRx   = Config(0)          // Three-wire transimt and receive.
+	RxOnly = Config(spi.RXONLY) // Three-wire receive only.
+
+	Rx = Config(0)          // Two-wire receive-only.
 	Tx = Config(spi.BIDIOE) // Two-wire transmit-only.
 
 	cr1mask = spi.CPHA | spi.CPOL | spi.MSTR | 7<<spi.BRn | spi.LSBFIRST |
-		spi.SSM | spi.SSI | spi.BIDIMODE | spi.BIDIOE
+		spi.SSM | spi.SSI | spi.BIDIMODE | spi.RXONLY | spi.BIDIOE
 	cr2mask = spi.SSOE
 )
 
@@ -115,6 +118,17 @@ func (p *Periph) SetConfig(conf Config, baudrate int) {
 	p.raw.CR2.StoreBits(cr2mask, spi.CR2(conf>>16))
 }
 
+// EditConfig changes configuration.
+func (p *Periph) EditConfig(from, to Config) {
+	if (from|to)&BR256 != 0 {
+		from |= BR256
+	}
+	cr1 := p.raw.CR1.Load()
+	p.raw.CR1.Store(cr1&^spi.CR1(from&0xFFFF) | spi.CR1(to&0xFFFF))
+	cr2 := p.raw.CR2.Load()
+	p.raw.CR2.Store(cr2&^spi.CR2(from>>16) | spi.CR2(to>>16))
+}
+
 // Baudrate returns the currently configured baudrate.
 func (p *Periph) Baudrate() int {
 	br := p.raw.CR1.LoadBits(cr1mask) >> spi.BRn & 7
@@ -137,16 +151,6 @@ func (p *Periph) WordSize() int {
 // the default reset configuration does not work.
 func (p *Periph) SetWordSize(size int) {
 	p.setWordSize(size)
-}
-
-// TwoWireSetRx sets data direction to recevie in two-wire mode.
-func (p *Periph) TwoWireSetRx() {
-	p.raw.CR1.ClearBits(spi.BIDIOE)
-}
-
-// TwoWireSetTx sets data direction to transmit in two-wire mode.
-func (p *Periph) TwoWireSetTx() {
-	p.raw.CR1.SetBits(spi.BIDIOE)
 }
 
 // Event is a bitfield that encodes possible peripheral events.
@@ -250,28 +254,6 @@ func (p *Periph) Enable() {
 // Disable disables p.
 func (p *Periph) Disable() {
 	p.raw.SPE().Clear()
-}
-
-// Duplex describes duplex mode. In full-duplex mode transmission is performed
-// using MOSI and MISO lines. In half-duplex mode only MOSI at master side and
-// MISO at slave side are used.
-type Duplex uint16
-
-const (
-	Full    = Duplex(0)                         // Full-duplex mode.
-	HalfIn  = Duplex(spi.BIDIMODE)              // Half-duplex input mode.
-	HalfOut = Duplex(spi.BIDIMODE | spi.BIDIOE) // Half-duplex output mode.
-)
-
-func (p *Periph) Duplex() Duplex {
-	return Duplex(p.raw.CR1.Load()) & HalfOut
-}
-
-func (p *Periph) SetDuplex(duplex Duplex) {
-	cr1 := p.raw.CR1.Load()
-	if cr1&spi.CR1(HalfOut) != spi.CR1(duplex) {
-		p.raw.CR1.Store(cr1&^spi.CR1(HalfOut) | spi.CR1(duplex))
-	}
 }
 
 // StoreWord16 stores a 16-bit word to the data register. Use it only when 16-bit

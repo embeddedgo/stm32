@@ -42,7 +42,7 @@ func NewDriver(p *Periph, txdma, rxdma dma.Channel) *Driver {
 	return &Driver{deadline: -1, p: p, rxDMA: rxdma, txDMA: txdma}
 }
 
-// Periph return the internal SPI peripheral used by Driver.
+// Periph returns the SPI peripheral used by Driver.
 func (d *Driver) Periph() *Periph {
 	return d.p
 }
@@ -75,14 +75,14 @@ func (d *Driver) Disable() {
 	d.p.Disable()
 }
 
-// TwoWireSetRx calls d.Periph().TwoWireSetRx()
+// TwoWireSetRx can be used in two-wire mode to set data direction to recevie.
 func (d *Driver) TwoWireSetRx() {
-	d.p.TwoWireSetRx()
+	d.p.EditConfig(Tx, Rx)
 }
 
-// TwoWireSetTx calls d.Periph().TwoWireSetTx()
+// TwoWireSetRx can be used in two-wire mode to set data direction to transimit.
 func (d *Driver) TwoWireSetTx() {
-	d.p.TwoWireSetTx()
+	d.p.EditConfig(Rx, Tx)
 }
 
 func (d *Driver) TxDMA() dma.Channel {
@@ -95,20 +95,13 @@ func (d *Driver) RxDMA() dma.Channel {
 
 func (d *Driver) DMAISR(ch dma.Channel) {
 	ev, err := ch.Status()
-	if err&^dma.ErrFIFO != 0 {
-		goto done
-	}
-	if ev&dma.Complete != 0 {
-		ch.Clear(dma.Complete, 0)
+	if ev&dma.Complete != 0 || err&^dma.ErrFIFO != 0 {
+		ch.DisableIRQ(dma.EvAll, dma.ErrAll)
+		ch.Disable()
 		if atomic.AddInt32(&d.dmacnt, -1) == 0 {
-			goto done
+			d.done.Wakeup()
 		}
 	}
-	return
-done:
-	ch.DisableIRQ(dma.EvAll, dma.ErrAll)
-	ch.Disable()
-	d.done.Wakeup()
 }
 
 func (d *Driver) ISR() {
@@ -127,7 +120,7 @@ func (d *Driver) WriteReadByte(b byte) byte {
 	}
 	d.done.Clear()
 	p := d.p
-	p.SetDuplex(Full)
+	p.EditConfig(TwoWire|Tx, ThreeWire|TxRx)
 	p.EnableIRQ(RxNotEmpty | Err)
 	p.StoreByte(b)
 	if !d.done.Sleep(d.deadline) {
@@ -150,7 +143,7 @@ func (d *Driver) WriteReadWord16(w uint16) uint16 {
 	}
 	d.done.Clear()
 	p := d.p
-	p.SetDuplex(Full)
+	p.EditConfig(TwoWire|Tx, ThreeWire|TxRx)
 	p.EnableIRQ(RxNotEmpty | Err)
 	p.StoreWord16(w)
 	if !d.done.Sleep(d.deadline) {
@@ -189,7 +182,7 @@ func (d *Driver) writeReadDMA(out, in uintptr, olen, ilen int, wsize uintptr) (n
 	d.setupDMA(d.txDMA, txdmacfg, 1)
 	d.setupDMA(d.rxDMA, dma.PTM|dma.IncM|dma.FT4, wsize)
 	p := d.p
-	p.SetDuplex(Full)
+	p.EditConfig(TwoWire|Tx, ThreeWire|TxRx)
 	p.EnableDMA(RxNotEmpty | TxEmpty)
 	p.EnableIRQ(Err)
 	for {
@@ -240,7 +233,7 @@ func (d *Driver) writeReadDMA(out, in uintptr, olen, ilen int, wsize uintptr) (n
 func (d *Driver) writeDMA(out uintptr, n int, wsize uintptr, incm dma.Mode) {
 	d.setupDMA(d.txDMA, dma.MTP|incm|dma.FT4, wsize)
 	p := d.p
-	p.SetDuplex(HalfOut) // avoid ErrOverflow
+	p.EditConfig(ThreeWire|TxRx, TwoWire|Tx) // avoid ErrOverflow
 	p.EnableDMA(TxEmpty)
 	p.EnableIRQ(Err)
 	for n > 0 {

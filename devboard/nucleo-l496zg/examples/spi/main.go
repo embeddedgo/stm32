@@ -37,7 +37,7 @@ func main() {
 
 	var buf [40]byte
 	for i := 0; ; i++ {
-		d.WriteStringRead("Hello world !", buf[:])
+		d.WriteStringRead("Hello world!", buf[:])
 		println(string(buf[:]))
 		rtos.Nanosleep(1e9)
 	}

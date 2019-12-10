@@ -35,7 +35,7 @@ func main() {
 	d.SetWordSize(8)
 	d.Enable()
 
-	var buf [16]byte
+	var buf [40]byte
 	for i := 0; ; i++ {
 		d.WriteStringRead("Hello world!", buf[:])
 		println(string(buf[:]))
