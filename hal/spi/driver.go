@@ -97,7 +97,7 @@ func (d *Driver) DMAISR(ch dma.Channel) {
 	ev, err := ch.Status()
 	if ev&dma.Complete != 0 || err&^dma.ErrFIFO != 0 {
 		ch.DisableIRQ(dma.EvAll, dma.ErrAll)
-		ch.Disable()
+		ch.Disable() // required by non-stream DMA (eg. F0,F1,F3,L1,L4)
 		if atomic.AddInt32(&d.dmacnt, -1) == 0 {
 			d.done.Wakeup()
 		}
@@ -166,7 +166,6 @@ func (d *Driver) setupDMA(ch dma.Channel, mode dma.Mode, wordSize uintptr) {
 }
 
 func startDMA(ch dma.Channel, addr uintptr, n int) {
-	ch.Disable() // F1, L4 does not disable channel at the end of transfer.
 	ch.SetAddrM(unsafe.Pointer(addr))
 	ch.SetLen(n)
 	ch.Clear(dma.EvAll, dma.ErrAll)
