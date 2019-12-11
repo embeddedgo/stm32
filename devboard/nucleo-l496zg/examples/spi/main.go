@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// SPI loop test: wire PB14 and PB15 together.
+// SPI loop test: wire PA6 and PA7 together.
 package main
 
 import (
