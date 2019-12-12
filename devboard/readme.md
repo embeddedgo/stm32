@@ -2,13 +2,15 @@
 
 ### The idea
 
-The idea is to simplyfy the use of popular STM32 development boards.
+The idea is to simplify the use of popular STM32 development boards.
 
-Every board directory contains the `board` package that provides the interface to the peripherals available on the board (for now the support is modest: only LEDs and buttons). The provided interface tries to be simple and uniform accros all development boards with the same or similar peripherals. For example, the `Setup` function allows to configure the whole system for typical usage without going into details about available clock sources and their parameters.
+Every development board directory contains set of packages (in `board` subdirectory) that provides the interface to the peripherals available on the board (for now the support is modest: only LEDs and buttons). The provided interface tries to be simple and uniform accros all development boards with the same or similar peripherals.
 
-The _examples_ subdirectory as the name suggests includes sample code, but also scripts and configuration that help to build, load and debug.
+The `board/init` package when imported configures the whole system for typical usage. If you use any other package from `board` directory the `board/init` is imported implicitly to ensure the board is properly configured..
 
-There is also _doc_ subdirectory that contain useful information and other resources about this development board.
+The *examples* subdirectory as the name suggests includes sample code, but also scripts and configuration that help to build, load and debug.
+
+There is also *doc* subdirectory that contain useful information and other resources about this development board.
 
 ### Supported boards
 
