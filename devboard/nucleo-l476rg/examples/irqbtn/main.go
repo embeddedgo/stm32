@@ -63,5 +63,6 @@ func EXTI15_10_Handler() {
 	p.ClearPending()
 	if pin := buttons.User.Pin(); p>>pin.Index()&1 != 0 {
 		note.Wakeup()
+		println("user pin IRQ") // can print if prio <= IntPrioLow
 	}
 }
