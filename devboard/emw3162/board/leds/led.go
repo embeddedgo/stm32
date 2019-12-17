@@ -55,5 +55,6 @@ func init() {
 	cfg := &gpio.Config{Mode: gpio.Out, Speed: gpio.Low}
 	D1.Pin().Setup(cfg)
 	cfg.Driver = gpio.OpenDrain
+	D2.SetOff()
 	D2.Pin().Setup(cfg)
 }
