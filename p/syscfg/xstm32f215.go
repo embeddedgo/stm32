@@ -20,6 +20,8 @@ type Periph struct {
 	CMPCR  RCMPCR
 }
 
+func SYSCFG() *Periph { return (*Periph)(unsafe.Pointer(uintptr(mmap.SYSCFG_BASE))) }
+
 func (p *Periph) BaseAddr() uintptr {
 	return uintptr(unsafe.Pointer(p))
 }
@@ -27,8 +29,6 @@ func (p *Periph) BaseAddr() uintptr {
 func (p *Periph) Bus() bus.Bus {
 	return bus.APB2
 }
-
-func SYSCFG() *Periph { return (*Periph)(unsafe.Pointer(uintptr(mmap.SYSCFG_BASE))) }
 
 type MEMRM uint32
 

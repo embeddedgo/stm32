@@ -15,6 +15,7 @@
 //  0x014 32  MACMIIDR   Ethernet MAC MII data register
 //  0x018 32  MACFCR     Ethernet MAC flow control register
 //  0x01C 32  MACVLANTR  Ethernet MAC VLAN tag register
+//  0x028 32  MACRWUFFR  Ethernet MAC remote wakeup frame filter register
 //  0x02C 32  MACPMTCSR  Ethernet MAC PMT control and status register
 //  0x034 32  MACDBGR    Ethernet MAC debug register
 //  0x038 32  MACSR      Ethernet MAC interrupt status register
@@ -27,7 +28,6 @@
 //  0x054 32  MACA2LR    Ethernet MAC address 2 low register
 //  0x058 32  MACA3HR    Ethernet MAC address 3 high register
 //  0x05C 32  MACA3LR    Ethernet MAC address 3 low register
-//  0x028 32  MACRWUFFR  Ethernet MAC remote wakeup frame filter register
 // Import:
 //  github.com/embeddedgo/stm32/p/mmap
 package ethernet_mac

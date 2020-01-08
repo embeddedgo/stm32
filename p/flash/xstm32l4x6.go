@@ -33,6 +33,8 @@ type Periph struct {
 	WRP2BR   RWRP2BR
 }
 
+func FLASH() *Periph { return (*Periph)(unsafe.Pointer(uintptr(mmap.FLASH_BASE))) }
+
 func (p *Periph) BaseAddr() uintptr {
 	return uintptr(unsafe.Pointer(p))
 }
@@ -40,8 +42,6 @@ func (p *Periph) BaseAddr() uintptr {
 func (p *Periph) Bus() bus.Bus {
 	return bus.AHB1
 }
-
-func FLASH() *Periph { return (*Periph)(unsafe.Pointer(uintptr(mmap.FLASH_BASE))) }
 
 type ACR uint32
 

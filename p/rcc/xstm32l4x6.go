@@ -52,11 +52,11 @@ type Periph struct {
 	CSR         RCSR
 }
 
+func RCC() *Periph { return (*Periph)(unsafe.Pointer(uintptr(mmap.RCC_BASE))) }
+
 func (p *Periph) BaseAddr() uintptr {
 	return uintptr(unsafe.Pointer(p))
 }
-
-func RCC() *Periph { return (*Periph)(unsafe.Pointer(uintptr(mmap.RCC_BASE))) }
 
 type CR uint32
 

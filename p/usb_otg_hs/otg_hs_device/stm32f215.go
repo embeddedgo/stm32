@@ -23,55 +23,55 @@
 //  0x040 32  OTG_HS_DIEPEACHMSK1  OTG_HS device each in endpoint-1 interrupt register
 //  0x080 32  OTG_HS_DOEPEACHMSK1  OTG_HS device each OUT endpoint-1 interrupt register
 //  0x100 32  OTG_HS_DIEPCTL0      OTG device endpoint-0 control register
-//  0x120 32  OTG_HS_DIEPCTL1      OTG device endpoint-1 control register
-//  0x140 32  OTG_HS_DIEPCTL2      OTG device endpoint-2 control register
-//  0x160 32  OTG_HS_DIEPCTL3      OTG device endpoint-3 control register
-//  0x180 32  OTG_HS_DIEPCTL4      OTG device endpoint-4 control register
-//  0x1A0 32  OTG_HS_DIEPCTL5      OTG device endpoint-5 control register
-//  0x1C0 32  OTG_HS_DIEPCTL6      OTG device endpoint-6 control register
-//  0x1E0 32  OTG_HS_DIEPCTL7      OTG device endpoint-7 control register
 //  0x108 32  OTG_HS_DIEPINT0      OTG device endpoint-0 interrupt register
-//  0x128 32  OTG_HS_DIEPINT1      OTG device endpoint-1 interrupt register
-//  0x148 32  OTG_HS_DIEPINT2      OTG device endpoint-2 interrupt register
-//  0x168 32  OTG_HS_DIEPINT3      OTG device endpoint-3 interrupt register
-//  0x188 32  OTG_HS_DIEPINT4      OTG device endpoint-4 interrupt register
-//  0x1A8 32  OTG_HS_DIEPINT5      OTG device endpoint-5 interrupt register
-//  0x1C8 32  OTG_HS_DIEPINT6      OTG device endpoint-6 interrupt register
-//  0x1E8 32  OTG_HS_DIEPINT7      OTG device endpoint-7 interrupt register
 //  0x110 32  OTG_HS_DIEPTSIZ0     OTG_HS device IN endpoint 0 transfer size register
 //  0x114 32  OTG_HS_DIEPDMA1      OTG_HS device endpoint-1 DMA address register
-//  0x134 32  OTG_HS_DIEPDMA2      OTG_HS device endpoint-2 DMA address register
-//  0x154 32  OTG_HS_DIEPDMA3      OTG_HS device endpoint-3 DMA address register
-//  0x174 32  OTG_HS_DIEPDMA4      OTG_HS device endpoint-4 DMA address register
-//  0x194 32  OTG_HS_DIEPDMA5      OTG_HS device endpoint-5 DMA address register
 //  0x118 32  OTG_HS_DTXFSTS0      OTG_HS device IN endpoint transmit FIFO status register
-//  0x138 32  OTG_HS_DTXFSTS1      OTG_HS device IN endpoint transmit FIFO status register
-//  0x158 32  OTG_HS_DTXFSTS2      OTG_HS device IN endpoint transmit FIFO status register
-//  0x178 32  OTG_HS_DTXFSTS3      OTG_HS device IN endpoint transmit FIFO status register
-//  0x198 32  OTG_HS_DTXFSTS4      OTG_HS device IN endpoint transmit FIFO status register
-//  0x1B8 32  OTG_HS_DTXFSTS5      OTG_HS device IN endpoint transmit FIFO status register
+//  0x120 32  OTG_HS_DIEPCTL1      OTG device endpoint-1 control register
+//  0x128 32  OTG_HS_DIEPINT1      OTG device endpoint-1 interrupt register
 //  0x130 32  OTG_HS_DIEPTSIZ1     OTG_HS device endpoint transfer size register
+//  0x134 32  OTG_HS_DIEPDMA2      OTG_HS device endpoint-2 DMA address register
+//  0x138 32  OTG_HS_DTXFSTS1      OTG_HS device IN endpoint transmit FIFO status register
+//  0x140 32  OTG_HS_DIEPCTL2      OTG device endpoint-2 control register
+//  0x148 32  OTG_HS_DIEPINT2      OTG device endpoint-2 interrupt register
 //  0x150 32  OTG_HS_DIEPTSIZ2     OTG_HS device endpoint transfer size register
+//  0x154 32  OTG_HS_DIEPDMA3      OTG_HS device endpoint-3 DMA address register
+//  0x158 32  OTG_HS_DTXFSTS2      OTG_HS device IN endpoint transmit FIFO status register
+//  0x160 32  OTG_HS_DIEPCTL3      OTG device endpoint-3 control register
+//  0x168 32  OTG_HS_DIEPINT3      OTG device endpoint-3 interrupt register
 //  0x170 32  OTG_HS_DIEPTSIZ3     OTG_HS device endpoint transfer size register
+//  0x174 32  OTG_HS_DIEPDMA4      OTG_HS device endpoint-4 DMA address register
+//  0x178 32  OTG_HS_DTXFSTS3      OTG_HS device IN endpoint transmit FIFO status register
+//  0x180 32  OTG_HS_DIEPCTL4      OTG device endpoint-4 control register
+//  0x188 32  OTG_HS_DIEPINT4      OTG device endpoint-4 interrupt register
 //  0x190 32  OTG_HS_DIEPTSIZ4     OTG_HS device endpoint transfer size register
+//  0x194 32  OTG_HS_DIEPDMA5      OTG_HS device endpoint-5 DMA address register
+//  0x198 32  OTG_HS_DTXFSTS4      OTG_HS device IN endpoint transmit FIFO status register
+//  0x1A0 32  OTG_HS_DIEPCTL5      OTG device endpoint-5 control register
+//  0x1A8 32  OTG_HS_DIEPINT5      OTG device endpoint-5 interrupt register
 //  0x1B0 32  OTG_HS_DIEPTSIZ5     OTG_HS device endpoint transfer size register
+//  0x1B8 32  OTG_HS_DTXFSTS5      OTG_HS device IN endpoint transmit FIFO status register
+//  0x1C0 32  OTG_HS_DIEPCTL6      OTG device endpoint-6 control register
+//  0x1C8 32  OTG_HS_DIEPINT6      OTG device endpoint-6 interrupt register
+//  0x1E0 32  OTG_HS_DIEPCTL7      OTG device endpoint-7 control register
+//  0x1E8 32  OTG_HS_DIEPINT7      OTG device endpoint-7 interrupt register
 //  0x300 32  OTG_HS_DOEPCTL0      OTG_HS device control OUT endpoint 0 control register
-//  0x320 32  OTG_HS_DOEPCTL1      OTG device endpoint-1 control register
-//  0x340 32  OTG_HS_DOEPCTL2      OTG device endpoint-2 control register
-//  0x360 32  OTG_HS_DOEPCTL3      OTG device endpoint-3 control register
 //  0x308 32  OTG_HS_DOEPINT0      OTG_HS device endpoint-0 interrupt register
+//  0x310 32  OTG_HS_DOEPTSIZ0     OTG_HS device endpoint-1 transfer size register
+//  0x320 32  OTG_HS_DOEPCTL1      OTG device endpoint-1 control register
 //  0x328 32  OTG_HS_DOEPINT1      OTG_HS device endpoint-1 interrupt register
+//  0x330 32  OTG_HS_DOEPTSIZ1     OTG_HS device endpoint-2 transfer size register
+//  0x340 32  OTG_HS_DOEPCTL2      OTG device endpoint-2 control register
 //  0x348 32  OTG_HS_DOEPINT2      OTG_HS device endpoint-2 interrupt register
+//  0x350 32  OTG_HS_DOEPTSIZ2     OTG_HS device endpoint-3 transfer size register
+//  0x360 32  OTG_HS_DOEPCTL3      OTG device endpoint-3 control register
 //  0x368 32  OTG_HS_DOEPINT3      OTG_HS device endpoint-3 interrupt register
+//  0x370 32  OTG_HS_DOEPTSIZ3     OTG_HS device endpoint-4 transfer size register
 //  0x388 32  OTG_HS_DOEPINT4      OTG_HS device endpoint-4 interrupt register
+//  0x390 32  OTG_HS_DOEPTSIZ4     OTG_HS device endpoint-5 transfer size register
 //  0x3A8 32  OTG_HS_DOEPINT5      OTG_HS device endpoint-5 interrupt register
 //  0x3C8 32  OTG_HS_DOEPINT6      OTG_HS device endpoint-6 interrupt register
 //  0x3E8 32  OTG_HS_DOEPINT7      OTG_HS device endpoint-7 interrupt register
-//  0x310 32  OTG_HS_DOEPTSIZ0     OTG_HS device endpoint-1 transfer size register
-//  0x330 32  OTG_HS_DOEPTSIZ1     OTG_HS device endpoint-2 transfer size register
-//  0x350 32  OTG_HS_DOEPTSIZ2     OTG_HS device endpoint-3 transfer size register
-//  0x370 32  OTG_HS_DOEPTSIZ3     OTG_HS device endpoint-4 transfer size register
-//  0x390 32  OTG_HS_DOEPTSIZ4     OTG_HS device endpoint-5 transfer size register
 // Import:
 //  github.com/embeddedgo/stm32/p/mmap
 package otg_hs_device
@@ -341,230 +341,6 @@ const (
 )
 
 const (
-	MPSIZ          OTG_HS_DIEPCTL1 = 0x7FF << 0 //+ Maximum packet size
-	USBAEP         OTG_HS_DIEPCTL1 = 0x01 << 15 //+ USB active endpoint
-	EONUM_DPID     OTG_HS_DIEPCTL1 = 0x01 << 16 //+ Even/odd frame
-	NAKSTS         OTG_HS_DIEPCTL1 = 0x01 << 17 //+ NAK status
-	EPTYP          OTG_HS_DIEPCTL1 = 0x03 << 18 //+ Endpoint type
-	Stall          OTG_HS_DIEPCTL1 = 0x01 << 21 //+ STALL handshake
-	TXFNUM         OTG_HS_DIEPCTL1 = 0x0F << 22 //+ TxFIFO number
-	CNAK           OTG_HS_DIEPCTL1 = 0x01 << 26 //+ Clear NAK
-	SNAK           OTG_HS_DIEPCTL1 = 0x01 << 27 //+ Set NAK
-	SD0PID_SEVNFRM OTG_HS_DIEPCTL1 = 0x01 << 28 //+ Set DATA0 PID
-	SODDFRM        OTG_HS_DIEPCTL1 = 0x01 << 29 //+ Set odd frame
-	EPDIS          OTG_HS_DIEPCTL1 = 0x01 << 30 //+ Endpoint disable
-	EPENA          OTG_HS_DIEPCTL1 = 0x01 << 31 //+ Endpoint enable
-)
-
-const (
-	MPSIZn          = 0
-	USBAEPn         = 15
-	EONUM_DPIDn     = 16
-	NAKSTSn         = 17
-	EPTYPn          = 18
-	Stalln          = 21
-	TXFNUMn         = 22
-	CNAKn           = 26
-	SNAKn           = 27
-	SD0PID_SEVNFRMn = 28
-	SODDFRMn        = 29
-	EPDISn          = 30
-	EPENAn          = 31
-)
-
-const (
-	MPSIZ          OTG_HS_DIEPCTL2 = 0x7FF << 0 //+ Maximum packet size
-	USBAEP         OTG_HS_DIEPCTL2 = 0x01 << 15 //+ USB active endpoint
-	EONUM_DPID     OTG_HS_DIEPCTL2 = 0x01 << 16 //+ Even/odd frame
-	NAKSTS         OTG_HS_DIEPCTL2 = 0x01 << 17 //+ NAK status
-	EPTYP          OTG_HS_DIEPCTL2 = 0x03 << 18 //+ Endpoint type
-	Stall          OTG_HS_DIEPCTL2 = 0x01 << 21 //+ STALL handshake
-	TXFNUM         OTG_HS_DIEPCTL2 = 0x0F << 22 //+ TxFIFO number
-	CNAK           OTG_HS_DIEPCTL2 = 0x01 << 26 //+ Clear NAK
-	SNAK           OTG_HS_DIEPCTL2 = 0x01 << 27 //+ Set NAK
-	SD0PID_SEVNFRM OTG_HS_DIEPCTL2 = 0x01 << 28 //+ Set DATA0 PID
-	SODDFRM        OTG_HS_DIEPCTL2 = 0x01 << 29 //+ Set odd frame
-	EPDIS          OTG_HS_DIEPCTL2 = 0x01 << 30 //+ Endpoint disable
-	EPENA          OTG_HS_DIEPCTL2 = 0x01 << 31 //+ Endpoint enable
-)
-
-const (
-	MPSIZn          = 0
-	USBAEPn         = 15
-	EONUM_DPIDn     = 16
-	NAKSTSn         = 17
-	EPTYPn          = 18
-	Stalln          = 21
-	TXFNUMn         = 22
-	CNAKn           = 26
-	SNAKn           = 27
-	SD0PID_SEVNFRMn = 28
-	SODDFRMn        = 29
-	EPDISn          = 30
-	EPENAn          = 31
-)
-
-const (
-	MPSIZ          OTG_HS_DIEPCTL3 = 0x7FF << 0 //+ Maximum packet size
-	USBAEP         OTG_HS_DIEPCTL3 = 0x01 << 15 //+ USB active endpoint
-	EONUM_DPID     OTG_HS_DIEPCTL3 = 0x01 << 16 //+ Even/odd frame
-	NAKSTS         OTG_HS_DIEPCTL3 = 0x01 << 17 //+ NAK status
-	EPTYP          OTG_HS_DIEPCTL3 = 0x03 << 18 //+ Endpoint type
-	Stall          OTG_HS_DIEPCTL3 = 0x01 << 21 //+ STALL handshake
-	TXFNUM         OTG_HS_DIEPCTL3 = 0x0F << 22 //+ TxFIFO number
-	CNAK           OTG_HS_DIEPCTL3 = 0x01 << 26 //+ Clear NAK
-	SNAK           OTG_HS_DIEPCTL3 = 0x01 << 27 //+ Set NAK
-	SD0PID_SEVNFRM OTG_HS_DIEPCTL3 = 0x01 << 28 //+ Set DATA0 PID
-	SODDFRM        OTG_HS_DIEPCTL3 = 0x01 << 29 //+ Set odd frame
-	EPDIS          OTG_HS_DIEPCTL3 = 0x01 << 30 //+ Endpoint disable
-	EPENA          OTG_HS_DIEPCTL3 = 0x01 << 31 //+ Endpoint enable
-)
-
-const (
-	MPSIZn          = 0
-	USBAEPn         = 15
-	EONUM_DPIDn     = 16
-	NAKSTSn         = 17
-	EPTYPn          = 18
-	Stalln          = 21
-	TXFNUMn         = 22
-	CNAKn           = 26
-	SNAKn           = 27
-	SD0PID_SEVNFRMn = 28
-	SODDFRMn        = 29
-	EPDISn          = 30
-	EPENAn          = 31
-)
-
-const (
-	MPSIZ          OTG_HS_DIEPCTL4 = 0x7FF << 0 //+ Maximum packet size
-	USBAEP         OTG_HS_DIEPCTL4 = 0x01 << 15 //+ USB active endpoint
-	EONUM_DPID     OTG_HS_DIEPCTL4 = 0x01 << 16 //+ Even/odd frame
-	NAKSTS         OTG_HS_DIEPCTL4 = 0x01 << 17 //+ NAK status
-	EPTYP          OTG_HS_DIEPCTL4 = 0x03 << 18 //+ Endpoint type
-	Stall          OTG_HS_DIEPCTL4 = 0x01 << 21 //+ STALL handshake
-	TXFNUM         OTG_HS_DIEPCTL4 = 0x0F << 22 //+ TxFIFO number
-	CNAK           OTG_HS_DIEPCTL4 = 0x01 << 26 //+ Clear NAK
-	SNAK           OTG_HS_DIEPCTL4 = 0x01 << 27 //+ Set NAK
-	SD0PID_SEVNFRM OTG_HS_DIEPCTL4 = 0x01 << 28 //+ Set DATA0 PID
-	SODDFRM        OTG_HS_DIEPCTL4 = 0x01 << 29 //+ Set odd frame
-	EPDIS          OTG_HS_DIEPCTL4 = 0x01 << 30 //+ Endpoint disable
-	EPENA          OTG_HS_DIEPCTL4 = 0x01 << 31 //+ Endpoint enable
-)
-
-const (
-	MPSIZn          = 0
-	USBAEPn         = 15
-	EONUM_DPIDn     = 16
-	NAKSTSn         = 17
-	EPTYPn          = 18
-	Stalln          = 21
-	TXFNUMn         = 22
-	CNAKn           = 26
-	SNAKn           = 27
-	SD0PID_SEVNFRMn = 28
-	SODDFRMn        = 29
-	EPDISn          = 30
-	EPENAn          = 31
-)
-
-const (
-	MPSIZ          OTG_HS_DIEPCTL5 = 0x7FF << 0 //+ Maximum packet size
-	USBAEP         OTG_HS_DIEPCTL5 = 0x01 << 15 //+ USB active endpoint
-	EONUM_DPID     OTG_HS_DIEPCTL5 = 0x01 << 16 //+ Even/odd frame
-	NAKSTS         OTG_HS_DIEPCTL5 = 0x01 << 17 //+ NAK status
-	EPTYP          OTG_HS_DIEPCTL5 = 0x03 << 18 //+ Endpoint type
-	Stall          OTG_HS_DIEPCTL5 = 0x01 << 21 //+ STALL handshake
-	TXFNUM         OTG_HS_DIEPCTL5 = 0x0F << 22 //+ TxFIFO number
-	CNAK           OTG_HS_DIEPCTL5 = 0x01 << 26 //+ Clear NAK
-	SNAK           OTG_HS_DIEPCTL5 = 0x01 << 27 //+ Set NAK
-	SD0PID_SEVNFRM OTG_HS_DIEPCTL5 = 0x01 << 28 //+ Set DATA0 PID
-	SODDFRM        OTG_HS_DIEPCTL5 = 0x01 << 29 //+ Set odd frame
-	EPDIS          OTG_HS_DIEPCTL5 = 0x01 << 30 //+ Endpoint disable
-	EPENA          OTG_HS_DIEPCTL5 = 0x01 << 31 //+ Endpoint enable
-)
-
-const (
-	MPSIZn          = 0
-	USBAEPn         = 15
-	EONUM_DPIDn     = 16
-	NAKSTSn         = 17
-	EPTYPn          = 18
-	Stalln          = 21
-	TXFNUMn         = 22
-	CNAKn           = 26
-	SNAKn           = 27
-	SD0PID_SEVNFRMn = 28
-	SODDFRMn        = 29
-	EPDISn          = 30
-	EPENAn          = 31
-)
-
-const (
-	MPSIZ          OTG_HS_DIEPCTL6 = 0x7FF << 0 //+ Maximum packet size
-	USBAEP         OTG_HS_DIEPCTL6 = 0x01 << 15 //+ USB active endpoint
-	EONUM_DPID     OTG_HS_DIEPCTL6 = 0x01 << 16 //+ Even/odd frame
-	NAKSTS         OTG_HS_DIEPCTL6 = 0x01 << 17 //+ NAK status
-	EPTYP          OTG_HS_DIEPCTL6 = 0x03 << 18 //+ Endpoint type
-	Stall          OTG_HS_DIEPCTL6 = 0x01 << 21 //+ STALL handshake
-	TXFNUM         OTG_HS_DIEPCTL6 = 0x0F << 22 //+ TxFIFO number
-	CNAK           OTG_HS_DIEPCTL6 = 0x01 << 26 //+ Clear NAK
-	SNAK           OTG_HS_DIEPCTL6 = 0x01 << 27 //+ Set NAK
-	SD0PID_SEVNFRM OTG_HS_DIEPCTL6 = 0x01 << 28 //+ Set DATA0 PID
-	SODDFRM        OTG_HS_DIEPCTL6 = 0x01 << 29 //+ Set odd frame
-	EPDIS          OTG_HS_DIEPCTL6 = 0x01 << 30 //+ Endpoint disable
-	EPENA          OTG_HS_DIEPCTL6 = 0x01 << 31 //+ Endpoint enable
-)
-
-const (
-	MPSIZn          = 0
-	USBAEPn         = 15
-	EONUM_DPIDn     = 16
-	NAKSTSn         = 17
-	EPTYPn          = 18
-	Stalln          = 21
-	TXFNUMn         = 22
-	CNAKn           = 26
-	SNAKn           = 27
-	SD0PID_SEVNFRMn = 28
-	SODDFRMn        = 29
-	EPDISn          = 30
-	EPENAn          = 31
-)
-
-const (
-	MPSIZ          OTG_HS_DIEPCTL7 = 0x7FF << 0 //+ Maximum packet size
-	USBAEP         OTG_HS_DIEPCTL7 = 0x01 << 15 //+ USB active endpoint
-	EONUM_DPID     OTG_HS_DIEPCTL7 = 0x01 << 16 //+ Even/odd frame
-	NAKSTS         OTG_HS_DIEPCTL7 = 0x01 << 17 //+ NAK status
-	EPTYP          OTG_HS_DIEPCTL7 = 0x03 << 18 //+ Endpoint type
-	Stall          OTG_HS_DIEPCTL7 = 0x01 << 21 //+ STALL handshake
-	TXFNUM         OTG_HS_DIEPCTL7 = 0x0F << 22 //+ TxFIFO number
-	CNAK           OTG_HS_DIEPCTL7 = 0x01 << 26 //+ Clear NAK
-	SNAK           OTG_HS_DIEPCTL7 = 0x01 << 27 //+ Set NAK
-	SD0PID_SEVNFRM OTG_HS_DIEPCTL7 = 0x01 << 28 //+ Set DATA0 PID
-	SODDFRM        OTG_HS_DIEPCTL7 = 0x01 << 29 //+ Set odd frame
-	EPDIS          OTG_HS_DIEPCTL7 = 0x01 << 30 //+ Endpoint disable
-	EPENA          OTG_HS_DIEPCTL7 = 0x01 << 31 //+ Endpoint enable
-)
-
-const (
-	MPSIZn          = 0
-	USBAEPn         = 15
-	EONUM_DPIDn     = 16
-	NAKSTSn         = 17
-	EPTYPn          = 18
-	Stalln          = 21
-	TXFNUMn         = 22
-	CNAKn           = 26
-	SNAKn           = 27
-	SD0PID_SEVNFRMn = 28
-	SODDFRMn        = 29
-	EPDISn          = 30
-	EPENAn          = 31
-)
-
-const (
 	XFRC       OTG_HS_DIEPINT0 = 0x01 << 0  //+ Transfer completed interrupt
 	EPDISD     OTG_HS_DIEPINT0 = 0x01 << 1  //+ Endpoint disabled interrupt
 	TOC        OTG_HS_DIEPINT0 = 0x01 << 3  //+ Timeout condition
@@ -576,202 +352,6 @@ const (
 	PKTDRPSTS  OTG_HS_DIEPINT0 = 0x01 << 11 //+ Packet dropped status
 	BERR       OTG_HS_DIEPINT0 = 0x01 << 12 //+ Babble error interrupt
 	NAK        OTG_HS_DIEPINT0 = 0x01 << 13 //+ NAK interrupt
-)
-
-const (
-	XFRCn       = 0
-	EPDISDn     = 1
-	TOCn        = 3
-	ITTXFEn     = 4
-	INEPNEn     = 6
-	TXFEn       = 7
-	TXFIFOUDRNn = 8
-	BNAn        = 9
-	PKTDRPSTSn  = 11
-	BERRn       = 12
-	NAKn        = 13
-)
-
-const (
-	XFRC       OTG_HS_DIEPINT1 = 0x01 << 0  //+ Transfer completed interrupt
-	EPDISD     OTG_HS_DIEPINT1 = 0x01 << 1  //+ Endpoint disabled interrupt
-	TOC        OTG_HS_DIEPINT1 = 0x01 << 3  //+ Timeout condition
-	ITTXFE     OTG_HS_DIEPINT1 = 0x01 << 4  //+ IN token received when TxFIFO is empty
-	INEPNE     OTG_HS_DIEPINT1 = 0x01 << 6  //+ IN endpoint NAK effective
-	TXFE       OTG_HS_DIEPINT1 = 0x01 << 7  //+ Transmit FIFO empty
-	TXFIFOUDRN OTG_HS_DIEPINT1 = 0x01 << 8  //+ Transmit Fifo Underrun
-	BNA        OTG_HS_DIEPINT1 = 0x01 << 9  //+ Buffer not available interrupt
-	PKTDRPSTS  OTG_HS_DIEPINT1 = 0x01 << 11 //+ Packet dropped status
-	BERR       OTG_HS_DIEPINT1 = 0x01 << 12 //+ Babble error interrupt
-	NAK        OTG_HS_DIEPINT1 = 0x01 << 13 //+ NAK interrupt
-)
-
-const (
-	XFRCn       = 0
-	EPDISDn     = 1
-	TOCn        = 3
-	ITTXFEn     = 4
-	INEPNEn     = 6
-	TXFEn       = 7
-	TXFIFOUDRNn = 8
-	BNAn        = 9
-	PKTDRPSTSn  = 11
-	BERRn       = 12
-	NAKn        = 13
-)
-
-const (
-	XFRC       OTG_HS_DIEPINT2 = 0x01 << 0  //+ Transfer completed interrupt
-	EPDISD     OTG_HS_DIEPINT2 = 0x01 << 1  //+ Endpoint disabled interrupt
-	TOC        OTG_HS_DIEPINT2 = 0x01 << 3  //+ Timeout condition
-	ITTXFE     OTG_HS_DIEPINT2 = 0x01 << 4  //+ IN token received when TxFIFO is empty
-	INEPNE     OTG_HS_DIEPINT2 = 0x01 << 6  //+ IN endpoint NAK effective
-	TXFE       OTG_HS_DIEPINT2 = 0x01 << 7  //+ Transmit FIFO empty
-	TXFIFOUDRN OTG_HS_DIEPINT2 = 0x01 << 8  //+ Transmit Fifo Underrun
-	BNA        OTG_HS_DIEPINT2 = 0x01 << 9  //+ Buffer not available interrupt
-	PKTDRPSTS  OTG_HS_DIEPINT2 = 0x01 << 11 //+ Packet dropped status
-	BERR       OTG_HS_DIEPINT2 = 0x01 << 12 //+ Babble error interrupt
-	NAK        OTG_HS_DIEPINT2 = 0x01 << 13 //+ NAK interrupt
-)
-
-const (
-	XFRCn       = 0
-	EPDISDn     = 1
-	TOCn        = 3
-	ITTXFEn     = 4
-	INEPNEn     = 6
-	TXFEn       = 7
-	TXFIFOUDRNn = 8
-	BNAn        = 9
-	PKTDRPSTSn  = 11
-	BERRn       = 12
-	NAKn        = 13
-)
-
-const (
-	XFRC       OTG_HS_DIEPINT3 = 0x01 << 0  //+ Transfer completed interrupt
-	EPDISD     OTG_HS_DIEPINT3 = 0x01 << 1  //+ Endpoint disabled interrupt
-	TOC        OTG_HS_DIEPINT3 = 0x01 << 3  //+ Timeout condition
-	ITTXFE     OTG_HS_DIEPINT3 = 0x01 << 4  //+ IN token received when TxFIFO is empty
-	INEPNE     OTG_HS_DIEPINT3 = 0x01 << 6  //+ IN endpoint NAK effective
-	TXFE       OTG_HS_DIEPINT3 = 0x01 << 7  //+ Transmit FIFO empty
-	TXFIFOUDRN OTG_HS_DIEPINT3 = 0x01 << 8  //+ Transmit Fifo Underrun
-	BNA        OTG_HS_DIEPINT3 = 0x01 << 9  //+ Buffer not available interrupt
-	PKTDRPSTS  OTG_HS_DIEPINT3 = 0x01 << 11 //+ Packet dropped status
-	BERR       OTG_HS_DIEPINT3 = 0x01 << 12 //+ Babble error interrupt
-	NAK        OTG_HS_DIEPINT3 = 0x01 << 13 //+ NAK interrupt
-)
-
-const (
-	XFRCn       = 0
-	EPDISDn     = 1
-	TOCn        = 3
-	ITTXFEn     = 4
-	INEPNEn     = 6
-	TXFEn       = 7
-	TXFIFOUDRNn = 8
-	BNAn        = 9
-	PKTDRPSTSn  = 11
-	BERRn       = 12
-	NAKn        = 13
-)
-
-const (
-	XFRC       OTG_HS_DIEPINT4 = 0x01 << 0  //+ Transfer completed interrupt
-	EPDISD     OTG_HS_DIEPINT4 = 0x01 << 1  //+ Endpoint disabled interrupt
-	TOC        OTG_HS_DIEPINT4 = 0x01 << 3  //+ Timeout condition
-	ITTXFE     OTG_HS_DIEPINT4 = 0x01 << 4  //+ IN token received when TxFIFO is empty
-	INEPNE     OTG_HS_DIEPINT4 = 0x01 << 6  //+ IN endpoint NAK effective
-	TXFE       OTG_HS_DIEPINT4 = 0x01 << 7  //+ Transmit FIFO empty
-	TXFIFOUDRN OTG_HS_DIEPINT4 = 0x01 << 8  //+ Transmit Fifo Underrun
-	BNA        OTG_HS_DIEPINT4 = 0x01 << 9  //+ Buffer not available interrupt
-	PKTDRPSTS  OTG_HS_DIEPINT4 = 0x01 << 11 //+ Packet dropped status
-	BERR       OTG_HS_DIEPINT4 = 0x01 << 12 //+ Babble error interrupt
-	NAK        OTG_HS_DIEPINT4 = 0x01 << 13 //+ NAK interrupt
-)
-
-const (
-	XFRCn       = 0
-	EPDISDn     = 1
-	TOCn        = 3
-	ITTXFEn     = 4
-	INEPNEn     = 6
-	TXFEn       = 7
-	TXFIFOUDRNn = 8
-	BNAn        = 9
-	PKTDRPSTSn  = 11
-	BERRn       = 12
-	NAKn        = 13
-)
-
-const (
-	XFRC       OTG_HS_DIEPINT5 = 0x01 << 0  //+ Transfer completed interrupt
-	EPDISD     OTG_HS_DIEPINT5 = 0x01 << 1  //+ Endpoint disabled interrupt
-	TOC        OTG_HS_DIEPINT5 = 0x01 << 3  //+ Timeout condition
-	ITTXFE     OTG_HS_DIEPINT5 = 0x01 << 4  //+ IN token received when TxFIFO is empty
-	INEPNE     OTG_HS_DIEPINT5 = 0x01 << 6  //+ IN endpoint NAK effective
-	TXFE       OTG_HS_DIEPINT5 = 0x01 << 7  //+ Transmit FIFO empty
-	TXFIFOUDRN OTG_HS_DIEPINT5 = 0x01 << 8  //+ Transmit Fifo Underrun
-	BNA        OTG_HS_DIEPINT5 = 0x01 << 9  //+ Buffer not available interrupt
-	PKTDRPSTS  OTG_HS_DIEPINT5 = 0x01 << 11 //+ Packet dropped status
-	BERR       OTG_HS_DIEPINT5 = 0x01 << 12 //+ Babble error interrupt
-	NAK        OTG_HS_DIEPINT5 = 0x01 << 13 //+ NAK interrupt
-)
-
-const (
-	XFRCn       = 0
-	EPDISDn     = 1
-	TOCn        = 3
-	ITTXFEn     = 4
-	INEPNEn     = 6
-	TXFEn       = 7
-	TXFIFOUDRNn = 8
-	BNAn        = 9
-	PKTDRPSTSn  = 11
-	BERRn       = 12
-	NAKn        = 13
-)
-
-const (
-	XFRC       OTG_HS_DIEPINT6 = 0x01 << 0  //+ Transfer completed interrupt
-	EPDISD     OTG_HS_DIEPINT6 = 0x01 << 1  //+ Endpoint disabled interrupt
-	TOC        OTG_HS_DIEPINT6 = 0x01 << 3  //+ Timeout condition
-	ITTXFE     OTG_HS_DIEPINT6 = 0x01 << 4  //+ IN token received when TxFIFO is empty
-	INEPNE     OTG_HS_DIEPINT6 = 0x01 << 6  //+ IN endpoint NAK effective
-	TXFE       OTG_HS_DIEPINT6 = 0x01 << 7  //+ Transmit FIFO empty
-	TXFIFOUDRN OTG_HS_DIEPINT6 = 0x01 << 8  //+ Transmit Fifo Underrun
-	BNA        OTG_HS_DIEPINT6 = 0x01 << 9  //+ Buffer not available interrupt
-	PKTDRPSTS  OTG_HS_DIEPINT6 = 0x01 << 11 //+ Packet dropped status
-	BERR       OTG_HS_DIEPINT6 = 0x01 << 12 //+ Babble error interrupt
-	NAK        OTG_HS_DIEPINT6 = 0x01 << 13 //+ NAK interrupt
-)
-
-const (
-	XFRCn       = 0
-	EPDISDn     = 1
-	TOCn        = 3
-	ITTXFEn     = 4
-	INEPNEn     = 6
-	TXFEn       = 7
-	TXFIFOUDRNn = 8
-	BNAn        = 9
-	PKTDRPSTSn  = 11
-	BERRn       = 12
-	NAKn        = 13
-)
-
-const (
-	XFRC       OTG_HS_DIEPINT7 = 0x01 << 0  //+ Transfer completed interrupt
-	EPDISD     OTG_HS_DIEPINT7 = 0x01 << 1  //+ Endpoint disabled interrupt
-	TOC        OTG_HS_DIEPINT7 = 0x01 << 3  //+ Timeout condition
-	ITTXFE     OTG_HS_DIEPINT7 = 0x01 << 4  //+ IN token received when TxFIFO is empty
-	INEPNE     OTG_HS_DIEPINT7 = 0x01 << 6  //+ IN endpoint NAK effective
-	TXFE       OTG_HS_DIEPINT7 = 0x01 << 7  //+ Transmit FIFO empty
-	TXFIFOUDRN OTG_HS_DIEPINT7 = 0x01 << 8  //+ Transmit Fifo Underrun
-	BNA        OTG_HS_DIEPINT7 = 0x01 << 9  //+ Buffer not available interrupt
-	PKTDRPSTS  OTG_HS_DIEPINT7 = 0x01 << 11 //+ Packet dropped status
-	BERR       OTG_HS_DIEPINT7 = 0x01 << 12 //+ Babble error interrupt
-	NAK        OTG_HS_DIEPINT7 = 0x01 << 13 //+ NAK interrupt
 )
 
 const (
@@ -807,38 +387,6 @@ const (
 )
 
 const (
-	DMAADDR OTG_HS_DIEPDMA2 = 0xFFFFFFFF << 0 //+ DMA address
-)
-
-const (
-	DMAADDRn = 0
-)
-
-const (
-	DMAADDR OTG_HS_DIEPDMA3 = 0xFFFFFFFF << 0 //+ DMA address
-)
-
-const (
-	DMAADDRn = 0
-)
-
-const (
-	DMAADDR OTG_HS_DIEPDMA4 = 0xFFFFFFFF << 0 //+ DMA address
-)
-
-const (
-	DMAADDRn = 0
-)
-
-const (
-	DMAADDR OTG_HS_DIEPDMA5 = 0xFFFFFFFF << 0 //+ DMA address
-)
-
-const (
-	DMAADDRn = 0
-)
-
-const (
 	INEPTFSAV OTG_HS_DTXFSTS0 = 0xFFFF << 0 //+ IN endpoint TxFIFO space avail
 )
 
@@ -847,43 +395,63 @@ const (
 )
 
 const (
-	INEPTFSAV OTG_HS_DTXFSTS1 = 0xFFFF << 0 //+ IN endpoint TxFIFO space avail
+	MPSIZ          OTG_HS_DIEPCTL1 = 0x7FF << 0 //+ Maximum packet size
+	USBAEP         OTG_HS_DIEPCTL1 = 0x01 << 15 //+ USB active endpoint
+	EONUM_DPID     OTG_HS_DIEPCTL1 = 0x01 << 16 //+ Even/odd frame
+	NAKSTS         OTG_HS_DIEPCTL1 = 0x01 << 17 //+ NAK status
+	EPTYP          OTG_HS_DIEPCTL1 = 0x03 << 18 //+ Endpoint type
+	Stall          OTG_HS_DIEPCTL1 = 0x01 << 21 //+ STALL handshake
+	TXFNUM         OTG_HS_DIEPCTL1 = 0x0F << 22 //+ TxFIFO number
+	CNAK           OTG_HS_DIEPCTL1 = 0x01 << 26 //+ Clear NAK
+	SNAK           OTG_HS_DIEPCTL1 = 0x01 << 27 //+ Set NAK
+	SD0PID_SEVNFRM OTG_HS_DIEPCTL1 = 0x01 << 28 //+ Set DATA0 PID
+	SODDFRM        OTG_HS_DIEPCTL1 = 0x01 << 29 //+ Set odd frame
+	EPDIS          OTG_HS_DIEPCTL1 = 0x01 << 30 //+ Endpoint disable
+	EPENA          OTG_HS_DIEPCTL1 = 0x01 << 31 //+ Endpoint enable
 )
 
 const (
-	INEPTFSAVn = 0
+	MPSIZn          = 0
+	USBAEPn         = 15
+	EONUM_DPIDn     = 16
+	NAKSTSn         = 17
+	EPTYPn          = 18
+	Stalln          = 21
+	TXFNUMn         = 22
+	CNAKn           = 26
+	SNAKn           = 27
+	SD0PID_SEVNFRMn = 28
+	SODDFRMn        = 29
+	EPDISn          = 30
+	EPENAn          = 31
 )
 
 const (
-	INEPTFSAV OTG_HS_DTXFSTS2 = 0xFFFF << 0 //+ IN endpoint TxFIFO space avail
+	XFRC       OTG_HS_DIEPINT1 = 0x01 << 0  //+ Transfer completed interrupt
+	EPDISD     OTG_HS_DIEPINT1 = 0x01 << 1  //+ Endpoint disabled interrupt
+	TOC        OTG_HS_DIEPINT1 = 0x01 << 3  //+ Timeout condition
+	ITTXFE     OTG_HS_DIEPINT1 = 0x01 << 4  //+ IN token received when TxFIFO is empty
+	INEPNE     OTG_HS_DIEPINT1 = 0x01 << 6  //+ IN endpoint NAK effective
+	TXFE       OTG_HS_DIEPINT1 = 0x01 << 7  //+ Transmit FIFO empty
+	TXFIFOUDRN OTG_HS_DIEPINT1 = 0x01 << 8  //+ Transmit Fifo Underrun
+	BNA        OTG_HS_DIEPINT1 = 0x01 << 9  //+ Buffer not available interrupt
+	PKTDRPSTS  OTG_HS_DIEPINT1 = 0x01 << 11 //+ Packet dropped status
+	BERR       OTG_HS_DIEPINT1 = 0x01 << 12 //+ Babble error interrupt
+	NAK        OTG_HS_DIEPINT1 = 0x01 << 13 //+ NAK interrupt
 )
 
 const (
-	INEPTFSAVn = 0
-)
-
-const (
-	INEPTFSAV OTG_HS_DTXFSTS3 = 0xFFFF << 0 //+ IN endpoint TxFIFO space avail
-)
-
-const (
-	INEPTFSAVn = 0
-)
-
-const (
-	INEPTFSAV OTG_HS_DTXFSTS4 = 0xFFFF << 0 //+ IN endpoint TxFIFO space avail
-)
-
-const (
-	INEPTFSAVn = 0
-)
-
-const (
-	INEPTFSAV OTG_HS_DTXFSTS5 = 0xFFFF << 0 //+ IN endpoint TxFIFO space avail
-)
-
-const (
-	INEPTFSAVn = 0
+	XFRCn       = 0
+	EPDISDn     = 1
+	TOCn        = 3
+	ITTXFEn     = 4
+	INEPNEn     = 6
+	TXFEn       = 7
+	TXFIFOUDRNn = 8
+	BNAn        = 9
+	PKTDRPSTSn  = 11
+	BERRn       = 12
+	NAKn        = 13
 )
 
 const (
@@ -899,6 +467,82 @@ const (
 )
 
 const (
+	DMAADDR OTG_HS_DIEPDMA2 = 0xFFFFFFFF << 0 //+ DMA address
+)
+
+const (
+	DMAADDRn = 0
+)
+
+const (
+	INEPTFSAV OTG_HS_DTXFSTS1 = 0xFFFF << 0 //+ IN endpoint TxFIFO space avail
+)
+
+const (
+	INEPTFSAVn = 0
+)
+
+const (
+	MPSIZ          OTG_HS_DIEPCTL2 = 0x7FF << 0 //+ Maximum packet size
+	USBAEP         OTG_HS_DIEPCTL2 = 0x01 << 15 //+ USB active endpoint
+	EONUM_DPID     OTG_HS_DIEPCTL2 = 0x01 << 16 //+ Even/odd frame
+	NAKSTS         OTG_HS_DIEPCTL2 = 0x01 << 17 //+ NAK status
+	EPTYP          OTG_HS_DIEPCTL2 = 0x03 << 18 //+ Endpoint type
+	Stall          OTG_HS_DIEPCTL2 = 0x01 << 21 //+ STALL handshake
+	TXFNUM         OTG_HS_DIEPCTL2 = 0x0F << 22 //+ TxFIFO number
+	CNAK           OTG_HS_DIEPCTL2 = 0x01 << 26 //+ Clear NAK
+	SNAK           OTG_HS_DIEPCTL2 = 0x01 << 27 //+ Set NAK
+	SD0PID_SEVNFRM OTG_HS_DIEPCTL2 = 0x01 << 28 //+ Set DATA0 PID
+	SODDFRM        OTG_HS_DIEPCTL2 = 0x01 << 29 //+ Set odd frame
+	EPDIS          OTG_HS_DIEPCTL2 = 0x01 << 30 //+ Endpoint disable
+	EPENA          OTG_HS_DIEPCTL2 = 0x01 << 31 //+ Endpoint enable
+)
+
+const (
+	MPSIZn          = 0
+	USBAEPn         = 15
+	EONUM_DPIDn     = 16
+	NAKSTSn         = 17
+	EPTYPn          = 18
+	Stalln          = 21
+	TXFNUMn         = 22
+	CNAKn           = 26
+	SNAKn           = 27
+	SD0PID_SEVNFRMn = 28
+	SODDFRMn        = 29
+	EPDISn          = 30
+	EPENAn          = 31
+)
+
+const (
+	XFRC       OTG_HS_DIEPINT2 = 0x01 << 0  //+ Transfer completed interrupt
+	EPDISD     OTG_HS_DIEPINT2 = 0x01 << 1  //+ Endpoint disabled interrupt
+	TOC        OTG_HS_DIEPINT2 = 0x01 << 3  //+ Timeout condition
+	ITTXFE     OTG_HS_DIEPINT2 = 0x01 << 4  //+ IN token received when TxFIFO is empty
+	INEPNE     OTG_HS_DIEPINT2 = 0x01 << 6  //+ IN endpoint NAK effective
+	TXFE       OTG_HS_DIEPINT2 = 0x01 << 7  //+ Transmit FIFO empty
+	TXFIFOUDRN OTG_HS_DIEPINT2 = 0x01 << 8  //+ Transmit Fifo Underrun
+	BNA        OTG_HS_DIEPINT2 = 0x01 << 9  //+ Buffer not available interrupt
+	PKTDRPSTS  OTG_HS_DIEPINT2 = 0x01 << 11 //+ Packet dropped status
+	BERR       OTG_HS_DIEPINT2 = 0x01 << 12 //+ Babble error interrupt
+	NAK        OTG_HS_DIEPINT2 = 0x01 << 13 //+ NAK interrupt
+)
+
+const (
+	XFRCn       = 0
+	EPDISDn     = 1
+	TOCn        = 3
+	ITTXFEn     = 4
+	INEPNEn     = 6
+	TXFEn       = 7
+	TXFIFOUDRNn = 8
+	BNAn        = 9
+	PKTDRPSTSn  = 11
+	BERRn       = 12
+	NAKn        = 13
+)
+
+const (
 	XFRSIZ OTG_HS_DIEPTSIZ2 = 0x7FFFF << 0 //+ Transfer size
 	PKTCNT OTG_HS_DIEPTSIZ2 = 0x3FF << 19  //+ Packet count
 	MCNT   OTG_HS_DIEPTSIZ2 = 0x03 << 29   //+ Multi count
@@ -908,6 +552,82 @@ const (
 	XFRSIZn = 0
 	PKTCNTn = 19
 	MCNTn   = 29
+)
+
+const (
+	DMAADDR OTG_HS_DIEPDMA3 = 0xFFFFFFFF << 0 //+ DMA address
+)
+
+const (
+	DMAADDRn = 0
+)
+
+const (
+	INEPTFSAV OTG_HS_DTXFSTS2 = 0xFFFF << 0 //+ IN endpoint TxFIFO space avail
+)
+
+const (
+	INEPTFSAVn = 0
+)
+
+const (
+	MPSIZ          OTG_HS_DIEPCTL3 = 0x7FF << 0 //+ Maximum packet size
+	USBAEP         OTG_HS_DIEPCTL3 = 0x01 << 15 //+ USB active endpoint
+	EONUM_DPID     OTG_HS_DIEPCTL3 = 0x01 << 16 //+ Even/odd frame
+	NAKSTS         OTG_HS_DIEPCTL3 = 0x01 << 17 //+ NAK status
+	EPTYP          OTG_HS_DIEPCTL3 = 0x03 << 18 //+ Endpoint type
+	Stall          OTG_HS_DIEPCTL3 = 0x01 << 21 //+ STALL handshake
+	TXFNUM         OTG_HS_DIEPCTL3 = 0x0F << 22 //+ TxFIFO number
+	CNAK           OTG_HS_DIEPCTL3 = 0x01 << 26 //+ Clear NAK
+	SNAK           OTG_HS_DIEPCTL3 = 0x01 << 27 //+ Set NAK
+	SD0PID_SEVNFRM OTG_HS_DIEPCTL3 = 0x01 << 28 //+ Set DATA0 PID
+	SODDFRM        OTG_HS_DIEPCTL3 = 0x01 << 29 //+ Set odd frame
+	EPDIS          OTG_HS_DIEPCTL3 = 0x01 << 30 //+ Endpoint disable
+	EPENA          OTG_HS_DIEPCTL3 = 0x01 << 31 //+ Endpoint enable
+)
+
+const (
+	MPSIZn          = 0
+	USBAEPn         = 15
+	EONUM_DPIDn     = 16
+	NAKSTSn         = 17
+	EPTYPn          = 18
+	Stalln          = 21
+	TXFNUMn         = 22
+	CNAKn           = 26
+	SNAKn           = 27
+	SD0PID_SEVNFRMn = 28
+	SODDFRMn        = 29
+	EPDISn          = 30
+	EPENAn          = 31
+)
+
+const (
+	XFRC       OTG_HS_DIEPINT3 = 0x01 << 0  //+ Transfer completed interrupt
+	EPDISD     OTG_HS_DIEPINT3 = 0x01 << 1  //+ Endpoint disabled interrupt
+	TOC        OTG_HS_DIEPINT3 = 0x01 << 3  //+ Timeout condition
+	ITTXFE     OTG_HS_DIEPINT3 = 0x01 << 4  //+ IN token received when TxFIFO is empty
+	INEPNE     OTG_HS_DIEPINT3 = 0x01 << 6  //+ IN endpoint NAK effective
+	TXFE       OTG_HS_DIEPINT3 = 0x01 << 7  //+ Transmit FIFO empty
+	TXFIFOUDRN OTG_HS_DIEPINT3 = 0x01 << 8  //+ Transmit Fifo Underrun
+	BNA        OTG_HS_DIEPINT3 = 0x01 << 9  //+ Buffer not available interrupt
+	PKTDRPSTS  OTG_HS_DIEPINT3 = 0x01 << 11 //+ Packet dropped status
+	BERR       OTG_HS_DIEPINT3 = 0x01 << 12 //+ Babble error interrupt
+	NAK        OTG_HS_DIEPINT3 = 0x01 << 13 //+ NAK interrupt
+)
+
+const (
+	XFRCn       = 0
+	EPDISDn     = 1
+	TOCn        = 3
+	ITTXFEn     = 4
+	INEPNEn     = 6
+	TXFEn       = 7
+	TXFIFOUDRNn = 8
+	BNAn        = 9
+	PKTDRPSTSn  = 11
+	BERRn       = 12
+	NAKn        = 13
 )
 
 const (
@@ -923,6 +643,82 @@ const (
 )
 
 const (
+	DMAADDR OTG_HS_DIEPDMA4 = 0xFFFFFFFF << 0 //+ DMA address
+)
+
+const (
+	DMAADDRn = 0
+)
+
+const (
+	INEPTFSAV OTG_HS_DTXFSTS3 = 0xFFFF << 0 //+ IN endpoint TxFIFO space avail
+)
+
+const (
+	INEPTFSAVn = 0
+)
+
+const (
+	MPSIZ          OTG_HS_DIEPCTL4 = 0x7FF << 0 //+ Maximum packet size
+	USBAEP         OTG_HS_DIEPCTL4 = 0x01 << 15 //+ USB active endpoint
+	EONUM_DPID     OTG_HS_DIEPCTL4 = 0x01 << 16 //+ Even/odd frame
+	NAKSTS         OTG_HS_DIEPCTL4 = 0x01 << 17 //+ NAK status
+	EPTYP          OTG_HS_DIEPCTL4 = 0x03 << 18 //+ Endpoint type
+	Stall          OTG_HS_DIEPCTL4 = 0x01 << 21 //+ STALL handshake
+	TXFNUM         OTG_HS_DIEPCTL4 = 0x0F << 22 //+ TxFIFO number
+	CNAK           OTG_HS_DIEPCTL4 = 0x01 << 26 //+ Clear NAK
+	SNAK           OTG_HS_DIEPCTL4 = 0x01 << 27 //+ Set NAK
+	SD0PID_SEVNFRM OTG_HS_DIEPCTL4 = 0x01 << 28 //+ Set DATA0 PID
+	SODDFRM        OTG_HS_DIEPCTL4 = 0x01 << 29 //+ Set odd frame
+	EPDIS          OTG_HS_DIEPCTL4 = 0x01 << 30 //+ Endpoint disable
+	EPENA          OTG_HS_DIEPCTL4 = 0x01 << 31 //+ Endpoint enable
+)
+
+const (
+	MPSIZn          = 0
+	USBAEPn         = 15
+	EONUM_DPIDn     = 16
+	NAKSTSn         = 17
+	EPTYPn          = 18
+	Stalln          = 21
+	TXFNUMn         = 22
+	CNAKn           = 26
+	SNAKn           = 27
+	SD0PID_SEVNFRMn = 28
+	SODDFRMn        = 29
+	EPDISn          = 30
+	EPENAn          = 31
+)
+
+const (
+	XFRC       OTG_HS_DIEPINT4 = 0x01 << 0  //+ Transfer completed interrupt
+	EPDISD     OTG_HS_DIEPINT4 = 0x01 << 1  //+ Endpoint disabled interrupt
+	TOC        OTG_HS_DIEPINT4 = 0x01 << 3  //+ Timeout condition
+	ITTXFE     OTG_HS_DIEPINT4 = 0x01 << 4  //+ IN token received when TxFIFO is empty
+	INEPNE     OTG_HS_DIEPINT4 = 0x01 << 6  //+ IN endpoint NAK effective
+	TXFE       OTG_HS_DIEPINT4 = 0x01 << 7  //+ Transmit FIFO empty
+	TXFIFOUDRN OTG_HS_DIEPINT4 = 0x01 << 8  //+ Transmit Fifo Underrun
+	BNA        OTG_HS_DIEPINT4 = 0x01 << 9  //+ Buffer not available interrupt
+	PKTDRPSTS  OTG_HS_DIEPINT4 = 0x01 << 11 //+ Packet dropped status
+	BERR       OTG_HS_DIEPINT4 = 0x01 << 12 //+ Babble error interrupt
+	NAK        OTG_HS_DIEPINT4 = 0x01 << 13 //+ NAK interrupt
+)
+
+const (
+	XFRCn       = 0
+	EPDISDn     = 1
+	TOCn        = 3
+	ITTXFEn     = 4
+	INEPNEn     = 6
+	TXFEn       = 7
+	TXFIFOUDRNn = 8
+	BNAn        = 9
+	PKTDRPSTSn  = 11
+	BERRn       = 12
+	NAKn        = 13
+)
+
+const (
 	XFRSIZ OTG_HS_DIEPTSIZ4 = 0x7FFFF << 0 //+ Transfer size
 	PKTCNT OTG_HS_DIEPTSIZ4 = 0x3FF << 19  //+ Packet count
 	MCNT   OTG_HS_DIEPTSIZ4 = 0x03 << 29   //+ Multi count
@@ -935,6 +731,82 @@ const (
 )
 
 const (
+	DMAADDR OTG_HS_DIEPDMA5 = 0xFFFFFFFF << 0 //+ DMA address
+)
+
+const (
+	DMAADDRn = 0
+)
+
+const (
+	INEPTFSAV OTG_HS_DTXFSTS4 = 0xFFFF << 0 //+ IN endpoint TxFIFO space avail
+)
+
+const (
+	INEPTFSAVn = 0
+)
+
+const (
+	MPSIZ          OTG_HS_DIEPCTL5 = 0x7FF << 0 //+ Maximum packet size
+	USBAEP         OTG_HS_DIEPCTL5 = 0x01 << 15 //+ USB active endpoint
+	EONUM_DPID     OTG_HS_DIEPCTL5 = 0x01 << 16 //+ Even/odd frame
+	NAKSTS         OTG_HS_DIEPCTL5 = 0x01 << 17 //+ NAK status
+	EPTYP          OTG_HS_DIEPCTL5 = 0x03 << 18 //+ Endpoint type
+	Stall          OTG_HS_DIEPCTL5 = 0x01 << 21 //+ STALL handshake
+	TXFNUM         OTG_HS_DIEPCTL5 = 0x0F << 22 //+ TxFIFO number
+	CNAK           OTG_HS_DIEPCTL5 = 0x01 << 26 //+ Clear NAK
+	SNAK           OTG_HS_DIEPCTL5 = 0x01 << 27 //+ Set NAK
+	SD0PID_SEVNFRM OTG_HS_DIEPCTL5 = 0x01 << 28 //+ Set DATA0 PID
+	SODDFRM        OTG_HS_DIEPCTL5 = 0x01 << 29 //+ Set odd frame
+	EPDIS          OTG_HS_DIEPCTL5 = 0x01 << 30 //+ Endpoint disable
+	EPENA          OTG_HS_DIEPCTL5 = 0x01 << 31 //+ Endpoint enable
+)
+
+const (
+	MPSIZn          = 0
+	USBAEPn         = 15
+	EONUM_DPIDn     = 16
+	NAKSTSn         = 17
+	EPTYPn          = 18
+	Stalln          = 21
+	TXFNUMn         = 22
+	CNAKn           = 26
+	SNAKn           = 27
+	SD0PID_SEVNFRMn = 28
+	SODDFRMn        = 29
+	EPDISn          = 30
+	EPENAn          = 31
+)
+
+const (
+	XFRC       OTG_HS_DIEPINT5 = 0x01 << 0  //+ Transfer completed interrupt
+	EPDISD     OTG_HS_DIEPINT5 = 0x01 << 1  //+ Endpoint disabled interrupt
+	TOC        OTG_HS_DIEPINT5 = 0x01 << 3  //+ Timeout condition
+	ITTXFE     OTG_HS_DIEPINT5 = 0x01 << 4  //+ IN token received when TxFIFO is empty
+	INEPNE     OTG_HS_DIEPINT5 = 0x01 << 6  //+ IN endpoint NAK effective
+	TXFE       OTG_HS_DIEPINT5 = 0x01 << 7  //+ Transmit FIFO empty
+	TXFIFOUDRN OTG_HS_DIEPINT5 = 0x01 << 8  //+ Transmit Fifo Underrun
+	BNA        OTG_HS_DIEPINT5 = 0x01 << 9  //+ Buffer not available interrupt
+	PKTDRPSTS  OTG_HS_DIEPINT5 = 0x01 << 11 //+ Packet dropped status
+	BERR       OTG_HS_DIEPINT5 = 0x01 << 12 //+ Babble error interrupt
+	NAK        OTG_HS_DIEPINT5 = 0x01 << 13 //+ NAK interrupt
+)
+
+const (
+	XFRCn       = 0
+	EPDISDn     = 1
+	TOCn        = 3
+	ITTXFEn     = 4
+	INEPNEn     = 6
+	TXFEn       = 7
+	TXFIFOUDRNn = 8
+	BNAn        = 9
+	PKTDRPSTSn  = 11
+	BERRn       = 12
+	NAKn        = 13
+)
+
+const (
 	XFRSIZ OTG_HS_DIEPTSIZ5 = 0x7FFFF << 0 //+ Transfer size
 	PKTCNT OTG_HS_DIEPTSIZ5 = 0x3FF << 19  //+ Packet count
 	MCNT   OTG_HS_DIEPTSIZ5 = 0x03 << 29   //+ Multi count
@@ -944,6 +816,134 @@ const (
 	XFRSIZn = 0
 	PKTCNTn = 19
 	MCNTn   = 29
+)
+
+const (
+	INEPTFSAV OTG_HS_DTXFSTS5 = 0xFFFF << 0 //+ IN endpoint TxFIFO space avail
+)
+
+const (
+	INEPTFSAVn = 0
+)
+
+const (
+	MPSIZ          OTG_HS_DIEPCTL6 = 0x7FF << 0 //+ Maximum packet size
+	USBAEP         OTG_HS_DIEPCTL6 = 0x01 << 15 //+ USB active endpoint
+	EONUM_DPID     OTG_HS_DIEPCTL6 = 0x01 << 16 //+ Even/odd frame
+	NAKSTS         OTG_HS_DIEPCTL6 = 0x01 << 17 //+ NAK status
+	EPTYP          OTG_HS_DIEPCTL6 = 0x03 << 18 //+ Endpoint type
+	Stall          OTG_HS_DIEPCTL6 = 0x01 << 21 //+ STALL handshake
+	TXFNUM         OTG_HS_DIEPCTL6 = 0x0F << 22 //+ TxFIFO number
+	CNAK           OTG_HS_DIEPCTL6 = 0x01 << 26 //+ Clear NAK
+	SNAK           OTG_HS_DIEPCTL6 = 0x01 << 27 //+ Set NAK
+	SD0PID_SEVNFRM OTG_HS_DIEPCTL6 = 0x01 << 28 //+ Set DATA0 PID
+	SODDFRM        OTG_HS_DIEPCTL6 = 0x01 << 29 //+ Set odd frame
+	EPDIS          OTG_HS_DIEPCTL6 = 0x01 << 30 //+ Endpoint disable
+	EPENA          OTG_HS_DIEPCTL6 = 0x01 << 31 //+ Endpoint enable
+)
+
+const (
+	MPSIZn          = 0
+	USBAEPn         = 15
+	EONUM_DPIDn     = 16
+	NAKSTSn         = 17
+	EPTYPn          = 18
+	Stalln          = 21
+	TXFNUMn         = 22
+	CNAKn           = 26
+	SNAKn           = 27
+	SD0PID_SEVNFRMn = 28
+	SODDFRMn        = 29
+	EPDISn          = 30
+	EPENAn          = 31
+)
+
+const (
+	XFRC       OTG_HS_DIEPINT6 = 0x01 << 0  //+ Transfer completed interrupt
+	EPDISD     OTG_HS_DIEPINT6 = 0x01 << 1  //+ Endpoint disabled interrupt
+	TOC        OTG_HS_DIEPINT6 = 0x01 << 3  //+ Timeout condition
+	ITTXFE     OTG_HS_DIEPINT6 = 0x01 << 4  //+ IN token received when TxFIFO is empty
+	INEPNE     OTG_HS_DIEPINT6 = 0x01 << 6  //+ IN endpoint NAK effective
+	TXFE       OTG_HS_DIEPINT6 = 0x01 << 7  //+ Transmit FIFO empty
+	TXFIFOUDRN OTG_HS_DIEPINT6 = 0x01 << 8  //+ Transmit Fifo Underrun
+	BNA        OTG_HS_DIEPINT6 = 0x01 << 9  //+ Buffer not available interrupt
+	PKTDRPSTS  OTG_HS_DIEPINT6 = 0x01 << 11 //+ Packet dropped status
+	BERR       OTG_HS_DIEPINT6 = 0x01 << 12 //+ Babble error interrupt
+	NAK        OTG_HS_DIEPINT6 = 0x01 << 13 //+ NAK interrupt
+)
+
+const (
+	XFRCn       = 0
+	EPDISDn     = 1
+	TOCn        = 3
+	ITTXFEn     = 4
+	INEPNEn     = 6
+	TXFEn       = 7
+	TXFIFOUDRNn = 8
+	BNAn        = 9
+	PKTDRPSTSn  = 11
+	BERRn       = 12
+	NAKn        = 13
+)
+
+const (
+	MPSIZ          OTG_HS_DIEPCTL7 = 0x7FF << 0 //+ Maximum packet size
+	USBAEP         OTG_HS_DIEPCTL7 = 0x01 << 15 //+ USB active endpoint
+	EONUM_DPID     OTG_HS_DIEPCTL7 = 0x01 << 16 //+ Even/odd frame
+	NAKSTS         OTG_HS_DIEPCTL7 = 0x01 << 17 //+ NAK status
+	EPTYP          OTG_HS_DIEPCTL7 = 0x03 << 18 //+ Endpoint type
+	Stall          OTG_HS_DIEPCTL7 = 0x01 << 21 //+ STALL handshake
+	TXFNUM         OTG_HS_DIEPCTL7 = 0x0F << 22 //+ TxFIFO number
+	CNAK           OTG_HS_DIEPCTL7 = 0x01 << 26 //+ Clear NAK
+	SNAK           OTG_HS_DIEPCTL7 = 0x01 << 27 //+ Set NAK
+	SD0PID_SEVNFRM OTG_HS_DIEPCTL7 = 0x01 << 28 //+ Set DATA0 PID
+	SODDFRM        OTG_HS_DIEPCTL7 = 0x01 << 29 //+ Set odd frame
+	EPDIS          OTG_HS_DIEPCTL7 = 0x01 << 30 //+ Endpoint disable
+	EPENA          OTG_HS_DIEPCTL7 = 0x01 << 31 //+ Endpoint enable
+)
+
+const (
+	MPSIZn          = 0
+	USBAEPn         = 15
+	EONUM_DPIDn     = 16
+	NAKSTSn         = 17
+	EPTYPn          = 18
+	Stalln          = 21
+	TXFNUMn         = 22
+	CNAKn           = 26
+	SNAKn           = 27
+	SD0PID_SEVNFRMn = 28
+	SODDFRMn        = 29
+	EPDISn          = 30
+	EPENAn          = 31
+)
+
+const (
+	XFRC       OTG_HS_DIEPINT7 = 0x01 << 0  //+ Transfer completed interrupt
+	EPDISD     OTG_HS_DIEPINT7 = 0x01 << 1  //+ Endpoint disabled interrupt
+	TOC        OTG_HS_DIEPINT7 = 0x01 << 3  //+ Timeout condition
+	ITTXFE     OTG_HS_DIEPINT7 = 0x01 << 4  //+ IN token received when TxFIFO is empty
+	INEPNE     OTG_HS_DIEPINT7 = 0x01 << 6  //+ IN endpoint NAK effective
+	TXFE       OTG_HS_DIEPINT7 = 0x01 << 7  //+ Transmit FIFO empty
+	TXFIFOUDRN OTG_HS_DIEPINT7 = 0x01 << 8  //+ Transmit Fifo Underrun
+	BNA        OTG_HS_DIEPINT7 = 0x01 << 9  //+ Buffer not available interrupt
+	PKTDRPSTS  OTG_HS_DIEPINT7 = 0x01 << 11 //+ Packet dropped status
+	BERR       OTG_HS_DIEPINT7 = 0x01 << 12 //+ Babble error interrupt
+	NAK        OTG_HS_DIEPINT7 = 0x01 << 13 //+ NAK interrupt
+)
+
+const (
+	XFRCn       = 0
+	EPDISDn     = 1
+	TOCn        = 3
+	ITTXFEn     = 4
+	INEPNEn     = 6
+	TXFEn       = 7
+	TXFIFOUDRNn = 8
+	BNAn        = 9
+	PKTDRPSTSn  = 11
+	BERRn       = 12
+	NAKn        = 13
 )
 
 const (
@@ -970,6 +970,36 @@ const (
 	SNAKn   = 27
 	EPDISn  = 30
 	EPENAn  = 31
+)
+
+const (
+	XFRC    OTG_HS_DOEPINT0 = 0x01 << 0  //+ Transfer completed interrupt
+	EPDISD  OTG_HS_DOEPINT0 = 0x01 << 1  //+ Endpoint disabled interrupt
+	STUP    OTG_HS_DOEPINT0 = 0x01 << 3  //+ SETUP phase done
+	OTEPDIS OTG_HS_DOEPINT0 = 0x01 << 4  //+ OUT token received when endpoint disabled
+	B2BSTUP OTG_HS_DOEPINT0 = 0x01 << 6  //+ Back-to-back SETUP packets received
+	NYET    OTG_HS_DOEPINT0 = 0x01 << 14 //+ NYET interrupt
+)
+
+const (
+	XFRCn    = 0
+	EPDISDn  = 1
+	STUPn    = 3
+	OTEPDISn = 4
+	B2BSTUPn = 6
+	NYETn    = 14
+)
+
+const (
+	XFRSIZ  OTG_HS_DOEPTSIZ0 = 0x7F << 0  //+ Transfer size
+	PKTCNT  OTG_HS_DOEPTSIZ0 = 0x01 << 19 //+ Packet count
+	STUPCNT OTG_HS_DOEPTSIZ0 = 0x03 << 29 //+ SETUP packet count
+)
+
+const (
+	XFRSIZn  = 0
+	PKTCNTn  = 19
+	STUPCNTn = 29
 )
 
 const (
@@ -1005,6 +1035,36 @@ const (
 )
 
 const (
+	XFRC    OTG_HS_DOEPINT1 = 0x01 << 0  //+ Transfer completed interrupt
+	EPDISD  OTG_HS_DOEPINT1 = 0x01 << 1  //+ Endpoint disabled interrupt
+	STUP    OTG_HS_DOEPINT1 = 0x01 << 3  //+ SETUP phase done
+	OTEPDIS OTG_HS_DOEPINT1 = 0x01 << 4  //+ OUT token received when endpoint disabled
+	B2BSTUP OTG_HS_DOEPINT1 = 0x01 << 6  //+ Back-to-back SETUP packets received
+	NYET    OTG_HS_DOEPINT1 = 0x01 << 14 //+ NYET interrupt
+)
+
+const (
+	XFRCn    = 0
+	EPDISDn  = 1
+	STUPn    = 3
+	OTEPDISn = 4
+	B2BSTUPn = 6
+	NYETn    = 14
+)
+
+const (
+	XFRSIZ         OTG_HS_DOEPTSIZ1 = 0x7FFFF << 0 //+ Transfer size
+	PKTCNT         OTG_HS_DOEPTSIZ1 = 0x3FF << 19  //+ Packet count
+	RXDPID_STUPCNT OTG_HS_DOEPTSIZ1 = 0x03 << 29   //+ Received data PID/SETUP packet count
+)
+
+const (
+	XFRSIZn         = 0
+	PKTCNTn         = 19
+	RXDPID_STUPCNTn = 29
+)
+
+const (
 	MPSIZ          OTG_HS_DOEPCTL2 = 0x7FF << 0 //+ Maximum packet size
 	USBAEP         OTG_HS_DOEPCTL2 = 0x01 << 15 //+ USB active endpoint
 	EONUM_DPID     OTG_HS_DOEPCTL2 = 0x01 << 16 //+ Even odd frame/Endpoint data PID
@@ -1034,6 +1094,36 @@ const (
 	SODDFRMn        = 29
 	EPDISn          = 30
 	EPENAn          = 31
+)
+
+const (
+	XFRC    OTG_HS_DOEPINT2 = 0x01 << 0  //+ Transfer completed interrupt
+	EPDISD  OTG_HS_DOEPINT2 = 0x01 << 1  //+ Endpoint disabled interrupt
+	STUP    OTG_HS_DOEPINT2 = 0x01 << 3  //+ SETUP phase done
+	OTEPDIS OTG_HS_DOEPINT2 = 0x01 << 4  //+ OUT token received when endpoint disabled
+	B2BSTUP OTG_HS_DOEPINT2 = 0x01 << 6  //+ Back-to-back SETUP packets received
+	NYET    OTG_HS_DOEPINT2 = 0x01 << 14 //+ NYET interrupt
+)
+
+const (
+	XFRCn    = 0
+	EPDISDn  = 1
+	STUPn    = 3
+	OTEPDISn = 4
+	B2BSTUPn = 6
+	NYETn    = 14
+)
+
+const (
+	XFRSIZ         OTG_HS_DOEPTSIZ2 = 0x7FFFF << 0 //+ Transfer size
+	PKTCNT         OTG_HS_DOEPTSIZ2 = 0x3FF << 19  //+ Packet count
+	RXDPID_STUPCNT OTG_HS_DOEPTSIZ2 = 0x03 << 29   //+ Received data PID/SETUP packet count
+)
+
+const (
+	XFRSIZn         = 0
+	PKTCNTn         = 19
+	RXDPID_STUPCNTn = 29
 )
 
 const (
@@ -1069,60 +1159,6 @@ const (
 )
 
 const (
-	XFRC    OTG_HS_DOEPINT0 = 0x01 << 0  //+ Transfer completed interrupt
-	EPDISD  OTG_HS_DOEPINT0 = 0x01 << 1  //+ Endpoint disabled interrupt
-	STUP    OTG_HS_DOEPINT0 = 0x01 << 3  //+ SETUP phase done
-	OTEPDIS OTG_HS_DOEPINT0 = 0x01 << 4  //+ OUT token received when endpoint disabled
-	B2BSTUP OTG_HS_DOEPINT0 = 0x01 << 6  //+ Back-to-back SETUP packets received
-	NYET    OTG_HS_DOEPINT0 = 0x01 << 14 //+ NYET interrupt
-)
-
-const (
-	XFRCn    = 0
-	EPDISDn  = 1
-	STUPn    = 3
-	OTEPDISn = 4
-	B2BSTUPn = 6
-	NYETn    = 14
-)
-
-const (
-	XFRC    OTG_HS_DOEPINT1 = 0x01 << 0  //+ Transfer completed interrupt
-	EPDISD  OTG_HS_DOEPINT1 = 0x01 << 1  //+ Endpoint disabled interrupt
-	STUP    OTG_HS_DOEPINT1 = 0x01 << 3  //+ SETUP phase done
-	OTEPDIS OTG_HS_DOEPINT1 = 0x01 << 4  //+ OUT token received when endpoint disabled
-	B2BSTUP OTG_HS_DOEPINT1 = 0x01 << 6  //+ Back-to-back SETUP packets received
-	NYET    OTG_HS_DOEPINT1 = 0x01 << 14 //+ NYET interrupt
-)
-
-const (
-	XFRCn    = 0
-	EPDISDn  = 1
-	STUPn    = 3
-	OTEPDISn = 4
-	B2BSTUPn = 6
-	NYETn    = 14
-)
-
-const (
-	XFRC    OTG_HS_DOEPINT2 = 0x01 << 0  //+ Transfer completed interrupt
-	EPDISD  OTG_HS_DOEPINT2 = 0x01 << 1  //+ Endpoint disabled interrupt
-	STUP    OTG_HS_DOEPINT2 = 0x01 << 3  //+ SETUP phase done
-	OTEPDIS OTG_HS_DOEPINT2 = 0x01 << 4  //+ OUT token received when endpoint disabled
-	B2BSTUP OTG_HS_DOEPINT2 = 0x01 << 6  //+ Back-to-back SETUP packets received
-	NYET    OTG_HS_DOEPINT2 = 0x01 << 14 //+ NYET interrupt
-)
-
-const (
-	XFRCn    = 0
-	EPDISDn  = 1
-	STUPn    = 3
-	OTEPDISn = 4
-	B2BSTUPn = 6
-	NYETn    = 14
-)
-
-const (
 	XFRC    OTG_HS_DOEPINT3 = 0x01 << 0  //+ Transfer completed interrupt
 	EPDISD  OTG_HS_DOEPINT3 = 0x01 << 1  //+ Endpoint disabled interrupt
 	STUP    OTG_HS_DOEPINT3 = 0x01 << 3  //+ SETUP phase done
@@ -1141,6 +1177,18 @@ const (
 )
 
 const (
+	XFRSIZ         OTG_HS_DOEPTSIZ3 = 0x7FFFF << 0 //+ Transfer size
+	PKTCNT         OTG_HS_DOEPTSIZ3 = 0x3FF << 19  //+ Packet count
+	RXDPID_STUPCNT OTG_HS_DOEPTSIZ3 = 0x03 << 29   //+ Received data PID/SETUP packet count
+)
+
+const (
+	XFRSIZn         = 0
+	PKTCNTn         = 19
+	RXDPID_STUPCNTn = 29
+)
+
+const (
 	XFRC    OTG_HS_DOEPINT4 = 0x01 << 0  //+ Transfer completed interrupt
 	EPDISD  OTG_HS_DOEPINT4 = 0x01 << 1  //+ Endpoint disabled interrupt
 	STUP    OTG_HS_DOEPINT4 = 0x01 << 3  //+ SETUP phase done
@@ -1156,6 +1204,18 @@ const (
 	OTEPDISn = 4
 	B2BSTUPn = 6
 	NYETn    = 14
+)
+
+const (
+	XFRSIZ         OTG_HS_DOEPTSIZ4 = 0x7FFFF << 0 //+ Transfer size
+	PKTCNT         OTG_HS_DOEPTSIZ4 = 0x3FF << 19  //+ Packet count
+	RXDPID_STUPCNT OTG_HS_DOEPTSIZ4 = 0x03 << 29   //+ Received data PID/SETUP packet count
+)
+
+const (
+	XFRSIZn         = 0
+	PKTCNTn         = 19
+	RXDPID_STUPCNTn = 29
 )
 
 const (
@@ -1210,64 +1270,4 @@ const (
 	OTEPDISn = 4
 	B2BSTUPn = 6
 	NYETn    = 14
-)
-
-const (
-	XFRSIZ  OTG_HS_DOEPTSIZ0 = 0x7F << 0  //+ Transfer size
-	PKTCNT  OTG_HS_DOEPTSIZ0 = 0x01 << 19 //+ Packet count
-	STUPCNT OTG_HS_DOEPTSIZ0 = 0x03 << 29 //+ SETUP packet count
-)
-
-const (
-	XFRSIZn  = 0
-	PKTCNTn  = 19
-	STUPCNTn = 29
-)
-
-const (
-	XFRSIZ         OTG_HS_DOEPTSIZ1 = 0x7FFFF << 0 //+ Transfer size
-	PKTCNT         OTG_HS_DOEPTSIZ1 = 0x3FF << 19  //+ Packet count
-	RXDPID_STUPCNT OTG_HS_DOEPTSIZ1 = 0x03 << 29   //+ Received data PID/SETUP packet count
-)
-
-const (
-	XFRSIZn         = 0
-	PKTCNTn         = 19
-	RXDPID_STUPCNTn = 29
-)
-
-const (
-	XFRSIZ         OTG_HS_DOEPTSIZ2 = 0x7FFFF << 0 //+ Transfer size
-	PKTCNT         OTG_HS_DOEPTSIZ2 = 0x3FF << 19  //+ Packet count
-	RXDPID_STUPCNT OTG_HS_DOEPTSIZ2 = 0x03 << 29   //+ Received data PID/SETUP packet count
-)
-
-const (
-	XFRSIZn         = 0
-	PKTCNTn         = 19
-	RXDPID_STUPCNTn = 29
-)
-
-const (
-	XFRSIZ         OTG_HS_DOEPTSIZ3 = 0x7FFFF << 0 //+ Transfer size
-	PKTCNT         OTG_HS_DOEPTSIZ3 = 0x3FF << 19  //+ Packet count
-	RXDPID_STUPCNT OTG_HS_DOEPTSIZ3 = 0x03 << 29   //+ Received data PID/SETUP packet count
-)
-
-const (
-	XFRSIZn         = 0
-	PKTCNTn         = 19
-	RXDPID_STUPCNTn = 29
-)
-
-const (
-	XFRSIZ         OTG_HS_DOEPTSIZ4 = 0x7FFFF << 0 //+ Transfer size
-	PKTCNT         OTG_HS_DOEPTSIZ4 = 0x3FF << 19  //+ Packet count
-	RXDPID_STUPCNT OTG_HS_DOEPTSIZ4 = 0x03 << 29   //+ Received data PID/SETUP packet count
-)
-
-const (
-	XFRSIZn         = 0
-	PKTCNTn         = 19
-	RXDPID_STUPCNTn = 29
 )

@@ -23,14 +23,14 @@
 //  0x034 32  C13CR  DMAMux - DMA request line multiplexer channel x control register
 //  0x038 32  C14CR  DMAMux - DMA request line multiplexer channel x control register
 //  0x03C 32  C15CR  DMAMux - DMA request line multiplexer channel x control register
+//  0x080 32  CSR    DMAMUX request line multiplexer interrupt channel status register
+//  0x084 32  CFR    DMAMUX request line multiplexer interrupt clear flag register
 //  0x100 32  RG0CR  DMAMux - DMA request generator channel x control register
 //  0x104 32  RG1CR  DMAMux - DMA request generator channel x control register
 //  0x108 32  RG2CR  DMAMux - DMA request generator channel x control register
 //  0x10C 32  RG3CR  DMAMux - DMA request generator channel x control register
 //  0x140 32  RGSR   DMAMux - DMA request generator status register
 //  0x144 32  RGCFR  DMAMux - DMA request generator clear flag register
-//  0x080 32  CSR    DMAMUX request line multiplexer interrupt channel status register
-//  0x084 32  CFR    DMAMUX request line multiplexer interrupt clear flag register
 // Import:
 //  github.com/embeddedgo/stm32/p/bus
 //  github.com/embeddedgo/stm32/p/mmap
@@ -357,6 +357,22 @@ const (
 )
 
 const (
+	SOF CSR = 0xFFFF << 0 //+ Synchronization overrun event flag
+)
+
+const (
+	SOFn = 0
+)
+
+const (
+	CSOF CFR = 0xFFFF << 0 //+ Clear synchronization overrun event flag
+)
+
+const (
+	CSOFn = 0
+)
+
+const (
 	SIG_ID RG0CR = 0x1F << 0  //+ DMA request trigger input selected
 	OIE    RG0CR = 0x01 << 8  //+ Interrupt enable at trigger event overrun
 	GE     RG0CR = 0x01 << 16 //+ DMA request generator channel enable/disable
@@ -434,20 +450,4 @@ const (
 
 const (
 	COFn = 0
-)
-
-const (
-	SOF CSR = 0xFFFF << 0 //+ Synchronization overrun event flag
-)
-
-const (
-	SOFn = 0
-)
-
-const (
-	CSOF CFR = 0xFFFF << 0 //+ Clear synchronization overrun event flag
-)
-
-const (
-	CSOFn = 0
 )

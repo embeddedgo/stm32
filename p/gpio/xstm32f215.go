@@ -25,14 +25,6 @@ type Periph struct {
 	AFRH    RAFRH
 }
 
-func (p *Periph) BaseAddr() uintptr {
-	return uintptr(unsafe.Pointer(p))
-}
-
-func (p *Periph) Bus() bus.Bus {
-	return bus.AHB1
-}
-
 func GPIOA() *Periph { return (*Periph)(unsafe.Pointer(uintptr(mmap.GPIOA_BASE))) }
 func GPIOB() *Periph { return (*Periph)(unsafe.Pointer(uintptr(mmap.GPIOB_BASE))) }
 func GPIOC() *Periph { return (*Periph)(unsafe.Pointer(uintptr(mmap.GPIOC_BASE))) }
@@ -42,6 +34,14 @@ func GPIOF() *Periph { return (*Periph)(unsafe.Pointer(uintptr(mmap.GPIOF_BASE))
 func GPIOG() *Periph { return (*Periph)(unsafe.Pointer(uintptr(mmap.GPIOG_BASE))) }
 func GPIOH() *Periph { return (*Periph)(unsafe.Pointer(uintptr(mmap.GPIOH_BASE))) }
 func GPIOI() *Periph { return (*Periph)(unsafe.Pointer(uintptr(mmap.GPIOI_BASE))) }
+
+func (p *Periph) BaseAddr() uintptr {
+	return uintptr(unsafe.Pointer(p))
+}
+
+func (p *Periph) Bus() bus.Bus {
+	return bus.AHB1
+}
 
 type MODER uint32
 

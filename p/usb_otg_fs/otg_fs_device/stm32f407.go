@@ -18,32 +18,32 @@
 //  0x02C 32  DVBUSPULSE   OTG_FS device VBUS pulsing time register
 //  0x034 32  DIEPEMPMSK   OTG_FS device IN endpoint FIFO empty interrupt mask register
 //  0x100 32  FS_DIEPCTL0  OTG_FS device control IN endpoint 0 control register (OTG_FS_DIEPCTL0)
-//  0x120 32  DIEPCTL1     OTG device endpoint-1 control register
-//  0x140 32  DIEPCTL2     OTG device endpoint-2 control register
-//  0x160 32  DIEPCTL3     OTG device endpoint-3 control register
-//  0x300 32  DOEPCTL0     device endpoint-0 control register
-//  0x320 32  DOEPCTL1     device endpoint-1 control register
-//  0x340 32  DOEPCTL2     device endpoint-2 control register
-//  0x360 32  DOEPCTL3     device endpoint-3 control register
 //  0x108 32  DIEPINT0     device endpoint-x interrupt register
-//  0x128 32  DIEPINT1     device endpoint-1 interrupt register
-//  0x148 32  DIEPINT2     device endpoint-2 interrupt register
-//  0x168 32  DIEPINT3     device endpoint-3 interrupt register
-//  0x308 32  DOEPINT0     device endpoint-0 interrupt register
-//  0x328 32  DOEPINT1     device endpoint-1 interrupt register
-//  0x348 32  DOEPINT2     device endpoint-2 interrupt register
-//  0x368 32  DOEPINT3     device endpoint-3 interrupt register
 //  0x110 32  DIEPTSIZ0    device endpoint-0 transfer size register
-//  0x310 32  DOEPTSIZ0    device OUT endpoint-0 transfer size register
-//  0x130 32  DIEPTSIZ1    device endpoint-1 transfer size register
-//  0x150 32  DIEPTSIZ2    device endpoint-2 transfer size register
-//  0x170 32  DIEPTSIZ3    device endpoint-3 transfer size register
 //  0x118 32  DTXFSTS0     OTG_FS device IN endpoint transmit FIFO status register
+//  0x120 32  DIEPCTL1     OTG device endpoint-1 control register
+//  0x128 32  DIEPINT1     device endpoint-1 interrupt register
+//  0x130 32  DIEPTSIZ1    device endpoint-1 transfer size register
 //  0x138 32  DTXFSTS1     OTG_FS device IN endpoint transmit FIFO status register
+//  0x140 32  DIEPCTL2     OTG device endpoint-2 control register
+//  0x148 32  DIEPINT2     device endpoint-2 interrupt register
+//  0x150 32  DIEPTSIZ2    device endpoint-2 transfer size register
 //  0x158 32  DTXFSTS2     OTG_FS device IN endpoint transmit FIFO status register
+//  0x160 32  DIEPCTL3     OTG device endpoint-3 control register
+//  0x168 32  DIEPINT3     device endpoint-3 interrupt register
+//  0x170 32  DIEPTSIZ3    device endpoint-3 transfer size register
 //  0x178 32  DTXFSTS3     OTG_FS device IN endpoint transmit FIFO status register
+//  0x300 32  DOEPCTL0     device endpoint-0 control register
+//  0x308 32  DOEPINT0     device endpoint-0 interrupt register
+//  0x310 32  DOEPTSIZ0    device OUT endpoint-0 transfer size register
+//  0x320 32  DOEPCTL1     device endpoint-1 control register
+//  0x328 32  DOEPINT1     device endpoint-1 interrupt register
 //  0x330 32  DOEPTSIZ1    device OUT endpoint-1 transfer size register
+//  0x340 32  DOEPCTL2     device endpoint-2 control register
+//  0x348 32  DOEPINT2     device endpoint-2 interrupt register
 //  0x350 32  DOEPTSIZ2    device OUT endpoint-2 transfer size register
+//  0x360 32  DOEPCTL3     device endpoint-3 control register
+//  0x368 32  DOEPINT3     device endpoint-3 interrupt register
 //  0x370 32  DOEPTSIZ3    device OUT endpoint-3 transfer size register
 // Import:
 //  github.com/embeddedgo/stm32/p/mmap
@@ -206,6 +206,42 @@ const (
 )
 
 const (
+	XFRC   DIEPINT0 = 0x01 << 0 //+ XFRC
+	EPDISD DIEPINT0 = 0x01 << 1 //+ EPDISD
+	TOC    DIEPINT0 = 0x01 << 3 //+ TOC
+	ITTXFE DIEPINT0 = 0x01 << 4 //+ ITTXFE
+	INEPNE DIEPINT0 = 0x01 << 6 //+ INEPNE
+	TXFE   DIEPINT0 = 0x01 << 7 //+ TXFE
+)
+
+const (
+	XFRCn   = 0
+	EPDISDn = 1
+	TOCn    = 3
+	ITTXFEn = 4
+	INEPNEn = 6
+	TXFEn   = 7
+)
+
+const (
+	XFRSIZ DIEPTSIZ0 = 0x7F << 0  //+ Transfer size
+	PKTCNT DIEPTSIZ0 = 0x03 << 19 //+ Packet count
+)
+
+const (
+	XFRSIZn = 0
+	PKTCNTn = 19
+)
+
+const (
+	INEPTFSAV DTXFSTS0 = 0xFFFF << 0 //+ IN endpoint TxFIFO space available
+)
+
+const (
+	INEPTFSAVn = 0
+)
+
+const (
 	MPSIZ          DIEPCTL1 = 0x7FF << 0 //+ MPSIZ
 	USBAEP         DIEPCTL1 = 0x01 << 15 //+ USBAEP
 	EONUM_DPID     DIEPCTL1 = 0x01 << 16 //+ EONUM/DPID
@@ -235,6 +271,44 @@ const (
 	SODDFRM_SD1PIDn = 29
 	EPDISn          = 30
 	EPENAn          = 31
+)
+
+const (
+	XFRC   DIEPINT1 = 0x01 << 0 //+ XFRC
+	EPDISD DIEPINT1 = 0x01 << 1 //+ EPDISD
+	TOC    DIEPINT1 = 0x01 << 3 //+ TOC
+	ITTXFE DIEPINT1 = 0x01 << 4 //+ ITTXFE
+	INEPNE DIEPINT1 = 0x01 << 6 //+ INEPNE
+	TXFE   DIEPINT1 = 0x01 << 7 //+ TXFE
+)
+
+const (
+	XFRCn   = 0
+	EPDISDn = 1
+	TOCn    = 3
+	ITTXFEn = 4
+	INEPNEn = 6
+	TXFEn   = 7
+)
+
+const (
+	XFRSIZ DIEPTSIZ1 = 0x7FFFF << 0 //+ Transfer size
+	PKTCNT DIEPTSIZ1 = 0x3FF << 19  //+ Packet count
+	MCNT   DIEPTSIZ1 = 0x03 << 29   //+ Multi count
+)
+
+const (
+	XFRSIZn = 0
+	PKTCNTn = 19
+	MCNTn   = 29
+)
+
+const (
+	INEPTFSAV DTXFSTS1 = 0xFFFF << 0 //+ IN endpoint TxFIFO space available
+)
+
+const (
+	INEPTFSAVn = 0
 )
 
 const (
@@ -270,6 +344,44 @@ const (
 )
 
 const (
+	XFRC   DIEPINT2 = 0x01 << 0 //+ XFRC
+	EPDISD DIEPINT2 = 0x01 << 1 //+ EPDISD
+	TOC    DIEPINT2 = 0x01 << 3 //+ TOC
+	ITTXFE DIEPINT2 = 0x01 << 4 //+ ITTXFE
+	INEPNE DIEPINT2 = 0x01 << 6 //+ INEPNE
+	TXFE   DIEPINT2 = 0x01 << 7 //+ TXFE
+)
+
+const (
+	XFRCn   = 0
+	EPDISDn = 1
+	TOCn    = 3
+	ITTXFEn = 4
+	INEPNEn = 6
+	TXFEn   = 7
+)
+
+const (
+	XFRSIZ DIEPTSIZ2 = 0x7FFFF << 0 //+ Transfer size
+	PKTCNT DIEPTSIZ2 = 0x3FF << 19  //+ Packet count
+	MCNT   DIEPTSIZ2 = 0x03 << 29   //+ Multi count
+)
+
+const (
+	XFRSIZn = 0
+	PKTCNTn = 19
+	MCNTn   = 29
+)
+
+const (
+	INEPTFSAV DTXFSTS2 = 0xFFFF << 0 //+ IN endpoint TxFIFO space available
+)
+
+const (
+	INEPTFSAVn = 0
+)
+
+const (
 	MPSIZ          DIEPCTL3 = 0x7FF << 0 //+ MPSIZ
 	USBAEP         DIEPCTL3 = 0x01 << 15 //+ USBAEP
 	EONUM_DPID     DIEPCTL3 = 0x01 << 16 //+ EONUM/DPID
@@ -302,6 +414,44 @@ const (
 )
 
 const (
+	XFRC   DIEPINT3 = 0x01 << 0 //+ XFRC
+	EPDISD DIEPINT3 = 0x01 << 1 //+ EPDISD
+	TOC    DIEPINT3 = 0x01 << 3 //+ TOC
+	ITTXFE DIEPINT3 = 0x01 << 4 //+ ITTXFE
+	INEPNE DIEPINT3 = 0x01 << 6 //+ INEPNE
+	TXFE   DIEPINT3 = 0x01 << 7 //+ TXFE
+)
+
+const (
+	XFRCn   = 0
+	EPDISDn = 1
+	TOCn    = 3
+	ITTXFEn = 4
+	INEPNEn = 6
+	TXFEn   = 7
+)
+
+const (
+	XFRSIZ DIEPTSIZ3 = 0x7FFFF << 0 //+ Transfer size
+	PKTCNT DIEPTSIZ3 = 0x3FF << 19  //+ Packet count
+	MCNT   DIEPTSIZ3 = 0x03 << 29   //+ Multi count
+)
+
+const (
+	XFRSIZn = 0
+	PKTCNTn = 19
+	MCNTn   = 29
+)
+
+const (
+	INEPTFSAV DTXFSTS3 = 0xFFFF << 0 //+ IN endpoint TxFIFO space available
+)
+
+const (
+	INEPTFSAVn = 0
+)
+
+const (
 	MPSIZ  DOEPCTL0 = 0x03 << 0  //+ MPSIZ
 	USBAEP DOEPCTL0 = 0x01 << 15 //+ USBAEP
 	NAKSTS DOEPCTL0 = 0x01 << 17 //+ NAKSTS
@@ -325,6 +475,34 @@ const (
 	SNAKn   = 27
 	EPDISn  = 30
 	EPENAn  = 31
+)
+
+const (
+	XFRC    DOEPINT0 = 0x01 << 0 //+ XFRC
+	EPDISD  DOEPINT0 = 0x01 << 1 //+ EPDISD
+	STUP    DOEPINT0 = 0x01 << 3 //+ STUP
+	OTEPDIS DOEPINT0 = 0x01 << 4 //+ OTEPDIS
+	B2BSTUP DOEPINT0 = 0x01 << 6 //+ B2BSTUP
+)
+
+const (
+	XFRCn    = 0
+	EPDISDn  = 1
+	STUPn    = 3
+	OTEPDISn = 4
+	B2BSTUPn = 6
+)
+
+const (
+	XFRSIZ  DOEPTSIZ0 = 0x7F << 0  //+ Transfer size
+	PKTCNT  DOEPTSIZ0 = 0x01 << 19 //+ Packet count
+	STUPCNT DOEPTSIZ0 = 0x03 << 29 //+ SETUP packet count
+)
+
+const (
+	XFRSIZn  = 0
+	PKTCNTn  = 19
+	STUPCNTn = 29
 )
 
 const (
@@ -360,6 +538,34 @@ const (
 )
 
 const (
+	XFRC    DOEPINT1 = 0x01 << 0 //+ XFRC
+	EPDISD  DOEPINT1 = 0x01 << 1 //+ EPDISD
+	STUP    DOEPINT1 = 0x01 << 3 //+ STUP
+	OTEPDIS DOEPINT1 = 0x01 << 4 //+ OTEPDIS
+	B2BSTUP DOEPINT1 = 0x01 << 6 //+ B2BSTUP
+)
+
+const (
+	XFRCn    = 0
+	EPDISDn  = 1
+	STUPn    = 3
+	OTEPDISn = 4
+	B2BSTUPn = 6
+)
+
+const (
+	XFRSIZ         DOEPTSIZ1 = 0x7FFFF << 0 //+ Transfer size
+	PKTCNT         DOEPTSIZ1 = 0x3FF << 19  //+ Packet count
+	RXDPID_STUPCNT DOEPTSIZ1 = 0x03 << 29   //+ Received data PID/SETUP packet count
+)
+
+const (
+	XFRSIZn         = 0
+	PKTCNTn         = 19
+	RXDPID_STUPCNTn = 29
+)
+
+const (
 	MPSIZ          DOEPCTL2 = 0x7FF << 0 //+ MPSIZ
 	USBAEP         DOEPCTL2 = 0x01 << 15 //+ USBAEP
 	EONUM_DPID     DOEPCTL2 = 0x01 << 16 //+ EONUM/DPID
@@ -389,6 +595,34 @@ const (
 	SODDFRMn        = 29
 	EPDISn          = 30
 	EPENAn          = 31
+)
+
+const (
+	XFRC    DOEPINT2 = 0x01 << 0 //+ XFRC
+	EPDISD  DOEPINT2 = 0x01 << 1 //+ EPDISD
+	STUP    DOEPINT2 = 0x01 << 3 //+ STUP
+	OTEPDIS DOEPINT2 = 0x01 << 4 //+ OTEPDIS
+	B2BSTUP DOEPINT2 = 0x01 << 6 //+ B2BSTUP
+)
+
+const (
+	XFRCn    = 0
+	EPDISDn  = 1
+	STUPn    = 3
+	OTEPDISn = 4
+	B2BSTUPn = 6
+)
+
+const (
+	XFRSIZ         DOEPTSIZ2 = 0x7FFFF << 0 //+ Transfer size
+	PKTCNT         DOEPTSIZ2 = 0x3FF << 19  //+ Packet count
+	RXDPID_STUPCNT DOEPTSIZ2 = 0x03 << 29   //+ Received data PID/SETUP packet count
+)
+
+const (
+	XFRSIZn         = 0
+	PKTCNTn         = 19
+	RXDPID_STUPCNTn = 29
 )
 
 const (
@@ -424,126 +658,6 @@ const (
 )
 
 const (
-	XFRC   DIEPINT0 = 0x01 << 0 //+ XFRC
-	EPDISD DIEPINT0 = 0x01 << 1 //+ EPDISD
-	TOC    DIEPINT0 = 0x01 << 3 //+ TOC
-	ITTXFE DIEPINT0 = 0x01 << 4 //+ ITTXFE
-	INEPNE DIEPINT0 = 0x01 << 6 //+ INEPNE
-	TXFE   DIEPINT0 = 0x01 << 7 //+ TXFE
-)
-
-const (
-	XFRCn   = 0
-	EPDISDn = 1
-	TOCn    = 3
-	ITTXFEn = 4
-	INEPNEn = 6
-	TXFEn   = 7
-)
-
-const (
-	XFRC   DIEPINT1 = 0x01 << 0 //+ XFRC
-	EPDISD DIEPINT1 = 0x01 << 1 //+ EPDISD
-	TOC    DIEPINT1 = 0x01 << 3 //+ TOC
-	ITTXFE DIEPINT1 = 0x01 << 4 //+ ITTXFE
-	INEPNE DIEPINT1 = 0x01 << 6 //+ INEPNE
-	TXFE   DIEPINT1 = 0x01 << 7 //+ TXFE
-)
-
-const (
-	XFRCn   = 0
-	EPDISDn = 1
-	TOCn    = 3
-	ITTXFEn = 4
-	INEPNEn = 6
-	TXFEn   = 7
-)
-
-const (
-	XFRC   DIEPINT2 = 0x01 << 0 //+ XFRC
-	EPDISD DIEPINT2 = 0x01 << 1 //+ EPDISD
-	TOC    DIEPINT2 = 0x01 << 3 //+ TOC
-	ITTXFE DIEPINT2 = 0x01 << 4 //+ ITTXFE
-	INEPNE DIEPINT2 = 0x01 << 6 //+ INEPNE
-	TXFE   DIEPINT2 = 0x01 << 7 //+ TXFE
-)
-
-const (
-	XFRCn   = 0
-	EPDISDn = 1
-	TOCn    = 3
-	ITTXFEn = 4
-	INEPNEn = 6
-	TXFEn   = 7
-)
-
-const (
-	XFRC   DIEPINT3 = 0x01 << 0 //+ XFRC
-	EPDISD DIEPINT3 = 0x01 << 1 //+ EPDISD
-	TOC    DIEPINT3 = 0x01 << 3 //+ TOC
-	ITTXFE DIEPINT3 = 0x01 << 4 //+ ITTXFE
-	INEPNE DIEPINT3 = 0x01 << 6 //+ INEPNE
-	TXFE   DIEPINT3 = 0x01 << 7 //+ TXFE
-)
-
-const (
-	XFRCn   = 0
-	EPDISDn = 1
-	TOCn    = 3
-	ITTXFEn = 4
-	INEPNEn = 6
-	TXFEn   = 7
-)
-
-const (
-	XFRC    DOEPINT0 = 0x01 << 0 //+ XFRC
-	EPDISD  DOEPINT0 = 0x01 << 1 //+ EPDISD
-	STUP    DOEPINT0 = 0x01 << 3 //+ STUP
-	OTEPDIS DOEPINT0 = 0x01 << 4 //+ OTEPDIS
-	B2BSTUP DOEPINT0 = 0x01 << 6 //+ B2BSTUP
-)
-
-const (
-	XFRCn    = 0
-	EPDISDn  = 1
-	STUPn    = 3
-	OTEPDISn = 4
-	B2BSTUPn = 6
-)
-
-const (
-	XFRC    DOEPINT1 = 0x01 << 0 //+ XFRC
-	EPDISD  DOEPINT1 = 0x01 << 1 //+ EPDISD
-	STUP    DOEPINT1 = 0x01 << 3 //+ STUP
-	OTEPDIS DOEPINT1 = 0x01 << 4 //+ OTEPDIS
-	B2BSTUP DOEPINT1 = 0x01 << 6 //+ B2BSTUP
-)
-
-const (
-	XFRCn    = 0
-	EPDISDn  = 1
-	STUPn    = 3
-	OTEPDISn = 4
-	B2BSTUPn = 6
-)
-
-const (
-	XFRC    DOEPINT2 = 0x01 << 0 //+ XFRC
-	EPDISD  DOEPINT2 = 0x01 << 1 //+ EPDISD
-	STUP    DOEPINT2 = 0x01 << 3 //+ STUP
-	OTEPDIS DOEPINT2 = 0x01 << 4 //+ OTEPDIS
-	B2BSTUP DOEPINT2 = 0x01 << 6 //+ B2BSTUP
-)
-
-const (
-	XFRCn    = 0
-	EPDISDn  = 1
-	STUPn    = 3
-	OTEPDISn = 4
-	B2BSTUPn = 6
-)
-
-const (
 	XFRC    DOEPINT3 = 0x01 << 0 //+ XFRC
 	EPDISD  DOEPINT3 = 0x01 << 1 //+ EPDISD
 	STUP    DOEPINT3 = 0x01 << 3 //+ STUP
@@ -557,120 +671,6 @@ const (
 	STUPn    = 3
 	OTEPDISn = 4
 	B2BSTUPn = 6
-)
-
-const (
-	XFRSIZ DIEPTSIZ0 = 0x7F << 0  //+ Transfer size
-	PKTCNT DIEPTSIZ0 = 0x03 << 19 //+ Packet count
-)
-
-const (
-	XFRSIZn = 0
-	PKTCNTn = 19
-)
-
-const (
-	XFRSIZ  DOEPTSIZ0 = 0x7F << 0  //+ Transfer size
-	PKTCNT  DOEPTSIZ0 = 0x01 << 19 //+ Packet count
-	STUPCNT DOEPTSIZ0 = 0x03 << 29 //+ SETUP packet count
-)
-
-const (
-	XFRSIZn  = 0
-	PKTCNTn  = 19
-	STUPCNTn = 29
-)
-
-const (
-	XFRSIZ DIEPTSIZ1 = 0x7FFFF << 0 //+ Transfer size
-	PKTCNT DIEPTSIZ1 = 0x3FF << 19  //+ Packet count
-	MCNT   DIEPTSIZ1 = 0x03 << 29   //+ Multi count
-)
-
-const (
-	XFRSIZn = 0
-	PKTCNTn = 19
-	MCNTn   = 29
-)
-
-const (
-	XFRSIZ DIEPTSIZ2 = 0x7FFFF << 0 //+ Transfer size
-	PKTCNT DIEPTSIZ2 = 0x3FF << 19  //+ Packet count
-	MCNT   DIEPTSIZ2 = 0x03 << 29   //+ Multi count
-)
-
-const (
-	XFRSIZn = 0
-	PKTCNTn = 19
-	MCNTn   = 29
-)
-
-const (
-	XFRSIZ DIEPTSIZ3 = 0x7FFFF << 0 //+ Transfer size
-	PKTCNT DIEPTSIZ3 = 0x3FF << 19  //+ Packet count
-	MCNT   DIEPTSIZ3 = 0x03 << 29   //+ Multi count
-)
-
-const (
-	XFRSIZn = 0
-	PKTCNTn = 19
-	MCNTn   = 29
-)
-
-const (
-	INEPTFSAV DTXFSTS0 = 0xFFFF << 0 //+ IN endpoint TxFIFO space available
-)
-
-const (
-	INEPTFSAVn = 0
-)
-
-const (
-	INEPTFSAV DTXFSTS1 = 0xFFFF << 0 //+ IN endpoint TxFIFO space available
-)
-
-const (
-	INEPTFSAVn = 0
-)
-
-const (
-	INEPTFSAV DTXFSTS2 = 0xFFFF << 0 //+ IN endpoint TxFIFO space available
-)
-
-const (
-	INEPTFSAVn = 0
-)
-
-const (
-	INEPTFSAV DTXFSTS3 = 0xFFFF << 0 //+ IN endpoint TxFIFO space available
-)
-
-const (
-	INEPTFSAVn = 0
-)
-
-const (
-	XFRSIZ         DOEPTSIZ1 = 0x7FFFF << 0 //+ Transfer size
-	PKTCNT         DOEPTSIZ1 = 0x3FF << 19  //+ Packet count
-	RXDPID_STUPCNT DOEPTSIZ1 = 0x03 << 29   //+ Received data PID/SETUP packet count
-)
-
-const (
-	XFRSIZn         = 0
-	PKTCNTn         = 19
-	RXDPID_STUPCNTn = 29
-)
-
-const (
-	XFRSIZ         DOEPTSIZ2 = 0x7FFFF << 0 //+ Transfer size
-	PKTCNT         DOEPTSIZ2 = 0x3FF << 19  //+ Packet count
-	RXDPID_STUPCNT DOEPTSIZ2 = 0x03 << 29   //+ Received data PID/SETUP packet count
-)
-
-const (
-	XFRSIZn         = 0
-	PKTCNTn         = 19
-	RXDPID_STUPCNTn = 29
 )
 
 const (

@@ -22,14 +22,14 @@
 //  0x024 32  CNT           counter
 //  0x028 32  PSC           prescaler
 //  0x02C 32  ARR           auto-reload register
+//  0x030 32  RCR           repetition counter register
 //  0x034 32  CCR1          capture/compare register 1
 //  0x038 32  CCR2          capture/compare register 2
 //  0x03C 32  CCR3          capture/compare register 3
 //  0x040 32  CCR4          capture/compare register 4
+//  0x044 32  BDTR          break and dead-time register
 //  0x048 32  DCR           DMA control register
 //  0x04C 32  DMAR          DMA address for full transfer
-//  0x030 32  RCR           repetition counter register
-//  0x044 32  BDTR          break and dead-time register
 // Import:
 //  github.com/embeddedgo/stm32/p/bus
 //  github.com/embeddedgo/stm32/p/mmap
@@ -342,6 +342,14 @@ const (
 )
 
 const (
+	REP RCR = 0xFF << 0 //+ Repetition counter value
+)
+
+const (
+	REPn = 0
+)
+
+const (
 	CCR1 CCR1 = 0xFFFF << 0 //+ Capture/Compare 1 value
 )
 
@@ -374,32 +382,6 @@ const (
 )
 
 const (
-	DBA DCR = 0x1F << 0 //+ DMA base address
-	DBL DCR = 0x1F << 8 //+ DMA burst length
-)
-
-const (
-	DBAn = 0
-	DBLn = 8
-)
-
-const (
-	DMAB DMAR = 0xFFFF << 0 //+ DMA register for burst accesses
-)
-
-const (
-	DMABn = 0
-)
-
-const (
-	REP RCR = 0xFF << 0 //+ Repetition counter value
-)
-
-const (
-	REPn = 0
-)
-
-const (
 	DTG  BDTR = 0xFF << 0  //+ Dead-time generator setup
 	LOCK BDTR = 0x03 << 8  //+ Lock configuration
 	OSSI BDTR = 0x01 << 10 //+ Off-state selection for Idle mode
@@ -419,4 +401,22 @@ const (
 	BKPn  = 13
 	AOEn  = 14
 	MOEn  = 15
+)
+
+const (
+	DBA DCR = 0x1F << 0 //+ DMA base address
+	DBL DCR = 0x1F << 8 //+ DMA burst length
+)
+
+const (
+	DBAn = 0
+	DBLn = 8
+)
+
+const (
+	DMAB DMAR = 0xFFFF << 0 //+ DMA register for burst accesses
+)
+
+const (
+	DMABn = 0
 )

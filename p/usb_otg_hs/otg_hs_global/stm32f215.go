@@ -15,10 +15,12 @@
 //  0x014 32  OTG_HS_GINTSTS             OTG_HS core interrupt register
 //  0x018 32  OTG_HS_GINTMSK             OTG_HS interrupt mask register
 //  0x01C 32  OTG_HS_GRXSTSR_Host        OTG_HS Receive status debug read register (host mode)
+//  0x01C 32  OTG_HS_GRXSTSR_Peripheral  OTG_HS Receive status debug read register (peripheral mode mode)
 //  0x020 32  OTG_HS_GRXSTSP_Host        OTG_HS status read and pop register (host mode)
+//  0x020 32  OTG_HS_GRXSTSP_Peripheral  OTG_HS status read and pop register (peripheral mode)
 //  0x024 32  OTG_HS_GRXFSIZ             OTG_HS Receive FIFO size register
-//  0x028 32  OTG_HS_GNPTXFSIZ_Host      OTG_HS nonperiodic transmit FIFO size register (host mode)
 //  0x028 32  OTG_HS_TX0FSIZ_Peripheral  Endpoint 0 transmit FIFO size (peripheral mode)
+//  0x028 32  OTG_HS_GNPTXFSIZ_Host      OTG_HS nonperiodic transmit FIFO size register (host mode)
 //  0x02C 32  OTG_HS_GNPTXSTS            OTG_HS nonperiodic transmit FIFO/queue status register
 //  0x038 32  OTG_HS_GCCFG               OTG_HS general core configuration register
 //  0x03C 32  OTG_HS_CID                 OTG_HS core ID register
@@ -30,8 +32,6 @@
 //  0x124 32  OTG_HS_DIEPTXF5            OTG_HS device IN endpoint transmit FIFO size register
 //  0x128 32  OTG_HS_DIEPTXF6            OTG_HS device IN endpoint transmit FIFO size register
 //  0x12C 32  OTG_HS_DIEPTXF7            OTG_HS device IN endpoint transmit FIFO size register
-//  0x01C 32  OTG_HS_GRXSTSR_Peripheral  OTG_HS Receive status debug read register (peripheral mode mode)
-//  0x020 32  OTG_HS_GRXSTSP_Peripheral  OTG_HS status read and pop register (peripheral mode)
 // Import:
 //  github.com/embeddedgo/stm32/p/mmap
 package otg_hs_global
@@ -291,6 +291,22 @@ const (
 )
 
 const (
+	EPNUM  OTG_HS_GRXSTSR_Peripheral = 0x0F << 0  //+ Endpoint number
+	BCNT   OTG_HS_GRXSTSR_Peripheral = 0x7FF << 4 //+ Byte count
+	DPID   OTG_HS_GRXSTSR_Peripheral = 0x03 << 15 //+ Data PID
+	PKTSTS OTG_HS_GRXSTSR_Peripheral = 0x0F << 17 //+ Packet status
+	FRMNUM OTG_HS_GRXSTSR_Peripheral = 0x0F << 21 //+ Frame number
+)
+
+const (
+	EPNUMn  = 0
+	BCNTn   = 4
+	DPIDn   = 15
+	PKTSTSn = 17
+	FRMNUMn = 21
+)
+
+const (
 	CHNUM  OTG_HS_GRXSTSP_Host = 0x0F << 0  //+ Channel number
 	BCNT   OTG_HS_GRXSTSP_Host = 0x7FF << 4 //+ Byte count
 	DPID   OTG_HS_GRXSTSP_Host = 0x03 << 15 //+ Data PID
@@ -305,21 +321,27 @@ const (
 )
 
 const (
+	EPNUM  OTG_HS_GRXSTSP_Peripheral = 0x0F << 0  //+ Endpoint number
+	BCNT   OTG_HS_GRXSTSP_Peripheral = 0x7FF << 4 //+ Byte count
+	DPID   OTG_HS_GRXSTSP_Peripheral = 0x03 << 15 //+ Data PID
+	PKTSTS OTG_HS_GRXSTSP_Peripheral = 0x0F << 17 //+ Packet status
+	FRMNUM OTG_HS_GRXSTSP_Peripheral = 0x0F << 21 //+ Frame number
+)
+
+const (
+	EPNUMn  = 0
+	BCNTn   = 4
+	DPIDn   = 15
+	PKTSTSn = 17
+	FRMNUMn = 21
+)
+
+const (
 	RXFD OTG_HS_GRXFSIZ = 0xFFFF << 0 //+ RxFIFO depth
 )
 
 const (
 	RXFDn = 0
-)
-
-const (
-	NPTXFSA OTG_HS_GNPTXFSIZ_Host = 0xFFFF << 0  //+ Nonperiodic transmit RAM start address
-	NPTXFD  OTG_HS_GNPTXFSIZ_Host = 0xFFFF << 16 //+ Nonperiodic TxFIFO depth
-)
-
-const (
-	NPTXFSAn = 0
-	NPTXFDn  = 16
 )
 
 const (
@@ -330,6 +352,16 @@ const (
 const (
 	TX0FSAn = 0
 	TX0FDn  = 16
+)
+
+const (
+	NPTXFSA OTG_HS_GNPTXFSIZ_Host = 0xFFFF << 0  //+ Nonperiodic transmit RAM start address
+	NPTXFD  OTG_HS_GNPTXFSIZ_Host = 0xFFFF << 16 //+ Nonperiodic TxFIFO depth
+)
+
+const (
+	NPTXFSAn = 0
+	NPTXFDn  = 16
 )
 
 const (
@@ -448,36 +480,4 @@ const (
 const (
 	INEPTXSAn = 0
 	INEPTXFDn = 16
-)
-
-const (
-	EPNUM  OTG_HS_GRXSTSR_Peripheral = 0x0F << 0  //+ Endpoint number
-	BCNT   OTG_HS_GRXSTSR_Peripheral = 0x7FF << 4 //+ Byte count
-	DPID   OTG_HS_GRXSTSR_Peripheral = 0x03 << 15 //+ Data PID
-	PKTSTS OTG_HS_GRXSTSR_Peripheral = 0x0F << 17 //+ Packet status
-	FRMNUM OTG_HS_GRXSTSR_Peripheral = 0x0F << 21 //+ Frame number
-)
-
-const (
-	EPNUMn  = 0
-	BCNTn   = 4
-	DPIDn   = 15
-	PKTSTSn = 17
-	FRMNUMn = 21
-)
-
-const (
-	EPNUM  OTG_HS_GRXSTSP_Peripheral = 0x0F << 0  //+ Endpoint number
-	BCNT   OTG_HS_GRXSTSP_Peripheral = 0x7FF << 4 //+ Byte count
-	DPID   OTG_HS_GRXSTSP_Peripheral = 0x03 << 15 //+ Data PID
-	PKTSTS OTG_HS_GRXSTSP_Peripheral = 0x0F << 17 //+ Packet status
-	FRMNUM OTG_HS_GRXSTSP_Peripheral = 0x0F << 21 //+ Frame number
-)
-
-const (
-	EPNUMn  = 0
-	BCNTn   = 4
-	DPIDn   = 15
-	PKTSTSn = 17
-	FRMNUMn = 21
 )

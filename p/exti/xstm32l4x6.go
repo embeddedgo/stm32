@@ -27,11 +27,11 @@ type Periph struct {
 	PR2    RPR2
 }
 
+func EXTI() *Periph { return (*Periph)(unsafe.Pointer(uintptr(mmap.EXTI_BASE))) }
+
 func (p *Periph) BaseAddr() uintptr {
 	return uintptr(unsafe.Pointer(p))
 }
-
-func EXTI() *Periph { return (*Periph)(unsafe.Pointer(uintptr(mmap.EXTI_BASE))) }
 
 type IMR1 uint32
 

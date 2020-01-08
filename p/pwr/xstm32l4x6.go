@@ -24,6 +24,8 @@ type Periph struct {
 	PUDC [8]RPUDC
 }
 
+func PWR() *Periph { return (*Periph)(unsafe.Pointer(uintptr(mmap.PWR_BASE))) }
+
 func (p *Periph) BaseAddr() uintptr {
 	return uintptr(unsafe.Pointer(p))
 }
@@ -31,8 +33,6 @@ func (p *Periph) BaseAddr() uintptr {
 func (p *Periph) Bus() bus.Bus {
 	return bus.APB1
 }
-
-func PWR() *Periph { return (*Periph)(unsafe.Pointer(uintptr(mmap.PWR_BASE))) }
 
 type CR1 uint32
 

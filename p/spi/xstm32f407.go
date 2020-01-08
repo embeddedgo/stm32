@@ -24,6 +24,15 @@ type Periph struct {
 	I2SPR   RI2SPR
 }
 
+func I2S2ext() *Periph { return (*Periph)(unsafe.Pointer(uintptr(mmap.I2S2ext_BASE))) }
+func I2S3ext() *Periph { return (*Periph)(unsafe.Pointer(uintptr(mmap.I2S3ext_BASE))) }
+func SPI1() *Periph    { return (*Periph)(unsafe.Pointer(uintptr(mmap.SPI1_BASE))) }
+func SPI2() *Periph    { return (*Periph)(unsafe.Pointer(uintptr(mmap.SPI2_BASE))) }
+func SPI3() *Periph    { return (*Periph)(unsafe.Pointer(uintptr(mmap.SPI3_BASE))) }
+func SPI4() *Periph    { return (*Periph)(unsafe.Pointer(uintptr(mmap.SPI4_BASE))) }
+func SPI5() *Periph    { return (*Periph)(unsafe.Pointer(uintptr(mmap.SPI5_BASE))) }
+func SPI6() *Periph    { return (*Periph)(unsafe.Pointer(uintptr(mmap.SPI6_BASE))) }
+
 func (p *Periph) BaseAddr() uintptr {
 	return uintptr(unsafe.Pointer(p))
 }
@@ -36,15 +45,6 @@ func (p *Periph) Bus() bus.Bus {
 		return bus.APB1
 	}
 }
-
-func I2S2ext() *Periph { return (*Periph)(unsafe.Pointer(uintptr(mmap.I2S2ext_BASE))) }
-func I2S3ext() *Periph { return (*Periph)(unsafe.Pointer(uintptr(mmap.I2S3ext_BASE))) }
-func SPI1() *Periph    { return (*Periph)(unsafe.Pointer(uintptr(mmap.SPI1_BASE))) }
-func SPI2() *Periph    { return (*Periph)(unsafe.Pointer(uintptr(mmap.SPI2_BASE))) }
-func SPI3() *Periph    { return (*Periph)(unsafe.Pointer(uintptr(mmap.SPI3_BASE))) }
-func SPI4() *Periph    { return (*Periph)(unsafe.Pointer(uintptr(mmap.SPI4_BASE))) }
-func SPI5() *Periph    { return (*Periph)(unsafe.Pointer(uintptr(mmap.SPI5_BASE))) }
-func SPI6() *Periph    { return (*Periph)(unsafe.Pointer(uintptr(mmap.SPI6_BASE))) }
 
 type CR1 uint32
 

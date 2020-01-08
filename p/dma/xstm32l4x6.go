@@ -20,6 +20,9 @@ type Periph struct {
 	CSELR RCSELR
 }
 
+func DMA1() *Periph { return (*Periph)(unsafe.Pointer(uintptr(mmap.DMA1_BASE))) }
+func DMA2() *Periph { return (*Periph)(unsafe.Pointer(uintptr(mmap.DMA2_BASE))) }
+
 func (p *Periph) BaseAddr() uintptr {
 	return uintptr(unsafe.Pointer(p))
 }
@@ -27,9 +30,6 @@ func (p *Periph) BaseAddr() uintptr {
 func (p *Periph) Bus() bus.Bus {
 	return bus.AHB1
 }
-
-func DMA1() *Periph { return (*Periph)(unsafe.Pointer(uintptr(mmap.DMA1_BASE))) }
-func DMA2() *Periph { return (*Periph)(unsafe.Pointer(uintptr(mmap.DMA2_BASE))) }
 
 type ISR uint32
 
