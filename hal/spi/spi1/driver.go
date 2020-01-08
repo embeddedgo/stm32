@@ -11,6 +11,7 @@ import (
 
 var driver *spi.Driver
 
+// Driver returns ready to use driver for SPI1 peripheral.
 func Driver() *spi.Driver {
 	if driver == nil {
 		setupDriver()
