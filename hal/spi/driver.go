@@ -28,18 +28,18 @@ func (e DriverError) Error() string {
 }
 
 type Driver struct {
-	deadline int64
-	p        *Periph
-	rxDMA    dma.Channel
-	txDMA    dma.Channel
-	done     rtos.Note
-	dmacnt   int32
-	err      uint32
+	timeout int64
+	p       *Periph
+	rxDMA   dma.Channel
+	txDMA   dma.Channel
+	done    rtos.Note
+	dmacnt  int32
+	err     uint32
 }
 
 // NewDriver provides convenient way to create heap allocated Driver struct.
 func NewDriver(p *Periph, txdma, rxdma dma.Channel) *Driver {
-	return &Driver{deadline: -1, p: p, rxDMA: rxdma, txDMA: txdma}
+	return &Driver{timeout: -1, p: p, rxDMA: rxdma, txDMA: txdma}
 }
 
 // Periph returns the SPI peripheral used by Driver.
@@ -109,8 +109,8 @@ func (d *Driver) ISR() {
 	d.done.Wakeup()
 }
 
-func (d *Driver) SetDeadline(ns int64) {
-	d.deadline = ns
+func (d *Driver) SetTimeout(ns int64) {
+	d.timeout = ns
 }
 
 // WriteReadByte writes and reads byte.
@@ -123,7 +123,7 @@ func (d *Driver) WriteReadByte(b byte) byte {
 	p.EditConfig(TwoWire|Tx, ThreeWire|TxRx)
 	p.EnableIRQ(RxNotEmpty | Err)
 	p.StoreByte(b)
-	if !d.done.Sleep(d.deadline) {
+	if !d.done.Sleep(d.timeout) {
 		p.DisableIRQ(RxNotEmpty | Err)
 		d.err = uint32(ErrTimeout) << 16
 		return 0
@@ -146,7 +146,7 @@ func (d *Driver) WriteReadWord16(w uint16) uint16 {
 	p.EditConfig(TwoWire|Tx, ThreeWire|TxRx)
 	p.EnableIRQ(RxNotEmpty | Err)
 	p.StoreWord16(w)
-	if !d.done.Sleep(d.deadline) {
+	if !d.done.Sleep(d.timeout) {
 		p.DisableIRQ(RxNotEmpty | Err)
 		d.err = uint32(ErrTimeout) << 16
 		return 0
@@ -201,7 +201,7 @@ func (d *Driver) writeReadDMA(out, in uintptr, olen, ilen int, wsize uintptr) (n
 		}
 		in += uintptr(m)
 		n += m
-		done := d.done.Sleep(d.deadline)
+		done := d.done.Sleep(d.timeout)
 		if !done {
 			d.txDMA.DisableIRQ(dma.EvAll, dma.ErrAll)
 			d.rxDMA.DisableIRQ(dma.EvAll, dma.ErrAll)
@@ -247,7 +247,7 @@ func (d *Driver) writeDMA(out uintptr, n int, wsize uintptr, incm dma.Mode) {
 		if incm != 0 {
 			out += uintptr(m)
 		}
-		done := d.done.Sleep(d.deadline)
+		done := d.done.Sleep(d.timeout)
 		if !done {
 			d.txDMA.DisableIRQ(dma.EvAll, dma.ErrAll)
 			d.err = uint32(ErrTimeout) << 16

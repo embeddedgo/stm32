@@ -26,7 +26,9 @@ func main() {
 
 	// Configure SPI pins
 
-	spi1.UsePinsMaster(sck, mosi, miso)
+	spi1.UsePinMaster(spi.SCK, sck)
+	spi1.UsePinMaster(spi.MOSI, mosi)
+	spi1.UsePinMaster(spi.MISO, miso)
 
 	// Configure and enable SPI
 

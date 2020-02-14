@@ -6,46 +6,39 @@ package spi
 
 import "github.com/embeddedgo/stm32/hal/gpio"
 
-// UsePinsMaster is helper function that can be used to configure GPIO pins as
-// required by SPI master if they all can use the same alternate function.
-func UsePinsMaster(af gpio.AltFunc, sck, mosi gpio.Pin, miso_nss ...gpio.Pin) {
-	cfg := &gpio.Config{Mode: gpio.Alt, Speed: gpio.VeryHigh}
-	if sck.IsValid() {
-		sck.Setup(cfg)
-		sck.SetAltFunc(af)
+type Signal uint8
+
+const (
+	SCK Signal = iota
+	MOSI
+	MISO
+	NSS
+)
+
+// UsePinMaster is a helper function that can be used to configure GPIO pins as
+// required by SPI master device.
+func UsePinMaster(af gpio.AltFunc, sig Signal, pin gpio.Pin) {
+	var cfg gpio.Config
+	if sig == MISO {
+		cfg.Mode = gpio.AltIn
+	} else {
+		cfg.Mode = gpio.Alt
+		cfg.Speed = gpio.VeryHigh
 	}
-	if mosi.IsValid() {
-		mosi.Setup(cfg)
-		mosi.SetAltFunc(af)
-	}
-	if len(miso_nss) > 0 && miso_nss[0].IsValid() {
-		miso_nss[0].Setup(&gpio.Config{Mode: gpio.AltIn})
-		miso_nss[0].SetAltFunc(af)
-	}
-	if len(miso_nss) > 1 {
-		miso_nss[1].Setup(cfg)
-		miso_nss[1].SetAltFunc(af)
-	}
+	pin.Setup(&cfg)
+	pin.SetAltFunc(af)
 }
 
-// UsePinsSlave is helper function that can be used to configure GPIO pins as
-// required by SPI slave if they all can use the same alternate function.
-func UsePinsSlave(af gpio.AltFunc, sck, miso gpio.Pin, mosi_nss ...gpio.Pin) {
-	cfg := &gpio.Config{Mode: gpio.AltIn}
-	if sck.IsValid() {
-		sck.Setup(cfg)
-		sck.SetAltFunc(af)
+// UsePinSlave is a helper function that can be used to configure GPIO pins as
+// required by SPI slave device.
+func UsePinSlave(af gpio.AltFunc, sig Signal, pin gpio.Pin) {
+	var cfg gpio.Config
+	if sig == MISO {
+		cfg.Mode = gpio.Alt
+		cfg.Speed = gpio.VeryHigh
+	} else {
+		cfg.Mode = gpio.AltIn
 	}
-	if miso.IsValid() {
-		miso.Setup(cfg)
-		miso.SetAltFunc(af)
-	}
-	if len(mosi_nss) > 0 && mosi_nss[0].IsValid() {
-		mosi_nss[0].Setup(&gpio.Config{Mode: gpio.Alt, Speed: gpio.VeryHigh})
-		mosi_nss[0].SetAltFunc(af)
-	}
-	if len(mosi_nss) > 1 && mosi_nss[1].IsValid() {
-		mosi_nss[1].Setup(cfg)
-		mosi_nss[1].SetAltFunc(af)
-	}
+	pin.Setup(&cfg)
+	pin.SetAltFunc(af)
 }

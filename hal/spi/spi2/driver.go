@@ -19,14 +19,14 @@ func Driver() *spi.Driver {
 	return driver
 }
 
-// UsePinsMaster is helper function that can be used to configure GPIO pins as
-// required by SPI master device
-func UsePinsMaster(sck, mosi gpio.Pin, miso_nss ...gpio.Pin) {
-	spi.UsePinsMaster(altFunc, sck, mosi, miso_nss...)
+// UsePinMaster is a helper function that can be used to configure GPIO pins as
+// required by SPI master device.
+func UsePinMaster(sig spi.Signal, pin gpio.Pin) {
+	spi.UsePinMaster(altFunc, sig, pin)
 }
 
-// UsePinsSlave is helper function that can be used to configure GPIO pins as
+// UsePinSlave is a helper function that can be used to configure GPIO pins as
 // required by SPI slave device.
-func UsePinsSlave(sck, miso gpio.Pin, mosi_nss ...gpio.Pin) {
-	spi.UsePinsSlave(altFunc, sck, miso, mosi_nss...)
+func UsePinSlave(sig spi.Signal, pin gpio.Pin) {
+	spi.UsePinSlave(altFunc, sig, pin)
 }
