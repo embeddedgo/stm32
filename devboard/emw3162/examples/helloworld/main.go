@@ -5,7 +5,7 @@
 package main
 
 import (
-	"github.com/embeddedgo/x/time"
+	"time"
 
 	_ "github.com/embeddedgo/stm32/devboard/emw3162/board/init"
 )

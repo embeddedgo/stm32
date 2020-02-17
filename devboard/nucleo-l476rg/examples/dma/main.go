@@ -8,6 +8,7 @@ package main
 
 import (
 	"embedded/rtos"
+	"time"
 	"unsafe"
 
 	"github.com/embeddedgo/stm32/hal/dma"
@@ -38,10 +39,10 @@ func copyDMA(n int) {
 	}
 }
 
-func printSpeed(t int64, n int, check bool) {
+func printSpeed(t time.Duration, n int, check bool) {
 	t1 := rtos.Nanotime()
 	t2 := rtos.Nanotime()
-	dt := (t1 - t) - (t2 - t1)
+	dt := int64(t1-t) - int64(t2-t1)
 	if check {
 		for i := 0; i < n; i++ {
 			if dst[i] != uint32(i) {
@@ -88,9 +89,9 @@ func main() {
 			copyDMA(n)
 			printSpeed(t, n, true)
 
-			rtos.Nanosleep(2e9)
+			time.Sleep(2 * time.Second)
 		}
-		rtos.Nanosleep(2e9)
+		time.Sleep(2 * time.Second)
 		println("\n---")
 	}
 }

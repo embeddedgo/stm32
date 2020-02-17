@@ -9,6 +9,7 @@ import (
 	"reflect"
 	"runtime"
 	"sync/atomic"
+	"time"
 	"unsafe"
 
 	"github.com/embeddedgo/stm32/hal/dma"
@@ -28,7 +29,7 @@ func (e DriverError) Error() string {
 }
 
 type Driver struct {
-	timeout int64
+	timeout time.Duration
 	p       *Periph
 	rxDMA   dma.Channel
 	txDMA   dma.Channel
@@ -109,8 +110,8 @@ func (d *Driver) ISR() {
 	d.done.Wakeup()
 }
 
-func (d *Driver) SetTimeout(ns int64) {
-	d.timeout = ns
+func (d *Driver) SetTimeout(timeout time.Duration) {
+	d.timeout = timeout
 }
 
 // WriteReadByte writes and reads byte.

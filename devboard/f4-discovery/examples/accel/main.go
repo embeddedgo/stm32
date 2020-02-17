@@ -6,6 +6,7 @@ package main
 
 import (
 	"embedded/rtos"
+	"time"
 
 	"github.com/embeddedgo/stm32/hal/exti"
 	"github.com/embeddedgo/stm32/hal/gpio"
@@ -36,7 +37,7 @@ func NewLIS3DSH(d *spi.Driver, cs gpio.Pin, dri exti.Lines) *LIS3DSH {
 }
 
 func (a *LIS3DSH) Init() {
-	rtos.Nanosleep(10e6 - rtos.Nanotime())
+	time.Sleep(10*time.Millisecond - rtos.Nanotime())
 	a.cs.Clear()
 	a.d.WriteRead([]byte{CTRL_REG4, 0x67}, nil)
 	a.cs.Set()
@@ -117,7 +118,7 @@ func show(x, y, z int) {
 	gauge("y", y)
 	gauge("z", z)
 	print("+-----------------------------------------+\n")
-	rtos.Nanosleep(100e6)
+	time.Sleep(100 * time.Millisecond)
 }
 
 func gauge(name string, v int) {

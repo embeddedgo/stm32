@@ -6,7 +6,7 @@
 package main
 
 import (
-	"embedded/rtos"
+	"time"
 
 	"github.com/embeddedgo/stm32/hal/gpio"
 	"github.com/embeddedgo/stm32/hal/spi"
@@ -41,6 +41,6 @@ func main() {
 	for i := 0; ; i++ {
 		d.WriteStringRead("Hello world!", buf[:])
 		println(string(buf[:]))
-		rtos.Nanosleep(1e9)
+		time.Sleep(time.Second)
 	}
 }

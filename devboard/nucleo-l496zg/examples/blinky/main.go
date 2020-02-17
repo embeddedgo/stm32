@@ -6,7 +6,7 @@
 package main
 
 import (
-	"github.com/embeddedgo/x/time"
+	"time"
 
 	"github.com/embeddedgo/stm32/devboard/nucleo-l496zg/board/buttons"
 	"github.com/embeddedgo/stm32/devboard/nucleo-l496zg/board/leds"

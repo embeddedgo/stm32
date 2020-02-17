@@ -8,6 +8,7 @@ package main
 
 import (
 	"embedded/rtos"
+	"time"
 
 	"github.com/embeddedgo/stm32/hal/exti"
 	"github.com/embeddedgo/stm32/hal/irq"
@@ -45,9 +46,9 @@ func waitBtn(state int) {
 	for {
 		note.Clear()
 		line.EnableIRQ()
-		wait := int64(-1)
+		wait := time.Duration(-1)
 		if buttons.User.Read() == state {
-			wait = 50e6 // we want 50 ms of stable state
+			wait = 50 * time.Millisecond // we want 50 ms of stable state
 		}
 		if !note.Sleep(wait) {
 			line.DisableIRQ()

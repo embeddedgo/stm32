@@ -6,7 +6,7 @@
 package main
 
 import (
-	"github.com/embeddedgo/x/time"
+	"time"
 
 	"github.com/embeddedgo/stm32/devboard/f4-discovery/board/buttons"
 	"github.com/embeddedgo/stm32/devboard/f4-discovery/board/leds"
