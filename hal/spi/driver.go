@@ -6,7 +6,6 @@ package spi
 
 import (
 	"embedded/rtos"
-	"reflect"
 	"runtime"
 	"sync/atomic"
 	"time"
@@ -350,8 +349,8 @@ func (d *Driver) WriteStringRead(out string, in []byte) int {
 		}
 		return 0
 	}
-	oaddr := (*reflect.StringHeader)(unsafe.Pointer(&out)).Data
-	iaddr := (*reflect.SliceHeader)(unsafe.Pointer(&in)).Data
+	oaddr := *(*uintptr)(unsafe.Pointer(&out))
+	iaddr := *(*uintptr)(unsafe.Pointer(&in))
 	return d.writeRead(oaddr, iaddr, olen, ilen, 1)
 }
 
@@ -404,8 +403,8 @@ func (d *Driver) WriteRead16(out, in []uint16) int {
 		}
 		return 0
 	}
-	oaddr := (*reflect.SliceHeader)(unsafe.Pointer(&out)).Data
-	iaddr := (*reflect.SliceHeader)(unsafe.Pointer(&in)).Data
+	oaddr := *(*uintptr)(unsafe.Pointer(&out))
+	iaddr := *(*uintptr)(unsafe.Pointer(&in))
 	return d.writeRead(oaddr, iaddr, olen, ilen, 2)
 }
 
