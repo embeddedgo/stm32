@@ -22,6 +22,9 @@ func UsePinMaster(af gpio.AltFunc, sig Signal, pin gpio.Pin) {
 	if sig == MISO {
 		cfg.Mode = gpio.AltIn
 	} else {
+		if sig == NSS {
+			cfg.Pull = gpio.PullUp
+		}
 		cfg.Mode = gpio.Alt
 		cfg.Speed = gpio.VeryHigh
 	}
