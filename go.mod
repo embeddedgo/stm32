@@ -2,6 +2,9 @@ module github.com/embeddedgo/stm32
 
 go 1.13
 
-require github.com/embeddedgo/x v0.0.5
+//replace github.com/embeddedgo/display => ../display
 
-//replace github.com/embeddedgo/x => ../x
+require (
+	github.com/embeddedgo/display v0.0.1
+	github.com/embeddedgo/x v0.0.5
+)
