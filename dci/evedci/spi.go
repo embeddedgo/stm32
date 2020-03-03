@@ -15,7 +15,6 @@ type SPI struct {
 	pdn, csn gpio.Pin
 	clkHz    int
 	maxClkHz int
-	started  bool
 	reconf   bool
 }
 
@@ -70,12 +69,21 @@ func (dci *SPI) SetPDN(pdn int) {
 	dci.pdn.Store(pdn)
 }
 
+func (dci *SPI) Begin() {
+	if dci.csn.IsValid() {
+		dci.csn.Clear()
+		if dci.reconf {
+			dci.spi.Setup(spi.Master|spi.SoftSS|spi.ISSHigh, dci.clkHz)
+		}
+	}
+	dci.spi.Enable()
+}
+
 func (dci *SPI) End() {
 	if dci.csn.IsValid() {
 		dci.csn.Set()
 	}
 	dci.spi.Disable()
-	dci.started = false
 }
 
 func (dci *SPI) Read(s []byte) {
@@ -83,18 +91,5 @@ func (dci *SPI) Read(s []byte) {
 }
 
 func (dci *SPI) Write(s []byte) {
-	if len(s) == 0 {
-		return
-	}
-	if !dci.started {
-		if dci.csn.IsValid() {
-			dci.csn.Clear()
-			if dci.reconf {
-				dci.spi.Setup(spi.Master|spi.SoftSS|spi.ISSHigh, dci.clkHz)
-			}
-		}
-		dci.spi.Enable()
-		dci.started = true
-	}
 	dci.spi.WriteRead(s, nil)
 }

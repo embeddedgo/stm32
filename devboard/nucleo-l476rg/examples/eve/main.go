@@ -136,33 +136,9 @@ func main() {
 	waitTouch(lcd)
 	time.Sleep(200 * time.Millisecond)
 
-calibration:
-	ce = lcd.CE()
-	ce.DLStart()
-	ce.Clear(eve.CST)
-	ce.TextString(
-		width/2, height/2, 30, eve.OPT_CENTER,
-		"Touch panel calibration",
-	)
-	addr := ce.Calibrate()
-	ce.Close()
-
-	if lcd.ReadUint32(addr) == 0 {
-		ce = lcd.CE()
-		ce.DLStart()
-		ce.Clear(eve.CST)
-		ce.TextString(
-			width/2, height/2, 30, eve.OPT_CENTER,
-			"Calibration failed!",
-		)
-		ce.Close()
-		time.Sleep(2 * time.Second)
-		goto calibration
-	}
-
 	w := lcd.W(0)
 	w.WriteString(gopherMask)
-	addr = w.Close()
+	addr := w.Close()
 	addr1 := (len(gopherMask) + 3) &^ 3
 	println(addr, addr1)
 
@@ -189,6 +165,73 @@ calibration:
 	ce.Display()
 	ce.Swap()
 	ce.Close()
+
+calibration:
+	ce = lcd.CE()
+	ce.DLStart()
+	ce.Clear(eve.CST)
+	ce.TextString(
+		width/2, height/2, 30, eve.OPT_CENTER,
+		"Touch panel calibration",
+	)
+	addr = ce.Calibrate()
+	ce.Close()
+
+	if lcd.ReadUint32(addr) == 0 {
+		ce = lcd.CE()
+		ce.DLStart()
+		ce.Clear(eve.CST)
+		ce.TextString(
+			width/2, height/2, 30, eve.OPT_CENTER,
+			"Calibration failed!",
+		)
+		ce.Close()
+		time.Sleep(2 * time.Second)
+		goto calibration
+	}
+
+	const button = 1
+	for {
+		tag := lcd.TouchTag()
+		ce = lcd.CE()
+		ce.DLStart()
+		ce.ClearColorRGB(0xc3a6f4)
+		ce.Clear(eve.CST)
+		ce.Gradient(0, 0, 0x0004ff, 0, height, 0xe08484)
+		ce.Align(4)
+		ce.TextString(width/2, height/2, 30, eve.OPT_CENTER, "Hello World!")
+		ce.Begin(eve.RECTS)
+		ce.ColorA(128)
+		ce.ColorRGB(0xFF8000)
+		ce.Vertex2ii(260, 100, 0, 0)
+		ce.Vertex2ii(360, 200, 0, 0)
+		ce.ColorRGB(0x0080FF)
+		ce.Vertex2ii(300, 160, 0, 0)
+		ce.Vertex2ii(400, 260, 0, 0)
+		ce.ColorRGB(0xFFFFFF)
+		ce.ColorA(200)
+		t := time.Now()
+		h, m, s := t.Clock()
+		ms := int(t.Nanosecond() / 1e6)
+		ce.Clock(100, 100, 70, eve.OPT_NOBACK, h, m, s, ms)
+		ce.ColorA(255)
+		ce.Tag(button)
+		buttonFont := byte(27)
+		buttonStyle := uint16(eve.DEFAULT)
+		if tag == button {
+			buttonFont--
+			buttonStyle |= eve.OPT_FLAT
+			ce.TextString(300, height-70, 29, eve.DEFAULT, "Thanks!")
+		}
+		ce.ButtonString(
+			40, height-70, 100, 40, buttonFont, buttonStyle,
+			"Push me!",
+		)
+		ce.Display()
+		ce.Swap()
+		ce.Close()
+	}
+
 }
 
 func checkErr(err error) {
