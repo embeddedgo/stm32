@@ -134,20 +134,16 @@ func main() {
 	ce.Close()
 
 	waitTouch(lcd)
-	time.Sleep(200 * time.Millisecond)
 
 	w := lcd.W(0)
 	w.WriteString(gopherMask)
 	addr := w.Close()
-	addr1 := (len(gopherMask) + 3) &^ 3
-	println(addr, addr1)
 
 	ce = lcd.CE()
 	ce.DLStart()
-	ce.LoadImageString(addr, eve.OPT_RGB565, gopher)
-	ce.Close() // A lot of data sent. Ensure free space.
-
-	ce = lcd.CE()
+	ce.LoadImage(addr, eve.OPT_RGB565)
+	ce.WriteString(gopher)
+	ce.Align(4)
 	ce.BitmapHandle(1)
 	ce.BitmapLayout(eve.L1, 216/8, 251)
 	ce.BitmapSize(eve.DEFAULT, 211, 251)
@@ -165,6 +161,9 @@ func main() {
 	ce.Display()
 	ce.Swap()
 	ce.Close()
+
+	waitTouch(lcd)
+	time.Sleep(200 * time.Millisecond)
 
 calibration:
 	ce = lcd.CE()
@@ -219,7 +218,6 @@ calibration:
 		buttonFont := byte(27)
 		buttonStyle := uint16(eve.DEFAULT)
 		if tag == button {
-			buttonFont--
 			buttonStyle |= eve.OPT_FLAT
 			ce.TextString(300, height-70, 29, eve.DEFAULT, "Thanks!")
 		}
@@ -231,7 +229,6 @@ calibration:
 		ce.Swap()
 		ce.Close()
 	}
-
 }
 
 func checkErr(err error) {
