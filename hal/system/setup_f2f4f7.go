@@ -43,6 +43,8 @@
 package system
 
 import (
+	"runtime"
+
 	"github.com/embeddedgo/stm32/p/bus"
 	"github.com/embeddedgo/stm32/p/flash"
 	"github.com/embeddedgo/stm32/p/rcc"
@@ -73,11 +75,11 @@ func SetupPLL(osc, N, P int) {
 	// Reset RCC clock configuration.
 	RCC.HSION().Set()
 	for RCC.HSIRDY().Load() == 0 {
-		// Wait for HSI...
+		runtime.Gosched() // Wait for HSI...
 	}
 	RCC.CFGR.Store(0)
 	for RCC.SWS().Load() != rcc.SWS_HSI {
-		// Wait for system clock setup...
+		runtime.Gosched() // Wait for system clock setup...
 	}
 	RCC.CR.Store(rcc.HSION)
 	RCC.PLLCFGR.Store(0x24003010)
@@ -151,9 +153,9 @@ func SetupPLL(osc, N, P int) {
 		apb2clk = ahbclk / 16
 	}
 	bus.Core.SetClock(int64(sysclk))
-	bus.AHB1.SetClock(int64(ahbclk))
-	bus.AHB2.SetClock(int64(ahbclk))
-	bus.AHB3.SetClock(int64(ahbclk))
+	for b := bus.AHB1; b <= bus.AHBLast; b++ {
+		b.SetClock(int64(ahbclk))
+	}
 	bus.APB1.SetClock(int64(apb1clk))
 	bus.APB2.SetClock(int64(apb2clk))
 
@@ -166,6 +168,7 @@ func SetupPLL(osc, N, P int) {
 		src = rcc.PLLSRC_HSE
 		mnpq |= rcc.PLLCFGR(osc/2) << rcc.PLLMn
 		for RCC.HSERDY().Load() == 0 {
+			runtime.Gosched()
 		}
 	} else {
 		src = rcc.PLLSRC_HSI
@@ -174,11 +177,13 @@ func SetupPLL(osc, N, P int) {
 	RCC.PLLCFGR.Store(mnpq | src)
 	RCC.PLLON().Set()
 	for RCC.PLLRDY().Load() == 0 {
+			runtime.Gosched()
 	}
 
 	// Change system clock source to PLL.
 	RCC.CFGR.Store(cfgr | rcc.SW_PLL)
 	for RCC.SWS().Load() != rcc.SWS_PLL {
+			runtime.Gosched()
 	}
 	if osc != 0 {
 		RCC.HSION().Clear()

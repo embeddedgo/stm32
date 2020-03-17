@@ -61,6 +61,8 @@
 package system
 
 import (
+	"runtime"
+
 	"github.com/embeddedgo/stm32/p/bus"
 	"github.com/embeddedgo/stm32/p/flash"
 	"github.com/embeddedgo/stm32/p/rcc"
@@ -101,6 +103,7 @@ func SetupPLL(clksrc, M, N, P, Q, R int) {
 	// Reset RCC clock configuration.
 	RCC.MSION().Set()
 	for RCC.MSIRDY().Load() == 0 {
+		runtime.Gosched()
 	}
 	RCC.CR.Store(6<<rcc.MSIRANGEn | rcc.MSIRGSEL | rcc.MSION)
 	RCC.CFGR.Store(0) // MSI selected as system clock. APBCLK, AHBCLK = SYSCLK.
@@ -237,16 +240,19 @@ func SetupPLL(clksrc, M, N, P, Q, R int) {
 
 	// Setup PLL.
 	for PWR.VOSF().Load() != 0 {
+		runtime.Gosched()
 	}
 	RCC.PWREN().Clear()
 	var src rcc.PLLCFGR
 	if clksrc == 0 {
 		src = rcc.PLLSRC_HSI
 		for RCC.HSIRDY().Load() == 0 {
+			runtime.Gosched()
 		}
 	} else if clksrc > 0 {
 		src = rcc.PLLSRC_HSE
 		for RCC.HSERDY().Load() == 0 {
+			runtime.Gosched()
 		}
 	} else {
 		src = rcc.PLLSRC_MSI
@@ -262,6 +268,7 @@ func SetupPLL(clksrc, M, N, P, Q, R int) {
 		if msirange != 0 {
 			RCC.MSIRANGE().Store(msirange << rcc.MSIRANGEn)
 			for RCC.MSIRDY().Load() == 0 {
+				runtime.Gosched()
 			}
 		}
 	}
@@ -279,11 +286,13 @@ func SetupPLL(clksrc, M, N, P, Q, R int) {
 	RCC.PLLCFGR.Store(mnpqr | src)
 	RCC.PLLON().Set()
 	for RCC.PLLRDY().Load() == 0 {
+		runtime.Gosched()
 	}
 
 	// Set system clock source to PLL.
 	RCC.CFGR.Store(cfgr | rcc.SW_PLL)
 	for RCC.SWS().Load() != rcc.SWS_PLL {
+		runtime.Gosched()
 	}
 	if osc >= 0 {
 		RCC.MSION().Clear()
@@ -308,6 +317,7 @@ func SetupMSI(msikHz int) {
 	// Reset RCC clock configuration.
 	RCC.MSION().Set()
 	for RCC.MSIRDY().Load() == 0 {
+		runtime.Gosched()
 	}
 	RCC.CR.Store(6<<rcc.MSIRANGEn | rcc.MSIRGSEL | rcc.MSION)
 	RCC.CFGR.Store(0) // MSI selected as system clock. APBCLK, AHBCLK = SYSCLK.
