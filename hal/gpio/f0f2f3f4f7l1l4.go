@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// +build stm32f215 stm32f407 stm32f7x6 stm32l4x6
+// +build stm32f215 stm32f407 stm32f412 stm32f7x6 stm32l4x6
 
 package gpio
 

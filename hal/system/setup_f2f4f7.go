@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// +build stm32f215 stm32f407
+// +build stm32f215 stm32f407 stm32f412
 
 // Goal is to provide 48 MHz for USB FS (SDIO, RNG). So PLLVCO must satisfy the
 // equation:
