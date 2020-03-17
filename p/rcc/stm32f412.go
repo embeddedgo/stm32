@@ -62,76 +62,65 @@ const (
 )
 
 const (
-	PLLM0  PLLCFGR = 0x01 << 0  //+ Division factor for the main PLL (PLL) and audio PLL (PLLI2S) input clock
-	PLLM1  PLLCFGR = 0x01 << 1  //+ Division factor for the main PLL (PLL) and audio PLL (PLLI2S) input clock
-	PLLM2  PLLCFGR = 0x01 << 2  //+ Division factor for the main PLL (PLL) and audio PLL (PLLI2S) input clock
-	PLLM3  PLLCFGR = 0x01 << 3  //+ Division factor for the main PLL (PLL) and audio PLL (PLLI2S) input clock
-	PLLM4  PLLCFGR = 0x01 << 4  //+ Division factor for the main PLL (PLL) and audio PLL (PLLI2S) input clock
-	PLLM5  PLLCFGR = 0x01 << 5  //+ Division factor for the main PLL (PLL) and audio PLL (PLLI2S) input clock
-	PLLN0  PLLCFGR = 0x01 << 6  //+ Main PLL (PLL) multiplication factor for VCO
-	PLLN1  PLLCFGR = 0x01 << 7  //+ Main PLL (PLL) multiplication factor for VCO
-	PLLN2  PLLCFGR = 0x01 << 8  //+ Main PLL (PLL) multiplication factor for VCO
-	PLLN3  PLLCFGR = 0x01 << 9  //+ Main PLL (PLL) multiplication factor for VCO
-	PLLN4  PLLCFGR = 0x01 << 10 //+ Main PLL (PLL) multiplication factor for VCO
-	PLLN5  PLLCFGR = 0x01 << 11 //+ Main PLL (PLL) multiplication factor for VCO
-	PLLN6  PLLCFGR = 0x01 << 12 //+ Main PLL (PLL) multiplication factor for VCO
-	PLLN7  PLLCFGR = 0x01 << 13 //+ Main PLL (PLL) multiplication factor for VCO
-	PLLN8  PLLCFGR = 0x01 << 14 //+ Main PLL (PLL) multiplication factor for VCO
-	PLLP0  PLLCFGR = 0x01 << 16 //+ Main PLL (PLL) division factor for main system clock
-	PLLP1  PLLCFGR = 0x01 << 17 //+ Main PLL (PLL) division factor for main system clock
-	PLLSRC PLLCFGR = 0x01 << 22 //+ Main PLL(PLL) and audio PLL (PLLI2S) entry clock source
-	PLLQ0  PLLCFGR = 0x01 << 24 //+ Main PLL (PLL) division factor for USB OTG FS, SDIO and random number generator clocks
-	PLLQ1  PLLCFGR = 0x01 << 25 //+ Main PLL (PLL) division factor for USB OTG FS, SDIO and random number generator clocks
-	PLLQ2  PLLCFGR = 0x01 << 26 //+ Main PLL (PLL) division factor for USB OTG FS, SDIO and random number generator clocks
-	PLLQ3  PLLCFGR = 0x01 << 27 //+ Main PLL (PLL) division factor for USB OTG FS, SDIO and random number generator clocks
+	PLLM       PLLCFGR = 0x3F << 0  //+ Division factor for the main PLL (PLL) and audio PLL (PLLI2S) input clock
+	PLLN       PLLCFGR = 0x1FF << 6 //+ Main PLL (PLL) multiplication factor for VCO
+	PLLP       PLLCFGR = 0x03 << 16 //+ Main PLL (PLL) division factor for main system clock
+	PLLSRC     PLLCFGR = 0x01 << 22 //+ Main PLL(PLL) and audio PLL (PLLI2S) entry clock source
+	PLLSRC_HSI PLLCFGR = 0x00 << 22 //  HSI usead as clock source
+	PLLSRC_HSE PLLCFGR = 0x01 << 22 //  HSE usead as clock source
+	PLLQ       PLLCFGR = 0x0F << 24 //+ Main PLL (PLL) division factor for USB OTG FS, SDIO and random number generator clocks
 )
 
 const (
-	PLLM0n  = 0
-	PLLM1n  = 1
-	PLLM2n  = 2
-	PLLM3n  = 3
-	PLLM4n  = 4
-	PLLM5n  = 5
-	PLLN0n  = 6
-	PLLN1n  = 7
-	PLLN2n  = 8
-	PLLN3n  = 9
-	PLLN4n  = 10
-	PLLN5n  = 11
-	PLLN6n  = 12
-	PLLN7n  = 13
-	PLLN8n  = 14
-	PLLP0n  = 16
-	PLLP1n  = 17
+	PLLMn   = 0
+	PLLNn   = 6
+	PLLPn   = 16
 	PLLSRCn = 22
-	PLLQ0n  = 24
-	PLLQ1n  = 25
-	PLLQ2n  = 26
-	PLLQ3n  = 27
+	PLLQn   = 24
 )
 
 const (
-	SW0     CFGR = 0x01 << 0  //+ System clock switch
-	SW1     CFGR = 0x01 << 1  //+ System clock switch
-	SWS0    CFGR = 0x01 << 2  //+ System clock switch status
-	SWS1    CFGR = 0x01 << 3  //+ System clock switch status
-	HPRE    CFGR = 0x0F << 4  //+ AHB prescaler
-	PPRE1   CFGR = 0x07 << 10 //+ APB Low speed prescaler (APB1)
-	PPRE2   CFGR = 0x07 << 13 //+ APB high-speed prescaler (APB2)
-	RTCPRE  CFGR = 0x1F << 16 //+ HSE division factor for RTC clock
-	MCO1    CFGR = 0x03 << 21 //+ Microcontroller clock output 1
-	I2SSRC  CFGR = 0x01 << 23 //+ I2S clock selection
-	MCO1PRE CFGR = 0x07 << 24 //+ MCO1 prescaler
-	MCO2PRE CFGR = 0x07 << 27 //+ MCO2 prescaler
-	MCO2    CFGR = 0x03 << 30 //+ Microcontroller clock output 2
+	SW          CFGR = 0x03 << 0  //+ System clock switch
+	SW_HSI      CFGR = 0x00 << 0  //  HSI selected as system clock
+	SW_HSE      CFGR = 0x01 << 0  //  HSE selected as system clock
+	SW_PLL      CFGR = 0x02 << 0  //  PLL/PLLP selected as system clock
+	SWS         CFGR = 0x03 << 2  //+ System clock switch status
+	SWS_HSI     CFGR = 0x00 << 2  //  HSI oscillator used as system clock
+	SWS_HSE     CFGR = 0x01 << 2  //  HSE oscillator used as system clock
+	SWS_PLL     CFGR = 0x02 << 2  //  PLL/PLLP used as system clock
+	HPRE        CFGR = 0x0F << 4  //+ AHB prescaler
+	HPRE_DIV1   CFGR = 0x00 << 4  //  SYSCLK not divided
+	HPRE_DIV2   CFGR = 0x08 << 4  //  SYSCLK divided by 2
+	HPRE_DIV4   CFGR = 0x09 << 4  //  SYSCLK divided by 4
+	HPRE_DIV8   CFGR = 0x0A << 4  //  SYSCLK divided by 8
+	HPRE_DIV16  CFGR = 0x0B << 4  //  SYSCLK divided by 16
+	HPRE_DIV64  CFGR = 0x0C << 4  //  SYSCLK divided by 64
+	HPRE_DIV128 CFGR = 0x0D << 4  //  SYSCLK divided by 128
+	HPRE_DIV256 CFGR = 0x0E << 4  //  SYSCLK divided by 256
+	HPRE_DIV512 CFGR = 0x0F << 4  //  SYSCLK divided by 512
+	PPRE1       CFGR = 0x07 << 10 //+ APB Low speed prescaler (APB1)
+	PPRE1_DIV1  CFGR = 0x00 << 10 //  HCLK not divided
+	PPRE1_DIV2  CFGR = 0x04 << 10 //  HCLK divided by 2
+	PPRE1_DIV4  CFGR = 0x05 << 10 //  HCLK divided by 4
+	PPRE1_DIV8  CFGR = 0x06 << 10 //  HCLK divided by 8
+	PPRE1_DIV16 CFGR = 0x07 << 10 //  HCLK divided by 16
+	PPRE2       CFGR = 0x07 << 13 //+ APB high-speed prescaler (APB2)
+	PPRE2_DIV1  CFGR = 0x00 << 13 //  HCLK not divided
+	PPRE2_DIV2  CFGR = 0x04 << 13 //  HCLK divided by 2
+	PPRE2_DIV4  CFGR = 0x05 << 13 //  HCLK divided by 4
+	PPRE2_DIV8  CFGR = 0x06 << 13 //  HCLK divided by 8
+	PPRE2_DIV16 CFGR = 0x07 << 13 //  HCLK divided by 16
+	RTCPRE      CFGR = 0x1F << 16 //+ HSE division factor for RTC clock
+	MCO1        CFGR = 0x03 << 21 //+ Microcontroller clock output 1
+	I2SSRC      CFGR = 0x01 << 23 //+ I2S clock selection
+	MCO1PRE     CFGR = 0x07 << 24 //+ MCO1 prescaler
+	MCO2PRE     CFGR = 0x07 << 27 //+ MCO2 prescaler
+	MCO2        CFGR = 0x03 << 30 //+ Microcontroller clock output 2
 )
 
 const (
-	SW0n     = 0
-	SW1n     = 1
-	SWS0n    = 2
-	SWS1n    = 3
+	SWn      = 0
+	SWSn     = 2
 	HPREn    = 4
 	PPRE1n   = 10
 	PPRE2n   = 13

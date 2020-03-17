@@ -11,6 +11,9 @@ const (
 	AHB3
 	APB1
 	APB2
+
+	AHBLast = AHB3
+	APBLast = APB2
 )
 
 type Bus uint8

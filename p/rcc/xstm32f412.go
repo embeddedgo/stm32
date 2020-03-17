@@ -127,92 +127,24 @@ type RMPLLCFGR struct{ mmio.UM32 }
 func (rm RMPLLCFGR) Load() PLLCFGR   { return PLLCFGR(rm.UM32.Load()) }
 func (rm RMPLLCFGR) Store(b PLLCFGR) { rm.UM32.Store(uint32(b)) }
 
-func (p *Periph) PLLM0() RMPLLCFGR {
-	return RMPLLCFGR{mmio.UM32{&p.PLLCFGR.U32, uint32(PLLM0)}}
+func (p *Periph) PLLM() RMPLLCFGR {
+	return RMPLLCFGR{mmio.UM32{&p.PLLCFGR.U32, uint32(PLLM)}}
 }
 
-func (p *Periph) PLLM1() RMPLLCFGR {
-	return RMPLLCFGR{mmio.UM32{&p.PLLCFGR.U32, uint32(PLLM1)}}
+func (p *Periph) PLLN() RMPLLCFGR {
+	return RMPLLCFGR{mmio.UM32{&p.PLLCFGR.U32, uint32(PLLN)}}
 }
 
-func (p *Periph) PLLM2() RMPLLCFGR {
-	return RMPLLCFGR{mmio.UM32{&p.PLLCFGR.U32, uint32(PLLM2)}}
-}
-
-func (p *Periph) PLLM3() RMPLLCFGR {
-	return RMPLLCFGR{mmio.UM32{&p.PLLCFGR.U32, uint32(PLLM3)}}
-}
-
-func (p *Periph) PLLM4() RMPLLCFGR {
-	return RMPLLCFGR{mmio.UM32{&p.PLLCFGR.U32, uint32(PLLM4)}}
-}
-
-func (p *Periph) PLLM5() RMPLLCFGR {
-	return RMPLLCFGR{mmio.UM32{&p.PLLCFGR.U32, uint32(PLLM5)}}
-}
-
-func (p *Periph) PLLN0() RMPLLCFGR {
-	return RMPLLCFGR{mmio.UM32{&p.PLLCFGR.U32, uint32(PLLN0)}}
-}
-
-func (p *Periph) PLLN1() RMPLLCFGR {
-	return RMPLLCFGR{mmio.UM32{&p.PLLCFGR.U32, uint32(PLLN1)}}
-}
-
-func (p *Periph) PLLN2() RMPLLCFGR {
-	return RMPLLCFGR{mmio.UM32{&p.PLLCFGR.U32, uint32(PLLN2)}}
-}
-
-func (p *Periph) PLLN3() RMPLLCFGR {
-	return RMPLLCFGR{mmio.UM32{&p.PLLCFGR.U32, uint32(PLLN3)}}
-}
-
-func (p *Periph) PLLN4() RMPLLCFGR {
-	return RMPLLCFGR{mmio.UM32{&p.PLLCFGR.U32, uint32(PLLN4)}}
-}
-
-func (p *Periph) PLLN5() RMPLLCFGR {
-	return RMPLLCFGR{mmio.UM32{&p.PLLCFGR.U32, uint32(PLLN5)}}
-}
-
-func (p *Periph) PLLN6() RMPLLCFGR {
-	return RMPLLCFGR{mmio.UM32{&p.PLLCFGR.U32, uint32(PLLN6)}}
-}
-
-func (p *Periph) PLLN7() RMPLLCFGR {
-	return RMPLLCFGR{mmio.UM32{&p.PLLCFGR.U32, uint32(PLLN7)}}
-}
-
-func (p *Periph) PLLN8() RMPLLCFGR {
-	return RMPLLCFGR{mmio.UM32{&p.PLLCFGR.U32, uint32(PLLN8)}}
-}
-
-func (p *Periph) PLLP0() RMPLLCFGR {
-	return RMPLLCFGR{mmio.UM32{&p.PLLCFGR.U32, uint32(PLLP0)}}
-}
-
-func (p *Periph) PLLP1() RMPLLCFGR {
-	return RMPLLCFGR{mmio.UM32{&p.PLLCFGR.U32, uint32(PLLP1)}}
+func (p *Periph) PLLP() RMPLLCFGR {
+	return RMPLLCFGR{mmio.UM32{&p.PLLCFGR.U32, uint32(PLLP)}}
 }
 
 func (p *Periph) PLLSRC() RMPLLCFGR {
 	return RMPLLCFGR{mmio.UM32{&p.PLLCFGR.U32, uint32(PLLSRC)}}
 }
 
-func (p *Periph) PLLQ0() RMPLLCFGR {
-	return RMPLLCFGR{mmio.UM32{&p.PLLCFGR.U32, uint32(PLLQ0)}}
-}
-
-func (p *Periph) PLLQ1() RMPLLCFGR {
-	return RMPLLCFGR{mmio.UM32{&p.PLLCFGR.U32, uint32(PLLQ1)}}
-}
-
-func (p *Periph) PLLQ2() RMPLLCFGR {
-	return RMPLLCFGR{mmio.UM32{&p.PLLCFGR.U32, uint32(PLLQ2)}}
-}
-
-func (p *Periph) PLLQ3() RMPLLCFGR {
-	return RMPLLCFGR{mmio.UM32{&p.PLLCFGR.U32, uint32(PLLQ3)}}
+func (p *Periph) PLLQ() RMPLLCFGR {
+	return RMPLLCFGR{mmio.UM32{&p.PLLCFGR.U32, uint32(PLLQ)}}
 }
 
 type CFGR uint32
@@ -231,20 +163,12 @@ type RMCFGR struct{ mmio.UM32 }
 func (rm RMCFGR) Load() CFGR   { return CFGR(rm.UM32.Load()) }
 func (rm RMCFGR) Store(b CFGR) { rm.UM32.Store(uint32(b)) }
 
-func (p *Periph) SW0() RMCFGR {
-	return RMCFGR{mmio.UM32{&p.CFGR.U32, uint32(SW0)}}
+func (p *Periph) SW() RMCFGR {
+	return RMCFGR{mmio.UM32{&p.CFGR.U32, uint32(SW)}}
 }
 
-func (p *Periph) SW1() RMCFGR {
-	return RMCFGR{mmio.UM32{&p.CFGR.U32, uint32(SW1)}}
-}
-
-func (p *Periph) SWS0() RMCFGR {
-	return RMCFGR{mmio.UM32{&p.CFGR.U32, uint32(SWS0)}}
-}
-
-func (p *Periph) SWS1() RMCFGR {
-	return RMCFGR{mmio.UM32{&p.CFGR.U32, uint32(SWS1)}}
+func (p *Periph) SWS() RMCFGR {
+	return RMCFGR{mmio.UM32{&p.CFGR.U32, uint32(SWS)}}
 }
 
 func (p *Periph) HPRE() RMCFGR {

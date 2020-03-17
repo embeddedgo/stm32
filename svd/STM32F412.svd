@@ -1,3 +1,17 @@
+<!--
+This file slightly diverges from the original one provided by ST. The following
+thinghs were fixed:
+
+CPU:      mpuPresent, fpuPresent set to true
+CFGR:     fields merged: SWS0..SWS1 -> SWS, SW0..SW1 -> SW
+          enums added: SW_HSI, SW_HSE, SW_PLL, SWS_HSI, SWS_HSE,
+          SWS_PLL, HPRE_DIV1..HPRE_DIV512, PPRE1_DIV1..PPRE1_DIV16,
+          PPRE2_DIV1..PPRE2_DIV16
+PLLCFGR:  fields merged: PLLM0..PLLM5 -> PLLM, PLLN0..PLLN8 -> PLLN,
+          PLLP0..PLLP1 -> PLLP, PLLQ0..PLLQ3 -> PLLQ
+          enums added: PLLSRC_HSI, PLLSRC_HSE
+-->
+
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <device schemaVersion="1.1"
 xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
@@ -10,8 +24,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
     <name>CM4</name>
     <revision>r1p0</revision>
     <endian>little</endian>
-    <mpuPresent>false</mpuPresent>
-    <fpuPresent>false</fpuPresent>
+    <mpuPresent>true</mpuPresent>
+    <fpuPresent>true</fpuPresent>
     <nvicPrioBits>3</nvicPrioBits>
     <vendorSystickConfig>false</vendorSystickConfig>
   </cpu>   
@@ -2851,36 +2865,12 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           <resetValue>0x24003010</resetValue>
           <fields>
             <field>
-              <name>PLLQ3</name>
-              <description>Main PLL (PLL) division factor for USB
-              OTG FS, SDIO and random number generator
-              clocks</description>
-              <bitOffset>27</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>PLLQ2</name>
-              <description>Main PLL (PLL) division factor for USB
-              OTG FS, SDIO and random number generator
-              clocks</description>
-              <bitOffset>26</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>PLLQ1</name>
-              <description>Main PLL (PLL) division factor for USB
-              OTG FS, SDIO and random number generator
-              clocks</description>
-              <bitOffset>25</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>PLLQ0</name>
+              <name>PLLQ</name>
               <description>Main PLL (PLL) division factor for USB
               OTG FS, SDIO and random number generator
               clocks</description>
               <bitOffset>24</bitOffset>
-              <bitWidth>1</bitWidth>
+              <bitWidth>4</bitWidth>
             </field>
             <field>
               <name>PLLSRC</name>
@@ -2888,125 +2878,39 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               entry clock source</description>
               <bitOffset>22</bitOffset>
               <bitWidth>1</bitWidth>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>PLLSRC_HSI</name>
+                  <description>HSI usead as clock source</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>PLLSRC_HSE</name>
+                  <description>HSE usead as clock source</description>
+                  <value>1</value>
+                </enumeratedValue>
+              </enumeratedValues>
             </field>
             <field>
-              <name>PLLP1</name>
-              <description>Main PLL (PLL) division factor for main
-              system clock</description>
-              <bitOffset>17</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>PLLP0</name>
+              <name>PLLP</name>
               <description>Main PLL (PLL) division factor for main
               system clock</description>
               <bitOffset>16</bitOffset>
-              <bitWidth>1</bitWidth>
+              <bitWidth>2</bitWidth>
             </field>
             <field>
-              <name>PLLN8</name>
-              <description>Main PLL (PLL) multiplication factor for
-              VCO</description>
-              <bitOffset>14</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>PLLN7</name>
-              <description>Main PLL (PLL) multiplication factor for
-              VCO</description>
-              <bitOffset>13</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>PLLN6</name>
-              <description>Main PLL (PLL) multiplication factor for
-              VCO</description>
-              <bitOffset>12</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>PLLN5</name>
-              <description>Main PLL (PLL) multiplication factor for
-              VCO</description>
-              <bitOffset>11</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>PLLN4</name>
-              <description>Main PLL (PLL) multiplication factor for
-              VCO</description>
-              <bitOffset>10</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>PLLN3</name>
-              <description>Main PLL (PLL) multiplication factor for
-              VCO</description>
-              <bitOffset>9</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>PLLN2</name>
-              <description>Main PLL (PLL) multiplication factor for
-              VCO</description>
-              <bitOffset>8</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>PLLN1</name>
-              <description>Main PLL (PLL) multiplication factor for
-              VCO</description>
-              <bitOffset>7</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>PLLN0</name>
+              <name>PLLN</name>
               <description>Main PLL (PLL) multiplication factor for
               VCO</description>
               <bitOffset>6</bitOffset>
-              <bitWidth>1</bitWidth>
+              <bitWidth>9</bitWidth>
             </field>
             <field>
-              <name>PLLM5</name>
-              <description>Division factor for the main PLL (PLL)
-              and audio PLL (PLLI2S) input clock</description>
-              <bitOffset>5</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>PLLM4</name>
-              <description>Division factor for the main PLL (PLL)
-              and audio PLL (PLLI2S) input clock</description>
-              <bitOffset>4</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>PLLM3</name>
-              <description>Division factor for the main PLL (PLL)
-              and audio PLL (PLLI2S) input clock</description>
-              <bitOffset>3</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>PLLM2</name>
-              <description>Division factor for the main PLL (PLL)
-              and audio PLL (PLLI2S) input clock</description>
-              <bitOffset>2</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>PLLM1</name>
-              <description>Division factor for the main PLL (PLL)
-              and audio PLL (PLLI2S) input clock</description>
-              <bitOffset>1</bitOffset>
-              <bitWidth>1</bitWidth>
-            </field>
-            <field>
-              <name>PLLM0</name>
+              <name>PLLM</name>
               <description>Division factor for the main PLL (PLL)
               and audio PLL (PLLI2S) input clock</description>
               <bitOffset>0</bitOffset>
-              <bitWidth>1</bitWidth>
+              <bitWidth>6</bitWidth>
             </field>
           </fields>
         </register>
@@ -3070,6 +2974,33 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <bitOffset>13</bitOffset>
               <bitWidth>3</bitWidth>
               <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>PPRE2_DIV1</name>
+                  <description>HCLK not divided</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>PPRE2_DIV2</name>
+                  <description>HCLK divided by 2</description>
+                  <value>4</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>PPRE2_DIV4</name>
+                  <description>HCLK divided by 4</description>
+                  <value>5</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>PPRE2_DIV8</name>
+                  <description>HCLK divided by 8</description>
+                  <value>6</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>PPRE2_DIV16</name>
+                  <description>HCLK divided by 16</description>
+                  <value>7</value>
+                </enumeratedValue>
+              </enumeratedValues>
             </field>
             <field>
               <name>PPRE1</name>
@@ -3078,6 +3009,33 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <bitOffset>10</bitOffset>
               <bitWidth>3</bitWidth>
               <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>PPRE1_DIV1</name>
+                  <description>HCLK not divided</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>PPRE1_DIV2</name>
+                  <description>HCLK divided by 2</description>
+                  <value>4</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>PPRE1_DIV4</name>
+                  <description>HCLK divided by 4</description>
+                  <value>5</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>PPRE1_DIV8</name>
+                  <description>HCLK divided by 8</description>
+                  <value>6</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>PPRE1_DIV16</name>
+                  <description>HCLK divided by 16</description>
+                  <value>7</value>
+                </enumeratedValue>
+              </enumeratedValues>
             </field>
             <field>
               <name>HPRE</name>
@@ -3085,34 +3043,101 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <bitOffset>4</bitOffset>
               <bitWidth>4</bitWidth>
               <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>HPRE_DIV1</name>
+                  <description>SYSCLK not divided</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>HPRE_DIV2</name>
+                  <description>SYSCLK divided by 2</description>
+                  <value>8</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>HPRE_DIV4</name>
+                  <description>SYSCLK divided by 4</description>
+                  <value>9</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>HPRE_DIV8</name>
+                  <description>SYSCLK divided by 8</description>
+                  <value>10</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>HPRE_DIV16</name>
+                  <description>SYSCLK divided by 16</description>
+                  <value>11</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>HPRE_DIV64</name>
+                  <description>SYSCLK divided by 64</description>
+                  <value>12</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>HPRE_DIV128</name>
+                  <description>SYSCLK divided by 128</description>
+                  <value>13</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>HPRE_DIV256</name>
+                  <description>SYSCLK divided by 256</description>
+                  <value>14</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>HPRE_DIV512</name>
+                  <description>SYSCLK divided by 512</description>
+                  <value>15</value>
+                </enumeratedValue>
+              </enumeratedValues>
             </field>
             <field>
-              <name>SWS1</name>
-              <description>System clock switch status</description>
-              <bitOffset>3</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-only</access>
-            </field>
-            <field>
-              <name>SWS0</name>
+              <name>SWS</name>
               <description>System clock switch status</description>
               <bitOffset>2</bitOffset>
-              <bitWidth>1</bitWidth>
+              <bitWidth>2</bitWidth>
               <access>read-only</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>SWS_HSI</name>
+                  <description>HSI oscillator used as system clock</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>SWS_HSE</name>
+                  <description>HSE oscillator used as system clock</description>
+                  <value>1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>SWS_PLL</name>
+                  <description>PLL/PLLP used as system clock</description>
+                  <value>2</value>
+                </enumeratedValue>
+              </enumeratedValues>
             </field>
             <field>
-              <name>SW1</name>
-              <description>System clock switch</description>
-              <bitOffset>1</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>SW0</name>
+              <name>SW</name>
               <description>System clock switch</description>
               <bitOffset>0</bitOffset>
-              <bitWidth>1</bitWidth>
+              <bitWidth>2</bitWidth>
               <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>SW_HSI</name>
+                  <description>HSI selected as system clock</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>SW_HSE</name>
+                  <description>HSE selected as system clock</description>
+                  <value>1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>SW_PLL</name>
+                  <description>PLL/PLLP selected as system clock</description>
+                  <value>2</value>
+                </enumeratedValue>
+              </enumeratedValues>
             </field>
           </fields>
         </register>
