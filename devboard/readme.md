@@ -1,10 +1,8 @@
 ## Support for STM32 development boards
 
-### The idea
+### Directory structure
 
-The idea is to simplify the use of popular STM32 development boards.
-
-Every development board directory contains set of packages (in *board* subdirectory) that provides the interface to the peripherals available on the board (for now the support is modest: only LEDs and buttons). The provided interface tries to be simple and uniform accros all development boards with the same or similar peripherals.
+Every board directory contains a set of packages (in *board* subdirectory) that provides the interface to the peripherals available on the board (for now the support is modest: only LEDs and buttons).
 
 The board/init package, when imported, configures the whole system for typical usage. If you use any other package from *board* directory the board/init package is imported implicitly to ensure the board is properly configured.
 
@@ -13,6 +11,10 @@ The *examples* subdirectory as the name suggests includes sample code, but also 
 There is also *doc* subdirectory that contain useful information and other resources about this development board.
 
 ### Supported boards
+
+[az3166](az3166): MXCHIP Azure IoT DevKit based on [EMW3166](https://en.mxchip.com/productinfo/244866.html) ([STM32F412RG](https://www.st.com/en/microcontrollers/stm32f412rg.html) + [BCM43362](http://www.cypress.com/products/wi-fi) + 2MB QSPI Flash), [website](https://www.mxchip.com/az3166)
+
+![EMW3166](az3166/doc/board.jpg)
 
 [emw3162](emw3162): MXCHIP EMW3162 ([STM32F205RGT6](https://www.st.com/en/microcontrollers/stm32f205rg.html) + [BCM43362](http://www.cypress.com/products/wi-fi)), [website](https://en.mxchip.com/productinfo/244895.html)
 
