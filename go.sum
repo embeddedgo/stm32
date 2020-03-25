@@ -1,4 +1,6 @@
 github.com/embeddedgo/display v0.1.0 h1:qekWnleEOc0SZxPCZ1jJMobdWkK986pj+7lTLP6RV+Q=
 github.com/embeddedgo/display v0.1.0/go.mod h1:2i5StnXmb6K+Jq9AQ4xPQDqPlkT50lVBPMK9DKt8o0s=
+github.com/embeddedgo/display v0.1.5 h1:hzBe60Sti6RyvuoSGzqTXyh66BBI+iRe1E4zcDzssgw=
+github.com/embeddedgo/display v0.1.5/go.mod h1:2i5StnXmb6K+Jq9AQ4xPQDqPlkT50lVBPMK9DKt8o0s=
 github.com/embeddedgo/x v0.0.5 h1:j43fUgX7zqUAVoPUZU0QvGhcE2KPl8bSgaObxNoCAE8=
 github.com/embeddedgo/x v0.0.5/go.mod h1:JAQbYga7ix3MlNg2kd1kdV8wzLKQ49qJ6/LKCnDfYUo=
