@@ -15,7 +15,7 @@ import (
 	"github.com/embeddedgo/stm32/hal/spi"
 	"github.com/embeddedgo/stm32/hal/spi/spi2"
 
-	"github.com/embeddedgo/display/eve/examples/gameduino/nightstrike"
+	"github.com/embeddedgo/display/eve/examples/evetest"
 
 	_ "github.com/embeddedgo/stm32/devboard/f4-discovery/board/init"
 )
@@ -61,7 +61,7 @@ func main() {
 
 	lcd.SetBacklight(96)
 
-	nightstrike.Run(lcd)
+	evetest.Run(lcd)
 }
 
 func checkErr(err error) {
