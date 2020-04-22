@@ -113,5 +113,5 @@ func (p *Port) SetAltFunc(pins Pins, af AltFunc) {
 
 // SetAltFunc sets alternate function for pin.
 func (p Pin) SetAltFunc(af AltFunc) {
-	p.Port().SetPinAltFunc(p.Index(), af)
+	p.Port().SetPinAltFunc(p.Num(), af)
 }

@@ -19,7 +19,7 @@ import (
 
 func main() {
 	pin := buttons.User.Pin() // PC13
-	line := exti.Lines(1 << pin.Index())
+	line := exti.Lines(1 << pin.Num())
 	line.Connect(pin.Port())
 	line.EnableRiseTrig()
 	line.EnableFallTrig()
@@ -42,7 +42,7 @@ func main() {
 var note rtos.Note
 
 func waitBtn(state int) {
-	line := exti.Lines(1 << buttons.User.Pin().Index())
+	line := exti.Lines(1 << buttons.User.Pin().Num())
 	for {
 		note.Clear()
 		line.EnableIRQ()
@@ -62,7 +62,7 @@ func EXTI15_10_Handler() {
 	p := exti.Pending() & (exti.L15<<1 - exti.L10)
 	p.DisableIRQ()
 	p.ClearPending()
-	if pin := buttons.User.Pin(); p>>pin.Index()&1 != 0 {
+	if pin := buttons.User.Pin(); p>>pin.Num()&1 != 0 {
 		note.Wakeup()
 		println("user pin IRQ") // can print if prio <= IntPrioLow
 	}

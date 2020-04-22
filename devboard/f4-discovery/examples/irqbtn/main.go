@@ -19,7 +19,7 @@ import (
 
 func main() {
 	pin := buttons.User.Pin() // PA0
-	line := exti.Lines(1 << pin.Index())
+	line := exti.Lines(1 << pin.Num())
 	line.Connect(pin.Port())
 	line.EnableRiseTrig()
 	line.EnableFallTrig()
@@ -56,7 +56,7 @@ func main() {
 var note rtos.Note
 
 func waitBtn(state int) {
-	line := exti.Lines(1 << buttons.User.Pin().Index())
+	line := exti.Lines(1 << buttons.User.Pin().Num())
 	for {
 		note.Clear()
 		line.EnableIRQ()
@@ -73,7 +73,7 @@ func waitBtn(state int) {
 
 //go:interrupthandler
 func EXTI0_Handler() {
-	line := exti.Lines(1 << buttons.User.Pin().Index())
+	line := exti.Lines(1 << buttons.User.Pin().Num())
 	line.DisableIRQ()
 	line.ClearPending()
 	note.Wakeup()

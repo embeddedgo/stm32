@@ -92,7 +92,7 @@ func main() {
 	// Configure EXTI
 
 	dr.Setup(&gpio.Config{Mode: gpio.In})
-	dri := exti.Lines(1 << dr.Index())
+	dri := exti.Lines(1 << dr.Num())
 	dri.Connect(dr.Port())
 	dri.EnableRiseTrig()
 	irq.EXTI0.Enable(rtos.IntPrioLow)
