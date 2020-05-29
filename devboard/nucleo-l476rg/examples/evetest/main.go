@@ -37,7 +37,7 @@ func main() {
 	// EVE driver
 
 	evedci.UseIntPin(intn)
-	irq.EXTI1.Enable(rtos.IntPrioLowest)
+	irq.EXTI1.Enable(rtos.IntPrioLowest, -1)
 
 	spi2.UsePinMaster(spi.NSS, csn)
 	spi2.UsePinMaster(spi.SCK, sck)
@@ -52,12 +52,12 @@ func main() {
 	// Dither and Spread are set at the same time (default after reset).
 	// Reducing PCLK to 15 MHz eliminates this problem but slows down the
 	// display to 30 FPS.
-	
+
 	//dispCfg := &eve.Default800x480
 	//dispCfg.ClkMHz = 15
-	
+
 	dispCfg := &eve.Default480x272
-	
+
 	checkErr(lcd.Init(dispCfg, nil))
 	checkErr(evetest.Run(lcd))
 }

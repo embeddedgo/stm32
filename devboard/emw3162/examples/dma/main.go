@@ -60,7 +60,7 @@ func main() {
 	d := dma.DMA(2)
 	d.EnableClock(true)
 	ch = d.Channel(0, 0)
-	irq.DMA2_Stream0.Enable(rtos.IntPrioLow)
+	irq.DMA2_Stream0.Enable(rtos.IntPrioLow, -1)
 
 	for {
 		for n := 1000; n <= len(src); n += 1000 {

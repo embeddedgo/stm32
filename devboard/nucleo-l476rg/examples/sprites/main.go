@@ -37,7 +37,7 @@ func main() {
 	// EVE driver
 
 	evedci.UseIntPin(intn)
-	irq.EXTI1.Enable(rtos.IntPrioLowest)
+	irq.EXTI1.Enable(rtos.IntPrioLowest, -1)
 
 	spi2.UsePinMaster(spi.NSS, csn)
 	spi2.UsePinMaster(spi.SCK, sck)

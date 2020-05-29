@@ -24,7 +24,7 @@ func main() {
 	line.EnableRiseTrig()
 	line.EnableFallTrig()
 
-	irq.EXTI0.Enable(rtos.IntPrioLow)
+	irq.EXTI0.Enable(rtos.IntPrioLow, -1)
 
 	for {
 		leds.Green.SetOff()
