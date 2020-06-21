@@ -1,3 +1,4 @@
 *.elf
 *.bin
 zisrnames.go
+core
