@@ -95,7 +95,7 @@ func main() {
 	dri := exti.Lines(1 << dr.Num())
 	dri.Connect(dr.Port())
 	dri.EnableRiseTrig()
-	irq.EXTI0.Enable(rtos.IntPrioLow, -1)
+	irq.EXTI0.Enable(rtos.IntPrioLow, 0)
 
 	// Configure and enable SPI
 

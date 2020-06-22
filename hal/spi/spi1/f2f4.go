@@ -22,9 +22,9 @@ func setupDriver() {
 	d := dma.DMA(2)
 	d.EnableClock(true)
 	driver = spi.NewDriver(spi.SPI1(), d.Channel(3, 3), d.Channel(0, 3))
-	irq.SPI1.Enable(rtos.IntPrioLow, -1)
-	irq.DMA2_Stream0.Enable(rtos.IntPrioLow, -1)
-	irq.DMA2_Stream3.Enable(rtos.IntPrioLow, -1)
+	irq.SPI1.Enable(rtos.IntPrioLow, 0)
+	irq.DMA2_Stream0.Enable(rtos.IntPrioLow, 0)
+	irq.DMA2_Stream3.Enable(rtos.IntPrioLow, 0)
 }
 
 //go:interrupthandler
