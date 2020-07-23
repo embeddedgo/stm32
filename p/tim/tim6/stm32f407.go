@@ -2,7 +2,7 @@
 
 // +build stm32f407
 
-// Package tim6 provides access to the registers of the TIM6 peripheral.
+// Package tim6 provides access to the registers of the TIM peripheral.
 //
 // Instances:
 //  TIM6  TIM6_BASE  APB1  TIM6_DAC*  Basic timers

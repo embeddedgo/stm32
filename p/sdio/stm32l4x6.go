@@ -2,7 +2,7 @@
 
 // +build stm32l4x6
 
-// Package sdio provides access to the registers of the SDMMC1 peripheral.
+// Package sdio provides access to the registers of the SDMMC peripheral.
 //
 // Instances:
 //  SDMMC1  SDMMC1_BASE  -  SDMMC1  Secure digital input/output interface

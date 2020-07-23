@@ -2,7 +2,7 @@
 
 // +build stm32f412
 
-// Package tim13 provides access to the registers of the TIM13 peripheral.
+// Package tim13 provides access to the registers of the TIM peripheral.
 //
 // Instances:
 //  TIM13  TIM13_BASE  APB1  TIM13  General purpose timers

@@ -2,7 +2,7 @@
 
 // +build stm32f215
 
-// Package tim10 provides access to the registers of the TIM10 peripheral.
+// Package tim10 provides access to the registers of the TIM peripheral.
 //
 // Instances:
 //  TIM10  TIM10_BASE  APB2  TIM1_UP_TIM10*       General-purpose-timers

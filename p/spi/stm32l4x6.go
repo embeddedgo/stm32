@@ -2,7 +2,7 @@
 
 // +build stm32l4x6
 
-// Package spi provides access to the registers of the SPI1 peripheral.
+// Package spi provides access to the registers of the SPI peripheral.
 //
 // Instances:
 //  SPI1  SPI1_BASE  APB2  SPI1  Serial peripheral interface/Inter-IC sound

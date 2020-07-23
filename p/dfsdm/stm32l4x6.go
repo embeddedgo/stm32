@@ -2,7 +2,7 @@
 
 // +build stm32l4x6
 
-// Package dfsdm provides access to the registers of the DFSDM1 peripheral.
+// Package dfsdm provides access to the registers of the DFSDM peripheral.
 //
 // Instances:
 //  DFSDM1  DFSDM1_BASE  -  DFSDM1_FLT3,DFSDM1_FLT0,DFSDM1_FLT1,DFSDM1_FLT2  Digital filter for sigma delta modulators

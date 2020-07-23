@@ -2,7 +2,7 @@
 
 // +build stm32f407
 
-// Package dma provides access to the registers of the DMA2 peripheral.
+// Package dma provides access to the registers of the DMA peripheral.
 //
 // Instances:
 //  DMA1  DMA1_BASE  AHB1  DMA1_Stream0,DMA1_Stream1,DMA1_Stream2,DMA1_Stream3,DMA1_Stream4,DMA1_Stream5,DMA1_Stream6,DMA1_Stream7  DMA controller

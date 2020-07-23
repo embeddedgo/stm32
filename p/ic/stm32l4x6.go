@@ -2,7 +2,7 @@
 
 // +build stm32l4x6
 
-// Package ic provides access to the registers of the I2C1 peripheral.
+// Package ic provides access to the registers of the I2C peripheral.
 //
 // Instances:
 //  I2C1  I2C1_BASE  APB1  I2C1_EV,I2C1_ER  Inter-integrated circuit

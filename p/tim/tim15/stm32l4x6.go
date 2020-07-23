@@ -2,7 +2,7 @@
 
 // +build stm32l4x6
 
-// Package tim15 provides access to the registers of the TIM15 peripheral.
+// Package tim15 provides access to the registers of the TIM peripheral.
 //
 // Instances:
 //  TIM15  TIM15_BASE  APB2  -  General purpose timers

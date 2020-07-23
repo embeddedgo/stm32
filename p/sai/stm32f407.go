@@ -2,7 +2,7 @@
 
 // +build stm32f407
 
-// Package sai provides access to the registers of the SAI1 peripheral.
+// Package sai provides access to the registers of the SAI peripheral.
 //
 // Instances:
 //  SAI1  SAI1_BASE  -  -  Serial audio interface

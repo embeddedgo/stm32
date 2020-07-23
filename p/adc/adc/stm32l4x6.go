@@ -2,7 +2,7 @@
 
 // +build stm32l4x6
 
-// Package adc provides access to the registers of the ADC1 peripheral.
+// Package adc provides access to the registers of the ADC peripheral.
 //
 // Instances:
 //  ADC1  ADC1_BASE  -  ADC1_2+,ADC3+  Analog-to-Digital Converter

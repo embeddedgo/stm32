@@ -2,7 +2,7 @@
 
 // +build stm32l4x6
 
-// Package swpmi provides access to the registers of the SWPMI1 peripheral.
+// Package swpmi provides access to the registers of the SWPMI peripheral.
 //
 // Instances:
 //  SWPMI1  SWPMI1_BASE  APB1  SWPMI1  Single Wire Protocol Master Interface

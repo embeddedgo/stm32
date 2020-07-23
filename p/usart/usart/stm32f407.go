@@ -2,7 +2,7 @@
 
 // +build stm32f407
 
-// Package usart provides access to the registers of the USART6 peripheral.
+// Package usart provides access to the registers of the USART peripheral.
 //
 // Instances:
 //  USART1  USART1_BASE  APB2  USART1  Universal synchronous asynchronous receiver transmitter

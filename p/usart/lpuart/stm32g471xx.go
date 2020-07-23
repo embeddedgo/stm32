@@ -2,7 +2,7 @@
 
 // +build stm32g471xx
 
-// Package lpuart provides access to the registers of the LPUART1 peripheral.
+// Package lpuart provides access to the registers of the LPUART peripheral.
 //
 // Instances:
 //  LPUART1  LPUART1_BASE  APB1  LPTIM1,LPUART  Universal synchronous asynchronous receiver transmitter

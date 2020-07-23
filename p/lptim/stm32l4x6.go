@@ -2,7 +2,7 @@
 
 // +build stm32l4x6
 
-// Package lptim provides access to the registers of the LPTIM1 peripheral.
+// Package lptim provides access to the registers of the LPTIM peripheral.
 //
 // Instances:
 //  LPTIM1  LPTIM1_BASE  APB1  LPTIM1  Low power timer

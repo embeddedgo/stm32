@@ -2,7 +2,7 @@
 
 // +build stm32l4x6
 
-// Package tim8 provides access to the registers of the TIM8 peripheral.
+// Package tim8 provides access to the registers of the TIM peripheral.
 //
 // Instances:
 //  TIM8  TIM8_BASE  APB2  TIM8_BRK,TIM8_UP,TIM8_TRG_COM,TIM8_CC  Advanced-timers

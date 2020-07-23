@@ -2,7 +2,7 @@
 
 // +build stm32g471xx
 
-// Package ucpd provides access to the registers of the UCPD1 peripheral.
+// Package ucpd provides access to the registers of the UCPD peripheral.
 //
 // Instances:
 //  UCPD1  UCPD1_BASE  -  UCPD1  UCPD1

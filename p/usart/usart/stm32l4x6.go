@@ -2,7 +2,7 @@
 
 // +build stm32l4x6
 
-// Package usart provides access to the registers of the USART1 peripheral.
+// Package usart provides access to the registers of the USART peripheral.
 //
 // Instances:
 //  UART4   UART4_BASE   APB1  UART4   Universal synchronous asynchronous receiver transmitter

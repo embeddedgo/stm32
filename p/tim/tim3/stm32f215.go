@@ -2,7 +2,7 @@
 
 // +build stm32f215
 
-// Package tim3 provides access to the registers of the TIM3 peripheral.
+// Package tim3 provides access to the registers of the TIM peripheral.
 //
 // Instances:
 //  TIM3  TIM3_BASE  APB1  TIM3  General-purpose-timers

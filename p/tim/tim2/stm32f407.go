@@ -2,7 +2,7 @@
 
 // +build stm32f407
 
-// Package tim2 provides access to the registers of the TIM2 peripheral.
+// Package tim2 provides access to the registers of the TIM peripheral.
 //
 // Instances:
 //  TIM2  TIM2_BASE  APB1  TIM2  General purpose timers

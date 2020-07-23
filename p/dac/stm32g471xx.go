@@ -2,7 +2,7 @@
 
 // +build stm32g471xx
 
-// Package dac provides access to the registers of the DAC1 peripheral.
+// Package dac provides access to the registers of the DAC peripheral.
 //
 // Instances:
 //  DAC1  DAC1_BASE  AHB2  TIM6_DACUNDER*  Digital-to-analog converter

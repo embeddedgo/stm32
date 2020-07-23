@@ -2,7 +2,7 @@
 
 // +build stm32f407
 
-// Package spi provides access to the registers of the SPI1 peripheral.
+// Package spi provides access to the registers of the SPI peripheral.
 //
 // Instances:
 //  I2S2ext  I2S2ext_BASE  APB2  SPI1+  Serial peripheral interface

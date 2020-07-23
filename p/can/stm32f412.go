@@ -2,7 +2,7 @@
 
 // +build stm32f412
 
-// Package can provides access to the registers of the CAN1 peripheral.
+// Package can provides access to the registers of the CAN peripheral.
 //
 // Instances:
 //  CAN1  CAN1_BASE  APB1  CAN1_TX+,CAN1_RX0+,CAN1_RX1+,CAN1_SCE+  Controller area network

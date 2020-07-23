@@ -2,7 +2,7 @@
 
 // +build stm32g471xx
 
-// Package adc1 provides access to the registers of the ADC1 peripheral.
+// Package adc1 provides access to the registers of the ADC peripheral.
 //
 // Instances:
 //  ADC1  ADC1_BASE  AHB2  ADC1_2+  Analog-to-Digital Converter

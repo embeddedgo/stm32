@@ -2,7 +2,7 @@
 
 // +build stm32f412
 
-// Package i2c4 provides access to the registers of the I2C4 peripheral.
+// Package i2c4 provides access to the registers of the I2C peripheral.
 //
 // Instances:
 //  I2C4  I2C4_BASE  APB1  -  Inter-integrated circuit

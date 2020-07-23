@@ -2,7 +2,7 @@
 
 // +build stm32f215
 
-// Package uart4 provides access to the registers of the UART4 peripheral.
+// Package uart4 provides access to the registers of the UART peripheral.
 //
 // Instances:
 //  UART4  UART4_BASE  APB1  UART4  Universal synchronous asynchronous receiver transmitter

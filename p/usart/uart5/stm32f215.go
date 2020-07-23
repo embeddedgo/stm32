@@ -2,7 +2,7 @@
 
 // +build stm32f215
 
-// Package uart5 provides access to the registers of the UART5 peripheral.
+// Package uart5 provides access to the registers of the UART peripheral.
 //
 // Instances:
 //  UART5  UART5_BASE  APB1  UART5  Universal synchronous asynchronous receiver transmitter

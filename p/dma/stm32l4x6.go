@@ -2,7 +2,7 @@
 
 // +build stm32l4x6
 
-// Package dma provides access to the registers of the DMA1 peripheral.
+// Package dma provides access to the registers of the DMA peripheral.
 //
 // Instances:
 //  DMA1  DMA1_BASE  AHB1  DMA1_CH1,DMA1_CH2,DMA1_CH3,DMA1_CH4,DMA1_CH5,DMA1_CH6,DMA1_CH7  Direct memory access controller

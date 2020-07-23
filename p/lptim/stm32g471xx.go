@@ -2,7 +2,7 @@
 
 // +build stm32g471xx
 
-// Package lptim provides access to the registers of the LPTIMER1 peripheral.
+// Package lptim provides access to the registers of the LPTIMER peripheral.
 //
 // Instances:
 //  LPTIMER1  LPTIMER1_BASE  -  -  Low power timer

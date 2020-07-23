@@ -2,7 +2,7 @@
 
 // +build stm32f407
 
-// Package adc provides access to the registers of the ADC1 peripheral.
+// Package adc provides access to the registers of the ADC peripheral.
 //
 // Instances:
 //  ADC1  ADC1_BASE  APB2  ADC+  Analog-to-digital converter

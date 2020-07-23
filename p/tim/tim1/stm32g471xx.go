@@ -2,7 +2,7 @@
 
 // +build stm32g471xx
 
-// Package tim1 provides access to the registers of the TIM1 peripheral.
+// Package tim1 provides access to the registers of the TIM peripheral.
 //
 // Instances:
 //  TIM1  TIM1_BASE  APB2  TIM1_BRK_TIM15,TIM1_UP_TIM16,TIM1_TRG_COM,TIM1_CC,TIM8_CC  Advanced-timers

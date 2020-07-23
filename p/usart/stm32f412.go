@@ -2,7 +2,7 @@
 
 // +build stm32f412
 
-// Package usart provides access to the registers of the USART1 peripheral.
+// Package usart provides access to the registers of the USART peripheral.
 //
 // Instances:
 //  USART1  USART1_BASE  APB2  -  Universal synchronous asynchronous receiver transmitter

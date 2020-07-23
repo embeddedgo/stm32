@@ -2,7 +2,7 @@
 
 // +build stm32l4x6
 
-// Package tim16 provides access to the registers of the TIM16 peripheral.
+// Package tim16 provides access to the registers of the TIM peripheral.
 //
 // Instances:
 //  TIM16  TIM16_BASE  APB2  -  General purpose timers

@@ -2,7 +2,7 @@
 
 // +build stm32f412
 
-// Package i2c3 provides access to the registers of the I2C3 peripheral.
+// Package i2c3 provides access to the registers of the I2C peripheral.
 //
 // Instances:
 //  I2C1  I2C1_BASE  APB1  I2C1_EV,I2C1_ER  Inter-integrated circuit

@@ -2,7 +2,7 @@
 
 // +build stm32f407
 
-// Package tim9 provides access to the registers of the TIM9 peripheral.
+// Package tim9 provides access to the registers of the TIM peripheral.
 //
 // Instances:
 //  TIM9   TIM9_BASE   APB2  TIM1_BRK_TIM9*   General purpose timers

@@ -2,7 +2,7 @@
 
 // +build stm32f215
 
-// Package tim1 provides access to the registers of the TIM1 peripheral.
+// Package tim1 provides access to the registers of the TIM peripheral.
 //
 // Instances:
 //  TIM1  TIM1_BASE  APB2  TIM1_BRK_TIM9*,TIM1_UP_TIM10*,TIM1_TRG_COM_TIM11*,TIM1_CC   Advanced-timers

@@ -2,7 +2,7 @@
 
 // +build stm32g471xx
 
-// Package adc3 provides access to the registers of the ADC3 peripheral.
+// Package adc3 provides access to the registers of the ADC peripheral.
 //
 // Instances:
 //  ADC3  ADC3_BASE  -  ADC3  Analog-to-Digital Converter
