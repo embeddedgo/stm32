@@ -82,9 +82,9 @@ func main() {
 
 	// Configure SPI pins
 
-	spi1.UsePinMaster(spi.SCK, sck)
-	spi1.UsePinMaster(spi.MOSI, mosi)
-	spi1.UsePinMaster(spi.MISO, miso)
+	spi1.UsePinMaster(sck, spi.SCK)
+	spi1.UsePinMaster(mosi, spi.MOSI)
+	spi1.UsePinMaster(miso, spi.MISO)
 
 	cs.Set() // CS active state is low
 	cs.Setup(&gpio.Config{Mode: gpio.Out, Speed: gpio.High})

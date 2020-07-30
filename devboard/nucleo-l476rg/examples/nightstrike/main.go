@@ -39,10 +39,10 @@ func main() {
 	evedci.UseIntPin(intn)
 	irq.EXTI1.Enable(rtos.IntPrioLowest, 0)
 
-	spi2.UsePinMaster(spi.NSS, csn)
-	spi2.UsePinMaster(spi.SCK, sck)
-	spi2.UsePinMaster(spi.MOSI, mosi)
-	spi2.UsePinMaster(spi.MISO, miso)
+	spi2.UsePinMaster(csn, spi.NSS)
+	spi2.UsePinMaster(sck, spi.SCK)
+	spi2.UsePinMaster(mosi, spi.MOSI)
+	spi2.UsePinMaster(miso, spi.MISO)
 
 	lcd := eve.NewDriver(evedci.NewSPI(spi2.Driver(), pdn), 256)
 	lcd.SetNote(&eveInt)

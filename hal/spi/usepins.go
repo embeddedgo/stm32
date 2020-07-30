@@ -17,7 +17,7 @@ const (
 
 // UsePinMaster is a helper function that can be used to configure GPIO pins as
 // required by SPI master device.
-func UsePinMaster(af gpio.AltFunc, sig Signal, pin gpio.Pin) {
+func UsePinMaster(pin gpio.Pin, af gpio.AltFunc, sig Signal) {
 	var cfg gpio.Config
 	if sig == MISO {
 		cfg.Mode = gpio.AltIn
@@ -34,7 +34,7 @@ func UsePinMaster(af gpio.AltFunc, sig Signal, pin gpio.Pin) {
 
 // UsePinSlave is a helper function that can be used to configure GPIO pins as
 // required by SPI slave device.
-func UsePinSlave(af gpio.AltFunc, sig Signal, pin gpio.Pin) {
+func UsePinSlave(pin gpio.Pin, af gpio.AltFunc, sig Signal) {
 	var cfg gpio.Config
 	if sig == MISO {
 		cfg.Mode = gpio.Alt

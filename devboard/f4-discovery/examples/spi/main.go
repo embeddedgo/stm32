@@ -26,9 +26,9 @@ func main() {
 
 	// Configure SPI pins
 
-	spi2.UsePinMaster(spi.SCK, sck)
-	spi2.UsePinMaster(spi.MOSI, mosi)
-	spi2.UsePinMaster(spi.MISO, miso)
+	spi2.UsePinMaster(sck, spi.SCK)
+	spi2.UsePinMaster(mosi, spi.MOSI)
+	spi2.UsePinMaster(miso, spi.MISO)
 
 	// Configure and enable SPI
 
