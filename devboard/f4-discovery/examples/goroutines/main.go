@@ -12,7 +12,7 @@ import (
 )
 
 func blink(led leds.LED, delay time.Duration) {
-	runtime.LockOSThread()
+	//runtime.LockOSThread()
 	for {
 		led.SetOn()
 		time.Sleep(delay)
@@ -22,6 +22,7 @@ func blink(led leds.LED, delay time.Duration) {
 }
 
 func main() {
+	runtime.GOMAXPROCS(2)
 	go blink(leds.Red, time.Second*2)
 	go blink(leds.Green, time.Second/3)
 	go blink(leds.Blue, time.Second/7)
