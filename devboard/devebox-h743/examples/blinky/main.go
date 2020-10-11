@@ -4,7 +4,10 @@
 
 package main
 
+import "github.com/embeddedgo/stm32/hal/system"
+
 func main() {
+	system.SetupPLL(25, 5, 80, 1)
 	for i := 0; ;i++ {
 		println(i)
 	}

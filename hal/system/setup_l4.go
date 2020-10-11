@@ -100,6 +100,8 @@ import (
 func SetupPLL(clksrc, M, N, P, Q, R int) {
 	RCC := rcc.RCC()
 
+	RCC.CIER.Store(0) // Disable clock interrupts.
+
 	// Reset RCC clock configuration.
 	RCC.MSION().Set()
 	for RCC.MSIRDY().Load() == 0 {
@@ -107,8 +109,6 @@ func SetupPLL(clksrc, M, N, P, Q, R int) {
 	}
 	RCC.CR.Store(6<<rcc.MSIRANGEn | rcc.MSIRGSEL | rcc.MSION)
 	RCC.CFGR.Store(0) // MSI selected as system clock. APBCLK, AHBCLK = SYSCLK.
-	RCC.PLLCFGR.Store(0x1000)
-	RCC.CIER.Store(0) // Disable clock interrupts.
 
 	// Calculate system clock.
 	if M < 1 || M > 8 {

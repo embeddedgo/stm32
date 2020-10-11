@@ -72,6 +72,8 @@ import (
 func SetupPLL(osc, N, P int) {
 	RCC := rcc.RCC()
 
+	RCC.CIR.Store(0) // Disable clock interrupts.
+
 	// Reset RCC clock configuration.
 	RCC.HSION().Set()
 	for RCC.HSIRDY().Load() == 0 {
@@ -82,8 +84,6 @@ func SetupPLL(osc, N, P int) {
 		runtime.Gosched() // Wait for system clock setup...
 	}
 	RCC.CR.Store(rcc.HSION)
-	RCC.PLLCFGR.Store(0x24003010)
-	RCC.CIR.Store(0) // Disable clock interrupts.
 
 	// Calculate system clock.
 	if osc != 0 && (osc < 4 || osc > 26 || osc&1 != 0) {
