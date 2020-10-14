@@ -14,6 +14,18 @@ import (
 	"github.com/embeddedgo/stm32/p/rcc"
 )
 
+// SetupPLL setups MCU for the best performance (prefetch on, I/D cache on,
+// minimum allowed Flash latency) using integrated PLL as system clock source.
+//
+// Clksrc configures clock source for PLL1.
+//
+// Positive clksrc selects HSE as PLL1 clock source and informs about external
+// clock signal frequency in MHz (alowed values: 4 to 48 MHz).
+//
+// Zero clksrc selects CSI as PLL clock surce (frequency about 4 MHz).
+//
+// Negative clksrc selects HSI as PLL clock source and setups its frequency to
+// (-clksrc) MHz (allowed values -8, -16, -32, -64).
 func SetupPLL(clksrc, M, N, P int) {
 	RCC := rcc.RCC()
 
@@ -41,4 +53,30 @@ func SetupPLL(clksrc, M, N, P int) {
 		panic("bad P")
 	}
 
+	var osc uint
+
+	switch clksrc {
+	case -8, -16, -32, -64:
+		osc = uint(-clksrc)
+	case 0:
+		RCC.CSION().Set()
+		osc = 4
+	default:
+		if clksrc < 4 || clksrc > 48 {
+			panic("bad clksrc")
+		}
+		// HSE needs milliseconds to stabilize, so enable it now.
+		RCC.HSEON().Set()
+		osc = uint(clksrc)
+	}
+
+	pllin := osc * 1e6 / uint(M)
+	switch {
+	case pllin >= 1 && pllin <= 2:
+
+	case pllin > 2 && pllin <= 16:
+
+	default:
+		panic("bad PLLIN")
+	}
 }

@@ -75,7 +75,7 @@ import (
 // Clksrc configures clock source for PLL.
 //
 // Positive clksrc selects HSE as PLL clock source and informs about external
-// clock signal frequency in MHz (alowed values: 4 to 48 MHz),
+// clock signal frequency in MHz (alowed values: 4 to 48 MHz).
 //
 // Zero clksrc selects HSI16 as PLL clock surce.
 //
@@ -303,7 +303,6 @@ func Setup80(P, Q int) {
 	SetupPLL(-48, 6, 20, P, Q, 2)
 }
 
-//emgo:const
 var msiRanges = [...]uint16{
 	100, 200, 400, 800, 1e3, 2e3, 4e3, 8e3, 16e3, 24e3, 32e3, 48e3,
 }
