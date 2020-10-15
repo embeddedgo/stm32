@@ -2,7 +2,8 @@
 This file slightly diverges from the original one provided by ST. The following
 thinghs were fixed:
 
-CFGR:     enums added: SWS_HSI, SWS_CSI, SWS_HSE, SWS_PLL1
+CFGR:      enums added: SWS_HSI, SWS_CSI, SWS_HSE, SWS_PLL1
+PLLCKSELR: enums addad: PLLSRC_HSI, PLLSRC_CSI, PLLSRC_HSE, PLLSRC_NONE
 -->
 
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
@@ -38585,6 +38586,28 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               selection</description>
               <bitOffset>0</bitOffset>
               <bitWidth>2</bitWidth>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>PLLSRC_HSI</name>
+                  <description>HSI selected as PLL clock</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>PLLSRC_CSI</name>
+                  <description>CSI selected as PLL clock</description>
+                  <value>1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>PLLSRC_HSE</name>
+                  <description>HSE selected as PLL clock</description>
+                  <value>2</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>PLLSRC_NONE</name>
+                  <description>PL1 used as system clock</description>
+                  <value>3</value>
+                </enumeratedValue>
+              </enumeratedValues>
             </field>
             <field>
               <name>DIVM1</name>

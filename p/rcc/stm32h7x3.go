@@ -200,10 +200,14 @@ const (
 )
 
 const (
-	PLLSRC PLLCKSELR = 0x03 << 0  //+ DIVMx and PLLs clock source selection
-	DIVM1  PLLCKSELR = 0x3F << 4  //+ Prescaler for PLL1
-	DIVM2  PLLCKSELR = 0x3F << 12 //+ Prescaler for PLL2
-	DIVM3  PLLCKSELR = 0x3F << 20 //+ Prescaler for PLL3
+	PLLSRC      PLLCKSELR = 0x03 << 0  //+ DIVMx and PLLs clock source selection
+	PLLSRC_HSI  PLLCKSELR = 0x00 << 0  //  HSI selected as PLL clock
+	PLLSRC_CSI  PLLCKSELR = 0x01 << 0  //  CSI selected as PLL clock
+	PLLSRC_HSE  PLLCKSELR = 0x02 << 0  //  HSE selected as PLL clock
+	PLLSRC_NONE PLLCKSELR = 0x03 << 0  //  PL1 used as system clock
+	DIVM1       PLLCKSELR = 0x3F << 4  //+ Prescaler for PLL1
+	DIVM2       PLLCKSELR = 0x3F << 12 //+ Prescaler for PLL2
+	DIVM3       PLLCKSELR = 0x3F << 20 //+ Prescaler for PLL3
 )
 
 const (

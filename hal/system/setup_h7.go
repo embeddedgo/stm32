@@ -53,18 +53,24 @@ func SetupPLL(clksrc, M, N, P int) {
 		panic("bad P")
 	}
 
-	var osc uint
+	var (
+		osc       uint
+		pllckselr rcc.PLLCKSELR
+	)
 
 	switch clksrc {
 	case -8, -16, -32, -64:
+		pllckselr = rcc.PLLSRC_HSI
 		osc = uint(-clksrc)
 	case 0:
+		pllckselr = rcc.PLLSRC_CSI
 		RCC.CSION().Set()
 		osc = 4
 	default:
 		if clksrc < 4 || clksrc > 48 {
 			panic("bad clksrc")
 		}
+		pllckselr = rcc.PLLSRC_HSE
 		// HSE needs milliseconds to stabilize, so enable it now.
 		RCC.HSEON().Set()
 		osc = uint(clksrc)
@@ -79,4 +85,6 @@ func SetupPLL(clksrc, M, N, P int) {
 	default:
 		panic("bad PLLIN")
 	}
+
+	RCC.PLLCKSELR.Store(pllckselr)
 }
