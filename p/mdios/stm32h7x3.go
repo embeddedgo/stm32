@@ -5,7 +5,7 @@
 // Package mdios provides access to the registers of the MDIOS peripheral.
 //
 // Instances:
-//  MDIOS  MDIOS_BASE  -  MDIOS_WKUP,MDIOS  Management data input/output slave
+//  MDIOS  MDIOS_BASE  APB1  MDIOS_WKUP,MDIOS  Management data input/output slave
 // Registers:
 //  0x000 32  CR       MDIOS configuration register
 //  0x004 32  WRFR     MDIOS write flag register
@@ -79,6 +79,7 @@
 //  0x114 32  DOUTR30  MDIOS output data register 30
 //  0x118 32  DOUTR31  MDIOS output data register 31
 // Import:
+//  github.com/embeddedgo/stm32/p/bus
 //  github.com/embeddedgo/stm32/p/mmap
 package mdios
 

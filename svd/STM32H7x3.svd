@@ -2,7 +2,7 @@
 This file slightly diverges from the original one provided by ST. The following
 thinghs were fixed:
 
-CFGR:      enums added: SWS_HSI, SWS_CSI, SWS_HSE, SWS_PLL1
+CFGR:      enums added: SW_HSI..SW_PLL1, SWS_HSI..SWS_PLL1
 PLLCKSELR: enums addad: PLLSRC_HSI, PLLSRC_CSI, PLLSRC_HSE, PLLSRC_NONE
 -->
 
@@ -38405,19 +38405,34 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <description>System clock switch</description>
               <bitOffset>0</bitOffset>
               <bitWidth>3</bitWidth>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>SW_HSI</name>
+                  <description>HSI oscillator selected as system clock</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>SW_CSI</name>
+                  <description>HSE oscillator selected as system clock</description>
+                  <value>1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>SW_HSE</name>
+                  <description>HSE oscillator selected as system clock</description>
+                  <value>2</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>SW_PLL1</name>
+                  <description>PLL1 selected as system clock</description>
+                  <value>3</value>
+                </enumeratedValue>
+              </enumeratedValues>
             </field>
             <field>
               <name>SWS</name>
               <description>System clock switch status</description>
               <bitOffset>3</bitOffset>
               <bitWidth>3</bitWidth>
-            </field>
-            <field>
-              <name>STOPWUCK</name>
-              <description>System clock selection after a wake up
-              from system Stop</description>
-              <bitOffset>6</bitOffset>
-              <bitWidth>1</bitWidth>
               <access>read-only</access>
               <enumeratedValues>
                 <enumeratedValue>
@@ -38437,10 +38452,17 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
                 </enumeratedValue>
                 <enumeratedValue>
                   <name>SWS_PLL1</name>
-                  <description>PL1 used as system clock</description>
+                  <description>PLL1 used as system clock</description>
                   <value>3</value>
                 </enumeratedValue>
               </enumeratedValues>
+            </field>
+            <field>
+              <name>STOPWUCK</name>
+              <description>System clock selection after a wake up
+              from system Stop</description>
+              <bitOffset>6</bitOffset>
+              <bitWidth>1</bitWidth>
             </field>
             <field>
               <name>STOPKERWUCK</name>

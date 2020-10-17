@@ -9,8 +9,6 @@ import (
 	"embedded/arch/cortexm/systim"
 	"embedded/rtos"
 	"runtime"
-
-	"github.com/embeddedgo/stm32/p/bus"
 )
 
 // Setup setups the SysTick as system timer. This is a ticking timer. Use tickless
@@ -19,7 +17,7 @@ import (
 func Setup(periodns int64) {
 	runtime.LockOSThread()
 	pl, _ := rtos.SetPrivLevel(0)
-	systim.Setup(periodns, bus.AHB1.Clock()/8, true)
+	systimSetup(periodns)
 	rtos.SetPrivLevel(pl)
 	runtime.UnlockOSThread()
 	rtos.SetSystemTimer(systim.Nanotime, nil)

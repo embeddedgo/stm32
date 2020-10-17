@@ -6,8 +6,8 @@
 //
 // Instances:
 //  SPI1  SPI1_BASE  APB2  SPI1  Serial peripheral interface
-//  SPI2  SPI2_BASE  -     SPI2  Serial peripheral interface
-//  SPI3  SPI3_BASE  -     SPI3  Serial peripheral interface
+//  SPI2  SPI2_BASE  APB1  SPI2  Serial peripheral interface
+//  SPI3  SPI3_BASE  APB1  SPI3  Serial peripheral interface
 //  SPI4  SPI4_BASE  APB2  SPI4  Serial peripheral interface
 //  SPI5  SPI5_BASE  APB2  SPI5  Serial peripheral interface
 //  SPI6  SPI6_BASE  APB4  SPI6  Serial peripheral interface

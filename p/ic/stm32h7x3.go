@@ -5,9 +5,9 @@
 // Package ic provides access to the registers of the I2C peripheral.
 //
 // Instances:
-//  I2C1  I2C1_BASE  -     I2C1_EV,I2C1_ER  I2C
-//  I2C2  I2C2_BASE  -     I2C2_EV,I2C2_ER  I2C
-//  I2C3  I2C3_BASE  -     I2C3_EV,I2C3_ER  I2C
+//  I2C1  I2C1_BASE  APB1  I2C1_EV,I2C1_ER  I2C
+//  I2C2  I2C2_BASE  APB1  I2C2_EV,I2C2_ER  I2C
+//  I2C3  I2C3_BASE  APB1  I2C3_EV,I2C3_ER  I2C
 //  I2C4  I2C4_BASE  APB4  I2C4_EV,I2C4_ER  I2C
 // Registers:
 //  0x000 32  CR1       Access: No wait states, except if a write access occurs while a write access to this register is ongoing. In this case, wait states are inserted in the second write access until the previous one is completed. The latency of the second write access can be up to 2 x PCLK1 + 6 x I2CCLK.

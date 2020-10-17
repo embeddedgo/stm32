@@ -47,6 +47,8 @@ func (p *Periph) Bus() bus.Bus {
 	switch p.BaseAddr() {
 	default:
 		return bus.APB2
+	case mmap.SPI2_BASE, mmap.SPI3_BASE:
+		return bus.APB1
 	case mmap.SPI6_BASE:
 		return bus.APB4
 	}

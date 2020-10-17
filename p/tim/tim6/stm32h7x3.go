@@ -5,8 +5,8 @@
 // Package tim6 provides access to the registers of the TIM peripheral.
 //
 // Instances:
-//  TIM6  TIM6_BASE  -  TIM6_DAC  Basic timers
-//  TIM7  TIM7_BASE  -  TIM7      Basic timers
+//  TIM6  TIM6_BASE  APB1  TIM6_DAC  Basic timers
+//  TIM7  TIM7_BASE  APB1  TIM7      Basic timers
 // Registers:
 //  0x000 32  CR1   control register 1
 //  0x004 32  CR2   control register 2
@@ -17,6 +17,7 @@
 //  0x028 32  PSC   prescaler
 //  0x02C 32  ARR   auto-reload register
 // Import:
+//  github.com/embeddedgo/stm32/p/bus
 //  github.com/embeddedgo/stm32/p/mmap
 package tim6
 

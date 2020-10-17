@@ -139,12 +139,16 @@ const (
 
 const (
 	SW          CFGR = 0x07 << 0  //+ System clock switch
+	SW_HSI      CFGR = 0x00 << 0  //  HSI oscillator selected as system clock
+	SW_CSI      CFGR = 0x01 << 0  //  HSE oscillator selected as system clock
+	SW_HSE      CFGR = 0x02 << 0  //  HSE oscillator selected as system clock
+	SW_PLL1     CFGR = 0x03 << 0  //  PLL1 selected as system clock
 	SWS         CFGR = 0x07 << 3  //+ System clock switch status
+	SWS_HSI     CFGR = 0x00 << 3  //  HSI oscillator used as system clock
+	SWS_CSI     CFGR = 0x01 << 3  //  HSE oscillator used as system clock
+	SWS_HSE     CFGR = 0x02 << 3  //  HSE oscillator used as system clock
+	SWS_PLL1    CFGR = 0x03 << 3  //  PLL1 used as system clock
 	STOPWUCK    CFGR = 0x01 << 6  //+ System clock selection after a wake up from system Stop
-	SWS_HSI     CFGR = 0x00 << 6  //  HSI oscillator used as system clock
-	SWS_CSI     CFGR = 0x01 << 6  //  HSE oscillator used as system clock
-	SWS_HSE     CFGR = 0x02 << 6  //  HSE oscillator used as system clock
-	SWS_PLL1    CFGR = 0x03 << 6  //  PL1 used as system clock
 	STOPKERWUCK CFGR = 0x01 << 7  //+ Kernel clock selection after a wake up from system Stop
 	RTCPRE      CFGR = 0x3F << 8  //+ HSE division factor for RTC clock
 	HRTIMSEL    CFGR = 0x01 << 14 //+ High Resolution Timer clock prescaler selection

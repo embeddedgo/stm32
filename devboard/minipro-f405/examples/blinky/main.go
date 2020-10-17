@@ -8,15 +8,15 @@ package main
 import (
 	"time"
 
-	"github.com/embeddedgo/stm32/devboard/mcudev-mini-pro/board/buttons"
-	"github.com/embeddedgo/stm32/devboard/mcudev-mini-pro/board/leds"
+	"github.com/embeddedgo/stm32/devboard/minipro-f405/board/buttons"
+	"github.com/embeddedgo/stm32/devboard/minipro-f405/board/leds"
 )
 
 func delay() {
 	if buttons.User.Read() != 0 {
-		time.Sleep(time.Second / 10)
+		time.Sleep(time.Second / 7)
 	} else {
-		time.Sleep(time.Second / 4)
+		time.Sleep(time.Second / 2)
 	}
 }
 

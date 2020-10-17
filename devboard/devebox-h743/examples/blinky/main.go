@@ -4,11 +4,26 @@
 
 package main
 
-import "github.com/embeddedgo/stm32/hal/system"
+import (
+	"time"
+
+	"github.com/embeddedgo/stm32/devboard/devebox-h743/board/buttons"
+	"github.com/embeddedgo/stm32/devboard/devebox-h743/board/leds"
+)
+
+func delay() {
+	if buttons.User.Read() != 0 {
+		time.Sleep(time.Second / 7)
+	} else {
+		time.Sleep(time.Second / 2)
+	}
+}
 
 func main() {
-	system.SetupPLL(25, 5, 80, 1)
-	for i := 0; ;i++ {
-		println(i)
+	for {
+		leds.User.SetOff()
+		delay()
+		leds.User.SetOn()
+		delay()
 	}
 }

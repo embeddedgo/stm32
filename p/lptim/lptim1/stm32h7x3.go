@@ -5,7 +5,7 @@
 // Package lptim1 provides access to the registers of the LPTIM peripheral.
 //
 // Instances:
-//  LPTIM1  LPTIM1_BASE  -     LPTIM1  Low power timer
+//  LPTIM1  LPTIM1_BASE  APB1  LPTIM1  Low power timer
 //  LPTIM2  LPTIM2_BASE  APB4  LPTIM2  Low power timer
 // Registers:
 //  0x000 32  ISR    Interrupt and Status Register

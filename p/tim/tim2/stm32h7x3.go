@@ -5,13 +5,13 @@
 // Package tim2 provides access to the registers of the TIM peripheral.
 //
 // Instances:
-//  TIM2   TIM2_BASE   -  TIM2+,SWPMI1+       General purpose timers
-//  TIM3   TIM3_BASE   -  TIM3                General purpose timers
-//  TIM4   TIM4_BASE   -  TIM2+,SWPMI1+       General purpose timers
-//  TIM5   TIM5_BASE   -  TIM4,TIM5           General purpose timers
-//  TIM12  TIM12_BASE  -  TIM8_BRK_TIM12      General purpose timers
-//  TIM13  TIM13_BASE  -  TIM8_UP_TIM13       General purpose timers
-//  TIM14  TIM14_BASE  -  TIM8_TRG_COM_TIM14  General purpose timers
+//  TIM2   TIM2_BASE   APB1  TIM2+,SWPMI1+       General purpose timers
+//  TIM3   TIM3_BASE   APB1  TIM3                General purpose timers
+//  TIM4   TIM4_BASE   APB1  TIM2+,SWPMI1+       General purpose timers
+//  TIM5   TIM5_BASE   APB1  TIM4,TIM5           General purpose timers
+//  TIM12  TIM12_BASE  APB1  TIM8_BRK_TIM12      General purpose timers
+//  TIM13  TIM13_BASE  APB1  TIM8_UP_TIM13       General purpose timers
+//  TIM14  TIM14_BASE  APB1  TIM8_TRG_COM_TIM14  General purpose timers
 // Registers:
 //  0x000 32  CR1           control register 1
 //  0x004 32  CR2           control register 2
@@ -36,6 +36,7 @@
 //  0x060 32  AF1           TIM alternate function option register 1
 //  0x068 32  TISEL         TIM timer input selection register
 // Import:
+//  github.com/embeddedgo/stm32/p/bus
 //  github.com/embeddedgo/stm32/p/mmap
 package tim2
 

@@ -12,7 +12,7 @@ AHB2RSTR: fields added: CRYPRST
 GPIOJ-K:  removed
 CFGR:     fields merged: SWS0..SWS1 -> SWS, SW0..SW1 -> SW
           enums added: SW_HSI, SW_HSE, SW_PLL, SWS_HSI, SWS_HSE,
-          SWS_PLL, HPRE_DIV1..HPRE_DIV512, PPRE1_DIV1..PPRE1_DIV16, 
+          SWS_PLL, HPRE_DIV1..HPRE_DIV512, PPRE1_DIV1..PPRE1_DIV16,
           PPRE2_DIV1..PPRE2_DIV16
 PLLCFGR:  fields merged: PLLM0..PLLM5 -> PLLM, PLLN0..PLLN8 -> PLLN,
           PLLP0..PLLP1 -> PLLP, PLLQ0..PLLQ3 -> PLLQ
@@ -14113,6 +14113,12 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           <access>read-write</access>
           <resetValue>0x00000000</resetValue>
           <fields>
+            <field>
+              <name>VOS</name>
+              <description>Regulator voltage scaling output selection</description>
+              <bitOffset>14</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
             <field>
               <name>FPDS</name>
               <description>Flash power down in Stop

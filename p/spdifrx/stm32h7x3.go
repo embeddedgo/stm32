@@ -5,7 +5,7 @@
 // Package spdifrx provides access to the registers of the SPDIFRX peripheral.
 //
 // Instances:
-//  SPDIFRX  SPDIFRX_BASE  -  SPDIF  Receiver Interface
+//  SPDIFRX  SPDIFRX_BASE  APB1  SPDIF  Receiver Interface
 // Registers:
 //  0x000 32  CR     Control register
 //  0x004 32  IMR    Interrupt mask register
@@ -20,6 +20,7 @@
 //  0x3F8 32  IDR    SPDIFRX identification register
 //  0x3FC 32  SIDR   SPDIFRX size identification register
 // Import:
+//  github.com/embeddedgo/stm32/p/bus
 //  github.com/embeddedgo/stm32/p/mmap
 package spdifrx
 

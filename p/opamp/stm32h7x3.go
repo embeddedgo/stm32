@@ -5,7 +5,7 @@
 // Package opamp provides access to the registers of the OPAMP peripheral.
 //
 // Instances:
-//  OPAMP  OPAMP_BASE  -  -  Operational amplifiers
+//  OPAMP  OPAMP_BASE  APB1  -  Operational amplifiers
 // Registers:
 //  0x000 32  OPAMP1_CSR    OPAMP1 control/status register
 //  0x004 32  OPAMP1_OTR    OPAMP1 offset trimming register in normal mode
@@ -14,6 +14,7 @@
 //  0x014 32  OPAMP2_OTR    OPAMP2 offset trimming register in normal mode
 //  0x018 32  OPAMP2_HSOTR  OPAMP2 offset trimming register in low-power mode
 // Import:
+//  github.com/embeddedgo/stm32/p/bus
 //  github.com/embeddedgo/stm32/p/mmap
 package opamp
 

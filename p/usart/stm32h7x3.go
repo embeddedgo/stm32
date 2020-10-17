@@ -5,13 +5,13 @@
 // Package usart provides access to the registers of the USART peripheral.
 //
 // Instances:
-//  UART4   UART4_BASE   -     USART3,UART4  Universal synchronous asynchronous receiver transmitter
-//  UART5   UART5_BASE   -     UART5         Universal synchronous asynchronous receiver transmitter
+//  UART4   UART4_BASE   APB1  USART3,UART4  Universal synchronous asynchronous receiver transmitter
+//  UART5   UART5_BASE   APB1  UART5         Universal synchronous asynchronous receiver transmitter
 //  UART7   UART7_BASE   -     UART7         Universal synchronous asynchronous receiver transmitter
 //  UART8   UART8_BASE   -     UART8         Universal synchronous asynchronous receiver transmitter
 //  USART1  USART1_BASE  APB2  -             Universal synchronous asynchronous receiver transmitter
-//  USART2  USART2_BASE  -     USART1        Universal synchronous asynchronous receiver transmitter
-//  USART3  USART3_BASE  -     USART2        Universal synchronous asynchronous receiver transmitter
+//  USART2  USART2_BASE  APB1  USART1        Universal synchronous asynchronous receiver transmitter
+//  USART3  USART3_BASE  APB1  USART2        Universal synchronous asynchronous receiver transmitter
 //  USART6  USART6_BASE  APB2  USART6        Universal synchronous asynchronous receiver transmitter
 // Registers:
 //  0x000 32  CR1    Control register 1

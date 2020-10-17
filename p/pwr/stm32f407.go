@@ -15,14 +15,15 @@
 package pwr
 
 const (
-	LPDS CR = 0x01 << 0 //+ Low-power deep sleep
-	PDDS CR = 0x01 << 1 //+ Power down deepsleep
-	CWUF CR = 0x01 << 2 //+ Clear wakeup flag
-	CSBF CR = 0x01 << 3 //+ Clear standby flag
-	PVDE CR = 0x01 << 4 //+ Power voltage detector enable
-	PLS  CR = 0x07 << 5 //+ PVD level selection
-	DBP  CR = 0x01 << 8 //+ Disable backup domain write protection
-	FPDS CR = 0x01 << 9 //+ Flash power down in Stop mode
+	LPDS CR = 0x01 << 0  //+ Low-power deep sleep
+	PDDS CR = 0x01 << 1  //+ Power down deepsleep
+	CWUF CR = 0x01 << 2  //+ Clear wakeup flag
+	CSBF CR = 0x01 << 3  //+ Clear standby flag
+	PVDE CR = 0x01 << 4  //+ Power voltage detector enable
+	PLS  CR = 0x07 << 5  //+ PVD level selection
+	DBP  CR = 0x01 << 8  //+ Disable backup domain write protection
+	FPDS CR = 0x01 << 9  //+ Flash power down in Stop mode
+	VOS  CR = 0x01 << 14 //+ Regulator voltage scaling output selection
 )
 
 const (
@@ -34,6 +35,7 @@ const (
 	PLSn  = 5
 	DBPn  = 8
 	FPDSn = 9
+	VOSn  = 14
 )
 
 const (

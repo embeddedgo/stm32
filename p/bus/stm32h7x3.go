@@ -6,12 +6,13 @@ package bus
 
 const (
 	Core Bus = iota
-	AHB3
 	AHB1
 	AHB2
+	AHB3
 	AHB4
-	APB3
+	APB1
 	APB2
+	APB3
 	APB4
 
 	AHBLast = AHB4
@@ -22,10 +23,10 @@ type Bus uint8
 
 func (b Bus) String() string {
 	i := int(b) * 4
-	return "CoreAHB3AHB1AHB2AHB4APB3APB2APB4"[i : i+4]
+	return "CoreAHB1AHB2AHB3AHB4APB1APB2APB3APB4"[i : i+4]
 }
 
-var buses [8]struct{ clockHz int64 }
+var buses [9]struct{ clockHz int64 }
 
 func (b Bus) Clock() int64      { return buses[b].clockHz }
 func (b Bus) SetClock(Hz int64) { buses[b].clockHz = Hz }

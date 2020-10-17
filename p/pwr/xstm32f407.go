@@ -75,6 +75,10 @@ func (p *Periph) FPDS() RMCR {
 	return RMCR{mmio.UM32{&p.CR.U32, uint32(FPDS)}}
 }
 
+func (p *Periph) VOS() RMCR {
+	return RMCR{mmio.UM32{&p.CR.U32, uint32(VOS)}}
+}
+
 type CSR uint32
 
 type RCSR struct{ mmio.U32 }

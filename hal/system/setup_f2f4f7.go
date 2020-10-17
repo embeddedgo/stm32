@@ -102,10 +102,16 @@ func SetupPLL(osc, N, P int) {
 
 	sysclk := 2e6 * uint(N) / uint(P)
 
-	// Setup linear voltage regulator scaling (TODO: this must be specialized).
-	// RCC.PWREN().Set()
-	// pwr.PWR.VOS().Store(pwr.VOS_1 | pwr.VOS_0)
-	// RCC.PWREN().Clear()
+	// Setup linear voltage regulator scaling. Default scale 1 works well up
+	// to 168 MHz. Scale 2 can be enabled in case of sysclk <= 144 MHz but
+	// the numerical values of constants are not compatible between different
+	// STM32F4 series.
+	//RCC.PWREN().Set()
+	//pwr.PWR.VOS().StoreBits(pwr.VOS, vos)
+	//for rcc.PWR.VOSRDY().Load() == 0 {
+	//	runtime.Gosched() // wait for voltage regulator...
+	//}
+	//RCC.PWREN().Clear()
 
 	// Setup Flash.
 	FLASH := flash.FLASH()
