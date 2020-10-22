@@ -5,9 +5,9 @@
 // Package fdcan provides access to the registers of the FDCAN peripheral.
 //
 // Instances:
-//  FDCAN   FDCAN_BASE   APB1  FDCAN2_intr0+,FDCAN2_intr1+  FDCAN
-//  FDCAN1  FDCAN1_BASE  -     FDCAN2_intr0+,FDCAN2_intr1+  FDCAN
-//  FDCAN2  FDCAN2_BASE  -     FDCAN2_intr0+,FDCAN2_intr1+  FDCAN
+//  FDCAN   FDCAN_BASE   APB1  FDCAN2_INTR0+,FDCAN2_INTR1+  FDCAN
+//  FDCAN1  FDCAN1_BASE  -     FDCAN2_INTR0+,FDCAN2_INTR1+  FDCAN
+//  FDCAN2  FDCAN2_BASE  -     FDCAN2_INTR0+,FDCAN2_INTR1+  FDCAN
 // Registers:
 //  0x000 32  CREL    FDCAN Core Release Register
 //  0x004 32  ENDN    FDCAN Core Release Register

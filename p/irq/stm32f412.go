@@ -35,7 +35,7 @@ const (
 	SPI1               = 35 // SPI1 global interrupt
 	SPI2               = 36 // SPI2 global interrupt
 	EXTI15_10          = 40 // EXTI Line[15:10] interrupts
-	RTC_Alarm          = 41 // RTC Alarms (A and B) through EXTI line interrupt
+	RTC_ALARM          = 41 // RTC Alarms (A and B) through EXTI line interrupt
 	OTG_FS_WKUP        = 42 // USB On-The-Go FS Wakeup through EXTI line interrupt
 	TIM12              = 43 // Timer 12 global interrupt
 	TIM13              = 44 // Timer 13 global interrupt

@@ -490,15 +490,19 @@ const (
 )
 
 const (
-	LSEON    BDCR = 0x01 << 0  //+ LSE oscillator enabled
-	LSERDY   BDCR = 0x01 << 1  //+ LSE oscillator ready
-	LSEBYP   BDCR = 0x01 << 2  //+ LSE oscillator bypass
-	LSEDRV   BDCR = 0x03 << 3  //+ LSE oscillator driving capability
-	LSECSSON BDCR = 0x01 << 5  //+ LSE clock security system enable
-	LSECSSD  BDCR = 0x01 << 6  //+ LSE clock security system failure detection
-	RTCSRC   BDCR = 0x03 << 8  //+ RTC clock source selection
-	RTCEN    BDCR = 0x01 << 15 //+ RTC clock enable
-	VSWRST   BDCR = 0x01 << 16 //+ VSwitch domain software reset
+	LSEON       BDCR = 0x01 << 0  //+ LSE oscillator enabled
+	LSERDY      BDCR = 0x01 << 1  //+ LSE oscillator ready
+	LSEBYP      BDCR = 0x01 << 2  //+ LSE oscillator bypass
+	LSEDRV      BDCR = 0x03 << 3  //+ LSE oscillator driving capability
+	LSECSSON    BDCR = 0x01 << 5  //+ LSE clock security system enable
+	LSECSSD     BDCR = 0x01 << 6  //+ LSE clock security system failure detection
+	RTCSEL      BDCR = 0x03 << 8  //+ RTC clock source selection
+	RTCSEL_NONE BDCR = 0x00 << 8  //  no clock
+	RTCSEL_LSE  BDCR = 0x01 << 8  //  LSE oscillator clock used as RTC clock
+	RTCSEL_LSI  BDCR = 0x02 << 8  //  LSI oscillator clock used as RTC clock
+	RTCSEL_HSE  BDCR = 0x03 << 8  //  HSE clock divided by RTCPRE value is used as RTC clock
+	RTCEN       BDCR = 0x01 << 15 //+ RTC clock enable
+	VSWRST      BDCR = 0x01 << 16 //+ VSwitch domain software reset
 )
 
 const (
@@ -508,7 +512,7 @@ const (
 	LSEDRVn   = 3
 	LSECSSONn = 5
 	LSECSSDn  = 6
-	RTCSRCn   = 8
+	RTCSELn   = 8
 	RTCENn    = 15
 	VSWRSTn   = 16
 )

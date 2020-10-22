@@ -27,8 +27,8 @@ const (
 	ADC1_2           = 18  // ADC1 and ADC2 global interrupt
 	USB_HP           = 19  // USB_HP
 	USB_LP           = 20  // USB_LP
-	fdcan1_intr1_it  = 21  // fdcan1_intr1_it
-	fdcan1_intr0_it  = 22  // fdcan1_intr0_it
+	FDCAN1_INTR1_IT  = 21  // fdcan1_intr1_it
+	FDCAN1_INTR0_IT  = 22  // fdcan1_intr0_it
 	EXTI9_5          = 23  // EXTI9_5
 	TIM1_BRK_TIM15   = 24  // TIM1_BRK_TIM15
 	TIM1_UP_TIM16    = 25  // TIM1_UP_TIM16
@@ -48,7 +48,7 @@ const (
 	USART3           = 39  // USART3
 	EXTI15_10        = 40  // EXTI15_10
 	RTC_ALARM        = 41  // RTC_ALARM
-	USBWakeUP        = 42  // USBWakeUP
+	USBWAKEUP        = 42  // USBWakeUP
 	TIM8_BRK         = 43  // TIM8_BRK
 	TIM8_UP          = 44  // TIM8_UP
 	TIM8_TRG_COM     = 45  // TIM8_TRG_COM
@@ -76,8 +76,8 @@ const (
 	I2C4_ER          = 83  // I2C4_ER
 	SPI4             = 84  // SPI4
 	AES              = 85  // AES
-	FDCAN2_intr0     = 86  // FDCAN2_intr0
-	FDCAN2_intr1     = 87  // FDCAN2_intr1
+	FDCAN2_INTR0     = 86  // FDCAN2_intr0
+	FDCAN2_INTR1     = 87  // FDCAN2_intr1
 	RNG              = 90  // RNG
 	LPUART           = 91  // LPUART
 	I2C3_EV          = 92  // I2C3_EV
@@ -87,6 +87,6 @@ const (
 	DMA2_CH6         = 97  // DMA2_CH6
 	DMA2_CH7         = 98  // DMA2_CH7
 	DMA2_CH8         = 99  // DMA2_CH8
-	Cordic           = 100 // Cordic
+	CORDIC           = 100 // Cordic
 	FMAC             = 101 // FMAC
 )

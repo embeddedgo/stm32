@@ -60,7 +60,7 @@ func main() {
 	d := dma.DMA(2)
 	d.EnableClock(true)
 	ch = d.Channel(0, 0)
-	irq.DMA2_Stream0.Enable(rtos.IntPrioLow, 0)
+	irq.DMA2_STREAM0.Enable(rtos.IntPrioLow, 0)
 
 	for {
 		for n := 1000; n <= len(src); n += 1000 {
@@ -123,7 +123,7 @@ func main() {
 }
 
 //go:interrupthandler
-func DMA2_Stream0_Handler() {
+func DMA2_STREAM0_Handler() {
 	ch.DisableIRQ(dma.EvAll, dma.ErrAll)
 	ch.Disable()
 	tce.Wakeup()

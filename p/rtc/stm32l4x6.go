@@ -7,57 +7,26 @@
 // Instances:
 //  RTC  RTC_BASE  -  TAMP_STAMP,RTC_WKUP,RTC_ALARM  Real-time clock
 // Registers:
-//  0x000 32  TR        time register
-//  0x004 32  DR        date register
-//  0x008 32  CR        control register
-//  0x00C 32  ISR       initialization and status register
-//  0x010 32  PRER      prescaler register
-//  0x014 32  WUTR      wakeup timer register
-//  0x01C 32  ALRMAR    alarm A register
-//  0x020 32  ALRMBR    alarm B register
-//  0x024 32  WPR       write protection register
-//  0x028 32  SSR       sub second register
-//  0x02C 32  SHIFTR    shift control register
-//  0x030 32  TSTR      time stamp time register
-//  0x034 32  TSDR      time stamp date register
-//  0x038 32  TSSSR     timestamp sub second register
-//  0x03C 32  CALR      calibration register
-//  0x040 32  TAMPCR    tamper configuration register
-//  0x044 32  ALRMASSR  alarm A sub second register
-//  0x048 32  ALRMBSSR  alarm B sub second register
-//  0x04C 32  OR        option register
-//  0x050 32  BKP0R     backup register
-//  0x054 32  BKP1R     backup register
-//  0x058 32  BKP2R     backup register
-//  0x05C 32  BKP3R     backup register
-//  0x060 32  BKP4R     backup register
-//  0x064 32  BKP5R     backup register
-//  0x068 32  BKP6R     backup register
-//  0x06C 32  BKP7R     backup register
-//  0x070 32  BKP8R     backup register
-//  0x074 32  BKP9R     backup register
-//  0x078 32  BKP10R    backup register
-//  0x07C 32  BKP11R    backup register
-//  0x080 32  BKP12R    backup register
-//  0x084 32  BKP13R    backup register
-//  0x088 32  BKP14R    backup register
-//  0x08C 32  BKP15R    backup register
-//  0x090 32  BKP16R    backup register
-//  0x094 32  BKP17R    backup register
-//  0x098 32  BKP18R    backup register
-//  0x09C 32  BKP19R    backup register
-//  0x0A0 32  BKP20R    backup register
-//  0x0A4 32  BKP21R    backup register
-//  0x0A8 32  BKP22R    backup register
-//  0x0AC 32  BKP23R    backup register
-//  0x0B0 32  BKP24R    backup register
-//  0x0B4 32  BKP25R    backup register
-//  0x0B8 32  BKP26R    backup register
-//  0x0BC 32  BKP27R    backup register
-//  0x0C0 32  BKP28R    backup register
-//  0x0C4 32  BKP29R    backup register
-//  0x0C8 32  BKP30R    backup register
-//  0x0CC 32  BKP31R    backup register
+//  0x000 32  TR                 time register
+//  0x004 32  DR                 date register
+//  0x008 32  CR                 control register
+//  0x00C 32  ISR                initialization and status register
+//  0x010 32  PRER               prescaler register
+//  0x014 32  WUTR               wakeup timer register
+//  0x01C 32  ALRMAR(ALRMR)      alarm A register
+//  0x020 32  ALRMBR(ALRMR)      alarm B register
+//  0x024 32  WPR                write protection register
+//  0x028 32  SSR                sub second register
+//  0x02C 32  SHIFTR             shift control register
+//  0x030 32  TSTR(TR)           time stamp time register
+//  0x034 32  TSDR(DR)           time stamp date register
+//  0x038 32  TSSSR(SSR)         timestamp sub second register
+//  0x03C 32  CALR               calibration register
+//  0x040 32  TAMPCR             tamper configuration register
+//  0x044 32  ALRMASSR(ALRMSSR)  alarm A sub second register
+//  0x048 32  ALRMBSSR(ALRMSSR)  alarm B sub second register
+//  0x04C 32  OR                 option register
+//  0x050 32  BKPR[32]           backup register
 // Import:
 //  github.com/embeddedgo/stm32/p/mmap
 package rtc
@@ -209,71 +178,37 @@ const (
 )
 
 const (
-	SU    ALRMAR = 0x0F << 0  //+ Second units in BCD format
-	ST    ALRMAR = 0x07 << 4  //+ Second tens in BCD format
-	MSK1  ALRMAR = 0x01 << 7  //+ Alarm A seconds mask
-	MNU   ALRMAR = 0x0F << 8  //+ Minute units in BCD format
-	MNT   ALRMAR = 0x07 << 12 //+ Minute tens in BCD format
-	MSK2  ALRMAR = 0x01 << 15 //+ Alarm A minutes mask
-	HU    ALRMAR = 0x0F << 16 //+ Hour units in BCD format
-	HT    ALRMAR = 0x03 << 20 //+ Hour tens in BCD format
-	PM    ALRMAR = 0x01 << 22 //+ AM/PM notation
-	MSK3  ALRMAR = 0x01 << 23 //+ Alarm A hours mask
-	DU    ALRMAR = 0x0F << 24 //+ Date units or day in BCD format
-	DT    ALRMAR = 0x03 << 28 //+ Date tens in BCD format
-	WDSEL ALRMAR = 0x01 << 30 //+ Week day selection
-	MSK4  ALRMAR = 0x01 << 31 //+ Alarm A date mask
+	ASU    ALRMR = 0x0F << 0  //+ Second units in BCD format
+	AST    ALRMR = 0x07 << 4  //+ Second tens in BCD format
+	AMSK1  ALRMR = 0x01 << 7  //+ Alarm A seconds mask
+	AMNU   ALRMR = 0x0F << 8  //+ Minute units in BCD format
+	AMNT   ALRMR = 0x07 << 12 //+ Minute tens in BCD format
+	AMSK2  ALRMR = 0x01 << 15 //+ Alarm A minutes mask
+	AHU    ALRMR = 0x0F << 16 //+ Hour units in BCD format
+	AHT    ALRMR = 0x03 << 20 //+ Hour tens in BCD format
+	APM    ALRMR = 0x01 << 22 //+ AM/PM notation
+	AMSK3  ALRMR = 0x01 << 23 //+ Alarm A hours mask
+	ADU    ALRMR = 0x0F << 24 //+ Date units or day in BCD format
+	ADT    ALRMR = 0x03 << 28 //+ Date tens in BCD format
+	AWDSEL ALRMR = 0x01 << 30 //+ Week day selection
+	AMSK4  ALRMR = 0x01 << 31 //+ Alarm A date mask
 )
 
 const (
-	SUn    = 0
-	STn    = 4
-	MSK1n  = 7
-	MNUn   = 8
-	MNTn   = 12
-	MSK2n  = 15
-	HUn    = 16
-	HTn    = 20
-	PMn    = 22
-	MSK3n  = 23
-	DUn    = 24
-	DTn    = 28
-	WDSELn = 30
-	MSK4n  = 31
-)
-
-const (
-	SU    ALRMBR = 0x0F << 0  //+ Second units in BCD format
-	ST    ALRMBR = 0x07 << 4  //+ Second tens in BCD format
-	MSK1  ALRMBR = 0x01 << 7  //+ Alarm B seconds mask
-	MNU   ALRMBR = 0x0F << 8  //+ Minute units in BCD format
-	MNT   ALRMBR = 0x07 << 12 //+ Minute tens in BCD format
-	MSK2  ALRMBR = 0x01 << 15 //+ Alarm B minutes mask
-	HU    ALRMBR = 0x0F << 16 //+ Hour units in BCD format
-	HT    ALRMBR = 0x03 << 20 //+ Hour tens in BCD format
-	PM    ALRMBR = 0x01 << 22 //+ AM/PM notation
-	MSK3  ALRMBR = 0x01 << 23 //+ Alarm B hours mask
-	DU    ALRMBR = 0x0F << 24 //+ Date units or day in BCD format
-	DT    ALRMBR = 0x03 << 28 //+ Date tens in BCD format
-	WDSEL ALRMBR = 0x01 << 30 //+ Week day selection
-	MSK4  ALRMBR = 0x01 << 31 //+ Alarm B date mask
-)
-
-const (
-	SUn    = 0
-	STn    = 4
-	MSK1n  = 7
-	MNUn   = 8
-	MNTn   = 12
-	MSK2n  = 15
-	HUn    = 16
-	HTn    = 20
-	PMn    = 22
-	MSK3n  = 23
-	DUn    = 24
-	DTn    = 28
-	WDSELn = 30
-	MSK4n  = 31
+	ASUn    = 0
+	ASTn    = 4
+	AMSK1n  = 7
+	AMNUn   = 8
+	AMNTn   = 12
+	AMSK2n  = 15
+	AHUn    = 16
+	AHTn    = 20
+	APMn    = 22
+	AMSK3n  = 23
+	ADUn    = 24
+	ADTn    = 28
+	AWDSELn = 30
+	AMSK4n  = 31
 )
 
 const (
@@ -300,50 +235,6 @@ const (
 const (
 	SUBFSn = 0
 	ADD1Sn = 31
-)
-
-const (
-	SU  TSTR = 0x0F << 0  //+ Second units in BCD format
-	ST  TSTR = 0x07 << 4  //+ Second tens in BCD format
-	MNU TSTR = 0x0F << 8  //+ Minute units in BCD format
-	MNT TSTR = 0x07 << 12 //+ Minute tens in BCD format
-	HU  TSTR = 0x0F << 16 //+ Hour units in BCD format
-	HT  TSTR = 0x03 << 20 //+ Hour tens in BCD format
-	PM  TSTR = 0x01 << 22 //+ AM/PM notation
-)
-
-const (
-	SUn  = 0
-	STn  = 4
-	MNUn = 8
-	MNTn = 12
-	HUn  = 16
-	HTn  = 20
-	PMn  = 22
-)
-
-const (
-	DU  TSDR = 0x0F << 0  //+ Date units in BCD format
-	DT  TSDR = 0x03 << 4  //+ Date tens in BCD format
-	MU  TSDR = 0x0F << 8  //+ Month units in BCD format
-	MT  TSDR = 0x01 << 12 //+ Month tens in BCD format
-	WDU TSDR = 0x07 << 13 //+ Week day units
-)
-
-const (
-	DUn  = 0
-	DTn  = 4
-	MUn  = 8
-	MTn  = 12
-	WDUn = 13
-)
-
-const (
-	SS TSSSR = 0xFFFF << 0 //+ Sub second value
-)
-
-const (
-	SSn = 0
 )
 
 const (
@@ -409,23 +300,13 @@ const (
 )
 
 const (
-	SS     ALRMASSR = 0x7FFF << 0 //+ Sub seconds value
-	MASKSS ALRMASSR = 0x0F << 24  //+ Mask the most-significant bits starting at this bit
+	ASS     ALRMSSR = 0x7FFF << 0 //+ Sub seconds value
+	AMASKSS ALRMSSR = 0x0F << 24  //+ Mask the most-significant bits starting at this bit
 )
 
 const (
-	SSn     = 0
-	MASKSSn = 24
-)
-
-const (
-	SS     ALRMBSSR = 0x7FFF << 0 //+ Sub seconds value
-	MASKSS ALRMBSSR = 0x0F << 24  //+ Mask the most-significant bits starting at this bit
-)
-
-const (
-	SSn     = 0
-	MASKSSn = 24
+	ASSn     = 0
+	AMASKSSn = 24
 )
 
 const (
@@ -436,260 +317,4 @@ const (
 const (
 	RTC_ALARM_TYPEn = 0
 	RTC_OUT_RMPn    = 1
-)
-
-const (
-	BKP BKP0R = 0xFFFFFFFF << 0 //+ BKP
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP BKP1R = 0xFFFFFFFF << 0 //+ BKP
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP BKP2R = 0xFFFFFFFF << 0 //+ BKP
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP BKP3R = 0xFFFFFFFF << 0 //+ BKP
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP BKP4R = 0xFFFFFFFF << 0 //+ BKP
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP BKP5R = 0xFFFFFFFF << 0 //+ BKP
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP BKP6R = 0xFFFFFFFF << 0 //+ BKP
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP BKP7R = 0xFFFFFFFF << 0 //+ BKP
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP BKP8R = 0xFFFFFFFF << 0 //+ BKP
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP BKP9R = 0xFFFFFFFF << 0 //+ BKP
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP BKP10R = 0xFFFFFFFF << 0 //+ BKP
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP BKP11R = 0xFFFFFFFF << 0 //+ BKP
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP BKP12R = 0xFFFFFFFF << 0 //+ BKP
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP BKP13R = 0xFFFFFFFF << 0 //+ BKP
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP BKP14R = 0xFFFFFFFF << 0 //+ BKP
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP BKP15R = 0xFFFFFFFF << 0 //+ BKP
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP BKP16R = 0xFFFFFFFF << 0 //+ BKP
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP BKP17R = 0xFFFFFFFF << 0 //+ BKP
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP BKP18R = 0xFFFFFFFF << 0 //+ BKP
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP BKP19R = 0xFFFFFFFF << 0 //+ BKP
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP BKP20R = 0xFFFFFFFF << 0 //+ BKP
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP BKP21R = 0xFFFFFFFF << 0 //+ BKP
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP BKP22R = 0xFFFFFFFF << 0 //+ BKP
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP BKP23R = 0xFFFFFFFF << 0 //+ BKP
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP BKP24R = 0xFFFFFFFF << 0 //+ BKP
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP BKP25R = 0xFFFFFFFF << 0 //+ BKP
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP BKP26R = 0xFFFFFFFF << 0 //+ BKP
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP BKP27R = 0xFFFFFFFF << 0 //+ BKP
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP BKP28R = 0xFFFFFFFF << 0 //+ BKP
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP BKP29R = 0xFFFFFFFF << 0 //+ BKP
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP BKP30R = 0xFFFFFFFF << 0 //+ BKP
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP BKP31R = 0xFFFFFFFF << 0 //+ BKP
-)
-
-const (
-	BKPn = 0
 )

@@ -29,8 +29,8 @@ const (
 	ADC1_2           rtos.IRQ = 18  // ADC1 and ADC2 global interrupt
 	USB_HP           rtos.IRQ = 19  // USB_HP
 	USB_LP           rtos.IRQ = 20  // USB_LP
-	fdcan1_intr1_it  rtos.IRQ = 21  // fdcan1_intr1_it
-	fdcan1_intr0_it  rtos.IRQ = 22  // fdcan1_intr0_it
+	FDCAN1_INTR1_IT  rtos.IRQ = 21  // fdcan1_intr1_it
+	FDCAN1_INTR0_IT  rtos.IRQ = 22  // fdcan1_intr0_it
 	EXTI9_5          rtos.IRQ = 23  // EXTI9_5
 	TIM1_BRK_TIM15   rtos.IRQ = 24  // TIM1_BRK_TIM15
 	TIM1_UP_TIM16    rtos.IRQ = 25  // TIM1_UP_TIM16
@@ -50,7 +50,7 @@ const (
 	USART3           rtos.IRQ = 39  // USART3
 	EXTI15_10        rtos.IRQ = 40  // EXTI15_10
 	RTC_ALARM        rtos.IRQ = 41  // RTC_ALARM
-	USBWakeUP        rtos.IRQ = 42  // USBWakeUP
+	USBWAKEUP        rtos.IRQ = 42  // USBWakeUP
 	TIM8_BRK         rtos.IRQ = 43  // TIM8_BRK
 	TIM8_UP          rtos.IRQ = 44  // TIM8_UP
 	TIM8_TRG_COM     rtos.IRQ = 45  // TIM8_TRG_COM
@@ -78,8 +78,8 @@ const (
 	I2C4_ER          rtos.IRQ = 83  // I2C4_ER
 	SPI4             rtos.IRQ = 84  // SPI4
 	AES              rtos.IRQ = 85  // AES
-	FDCAN2_intr0     rtos.IRQ = 86  // FDCAN2_intr0
-	FDCAN2_intr1     rtos.IRQ = 87  // FDCAN2_intr1
+	FDCAN2_INTR0     rtos.IRQ = 86  // FDCAN2_intr0
+	FDCAN2_INTR1     rtos.IRQ = 87  // FDCAN2_intr1
 	RNG              rtos.IRQ = 90  // RNG
 	LPUART           rtos.IRQ = 91  // LPUART
 	I2C3_EV          rtos.IRQ = 92  // I2C3_EV
@@ -89,6 +89,6 @@ const (
 	DMA2_CH6         rtos.IRQ = 97  // DMA2_CH6
 	DMA2_CH7         rtos.IRQ = 98  // DMA2_CH7
 	DMA2_CH8         rtos.IRQ = 99  // DMA2_CH8
-	Cordic           rtos.IRQ = 100 // Cordic
+	CORDIC           rtos.IRQ = 100 // Cordic
 	FMAC             rtos.IRQ = 101 // FMAC
 )

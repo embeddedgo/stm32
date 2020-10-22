@@ -833,17 +833,21 @@ const (
 )
 
 const (
-	LSEON    BDCR = 0x01 << 0  //+ LSE oscillator enable
-	LSERDY   BDCR = 0x01 << 1  //+ LSE oscillator ready
-	LSEBYP   BDCR = 0x01 << 2  //+ LSE oscillator bypass
-	LSEDRV   BDCR = 0x03 << 3  //+ SE oscillator drive capability
-	LSECSSON BDCR = 0x01 << 5  //+ LSECSSON
-	LSECSSD  BDCR = 0x01 << 6  //+ LSECSSD
-	RTCSEL   BDCR = 0x03 << 8  //+ RTC clock source selection
-	RTCEN    BDCR = 0x01 << 15 //+ RTC clock enable
-	BDRST    BDCR = 0x01 << 16 //+ Backup domain software reset
-	LSCOEN   BDCR = 0x01 << 24 //+ Low speed clock output enable
-	LSCOSEL  BDCR = 0x01 << 25 //+ Low speed clock output selection
+	LSEON       BDCR = 0x01 << 0  //+ LSE oscillator enable
+	LSERDY      BDCR = 0x01 << 1  //+ LSE oscillator ready
+	LSEBYP      BDCR = 0x01 << 2  //+ LSE oscillator bypass
+	LSEDRV      BDCR = 0x03 << 3  //+ SE oscillator drive capability
+	LSECSSON    BDCR = 0x01 << 5  //+ LSECSSON
+	LSECSSD     BDCR = 0x01 << 6  //+ LSECSSD
+	RTCSEL      BDCR = 0x03 << 8  //+ RTC clock source selection
+	RTCSEL_NONE BDCR = 0x00 << 8  //  no clock
+	RTCSEL_LSE  BDCR = 0x01 << 8  //  LSE oscillator clock used as RTC clock
+	RTCSEL_LSI  BDCR = 0x02 << 8  //  LSI oscillator clock used as RTC clock
+	RTCSEL_HSE  BDCR = 0x03 << 8  //  HSE oscillator clock divided by 32 used as RTC clock
+	RTCEN       BDCR = 0x01 << 15 //+ RTC clock enable
+	BDRST       BDCR = 0x01 << 16 //+ Backup domain software reset
+	LSCOEN      BDCR = 0x01 << 24 //+ Low speed clock output enable
+	LSCOSEL     BDCR = 0x01 << 25 //+ Low speed clock output selection
 )
 
 const (

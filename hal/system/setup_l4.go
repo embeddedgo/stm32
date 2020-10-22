@@ -189,6 +189,7 @@ func SetupPLL(clksrc, M, N, P, Q, R int) {
 		}
 	}
 	RCC.PWREN().Set()
+	RCC.PWREN().Load()
 	PWR := pwr.PWR()
 	PWR.CR1.Store(vos << pwr.VOSn)
 	flash.FLASH().ACR.Store(flash.DCEN | flash.ICEN | flash.PRFTEN | latency)

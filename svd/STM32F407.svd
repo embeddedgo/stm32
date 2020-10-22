@@ -17,6 +17,7 @@ CFGR:     fields merged: SWS0..SWS1 -> SWS, SW0..SW1 -> SW
 PLLCFGR:  fields merged: PLLM0..PLLM5 -> PLLM, PLLN0..PLLN8 -> PLLN,
           PLLP0..PLLP1 -> PLLP, PLLQ0..PLLQ3 -> PLLQ
           enums added: PLLSRC_HSI, PLLSRC_HSE
+BDCR:     enums added: RTCSEL_NONE..RTCSEL_HSE
 -->
 
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
@@ -6994,18 +6995,33 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <access>read-write</access>
             </field>
             <field>
-              <name>RTCSEL1</name>
-              <description>RTC clock source selection</description>
-              <bitOffset>9</bitOffset>
-              <bitWidth>1</bitWidth>
-              <access>read-write</access>
-            </field>
-            <field>
-              <name>RTCSEL0</name>
+              <name>RTCSEL</name>
               <description>RTC clock source selection</description>
               <bitOffset>8</bitOffset>
-              <bitWidth>1</bitWidth>
+              <bitWidth>2</bitWidth>
               <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>RTCSEL_NONE</name>
+                  <description>no clock</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>RTCSEL_LSE</name>
+                  <description>LSE oscillator clock used as RTC clock</description>
+                  <value>1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>RTCSEL_LSI </name>
+                  <description>LSI oscillator clock used as RTC clock</description>
+                  <value>2</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>RTCSEL_HSE</name>
+                  <description>HSE clock divided by RTCPRE value is used as RTC clock</description>
+                  <value>3</value>
+                </enumeratedValue>
+              </enumeratedValues>
             </field>
             <field>
               <name>LSEBYP</name>

@@ -5,7 +5,7 @@
 // Package exti provides access to the registers of the EXTI peripheral.
 //
 // Instances:
-//  EXTI  EXTI_BASE  -  PVD_PVM,EXTI0,EXTI1,EXTI2,EXTI3,EXTI4,USB_HP,USB_LP,fdcan1_intr1_it,fdcan1_intr0_it,EXTI9_5,EXTI15_10,USBWakeUP,CRS  External interrupt/event controller
+//  EXTI  EXTI_BASE  -  PVD_PVM,EXTI0,EXTI1,EXTI2,EXTI3,EXTI4,USB_HP,USB_LP,FDCAN1_INTR1_IT,FDCAN1_INTR0_IT,EXTI9_5,EXTI15_10,USBWAKEUP,CRS  External interrupt/event controller
 // Registers:
 //  0x000 32  IMR1    Interrupt mask register
 //  0x004 32  EMR1    Event mask register

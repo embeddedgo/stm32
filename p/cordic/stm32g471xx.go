@@ -5,7 +5,7 @@
 // Package cordic provides access to the registers of the CORDIC peripheral.
 //
 // Instances:
-//  CORDIC  CORDIC_BASE  AHB1  Cordic  CORDIC Co-processor
+//  CORDIC  CORDIC_BASE  AHB1  CORDIC  CORDIC Co-processor
 // Registers:
 //  0x000 32  CSR    CORDIC Control Status register
 //  0x004 32  WDATA  FMAC Write Data register

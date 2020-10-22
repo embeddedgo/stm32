@@ -1044,8 +1044,8 @@ func (p *Periph) LSECSSD() RMBDCR {
 	return RMBDCR{mmio.UM32{&p.BDCR.U32, uint32(LSECSSD)}}
 }
 
-func (p *Periph) RTCSRC() RMBDCR {
-	return RMBDCR{mmio.UM32{&p.BDCR.U32, uint32(RTCSRC)}}
+func (p *Periph) RTCSEL() RMBDCR {
+	return RMBDCR{mmio.UM32{&p.BDCR.U32, uint32(RTCSEL)}}
 }
 
 func (p *Periph) RTCEN() RMBDCR {

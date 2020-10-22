@@ -1324,12 +1324,8 @@ func (p *Periph) LSEBYP() RMBDCR {
 	return RMBDCR{mmio.UM32{&p.BDCR.U32, uint32(LSEBYP)}}
 }
 
-func (p *Periph) RTCSEL0() RMBDCR {
-	return RMBDCR{mmio.UM32{&p.BDCR.U32, uint32(RTCSEL0)}}
-}
-
-func (p *Periph) RTCSEL1() RMBDCR {
-	return RMBDCR{mmio.UM32{&p.BDCR.U32, uint32(RTCSEL1)}}
+func (p *Periph) RTCSEL() RMBDCR {
+	return RMBDCR{mmio.UM32{&p.BDCR.U32, uint32(RTCSEL)}}
 }
 
 func (p *Periph) RTCEN() RMBDCR {

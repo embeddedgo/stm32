@@ -630,23 +630,25 @@ const (
 )
 
 const (
-	LSEON   BDCR = 0x01 << 0  //+ External low-speed oscillator enable
-	LSERDY  BDCR = 0x01 << 1  //+ External low-speed oscillator ready
-	LSEBYP  BDCR = 0x01 << 2  //+ External low-speed oscillator bypass
-	RTCSEL0 BDCR = 0x01 << 8  //+ RTC clock source selection
-	RTCSEL1 BDCR = 0x01 << 9  //+ RTC clock source selection
-	RTCEN   BDCR = 0x01 << 15 //+ RTC clock enable
-	BDRST   BDCR = 0x01 << 16 //+ Backup domain software reset
+	LSEON       BDCR = 0x01 << 0  //+ External low-speed oscillator enable
+	LSERDY      BDCR = 0x01 << 1  //+ External low-speed oscillator ready
+	LSEBYP      BDCR = 0x01 << 2  //+ External low-speed oscillator bypass
+	RTCSEL      BDCR = 0x03 << 8  //+ RTC clock source selection
+	RTCSEL_NONE BDCR = 0x00 << 8  //  no clock
+	RTCSEL_LSE  BDCR = 0x01 << 8  //  LSE oscillator clock used as RTC clock
+	RTCSEL_LSI  BDCR = 0x02 << 8  //  LSI oscillator clock used as RTC clock
+	RTCSEL_HSE  BDCR = 0x03 << 8  //  HSE clock divided by RTCPRE value is used as RTC clock
+	RTCEN       BDCR = 0x01 << 15 //+ RTC clock enable
+	BDRST       BDCR = 0x01 << 16 //+ Backup domain software reset
 )
 
 const (
-	LSEONn   = 0
-	LSERDYn  = 1
-	LSEBYPn  = 2
-	RTCSEL0n = 8
-	RTCSEL1n = 9
-	RTCENn   = 15
-	BDRSTn   = 16
+	LSEONn  = 0
+	LSERDYn = 1
+	LSEBYPn = 2
+	RTCSELn = 8
+	RTCENn  = 15
+	BDRSTn  = 16
 )
 
 const (

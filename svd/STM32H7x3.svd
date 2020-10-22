@@ -4,6 +4,7 @@ thinghs were fixed:
 
 CFGR:      enums added: SW_HSI..SW_PLL1, SWS_HSI..SWS_PLL1
 PLLCKSELR: enums addad: PLLSRC_HSI, PLLSRC_CSI, PLLSRC_HSE, PLLSRC_NONE
+BDCR:      RTCSRC renamed to RTCSEL, enums added: RTCSEL_NONE..RTCSEL_HSE
 -->
 
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
@@ -39475,10 +39476,33 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <bitWidth>1</bitWidth>
             </field>
             <field>
-              <name>RTCSRC</name>
+              <name>RTCSEL</name>
               <description>RTC clock source selection</description>
               <bitOffset>8</bitOffset>
               <bitWidth>2</bitWidth>
+              <access>read-write</access>
+              <enumeratedValues>
+                <enumeratedValue>
+                  <name>RTCSEL_NONE</name>
+                  <description>no clock</description>
+                  <value>0</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>RTCSEL_LSE</name>
+                  <description>LSE oscillator clock used as RTC clock</description>
+                  <value>1</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>RTCSEL_LSI </name>
+                  <description>LSI oscillator clock used as RTC clock</description>
+                  <value>2</value>
+                </enumeratedValue>
+                <enumeratedValue>
+                  <name>RTCSEL_HSE</name>
+                  <description>HSE clock divided by RTCPRE value is used as RTC clock</description>
+                  <value>3</value>
+                </enumeratedValue>
+              </enumeratedValues>
             </field>
             <field>
               <name>RTCEN</name>

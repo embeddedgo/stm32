@@ -7,26 +7,26 @@
 // Instances:
 //  RTC  RTC_BASE  -  RTC_TAMP_CSS_LSE,RTC_WKUP,RTC_ALARM  Real-time clock
 // Registers:
-//  0x000 32  TR        time register
-//  0x004 32  DR        date register
-//  0x008 32  SSR       sub second register
-//  0x00C 32  ICSR      initialization and status register
-//  0x010 32  PRER      prescaler register
-//  0x014 32  WUTR      wakeup timer register
-//  0x018 32  CR        control register
-//  0x024 32  WPR       write protection register
-//  0x028 32  CALR      calibration register
-//  0x02C 32  SHIFTR    shift control register
-//  0x030 32  TSTR      time stamp time register
-//  0x034 32  TSDR      time stamp date register
-//  0x038 32  TSSSR     timestamp sub second register
-//  0x040 32  ALRMAR    alarm A register
-//  0x044 32  ALRMASSR  alarm A sub second register
-//  0x048 32  ALRMBR    alarm B register
-//  0x04C 32  ALRMBSSR  alarm B sub second register
-//  0x050 32  SR        status register
-//  0x054 32  MISR      status register
-//  0x05C 32  SCR       status register
+//  0x000 32  TR                 time register
+//  0x004 32  DR                 date register
+//  0x008 32  SSR                sub second register
+//  0x00C 32  ICSR               initialization and status register
+//  0x010 32  PRER               prescaler register
+//  0x014 32  WUTR               wakeup timer register
+//  0x018 32  CR                 control register
+//  0x024 32  WPR                write protection register
+//  0x028 32  CALR               calibration register
+//  0x02C 32  SHIFTR             shift control register
+//  0x030 32  TSTR(TR)           time stamp time register
+//  0x034 32  TSDR(DR)           time stamp date register
+//  0x038 32  TSSSR(SSR)         timestamp sub second register
+//  0x040 32  ALRMAR(ALRMR)      alarm A register
+//  0x044 32  ALRMASSR(ALRMSSR)  alarm A sub second register
+//  0x048 32  ALRMBR(ALRMR)      alarm B register
+//  0x04C 32  ALRMBSSR(ALRMSSR)  alarm B sub second register
+//  0x050 32  SR                 status register
+//  0x054 32  MISR               status register
+//  0x05C 32  SCR                status register
 // Import:
 //  github.com/embeddedgo/stm32/p/mmap
 package rtc
@@ -212,135 +212,47 @@ const (
 )
 
 const (
-	SU  TSTR = 0x0F << 0  //+ Second units in BCD format
-	ST  TSTR = 0x07 << 4  //+ Second tens in BCD format
-	MNU TSTR = 0x0F << 8  //+ Minute units in BCD format
-	MNT TSTR = 0x07 << 12 //+ Minute tens in BCD format
-	HU  TSTR = 0x0F << 16 //+ Hour units in BCD format
-	HT  TSTR = 0x03 << 20 //+ Hour tens in BCD format
-	PM  TSTR = 0x01 << 22 //+ AM/PM notation
+	ASU    ALRMR = 0x0F << 0  //+ Second units in BCD format
+	AST    ALRMR = 0x07 << 4  //+ Second tens in BCD format
+	AMSK1  ALRMR = 0x01 << 7  //+ Alarm A seconds mask
+	AMNU   ALRMR = 0x0F << 8  //+ Minute units in BCD format
+	AMNT   ALRMR = 0x07 << 12 //+ Minute tens in BCD format
+	AMSK2  ALRMR = 0x01 << 15 //+ Alarm A minutes mask
+	AHU    ALRMR = 0x0F << 16 //+ Hour units in BCD format
+	AHT    ALRMR = 0x03 << 20 //+ Hour tens in BCD format
+	APM    ALRMR = 0x01 << 22 //+ AM/PM notation
+	AMSK3  ALRMR = 0x01 << 23 //+ Alarm A hours mask
+	ADU    ALRMR = 0x0F << 24 //+ Date units or day in BCD format
+	ADT    ALRMR = 0x03 << 28 //+ Date tens in BCD format
+	AWDSEL ALRMR = 0x01 << 30 //+ Week day selection
+	AMSK4  ALRMR = 0x01 << 31 //+ Alarm A date mask
 )
 
 const (
-	SUn  = 0
-	STn  = 4
-	MNUn = 8
-	MNTn = 12
-	HUn  = 16
-	HTn  = 20
-	PMn  = 22
+	ASUn    = 0
+	ASTn    = 4
+	AMSK1n  = 7
+	AMNUn   = 8
+	AMNTn   = 12
+	AMSK2n  = 15
+	AHUn    = 16
+	AHTn    = 20
+	APMn    = 22
+	AMSK3n  = 23
+	ADUn    = 24
+	ADTn    = 28
+	AWDSELn = 30
+	AMSK4n  = 31
 )
 
 const (
-	DU  TSDR = 0x0F << 0  //+ Date units in BCD format
-	DT  TSDR = 0x03 << 4  //+ Date tens in BCD format
-	MU  TSDR = 0x0F << 8  //+ Month units in BCD format
-	MT  TSDR = 0x01 << 12 //+ Month tens in BCD format
-	WDU TSDR = 0x07 << 13 //+ Week day units
+	ASS     ALRMSSR = 0x7FFF << 0 //+ Sub seconds value
+	AMASKSS ALRMSSR = 0x0F << 24  //+ Mask the most-significant bits starting at this bit
 )
 
 const (
-	DUn  = 0
-	DTn  = 4
-	MUn  = 8
-	MTn  = 12
-	WDUn = 13
-)
-
-const (
-	SS TSSSR = 0xFFFF << 0 //+ Sub second value
-)
-
-const (
-	SSn = 0
-)
-
-const (
-	SU    ALRMAR = 0x0F << 0  //+ Second units in BCD format
-	ST    ALRMAR = 0x07 << 4  //+ Second tens in BCD format
-	MSK1  ALRMAR = 0x01 << 7  //+ Alarm A seconds mask
-	MNU   ALRMAR = 0x0F << 8  //+ Minute units in BCD format
-	MNT   ALRMAR = 0x07 << 12 //+ Minute tens in BCD format
-	MSK2  ALRMAR = 0x01 << 15 //+ Alarm A minutes mask
-	HU    ALRMAR = 0x0F << 16 //+ Hour units in BCD format
-	HT    ALRMAR = 0x03 << 20 //+ Hour tens in BCD format
-	PM    ALRMAR = 0x01 << 22 //+ AM/PM notation
-	MSK3  ALRMAR = 0x01 << 23 //+ Alarm A hours mask
-	DU    ALRMAR = 0x0F << 24 //+ Date units or day in BCD format
-	DT    ALRMAR = 0x03 << 28 //+ Date tens in BCD format
-	WDSEL ALRMAR = 0x01 << 30 //+ Week day selection
-	MSK4  ALRMAR = 0x01 << 31 //+ Alarm A date mask
-)
-
-const (
-	SUn    = 0
-	STn    = 4
-	MSK1n  = 7
-	MNUn   = 8
-	MNTn   = 12
-	MSK2n  = 15
-	HUn    = 16
-	HTn    = 20
-	PMn    = 22
-	MSK3n  = 23
-	DUn    = 24
-	DTn    = 28
-	WDSELn = 30
-	MSK4n  = 31
-)
-
-const (
-	SS     ALRMASSR = 0x7FFF << 0 //+ Sub seconds value
-	MASKSS ALRMASSR = 0x0F << 24  //+ Mask the most-significant bits starting at this bit
-)
-
-const (
-	SSn     = 0
-	MASKSSn = 24
-)
-
-const (
-	SU    ALRMBR = 0x0F << 0  //+ Second units in BCD format
-	ST    ALRMBR = 0x07 << 4  //+ Second tens in BCD format
-	MSK1  ALRMBR = 0x01 << 7  //+ Alarm B seconds mask
-	MNU   ALRMBR = 0x0F << 8  //+ Minute units in BCD format
-	MNT   ALRMBR = 0x07 << 12 //+ Minute tens in BCD format
-	MSK2  ALRMBR = 0x01 << 15 //+ Alarm B minutes mask
-	HU    ALRMBR = 0x0F << 16 //+ Hour units in BCD format
-	HT    ALRMBR = 0x03 << 20 //+ Hour tens in BCD format
-	PM    ALRMBR = 0x01 << 22 //+ AM/PM notation
-	MSK3  ALRMBR = 0x01 << 23 //+ Alarm B hours mask
-	DU    ALRMBR = 0x0F << 24 //+ Date units or day in BCD format
-	DT    ALRMBR = 0x03 << 28 //+ Date tens in BCD format
-	WDSEL ALRMBR = 0x01 << 30 //+ Week day selection
-	MSK4  ALRMBR = 0x01 << 31 //+ Alarm B date mask
-)
-
-const (
-	SUn    = 0
-	STn    = 4
-	MSK1n  = 7
-	MNUn   = 8
-	MNTn   = 12
-	MSK2n  = 15
-	HUn    = 16
-	HTn    = 20
-	PMn    = 22
-	MSK3n  = 23
-	DUn    = 24
-	DTn    = 28
-	WDSELn = 30
-	MSK4n  = 31
-)
-
-const (
-	SS     ALRMBSSR = 0x7FFF << 0 //+ Sub seconds value
-	MASKSS ALRMBSSR = 0x0F << 24  //+ Mask the most-significant bits starting at this bit
-)
-
-const (
-	SSn     = 0
-	MASKSSn = 24
+	ASSn     = 0
+	AMASKSSn = 24
 )
 
 const (

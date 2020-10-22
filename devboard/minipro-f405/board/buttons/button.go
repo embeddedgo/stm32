@@ -7,7 +7,7 @@ package buttons
 import (
 	"github.com/embeddedgo/stm32/hal/gpio"
 
-	_ "github.com/embeddedgo/stm32/devboard/mcudev-mini-pro/board/init"
+	_ "github.com/embeddedgo/stm32/devboard/minipro-f405/board/init"
 )
 
 // Onboard buttons

@@ -107,6 +107,7 @@ func SetupPLL(osc, N, P int) {
 	// the numerical values of constants are not compatible between different
 	// STM32F4 series.
 	//RCC.PWREN().Set()
+	//RCC.PWREN().Load()
 	//pwr.PWR.VOS().StoreBits(pwr.VOS, vos)
 	//for rcc.PWR.VOSRDY().Load() == 0 {
 	//	runtime.Gosched() // wait for voltage regulator...

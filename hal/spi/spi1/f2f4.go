@@ -23,19 +23,19 @@ func setupDriver() {
 	d.EnableClock(true)
 	driver = spi.NewDriver(spi.SPI1(), d.Channel(3, 3), d.Channel(0, 3))
 	irq.SPI1.Enable(rtos.IntPrioLow, 0)
-	irq.DMA2_Stream0.Enable(rtos.IntPrioLow, 0)
-	irq.DMA2_Stream3.Enable(rtos.IntPrioLow, 0)
+	irq.DMA2_STREAM0.Enable(rtos.IntPrioLow, 0)
+	irq.DMA2_STREAM3.Enable(rtos.IntPrioLow, 0)
 }
 
 //go:interrupthandler
 func _SPI1_Handler() { driver.ISR() }
 
 //go:interrupthandler
-func _DMA2_Stream0_Handler() { driver.DMAISR(driver.RxDMA()) }
+func _DMA2_STREAM0_Handler() { driver.DMAISR(driver.RxDMA()) }
 
 //go:interrupthandler
-func _DMA2_Stream3_Handler() { driver.DMAISR(driver.TxDMA()) }
+func _DMA2_STREAM3_Handler() { driver.DMAISR(driver.TxDMA()) }
 
 //go:linkname _SPI1_Handler IRQ35_Handler
-//go:linkname _DMA2_Stream0_Handler IRQ56_Handler
-//go:linkname _DMA2_Stream3_Handler IRQ59_Handler
+//go:linkname _DMA2_STREAM0_Handler IRQ56_Handler
+//go:linkname _DMA2_STREAM3_Handler IRQ59_Handler
