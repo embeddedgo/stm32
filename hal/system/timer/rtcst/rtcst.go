@@ -94,6 +94,7 @@ func Setup(clkSrc int8, divA, divS int) {
 	RTC.ISR.Store(0)
 	exti.RTCALR.EnableRiseTrig()
 	exti.RTCALR.ClearPending()
+	exti.RTCALR.EnableIRQ()
 	irq.RTC_ALARM.Enable(rtos.IntPrioSysTimer, 0)
 
 	rtos.SetSystemTimer(nanotime, setAlarm)
@@ -120,25 +121,23 @@ func nanotime() int64 {
 	h := tr>>rtc.HTn&3*10 + tr>>rtc.HUn&15
 	mn := tr>>rtc.MNTn&7*10 + tr>>rtc.MNUn&15
 	s := int64(tr>>rtc.STn&7*10 + tr>>rtc.SUn&15)
-	ns := 1e9 * int64(sspre-ssr&0xFFFF) / int64(sspre+1)
+	ns := (1e9 * int64(sspre-ssr&0xFFFF)) / int64(sspre+1)
 	return (int64((monoday(y, m, d)*24+h)*60+mn)*60+s)*1e9 + ns
 }
 
 func setAlarm(nanosec int64) {
+	RTC := rtc.RTC()
+	RTC.CR.Store(rtc.BYPSHAD)
 	if nanosec < 0 {
-		exti.RTCALR.DisableIRQ()
 		return
 	}
-	RTC := rtc.RTC()
-	RTC.CR.Store(rtc.BYPSHAD) // clear ALRAE first to avoid waiting for ALRAWF
 	sspre := int(RTC.PREDIV_S().Load())
-
 	sec := nanosec / 1e9
 	ns := int(nanosec - sec*1e9)
 	ss := sspre - int((int64(sspre+1)*int64(ns)+(1e9-1))/1e9)
 	if ss < 0 {
-		ss = sspre // SSR = PREDIV_S at the begining of any second
-		sec++      // we rounded up the alarm time to the next second
+		ss = sspre
+		sec++
 	}
 	monoday := uint(sec / (24 * 60 * 60))
 	s := uint(sec - int64(monoday)*(24*60*60))
@@ -161,24 +160,23 @@ func setAlarm(nanosec int64) {
 		mt<<rtc.AMNTn | mu<<rtc.AMNUn |
 		st<<rtc.ASTn | su<<rtc.ASUn
 
-	RTC.ISR.Store(0)
+	RTC.ISR.Store(0) // clear ALRAF
 	for RTC.ALRAWF().Load() == 0 {
 	}
 	RTC.ALRMAR.Store(rtc.ALRMR(alarm))
-	RTC.ALRMASSR.Store(rtc.ALRMSSR(ss))
+	RTC.ALRMASSR.Store(rtc.AMASKSS | rtc.ALRMSSR(ss))
 	RTC.CR.Store(rtc.ALRAIE | rtc.ALRAE | rtc.BYPSHAD)
-	if nanosec > nanotime() {
-		exti.RTCALR.EnableIRQ()
-	} else {
+	if nanosec <= nanotime() && RTC.ALRAF().Load() == 0 {
 		schedule() // avoid missed alarm
 	}
 }
 
-//go:linkname _RTC_ALARM_Handler IRQ41_Handler
+func schedule()
+
+//go:interrupthandler
 func _RTC_ALARM_Handler() {
-	exti.RTCALR.DisableIRQ()
 	exti.RTCALR.ClearPending()
 	schedule()
 }
 
-func schedule()
+//go:linkname _RTC_ALARM_Handler IRQ41_Handler
