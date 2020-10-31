@@ -1,0 +1,46 @@
+AZ3166 edge connector
+
+---  Reset
+ 0   PB0
+---  PA5
+---  PA4  (Buton A)
+---  PB4  (Red LED)
+---  PB3  (Green LED, SWO)
+ 1   PB6
+---  PC13 (User LED)
+---  PB10 (IR LED)
+---  PC7  (Blue LED)
+---  PA10 (Button B)
+---  PB2  (WiFi lED)
+ 2   PB7
+---  PB13
+---  PB14
+---  PB15
+---  PC6
+---  VDD
+ 3V  VDD
+---  VDD
+---  PB8
+---  PB9
+---  GND
+GND  GND
+---  GND
+
+
+ST-LINK/V2-1 (STM32F103C8T6) to EMW3166 (STM32F412RG)
+
+PA2 (UART2 TX) -> PA12 (USART6_RX)
+PA3 (UART2 RX) -> PA11 (USART6_TX)
+PB0            -> RESET (also connected to the reset button)
+
+
+ST-LINK SWD test points, starting from reset button:
+1: VDD
+2: SWDIO (PA13)
+3: SWCLK (PA14)
+4: GND
+
+ST-LINK
+
+BOOT0 -> 10K resistor (number 5 from the programming LED)
+PA9   -> programming LED (active high)
