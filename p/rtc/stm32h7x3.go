@@ -7,69 +7,38 @@
 // Instances:
 //  RTC  RTC_BASE  -  RTC_TAMP_STAMP_CSS_LSE,RTC_WKUP  RTC
 // Registers:
-//  0x000 32  RTC_TR        The RTC_TR is the calendar time shadow register. This register must be written in initialization mode only. Refer to Calendar initialization and configuration on page9 and Reading the calendar on page10.This register is write protected. The write access procedure is described in RTC register write protection on page9.
-//  0x004 32  RTC_DR        The RTC_DR is the calendar date shadow register. This register must be written in initialization mode only. Refer to Calendar initialization and configuration on page9 and Reading the calendar on page10.This register is write protected. The write access procedure is described in RTC register write protection on page9.
-//  0x008 32  RTC_CR        RTC control register
-//  0x00C 32  RTC_ISR       This register is write protected (except for RTC_ISR[13:8] bits). The write access procedure is described in RTC register write protection on page9.
-//  0x010 32  RTC_PRER      This register must be written in initialization mode only. The initialization must be performed in two separate write accesses. Refer to Calendar initialization and configuration on page9.This register is write protected. The write access procedure is described in RTC register write protection on page9.
-//  0x014 32  RTC_WUTR      This register can be written only when WUTWF is set to 1 in RTC_ISR.This register is write protected. The write access procedure is described in RTC register write protection on page9.
-//  0x01C 32  RTC_ALRMAR    This register can be written only when ALRAWF is set to 1 in RTC_ISR, or in initialization mode.This register is write protected. The write access procedure is described in RTC register write protection on page9.
-//  0x020 32  RTC_ALRMBR    This register can be written only when ALRBWF is set to 1 in RTC_ISR, or in initialization mode.This register is write protected. The write access procedure is described in RTC register write protection on page9.
-//  0x024 32  RTC_WPR       RTC write protection register
-//  0x028 32  RTC_SSR       RTC sub second register
-//  0x02C 32  RTC_SHIFTR    This register is write protected. The write access procedure is described in RTC register write protection on page9.
-//  0x030 32  RTC_TSTR      The content of this register is valid only when TSF is set to 1 in RTC_ISR. It is cleared when TSF bit is reset.
-//  0x034 32  RTC_TSDR      The content of this register is valid only when TSF is set to 1 in RTC_ISR. It is cleared when TSF bit is reset.
-//  0x038 32  RTC_TSSSR     The content of this register is valid only when RTC_ISR/TSF is set. It is cleared when the RTC_ISR/TSF bit is reset.
-//  0x03C 32  RTC_CALR      This register is write protected. The write access procedure is described in RTC register write protection on page9.
-//  0x040 32  RTC_TAMPCR    RTC tamper and alternate function configuration register
-//  0x044 32  RTC_ALRMASSR  This register can be written only when ALRAE is reset in RTC_CR register, or in initialization mode.This register is write protected. The write access procedure is described in RTC register write protection on page9
-//  0x048 32  RTC_ALRMBSSR  This register can be written only when ALRBE is reset in RTC_CR register, or in initialization mode.This register is write protected.The write access procedure is described in Section: RTC register write protection.
-//  0x04C 32  RTC_OR        RTC option register
-//  0x050 32  RTC_BKP0R     RTC backup registers
-//  0x054 32  RTC_BKP1R     RTC backup registers
-//  0x058 32  RTC_BKP2R     RTC backup registers
-//  0x05C 32  RTC_BKP3R     RTC backup registers
-//  0x060 32  RTC_BKP4R     RTC backup registers
-//  0x064 32  RTC_BKP5R     RTC backup registers
-//  0x068 32  RTC_BKP6R     RTC backup registers
-//  0x06C 32  RTC_BKP7R     RTC backup registers
-//  0x070 32  RTC_BKP8R     RTC backup registers
-//  0x074 32  RTC_BKP9R     RTC backup registers
-//  0x078 32  RTC_BKP10R    RTC backup registers
-//  0x07C 32  RTC_BKP11R    RTC backup registers
-//  0x080 32  RTC_BKP12R    RTC backup registers
-//  0x084 32  RTC_BKP13R    RTC backup registers
-//  0x088 32  RTC_BKP14R    RTC backup registers
-//  0x08C 32  RTC_BKP15R    RTC backup registers
-//  0x090 32  RTC_BKP16R    RTC backup registers
-//  0x094 32  RTC_BKP17R    RTC backup registers
-//  0x098 32  RTC_BKP18R    RTC backup registers
-//  0x09C 32  RTC_BKP19R    RTC backup registers
-//  0x0A0 32  RTC_BKP20R    RTC backup registers
-//  0x0A4 32  RTC_BKP21R    RTC backup registers
-//  0x0A8 32  RTC_BKP22R    RTC backup registers
-//  0x0AC 32  RTC_BKP23R    RTC backup registers
-//  0x0B0 32  RTC_BKP24R    RTC backup registers
-//  0x0B4 32  RTC_BKP25R    RTC backup registers
-//  0x0B8 32  RTC_BKP26R    RTC backup registers
-//  0x0BC 32  RTC_BKP27R    RTC backup registers
-//  0x0C0 32  RTC_BKP28R    RTC backup registers
-//  0x0C4 32  RTC_BKP29R    RTC backup registers
-//  0x0C8 32  RTC_BKP30R    RTC backup registers
-//  0x0CC 32  RTC_BKP31R    RTC backup registers
+//  0x000 32  TR                 The TR is the calendar time shadow register. This register must be written in initialization mode only. Refer to Calendar initialization and configuration on page9 and Reading the calendar on page10.This register is write protected. The write access procedure is described in RTC register write protection on page9.
+//  0x004 32  DR                 The DR is the calendar date shadow register. This register must be written in initialization mode only. Refer to Calendar initialization and configuration on page9 and Reading the calendar on page10.This register is write protected. The write access procedure is described in RTC register write protection on page9.
+//  0x008 32  CR                 RTC control register
+//  0x00C 32  ISR                This register is write protected (except for ISR[13:8] bits). The write access procedure is described in RTC register write protection on page9.
+//  0x010 32  PRER               This register must be written in initialization mode only. The initialization must be performed in two separate write accesses. Refer to Calendar initialization and configuration on page9.This register is write protected. The write access procedure is described in RTC register write protection on page9.
+//  0x014 32  WUTR               This register can be written only when WUTWF is set to 1 in ISR.This register is write protected. The write access procedure is described in RTC register write protection on page9.
+//  0x01C 32  ALRMAR(ALRMR)      This register can be written only when ALRAWF is set to 1 in ISR, or in initialization mode.This register is write protected. The write access procedure is described in RTC register write protection on page9.
+//  0x020 32  ALRMBR(ALRMR)      This register can be written only when ALRBWF is set to 1 in ISR, or in initialization mode.This register is write protected. The write access procedure is described in RTC register write protection on page9.
+//  0x024 32  WPR                RTC write protection register
+//  0x028 32  SSR                RTC sub second register
+//  0x02C 32  SHIFTR             This register is write protected. The write access procedure is described in RTC register write protection on page9.
+//  0x030 32  TSTR(TR)           The content of this register is valid only when TSF is set to 1 in ISR. It is cleared when TSF bit is reset.
+//  0x034 32  TSDR(DR)           The content of this register is valid only when TSF is set to 1 in ISR. It is cleared when TSF bit is reset.
+//  0x038 32  TSSSR(SSR)         The content of this register is valid only when ISR/TSF is set. It is cleared when the ISR/TSF bit is reset.
+//  0x03C 32  CALR               This register is write protected. The write access procedure is described in RTC register write protection on page9.
+//  0x040 32  TAMPCR             RTC tamper and alternate function configuration register
+//  0x044 32  ALRMASSR(ALRMSSR)  This register can be written only when ALRAE is reset in CR register, or in initialization mode.This register is write protected. The write access procedure is described in RTC register write protection on page9
+//  0x048 32  ALRMBSSR(ALRMSSR)  This register can be written only when ALRBE is reset in CR register, or in initialization mode.This register is write protected.The write access procedure is described in Section: RTC register write protection.
+//  0x04C 32  OR                 RTC option register
+//  0x050 32  BKPR[32]           RTC backup registers
 // Import:
 //  github.com/embeddedgo/stm32/p/mmap
 package rtc
 
 const (
-	SU  RTC_TR = 0x0F << 0  //+ Second units in BCD format
-	ST  RTC_TR = 0x07 << 4  //+ Second tens in BCD format
-	MNU RTC_TR = 0x0F << 8  //+ Minute units in BCD format
-	MNT RTC_TR = 0x07 << 12 //+ Minute tens in BCD format
-	HU  RTC_TR = 0x0F << 16 //+ Hour units in BCD format
-	HT  RTC_TR = 0x03 << 20 //+ Hour tens in BCD format
-	PM  RTC_TR = 0x01 << 22 //+ AM/PM notation
+	SU  TR = 0x0F << 0  //+ Second units in BCD format
+	ST  TR = 0x07 << 4  //+ Second tens in BCD format
+	MNU TR = 0x0F << 8  //+ Minute units in BCD format
+	MNT TR = 0x07 << 12 //+ Minute tens in BCD format
+	HU  TR = 0x0F << 16 //+ Hour units in BCD format
+	HT  TR = 0x03 << 20 //+ Hour tens in BCD format
+	PM  TR = 0x01 << 22 //+ AM/PM notation
 )
 
 const (
@@ -83,13 +52,13 @@ const (
 )
 
 const (
-	DU  RTC_DR = 0x0F << 0  //+ Date units in BCD format
-	DT  RTC_DR = 0x03 << 4  //+ Date tens in BCD format
-	MU  RTC_DR = 0x0F << 8  //+ Month units in BCD format
-	MT  RTC_DR = 0x01 << 12 //+ Month tens in BCD format
-	WDU RTC_DR = 0x07 << 13 //+ Week day units
-	YU  RTC_DR = 0x0F << 16 //+ Year units in BCD format
-	YT  RTC_DR = 0x0F << 20 //+ Year tens in BCD format
+	DU  DR = 0x0F << 0  //+ Date units in BCD format
+	DT  DR = 0x03 << 4  //+ Date tens in BCD format
+	MU  DR = 0x0F << 8  //+ Month units in BCD format
+	MT  DR = 0x01 << 12 //+ Month tens in BCD format
+	WDU DR = 0x07 << 13 //+ Week day units
+	YU  DR = 0x0F << 16 //+ Year units in BCD format
+	YT  DR = 0x0F << 20 //+ Year tens in BCD format
 )
 
 const (
@@ -103,27 +72,27 @@ const (
 )
 
 const (
-	WUCKSEL RTC_CR = 0x07 << 0  //+ Wakeup clock selection
-	TSEDGE  RTC_CR = 0x01 << 3  //+ Time-stamp event active edge TSE must be reset when TSEDGE is changed to avoid unwanted TSF setting.
-	REFCKON RTC_CR = 0x01 << 4  //+ RTC_REFIN reference clock detection enable (50 or 60Hz) Note: PREDIV_S must be 0x00FF.
-	BYPSHAD RTC_CR = 0x01 << 5  //+ Bypass the shadow registers Note: If the frequency of the APB clock is less than seven times the frequency of RTCCLK, BYPSHAD must be set to 1.
-	FMT     RTC_CR = 0x01 << 6  //+ Hour format
-	ALRAE   RTC_CR = 0x01 << 8  //+ Alarm A enable
-	ALRBE   RTC_CR = 0x01 << 9  //+ Alarm B enable
-	WUTE    RTC_CR = 0x01 << 10 //+ Wakeup timer enable
-	TSE     RTC_CR = 0x01 << 11 //+ timestamp enable
-	ALRAIE  RTC_CR = 0x01 << 12 //+ Alarm A interrupt enable
-	ALRBIE  RTC_CR = 0x01 << 13 //+ Alarm B interrupt enable
-	WUTIE   RTC_CR = 0x01 << 14 //+ Wakeup timer interrupt enable
-	TSIE    RTC_CR = 0x01 << 15 //+ Time-stamp interrupt enable
-	ADD1H   RTC_CR = 0x01 << 16 //+ Add 1 hour (summer time change) When this bit is set outside initialization mode, 1 hour is added to the calendar time. This bit is always read as 0.
-	SUB1H   RTC_CR = 0x01 << 17 //+ Subtract 1 hour (winter time change) When this bit is set outside initialization mode, 1 hour is subtracted to the calendar time if the current hour is not 0. This bit is always read as 0. Setting this bit has no effect when current hour is 0.
-	BKP     RTC_CR = 0x01 << 18 //+ Backup This bit can be written by the user to memorize whether the daylight saving time change has been performed or not.
-	COSEL   RTC_CR = 0x01 << 19 //+ Calibration output selection When COE=1, this bit selects which signal is output on RTC_CALIB. These frequencies are valid for RTCCLK at 32.768 kHz and prescalers at their default values (PREDIV_A=127 and PREDIV_S=255). Refer to Section24.3.15: Calibration clock output
-	POL     RTC_CR = 0x01 << 20 //+ Output polarity This bit is used to configure the polarity of RTC_ALARM output
-	OSEL    RTC_CR = 0x03 << 21 //+ Output selection These bits are used to select the flag to be routed to RTC_ALARM output
-	COE     RTC_CR = 0x01 << 23 //+ Calibration output enable This bit enables the RTC_CALIB output
-	ITSE    RTC_CR = 0x01 << 24 //+ timestamp on internal event enable
+	WUCKSEL CR = 0x07 << 0  //+ Wakeup clock selection
+	TSEDGE  CR = 0x01 << 3  //+ Time-stamp event active edge TSE must be reset when TSEDGE is changed to avoid unwanted TSF setting.
+	REFCKON CR = 0x01 << 4  //+ RTC_REFIN reference clock detection enable (50 or 60Hz) Note: PREDIV_S must be 0x00FF.
+	BYPSHAD CR = 0x01 << 5  //+ Bypass the shadow registers Note: If the frequency of the APB clock is less than seven times the frequency of RTCCLK, BYPSHAD must be set to 1.
+	FMT     CR = 0x01 << 6  //+ Hour format
+	ALRAE   CR = 0x01 << 8  //+ Alarm A enable
+	ALRBE   CR = 0x01 << 9  //+ Alarm B enable
+	WUTE    CR = 0x01 << 10 //+ Wakeup timer enable
+	TSE     CR = 0x01 << 11 //+ timestamp enable
+	ALRAIE  CR = 0x01 << 12 //+ Alarm A interrupt enable
+	ALRBIE  CR = 0x01 << 13 //+ Alarm B interrupt enable
+	WUTIE   CR = 0x01 << 14 //+ Wakeup timer interrupt enable
+	TSIE    CR = 0x01 << 15 //+ Time-stamp interrupt enable
+	ADD1H   CR = 0x01 << 16 //+ Add 1 hour (summer time change) When this bit is set outside initialization mode, 1 hour is added to the calendar time. This bit is always read as 0.
+	SUB1H   CR = 0x01 << 17 //+ Subtract 1 hour (winter time change) When this bit is set outside initialization mode, 1 hour is subtracted to the calendar time if the current hour is not 0. This bit is always read as 0. Setting this bit has no effect when current hour is 0.
+	BKP     CR = 0x01 << 18 //+ Backup This bit can be written by the user to memorize whether the daylight saving time change has been performed or not.
+	COSEL   CR = 0x01 << 19 //+ Calibration output selection When COE=1, this bit selects which signal is output on RTC_CALIB. These frequencies are valid for RTCCLK at 32.768 kHz and prescalers at their default values (PREDIV_A=127 and PREDIV_S=255). Refer to Section24.3.15: Calibration clock output
+	POL     CR = 0x01 << 20 //+ Output polarity This bit is used to configure the polarity of RTC_ALARM output
+	OSEL    CR = 0x03 << 21 //+ Output selection These bits are used to select the flag to be routed to RTC_ALARM output
+	COE     CR = 0x01 << 23 //+ Calibration output enable This bit enables the RTC_CALIB output
+	ITSE    CR = 0x01 << 24 //+ timestamp on internal event enable
 )
 
 const (
@@ -151,24 +120,24 @@ const (
 )
 
 const (
-	ALRAWF  RTC_ISR = 0x01 << 0  //+ Alarm A write flag This bit is set by hardware when Alarm A values can be changed, after the ALRAE bit has been set to 0 in RTC_CR. It is cleared by hardware in initialization mode.
-	ALRBWF  RTC_ISR = 0x01 << 1  //+ Alarm B write flag This bit is set by hardware when Alarm B values can be changed, after the ALRBE bit has been set to 0 in RTC_CR. It is cleared by hardware in initialization mode.
-	WUTWF   RTC_ISR = 0x01 << 2  //+ Wakeup timer write flag This bit is set by hardware up to 2 RTCCLK cycles after the WUTE bit has been set to 0 in RTC_CR, and is cleared up to 2 RTCCLK cycles after the WUTE bit has been set to 1. The wakeup timer values can be changed when WUTE bit is cleared and WUTWF is set.
-	SHPF    RTC_ISR = 0x01 << 3  //+ Shift operation pending This flag is set by hardware as soon as a shift operation is initiated by a write to the RTC_SHIFTR register. It is cleared by hardware when the corresponding shift operation has been executed. Writing to the SHPF bit has no effect.
-	INITS   RTC_ISR = 0x01 << 4  //+ Initialization status flag This bit is set by hardware when the calendar year field is different from 0 (Backup domain reset state).
-	RSF     RTC_ISR = 0x01 << 5  //+ Registers synchronization flag This bit is set by hardware each time the calendar registers are copied into the shadow registers (RTC_SSRx, RTC_TRx and RTC_DRx). This bit is cleared by hardware in initialization mode, while a shift operation is pending (SHPF=1), or when in bypass shadow register mode (BYPSHAD=1). This bit can also be cleared by software. It is cleared either by software or by hardware in initialization mode.
-	INITF   RTC_ISR = 0x01 << 6  //+ Initialization flag When this bit is set to 1, the RTC is in initialization state, and the time, date and prescaler registers can be updated.
-	INIT    RTC_ISR = 0x01 << 7  //+ Initialization mode
-	ALRAF   RTC_ISR = 0x01 << 8  //+ Alarm A flag This flag is set by hardware when the time/date registers (RTC_TR and RTC_DR) match the Alarm A register (RTC_ALRMAR). This flag is cleared by software by writing 0.
-	ALRBF   RTC_ISR = 0x01 << 9  //+ Alarm B flag This flag is set by hardware when the time/date registers (RTC_TR and RTC_DR) match the Alarm B register (RTC_ALRMBR). This flag is cleared by software by writing 0.
-	WUTF    RTC_ISR = 0x01 << 10 //+ Wakeup timer flag This flag is set by hardware when the wakeup auto-reload counter reaches 0. This flag is cleared by software by writing 0. This flag must be cleared by software at least 1.5 RTCCLK periods before WUTF is set to 1 again.
-	TSF     RTC_ISR = 0x01 << 11 //+ Time-stamp flag This flag is set by hardware when a time-stamp event occurs. This flag is cleared by software by writing 0.
-	TSOVF   RTC_ISR = 0x01 << 12 //+ Time-stamp overflow flag This flag is set by hardware when a time-stamp event occurs while TSF is already set. This flag is cleared by software by writing 0. It is recommended to check and then clear TSOVF only after clearing the TSF bit. Otherwise, an overflow might not be noticed if a time-stamp event occurs immediately before the TSF bit is cleared.
-	TAMP1F  RTC_ISR = 0x01 << 13 //+ RTC_TAMP1 detection flag This flag is set by hardware when a tamper detection event is detected on the RTC_TAMP1 input. It is cleared by software writing 0
-	TAMP2F  RTC_ISR = 0x01 << 14 //+ RTC_TAMP2 detection flag This flag is set by hardware when a tamper detection event is detected on the RTC_TAMP2 input. It is cleared by software writing 0
-	TAMP3F  RTC_ISR = 0x01 << 15 //+ RTC_TAMP3 detection flag This flag is set by hardware when a tamper detection event is detected on the RTC_TAMP3 input. It is cleared by software writing 0
-	RECALPF RTC_ISR = 0x01 << 16 //+ Recalibration pending Flag The RECALPF status flag is automatically set to 1 when software writes to the RTC_CALR register, indicating that the RTC_CALR register is blocked. When the new calibration settings are taken into account, this bit returns to 0. Refer to Re-calibration on-the-fly.
-	ITSF    RTC_ISR = 0x01 << 17 //+ Internal tTime-stamp flag
+	ALRAWF  ISR = 0x01 << 0  //+ Alarm A write flag This bit is set by hardware when Alarm A values can be changed, after the ALRAE bit has been set to 0 in CR. It is cleared by hardware in initialization mode.
+	ALRBWF  ISR = 0x01 << 1  //+ Alarm B write flag This bit is set by hardware when Alarm B values can be changed, after the ALRBE bit has been set to 0 in CR. It is cleared by hardware in initialization mode.
+	WUTWF   ISR = 0x01 << 2  //+ Wakeup timer write flag This bit is set by hardware up to 2 RTCCLK cycles after the WUTE bit has been set to 0 in CR, and is cleared up to 2 RTCCLK cycles after the WUTE bit has been set to 1. The wakeup timer values can be changed when WUTE bit is cleared and WUTWF is set.
+	SHPF    ISR = 0x01 << 3  //+ Shift operation pending This flag is set by hardware as soon as a shift operation is initiated by a write to the SHIFTR register. It is cleared by hardware when the corresponding shift operation has been executed. Writing to the SHPF bit has no effect.
+	INITS   ISR = 0x01 << 4  //+ Initialization status flag This bit is set by hardware when the calendar year field is different from 0 (Backup domain reset state).
+	RSF     ISR = 0x01 << 5  //+ Registers synchronization flag This bit is set by hardware each time the calendar registers are copied into the shadow registers (SSRx, TRx and DRx). This bit is cleared by hardware in initialization mode, while a shift operation is pending (SHPF=1), or when in bypass shadow register mode (BYPSHAD=1). This bit can also be cleared by software. It is cleared either by software or by hardware in initialization mode.
+	INITF   ISR = 0x01 << 6  //+ Initialization flag When this bit is set to 1, the RTC is in initialization state, and the time, date and prescaler registers can be updated.
+	INIT    ISR = 0x01 << 7  //+ Initialization mode
+	ALRAF   ISR = 0x01 << 8  //+ Alarm A flag This flag is set by hardware when the time/date registers (TR and DR) match the Alarm A register (ALRMAR). This flag is cleared by software by writing 0.
+	ALRBF   ISR = 0x01 << 9  //+ Alarm B flag This flag is set by hardware when the time/date registers (TR and DR) match the Alarm B register (ALRMBR). This flag is cleared by software by writing 0.
+	WUTF    ISR = 0x01 << 10 //+ Wakeup timer flag This flag is set by hardware when the wakeup auto-reload counter reaches 0. This flag is cleared by software by writing 0. This flag must be cleared by software at least 1.5 RTCCLK periods before WUTF is set to 1 again.
+	TSF     ISR = 0x01 << 11 //+ Time-stamp flag This flag is set by hardware when a time-stamp event occurs. This flag is cleared by software by writing 0.
+	TSOVF   ISR = 0x01 << 12 //+ Time-stamp overflow flag This flag is set by hardware when a time-stamp event occurs while TSF is already set. This flag is cleared by software by writing 0. It is recommended to check and then clear TSOVF only after clearing the TSF bit. Otherwise, an overflow might not be noticed if a time-stamp event occurs immediately before the TSF bit is cleared.
+	TAMP1F  ISR = 0x01 << 13 //+ TAMP1 detection flag This flag is set by hardware when a tamper detection event is detected on the TAMP1 input. It is cleared by software writing 0
+	TAMP2F  ISR = 0x01 << 14 //+ TAMP2 detection flag This flag is set by hardware when a tamper detection event is detected on the TAMP2 input. It is cleared by software writing 0
+	TAMP3F  ISR = 0x01 << 15 //+ TAMP3 detection flag This flag is set by hardware when a tamper detection event is detected on the TAMP3 input. It is cleared by software writing 0
+	RECALPF ISR = 0x01 << 16 //+ Recalibration pending Flag The RECALPF status flag is automatically set to 1 when software writes to the CALR register, indicating that the CALR register is blocked. When the new calibration settings are taken into account, this bit returns to 0. Refer to Re-calibration on-the-fly.
+	ITSF    ISR = 0x01 << 17 //+ Internal tTime-stamp flag
 )
 
 const (
@@ -193,8 +162,8 @@ const (
 )
 
 const (
-	PREDIV_S RTC_PRER = 0x7FFF << 0 //+ Synchronous prescaler factor This is the synchronous division factor: ck_spre frequency = ck_apre frequency/(PREDIV_S+1)
-	PREDIV_A RTC_PRER = 0x7F << 16  //+ Asynchronous prescaler factor This is the asynchronous division factor: ck_apre frequency = RTCCLK frequency/(PREDIV_A+1)
+	PREDIV_S PRER = 0x7FFF << 0 //+ Synchronous prescaler factor This is the synchronous division factor: ck_spre frequency = ck_apre frequency/(PREDIV_S+1)
+	PREDIV_A PRER = 0x7F << 16  //+ Asynchronous prescaler factor This is the asynchronous division factor: ck_apre frequency = RTCCLK frequency/(PREDIV_A+1)
 )
 
 const (
@@ -203,7 +172,7 @@ const (
 )
 
 const (
-	WUT RTC_WUTR = 0xFFFF << 0 //+ Wakeup auto-reload value bits When the wakeup timer is enabled (WUTE set to 1), the WUTF flag is set every (WUT[15:0] + 1) ck_wut cycles. The ck_wut period is selected through WUCKSEL[2:0] bits of the RTC_CR register When WUCKSEL[2] = 1, the wakeup timer becomes 17-bits and WUCKSEL[1] effectively becomes WUT[16] the most-significant bit to be reloaded into the timer. The first assertion of WUTF occurs (WUT+1) ck_wut cycles after WUTE is set. Setting WUT[15:0] to 0x0000 with WUCKSEL[2:0] =011 (RTCCLK/2) is forbidden.
+	WUT WUTR = 0xFFFF << 0 //+ Wakeup auto-reload value bits When the wakeup timer is enabled (WUTE set to 1), the WUTF flag is set every (WUT[15:0] + 1) ck_wut cycles. The ck_wut period is selected through WUCKSEL[2:0] bits of the CR register When WUCKSEL[2] = 1, the wakeup timer becomes 17-bits and WUCKSEL[1] effectively becomes WUT[16] the most-significant bit to be reloaded into the timer. The first assertion of WUTF occurs (WUT+1) ck_wut cycles after WUTE is set. Setting WUT[15:0] to 0x0000 with WUCKSEL[2:0] =011 (RTCCLK/2) is forbidden.
 )
 
 const (
@@ -211,75 +180,41 @@ const (
 )
 
 const (
-	SU    RTC_ALRMAR = 0x0F << 0  //+ Second units in BCD format.
-	ST    RTC_ALRMAR = 0x07 << 4  //+ Second tens in BCD format.
-	MSK1  RTC_ALRMAR = 0x01 << 7  //+ Alarm A seconds mask
-	MNU   RTC_ALRMAR = 0x0F << 8  //+ Minute units in BCD format.
-	MNT   RTC_ALRMAR = 0x07 << 12 //+ Minute tens in BCD format.
-	MSK2  RTC_ALRMAR = 0x01 << 15 //+ Alarm A minutes mask
-	HU    RTC_ALRMAR = 0x0F << 16 //+ Hour units in BCD format.
-	HT    RTC_ALRMAR = 0x03 << 20 //+ Hour tens in BCD format.
-	PM    RTC_ALRMAR = 0x01 << 22 //+ AM/PM notation
-	MSK3  RTC_ALRMAR = 0x01 << 23 //+ Alarm A hours mask
-	DU    RTC_ALRMAR = 0x0F << 24 //+ Date units or day in BCD format.
-	DT    RTC_ALRMAR = 0x03 << 28 //+ Date tens in BCD format.
-	WDSEL RTC_ALRMAR = 0x01 << 30 //+ Week day selection
-	MSK4  RTC_ALRMAR = 0x01 << 31 //+ Alarm A date mask
+	ASU    ALRMR = 0x0F << 0  //+ Second units in BCD format.
+	AST    ALRMR = 0x07 << 4  //+ Second tens in BCD format.
+	AMSK1  ALRMR = 0x01 << 7  //+ Alarm A seconds mask
+	AMNU   ALRMR = 0x0F << 8  //+ Minute units in BCD format.
+	AMNT   ALRMR = 0x07 << 12 //+ Minute tens in BCD format.
+	AMSK2  ALRMR = 0x01 << 15 //+ Alarm A minutes mask
+	AHU    ALRMR = 0x0F << 16 //+ Hour units in BCD format.
+	AHT    ALRMR = 0x03 << 20 //+ Hour tens in BCD format.
+	APM    ALRMR = 0x01 << 22 //+ AM/PM notation
+	AMSK3  ALRMR = 0x01 << 23 //+ Alarm A hours mask
+	ADU    ALRMR = 0x0F << 24 //+ Date units or day in BCD format.
+	ADT    ALRMR = 0x03 << 28 //+ Date tens in BCD format.
+	AWDSEL ALRMR = 0x01 << 30 //+ Week day selection
+	AMSK4  ALRMR = 0x01 << 31 //+ Alarm A date mask
 )
 
 const (
-	SUn    = 0
-	STn    = 4
-	MSK1n  = 7
-	MNUn   = 8
-	MNTn   = 12
-	MSK2n  = 15
-	HUn    = 16
-	HTn    = 20
-	PMn    = 22
-	MSK3n  = 23
-	DUn    = 24
-	DTn    = 28
-	WDSELn = 30
-	MSK4n  = 31
+	ASUn    = 0
+	ASTn    = 4
+	AMSK1n  = 7
+	AMNUn   = 8
+	AMNTn   = 12
+	AMSK2n  = 15
+	AHUn    = 16
+	AHTn    = 20
+	APMn    = 22
+	AMSK3n  = 23
+	ADUn    = 24
+	ADTn    = 28
+	AWDSELn = 30
+	AMSK4n  = 31
 )
 
 const (
-	SU    RTC_ALRMBR = 0x0F << 0  //+ Second units in BCD format
-	ST    RTC_ALRMBR = 0x07 << 4  //+ Second tens in BCD format
-	MSK1  RTC_ALRMBR = 0x01 << 7  //+ Alarm B seconds mask
-	MNU   RTC_ALRMBR = 0x0F << 8  //+ Minute units in BCD format
-	MNT   RTC_ALRMBR = 0x07 << 12 //+ Minute tens in BCD format
-	MSK2  RTC_ALRMBR = 0x01 << 15 //+ Alarm B minutes mask
-	HU    RTC_ALRMBR = 0x0F << 16 //+ Hour units in BCD format
-	HT    RTC_ALRMBR = 0x03 << 20 //+ Hour tens in BCD format
-	PM    RTC_ALRMBR = 0x01 << 22 //+ AM/PM notation
-	MSK3  RTC_ALRMBR = 0x01 << 23 //+ Alarm B hours mask
-	DU    RTC_ALRMBR = 0x0F << 24 //+ Date units or day in BCD format
-	DT    RTC_ALRMBR = 0x03 << 28 //+ Date tens in BCD format
-	WDSEL RTC_ALRMBR = 0x01 << 30 //+ Week day selection
-	MSK4  RTC_ALRMBR = 0x01 << 31 //+ Alarm B date mask
-)
-
-const (
-	SUn    = 0
-	STn    = 4
-	MSK1n  = 7
-	MNUn   = 8
-	MNTn   = 12
-	MSK2n  = 15
-	HUn    = 16
-	HTn    = 20
-	PMn    = 22
-	MSK3n  = 23
-	DUn    = 24
-	DTn    = 28
-	WDSELn = 30
-	MSK4n  = 31
-)
-
-const (
-	KEY RTC_WPR = 0xFF << 0 //+ Write protection key This byte is written by software. Reading this byte always returns 0x00. Refer to RTC register write protection for a description of how to unlock RTC register write protection.
+	KEY WPR = 0xFF << 0 //+ Write protection key This byte is written by software. Reading this byte always returns 0x00. Refer to RTC register write protection for a description of how to unlock RTC register write protection.
 )
 
 const (
@@ -287,7 +222,7 @@ const (
 )
 
 const (
-	SS RTC_SSR = 0xFFFF << 0 //+ Sub second value SS[15:0] is the value in the synchronous prescaler counter. The fraction of a second is given by the formula below: Second fraction = (PREDIV_S - SS) / (PREDIV_S + 1) Note: SS can be larger than PREDIV_S only after a shift operation. In that case, the correct time/date is one second less than as indicated by RTC_TR/RTC_DR.
+	SS SSR = 0xFFFF << 0 //+ Sub second value SS[15:0] is the value in the synchronous prescaler counter. The fraction of a second is given by the formula below: Second fraction = (PREDIV_S - SS) / (PREDIV_S + 1) Note: SS can be larger than PREDIV_S only after a shift operation. In that case, the correct time/date is one second less than as indicated by TR/DR.
 )
 
 const (
@@ -295,8 +230,8 @@ const (
 )
 
 const (
-	SUBFS RTC_SHIFTR = 0x7FFF << 0 //+ Subtract a fraction of a second These bits are write only and is always read as zero. Writing to this bit has no effect when a shift operation is pending (when SHPF=1, in RTC_ISR). The value which is written to SUBFS is added to the synchronous prescaler counter. Since this counter counts down, this operation effectively subtracts from (delays) the clock by: Delay (seconds) = SUBFS / (PREDIV_S + 1) A fraction of a second can effectively be added to the clock (advancing the clock) when the ADD1S function is used in conjunction with SUBFS, effectively advancing the clock by: Advance (seconds) = (1 - (SUBFS / (PREDIV_S + 1))). Note: Writing to SUBFS causes RSF to be cleared. Software can then wait until RSF=1 to be sure that the shadow registers have been updated with the shifted time.
-	ADD1S RTC_SHIFTR = 0x01 << 31  //+ Add one second This bit is write only and is always read as zero. Writing to this bit has no effect when a shift operation is pending (when SHPF=1, in RTC_ISR). This function is intended to be used with SUBFS (see description below) in order to effectively add a fraction of a second to the clock in an atomic operation.
+	SUBFS SHIFTR = 0x7FFF << 0 //+ Subtract a fraction of a second These bits are write only and is always read as zero. Writing to this bit has no effect when a shift operation is pending (when SHPF=1, in ISR). The value which is written to SUBFS is added to the synchronous prescaler counter. Since this counter counts down, this operation effectively subtracts from (delays) the clock by: Delay (seconds) = SUBFS / (PREDIV_S + 1) A fraction of a second can effectively be added to the clock (advancing the clock) when the ADD1S function is used in conjunction with SUBFS, effectively advancing the clock by: Advance (seconds) = (1 - (SUBFS / (PREDIV_S + 1))). Note: Writing to SUBFS causes RSF to be cleared. Software can then wait until RSF=1 to be sure that the shadow registers have been updated with the shifted time.
+	ADD1S SHIFTR = 0x01 << 31  //+ Add one second This bit is write only and is always read as zero. Writing to this bit has no effect when a shift operation is pending (when SHPF=1, in ISR). This function is intended to be used with SUBFS (see description below) in order to effectively add a fraction of a second to the clock in an atomic operation.
 )
 
 const (
@@ -305,54 +240,10 @@ const (
 )
 
 const (
-	SU  RTC_TSTR = 0x0F << 0  //+ Second units in BCD format.
-	ST  RTC_TSTR = 0x07 << 4  //+ Second tens in BCD format.
-	MNU RTC_TSTR = 0x0F << 8  //+ Minute units in BCD format.
-	MNT RTC_TSTR = 0x07 << 12 //+ Minute tens in BCD format.
-	HU  RTC_TSTR = 0x0F << 16 //+ Hour units in BCD format.
-	HT  RTC_TSTR = 0x03 << 20 //+ Hour tens in BCD format.
-	PM  RTC_TSTR = 0x01 << 22 //+ AM/PM notation
-)
-
-const (
-	SUn  = 0
-	STn  = 4
-	MNUn = 8
-	MNTn = 12
-	HUn  = 16
-	HTn  = 20
-	PMn  = 22
-)
-
-const (
-	DU  RTC_TSDR = 0x0F << 0  //+ Date units in BCD format
-	DT  RTC_TSDR = 0x03 << 4  //+ Date tens in BCD format
-	MU  RTC_TSDR = 0x0F << 8  //+ Month units in BCD format
-	MT  RTC_TSDR = 0x01 << 12 //+ Month tens in BCD format
-	WDU RTC_TSDR = 0x07 << 13 //+ Week day units
-)
-
-const (
-	DUn  = 0
-	DTn  = 4
-	MUn  = 8
-	MTn  = 12
-	WDUn = 13
-)
-
-const (
-	SS RTC_TSSSR = 0xFFFF << 0 //+ Sub second value SS[15:0] is the value of the synchronous prescaler counter when the timestamp event occurred.
-)
-
-const (
-	SSn = 0
-)
-
-const (
-	CALM   RTC_CALR = 0x1FF << 0 //+ Calibration minus The frequency of the calendar is reduced by masking CALM out of 220 RTCCLK pulses (32 seconds if the input frequency is 32768 Hz). This decreases the frequency of the calendar with a resolution of 0.9537 ppm. To increase the frequency of the calendar, this feature should be used in conjunction with CALP. See Section24.3.12: RTC smooth digital calibration on page13.
-	CALW16 RTC_CALR = 0x01 << 13 //+ Use a 16-second calibration cycle period When CALW16 is set to 1, the 16-second calibration cycle period is selected.This bit must not be set to 1 if CALW8=1. Note: CALM[0] is stuck at 0 when CALW16= 1. Refer to Section24.3.12: RTC smooth digital calibration.
-	CALW8  RTC_CALR = 0x01 << 14 //+ Use an 8-second calibration cycle period When CALW8 is set to 1, the 8-second calibration cycle period is selected. Note: CALM[1:0] are stuck at 00; when CALW8= 1. Refer to Section24.3.12: RTC smooth digital calibration.
-	CALP   RTC_CALR = 0x01 << 15 //+ Increase frequency of RTC by 488.5 ppm This feature is intended to be used in conjunction with CALM, which lowers the frequency of the calendar with a fine resolution. if the input frequency is 32768 Hz, the number of RTCCLK pulses added during a 32-second window is calculated as follows: (512 * CALP) - CALM. Refer to Section24.3.12: RTC smooth digital calibration.
+	CALM   CALR = 0x1FF << 0 //+ Calibration minus The frequency of the calendar is reduced by masking CALM out of 220 RTCCLK pulses (32 seconds if the input frequency is 32768 Hz). This decreases the frequency of the calendar with a resolution of 0.9537 ppm. To increase the frequency of the calendar, this feature should be used in conjunction with CALP. See Section24.3.12: RTC smooth digital calibration on page13.
+	CALW16 CALR = 0x01 << 13 //+ Use a 16-second calibration cycle period When CALW16 is set to 1, the 16-second calibration cycle period is selected.This bit must not be set to 1 if CALW8=1. Note: CALM[0] is stuck at 0 when CALW16= 1. Refer to Section24.3.12: RTC smooth digital calibration.
+	CALW8  CALR = 0x01 << 14 //+ Use an 8-second calibration cycle period When CALW8 is set to 1, the 8-second calibration cycle period is selected. Note: CALM[1:0] are stuck at 00; when CALW8= 1. Refer to Section24.3.12: RTC smooth digital calibration.
+	CALP   CALR = 0x01 << 15 //+ Increase frequency of RTC by 488.5 ppm This feature is intended to be used in conjunction with CALM, which lowers the frequency of the calendar with a fine resolution. if the input frequency is 32768 Hz, the number of RTCCLK pulses added during a 32-second window is calculated as follows: (512 * CALP) - CALM. Refer to Section24.3.12: RTC smooth digital calibration.
 )
 
 const (
@@ -363,27 +254,27 @@ const (
 )
 
 const (
-	TAMP1E       RTC_TAMPCR = 0x01 << 0  //+ RTC_TAMP1 input detection enable
-	TAMP1TRG     RTC_TAMPCR = 0x01 << 1  //+ Active level for RTC_TAMP1 input If TAMPFLT != 00 if TAMPFLT = 00:
-	TAMPIE       RTC_TAMPCR = 0x01 << 2  //+ Tamper interrupt enable
-	TAMP2E       RTC_TAMPCR = 0x01 << 3  //+ RTC_TAMP2 input detection enable
-	TAMP2TRG     RTC_TAMPCR = 0x01 << 4  //+ Active level for RTC_TAMP2 input if TAMPFLT != 00: if TAMPFLT = 00:
-	TAMP3E       RTC_TAMPCR = 0x01 << 5  //+ RTC_TAMP3 detection enable
-	TAMP3TRG     RTC_TAMPCR = 0x01 << 6  //+ Active level for RTC_TAMP3 input if TAMPFLT != 00: if TAMPFLT = 00:
-	TAMPTS       RTC_TAMPCR = 0x01 << 7  //+ Activate timestamp on tamper detection event TAMPTS is valid even if TSE=0 in the RTC_CR register.
-	TAMPFREQ     RTC_TAMPCR = 0x07 << 8  //+ Tamper sampling frequency Determines the frequency at which each of the RTC_TAMPx inputs are sampled.
-	TAMPFLT      RTC_TAMPCR = 0x03 << 11 //+ RTC_TAMPx filter count These bits determines the number of consecutive samples at the specified level (TAMP*TRG) needed to activate a Tamper event. TAMPFLT is valid for each of the RTC_TAMPx inputs.
-	TAMPPRCH     RTC_TAMPCR = 0x03 << 13 //+ RTC_TAMPx precharge duration These bit determines the duration of time during which the pull-up/is activated before each sample. TAMPPRCH is valid for each of the RTC_TAMPx inputs.
-	TAMPPUDIS    RTC_TAMPCR = 0x01 << 15 //+ RTC_TAMPx pull-up disable This bit determines if each of the RTC_TAMPx pins are pre-charged before each sample.
-	TAMP1IE      RTC_TAMPCR = 0x01 << 16 //+ Tamper 1 interrupt enable
-	TAMP1NOERASE RTC_TAMPCR = 0x01 << 17 //+ Tamper 1 no erase
-	TAMP1MF      RTC_TAMPCR = 0x01 << 18 //+ Tamper 1 mask flag
-	TAMP2IE      RTC_TAMPCR = 0x01 << 19 //+ Tamper 2 interrupt enable
-	TAMP2NOERASE RTC_TAMPCR = 0x01 << 20 //+ Tamper 2 no erase
-	TAMP2MF      RTC_TAMPCR = 0x01 << 21 //+ Tamper 2 mask flag
-	TAMP3IE      RTC_TAMPCR = 0x01 << 22 //+ Tamper 3 interrupt enable
-	TAMP3NOERASE RTC_TAMPCR = 0x01 << 23 //+ Tamper 3 no erase
-	TAMP3MF      RTC_TAMPCR = 0x01 << 24 //+ Tamper 3 mask flag
+	TAMP1E       TAMPCR = 0x01 << 0  //+ TAMP1 input detection enable
+	TAMP1TRG     TAMPCR = 0x01 << 1  //+ Active level for TAMP1 input If TAMPFLT != 00 if TAMPFLT = 00:
+	TAMPIE       TAMPCR = 0x01 << 2  //+ Tamper interrupt enable
+	TAMP2E       TAMPCR = 0x01 << 3  //+ TAMP2 input detection enable
+	TAMP2TRG     TAMPCR = 0x01 << 4  //+ Active level for TAMP2 input if TAMPFLT != 00: if TAMPFLT = 00:
+	TAMP3E       TAMPCR = 0x01 << 5  //+ TAMP3 detection enable
+	TAMP3TRG     TAMPCR = 0x01 << 6  //+ Active level for TAMP3 input if TAMPFLT != 00: if TAMPFLT = 00:
+	TAMPTS       TAMPCR = 0x01 << 7  //+ Activate timestamp on tamper detection event TAMPTS is valid even if TSE=0 in the CR register.
+	TAMPFREQ     TAMPCR = 0x07 << 8  //+ Tamper sampling frequency Determines the frequency at which each of the TAMPx inputs are sampled.
+	TAMPFLT      TAMPCR = 0x03 << 11 //+ TAMPx filter count These bits determines the number of consecutive samples at the specified level (TAMP*TRG) needed to activate a Tamper event. TAMPFLT is valid for each of the TAMPx inputs.
+	TAMPPRCH     TAMPCR = 0x03 << 13 //+ TAMPx precharge duration These bit determines the duration of time during which the pull-up/is activated before each sample. TAMPPRCH is valid for each of the TAMPx inputs.
+	TAMPPUDIS    TAMPCR = 0x01 << 15 //+ TAMPx pull-up disable This bit determines if each of the TAMPx pins are pre-charged before each sample.
+	TAMP1IE      TAMPCR = 0x01 << 16 //+ Tamper 1 interrupt enable
+	TAMP1NOERASE TAMPCR = 0x01 << 17 //+ Tamper 1 no erase
+	TAMP1MF      TAMPCR = 0x01 << 18 //+ Tamper 1 mask flag
+	TAMP2IE      TAMPCR = 0x01 << 19 //+ Tamper 2 interrupt enable
+	TAMP2NOERASE TAMPCR = 0x01 << 20 //+ Tamper 2 no erase
+	TAMP2MF      TAMPCR = 0x01 << 21 //+ Tamper 2 mask flag
+	TAMP3IE      TAMPCR = 0x01 << 22 //+ Tamper 3 interrupt enable
+	TAMP3NOERASE TAMPCR = 0x01 << 23 //+ Tamper 3 no erase
+	TAMP3MF      TAMPCR = 0x01 << 24 //+ Tamper 3 mask flag
 )
 
 const (
@@ -411,287 +302,21 @@ const (
 )
 
 const (
-	SS     RTC_ALRMASSR = 0x7FFF << 0 //+ Sub seconds value This value is compared with the contents of the synchronous prescaler counter to determine if Alarm A is to be activated. Only bits 0 up MASKSS-1 are compared.
-	MASKSS RTC_ALRMASSR = 0x0F << 24  //+ Mask the most-significant bits starting at this bit ... The overflow bits of the synchronous counter (bits 15) is never compared. This bit can be different from 0 only after a shift operation.
+	ASS     ALRMSSR = 0x7FFF << 0 //+ Sub seconds value This value is compared with the contents of the synchronous prescaler counter to determine if Alarm A is to be activated. Only bits 0 up MASKSS-1 are compared.
+	AMASKSS ALRMSSR = 0x0F << 24  //+ Mask the most-significant bits starting at this bit ... The overflow bits of the synchronous counter (bits 15) is never compared. This bit can be different from 0 only after a shift operation.
 )
 
 const (
-	SSn     = 0
-	MASKSSn = 24
+	ASSn     = 0
+	AMASKSSn = 24
 )
 
 const (
-	SS     RTC_ALRMBSSR = 0x7FFF << 0 //+ Sub seconds value This value is compared with the contents of the synchronous prescaler counter to determine if Alarm B is to be activated. Only bits 0 up to MASKSS-1 are compared.
-	MASKSS RTC_ALRMBSSR = 0x0F << 24  //+ Mask the most-significant bits starting at this bit ... The overflow bits of the synchronous counter (bits 15) is never compared. This bit can be different from 0 only after a shift operation.
+	ALARM_TYPE OR = 0x01 << 0 //+ ALARM output type on PC13
+	OUT_RMP    OR = 0x01 << 1 //+ OUT remap
 )
 
 const (
-	SSn     = 0
-	MASKSSn = 24
-)
-
-const (
-	RTC_ALARM_TYPE RTC_OR = 0x01 << 0 //+ RTC_ALARM output type on PC13
-	RTC_OUT_RMP    RTC_OR = 0x01 << 1 //+ RTC_OUT remap
-)
-
-const (
-	RTC_ALARM_TYPEn = 0
-	RTC_OUT_RMPn    = 1
-)
-
-const (
-	BKP RTC_BKP0R = 0xFFFFFFFF << 0 //+ The application can write or read data to and from these registers. They are powered-on by VBAT when VDD is switched off, so that they are not reset by System reset, and their contents remain valid when the device operates in low-power mode. This register is reset on a tamper detection event, as long as TAMPxF=1. or when the Flash readout protection is disabled.
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP RTC_BKP1R = 0xFFFFFFFF << 0 //+ The application can write or read data to and from these registers. They are powered-on by VBAT when VDD is switched off, so that they are not reset by System reset, and their contents remain valid when the device operates in low-power mode. This register is reset on a tamper detection event, as long as TAMPxF=1. or when the Flash readout protection is disabled.
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP RTC_BKP2R = 0xFFFFFFFF << 0 //+ The application can write or read data to and from these registers. They are powered-on by VBAT when VDD is switched off, so that they are not reset by System reset, and their contents remain valid when the device operates in low-power mode. This register is reset on a tamper detection event, as long as TAMPxF=1. or when the Flash readout protection is disabled.
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP RTC_BKP3R = 0xFFFFFFFF << 0 //+ The application can write or read data to and from these registers. They are powered-on by VBAT when VDD is switched off, so that they are not reset by System reset, and their contents remain valid when the device operates in low-power mode. This register is reset on a tamper detection event, as long as TAMPxF=1. or when the Flash readout protection is disabled.
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP RTC_BKP4R = 0xFFFFFFFF << 0 //+ The application can write or read data to and from these registers. They are powered-on by VBAT when VDD is switched off, so that they are not reset by System reset, and their contents remain valid when the device operates in low-power mode. This register is reset on a tamper detection event, as long as TAMPxF=1. or when the Flash readout protection is disabled.
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP RTC_BKP5R = 0xFFFFFFFF << 0 //+ The application can write or read data to and from these registers. They are powered-on by VBAT when VDD is switched off, so that they are not reset by System reset, and their contents remain valid when the device operates in low-power mode. This register is reset on a tamper detection event, as long as TAMPxF=1. or when the Flash readout protection is disabled.
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP RTC_BKP6R = 0xFFFFFFFF << 0 //+ The application can write or read data to and from these registers. They are powered-on by VBAT when VDD is switched off, so that they are not reset by System reset, and their contents remain valid when the device operates in low-power mode. This register is reset on a tamper detection event, as long as TAMPxF=1. or when the Flash readout protection is disabled.
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP RTC_BKP7R = 0xFFFFFFFF << 0 //+ The application can write or read data to and from these registers. They are powered-on by VBAT when VDD is switched off, so that they are not reset by System reset, and their contents remain valid when the device operates in low-power mode. This register is reset on a tamper detection event, as long as TAMPxF=1. or when the Flash readout protection is disabled.
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP RTC_BKP8R = 0xFFFFFFFF << 0 //+ The application can write or read data to and from these registers. They are powered-on by VBAT when VDD is switched off, so that they are not reset by System reset, and their contents remain valid when the device operates in low-power mode. This register is reset on a tamper detection event, as long as TAMPxF=1. or when the Flash readout protection is disabled.
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP RTC_BKP9R = 0xFFFFFFFF << 0 //+ The application can write or read data to and from these registers. They are powered-on by VBAT when VDD is switched off, so that they are not reset by System reset, and their contents remain valid when the device operates in low-power mode. This register is reset on a tamper detection event, as long as TAMPxF=1. or when the Flash readout protection is disabled.
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP RTC_BKP10R = 0xFFFFFFFF << 0 //+ The application can write or read data to and from these registers. They are powered-on by VBAT when VDD is switched off, so that they are not reset by System reset, and their contents remain valid when the device operates in low-power mode. This register is reset on a tamper detection event, as long as TAMPxF=1. or when the Flash readout protection is disabled.
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP RTC_BKP11R = 0xFFFFFFFF << 0 //+ The application can write or read data to and from these registers. They are powered-on by VBAT when VDD is switched off, so that they are not reset by System reset, and their contents remain valid when the device operates in low-power mode. This register is reset on a tamper detection event, as long as TAMPxF=1. or when the Flash readout protection is disabled.
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP RTC_BKP12R = 0xFFFFFFFF << 0 //+ The application can write or read data to and from these registers. They are powered-on by VBAT when VDD is switched off, so that they are not reset by System reset, and their contents remain valid when the device operates in low-power mode. This register is reset on a tamper detection event, as long as TAMPxF=1. or when the Flash readout protection is disabled.
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP RTC_BKP13R = 0xFFFFFFFF << 0 //+ The application can write or read data to and from these registers. They are powered-on by VBAT when VDD is switched off, so that they are not reset by System reset, and their contents remain valid when the device operates in low-power mode. This register is reset on a tamper detection event, as long as TAMPxF=1. or when the Flash readout protection is disabled.
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP RTC_BKP14R = 0xFFFFFFFF << 0 //+ The application can write or read data to and from these registers. They are powered-on by VBAT when VDD is switched off, so that they are not reset by System reset, and their contents remain valid when the device operates in low-power mode. This register is reset on a tamper detection event, as long as TAMPxF=1. or when the Flash readout protection is disabled.
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP RTC_BKP15R = 0xFFFFFFFF << 0 //+ The application can write or read data to and from these registers. They are powered-on by VBAT when VDD is switched off, so that they are not reset by System reset, and their contents remain valid when the device operates in low-power mode. This register is reset on a tamper detection event, as long as TAMPxF=1. or when the Flash readout protection is disabled.
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP RTC_BKP16R = 0xFFFFFFFF << 0 //+ The application can write or read data to and from these registers. They are powered-on by VBAT when VDD is switched off, so that they are not reset by System reset, and their contents remain valid when the device operates in low-power mode. This register is reset on a tamper detection event, as long as TAMPxF=1. or when the Flash readout protection is disabled.
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP RTC_BKP17R = 0xFFFFFFFF << 0 //+ The application can write or read data to and from these registers. They are powered-on by VBAT when VDD is switched off, so that they are not reset by System reset, and their contents remain valid when the device operates in low-power mode. This register is reset on a tamper detection event, as long as TAMPxF=1. or when the Flash readout protection is disabled.
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP RTC_BKP18R = 0xFFFFFFFF << 0 //+ The application can write or read data to and from these registers. They are powered-on by VBAT when VDD is switched off, so that they are not reset by System reset, and their contents remain valid when the device operates in low-power mode. This register is reset on a tamper detection event, as long as TAMPxF=1. or when the Flash readout protection is disabled.
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP RTC_BKP19R = 0xFFFFFFFF << 0 //+ The application can write or read data to and from these registers. They are powered-on by VBAT when VDD is switched off, so that they are not reset by System reset, and their contents remain valid when the device operates in low-power mode. This register is reset on a tamper detection event, as long as TAMPxF=1. or when the Flash readout protection is disabled.
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP RTC_BKP20R = 0xFFFFFFFF << 0 //+ The application can write or read data to and from these registers. They are powered-on by VBAT when VDD is switched off, so that they are not reset by System reset, and their contents remain valid when the device operates in low-power mode. This register is reset on a tamper detection event, as long as TAMPxF=1. or when the Flash readout protection is disabled.
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP RTC_BKP21R = 0xFFFFFFFF << 0 //+ The application can write or read data to and from these registers. They are powered-on by VBAT when VDD is switched off, so that they are not reset by System reset, and their contents remain valid when the device operates in low-power mode. This register is reset on a tamper detection event, as long as TAMPxF=1. or when the Flash readout protection is disabled.
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP RTC_BKP22R = 0xFFFFFFFF << 0 //+ The application can write or read data to and from these registers. They are powered-on by VBAT when VDD is switched off, so that they are not reset by System reset, and their contents remain valid when the device operates in low-power mode. This register is reset on a tamper detection event, as long as TAMPxF=1. or when the Flash readout protection is disabled.
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP RTC_BKP23R = 0xFFFFFFFF << 0 //+ The application can write or read data to and from these registers. They are powered-on by VBAT when VDD is switched off, so that they are not reset by System reset, and their contents remain valid when the device operates in low-power mode. This register is reset on a tamper detection event, as long as TAMPxF=1. or when the Flash readout protection is disabled.
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP RTC_BKP24R = 0xFFFFFFFF << 0 //+ The application can write or read data to and from these registers. They are powered-on by VBAT when VDD is switched off, so that they are not reset by System reset, and their contents remain valid when the device operates in low-power mode. This register is reset on a tamper detection event, as long as TAMPxF=1. or when the Flash readout protection is disabled.
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP RTC_BKP25R = 0xFFFFFFFF << 0 //+ The application can write or read data to and from these registers. They are powered-on by VBAT when VDD is switched off, so that they are not reset by System reset, and their contents remain valid when the device operates in low-power mode. This register is reset on a tamper detection event, as long as TAMPxF=1. or when the Flash readout protection is disabled.
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP RTC_BKP26R = 0xFFFFFFFF << 0 //+ The application can write or read data to and from these registers. They are powered-on by VBAT when VDD is switched off, so that they are not reset by System reset, and their contents remain valid when the device operates in low-power mode. This register is reset on a tamper detection event, as long as TAMPxF=1. or when the Flash readout protection is disabled.
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP RTC_BKP27R = 0xFFFFFFFF << 0 //+ The application can write or read data to and from these registers. They are powered-on by VBAT when VDD is switched off, so that they are not reset by System reset, and their contents remain valid when the device operates in low-power mode. This register is reset on a tamper detection event, as long as TAMPxF=1. or when the Flash readout protection is disabled.
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP RTC_BKP28R = 0xFFFFFFFF << 0 //+ The application can write or read data to and from these registers. They are powered-on by VBAT when VDD is switched off, so that they are not reset by System reset, and their contents remain valid when the device operates in low-power mode. This register is reset on a tamper detection event, as long as TAMPxF=1. or when the Flash readout protection is disabled.
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP RTC_BKP29R = 0xFFFFFFFF << 0 //+ The application can write or read data to and from these registers. They are powered-on by VBAT when VDD is switched off, so that they are not reset by System reset, and their contents remain valid when the device operates in low-power mode. This register is reset on a tamper detection event, as long as TAMPxF=1. or when the Flash readout protection is disabled.
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP RTC_BKP30R = 0xFFFFFFFF << 0 //+ The application can write or read data to and from these registers. They are powered-on by VBAT when VDD is switched off, so that they are not reset by System reset, and their contents remain valid when the device operates in low-power mode. This register is reset on a tamper detection event, as long as TAMPxF=1. or when the Flash readout protection is disabled.
-)
-
-const (
-	BKPn = 0
-)
-
-const (
-	BKP RTC_BKP31R = 0xFFFFFFFF << 0 //+ The application can write or read data to and from these registers. They are powered-on by VBAT when VDD is switched off, so that they are not reset by System reset, and their contents remain valid when the device operates in low-power mode. This register is reset on a tamper detection event, as long as TAMPxF=1. or when the Flash readout protection is disabled.
-)
-
-const (
-	BKPn = 0
+	ALARM_TYPEn = 0
+	OUT_RMPn    = 1
 )

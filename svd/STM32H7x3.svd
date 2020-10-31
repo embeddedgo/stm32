@@ -5,6 +5,7 @@ thinghs were fixed:
 CFGR:      enums added: SW_HSI..SW_PLL1, SWS_HSI..SWS_PLL1
 PLLCKSELR: enums addad: PLLSRC_HSI, PLLSRC_CSI, PLLSRC_HSE, PLLSRC_NONE
 BDCR:      RTCSRC renamed to RTCSEL, enums added: RTCSEL_NONE..RTCSEL_HSE
+RTC:       remove RTC_ prefix from register names
 -->
 
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
@@ -26127,9 +26128,9 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
       </interrupt>
       <registers>
         <register>
-          <name>RTC_TR</name>
-          <displayName>RTC_TR</displayName>
-          <description>The RTC_TR is the calendar time shadow
+          <name>TR</name>
+          <displayName>TR</displayName>
+          <description>The TR is the calendar time shadow
           register. This register must be written in initialization
           mode only. Refer to Calendar initialization and
           configuration on page9 and Reading the calendar on
@@ -26186,9 +26187,9 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>RTC_DR</name>
-          <displayName>RTC_DR</displayName>
-          <description>The RTC_DR is the calendar date shadow
+          <name>DR</name>
+          <displayName>DR</displayName>
+          <description>The DR is the calendar date shadow
           register. This register must be written in initialization
           mode only. Refer to Calendar initialization and
           configuration on page9 and Reading the calendar on
@@ -26245,8 +26246,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>RTC_CR</name>
-          <displayName>RTC_CR</displayName>
+          <name>CR</name>
+          <displayName>CR</displayName>
           <description>RTC control register</description>
           <addressOffset>0x8</addressOffset>
           <size>0x20</size>
@@ -26432,10 +26433,10 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>RTC_ISR</name>
-          <displayName>RTC_ISR</displayName>
+          <name>ISR</name>
+          <displayName>ISR</displayName>
           <description>This register is write protected (except for
-          RTC_ISR[13:8] bits). The write access procedure is
+          ISR[13:8] bits). The write access procedure is
           described in RTC register write protection on
           page9.</description>
           <addressOffset>0xC</addressOffset>
@@ -26446,7 +26447,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <name>ALRAWF</name>
               <description>Alarm A write flag This bit is set by
               hardware when Alarm A values can be changed, after
-              the ALRAE bit has been set to 0 in RTC_CR. It is
+              the ALRAE bit has been set to 0 in CR. It is
               cleared by hardware in initialization
               mode.</description>
               <bitOffset>0</bitOffset>
@@ -26457,7 +26458,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <name>ALRBWF</name>
               <description>Alarm B write flag This bit is set by
               hardware when Alarm B values can be changed, after
-              the ALRBE bit has been set to 0 in RTC_CR. It is
+              the ALRBE bit has been set to 0 in CR. It is
               cleared by hardware in initialization
               mode.</description>
               <bitOffset>1</bitOffset>
@@ -26468,7 +26469,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <name>WUTWF</name>
               <description>Wakeup timer write flag This bit is set
               by hardware up to 2 RTCCLK cycles after the WUTE bit
-              has been set to 0 in RTC_CR, and is cleared up to 2
+              has been set to 0 in CR, and is cleared up to 2
               RTCCLK cycles after the WUTE bit has been set to 1.
               The wakeup timer values can be changed when WUTE bit
               is cleared and WUTWF is set.</description>
@@ -26480,7 +26481,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <name>SHPF</name>
               <description>Shift operation pending This flag is set
               by hardware as soon as a shift operation is initiated
-              by a write to the RTC_SHIFTR register. It is cleared
+              by a write to the SHIFTR register. It is cleared
               by hardware when the corresponding shift operation
               has been executed. Writing to the SHPF bit has no
               effect.</description>
@@ -26502,8 +26503,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <name>RSF</name>
               <description>Registers synchronization flag This bit
               is set by hardware each time the calendar registers
-              are copied into the shadow registers (RTC_SSRx,
-              RTC_TRx and RTC_DRx). This bit is cleared by hardware
+              are copied into the shadow registers (SSRx,
+              TRx and DRx). This bit is cleared by hardware
               in initialization mode, while a shift operation is
               pending (SHPF=1), or when in bypass shadow register
               mode (BYPSHAD=1). This bit can also be cleared by
@@ -26533,8 +26534,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
             <field>
               <name>ALRAF</name>
               <description>Alarm A flag This flag is set by
-              hardware when the time/date registers (RTC_TR and
-              RTC_DR) match the Alarm A register (RTC_ALRMAR). This
+              hardware when the time/date registers (TR and
+              DR) match the Alarm A register (ALRMAR). This
               flag is cleared by software by writing
               0.</description>
               <bitOffset>8</bitOffset>
@@ -26544,8 +26545,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
             <field>
               <name>ALRBF</name>
               <description>Alarm B flag This flag is set by
-              hardware when the time/date registers (RTC_TR and
-              RTC_DR) match the Alarm B register (RTC_ALRMBR). This
+              hardware when the time/date registers (TR and
+              DR) match the Alarm B register (ALRMBR). This
               flag is cleared by software by writing
               0.</description>
               <bitOffset>9</bitOffset>
@@ -26589,9 +26590,9 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
             </field>
             <field>
               <name>TAMP1F</name>
-              <description>RTC_TAMP1 detection flag This flag is
+              <description>TAMP1 detection flag This flag is
               set by hardware when a tamper detection event is
-              detected on the RTC_TAMP1 input. It is cleared by
+              detected on the TAMP1 input. It is cleared by
               software writing 0</description>
               <bitOffset>13</bitOffset>
               <bitWidth>1</bitWidth>
@@ -26599,9 +26600,9 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
             </field>
             <field>
               <name>TAMP2F</name>
-              <description>RTC_TAMP2 detection flag This flag is
+              <description>TAMP2 detection flag This flag is
               set by hardware when a tamper detection event is
-              detected on the RTC_TAMP2 input. It is cleared by
+              detected on the TAMP2 input. It is cleared by
               software writing 0</description>
               <bitOffset>14</bitOffset>
               <bitWidth>1</bitWidth>
@@ -26609,9 +26610,9 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
             </field>
             <field>
               <name>TAMP3F</name>
-              <description>RTC_TAMP3 detection flag This flag is
+              <description>TAMP3 detection flag This flag is
               set by hardware when a tamper detection event is
-              detected on the RTC_TAMP3 input. It is cleared by
+              detected on the TAMP3 input. It is cleared by
               software writing 0</description>
               <bitOffset>15</bitOffset>
               <bitWidth>1</bitWidth>
@@ -26621,8 +26622,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <name>RECALPF</name>
               <description>Recalibration pending Flag The RECALPF
               status flag is automatically set to 1 when software
-              writes to the RTC_CALR register, indicating that the
-              RTC_CALR register is blocked. When the new
+              writes to the CALR register, indicating that the
+              CALR register is blocked. When the new
               calibration settings are taken into account, this bit
               returns to 0. Refer to Re-calibration
               on-the-fly.</description>
@@ -26640,8 +26641,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>RTC_PRER</name>
-          <displayName>RTC_PRER</displayName>
+          <name>PRER</name>
+          <displayName>PRER</displayName>
           <description>This register must be written in
           initialization mode only. The initialization must be
           performed in two separate write accesses. Refer to
@@ -26673,10 +26674,10 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>RTC_WUTR</name>
-          <displayName>RTC_WUTR</displayName>
+          <name>WUTR</name>
+          <displayName>WUTR</displayName>
           <description>This register can be written only when WUTWF
-          is set to 1 in RTC_ISR.This register is write protected.
+          is set to 1 in ISR.This register is write protected.
           The write access procedure is described in RTC register
           write protection on page9.</description>
           <addressOffset>0x14</addressOffset>
@@ -26690,7 +26691,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               wakeup timer is enabled (WUTE set to 1), the WUTF
               flag is set every (WUT[15:0] + 1) ck_wut cycles. The
               ck_wut period is selected through WUCKSEL[2:0] bits
-              of the RTC_CR register When WUCKSEL[2] = 1, the
+              of the CR register When WUCKSEL[2] = 1, the
               wakeup timer becomes 17-bits and WUCKSEL[1]
               effectively becomes WUT[16] the most-significant bit
               to be reloaded into the timer. The first assertion of
@@ -26703,10 +26704,10 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>RTC_ALRMAR</name>
-          <displayName>RTC_ALRMAR</displayName>
+          <name>ALRMAR</name>
+          <displayName>ALRMAR</displayName>
           <description>This register can be written only when
-          ALRAWF is set to 1 in RTC_ISR, or in initialization
+          ALRAWF is set to 1 in ISR, or in initialization
           mode.This register is write protected. The write access
           procedure is described in RTC register write protection
           on page9.</description>
@@ -26805,10 +26806,10 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>RTC_ALRMBR</name>
-          <displayName>RTC_ALRMBR</displayName>
+          <name>ALRMBR</name>
+          <displayName>ALRMBR</displayName>
           <description>This register can be written only when
-          ALRBWF is set to 1 in RTC_ISR, or in initialization
+          ALRBWF is set to 1 in ISR, or in initialization
           mode.This register is write protected. The write access
           procedure is described in RTC register write protection
           on page9.</description>
@@ -26905,8 +26906,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>RTC_WPR</name>
-          <displayName>RTC_WPR</displayName>
+          <name>WPR</name>
+          <displayName>WPR</displayName>
           <description>RTC write protection register</description>
           <addressOffset>0x24</addressOffset>
           <size>0x20</size>
@@ -26926,8 +26927,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>RTC_SSR</name>
-          <displayName>RTC_SSR</displayName>
+          <name>SSR</name>
+          <displayName>SSR</displayName>
           <description>RTC sub second register</description>
           <addressOffset>0x28</addressOffset>
           <size>0x20</size>
@@ -26943,15 +26944,15 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               can be larger than PREDIV_S only after a shift
               operation. In that case, the correct time/date is one
               second less than as indicated by
-              RTC_TR/RTC_DR.</description>
+              TR/DR.</description>
               <bitOffset>0</bitOffset>
               <bitWidth>16</bitWidth>
             </field>
           </fields>
         </register>
         <register>
-          <name>RTC_SHIFTR</name>
-          <displayName>RTC_SHIFTR</displayName>
+          <name>SHIFTR</name>
+          <displayName>SHIFTR</displayName>
           <description>This register is write protected. The write
           access procedure is described in RTC register write
           protection on page9.</description>
@@ -26965,7 +26966,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <description>Subtract a fraction of a second These
               bits are write only and is always read as zero.
               Writing to this bit has no effect when a shift
-              operation is pending (when SHPF=1, in RTC_ISR). The
+              operation is pending (when SHPF=1, in ISR). The
               value which is written to SUBFS is added to the
               synchronous prescaler counter. Since this counter
               counts down, this operation effectively subtracts
@@ -26987,7 +26988,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <description>Add one second This bit is write only
               and is always read as zero. Writing to this bit has
               no effect when a shift operation is pending (when
-              SHPF=1, in RTC_ISR). This function is intended to be
+              SHPF=1, in ISR). This function is intended to be
               used with SUBFS (see description below) in order to
               effectively add a fraction of a second to the clock
               in an atomic operation.</description>
@@ -26997,10 +26998,10 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>RTC_TSTR</name>
-          <displayName>RTC_TSTR</displayName>
+          <name>TSTR</name>
+          <displayName>TSTR</displayName>
           <description>The content of this register is valid only
-          when TSF is set to 1 in RTC_ISR. It is cleared when TSF
+          when TSF is set to 1 in ISR. It is cleared when TSF
           bit is reset.</description>
           <addressOffset>0x30</addressOffset>
           <size>0x20</size>
@@ -27054,10 +27055,10 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>RTC_TSDR</name>
-          <displayName>RTC_TSDR</displayName>
+          <name>TSDR</name>
+          <displayName>TSDR</displayName>
           <description>The content of this register is valid only
-          when TSF is set to 1 in RTC_ISR. It is cleared when TSF
+          when TSF is set to 1 in ISR. It is cleared when TSF
           bit is reset.</description>
           <addressOffset>0x34</addressOffset>
           <size>0x20</size>
@@ -27097,11 +27098,11 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>RTC_TSSSR</name>
-          <displayName>RTC_TSSSR</displayName>
+          <name>TSSSR</name>
+          <displayName>TSSSR</displayName>
           <description>The content of this register is valid only
-          when RTC_ISR/TSF is set. It is cleared when the
-          RTC_ISR/TSF bit is reset.</description>
+          when ISR/TSF is set. It is cleared when the
+          ISR/TSF bit is reset.</description>
           <addressOffset>0x38</addressOffset>
           <size>0x20</size>
           <access>read-only</access>
@@ -27118,8 +27119,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>RTC_CALR</name>
-          <displayName>RTC_CALR</displayName>
+          <name>CALR</name>
+          <displayName>CALR</displayName>
           <description>This register is write protected. The write
           access procedure is described in RTC register write
           protection on page9.</description>
@@ -27179,8 +27180,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>RTC_TAMPCR</name>
-          <displayName>RTC_TAMPCR</displayName>
+          <name>TAMPCR</name>
+          <displayName>TAMPCR</displayName>
           <description>RTC tamper and alternate function
           configuration register</description>
           <addressOffset>0x40</addressOffset>
@@ -27190,14 +27191,14 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           <fields>
             <field>
               <name>TAMP1E</name>
-              <description>RTC_TAMP1 input detection
+              <description>TAMP1 input detection
               enable</description>
               <bitOffset>0</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
             <field>
               <name>TAMP1TRG</name>
-              <description>Active level for RTC_TAMP1 input If
+              <description>Active level for TAMP1 input If
               TAMPFLT != 00 if TAMPFLT = 00:</description>
               <bitOffset>1</bitOffset>
               <bitWidth>1</bitWidth>
@@ -27210,27 +27211,27 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
             </field>
             <field>
               <name>TAMP2E</name>
-              <description>RTC_TAMP2 input detection
+              <description>TAMP2 input detection
               enable</description>
               <bitOffset>3</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
             <field>
               <name>TAMP2TRG</name>
-              <description>Active level for RTC_TAMP2 input if
+              <description>Active level for TAMP2 input if
               TAMPFLT != 00: if TAMPFLT = 00:</description>
               <bitOffset>4</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
             <field>
               <name>TAMP3E</name>
-              <description>RTC_TAMP3 detection enable</description>
+              <description>TAMP3 detection enable</description>
               <bitOffset>5</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
             <field>
               <name>TAMP3TRG</name>
-              <description>Active level for RTC_TAMP3 input if
+              <description>Active level for TAMP3 input if
               TAMPFLT != 00: if TAMPFLT = 00:</description>
               <bitOffset>6</bitOffset>
               <bitWidth>1</bitWidth>
@@ -27238,7 +27239,7 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
             <field>
               <name>TAMPTS</name>
               <description>Activate timestamp on tamper detection
-              event TAMPTS is valid even if TSE=0 in the RTC_CR
+              event TAMPTS is valid even if TSE=0 in the CR
               register.</description>
               <bitOffset>7</bitOffset>
               <bitWidth>1</bitWidth>
@@ -27246,34 +27247,34 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
             <field>
               <name>TAMPFREQ</name>
               <description>Tamper sampling frequency Determines the
-              frequency at which each of the RTC_TAMPx inputs are
+              frequency at which each of the TAMPx inputs are
               sampled.</description>
               <bitOffset>8</bitOffset>
               <bitWidth>3</bitWidth>
             </field>
             <field>
               <name>TAMPFLT</name>
-              <description>RTC_TAMPx filter count These bits
+              <description>TAMPx filter count These bits
               determines the number of consecutive samples at the
               specified level (TAMP*TRG) needed to activate a
               Tamper event. TAMPFLT is valid for each of the
-              RTC_TAMPx inputs.</description>
+              TAMPx inputs.</description>
               <bitOffset>11</bitOffset>
               <bitWidth>2</bitWidth>
             </field>
             <field>
               <name>TAMPPRCH</name>
-              <description>RTC_TAMPx precharge duration These bit
+              <description>TAMPx precharge duration These bit
               determines the duration of time during which the
               pull-up/is activated before each sample. TAMPPRCH is
-              valid for each of the RTC_TAMPx inputs.</description>
+              valid for each of the TAMPx inputs.</description>
               <bitOffset>13</bitOffset>
               <bitWidth>2</bitWidth>
             </field>
             <field>
               <name>TAMPPUDIS</name>
-              <description>RTC_TAMPx pull-up disable This bit
-              determines if each of the RTC_TAMPx pins are
+              <description>TAMPx pull-up disable This bit
+              determines if each of the TAMPx pins are
               pre-charged before each sample.</description>
               <bitOffset>15</bitOffset>
               <bitWidth>1</bitWidth>
@@ -27335,10 +27336,10 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>RTC_ALRMASSR</name>
-          <displayName>RTC_ALRMASSR</displayName>
+          <name>ALRMASSR</name>
+          <displayName>ALRMASSR</displayName>
           <description>This register can be written only when ALRAE
-          is reset in RTC_CR register, or in initialization
+          is reset in CR register, or in initialization
           mode.This register is write protected. The write access
           procedure is described in RTC register write protection
           on page9</description>
@@ -27369,10 +27370,10 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>RTC_ALRMBSSR</name>
-          <displayName>RTC_ALRMBSSR</displayName>
+          <name>ALRMBSSR</name>
+          <displayName>ALRMBSSR</displayName>
           <description>This register can be written only when ALRBE
-          is reset in RTC_CR register, or in initialization
+          is reset in CR register, or in initialization
           mode.This register is write protected.The write access
           procedure is described in Section: RTC register write
           protection.</description>
@@ -27404,8 +27405,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>RTC_BKP0R</name>
-          <displayName>RTC_BKP0R</displayName>
+          <name>BKP0R</name>
+          <displayName>BKP0R</displayName>
           <description>RTC backup registers</description>
           <addressOffset>0x50</addressOffset>
           <size>0x20</size>
@@ -27428,8 +27429,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>RTC_BKP1R</name>
-          <displayName>RTC_BKP1R</displayName>
+          <name>BKP1R</name>
+          <displayName>BKP1R</displayName>
           <description>RTC backup registers</description>
           <addressOffset>0x54</addressOffset>
           <size>0x20</size>
@@ -27452,8 +27453,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>RTC_BKP2R</name>
-          <displayName>RTC_BKP2R</displayName>
+          <name>BKP2R</name>
+          <displayName>BKP2R</displayName>
           <description>RTC backup registers</description>
           <addressOffset>0x58</addressOffset>
           <size>0x20</size>
@@ -27476,8 +27477,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>RTC_BKP3R</name>
-          <displayName>RTC_BKP3R</displayName>
+          <name>BKP3R</name>
+          <displayName>BKP3R</displayName>
           <description>RTC backup registers</description>
           <addressOffset>0x5C</addressOffset>
           <size>0x20</size>
@@ -27500,8 +27501,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>RTC_BKP4R</name>
-          <displayName>RTC_BKP4R</displayName>
+          <name>BKP4R</name>
+          <displayName>BKP4R</displayName>
           <description>RTC backup registers</description>
           <addressOffset>0x60</addressOffset>
           <size>0x20</size>
@@ -27524,8 +27525,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>RTC_BKP5R</name>
-          <displayName>RTC_BKP5R</displayName>
+          <name>BKP5R</name>
+          <displayName>BKP5R</displayName>
           <description>RTC backup registers</description>
           <addressOffset>0x64</addressOffset>
           <size>0x20</size>
@@ -27548,8 +27549,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>RTC_BKP6R</name>
-          <displayName>RTC_BKP6R</displayName>
+          <name>BKP6R</name>
+          <displayName>BKP6R</displayName>
           <description>RTC backup registers</description>
           <addressOffset>0x68</addressOffset>
           <size>0x20</size>
@@ -27572,8 +27573,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>RTC_BKP7R</name>
-          <displayName>RTC_BKP7R</displayName>
+          <name>BKP7R</name>
+          <displayName>BKP7R</displayName>
           <description>RTC backup registers</description>
           <addressOffset>0x6C</addressOffset>
           <size>0x20</size>
@@ -27596,8 +27597,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>RTC_BKP8R</name>
-          <displayName>RTC_BKP8R</displayName>
+          <name>BKP8R</name>
+          <displayName>BKP8R</displayName>
           <description>RTC backup registers</description>
           <addressOffset>0x70</addressOffset>
           <size>0x20</size>
@@ -27620,8 +27621,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>RTC_BKP9R</name>
-          <displayName>RTC_BKP9R</displayName>
+          <name>BKP9R</name>
+          <displayName>BKP9R</displayName>
           <description>RTC backup registers</description>
           <addressOffset>0x74</addressOffset>
           <size>0x20</size>
@@ -27644,8 +27645,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>RTC_BKP10R</name>
-          <displayName>RTC_BKP10R</displayName>
+          <name>BKP10R</name>
+          <displayName>BKP10R</displayName>
           <description>RTC backup registers</description>
           <addressOffset>0x78</addressOffset>
           <size>0x20</size>
@@ -27668,8 +27669,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>RTC_BKP11R</name>
-          <displayName>RTC_BKP11R</displayName>
+          <name>BKP11R</name>
+          <displayName>BKP11R</displayName>
           <description>RTC backup registers</description>
           <addressOffset>0x7C</addressOffset>
           <size>0x20</size>
@@ -27692,8 +27693,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>RTC_BKP12R</name>
-          <displayName>RTC_BKP12R</displayName>
+          <name>BKP12R</name>
+          <displayName>BKP12R</displayName>
           <description>RTC backup registers</description>
           <addressOffset>0x80</addressOffset>
           <size>0x20</size>
@@ -27716,8 +27717,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>RTC_BKP13R</name>
-          <displayName>RTC_BKP13R</displayName>
+          <name>BKP13R</name>
+          <displayName>BKP13R</displayName>
           <description>RTC backup registers</description>
           <addressOffset>0x84</addressOffset>
           <size>0x20</size>
@@ -27740,8 +27741,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>RTC_BKP14R</name>
-          <displayName>RTC_BKP14R</displayName>
+          <name>BKP14R</name>
+          <displayName>BKP14R</displayName>
           <description>RTC backup registers</description>
           <addressOffset>0x88</addressOffset>
           <size>0x20</size>
@@ -27764,8 +27765,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>RTC_BKP15R</name>
-          <displayName>RTC_BKP15R</displayName>
+          <name>BKP15R</name>
+          <displayName>RT_BKP15R</displayName>
           <description>RTC backup registers</description>
           <addressOffset>0x8C</addressOffset>
           <size>0x20</size>
@@ -27788,8 +27789,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>RTC_OR</name>
-          <displayName>RTC_OR</displayName>
+          <name>OR</name>
+          <displayName>OR</displayName>
           <description>RTC option register</description>
           <addressOffset>0x4C</addressOffset>
           <size>0x20</size>
@@ -27797,23 +27798,23 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           <resetValue>0x00000000</resetValue>
           <fields>
             <field>
-              <name>RTC_ALARM_TYPE</name>
-              <description>RTC_ALARM output type on
+              <name>ALARM_TYPE</name>
+              <description>ALARM output type on
               PC13</description>
               <bitOffset>0</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
             <field>
-              <name>RTC_OUT_RMP</name>
-              <description>RTC_OUT remap</description>
+              <name>OUT_RMP</name>
+              <description>OUT remap</description>
               <bitOffset>1</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
           </fields>
         </register>
         <register>
-          <name>RTC_BKP16R</name>
-          <displayName>RTC_BKP16R</displayName>
+          <name>BKP16R</name>
+          <displayName>BKP16R</displayName>
           <description>RTC backup registers</description>
           <addressOffset>0x90</addressOffset>
           <size>0x20</size>
@@ -27836,8 +27837,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>RTC_BKP17R</name>
-          <displayName>RTC_BKP17R</displayName>
+          <name>BKP17R</name>
+          <displayName>BKP17R</displayName>
           <description>RTC backup registers</description>
           <addressOffset>0x94</addressOffset>
           <size>0x20</size>
@@ -27860,8 +27861,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>RTC_BKP18R</name>
-          <displayName>RTC_BKP18R</displayName>
+          <name>BKP18R</name>
+          <displayName>BKP18R</displayName>
           <description>RTC backup registers</description>
           <addressOffset>0x98</addressOffset>
           <size>0x20</size>
@@ -27884,8 +27885,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>RTC_BKP19R</name>
-          <displayName>RTC_BKP19R</displayName>
+          <name>BKP19R</name>
+          <displayName>BKP19R</displayName>
           <description>RTC backup registers</description>
           <addressOffset>0x9C</addressOffset>
           <size>0x20</size>
@@ -27908,8 +27909,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>RTC_BKP20R</name>
-          <displayName>RTC_BKP20R</displayName>
+          <name>BKP20R</name>
+          <displayName>BKP20R</displayName>
           <description>RTC backup registers</description>
           <addressOffset>0xA0</addressOffset>
           <size>0x20</size>
@@ -27932,8 +27933,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>RTC_BKP21R</name>
-          <displayName>RTC_BKP21R</displayName>
+          <name>BKP21R</name>
+          <displayName>BKP21R</displayName>
           <description>RTC backup registers</description>
           <addressOffset>0xA4</addressOffset>
           <size>0x20</size>
@@ -27956,8 +27957,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>RTC_BKP22R</name>
-          <displayName>RTC_BKP22R</displayName>
+          <name>BKP22R</name>
+          <displayName>BKP22R</displayName>
           <description>RTC backup registers</description>
           <addressOffset>0xA8</addressOffset>
           <size>0x20</size>
@@ -27980,8 +27981,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>RTC_BKP23R</name>
-          <displayName>RTC_BKP23R</displayName>
+          <name>BKP23R</name>
+          <displayName>BKP23R</displayName>
           <description>RTC backup registers</description>
           <addressOffset>0xAC</addressOffset>
           <size>0x20</size>
@@ -28004,8 +28005,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>RTC_BKP24R</name>
-          <displayName>RTC_BKP24R</displayName>
+          <name>BKP24R</name>
+          <displayName>BKP24R</displayName>
           <description>RTC backup registers</description>
           <addressOffset>0xB0</addressOffset>
           <size>0x20</size>
@@ -28028,8 +28029,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>RTC_BKP25R</name>
-          <displayName>RTC_BKP25R</displayName>
+          <name>BKP25R</name>
+          <displayName>BKP25R</displayName>
           <description>RTC backup registers</description>
           <addressOffset>0xB4</addressOffset>
           <size>0x20</size>
@@ -28052,8 +28053,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>RTC_BKP26R</name>
-          <displayName>RTC_BKP26R</displayName>
+          <name>BKP26R</name>
+          <displayName>BKP26R</displayName>
           <description>RTC backup registers</description>
           <addressOffset>0xB8</addressOffset>
           <size>0x20</size>
@@ -28076,8 +28077,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>RTC_BKP27R</name>
-          <displayName>RTC_BKP27R</displayName>
+          <name>BKP27R</name>
+          <displayName>BKP27R</displayName>
           <description>RTC backup registers</description>
           <addressOffset>0xBC</addressOffset>
           <size>0x20</size>
@@ -28100,8 +28101,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>RTC_BKP28R</name>
-          <displayName>RTC_BKP28R</displayName>
+          <name>BKP28R</name>
+          <displayName>RTCBKP28R</displayName>
           <description>RTC backup registers</description>
           <addressOffset>0xC0</addressOffset>
           <size>0x20</size>
@@ -28124,8 +28125,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>RTC_BKP29R</name>
-          <displayName>RTC_BKP29R</displayName>
+          <name>BKP29R</name>
+          <displayName>BKP29R</displayName>
           <description>RTC backup registers</description>
           <addressOffset>0xC4</addressOffset>
           <size>0x20</size>
@@ -28148,8 +28149,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>RTC_BKP30R</name>
-          <displayName>RTC_BKP30R</displayName>
+          <name>BKP30R</name>
+          <displayName>BKP30R</displayName>
           <description>RTC backup registers</description>
           <addressOffset>0xC8</addressOffset>
           <size>0x20</size>
@@ -28172,8 +28173,8 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
           </fields>
         </register>
         <register>
-          <name>RTC_BKP31R</name>
-          <displayName>RTC_BKP31R</displayName>
+          <name>BKP31R</name>
+          <displayName>BKP31R</displayName>
           <description>RTC backup registers</description>
           <addressOffset>0xCC</addressOffset>
           <size>0x20</size>
