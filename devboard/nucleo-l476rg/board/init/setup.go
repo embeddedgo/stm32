@@ -12,5 +12,4 @@ import (
 func init() {
 	system.Setup80(0, 0)
 	rtcst.Setup(rtcst.LSE, 1, 32768)
-	//systick.Setup(2e6)
 }

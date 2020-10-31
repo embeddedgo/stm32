@@ -6,11 +6,11 @@ package init
 
 import (
 	"github.com/embeddedgo/stm32/hal/system"
-	"github.com/embeddedgo/stm32/hal/system/timer/systick"
+	"github.com/embeddedgo/stm32/hal/system/timer/rtcst"
 )
 
 func init() {
 	// 480 MHz not supported, requires disabling Vcore overdrive before any WFE instruction
 	system.SetupPLL(25, 5, 80, 1, 2, 2) // 400 MHz
-	systick.Setup(2e6)
+	rtcst.Setup(rtcst.LSE, 1, 32768)
 }
