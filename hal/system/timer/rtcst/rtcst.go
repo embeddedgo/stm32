@@ -23,6 +23,8 @@ import (
 	"github.com/embeddedgo/stm32/p/rtc"
 )
 
+var reset bool
+
 // RTC clock source
 const (
 	LSE int8 = iota
@@ -71,6 +73,7 @@ func Setup(clkSrc int8, divA, divS int) {
 
 	if RCC.BDCR.LoadBits(mask) != cfg {
 		// RTC not initialized
+		reset = true
 		RCC.BDCR.StoreBits(mask, cfg)
 
 		RTC.WPR.Store(0xCA)
@@ -98,6 +101,11 @@ func Setup(clkSrc int8, divA, divS int) {
 	irq.RTC_ALARM.Enable(rtos.IntPrioSysTimer, 0)
 
 	rtos.SetSystemTimer(nanotime, setAlarm)
+}
+
+// HasReset reports whether the RTC reset has been detected by Setup function.
+func HasReset() bool {
+	return reset
 }
 
 func nanotime() int64 {
