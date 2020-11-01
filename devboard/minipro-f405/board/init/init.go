@@ -6,10 +6,10 @@ package init
 
 import (
 	"github.com/embeddedgo/stm32/hal/system"
-	"github.com/embeddedgo/stm32/hal/system/timer/systick"
+	"github.com/embeddedgo/stm32/hal/system/timer/rtcst"
 )
 
 func init() {
 	system.Setup168(8)
-	systick.Setup(2e6)
+	rtcst.Setup(rtcst.LSE, 1, 32768)
 }
