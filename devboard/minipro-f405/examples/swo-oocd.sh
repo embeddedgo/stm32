@@ -3,5 +3,6 @@
 INTERFACE=stlink
 TARGET=stm32f4x
 TRACECLKIN=168000000
+RESET=none
 
 . ../../../../../scripts/swo-oocd.sh
