@@ -18,6 +18,7 @@ PLLCFGR:  fields merged: PLLM0..PLLM5 -> PLLM, PLLN0..PLLN8 -> PLLN,
           PLLP0..PLLP1 -> PLLP, PLLQ0..PLLQ3 -> PLLQ
           enums added: PLLSRC_HSI, PLLSRC_HSE
 BDCR:     enums added: RTCSEL_NONE..RTCSEL_HSE
+RTC.CR:   add missed BYPSHAD field
 -->
 
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
@@ -15169,6 +15170,13 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <name>FMT</name>
               <description>Hour format</description>
               <bitOffset>6</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>BYPSHAD</name>
+              <description>Bypass the shadow
+              registers</description>
+              <bitOffset>5</bitOffset>
               <bitWidth>1</bitWidth>
             </field>
             <field>

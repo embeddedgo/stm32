@@ -75,6 +75,7 @@ const (
 	WCKSEL  CR = 0x07 << 0  //+ Wakeup clock selection
 	TSEDGE  CR = 0x01 << 3  //+ Time-stamp event active edge
 	REFCKON CR = 0x01 << 4  //+ Reference clock detection enable (50 or 60 Hz)
+	BYPSHAD CR = 0x01 << 5  //+ Bypass the shadow registers
 	FMT     CR = 0x01 << 6  //+ Hour format
 	DCE     CR = 0x01 << 7  //+ Coarse digital calibration enable
 	ALRAE   CR = 0x01 << 8  //+ Alarm A enable
@@ -97,6 +98,7 @@ const (
 	WCKSELn  = 0
 	TSEDGEn  = 3
 	REFCKONn = 4
+	BYPSHADn = 5
 	FMTn     = 6
 	DCEn     = 7
 	ALRAEn   = 8

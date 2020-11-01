@@ -157,6 +157,10 @@ func (p *Periph) REFCKON() RMCR {
 	return RMCR{mmio.UM32{&p.CR.U32, uint32(REFCKON)}}
 }
 
+func (p *Periph) BYPSHAD() RMCR {
+	return RMCR{mmio.UM32{&p.CR.U32, uint32(BYPSHAD)}}
+}
+
 func (p *Periph) FMT() RMCR {
 	return RMCR{mmio.UM32{&p.CR.U32, uint32(FMT)}}
 }
