@@ -2,7 +2,7 @@
 
 INTERFACE=stlink
 TARGET=stm32l4x
-RESET='srst_only srst_nogate'
 TRACECLKIN=80000000
+RESET=srst_only
 
 . ../../../../../scripts/swo-oocd.sh
