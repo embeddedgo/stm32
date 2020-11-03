@@ -14,6 +14,7 @@ package rtcst
 import (
 	"embedded/rtos"
 	"runtime"
+	"time"
 	_ "unsafe"
 
 	"github.com/embeddedgo/stm32/hal/exti"
@@ -22,8 +23,6 @@ import (
 	"github.com/embeddedgo/stm32/p/rcc"
 	"github.com/embeddedgo/stm32/p/rtc"
 )
-
-var reset bool
 
 // RTC clock source
 const (
@@ -73,7 +72,6 @@ func Setup(clkSrc int8, divA, divS int) {
 
 	if RCC.BDCR.LoadBits(mask) != cfg {
 		// RTC not initialized
-		reset = true
 		RCC.BDCR.StoreBits(mask, cfg)
 
 		RTC.WPR.Store(0xCA)
@@ -103,9 +101,25 @@ func Setup(clkSrc int8, divA, divS int) {
 	rtos.SetSystemTimer(nanotime, setAlarm)
 }
 
-// HasReset reports whether the RTC reset has been detected by Setup function.
-func HasReset() bool {
-	return reset
+// Store stores a binary representation of t (without location) in a three
+// consecutive RTC backup registers starting from BKPR[n].
+func Store(t time.Time, n int) {
+	sec := t.Unix()
+	nsec := t.Nanosecond()
+	bkpr := &rtc.RTC().BKPR
+	bkpr[n].Store(rtc.BKPR(nsec))
+	bkpr[n+1].Store(rtc.BKPR(sec))
+	bkpr[n+2].Store(rtc.BKPR(sec >> 32))
+}
+
+// Load returns the local time corresponding to the binary representation of
+// time saved previously by Store in the three consecutive RTC backup registers
+// starting from BKPR[n].
+func Load(n int) time.Time {
+	bkpr := &rtc.RTC().BKPR
+	nsec := int64(bkpr[n].Load())
+	sec := int64(bkpr[n+1].Load()) | int64(bkpr[n+2].Load())<<32
+	return time.Unix(sec, nsec)
 }
 
 func nanotime() int64 {
