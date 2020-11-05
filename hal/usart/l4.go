@@ -28,6 +28,47 @@ type registers struct {
 	tdr  mmio.U32
 }
 
+const (
+	// cr1
+	ue    = 1 << 0
+	re    = 1 << 2
+	te    = 1 << 3
+	ps    = 1 << 9
+	pce   = 1 << 10
+	m0    = 1 << 12
+	over8 = 1 << 15
+	m1    = 1 << 28
+
+	// cr2
+	lbdie    = 1 << 6
+	stop0b5  = 1 << 12
+	stop2b   = 2 << 12
+	stop1b5  = 3 << 12
+	swap     = 1 << 15
+	rxinv    = 1 << 16
+	txinv    = 1 << 17
+	tainv    = 1 << 18
+	msbfirst = 1 << 19
+	abren    = 1 << 20
+
+	// cr3
+	eie    = 1 << 0
+	iren   = 1 << 1
+	irlp   = 1 << 2
+	hdsel  = 1 << 3
+	nack   = 1 << 4
+	scen   = 1 << 5
+	dmar   = 1 << 6
+	dmat   = 1 << 7
+	rtse   = 1 << 8
+	ctse   = 1 << 9
+	ctsie  = 1 << 10
+	onebit = 1 << 11
+
+	// rqr
+	rxfrq = 1 << 3
+)
+
 func busForAddr(p *Periph) bus.Bus {
 	switch uintptr(unsafe.Pointer(p)) {
 	default:
@@ -37,11 +78,17 @@ func busForAddr(p *Periph) bus.Bus {
 	}
 }
 
-const rxfrq = 1 << 3 // receive data flush request
-
 func clear(p *Periph, ev Event, err Error) {
 	p.icr.Store(uint32(ev) | uint32(err))
 	if ev&RxNotEmpty != 0 {
-		p.rqr.Store(rxfrq)
+		p.rqr.Store(rxfrq) // flush Rx data
 	}
+}
+
+func tdr(p *Periph) *mmio.U32 {
+	return &p.tdr
+}
+
+func rdr(p *Periph) *mmio.U32 {
+	return &p.rdr
 }
