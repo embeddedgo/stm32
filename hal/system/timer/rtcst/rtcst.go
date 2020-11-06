@@ -101,25 +101,26 @@ func Setup(clkSrc int8, divA, divS int) {
 	rtos.SetSystemTimer(nanotime, setAlarm)
 }
 
-// Store stores a binary representation of t (without location) in a three
-// consecutive RTC backup registers starting from BKPR[n].
-func Store(t time.Time, n int) {
+// Store stores a binary representation of t (without location) in the RTC
+// backup registers BKPR[i:i+n]. It returns the number of registesr used.
+func StoreTime(t time.Time, i int) (n int) {
 	sec := t.Unix()
 	nsec := t.Nanosecond()
 	bkpr := &rtc.RTC().BKPR
-	bkpr[n].Store(rtc.BKPR(nsec))
-	bkpr[n+1].Store(rtc.BKPR(sec))
-	bkpr[n+2].Store(rtc.BKPR(sec >> 32))
+	bkpr[i].Store(rtc.BKPR(nsec))
+	bkpr[i+1].Store(rtc.BKPR(sec))
+	bkpr[i+2].Store(rtc.BKPR(sec >> 32))
+	return 3
 }
 
-// Load returns the local time corresponding to the binary representation of
-// time saved previously by Store in the three consecutive RTC backup registers
-// starting from BKPR[n].
-func Load(n int) time.Time {
+// LoadTime reads a binray representation of time from the RTC backup registers
+// BKPR[i:i+n]. It returns the read time in time.Local location and the number
+// of register read.
+func LoadTime(i int) (t time.Time, n int) {
 	bkpr := &rtc.RTC().BKPR
-	nsec := int64(bkpr[n].Load())
-	sec := int64(bkpr[n+1].Load()) | int64(bkpr[n+2].Load())<<32
-	return time.Unix(sec, nsec)
+	nsec := int64(bkpr[i].Load())
+	sec := int64(bkpr[i+1].Load()) | int64(bkpr[i+2].Load())<<32
+	return time.Unix(sec, nsec), 3
 }
 
 func nanotime() int64 {
