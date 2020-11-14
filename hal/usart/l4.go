@@ -47,7 +47,7 @@ const (
 	swap     = 1 << 15
 	rxinv    = 1 << 16
 	txinv    = 1 << 17
-	tainv    = 1 << 18
+	datainv  = 1 << 18
 	msbfirst = 1 << 19
 	abren    = 1 << 20
 

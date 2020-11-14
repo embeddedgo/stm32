@@ -162,25 +162,16 @@ func (p *Periph) SetBaudrate(baud int) {
 	p.brr.Store(uint32(usartdiv))
 }
 
-// Enable enables p.
-func (p *Periph) Enable() {
-	p.cr1.SetBits(ue)
-}
-
-// Disable disables p at end of the current byte transfer.
-func (p *Periph) Disable() {
-	p.cr1.ClearBits(ue)
-}
-
 type Conf1 uint32
 
 const (
-	RxEna   Conf1 = re       // receiver enabled
-	TxEna   Conf1 = te       // transmiter enabled
-	ParEven Conf1 = pce      // parity control enabled: even
-	ParOdd  Conf1 = pce | ps // parity control enabled: odd
-	Word9b  Conf1 = m0       // 9 bit data word instead of 8 bit
-	Word7b  Conf1 = m1       // 7 bit data word instead of 8 bit
+	UE  Conf1 = ue  // UART enable
+	RE  Conf1 = re  // receiver enable
+	TE  Conf1 = te  // transmiter enable
+	PCE Conf1 = pce // parity control enable (default even)
+	OPS Conf1 = ps  // odd parity select
+	W9b Conf1 = m0  // 9 bit data word instead of 8 bit
+	W7b Conf1 = m1  // 7 bit data word instead of 8 bit
 )
 
 func (p *Periph) Conf1() Conf1 {
@@ -194,15 +185,15 @@ func (p *Periph) SetConf1(cfg Conf1) {
 type Conf2 uint32
 
 const (
-	Stop0b5  Conf2 = stop0b5  // use 0.5 stop bits insted of 1
-	Stop2b   Conf2 = stop2b   // use 2 stop bits instead of 1
-	Stop1b5  Conf2 = stop1b5  // use 1.5 stop bits instead of 1
-	SwapRxTx Conf2 = swap     // swap Tx/Rx pins
+	S05      Conf2 = stop0b5  // use 0.5 stop bits insted of 1
+	S2       Conf2 = stop2b   // use 2 stop bits instead of 1
+	S15      Conf2 = stop1b5  // use 1.5 stop bits instead of 1
+	Swap     Conf2 = swap     // swap Tx/Rx pins
 	RxInv    Conf2 = rxinv    // invert Rx signal
 	TxInv    Conf2 = txinv    // invert Tx signal
-	DataInv  Conf2 = tainv    // invert data bits for Tx and Rx
+	DataInv  Conf2 = datainv  // invert data bits for Tx and Rx
 	MSBFirst Conf2 = msbfirst // most significant bit first
-	AutoBR   Conf2 = abren    // automatic baud rate detection
+	ABREn    Conf2 = abren    // automatic baud rate detection
 )
 
 func (p *Periph) Conf2() Conf2 {
@@ -216,16 +207,16 @@ func (p *Periph) SetConf2(cfg Conf2) {
 type Conf3 uint32
 
 const (
-	IR         Conf3 = iren   // IrDA mode
-	IRLP       Conf3 = irlp   // IrDA low-power
-	HalfDuplex Conf3 = hdsel  // half-duplx operation
-	SCNACK     Conf3 = nack   // Smart Card auto-retry mode in case of NACK
-	SmartCard  Conf3 = scen   // Smart Card mode
-	RxDMA      Conf3 = dmar   // RxNotEmpty event generates DMA request
-	TxDMA      Conf3 = dmat   // TxEmpty event generates DMA request
-	RTS        Conf3 = rtse   // hardware RTS signal
-	CTS        Conf3 = ctse   // hardware CTS signal
-	OneBit     Conf3 = onebit // one-bit sampling (noise detection disabled)
+	IREn   Conf3 = iren   // IrDA mode
+	IRLP   Conf3 = irlp   // IrDA low-power
+	HDSEL  Conf3 = hdsel  // half-duplex operation
+	NACK   Conf3 = nack   // Smart Card auto-retry mode in case of NACK
+	SCEN   Conf3 = scen   // Smart Card mode
+	DMAR   Conf3 = dmar   // RxNotEmpty event generates DMA request
+	DMAT   Conf3 = dmat   // TxEmpty event generates DMA request
+	RTSE   Conf3 = rtse   // hardware RTS signal
+	CTSE   Conf3 = ctse   // hardware CTS signal
+	OneBit Conf3 = onebit // one-bit sampling (noise detection disabled)
 )
 
 func (p *Periph) Conf3() Conf3 {

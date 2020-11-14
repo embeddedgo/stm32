@@ -59,7 +59,7 @@ const (
 	swap     = 0
 	rxinv    = 0
 	txinv    = 0
-	tainv    = 0
+	datainv  = 0
 	msbfirst = 0
 	abren    = 0
 )
