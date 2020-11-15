@@ -94,9 +94,14 @@ func rdr(p *Periph) *mmio.U32 {
 	return &p.rdr
 }
 
-func altFunc(p *Periph) gpio.AltFunc {
+func altFunc(p *Periph, pin gpio.Pin) gpio.AltFunc {
 	switch p {
-	case USART1(), USART2(), USART3():
+	case USART1(), USART3():
+		return gpio.AF7
+	case USART2():
+		if pin == gpio.A().Pin(15) {
+			return gpio.AF3
+		}
 		return gpio.AF7
 	default: // UART4, UART5, LPUART1
 		return gpio.AF8

@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// +build stm32f407
+// +build stm32f215 stm32f407 stm32f412
 
 package usart
 
@@ -88,7 +88,7 @@ func rdr(p *Periph) *mmio.U32 {
 	return &p.dr
 }
 
-func altFunc(p *Periph) gpio.AltFunc {
+func altFunc(p *Periph, pin gpio.Pin) gpio.AltFunc {
 	switch p {
 	case USART1(), USART2(), USART3():
 		return gpio.AF7
