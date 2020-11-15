@@ -7,19 +7,20 @@ package main
 import (
 	"time"
 
-	"github.com/embeddedgo/stm32/devboard/nucleo-l476rg/board/leds"
 	"github.com/embeddedgo/stm32/hal/system/timer/rtcst"
+
+	_ "github.com/embeddedgo/stm32/devboard/nucleo-l476rg/board/init"
 )
 
 func main() {
-	br := 0 // index of the first RTC backup register used to save t0
-	t0 := rtcst.Load(br)
+	bi := 0 // index of the first RTC backup register used to save t0
+	t0, _ := rtcst.LoadTime(bi)
 	u0 := time.Unix(0, 0)
 	if t0.Equal(u0) {
 		// We have lost the time settings. Let's ask someone for the current
 		// time and adjust the internal "wall clock".
 		t0 = time.Set(askForTime())
-		rtcst.Store(t0, br)
+		rtcst.StoreTime(t0, bi)
 	} else {
 		// The RTC has survived the system reset. Let's adjust the wall clock
 		// based on the saved t0.
@@ -28,7 +29,6 @@ func main() {
 
 	for {
 		println(time.Now().String())
-		leds.User.Set(leds.User.Get() + 1)
 		time.Sleep(time.Second)
 	}
 }
