@@ -11,12 +11,9 @@ import (
 	_ "unsafe"
 
 	"github.com/embeddedgo/stm32/hal/dma"
-	"github.com/embeddedgo/stm32/hal/gpio"
 	"github.com/embeddedgo/stm32/hal/irq"
 	"github.com/embeddedgo/stm32/hal/spi"
 )
-
-const altFunc = gpio.AF5_SPI1
 
 func setupDriver() {
 	d := dma.DMA(2)

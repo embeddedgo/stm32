@@ -26,20 +26,20 @@ func main() {
 
 	// Configure SPI pins
 
-	spi2.UsePinMaster(sck, spi.SCK)
-	spi2.UsePinMaster(mosi, spi.MOSI)
-	spi2.UsePinMaster(miso, spi.MISO)
+	sd := spi2.Driver()
+	sd.UsePinMaster(sck, spi.SCK)
+	sd.UsePinMaster(mosi, spi.MOSI)
+	sd.UsePinMaster(miso, spi.MISO)
 
 	// Configure and enable SPI
 
-	d := spi2.Driver()
-	d.Setup(spi.Master|spi.SoftSS|spi.ISSHigh, 1e6)
-	d.SetWordSize(8)
-	d.Enable()
+	sd.Setup(spi.Master|spi.SoftSS|spi.ISSHigh, 1e6)
+	sd.SetWordSize(8)
+	sd.Enable()
 
 	var buf [40]byte
 	for i := 0; ; i++ {
-		d.WriteStringRead("Hello world!", buf[:])
+		sd.WriteStringRead("Hello world!", buf[:])
 		println(string(buf[:]))
 		time.Sleep(time.Second)
 	}

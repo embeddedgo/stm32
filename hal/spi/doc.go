@@ -1,3 +1,3 @@
-// Package spi provides access to the registers of the SPI peripheral.
-// It also provides a driver that implements synchronous I/O.
+// Package spi provides unified way to configure/use SPI peripherals.
+// It also provides a driver for synchronous I/O.
 package spi

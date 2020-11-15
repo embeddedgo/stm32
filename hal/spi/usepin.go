@@ -16,8 +16,8 @@ const (
 )
 
 // UsePinMaster is a helper function that can be used to configure GPIO pins as
-// required by SPI master device.
-func UsePinMaster(pin gpio.Pin, af gpio.AltFunc, sig Signal) {
+// required by SPI master device. Only certain pins can be used (see datasheet).
+func (d *Driver) UsePinMaster(pin gpio.Pin, sig Signal) {
 	var cfg gpio.Config
 	if sig == MISO {
 		cfg.Mode = gpio.AltIn
@@ -29,12 +29,12 @@ func UsePinMaster(pin gpio.Pin, af gpio.AltFunc, sig Signal) {
 		cfg.Speed = gpio.VeryHigh
 	}
 	pin.Setup(&cfg)
-	pin.SetAltFunc(af)
+	pin.SetAltFunc(altFunc(d.p, pin))
 }
 
 // UsePinSlave is a helper function that can be used to configure GPIO pins as
-// required by SPI slave device.
-func UsePinSlave(pin gpio.Pin, af gpio.AltFunc, sig Signal) {
+// required by SPI slave device. Only certain pins can be used (see datasheet).
+func (d *Driver) UsePinSlave(pin gpio.Pin, sig Signal) {
 	var cfg gpio.Config
 	if sig == MISO {
 		cfg.Mode = gpio.Alt
@@ -43,5 +43,5 @@ func UsePinSlave(pin gpio.Pin, af gpio.AltFunc, sig Signal) {
 		cfg.Mode = gpio.AltIn
 	}
 	pin.Setup(&cfg)
-	pin.SetAltFunc(af)
+	pin.SetAltFunc(altFunc(d.p, pin))
 }

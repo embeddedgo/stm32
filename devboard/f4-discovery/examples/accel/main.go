@@ -82,9 +82,10 @@ func main() {
 
 	// Configure SPI pins
 
-	spi1.UsePinMaster(sck, spi.SCK)
-	spi1.UsePinMaster(mosi, spi.MOSI)
-	spi1.UsePinMaster(miso, spi.MISO)
+	sd := spi1.Driver()
+	sd.UsePinMaster(sck, spi.SCK)
+	sd.UsePinMaster(mosi, spi.MOSI)
+	sd.UsePinMaster(miso, spi.MISO)
 
 	cs.Set() // CS active state is low
 	cs.Setup(&gpio.Config{Mode: gpio.Out, Speed: gpio.High})
@@ -99,14 +100,13 @@ func main() {
 
 	// Configure and enable SPI
 
-	d := spi1.Driver()
-	d.Setup(spi.Master|spi.CPOL1|spi.CPHA1|spi.SoftSS|spi.ISSHigh, 10e6)
-	d.SetWordSize(8)
-	d.Enable()
+	sd.Setup(spi.Master|spi.CPOL1|spi.CPHA1|spi.SoftSS|spi.ISSHigh, 10e6)
+	sd.SetWordSize(8)
+	sd.Enable()
 
 	// Reading acceleration data using DRDY interrupt
 
-	accel = NewLIS3DSH(d, cs, dri)
+	accel = NewLIS3DSH(sd, cs, dri)
 	accel.Init()
 	for {
 		show(accel.ReadXYZ())
