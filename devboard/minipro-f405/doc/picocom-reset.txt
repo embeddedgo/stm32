@@ -1,0 +1,28 @@
+How to reset MiniPro board using picocom
+
+1. Connect to the CH340 using picocom:
+
+    $ picocom -b 115200 /dev/ttyUSB0
+
+The initial state is both DTR and RTS signals are asserted (CH340_DTR# low, CH340_RTS# low) which means STM32_RESET# high, STM32_BOOT0 high.
+
+2. Deassert DTR signal (set CH340_DTR# high):
+
+    C-a C-t
+
+It asserts STM32 RESET signal (STM32_RESET# low, STM32_BOOT0 high). Another C-a C-t sequence will deassert STM32 RESET but with BOOT0 high so the STM32 will enter bootloader mode.
+
+3. Deassert RTS signal (set CH340_RTS# high):
+
+    C-a C-g
+
+It deasserts both STM32 RESET and BOOT0 signals (STM32_RESET# high, STM32_BOOT0 low). The STM32 starts executing your program.
+
+From now you can use C-a C-g sequence to reset STM32 without interrupting the connection to its USART1.
+
+
+Control codes (can be generated using a, g, t keys with Ctrl key pressed)
+
+C-a: 0x01, SOH (Start of Heading)
+C-g: 0x07, Bell
+C-t: 0x14, DC4 (Device Control Four)
