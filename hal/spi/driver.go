@@ -38,7 +38,7 @@ type Driver struct {
 }
 
 // NewDriver provides convenient way to create heap allocated Driver struct.
-func NewDriver(p *Periph, txdma, rxdma dma.Channel) *Driver {
+func NewDriver(p *Periph, rxdma, txdma dma.Channel) *Driver {
 	return &Driver{timeout: -1, p: p, rxDMA: rxdma, txDMA: txdma}
 }
 
@@ -85,12 +85,12 @@ func (d *Driver) TwoWireSetTx() {
 	d.p.EditConfig(Rx, Tx)
 }
 
-func (d *Driver) TxDMA() dma.Channel {
-	return d.txDMA
-}
-
 func (d *Driver) RxDMA() dma.Channel {
 	return d.rxDMA
+}
+
+func (d *Driver) TxDMA() dma.Channel {
+	return d.txDMA
 }
 
 func (d *Driver) DMAISR(ch dma.Channel) {

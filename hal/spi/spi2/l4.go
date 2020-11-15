@@ -21,7 +21,7 @@ const altFunc = gpio.AF5_SPI2
 func setupDriver() {
 	d := dma.DMA(1)
 	d.EnableClock(true)
-	driver = spi.NewDriver(spi.SPI2(), d.Channel(5, 1), d.Channel(4, 1))
+	driver = spi.NewDriver(spi.SPI2(), d.Channel(4, 1), d.Channel(5, 1))
 	irq.SPI2.Enable(rtos.IntPrioLow, 0)
 	irq.DMA1_CH4.Enable(rtos.IntPrioLow, 0)
 	irq.DMA1_CH5.Enable(rtos.IntPrioLow, 0)
