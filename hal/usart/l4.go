@@ -10,6 +10,7 @@ import (
 	"embedded/mmio"
 	"unsafe"
 
+	"github.com/embeddedgo/stm32/hal/gpio"
 	"github.com/embeddedgo/stm32/p/bus"
 	"github.com/embeddedgo/stm32/p/mmap"
 )
@@ -91,4 +92,13 @@ func tdr(p *Periph) *mmio.U32 {
 
 func rdr(p *Periph) *mmio.U32 {
 	return &p.rdr
+}
+
+func altFunc(p *Periph) gpio.AltFunc {
+	switch p {
+	case USART1(), USART2(), USART3():
+		return gpio.AF7
+	default: // UART4, UART5, LPUART1
+		return gpio.AF8
+	}
 }

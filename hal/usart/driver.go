@@ -35,22 +35,22 @@ type Driver struct {
 	timeoutRx time.Duration
 	timeoutTx time.Duration
 	p         *Periph
-	txDMA     dma.Channel
 	rxDMA     dma.Channel
+	txDMA     dma.Channel
 	rxBuf     []byte // Rx ring buffer for RxDMA.
-	txDone    rtos.Note
 	rxReady   rtos.Note
+	txDone    rtos.Note
 	rxp       int
 }
 
 // NewDriver returns a new driver for p.
-func NewDriver(p *Periph, txdma, rxdma dma.Channel) *Driver {
+func NewDriver(p *Periph, rxdma, txdma dma.Channel) *Driver {
 	return &Driver{
 		timeoutRx: -1,
 		timeoutTx: -1,
 		p:         p,
-		txDMA:     txdma,
 		rxDMA:     rxdma,
+		txDMA:     txdma,
 	}
 }
 
@@ -58,12 +58,12 @@ func (d *Driver) Periph() *Periph {
 	return d.p
 }
 
-func (d *Driver) TxDMA() dma.Channel {
-	return d.txDMA
-}
-
 func (d *Driver) RxDMA() dma.Channel {
 	return d.rxDMA
+}
+
+func (d *Driver) TxDMA() dma.Channel {
+	return d.txDMA
 }
 
 type Config uint32

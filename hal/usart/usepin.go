@@ -15,7 +15,9 @@ const (
 	RXD
 )
 
-func UsePin(pin gpio.Pin, af gpio.AltFunc, sig Signal) {
+// UsePin is a helper function that can be used to configure GPIO pins as
+// required by USART peripheral. Only some pins can be used (see datasheet).
+func (d *Driver) UsePin(pin gpio.Pin, sig Signal) {
 	var cfg gpio.Config
 	if sig <= TXD {
 		cfg.Mode = gpio.Alt
@@ -24,5 +26,5 @@ func UsePin(pin gpio.Pin, af gpio.AltFunc, sig Signal) {
 		cfg.Mode = gpio.AltIn
 	}
 	pin.Setup(&cfg)
-	pin.SetAltFunc(af)
+	pin.SetAltFunc(altFunc(d.p))
 }

@@ -143,6 +143,16 @@ func (p *Periph) DisableErrIRQ() {
 	p.cr3.ClearBits(eie)
 }
 
+// Baudrate returns the current UART speed [sym/s].
+func (p *Periph) Baudrate() int {
+	usartdiv := uint(p.brr.Load())
+	if p.cr1.LoadBits(over8) != 0 {
+		usartdiv = usartdiv&^7>>1 | usartdiv&7
+	}
+	pclk := uint(p.Bus().Clock())
+	return int((pclk + usartdiv/2) / usartdiv)
+}
+
 // SetBaudrate sets the UART speed [sym/s].
 func (p *Periph) SetBaudrate(baud int) {
 	br := uint(baud)
