@@ -5,6 +5,7 @@
 package usart
 
 import (
+	"embedded/rtos"
 	"runtime"
 	"unsafe"
 
@@ -33,6 +34,9 @@ func (d *Driver) DisableTx() {
 
 // WriteString works like Write but accepts string instead of byte slice.
 func (d *Driver) WriteString(s string) (int, error) {
+	if rtos.HandlerMode() {
+		return sysWrite(d, s)
+	}
 	ch := d.txDMA
 	ptr := *(*uintptr)(unsafe.Pointer(&s))
 	var n int
@@ -78,5 +82,33 @@ func (d *Driver) TxDMAISR() {
 	if err&^dma.ErrFIFO != 0 || ev&dma.Complete != 0 {
 		ch.DisableIRQ(dma.EvAll, dma.ErrAll)
 		d.txDone.Wakeup()
+	}
+}
+
+// sysWrite is called in handler mode. It is used by print and println mainly
+// to print a stack trace before system halt so it disables DMA to interrupt any
+// possible active transfer.
+func sysWrite(d *Driver, s string) (int, error) {
+	d.txDMA.DisableIRQ(dma.EvAll, dma.ErrAll)
+	d.txDMA.Disable()
+	for i := 0; i < len(s); i++ {
+		c := int(s[i])
+		if c == '\n' {
+			// convert "\n" to "\r\n"
+			waitTxEmpty(d.p)
+			d.p.Store('\r')
+		}
+		waitTxEmpty(d.p)
+		d.p.Store(c)
+	}
+	return len(s), nil
+}
+
+func waitTxEmpty(p *Periph) {
+	for {
+		ev, _ := p.Status()
+		if ev&TxEmpty != 0 {
+			break
+		}
 	}
 }
