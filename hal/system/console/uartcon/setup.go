@@ -21,6 +21,13 @@ func write(_ int, p []byte) int {
 	return n
 }
 
+func checkErr(err error) {
+	if err != nil {
+		println(err.Error())
+		os.Exit(1)
+	}
+}
+
 // Setup setpus an USART peripheral represented by d to work as system console.
 func Setup(d *usart.Driver, rx, tx gpio.Pin, conf usart.Config, baudrate int, lf string, name string) {
 	rxport := rx.Port()
@@ -35,8 +42,14 @@ func Setup(d *usart.Driver, rx, tx gpio.Pin, conf usart.Config, baudrate int, lf
 	d.EnableRx(nil)
 	uart = d
 	rtos.SetSystemWriter(write)
-	rtos.Mount("/dev/console", termfs.New(name, d, d, "\r\n"))
-	os.Stdin, _ = os.OpenFile("/dev/console", syscall.O_RDONLY, 0)
-	os.Stdout, _ = os.OpenFile("/dev/console", syscall.O_RDWR, 0)
+	con := termfs.New(name, d, d)
+	con.SetReplaceIn(termfs.CRtoLF)
+	con.SetReplaceOut(termfs.LFtoCRLF)
+	rtos.Mount(con, "/dev/console")
+	var err error
+	os.Stdin, err = os.OpenFile("/dev/console", syscall.O_RDONLY, 0)
+	checkErr(err)
+	os.Stdout, err = os.OpenFile("/dev/console", syscall.O_WRONLY, 0)
+	checkErr(err)
 	os.Stderr = os.Stdout
 }
