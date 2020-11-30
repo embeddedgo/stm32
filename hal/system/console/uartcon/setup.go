@@ -43,8 +43,7 @@ func Setup(d *usart.Driver, rx, tx gpio.Pin, conf usart.Config, baudrate int, lf
 	uart = d
 	rtos.SetSystemWriter(write)
 	con := termfs.New(name, d, d)
-	con.SetReplaceIn(termfs.CRtoLF)
-	con.SetReplaceOut(termfs.LFtoCRLF)
+	con.SetCharMap(termfs.InCRLF | termfs.OutLFCRLF)
 	rtos.Mount(con, "/dev/console")
 	var err error
 	os.Stdin, err = os.OpenFile("/dev/console", syscall.O_RDONLY, 0)

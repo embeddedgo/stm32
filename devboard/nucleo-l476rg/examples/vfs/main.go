@@ -41,22 +41,9 @@ func checkErr(err error) {
 func main() {
 	checkErr(rtos.Mount(ramfs.New(1024), "/tmp"))
 	lsmount()
-	buf := make([]byte, 64)
-	for {
-		n, err := os.Stdin.Read(buf)
-		checkErr(err)
-		fmt.Printf("read: \"%s\"\n", buf[:n])
-		for i, b := range buf[:n] {
-			fmt.Printf("%d: '%c' %#x\n", i, b, b)
-		}
-	}
 	scanner := bufio.NewScanner(os.Stdin)
 	for scanner.Scan() {
 		fmt.Println(scanner.Text())
 	}
 	checkErr(scanner.Err())
-	lsmount()
-	os.Open("/dev/console")
-	fmt.Println()
-	lsmount()
 }
