@@ -30,6 +30,7 @@ func checkErr(err error) {
 
 // Setup setpus an USART peripheral represented by d to work as system console.
 func Setup(d *usart.Driver, rx, tx gpio.Pin, conf usart.Config, baudrate int, lf string, name string) {
+	// Setup and enable the UART driver.
 	rxport := rx.Port()
 	rxport.EnableClock(true)
 	if txport := tx.Port(); txport != rxport {
@@ -40,10 +41,15 @@ func Setup(d *usart.Driver, rx, tx gpio.Pin, conf usart.Config, baudrate int, lf
 	d.Setup(conf, baudrate)
 	d.EnableTx()
 	d.EnableRx(nil)
+
+	// Set a system writer for print, println, panic, etc.
 	uart = d
 	rtos.SetSystemWriter(write)
+
+	// Setup a serial console (standard input and output).
 	con := termfs.New(name, d, d)
 	con.SetCharMap(termfs.InCRLF | termfs.OutLFCRLF)
+	con.SetEcho(true)
 	rtos.Mount(con, "/dev/console")
 	var err error
 	os.Stdin, err = os.OpenFile("/dev/console", syscall.O_RDONLY, 0)
