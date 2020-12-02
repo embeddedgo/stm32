@@ -68,6 +68,8 @@ func (d *Driver) DisableRx() (rxbuf []byte) {
 	return
 }
 
+// dmaPos returns the current Rx DMA position, tc extends the positon
+// information, e.g. pos=1 and tc=true is after pos=9 and tc=false.
 func dmaPos(d *Driver) (pos int, tc bool, e dma.Error) {
 	ev, err := d.rxDMA.Status()
 	if err != 0 {
@@ -122,7 +124,6 @@ again:
 		if n < len(buf) {
 			n += copy(buf[n:], d.rxBuf[:dmap])
 		}
-		d.rxDMA.Clear(dma.Complete, 0)
 	case dmap == d.rxp: // no new data in the ring buffer
 		// wait for RxNotEmpty event or error
 		d.rxReady.Clear()
@@ -147,6 +148,7 @@ again:
 	d.rxp += n
 	if d.rxp >= len(d.rxBuf) {
 		d.rxp -= len(d.rxBuf)
+		d.rxDMA.Clear(dma.Complete, 0)
 	}
 	return
 }
