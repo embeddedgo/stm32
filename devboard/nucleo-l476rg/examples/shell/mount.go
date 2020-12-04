@@ -14,7 +14,9 @@ import (
 	"github.com/embeddedgo/fs/ramfs"
 )
 
-const mountUsage = `mount FSTYPE(FSARGS) PREFIX
+const mountUsage = `
+mount
+mount FSTYPE(FSARGS) PREFIX
 
 Supported filesystems:
 

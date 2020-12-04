@@ -10,21 +10,28 @@ import (
 	"os"
 )
 
-const writeUsage = `write FILENAME
+const writeUsage = `
+create FILENAME
+write  FILENAME
 
-Write writes text from standard input to a file. Use CTRL+D to exit.
+Create/write reads text from the standard input and writes it to a file. Use
+CTRL+D to close the file and exit.
 `
 
 func write(args []string) {
 	if len(args) != 2 {
-		fmt.Print(writeUsage)
+		fmt.Fprint(os.Stdout, writeUsage)
 		return
 	}
-	f, err := os.OpenFile(args[1], os.O_CREATE, 0666)
+	flags := os.O_WRONLY
+	if args[0] == "create" {
+		flags |= os.O_CREATE | os.O_EXCL
+	}
+	f, err := os.OpenFile(args[1], flags, 0666)
 	if isErr(err) {
 		return
 	}
-	defer f.Close()
+	defer isErr(f.Close())
 	buf := make([]byte, 64)
 	for {
 		n, err1 := os.Stdin.Read(buf)

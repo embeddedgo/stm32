@@ -27,7 +27,7 @@ func main() {
 			fmt.Print("> ")
 		}
 		if err := scanner.Err(); err != nil {
-			fmt.Fprintln(os.Stderr, err)
+			fmt.Fprint(os.Stderr, err)
 		}
 	}
 }
@@ -43,9 +43,12 @@ var commands []command
 func init() {
 	// avoid initialization loop
 	commands = []command{
-		{"help", help, "print a list of available commands"},
-		{"mount", mount, "mount a file system or print all mount points"},
-		{"write", write, "write file"},
+		{"create", write, "create and write a file"},
+		{"help", help, "use help COMMAND for more information about a command"},
+		{"ls", ls, "list directory contents"},
+		{"mount", mount, "mount a file system or list mount points"},
+		{"read", read, "read file"},
+		{"write", write, "overwrite an existing file"},
 	}
 }
 
@@ -67,7 +70,6 @@ func help(args []string) {
 		cmd := &commands[i]
 		if len(args) == 2 {
 			if cmd.name == args[1] {
-				fmt.Printf("Usage: ")
 				cmd.f(nil)
 				return
 			}
