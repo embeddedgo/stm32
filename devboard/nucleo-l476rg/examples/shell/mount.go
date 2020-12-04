@@ -5,79 +5,29 @@
 package main
 
 import (
-	"bufio"
 	"embedded/rtos"
-	"errors"
 	"fmt"
 	"os"
 	"strconv"
 	"strings"
 
 	"github.com/embeddedgo/fs/ramfs"
-	_ "github.com/embeddedgo/stm32/devboard/nucleo-l476rg/board/init"
 )
 
-func main() {
-	for {
-		scanner := bufio.NewScanner(os.Stdin)
-		scanner.Buffer(nil, 256)
-		fmt.Print("Simple shell. Type help for more information.\n\n> ")
-		for scanner.Scan() {
-			args := strings.Fields(scanner.Text())
-			if len(args) >= 1 {
-				runCmd(args)
-			}
-			fmt.Print("> ")
-		}
-		if err := scanner.Err(); err != nil {
-			fmt.Fprintln(os.Stderr, err)
-		}
-	}
-}
+const mountUsage = `mount FSTYPE(FSARGS) PREFIX
 
-type command struct {
-	name  string
-	f     func(args []string)
-	brief string
-}
+Supported filesystems:
 
-var commands []command
-
-func init() {
-	// avoid initialization loop
-	commands = []command{
-		{"help", help, "print a list of available commands"},
-		{"mount", mount, "mount a file system or print all mount points"},
-	}
-}
-
-var ErrCmdNotFound = errors.New("command not found")
-
-func runCmd(args []string) {
-	for i := 0; i < len(commands); i++ {
-		cmd := &commands[i]
-		if cmd.name == args[0] {
-			cmd.f(args)
-			return
-		}
-	}
-	fmt.Fprint(os.Stderr, args[0], ": unknown command\n")
-}
-
-func help(_ []string) {
-	for i := 0; i < len(commands); i++ {
-		cmd := &commands[i]
-		fmt.Printf("%-8s %s\n", cmd.name, cmd.brief)
-	}
-}
+ramfs(SIZE)  filesystem in RAM
+`
 
 const head = `
-prefix                       fstype     fsname      opencnt      available used
+prefix                       fstype     fsname      opencnt available      used
 -------------------------------------------------------------------------------
 `
 
 func mount(args []string) {
-	if len(args) <= 1 {
+	if len(args) == 1 {
 		fmt.Printf(head)
 		for _, mp := range rtos.Mounts() {
 			_, _, used, max := mp.FS.Usage()
@@ -89,8 +39,8 @@ func mount(args []string) {
 		}
 		return
 	}
-	if args[1] == "-h" || len(args) != 3 {
-		fmt.Print(args[0], " FSTYPE(FSARGS) PREFIX\n")
+	if len(args) != 3 {
+		fmt.Print(mountUsage)
 		return
 	}
 	var fsargs []string
