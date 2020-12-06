@@ -19,9 +19,10 @@ import (
 )
 
 var (
-	src, dst [8000]uint32
-	ch       dma.Channel
-	tce      rtos.Note
+	src = make([]uint32, 4000)
+	dst = make([]uint32, 4000)
+	ch  dma.Channel
+	tce rtos.Note
 )
 
 func copyDMA(n int, mode dma.Mode) {

@@ -7,10 +7,53 @@
 package dma
 
 import (
+	"embedded/mmio"
 	"unsafe"
 
 	"github.com/embeddedgo/stm32/hal/internal"
-	"github.com/embeddedgo/stm32/p/dma"
+)
+
+type channel struct {
+	cr   mmio.U32
+	ndtr mmio.U32
+	par  mmio.U32
+	mar  mmio.U32
+	_    uint32
+}
+
+type registers struct {
+	isr   mmio.U32
+	ifcr  mmio.U32
+	c     [7]channel
+	_     [5]uint32
+	cselr mmio.U32
+}
+
+// cr
+const (
+	en   = 1 << 0
+	irqs = 7 << 1
+	mtp  = 1 << 4 // dir
+	circ = 1 << 5
+	incP = 1 << 6 // pinc
+	incM = 1 << 7 // minc
+	pl   = 3 << 12
+	mtm  = 1 << 14 // mem2mem
+)
+
+// unsupported
+const (
+	ft1  = 0
+	ft2  = 0
+	ft3  = 0
+	ft4  = 0
+	pb4  = 0
+	pb8  = 0
+	pb16 = 0
+	mb4  = 0
+	mb8  = 0
+	mb16 = 0
+	pfc  = 0
 )
 
 func (d *Controller) channel(cn, rn int) Channel {
@@ -21,17 +64,17 @@ func (d *Controller) channel(cn, rn int) Channel {
 	if uint(rn) > 15 {
 		panic("dma: bad request")
 	}
-	paddr := uintptr(unsafe.Pointer(&d.p.C[cn])) &^ 0x3ff
+	paddr := uintptr(unsafe.Pointer(&d.c[cn])) &^ 0x3ff
 	return Channel{paddr | uintptr(rn)<<4 | 8 | uintptr(cn)}
 }
 
-func (c Channel) periph() *dma.Periph {
-	return (*dma.Periph)(unsafe.Pointer(c.h &^ 0xff))
+func (c Channel) periph() *Controller {
+	return (*Controller)(unsafe.Pointer(c.h &^ 0xff))
 }
 
-func (c Channel) channel() *dma.RC {
-	addr := c.h&^0xf7 + c.h&7*unsafe.Sizeof(dma.RC{})
-	return (*dma.RC)(unsafe.Pointer(addr))
+func (c Channel) ch() *channel {
+	addr := c.h&^0xf7 + c.h&7*unsafe.Sizeof(channel{})
+	return (*channel)(unsafe.Pointer(addr))
 }
 
 func (c Channel) cnum() uintptr { return c.h & 7 }
@@ -49,67 +92,44 @@ const (
 )
 
 func (c Channel) status() byte {
-	isr := c.periph().ISR.Load()
+	isr := c.periph().isr.Load()
 	return byte(isr >> (c.cnum() * 4) & 0xf)
 }
 
 func (c Channel) clear(flags byte) {
-	mask := dma.IFCR(flags&0xf) << (c.cnum() * 4)
-	c.periph().IFCR.Store(mask)
+	mask := uint32(flags&0xf) << (c.cnum() * 4)
+	c.periph().ifcr.Store(mask)
 }
 
 func (c Channel) enable() {
-	c.channel().CR.SetBits(dma.EN)
+	c.ch().cr.SetBits(en)
 }
 
 func (c Channel) disable() {
-	c.channel().CR.ClearBits(dma.EN)
+	c.ch().cr.ClearBits(en)
 }
 
 func (c Channel) enabled() bool {
-	return c.channel().CR.LoadBits(dma.EN) != 0
+	return c.ch().cr.LoadBits(en) != 0
 }
 
 func (c Channel) irqEnabled() byte {
-	return byte(c.channel().CR.Load() & 0xe)
+	return byte(c.ch().cr.LoadBits(irqs))
 }
 
 func (c Channel) enableIRQ(flags byte) {
-	c.channel().CR.SetBits(dma.CR(flags) & 0xe)
+	c.ch().cr.SetBits(uint32(flags) & irqs)
 }
 
 func (c Channel) disableIRQ(flags byte) {
-	c.channel().CR.ClearBits(dma.CR(flags) & 0xe)
+	c.ch().cr.ClearBits(uint32(flags) & irqs)
 }
 
-const (
-	mtp = 1 << dma.DIRn
-	mtm = 1 << dma.MEM2MEMn
-
-	circ = 1 << dma.CIRCn
-	incP = 1 << dma.PINCn
-	incM = 1 << dma.MINCn
-
-	ft1 = 0
-	ft2 = 0
-	ft3 = 0
-	ft4 = 0
-
-	pb4  = 0
-	pb8  = 0
-	pb16 = 0
-	mb4  = 0
-	mb8  = 0
-	mb16 = 0
-
-	pfc = 0
-)
-
 func (c Channel) setup(m Mode) {
-	mask := dma.DIR | dma.MEM2MEM | dma.CIRC | dma.PINC | dma.MINC | dma.PL
-	c.channel().CR.StoreBits(mask, dma.CR(m))
+	const mask = mtp | mtm | circ | incP | incM | pl
+	c.ch().cr.StoreBits(mask, uint32(m))
 	n := 4 * c.cnum()
-	internal.AtomicStoreBits(&c.periph().CSELR.U32, 0xf<<n, c.rnum()<<n)
+	internal.AtomicStoreBits(&c.periph().cselr, 0xf<<n, c.rnum()<<n)
 }
 
 const (
@@ -119,37 +139,37 @@ const (
 )
 
 func (c Channel) setPrio(prio Prio) {
-	c.channel().CR.StoreBits(dma.PL, dma.CR(prio)<<dma.PLn)
+	c.ch().cr.StoreBits(pl, uint32(prio)<<12)
 }
 
 func (c Channel) prio() Prio {
-	return Prio(c.channel().CR.LoadBits(dma.PL) >> dma.PLn)
+	return Prio(c.ch().cr.LoadBits(pl) >> 12)
 }
 
 func (c Channel) wordSize() (p, m uintptr) {
-	ccr := uintptr(c.channel().CR.Load())
+	ccr := uintptr(c.ch().cr.Load())
 	p = 1 << (ccr >> 8 & 3)
 	m = 1 << (ccr >> 10 & 3)
 	return
 }
 
 func (c Channel) setWordSize(p, m uintptr) {
-	pm := dma.CR(p&6<<7 | m&6<<9)
-	c.channel().CR.StoreBits(0xf00, dma.CR(pm))
+	pm := p&6<<7 | m&6<<9
+	c.ch().cr.StoreBits(0xf00, uint32(pm))
 }
 
 func (c Channel) len() int {
-	return int(c.channel().NDTR.Load() & 0xFFFF)
+	return int(c.ch().ndtr.Load() & 0xFFFF)
 }
 
 func (c Channel) setLen(n int) {
-	c.channel().NDTR.Store(dma.NDTR(n) & 0xFFFF)
+	c.ch().ndtr.Store(uint32(n) & 0xFFFF)
 }
 
 func (c Channel) setAddrP(a unsafe.Pointer) {
-	c.channel().PAR.Store(dma.PAR(uintptr(a)))
+	c.ch().par.Store(uint32(uintptr(a)))
 }
 
 func (c Channel) setAddrM(a unsafe.Pointer) {
-	c.channel().MAR.Store(dma.MAR(uintptr(a)))
+	c.ch().mar.Store(uint32(uintptr(a)))
 }

@@ -4,14 +4,10 @@
 
 package dma
 
-import (
-	"unsafe"
-
-	"github.com/embeddedgo/stm32/p/dma"
-)
+import "unsafe"
 
 type Controller struct {
-	p dma.Periph
+	registers
 }
 
 // DMA returns n-th DMA controller. The first controller number is 1.
