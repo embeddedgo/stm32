@@ -68,17 +68,17 @@ func (d *Controller) channel(cn, rn int) Channel {
 	return Channel{paddr | uintptr(rn)<<4 | 8 | uintptr(cn)}
 }
 
-func (c Channel) periph() *Controller {
-	return (*Controller)(unsafe.Pointer(c.h &^ 0xff))
+func regs(c Channel) *registers {
+	return (*registers)(unsafe.Pointer(c.h &^ 0xff))
 }
 
-func (c Channel) ch() *channel {
+func ch(c Channel) *channel {
 	addr := c.h&^0xf7 + c.h&7*unsafe.Sizeof(channel{})
 	return (*channel)(unsafe.Pointer(addr))
 }
 
-func (c Channel) cnum() uintptr { return c.h & 7 }
-func (c Channel) rnum() uint32  { return uint32(c.h >> 4 & 15) }
+func cnum(c Channel) uintptr { return c.h & 7 }
+func rnum(c Channel) uint32  { return uint32(c.h >> 4 & 15) }
 
 const (
 	//gif = 1<<0  do not use global interrupt flag bacause of silicon bugs
@@ -92,44 +92,44 @@ const (
 )
 
 func (c Channel) status() byte {
-	isr := c.periph().isr.Load()
-	return byte(isr >> (c.cnum() * 4) & 0xf)
+	isr := regs(c).isr.Load()
+	return byte(isr >> (cnum(c) * 4) & 0xf)
 }
 
 func (c Channel) clear(flags byte) {
-	mask := uint32(flags&0xf) << (c.cnum() * 4)
-	c.periph().ifcr.Store(mask)
+	mask := uint32(flags&0xf) << (cnum(c) * 4)
+	regs(c).ifcr.Store(mask)
 }
 
 func (c Channel) enable() {
-	c.ch().cr.SetBits(en)
+	ch(c).cr.SetBits(en)
 }
 
 func (c Channel) disable() {
-	c.ch().cr.ClearBits(en)
+	ch(c).cr.ClearBits(en)
 }
 
 func (c Channel) enabled() bool {
-	return c.ch().cr.LoadBits(en) != 0
+	return ch(c).cr.LoadBits(en) != 0
 }
 
 func (c Channel) irqEnabled() byte {
-	return byte(c.ch().cr.LoadBits(irqs))
+	return byte(ch(c).cr.LoadBits(irqs))
 }
 
 func (c Channel) enableIRQ(flags byte) {
-	c.ch().cr.SetBits(uint32(flags) & irqs)
+	ch(c).cr.SetBits(uint32(flags) & irqs)
 }
 
 func (c Channel) disableIRQ(flags byte) {
-	c.ch().cr.ClearBits(uint32(flags) & irqs)
+	ch(c).cr.ClearBits(uint32(flags) & irqs)
 }
 
 func (c Channel) setup(m Mode) {
 	const mask = mtp | mtm | circ | incP | incM | pl
-	c.ch().cr.StoreBits(mask, uint32(m))
-	n := 4 * c.cnum()
-	internal.AtomicStoreBits(&c.periph().cselr, 0xf<<n, c.rnum()<<n)
+	ch(c).cr.StoreBits(mask, uint32(m))
+	n := 4 * cnum(c)
+	internal.AtomicStoreBits(&regs(c).cselr, 0xf<<n, rnum(c)<<n)
 }
 
 const (
@@ -139,15 +139,15 @@ const (
 )
 
 func (c Channel) setPrio(prio Prio) {
-	c.ch().cr.StoreBits(pl, uint32(prio)<<12)
+	ch(c).cr.StoreBits(pl, uint32(prio)<<12)
 }
 
 func (c Channel) prio() Prio {
-	return Prio(c.ch().cr.LoadBits(pl) >> 12)
+	return Prio(ch(c).cr.LoadBits(pl) >> 12)
 }
 
 func (c Channel) wordSize() (p, m uintptr) {
-	ccr := uintptr(c.ch().cr.Load())
+	ccr := uintptr(ch(c).cr.Load())
 	p = 1 << (ccr >> 8 & 3)
 	m = 1 << (ccr >> 10 & 3)
 	return
@@ -155,21 +155,21 @@ func (c Channel) wordSize() (p, m uintptr) {
 
 func (c Channel) setWordSize(p, m uintptr) {
 	pm := p&6<<7 | m&6<<9
-	c.ch().cr.StoreBits(0xf00, uint32(pm))
+	ch(c).cr.StoreBits(0xf00, uint32(pm))
 }
 
 func (c Channel) len() int {
-	return int(c.ch().ndtr.Load() & 0xFFFF)
+	return int(ch(c).ndtr.Load() & 0xFFFF)
 }
 
 func (c Channel) setLen(n int) {
-	c.ch().ndtr.Store(uint32(n) & 0xFFFF)
+	ch(c).ndtr.Store(uint32(n) & 0xFFFF)
 }
 
 func (c Channel) setAddrP(a unsafe.Pointer) {
-	c.ch().par.Store(uint32(uintptr(a)))
+	ch(c).par.Store(uint32(uintptr(a)))
 }
 
 func (c Channel) setAddrM(a unsafe.Pointer) {
-	c.ch().mar.Store(uint32(uintptr(a)))
+	ch(c).mar.Store(uint32(uintptr(a)))
 }
