@@ -65,8 +65,8 @@ import (
 
 	"github.com/embeddedgo/stm32/p/bus"
 	"github.com/embeddedgo/stm32/p/flash"
-	"github.com/embeddedgo/stm32/p/rcc"
 	"github.com/embeddedgo/stm32/p/pwr"
+	"github.com/embeddedgo/stm32/p/rcc"
 )
 
 // SetupPLL setups MCU for best performance (prefetch on, I/D cache on, minimum
@@ -103,8 +103,8 @@ func SetupPLL(clksrc, M, N, P, Q, R int) {
 	RCC.CIER.Store(0) // Disable clock interrupts.
 
 	// Reset RCC clock configuration.
-	RCC.MSION().Set()
-	for RCC.MSIRDY().Load() == 0 {
+	RCC.CR.SetBits(rcc.MSION)
+	for RCC.CR.LoadBits(rcc.MSIRDY) == 0 {
 		runtime.Gosched()
 	}
 	RCC.CR.Store(6<<rcc.MSIRANGEn | rcc.MSIRGSEL | rcc.MSION)
@@ -133,14 +133,14 @@ func SetupPLL(clksrc, M, N, P, Q, R int) {
 	case -4, -8, -16, -24, -32, -48:
 		osc = uint(-clksrc)
 	case 0:
-		RCC.HSION().Set()
+		RCC.CR.SetBits(rcc.HSION)
 		osc = 16
 	default:
 		if clksrc < 4 || clksrc > 48 {
 			panic("bad clksrc")
 		}
 		// HSE needs milliseconds to stabilize, so enable it now.
-		RCC.HSEON().Set()
+		RCC.CR.SetBits(rcc.HSEON)
 		osc = uint(clksrc)
 	}
 
@@ -188,8 +188,8 @@ func SetupPLL(clksrc, M, N, P, Q, R int) {
 			latency = 3
 		}
 	}
-	RCC.PWREN().Set()
-	RCC.PWREN().Load()
+	RCC.APB1ENR1.SetBits(rcc.PWREN)
+	RCC.APB1ENR1.Load()
 	PWR := pwr.PWR()
 	PWR.CR1.Store(vos << pwr.VOSn)
 	flash.FLASH().ACR.Store(flash.DCEN | flash.ICEN | flash.PRFTEN | latency)
@@ -240,19 +240,19 @@ func SetupPLL(clksrc, M, N, P, Q, R int) {
 	bus.APB2.SetClock(int64(apb2clk))
 
 	// Setup PLL.
-	for PWR.VOSF().Load() != 0 {
+	for PWR.SR2.LoadBits(pwr.VOSF) != 0 {
 		runtime.Gosched()
 	}
-	RCC.PWREN().Clear()
+	RCC.APB1ENR1.ClearBits(rcc.PWREN)
 	var src rcc.PLLCFGR
 	if clksrc == 0 {
 		src = rcc.PLLSRC_HSI
-		for RCC.HSIRDY().Load() == 0 {
+		for RCC.CR.LoadBits(rcc.HSIRDY) == 0 {
 			runtime.Gosched()
 		}
 	} else if clksrc > 0 {
 		src = rcc.PLLSRC_HSE
-		for RCC.HSERDY().Load() == 0 {
+		for RCC.CR.LoadBits(rcc.HSERDY) == 0 {
 			runtime.Gosched()
 		}
 	} else {
@@ -267,8 +267,8 @@ func SetupPLL(clksrc, M, N, P, Q, R int) {
 			msirange = rcc.CR(-clksrc/8 + 6)
 		}
 		if msirange != 0 {
-			RCC.MSIRANGE().Store(msirange << rcc.MSIRANGEn)
-			for RCC.MSIRDY().Load() == 0 {
+			RCC.CR.StoreBits(rcc.MSIRANGE, msirange<<rcc.MSIRANGEn)
+			for RCC.CR.LoadBits(rcc.MSIRDY) == 0 {
 				runtime.Gosched()
 			}
 		}
@@ -285,18 +285,18 @@ func SetupPLL(clksrc, M, N, P, Q, R int) {
 	}
 	mnpqr |= rcc.PLLREN | rcc.PLLCFGR(R/2-1)
 	RCC.PLLCFGR.Store(mnpqr | src)
-	RCC.PLLON().Set()
-	for RCC.PLLRDY().Load() == 0 {
+	RCC.CR.SetBits(rcc.PLLON)
+	for RCC.CR.LoadBits(rcc.PLLRDY) == 0 {
 		runtime.Gosched()
 	}
 
 	// Set system clock source to PLL.
 	RCC.CFGR.Store(cfgr | rcc.SW_PLL)
-	for RCC.SWS().Load() != rcc.SWS_PLL {
+	for RCC.CFGR.LoadBits(rcc.SWS) != rcc.SWS_PLL {
 		runtime.Gosched()
 	}
 	if osc >= 0 {
-		RCC.MSION().Clear()
+		RCC.CR.ClearBits(rcc.MSION)
 	}
 }
 
@@ -315,8 +315,8 @@ func SetupMSI(msikHz int) {
 	RCC := rcc.RCC()
 
 	// Reset RCC clock configuration.
-	RCC.MSION().Set()
-	for RCC.MSIRDY().Load() == 0 {
+	RCC.CR.SetBits(rcc.MSION)
+	for RCC.CR.LoadBits(rcc.MSIRDY) == 0 {
 		runtime.Gosched()
 	}
 	RCC.CR.Store(6<<rcc.MSIRANGEn | rcc.MSIRGSEL | rcc.MSION)
@@ -372,7 +372,7 @@ func SetupMSI(msikHz int) {
 		}
 	}
 
-	RCC.PWREN().Set()
+	RCC.APB1ENR1.SetBits(rcc.PWREN)
 	PWR := pwr.PWR()
 	PWR.CR1.Store(vos << pwr.VOSn)
 	flash.FLASH().ACR.Store(flash.DCEN | flash.ICEN | flash.PRFTEN | latency)
@@ -424,10 +424,10 @@ func SetupMSI(msikHz int) {
 	bus.APB2.SetClock(int64(apb2clk))
 
 	// Setup MSI freq.
-	for PWR.VOSF().Load() != 0 {
+	for PWR.SR2.LoadBits(pwr.VOSF) != 0 {
 	}
-	RCC.PWREN().Clear()
+	RCC.APB1ENR1.ClearBits(rcc.PWREN)
 	if msirange != 6 {
-		RCC.MSIRANGE().Store(msirange << rcc.MSIRANGEn)
+		RCC.CR.StoreBits(rcc.MSIRANGE, msirange<<rcc.MSIRANGEn)
 	}
 }

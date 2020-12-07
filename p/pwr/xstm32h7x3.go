@@ -47,35 +47,35 @@ type RMCR1 struct{ mmio.UM32 }
 func (rm RMCR1) Load() CR1   { return CR1(rm.UM32.Load()) }
 func (rm RMCR1) Store(b CR1) { rm.UM32.Store(uint32(b)) }
 
-func (p *Periph) LPDS() RMCR1 {
+func LPDS_(p *Periph) RMCR1 {
 	return RMCR1{mmio.UM32{&p.CR1.U32, uint32(LPDS)}}
 }
 
-func (p *Periph) PVDE() RMCR1 {
+func PVDE_(p *Periph) RMCR1 {
 	return RMCR1{mmio.UM32{&p.CR1.U32, uint32(PVDE)}}
 }
 
-func (p *Periph) PLS() RMCR1 {
+func PLS_(p *Periph) RMCR1 {
 	return RMCR1{mmio.UM32{&p.CR1.U32, uint32(PLS)}}
 }
 
-func (p *Periph) DBP() RMCR1 {
+func DBP_(p *Periph) RMCR1 {
 	return RMCR1{mmio.UM32{&p.CR1.U32, uint32(DBP)}}
 }
 
-func (p *Periph) FLPS() RMCR1 {
+func FLPS_(p *Periph) RMCR1 {
 	return RMCR1{mmio.UM32{&p.CR1.U32, uint32(FLPS)}}
 }
 
-func (p *Periph) SVOS() RMCR1 {
+func SVOS_(p *Periph) RMCR1 {
 	return RMCR1{mmio.UM32{&p.CR1.U32, uint32(SVOS)}}
 }
 
-func (p *Periph) AVDEN() RMCR1 {
+func AVDEN_(p *Periph) RMCR1 {
 	return RMCR1{mmio.UM32{&p.CR1.U32, uint32(AVDEN)}}
 }
 
-func (p *Periph) ALS() RMCR1 {
+func ALS_(p *Periph) RMCR1 {
 	return RMCR1{mmio.UM32{&p.CR1.U32, uint32(ALS)}}
 }
 
@@ -95,19 +95,19 @@ type RMCSR1 struct{ mmio.UM32 }
 func (rm RMCSR1) Load() CSR1   { return CSR1(rm.UM32.Load()) }
 func (rm RMCSR1) Store(b CSR1) { rm.UM32.Store(uint32(b)) }
 
-func (p *Periph) PVDO() RMCSR1 {
+func PVDO_(p *Periph) RMCSR1 {
 	return RMCSR1{mmio.UM32{&p.CSR1.U32, uint32(PVDO)}}
 }
 
-func (p *Periph) ACTVOSRDY() RMCSR1 {
+func ACTVOSRDY_(p *Periph) RMCSR1 {
 	return RMCSR1{mmio.UM32{&p.CSR1.U32, uint32(ACTVOSRDY)}}
 }
 
-func (p *Periph) ACTVOS() RMCSR1 {
+func ACTVOS_(p *Periph) RMCSR1 {
 	return RMCSR1{mmio.UM32{&p.CSR1.U32, uint32(ACTVOS)}}
 }
 
-func (p *Periph) AVDO() RMCSR1 {
+func AVDO_(p *Periph) RMCSR1 {
 	return RMCSR1{mmio.UM32{&p.CSR1.U32, uint32(AVDO)}}
 }
 
@@ -127,31 +127,31 @@ type RMCR2 struct{ mmio.UM32 }
 func (rm RMCR2) Load() CR2   { return CR2(rm.UM32.Load()) }
 func (rm RMCR2) Store(b CR2) { rm.UM32.Store(uint32(b)) }
 
-func (p *Periph) BREN() RMCR2 {
+func BREN_(p *Periph) RMCR2 {
 	return RMCR2{mmio.UM32{&p.CR2.U32, uint32(BREN)}}
 }
 
-func (p *Periph) MONEN() RMCR2 {
+func MONEN_(p *Periph) RMCR2 {
 	return RMCR2{mmio.UM32{&p.CR2.U32, uint32(MONEN)}}
 }
 
-func (p *Periph) BRRDY() RMCR2 {
+func BRRDY_(p *Periph) RMCR2 {
 	return RMCR2{mmio.UM32{&p.CR2.U32, uint32(BRRDY)}}
 }
 
-func (p *Periph) VBATL() RMCR2 {
+func VBATL_(p *Periph) RMCR2 {
 	return RMCR2{mmio.UM32{&p.CR2.U32, uint32(VBATL)}}
 }
 
-func (p *Periph) VBATH() RMCR2 {
+func VBATH_(p *Periph) RMCR2 {
 	return RMCR2{mmio.UM32{&p.CR2.U32, uint32(VBATH)}}
 }
 
-func (p *Periph) TEMPL() RMCR2 {
+func TEMPL_(p *Periph) RMCR2 {
 	return RMCR2{mmio.UM32{&p.CR2.U32, uint32(TEMPL)}}
 }
 
-func (p *Periph) TEMPH() RMCR2 {
+func TEMPH_(p *Periph) RMCR2 {
 	return RMCR2{mmio.UM32{&p.CR2.U32, uint32(TEMPH)}}
 }
 
@@ -171,35 +171,35 @@ type RMCR3 struct{ mmio.UM32 }
 func (rm RMCR3) Load() CR3   { return CR3(rm.UM32.Load()) }
 func (rm RMCR3) Store(b CR3) { rm.UM32.Store(uint32(b)) }
 
-func (p *Periph) BYPASS() RMCR3 {
+func BYPASS_(p *Periph) RMCR3 {
 	return RMCR3{mmio.UM32{&p.CR3.U32, uint32(BYPASS)}}
 }
 
-func (p *Periph) LDOEN() RMCR3 {
+func LDOEN_(p *Periph) RMCR3 {
 	return RMCR3{mmio.UM32{&p.CR3.U32, uint32(LDOEN)}}
 }
 
-func (p *Periph) SCUEN() RMCR3 {
+func SCUEN_(p *Periph) RMCR3 {
 	return RMCR3{mmio.UM32{&p.CR3.U32, uint32(SCUEN)}}
 }
 
-func (p *Periph) VBE() RMCR3 {
+func VBE_(p *Periph) RMCR3 {
 	return RMCR3{mmio.UM32{&p.CR3.U32, uint32(VBE)}}
 }
 
-func (p *Periph) VBRS() RMCR3 {
+func VBRS_(p *Periph) RMCR3 {
 	return RMCR3{mmio.UM32{&p.CR3.U32, uint32(VBRS)}}
 }
 
-func (p *Periph) USB33DEN() RMCR3 {
+func USB33DEN_(p *Periph) RMCR3 {
 	return RMCR3{mmio.UM32{&p.CR3.U32, uint32(USB33DEN)}}
 }
 
-func (p *Periph) USBREGEN() RMCR3 {
+func USBREGEN_(p *Periph) RMCR3 {
 	return RMCR3{mmio.UM32{&p.CR3.U32, uint32(USBREGEN)}}
 }
 
-func (p *Periph) USB33RDY() RMCR3 {
+func USB33RDY_(p *Periph) RMCR3 {
 	return RMCR3{mmio.UM32{&p.CR3.U32, uint32(USB33RDY)}}
 }
 
@@ -219,39 +219,39 @@ type RMCPUCR struct{ mmio.UM32 }
 func (rm RMCPUCR) Load() CPUCR   { return CPUCR(rm.UM32.Load()) }
 func (rm RMCPUCR) Store(b CPUCR) { rm.UM32.Store(uint32(b)) }
 
-func (p *Periph) PDDS_D1() RMCPUCR {
+func PDDS_D1_(p *Periph) RMCPUCR {
 	return RMCPUCR{mmio.UM32{&p.CPUCR.U32, uint32(PDDS_D1)}}
 }
 
-func (p *Periph) PDDS_D2() RMCPUCR {
+func PDDS_D2_(p *Periph) RMCPUCR {
 	return RMCPUCR{mmio.UM32{&p.CPUCR.U32, uint32(PDDS_D2)}}
 }
 
-func (p *Periph) PDDS_D3() RMCPUCR {
+func PDDS_D3_(p *Periph) RMCPUCR {
 	return RMCPUCR{mmio.UM32{&p.CPUCR.U32, uint32(PDDS_D3)}}
 }
 
-func (p *Periph) STOPF() RMCPUCR {
+func STOPF_(p *Periph) RMCPUCR {
 	return RMCPUCR{mmio.UM32{&p.CPUCR.U32, uint32(STOPF)}}
 }
 
-func (p *Periph) SBF() RMCPUCR {
+func SBF_(p *Periph) RMCPUCR {
 	return RMCPUCR{mmio.UM32{&p.CPUCR.U32, uint32(SBF)}}
 }
 
-func (p *Periph) SBF_D1() RMCPUCR {
+func SBF_D1_(p *Periph) RMCPUCR {
 	return RMCPUCR{mmio.UM32{&p.CPUCR.U32, uint32(SBF_D1)}}
 }
 
-func (p *Periph) SBF_D2() RMCPUCR {
+func SBF_D2_(p *Periph) RMCPUCR {
 	return RMCPUCR{mmio.UM32{&p.CPUCR.U32, uint32(SBF_D2)}}
 }
 
-func (p *Periph) CSSF() RMCPUCR {
+func CSSF_(p *Periph) RMCPUCR {
 	return RMCPUCR{mmio.UM32{&p.CPUCR.U32, uint32(CSSF)}}
 }
 
-func (p *Periph) RUN_D3() RMCPUCR {
+func RUN_D3_(p *Periph) RMCPUCR {
 	return RMCPUCR{mmio.UM32{&p.CPUCR.U32, uint32(RUN_D3)}}
 }
 
@@ -271,11 +271,11 @@ type RMD3CR struct{ mmio.UM32 }
 func (rm RMD3CR) Load() D3CR   { return D3CR(rm.UM32.Load()) }
 func (rm RMD3CR) Store(b D3CR) { rm.UM32.Store(uint32(b)) }
 
-func (p *Periph) VOSRDY() RMD3CR {
+func VOSRDY_(p *Periph) RMD3CR {
 	return RMD3CR{mmio.UM32{&p.D3CR.U32, uint32(VOSRDY)}}
 }
 
-func (p *Periph) VOS() RMD3CR {
+func VOS_(p *Periph) RMD3CR {
 	return RMD3CR{mmio.UM32{&p.D3CR.U32, uint32(VOS)}}
 }
 
@@ -295,7 +295,7 @@ type RMWKUPCR struct{ mmio.UM32 }
 func (rm RMWKUPCR) Load() WKUPCR   { return WKUPCR(rm.UM32.Load()) }
 func (rm RMWKUPCR) Store(b WKUPCR) { rm.UM32.Store(uint32(b)) }
 
-func (p *Periph) WKUPC() RMWKUPCR {
+func WKUPC_(p *Periph) RMWKUPCR {
 	return RMWKUPCR{mmio.UM32{&p.WKUPCR.U32, uint32(WKUPC)}}
 }
 
@@ -315,27 +315,27 @@ type RMWKUPFR struct{ mmio.UM32 }
 func (rm RMWKUPFR) Load() WKUPFR   { return WKUPFR(rm.UM32.Load()) }
 func (rm RMWKUPFR) Store(b WKUPFR) { rm.UM32.Store(uint32(b)) }
 
-func (p *Periph) WKUPF1() RMWKUPFR {
+func WKUPF1_(p *Periph) RMWKUPFR {
 	return RMWKUPFR{mmio.UM32{&p.WKUPFR.U32, uint32(WKUPF1)}}
 }
 
-func (p *Periph) WKUPF2() RMWKUPFR {
+func WKUPF2_(p *Periph) RMWKUPFR {
 	return RMWKUPFR{mmio.UM32{&p.WKUPFR.U32, uint32(WKUPF2)}}
 }
 
-func (p *Periph) WKUPF3() RMWKUPFR {
+func WKUPF3_(p *Periph) RMWKUPFR {
 	return RMWKUPFR{mmio.UM32{&p.WKUPFR.U32, uint32(WKUPF3)}}
 }
 
-func (p *Periph) WKUPF4() RMWKUPFR {
+func WKUPF4_(p *Periph) RMWKUPFR {
 	return RMWKUPFR{mmio.UM32{&p.WKUPFR.U32, uint32(WKUPF4)}}
 }
 
-func (p *Periph) WKUPF5() RMWKUPFR {
+func WKUPF5_(p *Periph) RMWKUPFR {
 	return RMWKUPFR{mmio.UM32{&p.WKUPFR.U32, uint32(WKUPF5)}}
 }
 
-func (p *Periph) WKUPF6() RMWKUPFR {
+func WKUPF6_(p *Periph) RMWKUPFR {
 	return RMWKUPFR{mmio.UM32{&p.WKUPFR.U32, uint32(WKUPF6)}}
 }
 
@@ -355,74 +355,74 @@ type RMWKUPEPR struct{ mmio.UM32 }
 func (rm RMWKUPEPR) Load() WKUPEPR   { return WKUPEPR(rm.UM32.Load()) }
 func (rm RMWKUPEPR) Store(b WKUPEPR) { rm.UM32.Store(uint32(b)) }
 
-func (p *Periph) WKUPEN1() RMWKUPEPR {
+func WKUPEN1_(p *Periph) RMWKUPEPR {
 	return RMWKUPEPR{mmio.UM32{&p.WKUPEPR.U32, uint32(WKUPEN1)}}
 }
 
-func (p *Periph) WKUPEN2() RMWKUPEPR {
+func WKUPEN2_(p *Periph) RMWKUPEPR {
 	return RMWKUPEPR{mmio.UM32{&p.WKUPEPR.U32, uint32(WKUPEN2)}}
 }
 
-func (p *Periph) WKUPEN3() RMWKUPEPR {
+func WKUPEN3_(p *Periph) RMWKUPEPR {
 	return RMWKUPEPR{mmio.UM32{&p.WKUPEPR.U32, uint32(WKUPEN3)}}
 }
 
-func (p *Periph) WKUPEN4() RMWKUPEPR {
+func WKUPEN4_(p *Periph) RMWKUPEPR {
 	return RMWKUPEPR{mmio.UM32{&p.WKUPEPR.U32, uint32(WKUPEN4)}}
 }
 
-func (p *Periph) WKUPEN5() RMWKUPEPR {
+func WKUPEN5_(p *Periph) RMWKUPEPR {
 	return RMWKUPEPR{mmio.UM32{&p.WKUPEPR.U32, uint32(WKUPEN5)}}
 }
 
-func (p *Periph) WKUPEN6() RMWKUPEPR {
+func WKUPEN6_(p *Periph) RMWKUPEPR {
 	return RMWKUPEPR{mmio.UM32{&p.WKUPEPR.U32, uint32(WKUPEN6)}}
 }
 
-func (p *Periph) WKUPP1() RMWKUPEPR {
+func WKUPP1_(p *Periph) RMWKUPEPR {
 	return RMWKUPEPR{mmio.UM32{&p.WKUPEPR.U32, uint32(WKUPP1)}}
 }
 
-func (p *Periph) WKUPP2() RMWKUPEPR {
+func WKUPP2_(p *Periph) RMWKUPEPR {
 	return RMWKUPEPR{mmio.UM32{&p.WKUPEPR.U32, uint32(WKUPP2)}}
 }
 
-func (p *Periph) WKUPP3() RMWKUPEPR {
+func WKUPP3_(p *Periph) RMWKUPEPR {
 	return RMWKUPEPR{mmio.UM32{&p.WKUPEPR.U32, uint32(WKUPP3)}}
 }
 
-func (p *Periph) WKUPP4() RMWKUPEPR {
+func WKUPP4_(p *Periph) RMWKUPEPR {
 	return RMWKUPEPR{mmio.UM32{&p.WKUPEPR.U32, uint32(WKUPP4)}}
 }
 
-func (p *Periph) WKUPP5() RMWKUPEPR {
+func WKUPP5_(p *Periph) RMWKUPEPR {
 	return RMWKUPEPR{mmio.UM32{&p.WKUPEPR.U32, uint32(WKUPP5)}}
 }
 
-func (p *Periph) WKUPP6() RMWKUPEPR {
+func WKUPP6_(p *Periph) RMWKUPEPR {
 	return RMWKUPEPR{mmio.UM32{&p.WKUPEPR.U32, uint32(WKUPP6)}}
 }
 
-func (p *Periph) WKUPPUPD1() RMWKUPEPR {
+func WKUPPUPD1_(p *Periph) RMWKUPEPR {
 	return RMWKUPEPR{mmio.UM32{&p.WKUPEPR.U32, uint32(WKUPPUPD1)}}
 }
 
-func (p *Periph) WKUPPUPD2() RMWKUPEPR {
+func WKUPPUPD2_(p *Periph) RMWKUPEPR {
 	return RMWKUPEPR{mmio.UM32{&p.WKUPEPR.U32, uint32(WKUPPUPD2)}}
 }
 
-func (p *Periph) WKUPPUPD3() RMWKUPEPR {
+func WKUPPUPD3_(p *Periph) RMWKUPEPR {
 	return RMWKUPEPR{mmio.UM32{&p.WKUPEPR.U32, uint32(WKUPPUPD3)}}
 }
 
-func (p *Periph) WKUPPUPD4() RMWKUPEPR {
+func WKUPPUPD4_(p *Periph) RMWKUPEPR {
 	return RMWKUPEPR{mmio.UM32{&p.WKUPEPR.U32, uint32(WKUPPUPD4)}}
 }
 
-func (p *Periph) WKUPPUPD5() RMWKUPEPR {
+func WKUPPUPD5_(p *Periph) RMWKUPEPR {
 	return RMWKUPEPR{mmio.UM32{&p.WKUPEPR.U32, uint32(WKUPPUPD5)}}
 }
 
-func (p *Periph) WKUPPUPD6() RMWKUPEPR {
+func WKUPPUPD6_(p *Periph) RMWKUPEPR {
 	return RMWKUPEPR{mmio.UM32{&p.WKUPEPR.U32, uint32(WKUPPUPD6)}}
 }

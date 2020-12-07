@@ -43,43 +43,43 @@ type RMCR struct{ mmio.UM32 }
 func (rm RMCR) Load() CR   { return CR(rm.UM32.Load()) }
 func (rm RMCR) Store(b CR) { rm.UM32.Store(uint32(b)) }
 
-func (p *Periph) LPDS() RMCR {
+func LPDS_(p *Periph) RMCR {
 	return RMCR{mmio.UM32{&p.CR.U32, uint32(LPDS)}}
 }
 
-func (p *Periph) PDDS() RMCR {
+func PDDS_(p *Periph) RMCR {
 	return RMCR{mmio.UM32{&p.CR.U32, uint32(PDDS)}}
 }
 
-func (p *Periph) CWUF() RMCR {
+func CWUF_(p *Periph) RMCR {
 	return RMCR{mmio.UM32{&p.CR.U32, uint32(CWUF)}}
 }
 
-func (p *Periph) CSBF() RMCR {
+func CSBF_(p *Periph) RMCR {
 	return RMCR{mmio.UM32{&p.CR.U32, uint32(CSBF)}}
 }
 
-func (p *Periph) PVDE() RMCR {
+func PVDE_(p *Periph) RMCR {
 	return RMCR{mmio.UM32{&p.CR.U32, uint32(PVDE)}}
 }
 
-func (p *Periph) PLS() RMCR {
+func PLS_(p *Periph) RMCR {
 	return RMCR{mmio.UM32{&p.CR.U32, uint32(PLS)}}
 }
 
-func (p *Periph) DBP() RMCR {
+func DBP_(p *Periph) RMCR {
 	return RMCR{mmio.UM32{&p.CR.U32, uint32(DBP)}}
 }
 
-func (p *Periph) FPDS() RMCR {
+func FPDS_(p *Periph) RMCR {
 	return RMCR{mmio.UM32{&p.CR.U32, uint32(FPDS)}}
 }
 
-func (p *Periph) ADCDC1() RMCR {
+func ADCDC1_(p *Periph) RMCR {
 	return RMCR{mmio.UM32{&p.CR.U32, uint32(ADCDC1)}}
 }
 
-func (p *Periph) VOS() RMCR {
+func VOS_(p *Periph) RMCR {
 	return RMCR{mmio.UM32{&p.CR.U32, uint32(VOS)}}
 }
 
@@ -99,30 +99,30 @@ type RMCSR struct{ mmio.UM32 }
 func (rm RMCSR) Load() CSR   { return CSR(rm.UM32.Load()) }
 func (rm RMCSR) Store(b CSR) { rm.UM32.Store(uint32(b)) }
 
-func (p *Periph) WUF() RMCSR {
+func WUF_(p *Periph) RMCSR {
 	return RMCSR{mmio.UM32{&p.CSR.U32, uint32(WUF)}}
 }
 
-func (p *Periph) SBF() RMCSR {
+func SBF_(p *Periph) RMCSR {
 	return RMCSR{mmio.UM32{&p.CSR.U32, uint32(SBF)}}
 }
 
-func (p *Periph) PVDO() RMCSR {
+func PVDO_(p *Periph) RMCSR {
 	return RMCSR{mmio.UM32{&p.CSR.U32, uint32(PVDO)}}
 }
 
-func (p *Periph) BRR() RMCSR {
+func BRR_(p *Periph) RMCSR {
 	return RMCSR{mmio.UM32{&p.CSR.U32, uint32(BRR)}}
 }
 
-func (p *Periph) EWUP() RMCSR {
+func EWUP_(p *Periph) RMCSR {
 	return RMCSR{mmio.UM32{&p.CSR.U32, uint32(EWUP)}}
 }
 
-func (p *Periph) BRE() RMCSR {
+func BRE_(p *Periph) RMCSR {
 	return RMCSR{mmio.UM32{&p.CSR.U32, uint32(BRE)}}
 }
 
-func (p *Periph) VOSRDY() RMCSR {
+func VOSRDY_(p *Periph) RMCSR {
 	return RMCSR{mmio.UM32{&p.CSR.U32, uint32(VOSRDY)}}
 }

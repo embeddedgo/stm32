@@ -65,10 +65,11 @@ func Setup(clkSrc int8, divA, divS int) {
 	RCC := rcc.RCC()
 	RTC := rtc.RTC()
 
-	RCC.PWREN().Set()
-	RCC.PWREN().Load()
-	PWR.DBP().Set() // enable write access to the backup domain.
-	RCC.PWREN().Clear()
+	PWREN := rcc.PWREN_(RCC)
+	PWREN.Set()
+	PWREN.Load()
+	pwr.DBP_(PWR).Set() // enable write access to the backup domain.
+	PWREN.Clear()
 
 	if RCC.BDCR.LoadBits(mask) != cfg {
 		// RTC not initialized
@@ -76,11 +77,11 @@ func Setup(clkSrc int8, divA, divS int) {
 
 		RTC.WPR.Store(0xCA)
 		RTC.WPR.Store(0x53)
-		for RCC.LSERDY().Load() == 0 {
+		for RCC.BDCR.LoadBits(rcc.LSERDY) == 0 {
 			runtime.Gosched()
 		}
 		RTC.ISR.Store(rtc.INIT)
-		for RTC.INITF().Load() == 0 {
+		for RTC.ISR.LoadBits(rtc.INITF) == 0 {
 			runtime.Gosched()
 		}
 		prer := (divA-1)<<rtc.PREDIV_An | (divS-1)<<rtc.PREDIV_Sn
@@ -137,7 +138,7 @@ func nanotime() int64 {
 		dr = uint(RTC.DR.Load())
 		ssr = uint(RTC.SSR.Load())
 	}
-	sspre := uint(RTC.PREDIV_S().Load())
+	sspre := uint(RTC.PRER.LoadBits(rtc.PREDIV_S))
 	y := dr>>rtc.YTn&15*10 + dr>>rtc.YUn&15
 	m := dr>>rtc.MTn&1*10 + dr>>rtc.MUn&15
 	d := dr>>rtc.DTn&3*10 + dr>>rtc.DUn&15
@@ -154,7 +155,7 @@ func setAlarm(nanosec int64) {
 	if nanosec < 0 {
 		return
 	}
-	sspre := int(RTC.PREDIV_S().Load())
+	sspre := int(RTC.PRER.LoadBits(rtc.PREDIV_S))
 	sec := nanosec / 1e9
 	ns := int(nanosec - sec*1e9)
 	ss := sspre - int((int64(sspre+1)*int64(ns)+(1e9-1))/1e9)
@@ -184,12 +185,12 @@ func setAlarm(nanosec int64) {
 		st<<rtc.ASTn | su<<rtc.ASUn
 
 	RTC.ISR.Store(0) // clear ALRAF
-	for RTC.ALRAWF().Load() == 0 {
+	for RTC.ISR.LoadBits(rtc.ALRAWF) == 0 {
 	}
 	RTC.ALRMAR.Store(rtc.ALRMR(alarm))
 	RTC.ALRMASSR.Store(rtc.AMASKSS | rtc.ALRMSSR(ss))
 	RTC.CR.Store(rtc.ALRAIE | rtc.ALRAE | rtc.BYPSHAD)
-	if nanosec <= nanotime() && RTC.ALRAF().Load() == 0 {
+	if nanosec <= nanotime() && RTC.ISR.LoadBits(rtc.ALRAF) == 0 {
 		schedule() // avoid missed alarm
 	}
 }

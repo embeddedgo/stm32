@@ -243,17 +243,17 @@ func (p *Periph) DisableDMA(e Event) {
 
 // Enabled reports whether p is enabled.
 func (p *Periph) Enabled() bool {
-	return p.raw.SPE().Load() != 0
+	return p.raw.CR1.LoadBits(spi.SPE) != 0
 }
 
 // Enable enables p.
 func (p *Periph) Enable() {
-	p.raw.SPE().Set()
+	p.raw.CR1.SetBits(spi.SPE)
 }
 
 // Disable disables p.
 func (p *Periph) Disable() {
-	p.raw.SPE().Clear()
+	p.raw.CR1.ClearBits(spi.SPE)
 }
 
 // StoreWord16 stores a 16-bit word to the data register. Use it only when 16-bit

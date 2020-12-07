@@ -35,12 +35,12 @@ func SetupPLL(clksrc, M, N, P, Q, R int) {
 	RCC.CIER.Store(0) // disable clock interrupts
 
 	// Reset RCC clock configuration.
-	RCC.HSION().Set()
-	for RCC.HSIRDY().Load() == 0 {
+	RCC.CR.SetBits(rcc.HSION)
+	for RCC.CR.LoadBits(rcc.HSIRDY) == 0 {
 		runtime.Gosched() // Wait for HSI...
 	}
 	RCC.CFGR.Store(0) // select HSI as system clock
-	for RCC.SWS().Load() != rcc.SWS_HSI {
+	for RCC.CFGR.LoadBits(rcc.SWS) != rcc.SWS_HSI {
 		runtime.Gosched() // wait for system clock setup...
 	}
 	RCC.CR.Store(rcc.HSION) // disables other clocks and all PLLs
@@ -94,7 +94,7 @@ func SetupPLL(clksrc, M, N, P, Q, R int) {
 		RCC.CR.Store(cr)
 	case 0:
 		pllckselr |= rcc.PLLSRC_CSI
-		RCC.CSION().Set()
+		RCC.CR.SetBits(rcc.CSION)
 		osc = CSIClk
 	default:
 		if clksrc < 4 || clksrc > 48 {
@@ -102,7 +102,7 @@ func SetupPLL(clksrc, M, N, P, Q, R int) {
 		}
 		pllckselr |= rcc.PLLSRC_HSE
 		osc = clksrc
-		RCC.HSEON().Set()
+		RCC.CR.SetBits(rcc.HSEON)
 	}
 	RCC.PLLCKSELR.Store(pllckselr)
 
@@ -147,16 +147,16 @@ func SetupPLL(clksrc, M, N, P, Q, R int) {
 		maxAPBClk = maxAPBClk1
 	}
 	PWR := pwr.PWR()
-	PWR.VOS().Store(vos << pwr.VOSn)
-	for PWR.VOSRDY().Load() == 0 {
+	PWR.D3CR.Store(vos << pwr.VOSn)
+	for PWR.D3CR.LoadBits(pwr.VOSRDY) == 0 {
 		runtime.Gosched() // wait for voltage regulator...
 	}
 	if sysclk > maxSysClk1 {
 		maxAPBClk = maxAPBClk0
-		RCC.SYSCFGEN().Set()
-		syscfg.SYSCFG().ODEN().Set() // 1.26-1.40V (Vcore boost)
-		RCC.SYSCFGEN().Clear()
-		for PWR.VOSRDY().Load() == 0 {
+		RCC.APB4ENR.SetBits(rcc.SYSCFGEN)
+		syscfg.SYSCFG().PWRCR.SetBits(syscfg.ODEN) // 1.26-1.40V (Vcore boost)
+		RCC.APB4ENR.ClearBits(rcc.SYSCFGEN)
+		for PWR.D3CR.LoadBits(pwr.VOSRDY) == 0 {
 			runtime.Gosched()
 		}
 	}
@@ -264,24 +264,24 @@ func SetupPLL(clksrc, M, N, P, Q, R int) {
 
 	// Enable PLL1 and make it a system clock source.
 
-	RCC.PLL1ON().Set()
+	RCC.CR.SetBits(rcc.PLL1ON)
 	FLASH := flash.FLASH1() // PLL need some time to stabilize so
 	FLASH.ACR.Store(acr)    // reconfigure Flash in the the meantime.
 	for FLASH.ACR.LoadBits(flash.WRHIGHFREQ|flash.LATENCY) != acr {
 		runtime.Gosched()
 	}
-	for RCC.PLL1RDY().Load() == 0 {
+	for RCC.CR.LoadBits(rcc.PLL1RDY) == 0 {
 		runtime.Gosched()
 	}
 
 	RCC.D1CFGR.Store(d1cfgr)
 	RCC.D2CFGR.Store(d2cfgr)
 	RCC.D3CFGR.Store(d3cfgr)
-	RCC.SW().Store(rcc.SW_PLL1)
-	for RCC.SWS().Load() != rcc.SWS_PLL1 {
+	RCC.CFGR.StoreBits(rcc.SW, rcc.SW_PLL1)
+	for RCC.CFGR.LoadBits(rcc.SWS) != rcc.SWS_PLL1 {
 		runtime.Gosched()
 	}
 	if osc >= 0 {
-		RCC.HSION().Clear()
+		RCC.CR.ClearBits(rcc.HSION)
 	}
 }

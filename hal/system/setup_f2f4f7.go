@@ -75,12 +75,12 @@ func SetupPLL(osc, N, P int) {
 	RCC.CIR.Store(0) // Disable clock interrupts.
 
 	// Reset RCC clock configuration.
-	RCC.HSION().Set()
-	for RCC.HSIRDY().Load() == 0 {
+	RCC.CR.SetBits(rcc.HSION)
+	for RCC.CR.LoadBits(rcc.HSIRDY) == 0 {
 		runtime.Gosched() // Wait for HSI...
 	}
 	RCC.CFGR.Store(0)
-	for RCC.SWS().Load() != rcc.SWS_HSI {
+	for RCC.CFGR.LoadBits(rcc.SWS) != rcc.SWS_HSI {
 		runtime.Gosched() // Wait for system clock setup...
 	}
 	RCC.CR.Store(rcc.HSION)
@@ -97,7 +97,7 @@ func SetupPLL(osc, N, P int) {
 	}
 	// HSE needs milliseconds to stabilize, so enable it now.
 	if osc != 0 {
-		RCC.HSEON().Set()
+		RCC.CR.SetBits(rcc.HSEON)
 	}
 
 	sysclk := 2e6 * uint(N) / uint(P)
@@ -174,7 +174,7 @@ func SetupPLL(osc, N, P int) {
 	if osc != 0 {
 		src = rcc.PLLSRC_HSE
 		mnpq |= rcc.PLLCFGR(osc/2) << rcc.PLLMn
-		for RCC.HSERDY().Load() == 0 {
+		for RCC.CR.LoadBits(rcc.HSERDY) == 0 {
 			runtime.Gosched()
 		}
 	} else {
@@ -182,18 +182,18 @@ func SetupPLL(osc, N, P int) {
 		mnpq |= HSIClk / 2 << rcc.PLLMn
 	}
 	RCC.PLLCFGR.Store(mnpq | src)
-	RCC.PLLON().Set()
-	for RCC.PLLRDY().Load() == 0 {
-			runtime.Gosched()
+	RCC.CR.SetBits(rcc.PLLON)
+	for RCC.CR.LoadBits(rcc.PLLRDY) == 0 {
+		runtime.Gosched()
 	}
 
 	// Change system clock source to PLL.
 	RCC.CFGR.Store(cfgr | rcc.SW_PLL)
-	for RCC.SWS().Load() != rcc.SWS_PLL {
-			runtime.Gosched()
+	for RCC.CFGR.LoadBits(rcc.SWS) != rcc.SWS_PLL {
+		runtime.Gosched()
 	}
 	if osc != 0 {
-		RCC.HSION().Clear()
+		RCC.CR.ClearBits(rcc.HSION)
 	}
 }
 

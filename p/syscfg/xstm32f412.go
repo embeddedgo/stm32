@@ -48,7 +48,7 @@ type RMMEMRM struct{ mmio.UM32 }
 func (rm RMMEMRM) Load() MEMRM   { return MEMRM(rm.UM32.Load()) }
 func (rm RMMEMRM) Store(b MEMRM) { rm.UM32.Store(uint32(b)) }
 
-func (p *Periph) MEM_MODE() RMMEMRM {
+func MEM_MODE_(p *Periph) RMMEMRM {
 	return RMMEMRM{mmio.UM32{&p.MEMRM.U32, uint32(MEM_MODE)}}
 }
 
@@ -68,7 +68,7 @@ type RMPMC struct{ mmio.UM32 }
 func (rm RMPMC) Load() PMC   { return PMC(rm.UM32.Load()) }
 func (rm RMPMC) Store(b PMC) { rm.UM32.Store(uint32(b)) }
 
-func (p *Periph) ADC1DC2() RMPMC {
+func ADC1DC2_(p *Periph) RMPMC {
 	return RMPMC{mmio.UM32{&p.PMC.U32, uint32(ADC1DC2)}}
 }
 
@@ -104,11 +104,11 @@ type RMCMPCR struct{ mmio.UM32 }
 func (rm RMCMPCR) Load() CMPCR   { return CMPCR(rm.UM32.Load()) }
 func (rm RMCMPCR) Store(b CMPCR) { rm.UM32.Store(uint32(b)) }
 
-func (p *Periph) CMP_PD() RMCMPCR {
+func CMP_PD_(p *Periph) RMCMPCR {
 	return RMCMPCR{mmio.UM32{&p.CMPCR.U32, uint32(CMP_PD)}}
 }
 
-func (p *Periph) READY() RMCMPCR {
+func READY_(p *Periph) RMCMPCR {
 	return RMCMPCR{mmio.UM32{&p.CMPCR.U32, uint32(READY)}}
 }
 
@@ -130,10 +130,10 @@ type RMI2C_BUFOUT struct{ mmio.UM32 }
 func (rm RMI2C_BUFOUT) Load() I2C_BUFOUT   { return I2C_BUFOUT(rm.UM32.Load()) }
 func (rm RMI2C_BUFOUT) Store(b I2C_BUFOUT) { rm.UM32.Store(uint32(b)) }
 
-func (p *Periph) I2C4SCL() RMI2C_BUFOUT {
+func I2C4SCL_(p *Periph) RMI2C_BUFOUT {
 	return RMI2C_BUFOUT{mmio.UM32{&p.I2C_BUFOUT.U32, uint32(I2C4SCL)}}
 }
 
-func (p *Periph) I2C4SDA() RMI2C_BUFOUT {
+func I2C4SDA_(p *Periph) RMI2C_BUFOUT {
 	return RMI2C_BUFOUT{mmio.UM32{&p.I2C_BUFOUT.U32, uint32(I2C4SDA)}}
 }
