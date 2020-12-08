@@ -17,9 +17,9 @@ import (
 func busForAddr(p *Periph) bus.Bus {
 	switch uintptr(unsafe.Pointer(p)) {
 	default:
-		return bus.APB1
-	case mmap.SPI2_BASE, mmap.SPI3_BASE:
 		return bus.APB2
+	case mmap.SPI2_BASE, mmap.SPI3_BASE:
+		return bus.APB1
 	}
 }
 

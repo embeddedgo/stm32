@@ -120,7 +120,7 @@ func (p *Periph) SetConfig(conf Config, baudrate int) {
 		conf = conf&^BR256 | p.BR(baudrate)
 	}
 	p.cr1.StoreBits(cr1mask, uint32(conf&0xFFFF))
-	p.cr1.StoreBits(cr2mask, uint32(conf>>16))
+	p.cr2.StoreBits(cr2mask, uint32(conf>>16))
 }
 
 // EditConfig changes configuration.
