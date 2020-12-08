@@ -14,8 +14,8 @@ import (
 	"github.com/embeddedgo/stm32/hal/irq"
 	"github.com/embeddedgo/stm32/hal/spi"
 	"github.com/embeddedgo/stm32/hal/spi/spi2"
-
-	_ "github.com/embeddedgo/stm32/devboard/nucleo-l476rg/board/init"
+	"github.com/embeddedgo/stm32/hal/system"
+	"github.com/embeddedgo/stm32/hal/system/timer/systick"
 
 	"github.com/embeddedgo/display/eve/examples/gameduino/nightstrike"
 )
@@ -23,6 +23,9 @@ import (
 var eveInt rtos.Note
 
 func main() {
+	system.Setup80(0, 0)
+	systick.Setup(2e6)
+
 	// Allocate GPIO pins
 
 	pb := gpio.B()
