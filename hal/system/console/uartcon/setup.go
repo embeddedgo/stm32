@@ -29,7 +29,7 @@ func checkErr(err error) {
 }
 
 // Setup setpus an USART peripheral represented by d to work as system console.
-func Setup(d *usart.Driver, rx, tx gpio.Pin, conf usart.Config, baudrate int, lf string, name string) {
+func Setup(d *usart.Driver, rx, tx gpio.Pin, conf usart.Config, baudrate int, name string) {
 	// Setup and enable the UART driver.
 	rxport := rx.Port()
 	rxport.EnableClock(true)
