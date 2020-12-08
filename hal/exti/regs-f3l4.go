@@ -18,7 +18,7 @@ func riseTrigEnabled() Lines {
 		Lines(exti.EXTI().RTSR2.Load())<<32
 }
 
-func (li Lines) enableRiseTrig() {
+func enableRiseTrig(li Lines) {
 	if m := uint32(li); m != 0 {
 		internal.AtomicSetBits(&exti.EXTI().RTSR1.U32, m)
 	}
@@ -27,7 +27,7 @@ func (li Lines) enableRiseTrig() {
 	}
 }
 
-func (li Lines) disableRiseTrig() {
+func disableRiseTrig(li Lines) {
 	if m := uint32(li); m != 0 {
 		internal.AtomicClearBits(&exti.EXTI().RTSR1.U32, m)
 	}
@@ -41,7 +41,7 @@ func fallTrigEnabled() Lines {
 		Lines(exti.EXTI().FTSR2.Load())<<32
 }
 
-func (li Lines) enableFallTrig() {
+func enableFallTrig(li Lines) {
 	if m := uint32(li); m != 0 {
 		internal.AtomicSetBits(&exti.EXTI().FTSR1.U32, m)
 	}
@@ -50,7 +50,7 @@ func (li Lines) enableFallTrig() {
 	}
 }
 
-func (li Lines) disableFallTrig() {
+func disableFallTrig(li Lines) {
 	if m := uint32(li); m != 0 {
 		internal.AtomicClearBits(&exti.EXTI().FTSR1.U32, m)
 	}
@@ -59,7 +59,7 @@ func (li Lines) disableFallTrig() {
 	}
 }
 
-func (li Lines) trigger() {
+func trigger(li Lines) {
 	if m := exti.SWIER1(li); m != 0 {
 		exti.EXTI().SWIER1.Store(m)
 	}
@@ -73,7 +73,7 @@ func irqEnabled() Lines {
 		Lines(exti.EXTI().IMR2.Load())<<32
 }
 
-func (li Lines) enableIRQ() {
+func enableIRQ(li Lines) {
 	if m := uint32(li); m != 0 {
 		internal.AtomicSetBits(&exti.EXTI().IMR1.U32, m)
 	}
@@ -82,7 +82,7 @@ func (li Lines) enableIRQ() {
 	}
 }
 
-func (li Lines) disableIRQ() {
+func disableIRQ(li Lines) {
 	if m := uint32(li); m != 0 {
 		internal.AtomicClearBits(&exti.EXTI().IMR1.U32, m)
 	}
@@ -96,7 +96,7 @@ func eventEnabled() Lines {
 		Lines(exti.EXTI().EMR2.Load())<<32
 }
 
-func (li Lines) enableEvent() {
+func enableEvent(li Lines) {
 	if m := uint32(li); m != 0 {
 		internal.AtomicSetBits(&exti.EXTI().EMR1.U32, m)
 	}
@@ -105,7 +105,7 @@ func (li Lines) enableEvent() {
 	}
 }
 
-func (li Lines) disableEvent() {
+func disableEvent(li Lines) {
 	if m := uint32(li); m != 0 {
 		internal.AtomicClearBits(&exti.EXTI().EMR1.U32, m)
 	}
@@ -119,7 +119,7 @@ func pending() Lines {
 		Lines(exti.EXTI().PR2.Load())<<32
 }
 
-func (li Lines) clearPending() {
+func clearPending(li Lines) {
 	if m := exti.PR1(li); m != 0 {
 		exti.EXTI().PR1.Store(m)
 	}

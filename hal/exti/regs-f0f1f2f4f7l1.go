@@ -17,11 +17,11 @@ func riseTrigEnabled() Lines {
 	return Lines(exti.EXTI().RTSR.Load())
 }
 
-func (li Lines) enableRiseTrig() {
+func enableRiseTrig(li Lines) {
 	internal.AtomicSetBits(&exti.EXTI().RTSR.U32, uint32(li))
 }
 
-func (li Lines) disableRiseTrig() {
+func disableRiseTrig(li Lines) {
 	internal.AtomicClearBits(&exti.EXTI().RTSR.U32, uint32(li))
 }
 
@@ -29,15 +29,15 @@ func fallTrigEnabled() Lines {
 	return Lines(exti.EXTI().FTSR.Load())
 }
 
-func (li Lines) enableFallTrig() {
+func enableFallTrig(li Lines) {
 	internal.AtomicSetBits(&exti.EXTI().FTSR.U32, uint32(li))
 }
 
-func (li Lines) disableFallTrig() {
+func disableFallTrig(li Lines) {
 	internal.AtomicClearBits(&exti.EXTI().FTSR.U32, uint32(li))
 }
 
-func (li Lines) trigger() {
+func trigger(li Lines) {
 	exti.EXTI().SWIER.Store(exti.SWIER(li))
 }
 
@@ -45,11 +45,11 @@ func irqEnabled() Lines {
 	return Lines(exti.EXTI().IMR.Load())
 }
 
-func (li Lines) enableIRQ() {
+func enableIRQ(li Lines) {
 	internal.AtomicSetBits(&exti.EXTI().IMR.U32, uint32(li))
 }
 
-func (li Lines) disableIRQ() {
+func disableIRQ(li Lines) {
 	internal.AtomicClearBits(&exti.EXTI().IMR.U32, uint32(li))
 }
 
@@ -57,11 +57,11 @@ func eventEnabled() Lines {
 	return Lines(exti.EXTI().EMR.Load())
 }
 
-func (li Lines) enableEvent() {
+func enableEvent(li Lines) {
 	internal.AtomicSetBits(&exti.EXTI().EMR.U32, uint32(li))
 }
 
-func (li Lines) disableEvent() {
+func disableEvent(li Lines) {
 	internal.AtomicClearBits(&exti.EXTI().EMR.U32, uint32(li))
 }
 
@@ -69,6 +69,6 @@ func pending() Lines {
 	return Lines(exti.EXTI().PR.Load())
 }
 
-func (li Lines) clearPending() {
+func clearPending(li Lines) {
 	exti.EXTI().PR.Store(exti.PR(li))
 }

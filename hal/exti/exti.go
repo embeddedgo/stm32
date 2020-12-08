@@ -82,12 +82,12 @@ func RiseTrigEnabled() Lines {
 
 // EnableRiseTrig enables rising edge detection for lines.
 func (li Lines) EnableRiseTrig() {
-	li.enableRiseTrig()
+	enableRiseTrig(li)
 }
 
 // DisableRiseTrig disables rising edge detection for lines.
 func (li Lines) DisableRiseTrig() {
-	li.disableRiseTrig()
+	disableRiseTrig(li)
 }
 
 // FallTrigEnabled returns lines that have falling edge detection enabled.
@@ -97,19 +97,19 @@ func FallTrigEnabled() Lines {
 
 // EnableFallTrig enables falling edge detection for lines.
 func (li Lines) EnableFallTrig() {
-	li.enableFallTrig()
+	enableFallTrig(li)
 }
 
 // DisableFallTrig disables falling edge detection for lines.
 func (li Lines) DisableFallTrig() {
-	li.disableFallTrig()
+	disableFallTrig(li)
 }
 
 // Trig allows to trigger an interrupt/event request by software. Interrupt
 // pending flag on the line is set only when interrupt generation is enabled
 // for this line.
 func (li Lines) Trigger() {
-	li.trigger()
+	trigger(li)
 }
 
 // IRQEnabled returns lines that have IRQ generation enabled.
@@ -119,12 +119,12 @@ func IRQEnabled() Lines {
 
 // EnableInt enables IRQ generation by lines.
 func (li Lines) EnableIRQ() {
-	li.enableIRQ()
+	enableIRQ(li)
 }
 
 // DisableInt disable IRQ generation by lines.
 func (li Lines) DisableIRQ() {
-	li.disableIRQ()
+	disableIRQ(li)
 }
 
 // EventEnabled returns lines that have event generation enabled.
@@ -134,12 +134,12 @@ func EventEnabled() Lines {
 
 // EnableEvent enables event generation by lines.
 func (li Lines) EnableEvent() {
-	li.enableEvent()
+	enableEvent(li)
 }
 
 // DisableEvent disable event generation by lines.
 func (li Lines) DisableEvent() {
-	li.disableEvent()
+	disableEvent(li)
 }
 
 // Pending returns lines that have pending interrupt flag set.
@@ -149,5 +149,5 @@ func Pending() Lines {
 
 // ClearPending clears pending interrupt flag for lines.
 func (li Lines) ClearPending() {
-	li.clearPending()
+	clearPending(li)
 }
