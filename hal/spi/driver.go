@@ -162,7 +162,7 @@ func (d *Driver) WriteReadWord16(w uint16) uint16 {
 func (d *Driver) setupDMA(ch dma.Channel, mode dma.Mode, wordSize uintptr) {
 	ch.Setup(mode)
 	ch.SetWordSize(wordSize, wordSize)
-	ch.SetAddrP(unsafe.Pointer(d.p.raw.DR.Addr()))
+	ch.SetAddrP(unsafe.Pointer(&d.p.dr))
 }
 
 func startDMA(ch dma.Channel, addr uintptr, n int) {

@@ -6,18 +6,16 @@
 
 package spi
 
-import "github.com/embeddedgo/stm32/p/spi"
-
 func (p *Periph) setWordSize(size int) {
 	if size == 16 {
-		p.raw.CR1.SetBits(spi.DFF)
+		p.cr1.SetBits(dff)
 	} else {
-		p.raw.CR1.ClearBits(spi.DFF)
+		p.cr1.ClearBits(dff)
 	}
 }
 
 func (p *Periph) wordSize() int {
-	if p.raw.CR1.LoadBits(spi.DFF) != 0 {
+	if p.cr1.LoadBits(dff) != 0 {
 		return 16
 	}
 	return 8

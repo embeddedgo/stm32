@@ -6,7 +6,22 @@
 
 package spi
 
-import "github.com/embeddedgo/stm32/hal/gpio"
+import (
+	"unsafe"
+
+	"github.com/embeddedgo/stm32/hal/gpio"
+	"github.com/embeddedgo/stm32/p/bus"
+	"github.com/embeddedgo/stm32/p/mmap"
+)
+
+func busForAddr(p *Periph) bus.Bus {
+	switch uintptr(unsafe.Pointer(p)) {
+	default:
+		return bus.APB1
+	case mmap.SPI2_BASE, mmap.SPI3_BASE:
+		return bus.APB2
+	}
+}
 
 func altFunc(p *Periph, pin gpio.Pin) gpio.AltFunc {
 	switch p {

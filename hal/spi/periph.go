@@ -11,17 +11,22 @@ import (
 
 	"github.com/embeddedgo/stm32/hal/internal/apb"
 	"github.com/embeddedgo/stm32/p/bus"
-	"github.com/embeddedgo/stm32/p/spi"
 )
 
 // Periph represents SPI peripheral.
 type Periph struct {
-	raw spi.Periph
+	cr1    mmio.U32
+	cr2    mmio.U32
+	sr     mmio.U32
+	dr     uint32 // 8 or 16 bit access allowed
+	crcpr  mmio.U32
+	rxcrcr mmio.U32
+	txcrcr mmio.U32
 }
 
 // Bus returns a bus to which p is connected to.
 func (p *Periph) Bus() bus.Bus {
-	return p.raw.Bus()
+	return busForAddr(p)
 }
 
 // EnableClock enables clock for p.
@@ -43,46 +48,46 @@ func (p *Periph) Reset() {
 type Config uint32
 
 const (
-	CPHA0  = Config(0)        // Sample on first edge.
-	CPHA1  = Config(spi.CPHA) // Sample on second edge.
-	CPOL0  = Config(0)        // Clock idle state is 0.
-	CPOL1  = Config(spi.CPOL) // Clock idle state is 1.
-	Slave  = Config(0)        // Slave mode.
-	Master = Config(spi.MSTR) // Master mode.
+	CPHA0  = Config(0)    // Sample on first edge.
+	CPHA1  = Config(cpha) // Sample on second edge.
+	CPOL0  = Config(0)    // Clock idle state is 0.
+	CPOL1  = Config(cpol) // Clock idle state is 1.
+	Slave  = Config(0)    // Slave mode.
+	Master = Config(mstr) // Master mode.
 
-	BR2   = Config(0)            // Baud rate = PCLK/2
-	BR4   = Config(1 << spi.BRn) // Baud rate = PCLK/4.
-	BR8   = Config(2 << spi.BRn) // Baud rate = PCLK/8.
-	BR16  = Config(3 << spi.BRn) // Baud rate = PCLK/16.
-	BR32  = Config(4 << spi.BRn) // Baud rate = PCLK/32.
-	BR64  = Config(5 << spi.BRn) // Baud rate = PCLK/64.
-	BR128 = Config(6 << spi.BRn) // Baud rate = PCLK/128.
-	BR256 = Config(7 << spi.BRn) // Baud rate = PCLK/256.
+	BR2   = Config(0)        // Baud rate = PCLK/2
+	BR4   = Config(1 << brn) // Baud rate = PCLK/4.
+	BR8   = Config(2 << brn) // Baud rate = PCLK/8.
+	BR16  = Config(3 << brn) // Baud rate = PCLK/16.
+	BR32  = Config(4 << brn) // Baud rate = PCLK/32.
+	BR64  = Config(5 << brn) // Baud rate = PCLK/64.
+	BR128 = Config(6 << brn) // Baud rate = PCLK/128.
+	BR256 = Config(7 << brn) // Baud rate = PCLK/256.
 
-	MSBF = Config(0)            // Most significant bit first.
-	LSBF = Config(spi.LSBFIRST) // Least significant bit first.
+	MSBF = Config(0)        // Most significant bit first.
+	LSBF = Config(lsbfirst) // Least significant bit first.
 
-	HardSS = Config(0)       // Hardware slave select.
-	SoftSS = Config(spi.SSM) // Software slave select (use ISSLow, ISSHigh).
+	HardSS = Config(0)   // Hardware slave select.
+	SoftSS = Config(ssm) // Software slave select (use ISSLow, ISSHigh).
 
-	ISSLow  = Config(0)       // Set NSS internally to low (used with SoftSS).
-	ISSHigh = Config(spi.SSI) // Set NSS internally to high (used with SoftSS).
+	ISSLow  = Config(0)   // Set NSS internally to low (used with SoftSS).
+	ISSHigh = Config(ssi) // Set NSS internally to high (used with SoftSS).
 
-	SSInp = Config(0)              // Set NSS as input (used with HardSS).
-	SSOut = Config(spi.SSOE << 16) // set NSS as output (used with HardSS).
+	SSInp = Config(0)          // Set NSS as input (used with HardSS).
+	SSOut = Config(ssoe << 16) // set NSS as output (used with HardSS).
 
-	ThreeWire = Config(0)            // Three-wire mode (SCK, MOSI, MISO).
-	TwoWire   = Config(spi.BIDIMODE) // Two-wire mode (SCK, MOSI/MISO).
+	ThreeWire = Config(0)        // Three-wire mode (SCK, MOSI, MISO).
+	TwoWire   = Config(bidimode) // Two-wire mode (SCK, MOSI/MISO).
 
-	TxRx   = Config(0)          // Three-wire transimt and receive.
-	RxOnly = Config(spi.RXONLY) // Three-wire receive only.
+	TxRx   = Config(0)      // Three-wire transimt and receive.
+	RxOnly = Config(rxonly) // Three-wire receive only.
 
-	Rx = Config(0)          // Two-wire receive-only.
-	Tx = Config(spi.BIDIOE) // Two-wire transmit-only.
+	Rx = Config(0)      // Two-wire receive-only.
+	Tx = Config(bidioe) // Two-wire transmit-only.
 
-	cr1mask = spi.CPHA | spi.CPOL | spi.MSTR | 7<<spi.BRn | spi.LSBFIRST |
-		spi.SSM | spi.SSI | spi.BIDIMODE | spi.RXONLY | spi.BIDIOE
-	cr2mask = spi.SSOE
+	cr1mask = cpha | cpol | mstr | br | lsbfirst | ssm | ssi | bidimode | rxonly | bidioe
+
+	cr2mask = ssoe
 )
 
 // BR calculates the baud rate bits of configuration. BR guarantees that
@@ -98,14 +103,14 @@ func (p *Periph) BR(baudrate int) Config {
 		div = 256
 	}
 	br := 31 - bits.LeadingZeros32(uint32(div-1))
-	return Config(br << spi.BRn)
+	return Config(br << brn)
 }
 
 // Config returns the current p's configuration.
 func (p *Periph) Config() Config {
-	cr1 := Config(p.raw.CR1.LoadBits(cr1mask))
-	cr2 := Config(p.raw.CR2.LoadBits(cr2mask))
-	return cr1 | cr2<<16
+	cr1 := p.cr1.LoadBits(cr1mask)
+	cr2 := p.cr2.LoadBits(cr2mask)
+	return Config(cr1 | cr2<<16)
 }
 
 // SetConfig configures p (p must be disabled). If baudrate > 0 it replaces the
@@ -114,8 +119,8 @@ func (p *Periph) SetConfig(conf Config, baudrate int) {
 	if baudrate != 0 {
 		conf = conf&^BR256 | p.BR(baudrate)
 	}
-	p.raw.CR1.StoreBits(cr1mask, spi.CR1(conf&0xFFFF))
-	p.raw.CR2.StoreBits(cr2mask, spi.CR2(conf>>16))
+	p.cr1.StoreBits(cr1mask, uint32(conf&0xFFFF))
+	p.cr1.StoreBits(cr2mask, uint32(conf>>16))
 }
 
 // EditConfig changes configuration.
@@ -123,21 +128,21 @@ func (p *Periph) EditConfig(from, to Config) {
 	if (from|to)&BR256 != 0 {
 		from |= BR256
 	}
-	cr1 := p.raw.CR1.Load()
-	p.raw.CR1.Store(cr1&^spi.CR1(from&0xFFFF) | spi.CR1(to&0xFFFF))
-	cr2 := p.raw.CR2.Load()
-	p.raw.CR2.Store(cr2&^spi.CR2(from>>16) | spi.CR2(to>>16))
+	cr1 := p.cr1.Load()
+	p.cr1.Store(cr1&^uint32(from&0xFFFF) | uint32(to&0xFFFF))
+	cr2 := p.cr2.Load()
+	p.cr2.Store(cr2&^uint32(from>>16) | uint32(to>>16))
 }
 
 // Baudrate returns the currently configured baudrate.
 func (p *Periph) Baudrate() int {
-	br := p.raw.CR1.LoadBits(cr1mask) >> spi.BRn & 7
+	br := p.cr1.LoadBits(cr1mask) >> brn & 7
 	return int(p.Bus().Clock() >> (br + 1))
 }
 
 // SetBaudrate sets the baudrate (p must be disabled).
 func (p *Periph) SetBaudrate(baudrate int) {
-	p.raw.CR1.StoreBits(spi.CR1(BR256), spi.CR1(p.BR(baudrate)))
+	p.cr1.StoreBits(uint32(BR256), uint32(p.BR(baudrate)))
 }
 
 // WordSize return currently used word size.
@@ -157,10 +162,10 @@ func (p *Periph) SetWordSize(size int) {
 type Event uint16
 
 const (
-	Err        = Event(1)             // Some hardware error occurs.
-	RxNotEmpty = Event(spi.RXNE) << 1 // Receive buffer not empty.
-	TxEmpty    = Event(spi.TXE) << 1  // Transmit buffer empty.
-	Busy       = Event(spi.BSY) << 1  // Periph is busy (not a real event).
+	Err        = Event(1)         // Some hardware error occurs.
+	RxNotEmpty = Event(rxne) << 1 // Receive buffer not empty.
+	TxEmpty    = Event(txe) << 1  // Transmit buffer empty.
+	Busy       = Event(bsy) << 1  // Periph is busy (not a real event).
 
 	realEventMask = RxNotEmpty | TxEmpty
 	errEventMask  = realEventMask | Err
@@ -168,12 +173,12 @@ const (
 )
 
 // Error is a bitfield that encodes possible peripheral errors.
-type Error byte
+type Error uint8
 
 const (
-	ErrCRC     = Error(spi.CRCERR >> 3)
-	ErrMode    = Error(spi.MODF >> 3)
-	ErrOverrun = Error(spi.OVR >> 3)
+	ErrCRC     = Error(crcerr >> 3)
+	ErrMode    = Error(modf >> 3)
+	ErrOverrun = Error(ovr >> 3)
 
 	errorMask = ErrCRC | ErrMode | ErrOverrun
 )
@@ -204,7 +209,7 @@ func (e Error) Error() string {
 
 // Status return current status of p.
 func (p *Periph) Status() (Event, Error) {
-	sr := p.raw.SR.Load()
+	sr := p.sr.Load()
 	err := Error(sr>>3) & errorMask
 	ev := Event(sr<<1) & bsyEventMask
 	if err != 0 {
@@ -216,66 +221,66 @@ func (p *Periph) Status() (Event, Error) {
 // EnableIRQ enables generating of IRQ by events e.
 func (p *Periph) EnableIRQ(e Event) {
 	if e &= errEventMask; e != 0 {
-		p.raw.CR2.SetBits(spi.CR2(e) << spi.ERRIEn)
+		p.cr2.SetBits(uint32(e) << errien)
 	}
 }
 
 // DisableIRQ disables generating of IRQ by events e.
 func (p *Periph) DisableIRQ(e Event) {
 	if e &= errEventMask; e != 0 {
-		p.raw.CR2.ClearBits(spi.CR2(e) << spi.ERRIEn)
+		p.cr2.ClearBits(uint32(e) << errien)
 	}
 }
 
 // EnableDMA enables generating of DMA requests by events e.
 func (p *Periph) EnableDMA(e Event) {
 	if e &= realEventMask; e != 0 {
-		p.raw.CR2.SetBits(spi.CR2(e) >> 1)
+		p.cr2.SetBits(uint32(e) >> 1)
 	}
 }
 
 // DisableDMA disables generating of DMA requests by events e.
 func (p *Periph) DisableDMA(e Event) {
 	if e &= realEventMask; e != 0 {
-		p.raw.CR2.ClearBits(spi.CR2(e) >> 1)
+		p.cr2.ClearBits(uint32(e) >> 1)
 	}
 }
 
 // Enabled reports whether p is enabled.
 func (p *Periph) Enabled() bool {
-	return p.raw.CR1.LoadBits(spi.SPE) != 0
+	return p.cr1.LoadBits(spe) != 0
 }
 
 // Enable enables p.
 func (p *Periph) Enable() {
-	p.raw.CR1.SetBits(spi.SPE)
+	p.cr1.SetBits(spe)
 }
 
 // Disable disables p.
 func (p *Periph) Disable() {
-	p.raw.CR1.ClearBits(spi.SPE)
+	p.cr1.ClearBits(spe)
 }
 
-// StoreWord16 stores a 16-bit word to the data register. Use it only when 16-bit
-// word or data packing is configured.
+// StoreWord16 stores a 16-bit word to the data register. Use it only when
+// 16-bit word or data packing is configured.
 func (p *Periph) StoreWord16(v uint16) {
-	(*mmio.U16)(unsafe.Pointer(&p.raw.DR)).Store(v)
+	(*mmio.U16)(unsafe.Pointer(&p.dr)).Store(v)
 }
 
-// LoadWord16 loads a 16-bit word from the data register. Use it only when 16-bit
-// word or data packing is configured.
+// LoadWord16 loads a 16-bit word from the data register. Use it only when
+// 16-bit word or data packing is configured.
 func (p *Periph) LoadWord16() uint16 {
-	return (*mmio.U16)(unsafe.Pointer(&p.raw.DR)).Load()
+	return (*mmio.U16)(unsafe.Pointer(&p.dr)).Load()
 }
 
 // StoreByte stores a byte to the data register. Use it only when 8-bit frame is
 // configured.
 func (p *Periph) StoreByte(v byte) {
-	(*mmio.U8)(unsafe.Pointer(&p.raw.DR)).Store(v)
+	(*mmio.U8)(unsafe.Pointer(&p.dr)).Store(v)
 }
 
 // LoadByte loads a byte from the data register. Use it only when 8-bit frame is
 // configured.
 func (p *Periph) LoadByte() byte {
-	return (*mmio.U8)(unsafe.Pointer(&p.raw.DR)).Load()
+	return (*mmio.U8)(unsafe.Pointer(&p.dr)).Load()
 }
