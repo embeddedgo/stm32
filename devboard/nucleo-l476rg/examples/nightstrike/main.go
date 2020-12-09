@@ -15,7 +15,7 @@ import (
 	"github.com/embeddedgo/stm32/hal/spi"
 	"github.com/embeddedgo/stm32/hal/spi/spi2"
 	"github.com/embeddedgo/stm32/hal/system"
-	"github.com/embeddedgo/stm32/hal/system/timer/systick"
+	"github.com/embeddedgo/stm32/hal/system/timer/rtcst"
 
 	"github.com/embeddedgo/display/eve/examples/gameduino/nightstrike"
 )
@@ -24,7 +24,7 @@ var eveInt rtos.Note
 
 func main() {
 	system.Setup80(0, 0)
-	systick.Setup(2e6)
+	rtcst.Setup(rtcst.LSE, 1, 32768)
 
 	// Allocate GPIO pins
 
