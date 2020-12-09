@@ -23,12 +23,12 @@ func ls(args []string) {
 	if isErr(err) {
 		return
 	}
-	defer isErr(f.Close())
 	list, err := f.Readdir(-1)
-	if isErr(err) {
+	if isErr(f.Close()) || isErr(err) {
 		return
 	}
 	for _, fi := range list {
 		fmt.Printf("%v %s\n", fi.Mode(), fi.Name())
 	}
+
 }

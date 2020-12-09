@@ -25,13 +25,13 @@ func read(args []string) {
 	if isErr(err) {
 		return
 	}
-	defer isErr(f.Close())
 	buf := make([]byte, 64)
 	for {
 		n, err1 := f.Read(buf)
 		_, err2 := os.Stdout.Write(buf[:n])
 		if isErr(err2) || err1 == io.EOF || isErr(err1) {
-			return
+			break
 		}
 	}
+	isErr(f.Close())
 }

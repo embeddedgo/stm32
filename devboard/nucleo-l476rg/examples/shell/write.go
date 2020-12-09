@@ -31,13 +31,13 @@ func write(args []string) {
 	if isErr(err) {
 		return
 	}
-	defer isErr(f.Close())
 	buf := make([]byte, 64)
 	for {
 		n, err1 := os.Stdin.Read(buf)
 		_, err2 := f.Write(buf[:n])
 		if isErr(err2) || err1 == io.EOF || isErr(err1) {
-			return
+			break
 		}
 	}
+	isErr(f.Close())
 }
