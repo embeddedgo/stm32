@@ -48,6 +48,7 @@ func init() {
 		{"ls", ls, "list directory contents"},
 		{"mount", mount, "mount a file system or list mount points"},
 		{"read", read, "read file"},
+		{"rename", rename, "rename file"},
 		{"write", write, "overwrite an existing file"},
 	}
 }
