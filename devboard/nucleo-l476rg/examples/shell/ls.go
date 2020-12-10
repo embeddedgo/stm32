@@ -18,6 +18,7 @@ List directory contents.
 func ls(args []string) {
 	if len(args) != 2 {
 		fmt.Print(lsUsage)
+		return
 	}
 	f, err := os.Open(args[1])
 	if isErr(err) {

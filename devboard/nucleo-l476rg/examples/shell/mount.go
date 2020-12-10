@@ -24,8 +24,8 @@ ramfs(SIZE)  filesystem in RAM
 `
 
 const head = `
-prefix                       fstype     fsname      opencnt available      used
--------------------------------------------------------------------------------
+prefix                        fstype     fsname      opencnt available      used
+--------------------------------------------------------------------------------
 `
 
 func mount(args []string) {
@@ -34,7 +34,7 @@ func mount(args []string) {
 		for _, mp := range rtos.Mounts() {
 			_, _, used, max := mp.FS.Usage()
 			fmt.Printf(
-				"%-28s %-10s %-12s %6d %9d %9d\n",
+				"%-29s %-10s %-12s %6d %9d %9d\n",
 				mp.Prefix, mp.FS.Type(), mp.FS.Name(), mp.OpenCount, max-used,
 				used,
 			)
