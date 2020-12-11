@@ -20,7 +20,7 @@ mount FSTYPE(FSARGS) PREFIX
 
 Supported filesystems:
 
-ramfs(SIZE)  filesystem in RAM
+ramfs(SIZE[,NAME])  filesystem in RAM
 `
 
 const head = `
@@ -59,20 +59,23 @@ func mount(args []string) {
 	var fsys rtos.FS
 	switch fstype {
 	case "ramfs":
-		size := 1024
-		if len(fsargs) > 0 {
-			var err error
-			size, err = strconv.Atoi(fsargs[0])
-			if err != nil {
-				fmt.Println("bad FS size:", err)
-				return
-			}
+		if len(fsargs) < 1 || len(fsargs) > 2 {
+			fmt.Print(mountUsage)
+			return
 		}
-		fsys = ramfs.New(int64(size))
+		size, err := strconv.Atoi(fsargs[0])
+		if err != nil {
+			fmt.Println("bad FS size:", err)
+			return
+		}
+		var name string
+		if len(fsargs) == 2 {
+			name = fsargs[1]
+		}
+		fsys = ramfs.New(name, int64(size))
 	default:
 		fmt.Fprint(os.Stderr, "unknown file system type: ", fstype,
-			".\nUse one of:\n",
-			"ramfs(SIZE)\n")
+			".\nUse one of: ramfs\n")
 		return
 	}
 	rtos.Mount(fsys, prefix)
