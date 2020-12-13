@@ -6,13 +6,12 @@ package main
 
 import (
 	"fmt"
+	"io/fs"
 	"os"
 )
 
 const lsUsage = `
 ls DIR
-
-List directory contents.
 `
 
 func ls(args []string) {
@@ -24,12 +23,27 @@ func ls(args []string) {
 	if isErr(err) {
 		return
 	}
-	list, err := f.Readdir(-1)
-	if isErr(f.Close()) || isErr(err) {
-		return
+	{
+		fi, err := f.Stat()
+		if isErr(err) {
+			goto close
+		}
+		var list []fs.FileInfo
+		if fi.IsDir() {
+			list, err = f.Readdir(-1)
+			if isErr(err) {
+				goto close
+			}
+		} else {
+			list = []fs.FileInfo{fi}
+		}
+		for _, fi := range list {
+			fmt.Printf("%v %7d %s %s\n",
+				fi.Mode(), fi.Size(),
+				fi.ModTime().Format(timeLayout), fi.Name(),
+			)
+		}
 	}
-	for _, fi := range list {
-		fmt.Printf("%v %s\n", fi.Mode(), fi.Name())
-	}
-
+close:
+	isErr(f.Close())
 }

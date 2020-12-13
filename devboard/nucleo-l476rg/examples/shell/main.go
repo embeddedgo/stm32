@@ -10,21 +10,36 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"time"
+
+	"github.com/embeddedgo/stm32/hal/system/timer/rtcst"
 
 	_ "github.com/embeddedgo/stm32/devboard/nucleo-l476rg/board/init"
 )
 
+var prompt = "date!> "
+
 func main() {
+	t0, _ := rtcst.LoadTime(0)
+	u0 := time.Unix(0, 0)
+	if !t0.Equal(u0) {
+		time.Set(u0, t0)
+		prompt = "> "
+	}
 	for {
 		scanner := bufio.NewScanner(os.Stdin)
 		scanner.Buffer(nil, 256)
-		fmt.Print("\n\nSimple shell. Type help for more information.\n\n> ")
+		fmt.Print(
+			"\n\nSimple shell. Type help for more information.\n\n",
+			prompt,
+		)
+
 		for scanner.Scan() {
 			args := strings.Fields(scanner.Text())
 			if len(args) >= 1 {
 				runCmd(args)
 			}
-			fmt.Print("> ")
+			fmt.Print(prompt)
 		}
 		if err := scanner.Err(); err != nil {
 			fmt.Fprint(os.Stderr, err)
@@ -44,6 +59,7 @@ func init() {
 	// avoid initialization loop
 	commands = []command{
 		{"create", write, "create and write a file"},
+		{"date", date, "print or set the system date and time"},
 		{"help", help, "use help COMMAND for more information about a command"},
 		{"ls", ls, "list directory contents"},
 		{"mount", mount, "mount a file system or list mount points"},
@@ -87,3 +103,5 @@ func isErr(err error) bool {
 	fmt.Fprintf(os.Stderr, "\n%v\n", err)
 	return true
 }
+
+const timeLayout = "2006-01-02 15:04:05"
