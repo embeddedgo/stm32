@@ -48,7 +48,7 @@ func LineIndex(id int) Lines {
 // itself) that enables/disables AFIO/SYSCFG.
 func (li Lines) Connect(port *gpio.Port) {
 	if li >= L15<<1 {
-		panic("exti: can not connect lines to GPIO port")
+		panic("non-GPIO lines")
 	}
 	exticrEna()
 	p := uint32(port.Num())

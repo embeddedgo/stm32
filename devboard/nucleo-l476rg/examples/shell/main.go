@@ -29,7 +29,7 @@ func main() {
 		scanner := bufio.NewScanner(os.Stdin)
 		scanner.Buffer(nil, 256)
 		fmt.Print(
-			"\n\nSimple shell. Type help for more information.\n\n",
+			"\n\nSimple shell. Type help for help.\n\n",
 			prompt,
 		)
 		for scanner.Scan() {
@@ -59,7 +59,7 @@ func init() {
 		{"cat", cat, "print files on the standard output"},
 		{"date", date, "print or set the system date and time"},
 		{"echo", echo, "display a line of tex"},
-		{"help", help, "print information about command"},
+		{"help", help, "print command description"},
 		{"ls", ls, "list directory content"},
 		{"mkdir", mkdir, "make directory"},
 		{"mount", mount, "mount a file system"},

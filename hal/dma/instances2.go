@@ -19,7 +19,7 @@ func (d *Controller) num() uint {
 func controller(n int) *Controller {
 	n--
 	if uint(n) > 1 {
-		panic("dma: bad controller number")
+		panic("bad DMA number")
 	}
 	return (*Controller)(unsafe.Pointer(mmap.DMA1_BASE + uintptr(n)*0x400))
 }

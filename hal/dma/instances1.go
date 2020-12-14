@@ -14,7 +14,7 @@ import (
 
 func controller(n int) *Controller {
 	if uint(n) != 1 {
-		panic("dma: bad controller number")
+		panic("bad DMA number")
 	}
 	return (*Controller)(unsafe.Pointer(mmap.DMA1_BASE)
 }

@@ -45,10 +45,10 @@ const (
 
 func (d *Controller) channel(sn, cn int) Channel {
 	if uint(sn) > 7 {
-		panic("dma: bad stream")
+		panic("bad stream")
 	}
 	if uint(cn) > 7 {
-		panic("dma: bad channel")
+		panic("bad channel")
 	}
 	return Channel{uintptr(unsafe.Pointer(&d.s[sn])) | uintptr(cn)}
 }

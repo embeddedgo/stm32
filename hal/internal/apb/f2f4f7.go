@@ -17,7 +17,7 @@ import (
 func EnableClock(addr unsafe.Pointer, lp bool) {
 	rn, bn := rnbn(addr)
 	if rn&1 != 0 || rn > 2 {
-		panic("apb: bad periph addr")
+		panic("bad periph addr")
 	}
 	enr := (*mmio.U32)(unsafe.Pointer(rcc.RCC().APB1ENR.U32.Addr() + rn*2))
 	lpenr := (*mmio.U32)(unsafe.Pointer(rcc.RCC().APB1LPENR.U32.Addr() + rn*2))
@@ -29,7 +29,7 @@ func EnableClock(addr unsafe.Pointer, lp bool) {
 func DisableClock(addr unsafe.Pointer) {
 	rn, bn := rnbn(addr)
 	if rn&1 != 0 || rn > 2 {
-		panic("apb: bad periph addr")
+		panic("bad periph addr")
 	}
 	enr := (*mmio.U32)(unsafe.Pointer(rcc.RCC().APB1ENR.U32.Addr() + rn*2))
 	internal.AtomicClearBits(enr, 1<<bn)
@@ -39,7 +39,7 @@ func DisableClock(addr unsafe.Pointer) {
 func Reset(addr unsafe.Pointer) {
 	rn, bn := rnbn(addr)
 	if rn&1 != 0 || rn > 2 {
-		panic("apb: bad periph addr")
+		panic("bad periph addr")
 	}
 	rstr := (*mmio.U32)(unsafe.Pointer(rcc.RCC().APB1RSTR.U32.Addr() + rn*2))
 	internal.AtomicSetBits(rstr, 1<<bn)

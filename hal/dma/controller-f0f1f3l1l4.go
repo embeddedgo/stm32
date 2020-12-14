@@ -59,10 +59,10 @@ const (
 func (d *Controller) channel(cn, rn int) Channel {
 	cn-- // channels are numbered from 1
 	if uint(cn) > 6 {
-		panic("dma: bad stream")
+		panic("bad stream")
 	}
 	if uint(rn) > 15 {
-		panic("dma: bad request")
+		panic("bad request")
 	}
 	paddr := uintptr(unsafe.Pointer(&d.c[cn])) &^ 0x3ff
 	return Channel{paddr | uintptr(rn)<<4 | 8 | uintptr(cn)}
