@@ -9,16 +9,14 @@ import (
 	"os"
 )
 
-const renameUsage = `
-rename OLDNAME NEWNAME
-
-Both OLDNAME and NEWNAME must be in the same filesystem.
+const mkdirUsage = `
+mkdir NAME
 `
 
-func rename(args []string) {
-	if len(args) != 3 {
-		fmt.Print(renameUsage)
+func mkdir(args []string) {
+	if len(args) != 2 {
+		fmt.Print(mkdirUsage)
 		return
 	}
-	isErr(os.Rename(args[1], args[2]))
+	isErr(os.Mkdir(args[1], 0755))
 }

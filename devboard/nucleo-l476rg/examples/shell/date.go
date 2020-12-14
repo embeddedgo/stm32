@@ -59,6 +59,6 @@ func date(args []string) {
 	case 1:
 		fmt.Println(now.Format(timeLayout))
 	default:
-		fmt.Println(dateUsage)
+		fmt.Print(dateUsage)
 	}
 }

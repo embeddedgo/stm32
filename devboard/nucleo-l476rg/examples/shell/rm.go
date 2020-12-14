@@ -9,16 +9,14 @@ import (
 	"os"
 )
 
-const renameUsage = `
-rename OLDNAME NEWNAME
-
-Both OLDNAME and NEWNAME must be in the same filesystem.
+const rmUsage = `
+rm NAME
 `
 
-func rename(args []string) {
-	if len(args) != 3 {
-		fmt.Print(renameUsage)
+func rm(args []string) {
+	if len(args) != 2 {
+		fmt.Print(rmUsage)
 		return
 	}
-	isErr(os.Rename(args[1], args[2]))
+	isErr(os.Remove(args[1]))
 }

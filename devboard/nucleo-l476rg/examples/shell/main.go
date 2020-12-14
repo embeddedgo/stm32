@@ -6,7 +6,6 @@ package main
 
 import (
 	"bufio"
-	"errors"
 	"fmt"
 	"os"
 	"strings"
@@ -33,7 +32,6 @@ func main() {
 			"\n\nSimple shell. Type help for more information.\n\n",
 			prompt,
 		)
-
 		for scanner.Scan() {
 			args := strings.Fields(scanner.Text())
 			if len(args) >= 1 {
@@ -58,28 +56,47 @@ var commands []command
 func init() {
 	// avoid initialization loop
 	commands = []command{
-		{"create", write, "create and write a file"},
+		{"cat", cat, "print files on the standard output"},
 		{"date", date, "print or set the system date and time"},
-		{"help", help, "use help COMMAND for more information about a command"},
-		{"ls", ls, "list directory contents"},
-		{"mount", mount, "mount a file system or list mount points"},
-		{"read", read, "read file"},
+		{"echo", echo, "display a line of tex"},
+		{"help", help, "print information about command"},
+		{"ls", ls, "list directory content"},
+		{"mkdir", mkdir, "make directory"},
+		{"mount", mount, "mount a file system"},
 		{"rename", rename, "rename file"},
-		{"write", write, "overwrite an existing file"},
+		{"rm", rm, "remove file"},
 	}
 }
 
-var ErrCmdNotFound = errors.New("command not found")
-
 func runCmd(args []string) {
-	for i := 0; i < len(commands); i++ {
-		cmd := &commands[i]
-		if cmd.name == args[0] {
-			cmd.f(args)
+	stdout := os.Stdout
+	if m := len(args) - 1; m > 0 && len(args[m]) > 1 && args[m][0] == '>' {
+		name := args[m][1:]
+		args = args[:m]
+		flags := os.O_WRONLY | os.O_CREATE | os.O_TRUNC
+		if len(name) > 1 && name[0] == '>' {
+			name = name[1:]
+			flags = os.O_WRONLY | os.O_CREATE | os.O_APPEND
+		}
+		f, err := os.OpenFile(name, flags, 0644)
+		if isErr(err) {
 			return
 		}
+		os.Stdout = f
 	}
-	fmt.Fprint(os.Stderr, args[0], ": unknown command\n")
+	var cmd *command
+	for i := 0; i < len(commands); i++ {
+		if commands[i].name == args[0] {
+			cmd = &commands[i]
+			break
+		}
+	}
+	if cmd == nil {
+		fmt.Fprint(os.Stderr, args[0], ": unknown command\n")
+	} else {
+		cmd.f(args)
+	}
+	os.Stdout = stdout
 }
 
 func help(args []string) {
@@ -95,13 +112,3 @@ func help(args []string) {
 		fmt.Printf("%-8s %s\n", cmd.name, cmd.brief)
 	}
 }
-
-func isErr(err error) bool {
-	if err == nil {
-		return false
-	}
-	fmt.Fprintf(os.Stderr, "\n%v\n", err)
-	return true
-}
-
-const timeLayout = "2006-01-02 15:04:05"

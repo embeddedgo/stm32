@@ -20,7 +20,7 @@ mount FSTYPE(FSARGS) PREFIX
 
 Supported filesystems:
 
-ramfs(SIZE[,NAME])  filesystem in RAM
+ramfs(SIZE[,NAME])  in RAM file system
 `
 
 const head = `
