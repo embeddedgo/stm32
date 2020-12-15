@@ -22,7 +22,3 @@ From now you can use C-a C-g sequence to reset STM32 without interrupting the co
 
 
 Control codes (can be generated using a, g, t keys with Ctrl key pressed)
-
-C-a: 0x01, SOH (Start of Heading)
-C-g: 0x07, Bell
-C-t: 0x14, DC4 (Device Control Four)
