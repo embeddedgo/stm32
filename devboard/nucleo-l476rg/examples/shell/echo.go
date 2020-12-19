@@ -4,9 +4,7 @@
 
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
 const echoUsage = `
 echo [TEXT ...]

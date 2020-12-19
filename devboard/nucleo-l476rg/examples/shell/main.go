@@ -63,7 +63,7 @@ func init() {
 		{"ls", ls, "list directory content"},
 		{"mkdir", mkdir, "make directory"},
 		{"mount", mount, "mount a file system"},
-		//{"rename", rename, "rename file"},
+		{"rename", rename, "rename file"},
 		{"rm", rm, "remove file"},
 	}
 }
