@@ -43,8 +43,8 @@ TIM1_CH2N,TIM8_CH2N,SPI2_MISO,I2S2ext_SD,USART3_RTS,TIM12_CH1  PB14  PB13  TIM1_
                          TIM2_CH3,TIM5_CH3,TIM9_CH1,USART2_TX   PA2  PA1   TIM2_CH2,TIM5_CH2,USART2_RTS,UART4_RX
            TIM2_CH1_ETR,TIM5_CH1,TIM8_ETR,USART2_CTS,UART4_TX   PA0  PC3   SPI2_MOSI
                                          SPI2_MISO,I2S2ext_SD   PC2  PC1
-                                                                PC0  PC15
-                                                               PC14  PC13
+                                                                PC0  PC15  RTC_OSC_OUT
+                                                  RTC_OSC_IN   PC14  PC13  3mA max
                                                                 GND  VBAT
 
 

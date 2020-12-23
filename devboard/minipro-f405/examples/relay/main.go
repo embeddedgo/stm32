@@ -28,12 +28,9 @@ func main() {
 	for {
 		scanner := bufio.NewScanner(os.Stdin)
 		scanner.Buffer(nil, 256)
-		fmt.Print(
-			"\n\nSimple shell. Type help for help.\n\n",
-			prompt,
-		)
+		fmt.Print("Type help for help.\n\n", prompt)
 		for scanner.Scan() {
-			args := strings.Fields(scanner.Text())
+			args := strings.Fields(strings.TrimSpace(scanner.Text()))
 			if len(args) >= 1 {
 				runCmd(args)
 			}
@@ -58,6 +55,7 @@ func init() {
 	commands = []command{
 		{"date", date, "print or set the system date and time"},
 		{"help", help, "print command description"},
+		{"relay", relay, "control the relays"},
 	}
 }
 
