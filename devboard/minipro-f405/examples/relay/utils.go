@@ -9,7 +9,7 @@ import (
 	"os"
 )
 
-const timeLayout = "2006-01-02 15:04:05"
+const timeLayout = "2006-01-02 15:04:05 MST"
 
 func isErr(err error) bool {
 	if err == nil {
