@@ -56,6 +56,7 @@ func init() {
 		{"date", date, "print or set the system date and time"},
 		{"help", help, "print command description"},
 		{"relay", relay, "control the relays"},
+		{"sunset", date, "print sunset time"},
 	}
 }
 

@@ -17,6 +17,7 @@ import (
 const dateUsage = `
 date
 date YYYY-MM-DD hh:mm:ss
+sunset
 `
 
 // time.Parse is too heavy
@@ -55,9 +56,19 @@ func date(args []string) {
 		)
 		t0 := time.Set(now, t)
 		rtcst.StoreTime(t0, 0)
-		prompt = "> "
+		if prompt != "> " {
+			go lanterns.Run()
+			prompt = "> "
+		} else {
+			lanterns.Reset()
+		}
 	case 1:
-		fmt.Println(now.Format(timeLayout))
+		if args[0] == "date" {
+			fmt.Println(now.Format(timeLayout))
+		} else {
+			transit, daytime := lanterns.TransitDaytime(now)
+			fmt.Println(transit.Add(daytime / 2).Format(timeLayout))
+		}
 	default:
 		fmt.Print(dateUsage)
 	}
