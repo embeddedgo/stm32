@@ -50,6 +50,11 @@ func date(args []string) {
 		if isErr(err) {
 			break
 		}
+		//offset, err := strconv.ParseInt(args[4], 10, 8)
+		//if isErr(err) {
+		//	break
+		//}
+		//time.Local = time.FixedZone(args[3], int(offset))
 		t := time.Date(
 			ymd[0], time.Month(ymd[1]), ymd[2],
 			hms[0], hms[1], hms[2], 0, time.Local,
