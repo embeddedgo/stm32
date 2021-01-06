@@ -80,11 +80,20 @@ func (l *Lanterns) Run() {
 		for _, r := range l.relays {
 			r.Set()
 		}
+		var daytime, delay time.Duration
 		now := time.Now()
-		transit, daytime := l.TransitDaytime(now)
-		sunset := transit.Add(daytime/2 + 15*time.Minute)
+		day := now
+		for {
+			var transit time.Time
+			transit, daytime = l.TransitDaytime(day)
+			sunset := transit.Add(daytime/2 + 15*time.Minute)
+			delay = sunset.Sub(now)
+			if delay >= 0 {
+				break
+			}
+			day = day.Add(24 * time.Hour)
+		}
 		duration := (24*time.Hour - daytime) / 3
-		delay := sunset.Sub(now)
 		if !timer.Stop() {
 			<-timer.C
 		}
@@ -93,7 +102,7 @@ func (l *Lanterns) Run() {
 		select {
 		case <-timer.C:
 			if duration == 0 {
-				break
+				break // turn off the lanterns
 			}
 			// turn on the lanterns
 			for _, r := range l.relays {
@@ -112,7 +121,7 @@ func (l *Lanterns) Reset() {
 }
 
 var lanterns = Lanterns{
-	relays:    relays[0:1],
+	relays:    relays[0 : 0+1],
 	latitude:  (51 + 43/60.0) * deg,
 	longitude: (19 + 38/60.0) * deg,
 	reset:     make(chan struct{}, 1),

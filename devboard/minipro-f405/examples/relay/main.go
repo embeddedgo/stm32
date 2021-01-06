@@ -23,7 +23,7 @@ func main() {
 	u0 := time.Unix(0, 0)
 	if !t0.Equal(u0) {
 		time.Set(u0, t0)
-		prompt = "> "
+		timeSet()
 	}
 	for {
 		scanner := bufio.NewScanner(os.Stdin)

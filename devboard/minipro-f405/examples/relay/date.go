@@ -62,8 +62,7 @@ func date(args []string) {
 		t0 := time.Set(now, t)
 		rtcst.StoreTime(t0, 0)
 		if prompt != "> " {
-			go lanterns.Run()
-			prompt = "> "
+			timeSet()
 		} else {
 			lanterns.Reset()
 		}
@@ -77,4 +76,9 @@ func date(args []string) {
 	default:
 		fmt.Print(dateUsage)
 	}
+}
+
+func timeSet() {
+	go lanterns.Run()
+	prompt = "> "
 }
