@@ -121,7 +121,7 @@ func (l *Lanterns) Reset() {
 }
 
 var lanterns = Lanterns{
-	relays:    relays[0 : 0+1],
+	relays:    relays[3 : 3+1],
 	latitude:  (51 + 43/60.0) * deg,
 	longitude: (19 + 38/60.0) * deg,
 	reset:     make(chan struct{}, 1),
