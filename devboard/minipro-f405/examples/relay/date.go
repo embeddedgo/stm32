@@ -17,7 +17,7 @@ import (
 const dateUsage = `
 date
 date YYYY-MM-DD hh:mm:ss
-sunset
+sun
 `
 
 // time.Parse is too heavy
@@ -70,8 +70,17 @@ func date(args []string) {
 		if args[0] == "date" {
 			fmt.Println(now.Format(timeLayout))
 		} else {
-			transit, daytime := lanterns.TransitDaytime(now)
-			fmt.Println(transit.Add(daytime / 2).Format(timeLayout))
+			for i := 0; i < 2; i++  {
+				if i != 0 {
+					fmt.Println()
+				}
+				transit, daytime := lanterns.TransitDaytime(now)
+				half := daytime / 2
+				fmt.Println("sunrise:", transit.Add(-half).Format(timeLayout))
+				fmt.Println("transit:", transit.Format(timeLayout))
+				fmt.Println("sunset: ", transit.Add(half).Format(timeLayout))
+				now = now.Add(24 * time.Hour)
+			}
 		}
 	default:
 		fmt.Print(dateUsage)

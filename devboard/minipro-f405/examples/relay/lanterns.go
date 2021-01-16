@@ -52,7 +52,14 @@ func (l *Lanterns) TransitDaytime(t time.Time) (transit time.Time, daytime time.
 
 	// Hour angle
 
-	w := math.Acos(((-0.014485726138606466 - math.Sin(l.latitude)*sind) / (math.Cos(l.latitude) * cosd)))
+	cosw := ((l.sinw - math.Sin(l.latitude)*sind) / (math.Cos(l.latitude) * cosd))
+
+	var w float64
+	if cosw <= -1 {
+		w = math.Pi
+	} else if cosw < 1 {
+		w = math.Acos(cosw)
+	}
 
 	// Calculate transit and daytime
 
@@ -60,9 +67,7 @@ func (l *Lanterns) TransitDaytime(t time.Time) (transit time.Time, daytime time.
 	tranSec, tranNsec := math.Modf(tranUnix)
 
 	transit = time.Unix(int64(tranSec), int64(tranNsec)).In(t.Location())
-	if w > 0 {
-		daytime = time.Duration(w * (float64(24*time.Hour) / math.Pi))
-	}
+	daytime = time.Duration(w * (float64(24*time.Hour) / math.Pi))
 	return
 }
 
@@ -70,6 +75,7 @@ type Lanterns struct {
 	relays    []gpio.Pin
 	latitude  float64
 	longitude float64
+	sinw      float64
 	reset     chan struct{}
 }
 
@@ -86,7 +92,7 @@ func (l *Lanterns) Run() {
 		for {
 			var transit time.Time
 			transit, daytime = l.TransitDaytime(day)
-			sunset := transit.Add(daytime/2 + 15*time.Minute)
+			sunset := transit.Add(daytime / 2)
 			delay = sunset.Sub(now)
 			if delay >= 0 {
 				break
@@ -120,9 +126,17 @@ func (l *Lanterns) Reset() {
 	l.reset <- struct{}{}
 }
 
+const (
+	sinGeom  = -0.01453808050249695 // sin(-0.833 * deg)
+	sinCivil = -0.10452846326765347 // sin(-6 * deg)
+	sinNauti = -0.20791169081775934 // sin(-12 * deg)
+	sinAstro = -0.3090169943749474  // sin(-18 * deg)
+)
+
 var lanterns = Lanterns{
 	relays:    relays[3 : 3+1],
 	latitude:  (51 + 43/60.0) * deg,
 	longitude: (19 + 38/60.0) * deg,
+	sinw:      sinCivil,
 	reset:     make(chan struct{}, 1),
 }
