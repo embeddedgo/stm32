@@ -80,7 +80,6 @@ type Lanterns struct {
 }
 
 func (l *Lanterns) Run() {
-	timer := time.NewTimer(0)
 	for {
 		// turn off the lanterns
 		for _, r := range l.relays {
@@ -99,25 +98,25 @@ func (l *Lanterns) Run() {
 			}
 			day = day.Add(24 * time.Hour)
 		}
+		timer := time.NewTimer(delay)
 		duration := (24*time.Hour - daytime) / 3
-		if !timer.Stop() {
-			<-timer.C
-		}
 	again:
-		timer.Reset(delay)
 		select {
 		case <-timer.C:
 			if duration == 0 {
 				break // turn off the lanterns
 			}
+			timer.Reset(duration)
+			duration = 0
 			// turn on the lanterns
 			for _, r := range l.relays {
 				r.Clear()
 			}
-			delay = duration
-			duration = 0
 			goto again
 		case <-l.reset:
+			if !timer.Stop() {
+				<-timer.C
+			}
 		}
 	}
 }
