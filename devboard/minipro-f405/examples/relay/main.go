@@ -61,21 +61,6 @@ func init() {
 }
 
 func runCmd(args []string) {
-	stdout := os.Stdout
-	if m := len(args) - 1; m > 0 && len(args[m]) > 1 && args[m][0] == '>' {
-		name := args[m][1:]
-		args = args[:m]
-		flags := os.O_WRONLY | os.O_CREATE | os.O_TRUNC
-		if len(name) > 1 && name[0] == '>' {
-			name = name[1:]
-			flags = os.O_WRONLY | os.O_CREATE | os.O_APPEND
-		}
-		f, err := os.OpenFile(name, flags, 0644)
-		if isErr(err) {
-			return
-		}
-		os.Stdout = f
-	}
 	var cmd *command
 	for i := 0; i < len(commands); i++ {
 		if commands[i].name == args[0] {
@@ -88,7 +73,6 @@ func runCmd(args []string) {
 	} else {
 		cmd.f(args)
 	}
-	os.Stdout = stdout
 }
 
 func help(args []string) {
