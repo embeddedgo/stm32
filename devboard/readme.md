@@ -16,7 +16,7 @@ There is also *doc* subdirectory that contain useful information and other resou
 
 ![AZ3166](az3166/doc/board.jpg)
 
-[devebox-h743](devebox-h743): DevEBox STM32H743 ([STM32H743VIT6](https://www.st.com/en/microcontrollers-microprocessors/stm32h743vi.html) + 8MB QSPI Flash [W25Q64JVSIQ](https://www.winbond.com/resource-files/w25q64jv%20spi%20%20%20revc%2006032016%20kms.pdf), [website](https://mcudev.taobao.com/))
+[devebox-h743](devebox-h743): DevEBox STM32H743 ([STM32H743VIT6](https://www.st.com/en/microcontrollers-microprocessors/stm32h743vi.html) + 8MB QSPI Flash [W25Q64JVSIQ](https://www.winbond.com/resource-files/w25q64jv%20spi%20%20%20revc%2006032016%20kms.pdf)), [website](https://mcudev.taobao.com/)
 
 ![DevEBox STM32H743](devebox-h743/doc/board.jpg)
 
@@ -28,7 +28,7 @@ There is also *doc* subdirectory that contain useful information and other resou
 
 ![STM32F4-Discovery](f4-discovery/doc/board.jpg)
 
-[minipro-f405](minipro-f405): STM32_MiNi_Pro ([STM32F405RGT6](https://www.st.com/en/microcontrollers-microprocessors/stm32f405rg.html) + 2MB SPI Flash [W25Q16JVSIQ](https://www.winbond.com/resource-files/w25q16jv%20spi%20revg%2003222018%20plus.pdf) + USB to UART+RESET+BOOT0 [CH340C](http://www.wch-ic.com/products/CH340.html), [website](https://mcudev.taobao.com/))
+[minipro-f405](minipro-f405): STM32_MiNi_Pro ([STM32F405RGT6](https://www.st.com/en/microcontrollers-microprocessors/stm32f405rg.html) + 2MB SPI Flash [W25Q16JVSIQ](https://www.winbond.com/resource-files/w25q16jv%20spi%20revg%2003222018%20plus.pdf) + USB to UART/RESET/BOOT0 [CH340C](http://www.wch-ic.com/products/CH340.html)), [website](https://mcudev.taobao.com/)
 
 ![minipro-f405](minipro-f405/doc/board.jpg)
 
