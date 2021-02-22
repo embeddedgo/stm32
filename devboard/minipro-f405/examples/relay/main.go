@@ -30,7 +30,7 @@ func main() {
 		scanner.Buffer(nil, 256)
 		fmt.Print("Type help for help.\n\n", prompt)
 		for scanner.Scan() {
-			args := strings.Fields(strings.TrimSpace(scanner.Text()))
+			args := strings.Fields(scanner.Text())
 			if len(args) >= 1 {
 				runCmd(args)
 			}
