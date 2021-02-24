@@ -96,7 +96,10 @@ func runCmd(args []string) {
 	} else {
 		cmd.f(args)
 	}
-	os.Stdout = stdout
+	if os.Stdout != stdout {
+		os.Stdout.Close()
+		os.Stdout = stdout
+	}
 }
 
 func help(args []string) {
