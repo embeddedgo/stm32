@@ -2,6 +2,10 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+// This example tests the USART1 interface. The onboard USB to UART
+// converter is connected to USART2 and used as system console
+// (os.Stdin, os.Stdout, os.Stderr). To see something you need to
+// connect an external USB to UART converter to D2 and D8 pins.
 package main
 
 import (
@@ -10,7 +14,7 @@ import (
 
 	"github.com/embeddedgo/stm32/hal/gpio"
 	"github.com/embeddedgo/stm32/hal/usart"
-	"github.com/embeddedgo/stm32/hal/usart/usart2"
+	"github.com/embeddedgo/stm32/hal/usart/usart1"
 
 	_ "github.com/embeddedgo/stm32/devboard/nucleo-l476rg/board/init"
 )
@@ -19,11 +23,11 @@ func main() {
 	// GPIO pins assignment
 	pa := gpio.A()
 	pa.EnableClock(true)
-	tx := pa.Pin(2)
-	rx := pa.Pin(3)
+	tx := pa.Pin(9)  // CN5 D8
+	rx := pa.Pin(10) // CN9 D2
 
 	// Configure and enable USART
-	u := usart2.Driver()
+	u := usart1.Driver()
 	u.UsePin(tx, usart.TXD)
 	u.UsePin(rx, usart.RXD)
 	u.Setup(usart.Word8b, 115200)
