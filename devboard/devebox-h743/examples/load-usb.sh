@@ -10,5 +10,5 @@ fi
 
 name=$(basename $(pwd))
 $OBJCOPY -O binary $name.elf $name.bin
-dfu-util -a 0 -s 0x8000000 -D blinky.bin
+dfu-util -a 0 -s 0x8000000 -D $name.bin
 rm $name.bin
