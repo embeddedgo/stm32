@@ -64,9 +64,9 @@ func (l *Lanterns) TransitDaytime(t time.Time) (transit time.Time, daytime time.
 	// Calculate transit and daytime
 
 	tranUnix := (Jtran - (2440587.5 - 2451545.0)) * (24 * 3600)
-	tranSec, tranNsec := math.Modf(tranUnix)
 
-	transit = time.Unix(int64(tranSec), int64(tranNsec)).In(t.Location())
+	// one second accuracy (use math.Modf to obtain sec and nsec from tranUnix)
+	transit = time.Unix(int64(tranUnix), 0).In(t.Location())
 	daytime = time.Duration(w * (float64(24*time.Hour) / math.Pi))
 	return
 }
