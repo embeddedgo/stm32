@@ -59,3 +59,33 @@ func Setup(d *usart.Driver, rx, tx gpio.Pin, conf usart.Config, baudrate int, na
 	checkErr(err)
 	os.Stderr = os.Stdout
 }
+
+// SetupLight setpus an USART peripheral represented by d to work as system console.
+// It usese termfs.LightFS instead of termfs.FS.
+func SetupLight(d *usart.Driver, rx, tx gpio.Pin, conf usart.Config, baudrate int, name string) {
+	// Setup and enable the UART driver.
+	rxport := rx.Port()
+	rxport.EnableClock(true)
+	if txport := tx.Port(); txport != rxport {
+		txport.EnableClock(true)
+	}
+	d.UsePin(rx, usart.RXD)
+	d.UsePin(tx, usart.TXD)
+	d.Setup(conf, baudrate)
+	d.EnableTx()
+	d.EnableRx(nil)
+
+	// Set a system writer for print, println, panic, etc.
+	uart = d
+	rtos.SetSystemWriter(write)
+
+	// Setup a serial console (standard input and output).
+	con := termfs.NewLight(name, d, d)
+	rtos.Mount(con, "/dev/console")
+	var err error
+	os.Stdin, err = os.OpenFile("/dev/console", syscall.O_RDONLY, 0)
+	checkErr(err)
+	os.Stdout, err = os.OpenFile("/dev/console", syscall.O_WRONLY, 0)
+	checkErr(err)
+	os.Stderr = os.Stdout
+}
