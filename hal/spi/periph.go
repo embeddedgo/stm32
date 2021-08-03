@@ -48,8 +48,8 @@ func (p *Periph) Reset() {
 type Config uint32
 
 const (
-	CPHA0  = Config(0)    // Sample on first edge.
-	CPHA1  = Config(cpha) // Sample on second edge.
+	CPHA0  = Config(0)    // Sample on leading edge.
+	CPHA1  = Config(cpha) // Sample on trailing edge.
 	CPOL0  = Config(0)    // Clock idle state is 0.
 	CPOL1  = Config(cpol) // Clock idle state is 1.
 	Slave  = Config(0)    // Slave mode.
