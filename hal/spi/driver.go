@@ -8,38 +8,23 @@ import (
 	"embedded/rtos"
 	"runtime"
 	"sync/atomic"
-	"time"
 	"unsafe"
 
 	"github.com/embeddedgo/stm32/hal/dma"
 )
 
-type DriverError byte
-
-const ErrTimeout DriverError = 1
-
-func (e DriverError) Error() string {
-	switch e {
-	case ErrTimeout:
-		return "timeout"
-	default:
-		return ""
-	}
-}
-
 type Driver struct {
-	timeout time.Duration
-	p       *Periph
-	rxDMA   dma.Channel
-	txDMA   dma.Channel
-	done    rtos.Note
-	dmacnt  int32
-	err     uint32
+	p      *Periph
+	rxDMA  dma.Channel
+	txDMA  dma.Channel
+	done   rtos.Note
+	dmacnt int32
+	err    uint32
 }
 
 // NewDriver provides convenient way to create heap allocated Driver struct.
 func NewDriver(p *Periph, rxdma, txdma dma.Channel) *Driver {
-	return &Driver{timeout: -1, p: p, rxDMA: rxdma, txDMA: txdma}
+	return &Driver{p: p, rxDMA: rxdma, txDMA: txdma}
 }
 
 // Periph returns the SPI peripheral used by Driver.
@@ -109,10 +94,6 @@ func (d *Driver) ISR() {
 	d.done.Wakeup()
 }
 
-func (d *Driver) SetTimeout(timeout time.Duration) {
-	d.timeout = timeout
-}
-
 // WriteReadByte writes and reads byte.
 func (d *Driver) WriteReadByte(b byte) byte {
 	if d.err != 0 {
@@ -123,11 +104,7 @@ func (d *Driver) WriteReadByte(b byte) byte {
 	p.EditConfig(TwoWire|Tx, ThreeWire|TxRx)
 	p.EnableIRQ(RxNotEmpty | Err)
 	p.StoreByte(b)
-	if !d.done.Sleep(d.timeout) {
-		p.DisableIRQ(RxNotEmpty | Err)
-		d.err = uint32(ErrTimeout) << 16
-		return 0
-	}
+	d.done.Sleep(-1)
 	b = p.LoadByte()
 	if _, e := p.Status(); e != 0 {
 		d.err = uint32(e) << 8
@@ -146,11 +123,7 @@ func (d *Driver) WriteReadWord16(w uint16) uint16 {
 	p.EditConfig(TwoWire|Tx, ThreeWire|TxRx)
 	p.EnableIRQ(RxNotEmpty | Err)
 	p.StoreWord16(w)
-	if !d.done.Sleep(d.timeout) {
-		p.DisableIRQ(RxNotEmpty | Err)
-		d.err = uint32(ErrTimeout) << 16
-		return 0
-	}
+	d.done.Sleep(-1)
 	w = p.LoadWord16()
 	if _, e := p.Status(); e != 0 {
 		d.err = uint32(e) << 8
@@ -201,14 +174,7 @@ func (d *Driver) writeReadDMA(out, in uintptr, olen, ilen int, wsize uintptr) (n
 		}
 		in += uintptr(m)
 		n += m
-		done := d.done.Sleep(d.timeout)
-		if !done {
-			d.txDMA.DisableIRQ(dma.EvAll, dma.ErrAll)
-			d.rxDMA.DisableIRQ(dma.EvAll, dma.ErrAll)
-			d.err = uint32(ErrTimeout) << 16
-			n -= d.rxDMA.Len()
-			break
-		}
+		d.done.Sleep(-1)
 		if _, e := p.Status(); e != 0 {
 			d.txDMA.DisableIRQ(dma.EvAll, dma.ErrAll)
 			d.rxDMA.DisableIRQ(dma.EvAll, dma.ErrAll)
@@ -247,12 +213,7 @@ func (d *Driver) writeDMA(out uintptr, n int, wsize uintptr, incm dma.Mode) {
 		if incm != 0 {
 			out += uintptr(m)
 		}
-		done := d.done.Sleep(d.timeout)
-		if !done {
-			d.txDMA.DisableIRQ(dma.EvAll, dma.ErrAll)
-			d.err = uint32(ErrTimeout) << 16
-			break
-		}
+		d.done.Sleep(-1)
 		if _, e := p.Status(); e != 0 {
 			d.txDMA.DisableIRQ(dma.EvAll, dma.ErrAll)
 			d.err = uint32(e) << 8
@@ -283,9 +244,6 @@ func (d *Driver) Err(clear bool) error {
 	}
 	if clear {
 		d.err = 0
-	}
-	if err := DriverError(e >> 16); err != 0 {
-		return err
 	}
 	if err := Error(e >> 8); err != 0 {
 		if err&ErrOverrun != 0 && clear {
