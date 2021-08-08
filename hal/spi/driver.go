@@ -1,4 +1,4 @@
-// Copyright 2019 Michal Derkacz. All rights reserved.
+// Copyright 2019 The Embedded Go authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -13,6 +13,8 @@ import (
 	"github.com/embeddedgo/stm32/hal/dma"
 )
 
+// Driver implements DMA based driver to an SPI peripheral working in master
+// mode.
 type Driver struct {
 	p      *Periph
 	rxDMA  dma.Channel
@@ -236,7 +238,9 @@ func (d *Driver) writeDMA(out uintptr, n int, wsize uintptr, incm dma.Mode) {
 	}
 }
 
-// Err returns value of internal error variable and clears it if clear is true.
+// Err returns the saved error and clears it if the clear is true. If an error
+// occurs during any command it is saved and the subsequent commands are ignored
+// until the error is cleared.
 func (d *Driver) Err(clear bool) error {
 	e := d.err
 	if e == 0 {
@@ -316,20 +320,7 @@ func (d *Driver) WriteRead(out, in []byte) int {
 	return d.WriteStringRead(*(*string)(unsafe.Pointer(&out)), in)
 }
 
-func (d *Driver) WriteReadMany(oi ...[]byte) int {
-	var n int
-	for k := 0; k < len(oi); k += 2 {
-		var in []byte
-		if k+1 < len(oi) {
-			in = oi[k+1]
-		}
-		out := oi[k]
-		n += d.WriteRead(out, in)
-	}
-	return n
-}
-
-func (d *Driver) RepeatByte(b byte, n int) {
+func (d *Driver) WriteByteN(b byte, n int) {
 	if d.err != 0 {
 		return
 	}
@@ -366,20 +357,7 @@ func (d *Driver) WriteRead16(out, in []uint16) int {
 	return d.writeRead(oaddr, iaddr, olen, ilen, 2)
 }
 
-func (d *Driver) WriteReadMany16(oi ...[]uint16) int {
-	var n int
-	for k := 0; k < len(oi); k += 2 {
-		var in []uint16
-		if k+1 < len(oi) {
-			in = oi[k+1]
-		}
-		out := oi[k]
-		n += d.WriteRead16(out, in)
-	}
-	return n
-}
-
-func (d *Driver) RepeatWord16(w uint16, n int) {
+func (d *Driver) WriteWord16N(w uint16, n int) {
 	if d.err != 0 {
 		return
 	}

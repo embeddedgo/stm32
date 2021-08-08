@@ -2,7 +2,7 @@ module github.com/embeddedgo/stm32
 
 go 1.15
 
-//replace github.com/embeddedgo/display => ../display
+replace github.com/embeddedgo/display => ../display
 //replace github.com/embeddedgo/fs => ../fs
 
 require (
