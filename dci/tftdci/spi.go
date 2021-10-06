@@ -39,6 +39,11 @@ func (dci *SPI) WriteBytes(p []uint8) {
 	dci.spi.WriteRead(p, nil)
 }
 
+func (dci *SPI) WriteString(s string) {
+	dci.spi.SetWordSize(8)
+	dci.spi.WriteStringRead(s, nil)
+}
+
 func (dci *SPI) WriteByteN(b byte, n int) {
 	dci.spi.SetWordSize(8)
 	dci.spi.WriteByteN(b, n)

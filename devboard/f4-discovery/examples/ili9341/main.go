@@ -6,7 +6,6 @@ package main
 
 import (
 	"image"
-	"image/draw"
 	"math/rand"
 	"time"
 
@@ -52,6 +51,11 @@ func main() {
 	reset.Clear()
 	time.Sleep(time.Millisecond)
 	reset.Set()
+
+	drv := ili9341.NewOver(tftdci.NewSPI(spidrv, dc))
+	drv.Init(ili9341.InitGFX, false)
+	drv.SetMADCTL(ili9341.BGR | ili9341.MX)
+	disp := pixd.NewDisplay(drv)
 
 	wh := uint16(0xffff)
 	bl := uint16(0)
@@ -101,7 +105,7 @@ func main() {
 		Stride: 2 * 18,
 		Pix:    buf2,
 	}
-	img24 := &pixd.RGB16{
+	img24 := &pixd.RGB{
 		Rect:   img16.Bounds(),
 		Stride: 3 * 18,
 		Pix:    buf3,
@@ -112,48 +116,50 @@ func main() {
 		Pix:    buf4,
 	}
 	_ = img32
-
-	drv := ili9341.New(tftdci.NewSPI(spidrv, dc))
-	drv.Init(false)
-	drv.SetMADCTL(ili9341.BGR | ili9341.MX)
-	disp := pixd.NewDisplay(drv)
+	//mask := &image.Uniform{color.Alpha{150}}
 
 	a := disp.NewArea(disp.Bounds())
-	a.SetColorRGB(77, 78, 79)
+	a.SetColorRGBA(77, 78, 79, 255)
 	a.Fill(a.Bounds())
 	a.SetRect(disp.Bounds().Sub(image.Point{20, 20}))
 	r := a.Bounds()
-	t1 := time.Now()
-	for i := 0; i < 50; i++ {
-		rnd := rand.Int()
-		x, rnd := rnd%r.Max.X, rnd/r.Max.X
-		y, rnd := rnd%r.Max.Y, rnd/r.Max.Y
-		ra, rnd := rnd&127, rnd>>7
-		rb := rnd & 127
-		rnd = rand.Int()
-		a.SetColorRGB(uint8(rnd&^7), uint8(rnd>>8&^3), uint8(rnd>>16&^7))
-		a.FillEllipse(image.Pt(x, y), ra, rb)
-	}
-	t2 := time.Now()
-	println(t2.Sub(t1))
-
-	a.SetColorRGB(24, 128, 40)
+	a.SetColorRGBA(24, 128, 40, 255)
+	a.Fill(a.Bounds())
 	for {
-		a.Fill(a.Bounds())
-		t1 = time.Now()
-		for i := 0; i < 1000; i++ {
+		t1 := time.Now()
+		for i := 0; i < 50; i++ {
 			rnd := rand.Int()
 			x, rnd := rnd%r.Max.X, rnd/r.Max.X
 			y, rnd := rnd%r.Max.Y, rnd/r.Max.Y
-			a.Draw(
-				image.Rectangle{image.Pt(x, y), image.Pt(x+18, y+18)},
-				img16, image.Point{},
-				nil, image.Point{},
-				draw.Src,
-			)
+			ra, rnd := rnd&127, rnd>>7
+			rb := rnd & 127
+			rnd = rand.Int()
+			a.SetColorRGBA(uint8(rnd), uint8(rnd>>8), uint8(rnd>>16), 128)
+			a.FillEllipse(image.Pt(x, y), ra, rb)
 		}
-		t2 = time.Now()
+		t2 := time.Now()
 		println(t2.Sub(t1))
-		time.Sleep(2 * time.Second)
 	}
+
+	/*
+		a.SetColorRGB(24, 128, 40)
+		for {
+			a.Fill(a.Bounds())
+			t1 = time.Now()
+			for i := 0; i < 1000; i++ {
+				rnd := rand.Int()
+				x, rnd := rnd%r.Max.X, rnd/r.Max.X
+				y, rnd := rnd%r.Max.Y, rnd/r.Max.Y
+				a.Draw(
+					image.Rectangle{image.Pt(x, y), image.Pt(x+18, y+18)},
+					img32, image.Point{},
+					mask, image.Point{},
+					draw.Src,
+				)
+			}
+			t2 = time.Now()
+			println(t2.Sub(t1))
+			time.Sleep(2 * time.Second)
+		}
+	*/
 }
