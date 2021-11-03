@@ -113,10 +113,11 @@ func (p *Periph) Config() Config {
 	return Config(cr1 | cr2<<16)
 }
 
-// SetConfig configures p (p must be disabled). If baudrate > 0 it replaces the
-// BR bits in conf with the ones calculated from baudrate.
+// SetConfig configures p. If baudrate > 0 it replaces the BR bits in conf with
+// the ones calculated from baudrate. Notice that some configuration changes
+// require disabled p.
 func (p *Periph) SetConfig(conf Config, baudrate int) {
-	if baudrate != 0 {
+	if baudrate > 0 {
 		conf = conf&^BR256 | p.BR(baudrate)
 	}
 	p.cr1.StoreBits(cr1mask, uint32(conf&0xFFFF))

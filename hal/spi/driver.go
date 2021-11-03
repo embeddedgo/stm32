@@ -57,8 +57,14 @@ func (d *Driver) Enable() {
 	d.p.Enable()
 }
 
-// Disable calls d.Periph().Disable().
+// Disable waits for the peripheral idle state and calls d.Periph().Disable().
 func (d *Driver) Disable() {
+	for {
+		if ev, _ := d.p.Status(); ev == TxEmpty {
+			break
+		}
+		runtime.Gosched()
+	}
 	d.p.Disable()
 }
 

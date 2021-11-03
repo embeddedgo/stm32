@@ -15,40 +15,45 @@ type SPI struct {
 	spi     *spi.Driver
 	dc      gpio.Pin
 	csn     gpio.Pin
-	clkHz   int
-	mode    spi.Config
+	wmode   spi.Config
+	rmode   spi.Config
 	started bool
 	reconf  bool
 }
 
-// NewSPI returns new SPI based implementation of display/tft.DCI that uses the
-// configured SPI driver and the configred data/command pin. Mode can be 0, 1,
-// 2, 3 (see https://en.wikipedia.org/wiki/Serial_Peripheral_Interface)
-func NewSPI(drv *spi.Driver, dc gpio.Pin, mode, clkHz int) *SPI {
+var gpioOut = &gpio.Config{Mode: gpio.Out, Speed: gpio.High}
+
+// NewSPI returns new SPI based implementation of tftdrv.DCI. It properly
+// configures the provided SPI driver and DC pin to communicate with a display
+// controller. Select the SPI mode (CPOL,CPHA), write and read clock speed
+// according to the display controller specification. Note that the maximum
+// speed may be limited by the concrete instance of STM32 SPI peripheral, the
+// bus topology and the specific display design.
+func NewSPI(drv *spi.Driver, dc gpio.Pin, mode spi.Config, wclkHz, rclkHz int) *SPI {
 	dci := new(SPI)
 	dci.spi = drv
 	dci.dc = dc
-	dci.clkHz = clkHz
-	switch mode {
-	case 0:
-		dci.mode = spi.CPOL0 | spi.CPHA0
-	case 1:
-		dci.mode = spi.CPOL0 | spi.CPHA1
-	case 2:
-		dci.mode = spi.CPOL1 | spi.CPHA0
-	default: // 3
-		dci.mode = spi.CPOL1 | spi.CPHA1
-	}
-	drv.Setup(spi.Master|spi.HardSS|spi.SSOut|dci.mode, clkHz)
+	mode |= spi.Master | spi.SSOut
+	dci.wmode = mode | drv.Periph().BR(wclkHz)
+	dci.rmode = mode | drv.Periph().BR(rclkHz)
+	dc.Clear()
+	dc.Setup(gpioOut)
+	drv.Setup(dci.wmode, 0)
 	return dci
 }
 
-func (dci *SPI) UseCSN(csn gpio.Pin, reconfSPI bool) {
+// UseCSN setups the underlying SPI peripheral in software slave select mode and
+// setups csn as slave select pin. If reconf is true the SPI peripheral is
+// reconfigured by any Cmd call so it can be shared with other applications
+// (exclusive acces is required until End call).
+func (dci *SPI) UseCSN(csn gpio.Pin, reconf bool) {
 	dci.csn = csn
-	dci.reconf = reconfSPI
+	dci.reconf = reconf
+	dci.wmode |= spi.SoftSS | spi.ISSHigh
+	dci.rmode |= spi.SoftSS | spi.ISSHigh
 	csn.Set()
-	csn.Setup(&gpio.Config{Mode: gpio.Out, Speed: gpio.High})
-	dci.spi.Setup(spi.Master|spi.SoftSS|spi.ISSHigh, dci.clkHz)
+	csn.Setup(gpioOut)
+	dci.spi.Periph().SetConfig(dci.wmode, 0)
 }
 
 func (dci *SPI) Driver() *spi.Driver  { return dci.spi }
@@ -61,7 +66,7 @@ func (dci *SPI) Cmd(cmd byte) {
 		if dci.csn.IsValid() {
 			dci.csn.Clear()
 			if dci.reconf {
-				dci.spi.Setup(spi.Master|spi.SoftSS|spi.ISSHigh, dci.clkHz)
+				dci.spi.Periph().SetConfig(dci.wmode, 0)
 			}
 		}
 		dci.spi.Enable()
@@ -107,5 +112,7 @@ func (dci *SPI) WriteWordN(w uint16, n int) {
 
 func (dci *SPI) ReadBytes(p []byte) {
 	dci.spi.SetWordSize(8)
+	dci.spi.Periph().SetConfig(dci.rmode, 0)
 	dci.spi.WriteRead(nil, p)
+	dci.spi.Periph().SetConfig(dci.wmode, 0)
 }

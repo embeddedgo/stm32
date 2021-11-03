@@ -6,6 +6,7 @@ package main
 
 import (
 	"image"
+	"image/color"
 	"math/rand"
 	"time"
 
@@ -18,6 +19,27 @@ import (
 
 	_ "github.com/embeddedgo/stm32/devboard/f4-discovery/board/init"
 )
+
+func rndMax(rnd int64, max int) (int, int64) {
+	r := rnd / int64(max)
+	return int(rnd - int64(max)*r), r
+}
+
+// rndPoint takes 18 LS-bits from rnd to generate random point
+func rndPoint(rnd int64, max image.Point) (image.Point, int64) {
+	var p image.Point
+	p.X, rnd = rndMax(rnd, max.X)
+	p.Y, rnd = rndMax(rnd, max.Y)
+	return p, rnd
+}
+
+// rndRGBA takes 18 LS-bits from rnd to generate r, g, b not greather than a
+func rndRGBA(rnd int64, a uint8) (color.RGBA, int64) {
+	r, rnd := rndMax(rnd, int(a))
+	g, rnd := rndMax(rnd, int(a))
+	b, rnd := rndMax(rnd, int(a))
+	return color.RGBA{uint8(r), uint8(g), uint8(b), a}, rnd
+}
 
 func main() {
 	pb := gpio.B()
@@ -32,13 +54,11 @@ func main() {
 	reset := pd.Pin(8)
 	dc := pd.Pin(10)
 
-	cfg := &gpio.Config{Mode: gpio.Out, Speed: gpio.Low}
-	dc.Clear()
-	dc.Setup(cfg)
 	reset.Clear()
-	reset.Setup(cfg) // assert RESET
+	reset.Setup(&gpio.Config{Mode: gpio.Out, Speed: gpio.Low}) // assert RESET
 	time.Sleep(time.Millisecond)
 	reset.Set() // deassert RESET
+	time.Sleep(5 * time.Millisecond)
 
 	spidrv := spi2.Driver()
 	spidrv.UsePinMaster(sck, spi.SCK)
@@ -46,12 +66,12 @@ func main() {
 	spidrv.UsePinMaster(mosi, spi.MOSI)
 	spidrv.UsePinMaster(csn, spi.NSS) // use hardware slave-select
 
-	dci := tftdci.NewSPI(spidrv, dc, 0, 21e6)
+	dci := tftdci.NewSPI(spidrv, dc, spi.CPOL0|spi.CPHA0, 21e6, 21e6)
 	//dci.UseCSN(csn, false) // use software slave-select
 	//drv := ili9341.NewOver(dci)
-	//drv.Init(ili9341.InitGFX)
-	drv := ili9486.NewOver(dci)
-	drv.Init(ili9486.InitMSP4022)
+	//drv.Init(ili9341.GFX)
+	drv := ili9486.New(dci)
+	drv.Init(ili9486.MSP4022)
 	disp := pixd.NewDisplay(drv)
 
 	a := disp.NewArea(disp.Bounds())
@@ -127,55 +147,59 @@ func main() {
 		a.SetColorRGBA(0, 0, 255, 255)
 		a.Fill(image.Rect(110, 10, 150, 200))
 		a.SetColorRGBA(128, 0, 128, 128)
-		a.Rectangle(image.Pt(10, 50), image.Pt(230, 100), false)
-		a.Rectangle(image.Pt(230, 150), image.Pt(10, 200), true)
+		a.RoundRect(image.Pt(10, 50), image.Pt(230, 100), 0, 0, false)
+		a.RoundRect(image.Pt(230, 150), image.Pt(10, 200), 0, 0, true)
 		time.Sleep(time.Second)
 
+		a.SetColorRGBA(255, 255, 255, 255)
 		t1 := time.Now()
-		for i := 0; i < 100; i++ {
+		for i := 0; i < 200; i++ {
 			rnd := rand.Int63()
-			x := int(rnd) & 255
-			if x >= r.Max.X {
-				x -= r.Max.X >> 1
-			}
+			p0, rnd := rndPoint(rnd, r.Max)
+			p1, rnd := rndPoint(rnd, r.Max)
+			p2, rnd := rndPoint(rnd, r.Max)
+
+			a.SetColorRGBA(uint8(rnd), uint8(rnd), uint8(rnd), 255)
+			a.Triangle(p0, p1, p2, true)
+
+			p0, rnd = rndPoint(rnd, r.Max)
+			p1, rnd = rndPoint(rnd, r.Max)
+			p2, _ = rndPoint(rnd, r.Max)
+
 			rnd >>= 8
-			y := int(rnd) & 511
-			if y >= r.Max.Y {
-				y -= r.Max.Y >> 1
-			}
-			rnd >>= 9
-			w := int(rnd) & 127
-			rnd >>= 7
-			h := int(rnd) & 127
-			rnd >>= 7
+			a.SetColorRGBA(uint8(rnd), uint8(rnd), uint8(rnd), 255)
+			a.Triangle(p0, p1, p2, true)
 
-			r := byte(rnd&31) << 2
-			rnd >>= 5
-			g := byte(rnd&31) << 2
-			rnd >>= 5
-			b := byte(rnd&31) << 2
-			rnd >>= 5
+			//rnd = rand.Int63()
+			//c, rnd := rndRGBA(rnd, 192)
 
-			a.SetColorRGBA(r, g, b, 192)
+			//a.SetColorRGBA(0, 0, 0, 255)
+			//a.Fill(a.Bounds())
+			//a.SetColorRGBA(0, 255, 0, 255)
+			//a.Triangle(p0, p1, p2, false)
+			//a.SetColorRGBA(255, 0, 0, 255)
+			//a.Triangle(p0, p1, p2, true)
+
 			//a.Fill(image.Rect(x-w, y-h, x+w, y+h))
 			//a.DrawPoint(image.Pt(x, y+h), w)
-			a.Ellipse(image.Pt(x, y+h), w, h, true)
-			a.SetColorRGBA(0, 0, 0, 192)
-			a.Ellipse(image.Pt(x, y+h), w, h, false)
+			//a.Ellipse(image.Pt(x, y+h), w, h, true)
+			//a.SetColorRGBA(0, 0, 0, 192)
+			//a.Ellipse(image.Pt(x, y+h), w, h, false)
 
-			r = byte(rnd&31) << 2
-			rnd >>= 5
-			g = byte(rnd&31) << 2
-			rnd >>= 5
-			b = byte(rnd&31) << 2
+			//r = byte(rnd&31) << 2
+			//rnd >>= 5
+			//g = byte(rnd&31) << 2
+			//rnd >>= 5
+			//b = byte(rnd&31) << 2
 
-			a.SetColorRGBA(r, g, b, 192)
+			//a.SetColorRGBA(r, g, b, 192)
 			//a.Fill(image.Rect(x-h, y-w, x+h, y+w))
 			//a.DrawPoint(image.Pt(x+w, y), h)
-			a.Ellipse(image.Pt(x+w, y), h, w, true)
-			a.SetColorRGBA(0, 0, 0, 192)
-			a.Ellipse(image.Pt(x+w, y), h, w, false)
+			//a.Ellipse(image.Pt(x+w, y), h, w, true)
+			//a.SetColorRGBA(0, 0, 0, 192)
+			//a.Ellipse(image.Pt(x+w, y), h, w, false)
 		}
+		a.Flush()
 		t2 := time.Now()
 		println(t2.Sub(t1))
 	}
