@@ -33,6 +33,8 @@ PA2 (UART2 TX) -> PA12 (USART6_RX)
 PA3 (UART2 RX) -> PA11 (USART6_TX)
 PB0            -> RESET (also connected to the reset button)
 
+PB13 -> PA14 (SWCLK)
+PB14 -> PA13 (SWDIO) 
 
 ST-LINK SWD test points, starting from reset button:
 1: VDD
