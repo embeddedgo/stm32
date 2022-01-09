@@ -14,14 +14,14 @@ import (
 	"github.com/embeddedgo/stm32/hal/spi"
 	"github.com/embeddedgo/stm32/hal/spi/spi2"
 
-	_ "github.com/embeddedgo/stm32/devboard/f4-discovery/board/init"
+	_ "github.com/embeddedgo/stm32/devboard/nucleo-l476rg/board/init"
 )
 
 // The SPI2 speeds below are max. for this MCU but can be out of display spec.
-// If your display works unstable reduce to 10.5e6 and 5.25e6 or even more.
+// If your display works unstable reduce to 10e6 and 5e6 or even more.
 const (
-	writeClk = 21e6
-	readClk  = 21e6
+	writeClk = 40e6
+	readClk  = 20e6
 )
 
 func main() {
@@ -29,15 +29,12 @@ func main() {
 
 	pb := gpio.B()
 	pb.EnableClock(true)
+	reset := pb.Pin(1)
+	dc := pb.Pin(11)
 	csn := pb.Pin(12)
 	sck := pb.Pin(13)
 	miso := pb.Pin(14)
 	mosi := pb.Pin(15)
-
-	pd := gpio.D()
-	pd.EnableClock(true)
-	reset := pd.Pin(8)
-	dc := pd.Pin(10)
 
 	// Configure peripherals
 
@@ -62,11 +59,13 @@ func main() {
 
 	//disp := examples.Adafruit_1i5_128x128_OLED_SSD1351(dci)
 	//disp := examples.Adafruit_1i54_240x240_IPS_ST7789(dci)
-	//disp := examples.Adafruit_2i8_240x320_TFT_ILI9341(dci)
+	disp := examples.Adafruit_2i8_240x320_TFT_ILI9341(dci)
 	//disp := examples.ERTFTM_1i54_240x240_IPS_ST7789(dci)
 	//disp := examples.MSP4022_4i0_320x480_TFT_ILI9486(dci)
-	disp := examples.Waveshare_1i5_128x128_OLED_SSD1351(dci)
+	//disp := examples.Waveshare_1i5_128x128_OLED_SSD1351(dci)
 
+	// STM32L476 has little RAM when it comes to Go programs. Reduce the number
+	// of examples below if you encounter an out of memory panic.
 	for {
 		examples.Colors(disp)
 		examples.RotateDisplay(disp)
