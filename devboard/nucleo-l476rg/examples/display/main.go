@@ -7,14 +7,15 @@ package main
 import (
 	"time"
 
-	"github.com/embeddedgo/display/pixd/examples"
+	"github.com/embeddedgo/display/pix/examples"
 
 	"github.com/embeddedgo/stm32/dci/tftdci"
 	"github.com/embeddedgo/stm32/hal/gpio"
 	"github.com/embeddedgo/stm32/hal/spi"
 	"github.com/embeddedgo/stm32/hal/spi/spi2"
-
-	_ "github.com/embeddedgo/stm32/devboard/nucleo-l476rg/board/init"
+	"github.com/embeddedgo/stm32/hal/system"
+	"github.com/embeddedgo/stm32/hal/system/timer/rtcst"
+	//_ "github.com/embeddedgo/stm32/devboard/nucleo-l476rg/board/init"
 )
 
 // The SPI2 speeds below are max. for this MCU but can be out of display spec.
@@ -25,6 +26,9 @@ const (
 )
 
 func main() {
+	system.Setup80(0, 0)
+	rtcst.Setup(rtcst.LSE, 1, 32768)
+
 	// Assign GPIO pins
 
 	pb := gpio.B()
@@ -67,8 +71,9 @@ func main() {
 	// STM32L476 has little RAM when it comes to Go programs. Reduce the number
 	// of examples below if you encounter an out of memory panic.
 	for {
-		examples.Colors(disp)
-		examples.RotateDisplay(disp)
-		examples.DrawText(disp)
+		//examples.Colors(disp)
+		//examples.RotateDisplay(disp)
+		//examples.DrawText(disp)
+		examples.GraphicsTest(disp)
 	}
 }

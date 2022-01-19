@@ -7,7 +7,7 @@ package main
 import (
 	"time"
 
-	"github.com/embeddedgo/display/pixd/examples"
+	"github.com/embeddedgo/display/pix/examples"
 
 	"github.com/embeddedgo/stm32/dci/tftdci"
 	"github.com/embeddedgo/stm32/hal/gpio"
@@ -68,8 +68,9 @@ func main() {
 	disp := examples.Waveshare_1i5_128x128_OLED_SSD1351(dci)
 
 	for {
-		examples.Colors(disp)
-		examples.RotateDisplay(disp)
-		examples.DrawText(disp)
+		//examples.Colors(disp)
+		//examples.RotateDisplay(disp)
+		//examples.DrawText(disp)
+		examples.GraphicsTest(disp)
 	}
 }
