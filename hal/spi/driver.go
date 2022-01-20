@@ -90,7 +90,6 @@ func (d *Driver) DMAISR(ch dma.Channel) {
 	ev, err := ch.Status()
 	if ev&dma.Complete != 0 || err&^dma.ErrFIFO != 0 {
 		ch.DisableIRQ(dma.EvAll, dma.ErrAll)
-		ch.Disable() // required by non-stream DMA (eg. F0,F1,F3,L1,L4)
 		if atomic.AddInt32(&d.dmacnt, -1) == 0 {
 			d.done.Wakeup()
 		}
@@ -98,7 +97,7 @@ func (d *Driver) DMAISR(ch dma.Channel) {
 }
 
 func (d *Driver) ISR() {
-	d.p.DisableIRQ(RxNotEmpty | Err)
+	d.p.DisableIRQ(Err)
 	d.done.Wakeup()
 }
 
@@ -107,18 +106,20 @@ func (d *Driver) WriteReadByte(b byte) byte {
 	if d.err != 0 {
 		return 0
 	}
-	d.done.Clear()
-	p := d.p
-	p.EditConfig(TwoWire|Tx, ThreeWire|TxRx)
-	p.EnableIRQ(RxNotEmpty | Err)
-	p.StoreByte(b)
-	d.done.Sleep(-1)
-	b = p.LoadByte()
-	if _, e := p.Status(); e != 0 {
-		d.err = uint32(e) << 8
-		return 0
+	d.p.EditConfig(TwoWire|Tx, ThreeWire|TxRx)
+	d.p.StoreByte(b)
+	// wait in loop, interrupts are too expensive for one byte transfer
+	for {
+		ev, err := d.p.Status()
+		if ev&RxNotEmpty != 0 {
+			break
+		}
+		if err != 0 {
+			d.err = uint32(err) << 8
+			return 0
+		}
 	}
-	return b
+	return d.p.LoadByte()
 }
 
 // WriteReadWord16 writes and reads 16-bit word.
@@ -126,18 +127,20 @@ func (d *Driver) WriteReadWord16(w uint16) uint16 {
 	if d.err != 0 {
 		return 0
 	}
-	d.done.Clear()
-	p := d.p
-	p.EditConfig(TwoWire|Tx, ThreeWire|TxRx)
-	p.EnableIRQ(RxNotEmpty | Err)
-	p.StoreWord16(w)
-	d.done.Sleep(-1)
-	w = p.LoadWord16()
-	if _, e := p.Status(); e != 0 {
-		d.err = uint32(e) << 8
-		return 0
+	d.p.EditConfig(TwoWire|Tx, ThreeWire|TxRx)
+	d.p.StoreWord16(w)
+	// wait in loop, interrupts are too expensive for one word transfer
+	for {
+		ev, err := d.p.Status()
+		if ev&RxNotEmpty != 0 {
+			break
+		}
+		if err != 0 {
+			d.err = uint32(err) << 8
+			return 0
+		}
 	}
-	return w
+	return d.p.LoadWord16()
 }
 
 func (d *Driver) setupDMA(ch dma.Channel, mode dma.Mode, wordSize uintptr) {
@@ -146,12 +149,55 @@ func (d *Driver) setupDMA(ch dma.Channel, mode dma.Mode, wordSize uintptr) {
 	ch.SetAddrP(unsafe.Pointer(&d.p.dr))
 }
 
+const minIRQLen = 8
+
 func startDMA(ch dma.Channel, addr uintptr, n int) {
 	ch.SetAddrM(unsafe.Pointer(addr))
 	ch.SetLen(n)
 	ch.Clear(dma.EvAll, dma.ErrAll)
-	ch.EnableIRQ(dma.Complete, dma.ErrAll&^dma.ErrFIFO)
+	if n >= minIRQLen {
+		ch.EnableIRQ(dma.Complete, dma.ErrAll&^dma.ErrFIFO)
+	}
 	ch.Enable()
+}
+
+func waitDMA(d *Driver, n int, rx bool) {
+	if n >= minIRQLen {
+		d.done.Sleep(-1)
+	}
+	tx := true
+	for {
+		if _, err := d.p.Status(); err != 0 {
+			d.err |= uint32(err) << 8
+			d.txDMA.DisableIRQ(dma.EvAll, dma.ErrAll)
+			d.rxDMA.DisableIRQ(dma.EvAll, dma.ErrAll)
+			d.txDMA.Disable()
+			d.rxDMA.Disable()
+			tx, rx = false, false
+		}
+		if tx {
+			ev, err := d.txDMA.Status()
+			err &^= dma.ErrFIFO
+			if ev&dma.Complete != 0 || err != 0 {
+				d.err |= uint32(err)
+				tx = false
+				d.txDMA.Disable() // required by non-stream DMA (F0,F1,F3,L1,L4)
+			}
+		}
+		if rx {
+			ev, err := d.rxDMA.Status()
+			err &^= dma.ErrFIFO
+			if ev&dma.Complete != 0 || err != 0 {
+				d.err |= uint32(err)
+				rx = false
+				d.rxDMA.Disable() // required by non-stream DMA (F0,F1,F3,L1,L4)
+			}
+		}
+		if !(tx || rx) {
+			break
+		}
+		runtime.Gosched()
+	}
 }
 
 func (d *Driver) writeReadDMA(out, in uintptr, olen, ilen int, wsize uintptr) (n int) {
@@ -159,7 +205,7 @@ func (d *Driver) writeReadDMA(out, in uintptr, olen, ilen int, wsize uintptr) (n
 	if olen > 1 {
 		txdmacfg |= dma.IncM
 	}
-	d.setupDMA(d.txDMA, txdmacfg, 1)
+	d.setupDMA(d.txDMA, txdmacfg, wsize)
 	d.setupDMA(d.rxDMA, dma.PTM|dma.IncM|dma.FT4, wsize)
 	p := d.p
 	p.EditConfig(TwoWire|Tx, ThreeWire|TxRx)
@@ -173,8 +219,10 @@ func (d *Driver) writeReadDMA(out, in uintptr, olen, ilen int, wsize uintptr) (n
 		if m > 0xffff {
 			m = 0xffff
 		}
-		d.dmacnt = 2
-		d.done.Clear()
+		if m >= minIRQLen {
+			d.dmacnt = 2
+			d.done.Clear()
+		}
 		startDMA(d.rxDMA, in, m)
 		startDMA(d.txDMA, out, m)
 		if olen > 1 {
@@ -182,18 +230,8 @@ func (d *Driver) writeReadDMA(out, in uintptr, olen, ilen int, wsize uintptr) (n
 		}
 		in += uintptr(m)
 		n += m
-		d.done.Sleep(-1)
-		if _, e := p.Status(); e != 0 {
-			d.txDMA.DisableIRQ(dma.EvAll, dma.ErrAll)
-			d.rxDMA.DisableIRQ(dma.EvAll, dma.ErrAll)
-			d.err = uint32(e) << 8
-			n -= d.rxDMA.Len()
-			break
-		}
-		_, rxe := d.rxDMA.Status()
-		_, txe := d.txDMA.Status()
-		if e := (rxe | txe) &^ dma.ErrFIFO; e != 0 {
-			d.err = uint32(e)
+		waitDMA(d, m, true)
+		if d.err != 0 {
 			n -= d.rxDMA.Len()
 			break
 		}
@@ -214,28 +252,23 @@ func (d *Driver) writeDMA(out uintptr, n int, wsize uintptr, incm dma.Mode) {
 		if m > 0xffff {
 			m = 0xffff
 		}
-		d.dmacnt = 1
-		d.done.Clear()
+		if m >= minIRQLen {
+			d.dmacnt = 1
+			d.done.Clear()
+		}
 		startDMA(d.txDMA, out, m)
 		n -= m
 		if incm != 0 {
 			out += uintptr(m)
 		}
-		d.done.Sleep(-1)
-		if _, e := p.Status(); e != 0 {
-			d.txDMA.DisableIRQ(dma.EvAll, dma.ErrAll)
-			d.err = uint32(e) << 8
-			break
-		}
-		_, txe := d.txDMA.Status()
-		if e := txe &^ dma.ErrFIFO; e != 0 {
-			d.err = uint32(e)
+		waitDMA(d, m, false)
+		if d.err != 0 {
 			break
 		}
 	}
 	p.DisableDMA(TxEmpty)
 	p.DisableIRQ(Err)
-	// Now DMA finished but SPI can still send buffered data. Wait for end.
+	// DMA finished but SPI can still send buffered data. Wait for end.
 	for {
 		if ev, _ := p.Status(); ev&Busy == 0 {
 			break
