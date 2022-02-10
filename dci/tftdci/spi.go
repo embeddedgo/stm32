@@ -60,16 +60,20 @@ func (dci *SPI) Driver() *spi.Driver  { return dci.spi }
 func (dci *SPI) Err(clear bool) error { return dci.spi.Err(clear) }
 func (dci *SPI) DC() gpio.Pin         { return dci.dc }
 
+func start(dci *SPI) {
+	dci.started = true
+	if dci.csn.IsValid() {
+		dci.csn.Clear()
+		if dci.reconf {
+			dci.spi.Periph().SetConfig(dci.wmode, 0)
+		}
+	}
+	dci.spi.Enable()
+}
+
 func (dci *SPI) Cmd(cmd byte) {
 	if !dci.started {
-		dci.started = true
-		if dci.csn.IsValid() {
-			dci.csn.Clear()
-			if dci.reconf {
-				dci.spi.Periph().SetConfig(dci.wmode, 0)
-			}
-		}
-		dci.spi.Enable()
+		start(dci)
 	}
 	dci.dc.Clear()
 	dci.spi.SetWordSize(8)
@@ -86,31 +90,49 @@ func (dci *SPI) End() {
 }
 
 func (dci *SPI) WriteBytes(p []uint8) {
+	if !dci.started {
+		start(dci)
+	}
 	dci.spi.SetWordSize(8)
 	dci.spi.WriteRead(p, nil)
 }
 
 func (dci *SPI) WriteString(s string) {
+	if !dci.started {
+		start(dci)
+	}
 	dci.spi.SetWordSize(8)
 	dci.spi.WriteStringRead(s, nil)
 }
 
 func (dci *SPI) WriteByteN(b byte, n int) {
+	if !dci.started {
+		start(dci)
+	}
 	dci.spi.SetWordSize(8)
 	dci.spi.WriteByteN(b, n)
 }
 
 func (dci *SPI) WriteWords(p []uint16) {
+	if !dci.started {
+		start(dci)
+	}
 	dci.spi.SetWordSize(16)
 	dci.spi.WriteRead16(p, nil)
 }
 
 func (dci *SPI) WriteWordN(w uint16, n int) {
+	if !dci.started {
+		start(dci)
+	}
 	dci.spi.SetWordSize(16)
 	dci.spi.WriteWord16N(w, n)
 }
 
 func (dci *SPI) ReadBytes(p []byte) {
+	if !dci.started {
+		start(dci)
+	}
 	dci.spi.SetWordSize(8)
 	dci.spi.Periph().SetConfig(dci.rmode, 0)
 	dci.spi.WriteRead(nil, p)
