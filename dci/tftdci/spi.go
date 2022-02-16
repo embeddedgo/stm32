@@ -71,13 +71,13 @@ func start(dci *SPI) {
 	dci.spi.Enable()
 }
 
-func (dci *SPI) Cmd(cmd byte) {
+func (dci *SPI) Cmd(p []byte) {
 	if !dci.started {
 		start(dci)
 	}
 	dci.dc.Clear()
 	dci.spi.SetWordSize(8)
-	dci.spi.WriteReadByte(cmd)
+	dci.spi.WriteRead(p, nil)
 	dci.dc.Set()
 }
 
