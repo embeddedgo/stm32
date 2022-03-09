@@ -1,10 +1,4 @@
-github.com/embeddedgo/display v0.1.9 h1:gBAS3/IoSTuikigAibknwpi6czwrketSRj1ab2dTw0w=
-github.com/embeddedgo/display v0.1.9/go.mod h1:2i5StnXmb6K+Jq9AQ4xPQDqPlkT50lVBPMK9DKt8o0s=
-github.com/embeddedgo/display v1.0.1 h1:UdY1OH/tgEqdPbnHbo8xiqOQNyqZWdsgOc3dIPZ9CgM=
-github.com/embeddedgo/display v1.0.1/go.mod h1:HkeokSER+jfg7BSdYP8rdAp6zlCIILgV4qBA5v+Ewn0=
-github.com/embeddedgo/fs v0.0.2 h1:L7Oxbj7W+FAubXtlSmx+09ftdMGFbNgSFJCv73qdWHE=
-github.com/embeddedgo/fs v0.0.2/go.mod h1:HxvXq7Q1lup39d5dUfG18xAnD6YYsDfpcsnPkn+uM1o=
-github.com/embeddedgo/fs v0.0.3 h1:c+9XDYq8/fK+xco2jiCSpzBoIb5BHpN8wzyaSUaa+9A=
-github.com/embeddedgo/fs v0.0.3/go.mod h1:HxvXq7Q1lup39d5dUfG18xAnD6YYsDfpcsnPkn+uM1o=
+github.com/embeddedgo/display v1.0.2 h1:GB6kTH4dE2rCw5YTJNEPyYSlxon9c0ScP79lSgBXNLA=
+github.com/embeddedgo/display v1.0.2/go.mod h1:HkeokSER+jfg7BSdYP8rdAp6zlCIILgV4qBA5v+Ewn0=
 github.com/embeddedgo/fs v0.0.5 h1:YEUivy1xb0BXB9vihuq9ZtY++APGMKcm9UbUP3P8l3o=
 github.com/embeddedgo/fs v0.0.5/go.mod h1:hGAp7AwFMpHUjB8hSOPEA5KN3DOSw6lNe5gLuqIS/m8=
