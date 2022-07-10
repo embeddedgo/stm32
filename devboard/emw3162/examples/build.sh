@@ -2,6 +2,5 @@
 
 GOTARGET=stm32f215
 GOMEM=0x20000000:128K
-GOTEXT=0x8000000
 
-. ../../../../../scripts/build.sh $@
+. $(emgo env GOROOT)/../scripts/build.sh $@

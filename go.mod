@@ -1,11 +1,8 @@
 module github.com/embeddedgo/stm32
 
-go 1.16
-
-//replace github.com/embeddedgo/display => ../display
-//replace github.com/embeddedgo/fs => ../fs
+go 1.18
 
 require (
-	github.com/embeddedgo/display v1.0.2
-	github.com/embeddedgo/fs v0.0.5
+	github.com/embeddedgo/display v1.1.0
+	github.com/embeddedgo/fs v0.1.0
 )

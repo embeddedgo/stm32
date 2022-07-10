@@ -1,7 +1,6 @@
 #!/bin/sh
 
-INTERFACE=stlink
 TARGET=stm32l4x
 RESET=srst_only
 
-. ../../../../../scripts/debug-oocd.sh
+. $(emgo env GOROOT)/../scripts/debug-oocd.sh

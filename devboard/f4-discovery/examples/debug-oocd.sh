@@ -4,4 +4,4 @@ INTERFACE=stlink
 TARGET=stm32f4x
 RESET=srst_only
 
-. ../../../../../scripts/debug-oocd.sh
+. $(emgo env GOROOT)/../scripts/debug-oocd.sh
