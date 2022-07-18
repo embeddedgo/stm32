@@ -10,6 +10,9 @@ svdxgen github.com/embeddedgo/stm32/p ../svd/*.svd
 for p in dma exti flash gpio pwr rcc rtc spi syscfg; do
 	cd $p
 	xgen *.go
+	for target in stm32f215 stm32f407 stm32f412 stm32l4x6; do
+		GOOS=noos GOARCH=thumb $(emgo env GOROOT)/bin/go build -tags $target
+	done
 	cd ..
 done
 
