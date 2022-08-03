@@ -20,7 +20,7 @@ MXCHIP [EMW3162](https://en.mxchip.com/productinfo/244895.html): ([STM32F205RGT6
 
 ![EMW3162](emw3162/doc/board.jpg)
 
-#### [f4-discovery](f4-discovery):
+#### [f4-discovery](f4-discovery)
 
 ST [STM32F4-Discovery](https://www.st.com/web/catalog/tools/FM116/SC959/SS1532/PF252419)
 
