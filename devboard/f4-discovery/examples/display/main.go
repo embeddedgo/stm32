@@ -2,6 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+// Display draws on the connected display.
 package main
 
 import (
@@ -61,6 +62,7 @@ func main() {
 
 	// Run
 
+	//disp := displays.Adafruit_0i96_128x64_OLED_SSD1306(dci)
 	//disp := displays.Adafruit_1i5_128x128_OLED_SSD1351(dci)
 	//disp := displays.Adafruit_1i54_240x240_IPS_ST7789(dci)
 	//disp := displays.Adafruit_2i8_240x320_TFT_ILI9341(dci)
@@ -69,7 +71,6 @@ func main() {
 	disp := displays.Waveshare_1i5_128x128_OLED_SSD1351(dci)
 
 	for {
-		examples.Colors(disp)
 		examples.RotateDisplay(disp)
 		examples.DrawText(disp)
 		examples.GraphicsTest(disp)
