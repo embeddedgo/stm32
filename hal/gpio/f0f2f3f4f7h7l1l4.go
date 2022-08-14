@@ -2,6 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+//go:build stm32f215 || stm32f407 || stm32f412 || stm32f7x6 || stm32h7x3 || stm32l4x6
 // +build stm32f215 stm32f407 stm32f412 stm32f7x6 stm32h7x3 stm32l4x6
 
 package gpio
@@ -65,7 +66,7 @@ func reset(p *Port) {
 
 func setup(p *Port, n int, cfg *Config) {
 	pos := uint(n * 2)
-	p.otyper.StoreBit(n, int(cfg.Driver))
+	p.otyper.StoreBits(1<<uint(n), uint32(cfg.Driver)<<uint(n))
 	p.ospeedr.StoreBits(3<<pos, uint32(int(cfg.Speed)-veryLow)<<pos)
 	p.pupdr.StoreBits(3<<pos, uint32(cfg.Pull)<<pos)
 	p.moder.StoreBits(3<<pos, uint32(cfg.Mode)<<pos)
