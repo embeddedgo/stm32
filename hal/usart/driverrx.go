@@ -11,9 +11,8 @@ import (
 	"github.com/embeddedgo/stm32/hal/dma"
 )
 
-// EnableRx enables the UART receiver. If rxbuf is not nil the Driver uses the
-// provided slice to buffer received data. Othewrise it allocates a small buffer
-// itself. At least 2-byte buffer is required.
+// EnableRx enables the UART receive. It allocates an internal ring buffer of
+// bufLen size. In most cases bufLen = 64 is good choise (minimum is 2).
 //
 // EnableRx setups Rx DMA channel in circular mode and enables it to continuous
 // reception of data. Driver assumes that it has exclusive access to the
@@ -33,16 +32,14 @@ import (
 //
 // As the DMA reads any received data it does not make much sense to enable
 // hardware RTS signaling unless the DMA is very busy.
-func (d *Driver) EnableRx(rxbuf []byte) {
+func (d *Driver) EnableRx(bufLen int) {
 	if d.rxBuf != nil {
 		panic("enabled before")
 	}
-	if rxbuf == nil {
-		rxbuf = make([]byte, 64)
-	} else if len(rxbuf) < 2 {
+	if bufLen < 2 {
 		panic("rxbuf too short")
 	}
-	d.rxBuf = rxbuf
+	d.rxBuf = make([]byte, bufLen)
 	ch := d.rxDMA
 	d.p.cr1.SetBits(re)
 	d.p.cr3.SetBits(dmar)
@@ -50,15 +47,14 @@ func (d *Driver) EnableRx(rxbuf []byte) {
 	startDMA(ch, uintptr(unsafe.Pointer(&d.rxBuf[0])), len(d.rxBuf), false)
 }
 
-// DisableRx disables USART receiver and resets the state of the internal ring
-// buffer.
-func (d *Driver) DisableRx() (rxbuf []byte) {
+// DisableRx disables USART receiver and frees memory allocated for the internal
+// ring buffer.
+func (d *Driver) DisableRx() {
 	ch := d.rxDMA
 	ch.Disable()
 	ch.DisableIRQ(dma.EvAll, dma.ErrAll)
 	d.p.cr1.ClearBits(re)
 	d.p.cr3.ClearBits(dmar)
-	rxbuf = d.rxBuf
 	d.rxBuf = nil
 	d.rxp = 0
 	// wait for DMA to really stop

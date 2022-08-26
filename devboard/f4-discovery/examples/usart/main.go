@@ -28,7 +28,7 @@ func main() {
 	u.UsePin(rx, usart.RXD)
 	u.Setup(usart.Word8b, 115200)
 	u.EnableTx()
-	u.EnableRx(nil)
+	u.EnableRx(64)
 
 	// Speed test
 

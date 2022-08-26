@@ -40,7 +40,7 @@ func Setup(d *usart.Driver, rx, tx gpio.Pin, conf usart.Config, baudrate int, na
 	d.UsePin(tx, usart.TXD)
 	d.Setup(conf, baudrate)
 	d.EnableTx()
-	d.EnableRx(nil)
+	d.EnableRx(64)
 
 	// Set a system writer for print, println, panic, etc.
 	uart = d
@@ -73,7 +73,7 @@ func SetupLight(d *usart.Driver, rx, tx gpio.Pin, conf usart.Config, baudrate in
 	d.UsePin(tx, usart.TXD)
 	d.Setup(conf, baudrate)
 	d.EnableTx()
-	d.EnableRx(nil)
+	d.EnableRx(64)
 
 	// Set a system writer for print, println, panic, etc.
 	uart = d
