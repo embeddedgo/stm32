@@ -33,13 +33,15 @@ import (
 // As the DMA reads any received data it does not make much sense to enable
 // hardware RTS signaling unless the DMA is very busy.
 func (d *Driver) EnableRx(bufLen int) {
-	if d.rxBuf != nil {
-		panic("enabled before")
+	if bufLen == 0 || len(d.rxBuf)+bufLen != 0 {
+		if d.rxBuf != nil {
+			panic("enabled before")
+		}
+		if bufLen < 2 {
+			panic("rxbuf too short")
+		}
+		d.rxBuf = make([]byte, bufLen)
 	}
-	if bufLen < 2 {
-		panic("rxbuf too short")
-	}
-	d.rxBuf = make([]byte, bufLen)
 	ch := d.rxDMA
 	d.p.cr1.SetBits(re)
 	d.p.cr3.SetBits(dmar)
@@ -62,6 +64,16 @@ func (d *Driver) DisableRx() {
 		runtime.Gosched()
 	}
 	return
+}
+
+// DiscardRx discards all rceived data.
+func (d *Driver) DiscardRx() {
+	rxBuf := d.rxBuf
+	d.DisableRx()
+	d.rxBuf = rxBuf
+	d.Periph().Status()
+	d.Periph().Load()
+	d.EnableRx(-len(rxBuf))
 }
 
 // dmaPos returns the current Rx DMA position, tc extends the positon
