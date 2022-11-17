@@ -107,6 +107,7 @@ func (d *Driver) disableRxIRQ() {
 	d.p.DisableErrIRQ()
 }
 
+// Read implements io.Reader interface.
 func (d *Driver) Read(buf []byte) (n int, err error) {
 start:
 	dmap, tc, e := dmaPos(d)
@@ -149,6 +150,11 @@ again:
 		if !d.rxReady.Sleep(d.timeoutRx) {
 			return 0, ErrTimeout
 		}
+		// BUG: There is a race between this goroutine awakened by the
+		// RxNotEmpty IRQ and the DMA controller handling the same RxNotEmpty
+		// request. If the DMA won't be able to handle it before this goroutine
+		// perform again the above (second) dmaPos check it'll sleep again,
+		// possibly forever, waiting for the next RxNotEmpty event.
 		goto start
 	default: // DMA position is in between d.rxp and the end of d.rxBuf
 		n = copy(buf, d.rxBuf[d.rxp:dmap])
@@ -157,6 +163,14 @@ again:
 	if d.rxp >= len(d.rxBuf) {
 		d.rxp -= len(d.rxBuf)
 		d.rxDMA.Clear(dma.Complete, 0)
+	}
+	return
+}
+
+func (d *Driver) ReadByte() (b byte, err error) {
+	var buf [1]byte
+	if _, err = d.Read(buf[:]); err == nil {
+		b = buf[0]
 	}
 	return
 }

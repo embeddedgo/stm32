@@ -66,6 +66,16 @@ func (d *Driver) TxDMA() dma.Channel {
 	return d.txDMA
 }
 
+// SetReadTimeout sets the read timeout used by Read* functions.
+func (d *Driver) SetReadTimeout(timeout time.Duration) {
+	d.timeoutRx = timeout
+}
+
+// SetWriteTimeout sets the write timeout used by Write* functions.
+func (d *Driver) SetWriteTimeout(timeout time.Duration) {
+	d.timeoutTx = timeout
+}
+
 type Config uint32
 
 const (

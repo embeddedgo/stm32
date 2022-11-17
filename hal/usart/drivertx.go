@@ -32,14 +32,35 @@ func (d *Driver) DisableTx() {
 	d.p.cr1.ClearBits(te)
 }
 
-// WriteString works like Write but accepts string instead of byte slice.
-func (d *Driver) WriteString(s string) (int, error) {
+// WriteByte implements io.ByteWriter interface.
+func (d *Driver) WriteByte(b byte) error {
+	p := d.p
+	for {
+		if ev, _ := p.Status(); ev&TxEmpty != 0 {
+			break
+		}
+		runtime.Gosched()
+	}
+	p.Store(uint32(b))
+	return nil
+}
+
+// WriteString implements io.StringWriter interface.
+func (d *Driver) WriteString(s string) (n int, err error) {
+	if len(s) == 0 {
+		return
+	}
 	if rtos.HandlerMode() {
 		return sysWrite(d, s)
 	}
+	if len(s) == 1 {
+		if err = d.WriteByte(s[0]); err == nil {
+			n = 1
+		}
+		return
+	}
 	ch := d.txDMA
 	ptr := *(*uintptr)(unsafe.Pointer(&s))
-	var n int
 	for {
 		m := len(s) - n
 		if m == 0 {
@@ -64,12 +85,10 @@ func (d *Driver) WriteString(s string) (int, error) {
 			return n - ch.Len(), e
 		}
 	}
-	return n, nil
+	return
 }
 
-// Write sends bytes from p to the remote party. It returns the number of bytes
-// sent and error if detected. It does not provide any guarantee that the bytes
-// sent were received by the remote party.
+// Write implements io.Writer interface.
 func (d *Driver) Write(p []byte) (int, error) {
 	return d.WriteString(*(*string)(unsafe.Pointer(&p)))
 }
@@ -91,15 +110,16 @@ func (d *Driver) TxDMAISR() {
 func sysWrite(d *Driver, s string) (int, error) {
 	d.txDMA.DisableIRQ(dma.EvAll, dma.ErrAll)
 	d.txDMA.Disable()
+	p := d.p
 	for i := 0; i < len(s); i++ {
-		c := int(s[i])
+		c := s[i]
 		if c == '\n' {
 			// convert "\n" to "\r\n"
 			waitTxEmpty(d.p)
-			d.p.Store('\r')
+			p.Store('\r')
 		}
 		waitTxEmpty(d.p)
-		d.p.Store(c)
+		p.Store(uint32(c))
 	}
 	return len(s), nil
 }

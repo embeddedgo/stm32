@@ -238,11 +238,11 @@ func (p *Periph) SetConf3(cfg Conf3) {
 }
 
 // Store stores a word in Tx data register.
-func (p *Periph) Store(word int) {
-	tdr(p).Store(uint32(word))
+func (p *Periph) Store(word uint32) {
+	tdr(p).Store(word)
 }
 
 // Load loads a word from Rx data register.
-func (p *Periph) Load() int {
-	return int(rdr(p).Load())
+func (p *Periph) Load() uint32 {
+	return rdr(p).Load()
 }
