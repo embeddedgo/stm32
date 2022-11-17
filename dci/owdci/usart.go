@@ -20,9 +20,9 @@ func usartDrv(dci *USART) *usart.Driver { return (*usart.Driver)(dci) }
 
 // SetupUSART configures d to be used as onewire.DCI.
 func SetupUSART(d *usart.Driver) *USART {
-	d.Setup(usart.Word8b, 115200)
-	// Half duplex mode and noise detection disabled.
-	d.SetConfig(usart.HalfDuplex | usart.OneBit)
+	d.Setup(usart.Word8b|usart.HalfDuplex, 115200)
+	p := d.Periph()
+	p.SetConf3(p.Conf3() | usart.OneBit) // disables noise detection
 	d.EnableRx(32)
 	d.EnableTx()
 	return (*USART)(d)
@@ -37,20 +37,21 @@ func checkErr(d *usart.Driver, err error) error {
 }
 
 func (dci *USART) Reset() error {
-	dci.Drv.Periph().SetBaudRate(9600)
-	err := dci.Drv.WriteByte(0xf0)
+	d := usartDrv(dci)
+	d.Periph().SetBaudrate(9600)
+	err := d.WriteByte(0xf0)
 	if err != nil {
 		return err
 	}
 	d.SetReadTimeout(time.Second)
-	r, err := dci.Drv.ReadByte()
+	r, err := d.ReadByte()
 	if err != nil {
 		return err
 	}
 	if r == 0xf0 {
 		return onewire.ErrNoResponse
 	}
-	dci.Drv.Periph().SetBaudRate(115200)
+	d.SetBaudrate(115200)
 	return nil
 }
 
@@ -70,12 +71,12 @@ func sendRecv(d *usart.Driver, slots *[8]byte) error {
 		return err
 	}
 	d.SetReadTimeout(time.Second)
-	_, err := io.ReadFull(dci.Drv, slots[:])
+	_, err := io.ReadFull(d, slots[:])
 	return checkErr(d, err)
 }
 
 func (dci *USART) ReadBit() (int, error) {
-	slot, err := sendRecvSlot(lpuartDrv(dci), 0xff)
+	slot, err := sendRecvSlot(usartDrv(dci), 0xff)
 	if err != nil {
 		return 0, err
 	}
@@ -87,7 +88,7 @@ func (dci *USART) WriteBit(bit int) error {
 	if bit&1 != 0 {
 		b = 0xff
 	}
-	d := lpuartDrv(dci)
+	d := usartDrv(dci)
 	slot, err := sendRecvSlot(d, b)
 	if err != nil {
 		return err
@@ -99,9 +100,9 @@ func (dci *USART) WriteBit(bit int) error {
 	return nil
 }
 
-func (dci USART) ReadByte() (byte, error) {
+func (dci *USART) ReadByte() (byte, error) {
 	slots := [8]byte{0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff}
-	err := sendRecv(lpuartDrv(dci), &slots)
+	err := sendRecv(usartDrv(dci), &slots)
 	var v int
 	for i, slot := range slots {
 		v += int(slot&1) << uint(i)
@@ -109,7 +110,7 @@ func (dci USART) ReadByte() (byte, error) {
 	return byte(v), err
 }
 
-func (dci USART) WriteByte(b byte) error {
+func (dci *USART) WriteByte(b byte) error {
 	var slots [8]byte
 	v := int(b)
 	for i := range slots {
@@ -118,7 +119,7 @@ func (dci USART) WriteByte(b byte) error {
 		}
 		v >>= 1
 	}
-	d := lpuartDrv(dci)
+	d := usartDrv(dci)
 	if err := sendRecv(d, &slots); err != nil {
 		return err
 	}
