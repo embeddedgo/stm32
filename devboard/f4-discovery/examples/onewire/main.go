@@ -2,10 +2,15 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// Onewire uses SkipROM addressing to configure and run all DS18x2x temperature
-// sensors on the 1-Wire bus conected to the LPUART2 interface. Next it searchs
-// for individual sensors and prints the mesured temperatures on the serial
-// terimnal connected to the LPUART1 interface.
+// Onewire uses SkipROM (broadcast) addressing to configure and run all DS18x2x
+// temperature sensors on the 1-Wire bus conected to the LPUART2 interface. Next
+// it waits for all sensors to finish the conversion. After that is searchs for
+// individual sensors on the bus and communicates with them using conventional
+// MatchROM (unicast) adressing mode, reads and and prints the mesured
+// temperatures on the serial terminal connected to the LPUART1 interface.
+//
+// Starting conversion on many sensors at the same time requires much power so
+// it may not work in parasite power bus configuration.
 package main
 
 import (
@@ -50,10 +55,6 @@ func main() {
 	owm := onewire.Master{owdci.SetupUSART(ow)}
 
 	dtypes := []onewire.Type{onewire.DS18S20, onewire.DS18B20, onewire.DS1822}
-
-	// This algorithm configures and starts conversion simultaneously on all
-	// temperature sensors on the bus. It is fast but doesn't work in case of
-	// if the parasite power bus configuration is used.
 
 start:
 	for {
