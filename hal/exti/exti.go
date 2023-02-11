@@ -108,7 +108,7 @@ func (li Lines) DisableFallTrig() {
 // Trig allows to trigger an interrupt/event request by software. Interrupt
 // pending flag on the line is set only when interrupt generation is enabled
 // for this line.
-func (li Lines) Trigger() {
+func (li Lines) Trig() {
 	trigger(li)
 }
 
