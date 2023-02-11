@@ -72,9 +72,9 @@ func main() {
 	// STM32L476 has little RAM when it comes to Go programs. Reduce the number
 	// of examples below if you encounter an out of memory panic.
 	for {
-		//examples.Colors(disp)
+		examples.Colors(disp)
 		//examples.RotateDisplay(disp)
 		//examples.DrawText(disp)
-		examples.GraphicsTest(disp)
+		//examples.GraphicsTest(disp)
 	}
 }
