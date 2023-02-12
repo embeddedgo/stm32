@@ -26,8 +26,8 @@ import (
 
 // Input pin states.
 const (
-	failure = 0 // low state on input pin
-	ok      = 1 // high state on input pin
+	failure = 0 // low state on the input pin
+	ok      = 1 // high state on the input pin
 )
 
 // System state
@@ -67,7 +67,7 @@ func (inp *input) ISR() {
 	if trigFail {
 		detected = failure
 	}
-	atomic.StoreInt32(&inp.detected, detected)
+	atomic.StoreInt32(&inp.detected, detected) // must be before setting LED
 	if trigFail {
 		leds.User.Set(backup) // respond fast
 	}
@@ -126,7 +126,7 @@ func EXTI15_10_Handler() {
 	p.DisableIRQ()
 	p.ClearPending()
 
-	// This interrup may be shared by multiple exti lines. Call individual ISRs
+	// This interrupt may be shared by multiple exti lines. Call individual ISRs
 	// below. Note that their corresponding EXTI lines pending bits were
 	// disabled and cleared (see above).
 	if p&inp.line != 0 {
