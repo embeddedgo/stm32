@@ -13,28 +13,26 @@
 //  TIM13  TIM13_BASE  APB1  TIM8_UP_TIM13       General purpose timers
 //  TIM14  TIM14_BASE  APB1  TIM8_TRG_COM_TIM14  General purpose timers
 // Registers:
-//  0x000 32  CR1           control register 1
-//  0x004 32  CR2           control register 2
-//  0x008 32  SMCR          slave mode control register
-//  0x00C 32  DIER          DMA/Interrupt enable register
-//  0x010 32  SR            status register
-//  0x014 32  EGR           event generation register
-//  0x018 32  CCMR1_Output  capture/compare mode register 1 (output mode)
-//  0x018 32  CCMR1_Input   capture/compare mode register 1 (input mode)
-//  0x01C 32  CCMR2_Output  capture/compare mode register 2 (output mode)
-//  0x01C 32  CCMR2_Input   capture/compare mode register 2 (input mode)
-//  0x020 32  CCER          capture/compare enable register
-//  0x024 32  CNT           counter
-//  0x028 32  PSC           prescaler
-//  0x02C 32  ARR           auto-reload register
-//  0x034 32  CCR1          capture/compare register 1
-//  0x038 32  CCR2          capture/compare register 2
-//  0x03C 32  CCR3          capture/compare register 3
-//  0x040 32  CCR4          capture/compare register 4
-//  0x048 32  DCR           DMA control register
-//  0x04C 32  DMAR          DMA address for full transfer
-//  0x060 32  AF1           TIM alternate function option register 1
-//  0x068 32  TISEL         TIM timer input selection register
+//  0x000 32  CR1        control register 1
+//  0x004 32  CR2        control register 2
+//  0x008 32  SMCR       slave mode control register
+//  0x00C 32  DIER       DMA/Interrupt enable register
+//  0x010 32  SR         status register
+//  0x014 32  EGR        event generation register
+//  0x018 32  CCMR1      capture/compare mode register 1
+//  0x01C 32  CCMR2      capture/compare mode register 2
+//  0x020 32  CCER       capture/compare enable register
+//  0x024 32  CNT        counter
+//  0x028 32  PSC        prescaler
+//  0x02C 32  ARR        auto-reload register
+//  0x034 32  CCR1(CCR)  capture/compare register 1
+//  0x038 32  CCR2(CCR)  capture/compare register 2
+//  0x03C 32  CCR3(CCR)  capture/compare register 3
+//  0x040 32  CCR4(CCR)  capture/compare register 4
+//  0x048 32  DCR        DMA control register
+//  0x04C 32  DMAR       DMA address for full transfer
+//  0x060 32  AF1        TIM alternate function option register 1
+//  0x068 32  TISEL      TIM timer input selection register
 // Import:
 //  github.com/embeddedgo/stm32/p/bus
 //  github.com/embeddedgo/stm32/p/mmap
@@ -175,18 +173,22 @@ const (
 )
 
 const (
-	CC1S   CCMR1_Output = 0x03 << 0  //+ CC1S
-	OC1FE  CCMR1_Output = 0x01 << 2  //+ OC1FE
-	OC1PE  CCMR1_Output = 0x01 << 3  //+ OC1PE
-	OC1M   CCMR1_Output = 0x07 << 4  //+ OC1M
-	OC1CE  CCMR1_Output = 0x01 << 7  //+ OC1CE
-	CC2S   CCMR1_Output = 0x03 << 8  //+ CC2S
-	OC2FE  CCMR1_Output = 0x01 << 10 //+ OC2FE
-	OC2PE  CCMR1_Output = 0x01 << 11 //+ OC2PE
-	OC2M   CCMR1_Output = 0x07 << 12 //+ OC2M
-	OC2CE  CCMR1_Output = 0x01 << 15 //+ OC2CE
-	OC1M_3 CCMR1_Output = 0x01 << 16 //+ Output Compare 1 mode - bit 3
-	OC2M_3 CCMR1_Output = 0x01 << 24 //+ Output Compare 2 mode - bit 3
+	CC1S   CCMR1 = 0x03 << 0  //+ CC1S
+	OC1FE  CCMR1 = 0x01 << 2  //+ OC1FE
+	OC1PE  CCMR1 = 0x01 << 3  //+ OC1PE
+	OC1M   CCMR1 = 0x07 << 4  //+ OC1M
+	OC1CE  CCMR1 = 0x01 << 7  //+ OC1CE
+	CC2S   CCMR1 = 0x03 << 8  //+ CC2S
+	OC2FE  CCMR1 = 0x01 << 10 //+ OC2FE
+	OC2PE  CCMR1 = 0x01 << 11 //+ OC2PE
+	OC2M   CCMR1 = 0x07 << 12 //+ OC2M
+	OC2CE  CCMR1 = 0x01 << 15 //+ OC2CE
+	OC1M_3 CCMR1 = 0x01 << 16 //+ Output Compare 1 mode - bit 3
+	OC2M_3 CCMR1 = 0x01 << 24 //+ Output Compare 2 mode - bit 3
+	ICPCS  CCMR1 = 0x03 << 2  //+ Input capture 1 prescaler
+	IC1F   CCMR1 = 0x0F << 4  //+ Input capture 1 filter
+	IC2PCS CCMR1 = 0x03 << 10 //+ Input capture 2 prescaler
+	IC2F   CCMR1 = 0x0F << 12 //+ Input capture 2 filter
 )
 
 const (
@@ -202,39 +204,29 @@ const (
 	OC2CEn  = 15
 	OC1M_3n = 16
 	OC2M_3n = 24
-)
-
-const (
-	CC1S   CCMR1_Input = 0x03 << 0  //+ Capture/Compare 1 selection
-	ICPCS  CCMR1_Input = 0x03 << 2  //+ Input capture 1 prescaler
-	IC1F   CCMR1_Input = 0x0F << 4  //+ Input capture 1 filter
-	CC2S   CCMR1_Input = 0x03 << 8  //+ Capture/Compare 2 selection
-	IC2PCS CCMR1_Input = 0x03 << 10 //+ Input capture 2 prescaler
-	IC2F   CCMR1_Input = 0x0F << 12 //+ Input capture 2 filter
-)
-
-const (
-	CC1Sn   = 0
 	ICPCSn  = 2
 	IC1Fn   = 4
-	CC2Sn   = 8
 	IC2PCSn = 10
 	IC2Fn   = 12
 )
 
 const (
-	CC3S   CCMR2_Output = 0x03 << 0  //+ CC3S
-	OC3FE  CCMR2_Output = 0x01 << 2  //+ OC3FE
-	OC3PE  CCMR2_Output = 0x01 << 3  //+ OC3PE
-	OC3M   CCMR2_Output = 0x07 << 4  //+ OC3M
-	OC3CE  CCMR2_Output = 0x01 << 7  //+ OC3CE
-	CC4S   CCMR2_Output = 0x03 << 8  //+ CC4S
-	OC4FE  CCMR2_Output = 0x01 << 10 //+ OC4FE
-	OC4PE  CCMR2_Output = 0x01 << 11 //+ OC4PE
-	OC4M   CCMR2_Output = 0x07 << 12 //+ OC4M
-	O24CE  CCMR2_Output = 0x01 << 15 //+ O24CE
-	OC3M_3 CCMR2_Output = 0x01 << 16 //+ Output Compare 1 mode - bit 3
-	OC4M_3 CCMR2_Output = 0x01 << 24 //+ Output Compare 2 mode - bit 3
+	CC3S   CCMR2 = 0x03 << 0  //+ CC3S
+	OC3FE  CCMR2 = 0x01 << 2  //+ OC3FE
+	OC3PE  CCMR2 = 0x01 << 3  //+ OC3PE
+	OC3M   CCMR2 = 0x07 << 4  //+ OC3M
+	OC3CE  CCMR2 = 0x01 << 7  //+ OC3CE
+	CC4S   CCMR2 = 0x03 << 8  //+ CC4S
+	OC4FE  CCMR2 = 0x01 << 10 //+ OC4FE
+	OC4PE  CCMR2 = 0x01 << 11 //+ OC4PE
+	OC4M   CCMR2 = 0x07 << 12 //+ OC4M
+	O24CE  CCMR2 = 0x01 << 15 //+ O24CE
+	OC3M_3 CCMR2 = 0x01 << 16 //+ Output Compare 1 mode - bit 3
+	OC4M_3 CCMR2 = 0x01 << 24 //+ Output Compare 2 mode - bit 3
+	IC3PSC CCMR2 = 0x03 << 2  //+ Input capture 3 prescaler
+	IC3F   CCMR2 = 0x0F << 4  //+ Input capture 3 filter
+	IC4PSC CCMR2 = 0x03 << 10 //+ Input capture 4 prescaler
+	IC4F   CCMR2 = 0x0F << 12 //+ Input capture 4 filter
 )
 
 const (
@@ -250,22 +242,8 @@ const (
 	O24CEn  = 15
 	OC3M_3n = 16
 	OC4M_3n = 24
-)
-
-const (
-	CC3S   CCMR2_Input = 0x03 << 0  //+ Capture/compare 3 selection
-	IC3PSC CCMR2_Input = 0x03 << 2  //+ Input capture 3 prescaler
-	IC3F   CCMR2_Input = 0x0F << 4  //+ Input capture 3 filter
-	CC4S   CCMR2_Input = 0x03 << 8  //+ Capture/Compare 4 selection
-	IC4PSC CCMR2_Input = 0x03 << 10 //+ Input capture 4 prescaler
-	IC4F   CCMR2_Input = 0x0F << 12 //+ Input capture 4 filter
-)
-
-const (
-	CC3Sn   = 0
 	IC3PSCn = 2
 	IC3Fn   = 4
-	CC4Sn   = 8
 	IC4PSCn = 10
 	IC4Fn   = 12
 )
@@ -301,74 +279,6 @@ const (
 )
 
 const (
-	CNT_L CNT = 0xFFFF << 0  //+ low counter value
-	CNT_H CNT = 0xFFFF << 16 //+ High counter value
-)
-
-const (
-	CNT_Ln = 0
-	CNT_Hn = 16
-)
-
-const (
-	PSC PSC = 0xFFFF << 0 //+ Prescaler value
-)
-
-const (
-	PSCn = 0
-)
-
-const (
-	ARR_L ARR = 0xFFFF << 0  //+ Low Auto-reload value
-	ARR_H ARR = 0xFFFF << 16 //+ High Auto-reload value
-)
-
-const (
-	ARR_Ln = 0
-	ARR_Hn = 16
-)
-
-const (
-	CCR1_L CCR1 = 0xFFFF << 0  //+ Low Capture/Compare 1 value
-	CCR1_H CCR1 = 0xFFFF << 16 //+ High Capture/Compare 1 value
-)
-
-const (
-	CCR1_Ln = 0
-	CCR1_Hn = 16
-)
-
-const (
-	CCR2_L CCR2 = 0xFFFF << 0  //+ Low Capture/Compare 2 value
-	CCR2_H CCR2 = 0xFFFF << 16 //+ High Capture/Compare 2 value
-)
-
-const (
-	CCR2_Ln = 0
-	CCR2_Hn = 16
-)
-
-const (
-	CCR3_L CCR3 = 0xFFFF << 0  //+ Low Capture/Compare value
-	CCR3_H CCR3 = 0xFFFF << 16 //+ High Capture/Compare value
-)
-
-const (
-	CCR3_Ln = 0
-	CCR3_Hn = 16
-)
-
-const (
-	CCR4_L CCR4 = 0xFFFF << 0  //+ Low Capture/Compare value
-	CCR4_H CCR4 = 0xFFFF << 16 //+ High Capture/Compare value
-)
-
-const (
-	CCR4_Ln = 0
-	CCR4_Hn = 16
-)
-
-const (
 	DBA DCR = 0x1F << 0 //+ DMA base address
 	DBL DCR = 0x1F << 8 //+ DMA burst length
 )
@@ -376,14 +286,6 @@ const (
 const (
 	DBAn = 0
 	DBLn = 8
-)
-
-const (
-	DMAB DMAR = 0xFFFF << 0 //+ DMA register for burst accesses
-)
-
-const (
-	DMABn = 0
 )
 
 const (

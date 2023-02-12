@@ -8,20 +8,19 @@
 //  TIM9   TIM9_BASE   APB2  TIM1_BRK_TIM9*   General purpose timers
 //  TIM12  TIM12_BASE  APB1  TIM8_BRK_TIM12*  General purpose timers
 // Registers:
-//  0x000 32  CR1           control register 1
-//  0x004 32  CR2           control register 2
-//  0x008 32  SMCR          slave mode control register
-//  0x00C 32  DIER          DMA/Interrupt enable register
-//  0x010 32  SR            status register
-//  0x014 32  EGR           event generation register
-//  0x018 32  CCMR1_Output  capture/compare mode register 1 (output mode)
-//  0x018 32  CCMR1_Input   capture/compare mode register 1 (input mode)
-//  0x020 32  CCER          capture/compare enable register
-//  0x024 32  CNT           counter
-//  0x028 32  PSC           prescaler
-//  0x02C 32  ARR           auto-reload register
-//  0x034 32  CCR1          capture/compare register 1
-//  0x038 32  CCR2          capture/compare register 2
+//  0x000 32  CR1        control register 1
+//  0x004 32  CR2        control register 2
+//  0x008 32  SMCR       slave mode control register
+//  0x00C 32  DIER       DMA/Interrupt enable register
+//  0x010 32  SR         status register
+//  0x014 32  EGR        event generation register
+//  0x018 32  CCMR1      capture/compare mode register 1
+//  0x020 32  CCER       capture/compare enable register
+//  0x024 32  CNT        counter
+//  0x028 32  PSC        prescaler
+//  0x02C 32  ARR        auto-reload register
+//  0x034 32  CCR1(CCR)  capture/compare register 1
+//  0x038 32  CCR2(CCR)  capture/compare register 2
 // Import:
 //  github.com/embeddedgo/stm32/p/bus
 //  github.com/embeddedgo/stm32/p/mmap
@@ -112,41 +111,31 @@ const (
 )
 
 const (
-	CC1S  CCMR1_Output = 0x03 << 0  //+ Capture/Compare 1 selection
-	OC1FE CCMR1_Output = 0x01 << 2  //+ Output Compare 1 fast enable
-	OC1PE CCMR1_Output = 0x01 << 3  //+ Output Compare 1 preload enable
-	OC1M  CCMR1_Output = 0x07 << 4  //+ Output Compare 1 mode
-	CC2S  CCMR1_Output = 0x03 << 8  //+ Capture/Compare 2 selection
-	OC2FE CCMR1_Output = 0x01 << 10 //+ Output Compare 2 fast enable
-	OC2PE CCMR1_Output = 0x01 << 11 //+ Output Compare 2 preload enable
-	OC2M  CCMR1_Output = 0x07 << 12 //+ Output Compare 2 mode
-)
-
-const (
-	CC1Sn  = 0
-	OC1FEn = 2
-	OC1PEn = 3
-	OC1Mn  = 4
-	CC2Sn  = 8
-	OC2FEn = 10
-	OC2PEn = 11
-	OC2Mn  = 12
-)
-
-const (
-	CC1S   CCMR1_Input = 0x03 << 0  //+ Capture/Compare 1 selection
-	ICPCS  CCMR1_Input = 0x03 << 2  //+ Input capture 1 prescaler
-	IC1F   CCMR1_Input = 0x07 << 4  //+ Input capture 1 filter
-	CC2S   CCMR1_Input = 0x03 << 8  //+ Capture/Compare 2 selection
-	IC2PCS CCMR1_Input = 0x03 << 10 //+ Input capture 2 prescaler
-	IC2F   CCMR1_Input = 0x07 << 12 //+ Input capture 2 filter
+	CC1S   CCMR1 = 0x03 << 0  //+ Capture/Compare 1 selection
+	OC1FE  CCMR1 = 0x01 << 2  //+ Output Compare 1 fast enable
+	OC1PE  CCMR1 = 0x01 << 3  //+ Output Compare 1 preload enable
+	OC1M   CCMR1 = 0x07 << 4  //+ Output Compare 1 mode
+	CC2S   CCMR1 = 0x03 << 8  //+ Capture/Compare 2 selection
+	OC2FE  CCMR1 = 0x01 << 10 //+ Output Compare 2 fast enable
+	OC2PE  CCMR1 = 0x01 << 11 //+ Output Compare 2 preload enable
+	OC2M   CCMR1 = 0x07 << 12 //+ Output Compare 2 mode
+	ICPCS  CCMR1 = 0x03 << 2  //+ Input capture 1 prescaler
+	IC1F   CCMR1 = 0x07 << 4  //+ Input capture 1 filter
+	IC2PCS CCMR1 = 0x03 << 10 //+ Input capture 2 prescaler
+	IC2F   CCMR1 = 0x07 << 12 //+ Input capture 2 filter
 )
 
 const (
 	CC1Sn   = 0
+	OC1FEn  = 2
+	OC1PEn  = 3
+	OC1Mn   = 4
+	CC2Sn   = 8
+	OC2FEn  = 10
+	OC2PEn  = 11
+	OC2Mn   = 12
 	ICPCSn  = 2
 	IC1Fn   = 4
-	CC2Sn   = 8
 	IC2PCSn = 10
 	IC2Fn   = 12
 )
@@ -167,44 +156,4 @@ const (
 	CC2En  = 4
 	CC2Pn  = 5
 	CC2NPn = 7
-)
-
-const (
-	CNT CNT = 0xFFFF << 0 //+ counter value
-)
-
-const (
-	CNTn = 0
-)
-
-const (
-	PSC PSC = 0xFFFF << 0 //+ Prescaler value
-)
-
-const (
-	PSCn = 0
-)
-
-const (
-	ARR ARR = 0xFFFF << 0 //+ Auto-reload value
-)
-
-const (
-	ARRn = 0
-)
-
-const (
-	CCR1 CCR1 = 0xFFFF << 0 //+ Capture/Compare 1 value
-)
-
-const (
-	CCR1n = 0
-)
-
-const (
-	CCR2 CCR2 = 0xFFFF << 0 //+ Capture/Compare 2 value
-)
-
-const (
-	CCR2n = 0
 )

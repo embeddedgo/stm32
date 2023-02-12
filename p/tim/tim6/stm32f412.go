@@ -72,29 +72,3 @@ const (
 const (
 	UGn = 0
 )
-
-const (
-	CNT    CNT = 0xFFFF << 0 //+ Low counter value
-	UIFCPY CNT = 0x01 << 31  //+ UIF Copy
-)
-
-const (
-	CNTn    = 0
-	UIFCPYn = 31
-)
-
-const (
-	PSC PSC = 0xFFFF << 0 //+ Prescaler value
-)
-
-const (
-	PSCn = 0
-)
-
-const (
-	ARR ARR = 0xFFFF << 0 //+ Low Auto-reload value
-)
-
-const (
-	ARRn = 0
-)

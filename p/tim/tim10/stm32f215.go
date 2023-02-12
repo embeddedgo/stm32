@@ -10,18 +10,17 @@
 //  TIM13  TIM13_BASE  APB1  TIM8_UP_TIM13*       General-purpose-timers
 //  TIM14  TIM14_BASE  APB1  TIM8_TRG_COM_TIM14*  General-purpose-timers
 // Registers:
-//  0x000 32  CR1           control register 1
-//  0x00C 32  DIER          DMA/Interrupt enable register
-//  0x010 32  SR            status register
-//  0x014 32  EGR           event generation register
-//  0x018 32  CCMR1_Output  capture/compare mode register (output mode)
-//  0x018 32  CCMR1_Input   capture/compare mode register (input mode)
-//  0x020 32  CCER          capture/compare enable register
-//  0x024 32  CNT           counter
-//  0x028 32  PSC           prescaler
-//  0x02C 32  ARR           auto-reload register
-//  0x034 32  CCR1          capture/compare register 1
-//  0x050 32  OR            option register
+//  0x000 32  CR1        control register 1
+//  0x00C 32  DIER       DMA/Interrupt enable register
+//  0x010 32  SR         status register
+//  0x014 32  EGR        event generation register
+//  0x018 32  CCMR1      capture/compare mode register
+//  0x020 32  CCER       capture/compare enable register
+//  0x024 32  CNT        counter
+//  0x028 32  PSC        prescaler
+//  0x02C 32  ARR        auto-reload register
+//  0x034 32  CCR1(CCR)  capture/compare register 1
+//  0x050 32  OR         option register
 // Import:
 //  github.com/embeddedgo/stm32/p/bus
 //  github.com/embeddedgo/stm32/p/mmap
@@ -76,27 +75,19 @@ const (
 )
 
 const (
-	CC1S  CCMR1_Output = 0x03 << 0 //+ Capture/Compare 1 selection
-	OC1FE CCMR1_Output = 0x01 << 2 //+ Output compare 1 fast enable
-	OC1PE CCMR1_Output = 0x01 << 3 //+ Output Compare 1 preload enable
-	OC1M  CCMR1_Output = 0x07 << 4 //+ Output Compare 1 mode
-)
-
-const (
-	CC1Sn  = 0
-	OC1FEn = 2
-	OC1PEn = 3
-	OC1Mn  = 4
-)
-
-const (
-	CC1S   CCMR1_Input = 0x03 << 0 //+ Capture/Compare 1 selection
-	IC1PSC CCMR1_Input = 0x03 << 2 //+ Input capture 1 prescaler
-	IC1F   CCMR1_Input = 0x0F << 4 //+ Input capture 1 filter
+	CC1S   CCMR1 = 0x03 << 0 //+ Capture/Compare 1 selection
+	OC1FE  CCMR1 = 0x01 << 2 //+ Output compare 1 fast enable
+	OC1PE  CCMR1 = 0x01 << 3 //+ Output Compare 1 preload enable
+	OC1M   CCMR1 = 0x07 << 4 //+ Output Compare 1 mode
+	IC1PSC CCMR1 = 0x03 << 2 //+ Input capture 1 prescaler
+	IC1F   CCMR1 = 0x0F << 4 //+ Input capture 1 filter
 )
 
 const (
 	CC1Sn   = 0
+	OC1FEn  = 2
+	OC1PEn  = 3
+	OC1Mn   = 4
 	IC1PSCn = 2
 	IC1Fn   = 4
 )
@@ -111,38 +102,6 @@ const (
 	CC1En  = 0
 	CC1Pn  = 1
 	CC1NPn = 3
-)
-
-const (
-	CNT CNT = 0xFFFF << 0 //+ counter value
-)
-
-const (
-	CNTn = 0
-)
-
-const (
-	PSC PSC = 0xFFFF << 0 //+ Prescaler value
-)
-
-const (
-	PSCn = 0
-)
-
-const (
-	ARR ARR = 0xFFFF << 0 //+ Auto-reload value
-)
-
-const (
-	ARRn = 0
-)
-
-const (
-	CCR1 CCR1 = 0xFFFF << 0 //+ Capture/Compare 1 value
-)
-
-const (
-	CCR1n = 0
 )
 
 const (

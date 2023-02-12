@@ -7,28 +7,27 @@
 // Instances:
 //  TIM15  TIM15_BASE  APB2  -  General purpose timers
 // Registers:
-//  0x000 32  CR1           control register 1
-//  0x004 32  CR2           control register 2
-//  0x008 32  SMCR          slave mode control register
-//  0x00C 32  DIER          DMA/Interrupt enable register
-//  0x010 32  SR            status register
-//  0x014 32  EGR           event generation register
-//  0x018 32  CCMR1_Output  capture/compare mode register (output mode)
-//  0x018 32  CCMR1_Input   capture/compare mode register 1 (input mode)
-//  0x020 32  CCER          capture/compare enable register
-//  0x024 32  CNT           counter
-//  0x028 32  PSC           prescaler
-//  0x02C 32  ARR           auto-reload register
-//  0x030 32  RCR           repetition counter register
-//  0x034 32  CCR1          capture/compare register 1
-//  0x038 32  CCR2          capture/compare register 2
-//  0x044 32  BDTR          break and dead-time register
-//  0x054 32  DTR2          timer Deadtime Register 2
-//  0x05C 32  TISEL         TIM timer input selection register
-//  0x060 32  AF1           TIM alternate function option register 1
-//  0x064 32  AF2           TIM alternate function option register 2
-//  0x3DC 32  DCR           DMA control register
-//  0x3E0 32  DMAR          DMA address for full transfer
+//  0x000 32  CR1        control register 1
+//  0x004 32  CR2        control register 2
+//  0x008 32  SMCR       slave mode control register
+//  0x00C 32  DIER       DMA/Interrupt enable register
+//  0x010 32  SR         status register
+//  0x014 32  EGR        event generation register
+//  0x018 32  CCMR1      capture/compare mode register
+//  0x020 32  CCER       capture/compare enable register
+//  0x024 32  CNT        counter
+//  0x028 32  PSC        prescaler
+//  0x02C 32  ARR        auto-reload register
+//  0x030 32  RCR        repetition counter register
+//  0x034 32  CCR1(CCR)  capture/compare register 1
+//  0x038 32  CCR2(CCR)  capture/compare register 2
+//  0x044 32  BDTR       break and dead-time register
+//  0x054 32  DTR2       timer Deadtime Register 2
+//  0x05C 32  TISEL      TIM timer input selection register
+//  0x060 32  AF1        TIM alternate function option register 1
+//  0x064 32  AF2        TIM alternate function option register 2
+//  0x3DC 32  DCR        DMA control register
+//  0x3E0 32  DMAR       DMA address for full transfer
 // Import:
 //  github.com/embeddedgo/stm32/p/bus
 //  github.com/embeddedgo/stm32/p/mmap
@@ -163,17 +162,21 @@ const (
 )
 
 const (
-	CC1S   CCMR1_Output = 0x03 << 0  //+ Capture/Compare 1 selection
-	OC1FE  CCMR1_Output = 0x01 << 2  //+ Output Compare 1 fast enable
-	OC1PE  CCMR1_Output = 0x01 << 3  //+ Output Compare 1 preload enable
-	OC1M   CCMR1_Output = 0x07 << 4  //+ Output Compare 1 mode
-	OC1CE  CCMR1_Output = 0x01 << 7  //+ OC1CE
-	CC2S   CCMR1_Output = 0x03 << 8  //+ CC2S
-	OC2FE  CCMR1_Output = 0x01 << 10 //+ OC2FE
-	OC2PE  CCMR1_Output = 0x01 << 11 //+ OC2PE
-	OC2M   CCMR1_Output = 0x07 << 12 //+ OC2M
-	OC1M_3 CCMR1_Output = 0x01 << 16 //+ Output Compare 1 mode
-	OC2M_3 CCMR1_Output = 0x01 << 24 //+ Output Compare 2 mode - bit 3
+	CC1S   CCMR1 = 0x03 << 0  //+ Capture/Compare 1 selection
+	OC1FE  CCMR1 = 0x01 << 2  //+ Output Compare 1 fast enable
+	OC1PE  CCMR1 = 0x01 << 3  //+ Output Compare 1 preload enable
+	OC1M   CCMR1 = 0x07 << 4  //+ Output Compare 1 mode
+	OC1CE  CCMR1 = 0x01 << 7  //+ OC1CE
+	CC2S   CCMR1 = 0x03 << 8  //+ CC2S
+	OC2FE  CCMR1 = 0x01 << 10 //+ OC2FE
+	OC2PE  CCMR1 = 0x01 << 11 //+ OC2PE
+	OC2M   CCMR1 = 0x07 << 12 //+ OC2M
+	OC1M_3 CCMR1 = 0x01 << 16 //+ Output Compare 1 mode
+	OC2M_3 CCMR1 = 0x01 << 24 //+ Output Compare 2 mode - bit 3
+	IC1PSC CCMR1 = 0x03 << 2  //+ Input capture 1 prescaler
+	IC1F   CCMR1 = 0x0F << 4  //+ Input capture 1 filter
+	IC2PSC CCMR1 = 0x03 << 10 //+ IC2PSC
+	IC2F   CCMR1 = 0x0F << 12 //+ IC2F
 )
 
 const (
@@ -188,22 +191,8 @@ const (
 	OC2Mn   = 12
 	OC1M_3n = 16
 	OC2M_3n = 24
-)
-
-const (
-	CC1S   CCMR1_Input = 0x03 << 0  //+ Capture/Compare 1 selection
-	IC1PSC CCMR1_Input = 0x03 << 2  //+ Input capture 1 prescaler
-	IC1F   CCMR1_Input = 0x0F << 4  //+ Input capture 1 filter
-	CC2S   CCMR1_Input = 0x03 << 8  //+ CC2S
-	IC2PSC CCMR1_Input = 0x03 << 10 //+ IC2PSC
-	IC2F   CCMR1_Input = 0x0F << 12 //+ IC2F
-)
-
-const (
-	CC1Sn   = 0
 	IC1PSCn = 2
 	IC1Fn   = 4
-	CC2Sn   = 8
 	IC2PSCn = 10
 	IC2Fn   = 12
 )
@@ -226,56 +215,6 @@ const (
 	CC2En  = 4
 	CC2Pn  = 5
 	CC2NPn = 7
-)
-
-const (
-	CNT    CNT = 0xFFFF << 0 //+ counter value
-	UIFCPY CNT = 0x01 << 31  //+ UIF Copy
-)
-
-const (
-	CNTn    = 0
-	UIFCPYn = 31
-)
-
-const (
-	PSC PSC = 0xFFFF << 0 //+ Prescaler value
-)
-
-const (
-	PSCn = 0
-)
-
-const (
-	ARR ARR = 0xFFFF << 0 //+ Auto-reload value
-)
-
-const (
-	ARRn = 0
-)
-
-const (
-	REP RCR = 0xFF << 0 //+ Repetition counter value
-)
-
-const (
-	REPn = 0
-)
-
-const (
-	CCR1 CCR1 = 0xFFFF << 0 //+ Capture/Compare 1 value
-)
-
-const (
-	CCR1n = 0
-)
-
-const (
-	CCR2 CCR2 = 0xFFFF << 0 //+ Capture/Compare 1 value
-)
-
-const (
-	CCR2n = 0
 )
 
 const (
@@ -376,12 +315,4 @@ const (
 const (
 	DBAn = 0
 	DBLn = 8
-)
-
-const (
-	DMAB DMAR = 0xFFFFFFFF << 0 //+ DMA register for burst accesses
-)
-
-const (
-	DMABn = 0
 )
