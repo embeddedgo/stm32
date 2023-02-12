@@ -39,6 +39,6 @@ func (d LED) Pin() gpio.Pin {
 }
 
 func init() {
-	gpio.A().EnableClock(true)
+	gpio.PA().EnableClock(true)
 	LD2.Pin().Setup(&gpio.Config{Mode: gpio.Out, Speed: gpio.Low})
 }

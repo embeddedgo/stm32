@@ -11,12 +11,28 @@ import (
 // Pnum is the number of available GPIO ports.
 const Pnum = pnum
 
+// Port names
+const (
+	A = iota
+	B
+	C
+	D
+	E
+	F
+	G
+	H
+	I
+	J
+	K
+)
+
 // Port represents a GPIO port.
 type Port struct {
 	registers
 }
 
-// P returns n-th GPIO port (0 means port A, 1 means port B, etc.).
+// P returns n-th GPIO port (0 means port A, 1 means port B, etc.). You can use
+// PA, PB, PC, ... helper functions instead of P if the port number is constant.
 func P(n int) *Port {
 	if uint(n) > pnum {
 		return nil

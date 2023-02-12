@@ -30,11 +30,11 @@ import (
 
 func main() {
 	// IO pins
-	pa := gpio.A()
+	pa := gpio.PA()
 	pa.EnableClock(true)
 	conTx := pa.Pin(2)
 	conRx := pa.Pin(3)
-	pc := gpio.C()
+	pc := gpio.PC()
 	pc.EnableClock(true)
 	owTxRx := pc.Pin(6)
 

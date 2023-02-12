@@ -25,7 +25,7 @@ var eveInt rtos.Note
 func main() {
 	// Allocate GPIO pins
 
-	pb := gpio.B()
+	pb := gpio.PB()
 	pb.EnableClock(true)
 	intn := pb.Pin(1)
 	pdn := pb.Pin(11)

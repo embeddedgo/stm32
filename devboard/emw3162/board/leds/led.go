@@ -51,7 +51,7 @@ func (d LED) Pin() gpio.Pin {
 }
 
 func init() {
-	gpio.B().EnableClock(true)
+	gpio.PB().EnableClock(true)
 	cfg := &gpio.Config{Mode: gpio.Out, Speed: gpio.Low}
 	D1.Pin().Setup(cfg)
 	cfg.Driver = gpio.OpenDrain

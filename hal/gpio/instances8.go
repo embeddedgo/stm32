@@ -2,21 +2,25 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+//go:build stm32f303 || stm32f412
 // +build stm32f303 stm32f412
-
 
 package gpio
 
-import "github.com/embeddedgo/stm32/p/mmap"
+import (
+	"unsafe"
 
-func A() *Port { return P(0) }
-func B() *Port { return P(1) }
-func C() *Port { return P(2) }
-func D() *Port { return P(3) }
-func E() *Port { return P(4) }
-func F() *Port { return P(5) }
-func G() *Port { return P(6) }
-func H() *Port { return P(7) }
+	"github.com/embeddedgo/stm32/p/mmap"
+)
+
+func PA() *Port { return (*Port)(unsafe.Pointer(mmap.GPIOA_BASE + A*pstep)) }
+func PB() *Port { return (*Port)(unsafe.Pointer(mmap.GPIOA_BASE + B*pstep)) }
+func PC() *Port { return (*Port)(unsafe.Pointer(mmap.GPIOA_BASE + C*pstep)) }
+func PD() *Port { return (*Port)(unsafe.Pointer(mmap.GPIOA_BASE + D*pstep)) }
+func PE() *Port { return (*Port)(unsafe.Pointer(mmap.GPIOA_BASE + E*pstep)) }
+func PF() *Port { return (*Port)(unsafe.Pointer(mmap.GPIOA_BASE + F*pstep)) }
+func PG() *Port { return (*Port)(unsafe.Pointer(mmap.GPIOA_BASE + G*pstep)) }
+func PH() *Port { return (*Port)(unsafe.Pointer(mmap.GPIOA_BASE + H*pstep)) }
 
 const pnum = 8
 

@@ -43,9 +43,9 @@ func (d LED) Pin() gpio.Pin {
 }
 
 func init() {
-	gpio.A().EnableClock(true)
-	gpio.B().EnableClock(true)
-	gpio.C().EnableClock(true)
+	gpio.PA().EnableClock(true)
+	gpio.PB().EnableClock(true)
+	gpio.PC().EnableClock(true)
 	cfg := &gpio.Config{Mode: gpio.Out, Speed: gpio.Low}
 	WiFi.Pin().Setup(cfg)
 	Azure.Pin().Setup(cfg)

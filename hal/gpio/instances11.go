@@ -2,23 +2,28 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+//go:build stm32f7x6 || stm32h7x3
 // +build stm32f7x6 stm32h7x3
 
 package gpio
 
-import "github.com/embeddedgo/stm32/p/mmap"
+import (
+	"unsafe"
 
-func A() *Port { return P(0) }
-func B() *Port { return P(1) }
-func C() *Port { return P(2) }
-func D() *Port { return P(3) }
-func E() *Port { return P(4) }
-func F() *Port { return P(5) }
-func G() *Port { return P(6) }
-func H() *Port { return P(7) }
-func I() *Port { return P(8) }
-func J() *Port { return P(9) }
-func K() *Port { return P(10) }
+	"github.com/embeddedgo/stm32/p/mmap"
+)
+
+func PA() *Port { return (*Port)(unsafe.Pointer(mmap.GPIOA_BASE + A*pstep)) }
+func PB() *Port { return (*Port)(unsafe.Pointer(mmap.GPIOA_BASE + B*pstep)) }
+func PC() *Port { return (*Port)(unsafe.Pointer(mmap.GPIOA_BASE + C*pstep)) }
+func PD() *Port { return (*Port)(unsafe.Pointer(mmap.GPIOA_BASE + D*pstep)) }
+func PE() *Port { return (*Port)(unsafe.Pointer(mmap.GPIOA_BASE + E*pstep)) }
+func PF() *Port { return (*Port)(unsafe.Pointer(mmap.GPIOA_BASE + F*pstep)) }
+func PG() *Port { return (*Port)(unsafe.Pointer(mmap.GPIOA_BASE + G*pstep)) }
+func PH() *Port { return (*Port)(unsafe.Pointer(mmap.GPIOA_BASE + H*pstep)) }
+func PI() *Port { return (*Port)(unsafe.Pointer(mmap.GPIOA_BASE + I*pstep)) }
+func PJ() *Port { return (*Port)(unsafe.Pointer(mmap.GPIOA_BASE + J*pstep)) }
+func PK() *Port { return (*Port)(unsafe.Pointer(mmap.GPIOA_BASE + K*pstep)) }
 
 const pnum = 11
 

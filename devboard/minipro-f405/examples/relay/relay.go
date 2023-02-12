@@ -12,10 +12,10 @@ import (
 )
 
 var relays = [...]gpio.Pin{
-	gpio.C().Pin(0),
-	gpio.C().Pin(1),
-	gpio.C().Pin(4),
-	gpio.C().Pin(5),
+	gpio.PC().Pin(0),
+	gpio.PC().Pin(1),
+	gpio.PC().Pin(4),
+	gpio.PC().Pin(5),
 }
 
 func init() {

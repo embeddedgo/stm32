@@ -26,7 +26,7 @@ func busForAddr(p *Periph) bus.Bus {
 func altFunc(p *Periph, pin gpio.Pin) gpio.AltFunc {
 	switch p {
 	case SPI3():
-		if pin.Port() == gpio.D() {
+		if pin.Port() == gpio.PD() {
 			return gpio.AF5
 		}
 		return gpio.AF6

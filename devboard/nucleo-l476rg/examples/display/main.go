@@ -32,7 +32,7 @@ func main() {
 
 	// Assign GPIO pins
 
-	pb := gpio.B()
+	pb := gpio.PB()
 	pb.EnableClock(true)
 	reset := pb.Pin(1)
 	dc := pb.Pin(11)

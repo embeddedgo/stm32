@@ -18,7 +18,7 @@ import (
 func main() {
 	// Allocate GPIO pins
 
-	pa := gpio.A()
+	pa := gpio.PA()
 	pa.EnableClock(true)
 	sck := pa.Pin(5)
 	miso := pa.Pin(6)

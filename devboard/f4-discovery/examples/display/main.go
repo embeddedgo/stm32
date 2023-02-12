@@ -29,14 +29,14 @@ const (
 func main() {
 	// Assign GPIO pins
 
-	pb := gpio.B()
+	pb := gpio.PB()
 	pb.EnableClock(true)
 	csn := pb.Pin(12)
 	sck := pb.Pin(13)
 	miso := pb.Pin(14)
 	mosi := pb.Pin(15)
 
-	pd := gpio.D()
+	pd := gpio.PD()
 	pd.EnableClock(true)
 	reset := pd.Pin(8)
 	dc := pd.Pin(10)

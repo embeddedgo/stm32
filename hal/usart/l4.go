@@ -99,7 +99,7 @@ func altFunc(p *Periph, pin gpio.Pin) gpio.AltFunc {
 	case USART1(), USART3():
 		return gpio.AF7
 	case USART2():
-		if pin == gpio.A().Pin(15) {
+		if pin == gpio.PA().Pin(15) {
 			return gpio.AF3
 		}
 		return gpio.AF7

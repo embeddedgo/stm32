@@ -69,13 +69,13 @@ func (a *LIS3DSH) ISR() {
 func main() {
 	// Allocate GPIO pins
 
-	pa := gpio.A()
+	pa := gpio.PA()
 	pa.EnableClock(true)
 	sck := pa.Pin(5)
 	miso := pa.Pin(6)
 	mosi := pa.Pin(7)
 
-	pe := gpio.E()
+	pe := gpio.PE()
 	pe.EnableClock(true)
 	dr := pe.Pin(0)
 	cs := pe.Pin(3)

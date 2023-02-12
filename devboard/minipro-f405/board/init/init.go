@@ -17,7 +17,7 @@ func init() {
 	system.Setup168(8)
 	rtcst.Setup(rtcst.LSE, 1, 32768)
 	uart := usart1.Driver()
-	rx := gpio.A().Pin(9)
-	tx := gpio.A().Pin(10)
+	rx := gpio.PA().Pin(9)
+	tx := gpio.PA().Pin(10)
 	uartcon.Setup(uart, rx, tx, usart.Word8b, 115200, "USART1")
 }

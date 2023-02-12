@@ -30,6 +30,6 @@ func (b Button) Pin() gpio.Pin {
 }
 
 func init() {
-	gpio.A().EnableClock(true)
+	gpio.PA().EnableClock(true)
 	B1.Pin().Setup(&gpio.Config{Mode: gpio.In})
 }

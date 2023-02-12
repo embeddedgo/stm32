@@ -28,7 +28,7 @@ func altFunc(p *Periph, pin gpio.Pin) gpio.AltFunc {
 	case SPI1():
 		return gpio.AF5
 	case SPI2():
-		if pin == gpio.A().Pin(9) || pin == gpio.C().Pin(1) {
+		if pin == gpio.PA().Pin(9) || pin == gpio.PC().Pin(1) {
 			return gpio.AF3
 		}
 		return gpio.AF5

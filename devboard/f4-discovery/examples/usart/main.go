@@ -17,7 +17,7 @@ import (
 
 func main() {
 	// GPIO pins assignment
-	pa := gpio.A()
+	pa := gpio.PA()
 	pa.EnableClock(true)
 	tx := pa.Pin(2)
 	rx := pa.Pin(3)
