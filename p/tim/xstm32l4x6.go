@@ -94,13 +94,14 @@ func OIS4_(p *Periph) mmio.RM32[CR2]  { return mmio.RM32[CR2]{&p.CR2, OIS4} }
 
 type SMCR uint32
 
-func SMS_(p *Periph) mmio.RM32[SMCR]  { return mmio.RM32[SMCR]{&p.SMCR, SMS} }
-func TS_(p *Periph) mmio.RM32[SMCR]   { return mmio.RM32[SMCR]{&p.SMCR, TS} }
-func MSM_(p *Periph) mmio.RM32[SMCR]  { return mmio.RM32[SMCR]{&p.SMCR, MSM} }
-func ETF_(p *Periph) mmio.RM32[SMCR]  { return mmio.RM32[SMCR]{&p.SMCR, ETF} }
-func ETPS_(p *Periph) mmio.RM32[SMCR] { return mmio.RM32[SMCR]{&p.SMCR, ETPS} }
-func ECE_(p *Periph) mmio.RM32[SMCR]  { return mmio.RM32[SMCR]{&p.SMCR, ECE} }
-func ETP_(p *Periph) mmio.RM32[SMCR]  { return mmio.RM32[SMCR]{&p.SMCR, ETP} }
+func SMS_(p *Periph) mmio.RM32[SMCR]   { return mmio.RM32[SMCR]{&p.SMCR, SMS} }
+func TS_(p *Periph) mmio.RM32[SMCR]    { return mmio.RM32[SMCR]{&p.SMCR, TS} }
+func MSM_(p *Periph) mmio.RM32[SMCR]   { return mmio.RM32[SMCR]{&p.SMCR, MSM} }
+func ETF_(p *Periph) mmio.RM32[SMCR]   { return mmio.RM32[SMCR]{&p.SMCR, ETF} }
+func ETPS_(p *Periph) mmio.RM32[SMCR]  { return mmio.RM32[SMCR]{&p.SMCR, ETPS} }
+func ECE_(p *Periph) mmio.RM32[SMCR]   { return mmio.RM32[SMCR]{&p.SMCR, ECE} }
+func ETP_(p *Periph) mmio.RM32[SMCR]   { return mmio.RM32[SMCR]{&p.SMCR, ETP} }
+func SMS_2_(p *Periph) mmio.RM32[SMCR] { return mmio.RM32[SMCR]{&p.SMCR, SMS_2} }
 
 type DIER uint32
 
@@ -158,6 +159,8 @@ func OC2FE_(p *Periph) mmio.RM32[CCMR1]  { return mmio.RM32[CCMR1]{&p.CCMR1, OC2
 func OC2PE_(p *Periph) mmio.RM32[CCMR1]  { return mmio.RM32[CCMR1]{&p.CCMR1, OC2PE} }
 func OC2M_(p *Periph) mmio.RM32[CCMR1]   { return mmio.RM32[CCMR1]{&p.CCMR1, OC2M} }
 func OC2CE_(p *Periph) mmio.RM32[CCMR1]  { return mmio.RM32[CCMR1]{&p.CCMR1, OC2CE} }
+func OC1M_2_(p *Periph) mmio.RM32[CCMR1] { return mmio.RM32[CCMR1]{&p.CCMR1, OC1M_2} }
+func OC2M_2_(p *Periph) mmio.RM32[CCMR1] { return mmio.RM32[CCMR1]{&p.CCMR1, OC2M_2} }
 func ICPCS_(p *Periph) mmio.RM32[CCMR1]  { return mmio.RM32[CCMR1]{&p.CCMR1, ICPCS} }
 func IC1F_(p *Periph) mmio.RM32[CCMR1]   { return mmio.RM32[CCMR1]{&p.CCMR1, IC1F} }
 func IC2PCS_(p *Periph) mmio.RM32[CCMR1] { return mmio.RM32[CCMR1]{&p.CCMR1, IC2PCS} }
@@ -175,6 +178,8 @@ func OC4FE_(p *Periph) mmio.RM32[CCMR2]  { return mmio.RM32[CCMR2]{&p.CCMR2, OC4
 func OC4PE_(p *Periph) mmio.RM32[CCMR2]  { return mmio.RM32[CCMR2]{&p.CCMR2, OC4PE} }
 func OC4M_(p *Periph) mmio.RM32[CCMR2]   { return mmio.RM32[CCMR2]{&p.CCMR2, OC4M} }
 func OC4CE_(p *Periph) mmio.RM32[CCMR2]  { return mmio.RM32[CCMR2]{&p.CCMR2, OC4CE} }
+func OC3M_2_(p *Periph) mmio.RM32[CCMR2] { return mmio.RM32[CCMR2]{&p.CCMR2, OC3M_2} }
+func OC4M_2_(p *Periph) mmio.RM32[CCMR2] { return mmio.RM32[CCMR2]{&p.CCMR2, OC4M_2} }
 func IC3PSC_(p *Periph) mmio.RM32[CCMR2] { return mmio.RM32[CCMR2]{&p.CCMR2, IC3PSC} }
 func IC3F_(p *Periph) mmio.RM32[CCMR2]   { return mmio.RM32[CCMR2]{&p.CCMR2, IC3F} }
 func IC4PSC_(p *Periph) mmio.RM32[CCMR2] { return mmio.RM32[CCMR2]{&p.CCMR2, IC4PSC} }

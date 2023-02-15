@@ -13,11 +13,11 @@ import (
 )
 
 type Periph struct {
-	ISR   RISR
-	IFCR  RIFCR
-	C     [7]RC
+	ISR   mmio.R32[ISR]
+	IFCR  mmio.R32[IFCR]
+	C     [7]SC
 	_     [5]uint32
-	CSELR RCSELR
+	CSELR mmio.R32[CSELR]
 }
 
 func DMA1() *Periph { return (*Periph)(unsafe.Pointer(uintptr(mmap.DMA1_BASE))) }
@@ -33,432 +33,107 @@ func (p *Periph) Bus() bus.Bus {
 
 type ISR uint32
 
-type RISR struct{ mmio.U32 }
-
-func (r *RISR) LoadBits(mask ISR) ISR { return ISR(r.U32.LoadBits(uint32(mask))) }
-func (r *RISR) StoreBits(mask, b ISR) { r.U32.StoreBits(uint32(mask), uint32(b)) }
-func (r *RISR) SetBits(mask ISR)      { r.U32.SetBits(uint32(mask)) }
-func (r *RISR) ClearBits(mask ISR)    { r.U32.ClearBits(uint32(mask)) }
-func (r *RISR) Load() ISR             { return ISR(r.U32.Load()) }
-func (r *RISR) Store(b ISR)           { r.U32.Store(uint32(b)) }
-
-type RMISR struct{ mmio.UM32 }
-
-func (rm RMISR) Load() ISR   { return ISR(rm.UM32.Load()) }
-func (rm RMISR) Store(b ISR) { rm.UM32.Store(uint32(b)) }
-
-func GIF1_(p *Periph) RMISR {
-	return RMISR{mmio.UM32{&p.ISR.U32, uint32(GIF1)}}
-}
-
-func TCIF1_(p *Periph) RMISR {
-	return RMISR{mmio.UM32{&p.ISR.U32, uint32(TCIF1)}}
-}
-
-func HTIF1_(p *Periph) RMISR {
-	return RMISR{mmio.UM32{&p.ISR.U32, uint32(HTIF1)}}
-}
-
-func TEIF1_(p *Periph) RMISR {
-	return RMISR{mmio.UM32{&p.ISR.U32, uint32(TEIF1)}}
-}
-
-func GIF2_(p *Periph) RMISR {
-	return RMISR{mmio.UM32{&p.ISR.U32, uint32(GIF2)}}
-}
-
-func TCIF2_(p *Periph) RMISR {
-	return RMISR{mmio.UM32{&p.ISR.U32, uint32(TCIF2)}}
-}
-
-func HTIF2_(p *Periph) RMISR {
-	return RMISR{mmio.UM32{&p.ISR.U32, uint32(HTIF2)}}
-}
-
-func TEIF2_(p *Periph) RMISR {
-	return RMISR{mmio.UM32{&p.ISR.U32, uint32(TEIF2)}}
-}
-
-func GIF3_(p *Periph) RMISR {
-	return RMISR{mmio.UM32{&p.ISR.U32, uint32(GIF3)}}
-}
-
-func TCIF3_(p *Periph) RMISR {
-	return RMISR{mmio.UM32{&p.ISR.U32, uint32(TCIF3)}}
-}
-
-func HTIF3_(p *Periph) RMISR {
-	return RMISR{mmio.UM32{&p.ISR.U32, uint32(HTIF3)}}
-}
-
-func TEIF3_(p *Periph) RMISR {
-	return RMISR{mmio.UM32{&p.ISR.U32, uint32(TEIF3)}}
-}
-
-func GIF4_(p *Periph) RMISR {
-	return RMISR{mmio.UM32{&p.ISR.U32, uint32(GIF4)}}
-}
-
-func TCIF4_(p *Periph) RMISR {
-	return RMISR{mmio.UM32{&p.ISR.U32, uint32(TCIF4)}}
-}
-
-func HTIF4_(p *Periph) RMISR {
-	return RMISR{mmio.UM32{&p.ISR.U32, uint32(HTIF4)}}
-}
-
-func TEIF4_(p *Periph) RMISR {
-	return RMISR{mmio.UM32{&p.ISR.U32, uint32(TEIF4)}}
-}
-
-func GIF5_(p *Periph) RMISR {
-	return RMISR{mmio.UM32{&p.ISR.U32, uint32(GIF5)}}
-}
-
-func TCIF5_(p *Periph) RMISR {
-	return RMISR{mmio.UM32{&p.ISR.U32, uint32(TCIF5)}}
-}
-
-func HTIF5_(p *Periph) RMISR {
-	return RMISR{mmio.UM32{&p.ISR.U32, uint32(HTIF5)}}
-}
-
-func TEIF5_(p *Periph) RMISR {
-	return RMISR{mmio.UM32{&p.ISR.U32, uint32(TEIF5)}}
-}
-
-func GIF6_(p *Periph) RMISR {
-	return RMISR{mmio.UM32{&p.ISR.U32, uint32(GIF6)}}
-}
-
-func TCIF6_(p *Periph) RMISR {
-	return RMISR{mmio.UM32{&p.ISR.U32, uint32(TCIF6)}}
-}
-
-func HTIF6_(p *Periph) RMISR {
-	return RMISR{mmio.UM32{&p.ISR.U32, uint32(HTIF6)}}
-}
-
-func TEIF6_(p *Periph) RMISR {
-	return RMISR{mmio.UM32{&p.ISR.U32, uint32(TEIF6)}}
-}
-
-func GIF7_(p *Periph) RMISR {
-	return RMISR{mmio.UM32{&p.ISR.U32, uint32(GIF7)}}
-}
-
-func TCIF7_(p *Periph) RMISR {
-	return RMISR{mmio.UM32{&p.ISR.U32, uint32(TCIF7)}}
-}
-
-func HTIF7_(p *Periph) RMISR {
-	return RMISR{mmio.UM32{&p.ISR.U32, uint32(HTIF7)}}
-}
-
-func TEIF7_(p *Periph) RMISR {
-	return RMISR{mmio.UM32{&p.ISR.U32, uint32(TEIF7)}}
-}
+func GIF1_(p *Periph) mmio.RM32[ISR]  { return mmio.RM32[ISR]{&p.ISR, GIF1} }
+func TCIF1_(p *Periph) mmio.RM32[ISR] { return mmio.RM32[ISR]{&p.ISR, TCIF1} }
+func HTIF1_(p *Periph) mmio.RM32[ISR] { return mmio.RM32[ISR]{&p.ISR, HTIF1} }
+func TEIF1_(p *Periph) mmio.RM32[ISR] { return mmio.RM32[ISR]{&p.ISR, TEIF1} }
+func GIF2_(p *Periph) mmio.RM32[ISR]  { return mmio.RM32[ISR]{&p.ISR, GIF2} }
+func TCIF2_(p *Periph) mmio.RM32[ISR] { return mmio.RM32[ISR]{&p.ISR, TCIF2} }
+func HTIF2_(p *Periph) mmio.RM32[ISR] { return mmio.RM32[ISR]{&p.ISR, HTIF2} }
+func TEIF2_(p *Periph) mmio.RM32[ISR] { return mmio.RM32[ISR]{&p.ISR, TEIF2} }
+func GIF3_(p *Periph) mmio.RM32[ISR]  { return mmio.RM32[ISR]{&p.ISR, GIF3} }
+func TCIF3_(p *Periph) mmio.RM32[ISR] { return mmio.RM32[ISR]{&p.ISR, TCIF3} }
+func HTIF3_(p *Periph) mmio.RM32[ISR] { return mmio.RM32[ISR]{&p.ISR, HTIF3} }
+func TEIF3_(p *Periph) mmio.RM32[ISR] { return mmio.RM32[ISR]{&p.ISR, TEIF3} }
+func GIF4_(p *Periph) mmio.RM32[ISR]  { return mmio.RM32[ISR]{&p.ISR, GIF4} }
+func TCIF4_(p *Periph) mmio.RM32[ISR] { return mmio.RM32[ISR]{&p.ISR, TCIF4} }
+func HTIF4_(p *Periph) mmio.RM32[ISR] { return mmio.RM32[ISR]{&p.ISR, HTIF4} }
+func TEIF4_(p *Periph) mmio.RM32[ISR] { return mmio.RM32[ISR]{&p.ISR, TEIF4} }
+func GIF5_(p *Periph) mmio.RM32[ISR]  { return mmio.RM32[ISR]{&p.ISR, GIF5} }
+func TCIF5_(p *Periph) mmio.RM32[ISR] { return mmio.RM32[ISR]{&p.ISR, TCIF5} }
+func HTIF5_(p *Periph) mmio.RM32[ISR] { return mmio.RM32[ISR]{&p.ISR, HTIF5} }
+func TEIF5_(p *Periph) mmio.RM32[ISR] { return mmio.RM32[ISR]{&p.ISR, TEIF5} }
+func GIF6_(p *Periph) mmio.RM32[ISR]  { return mmio.RM32[ISR]{&p.ISR, GIF6} }
+func TCIF6_(p *Periph) mmio.RM32[ISR] { return mmio.RM32[ISR]{&p.ISR, TCIF6} }
+func HTIF6_(p *Periph) mmio.RM32[ISR] { return mmio.RM32[ISR]{&p.ISR, HTIF6} }
+func TEIF6_(p *Periph) mmio.RM32[ISR] { return mmio.RM32[ISR]{&p.ISR, TEIF6} }
+func GIF7_(p *Periph) mmio.RM32[ISR]  { return mmio.RM32[ISR]{&p.ISR, GIF7} }
+func TCIF7_(p *Periph) mmio.RM32[ISR] { return mmio.RM32[ISR]{&p.ISR, TCIF7} }
+func HTIF7_(p *Periph) mmio.RM32[ISR] { return mmio.RM32[ISR]{&p.ISR, HTIF7} }
+func TEIF7_(p *Periph) mmio.RM32[ISR] { return mmio.RM32[ISR]{&p.ISR, TEIF7} }
 
 type IFCR uint32
 
-type RIFCR struct{ mmio.U32 }
+func CGIF1_(p *Periph) mmio.RM32[IFCR]  { return mmio.RM32[IFCR]{&p.IFCR, CGIF1} }
+func CTCIF1_(p *Periph) mmio.RM32[IFCR] { return mmio.RM32[IFCR]{&p.IFCR, CTCIF1} }
+func CHTIF1_(p *Periph) mmio.RM32[IFCR] { return mmio.RM32[IFCR]{&p.IFCR, CHTIF1} }
+func CTEIF1_(p *Periph) mmio.RM32[IFCR] { return mmio.RM32[IFCR]{&p.IFCR, CTEIF1} }
+func CGIF2_(p *Periph) mmio.RM32[IFCR]  { return mmio.RM32[IFCR]{&p.IFCR, CGIF2} }
+func CTCIF2_(p *Periph) mmio.RM32[IFCR] { return mmio.RM32[IFCR]{&p.IFCR, CTCIF2} }
+func CHTIF2_(p *Periph) mmio.RM32[IFCR] { return mmio.RM32[IFCR]{&p.IFCR, CHTIF2} }
+func CTEIF2_(p *Periph) mmio.RM32[IFCR] { return mmio.RM32[IFCR]{&p.IFCR, CTEIF2} }
+func CGIF3_(p *Periph) mmio.RM32[IFCR]  { return mmio.RM32[IFCR]{&p.IFCR, CGIF3} }
+func CTCIF3_(p *Periph) mmio.RM32[IFCR] { return mmio.RM32[IFCR]{&p.IFCR, CTCIF3} }
+func CHTIF3_(p *Periph) mmio.RM32[IFCR] { return mmio.RM32[IFCR]{&p.IFCR, CHTIF3} }
+func CTEIF3_(p *Periph) mmio.RM32[IFCR] { return mmio.RM32[IFCR]{&p.IFCR, CTEIF3} }
+func CGIF4_(p *Periph) mmio.RM32[IFCR]  { return mmio.RM32[IFCR]{&p.IFCR, CGIF4} }
+func CTCIF4_(p *Periph) mmio.RM32[IFCR] { return mmio.RM32[IFCR]{&p.IFCR, CTCIF4} }
+func CHTIF4_(p *Periph) mmio.RM32[IFCR] { return mmio.RM32[IFCR]{&p.IFCR, CHTIF4} }
+func CTEIF4_(p *Periph) mmio.RM32[IFCR] { return mmio.RM32[IFCR]{&p.IFCR, CTEIF4} }
+func CGIF5_(p *Periph) mmio.RM32[IFCR]  { return mmio.RM32[IFCR]{&p.IFCR, CGIF5} }
+func CTCIF5_(p *Periph) mmio.RM32[IFCR] { return mmio.RM32[IFCR]{&p.IFCR, CTCIF5} }
+func CHTIF5_(p *Periph) mmio.RM32[IFCR] { return mmio.RM32[IFCR]{&p.IFCR, CHTIF5} }
+func CTEIF5_(p *Periph) mmio.RM32[IFCR] { return mmio.RM32[IFCR]{&p.IFCR, CTEIF5} }
+func CGIF6_(p *Periph) mmio.RM32[IFCR]  { return mmio.RM32[IFCR]{&p.IFCR, CGIF6} }
+func CTCIF6_(p *Periph) mmio.RM32[IFCR] { return mmio.RM32[IFCR]{&p.IFCR, CTCIF6} }
+func CHTIF6_(p *Periph) mmio.RM32[IFCR] { return mmio.RM32[IFCR]{&p.IFCR, CHTIF6} }
+func CTEIF6_(p *Periph) mmio.RM32[IFCR] { return mmio.RM32[IFCR]{&p.IFCR, CTEIF6} }
+func CGIF7_(p *Periph) mmio.RM32[IFCR]  { return mmio.RM32[IFCR]{&p.IFCR, CGIF7} }
+func CTCIF7_(p *Periph) mmio.RM32[IFCR] { return mmio.RM32[IFCR]{&p.IFCR, CTCIF7} }
+func CHTIF7_(p *Periph) mmio.RM32[IFCR] { return mmio.RM32[IFCR]{&p.IFCR, CHTIF7} }
+func CTEIF7_(p *Periph) mmio.RM32[IFCR] { return mmio.RM32[IFCR]{&p.IFCR, CTEIF7} }
 
-func (r *RIFCR) LoadBits(mask IFCR) IFCR { return IFCR(r.U32.LoadBits(uint32(mask))) }
-func (r *RIFCR) StoreBits(mask, b IFCR)  { r.U32.StoreBits(uint32(mask), uint32(b)) }
-func (r *RIFCR) SetBits(mask IFCR)       { r.U32.SetBits(uint32(mask)) }
-func (r *RIFCR) ClearBits(mask IFCR)     { r.U32.ClearBits(uint32(mask)) }
-func (r *RIFCR) Load() IFCR              { return IFCR(r.U32.Load()) }
-func (r *RIFCR) Store(b IFCR)            { r.U32.Store(uint32(b)) }
-
-type RMIFCR struct{ mmio.UM32 }
-
-func (rm RMIFCR) Load() IFCR   { return IFCR(rm.UM32.Load()) }
-func (rm RMIFCR) Store(b IFCR) { rm.UM32.Store(uint32(b)) }
-
-func CGIF1_(p *Periph) RMIFCR {
-	return RMIFCR{mmio.UM32{&p.IFCR.U32, uint32(CGIF1)}}
-}
-
-func CTCIF1_(p *Periph) RMIFCR {
-	return RMIFCR{mmio.UM32{&p.IFCR.U32, uint32(CTCIF1)}}
-}
-
-func CHTIF1_(p *Periph) RMIFCR {
-	return RMIFCR{mmio.UM32{&p.IFCR.U32, uint32(CHTIF1)}}
-}
-
-func CTEIF1_(p *Periph) RMIFCR {
-	return RMIFCR{mmio.UM32{&p.IFCR.U32, uint32(CTEIF1)}}
-}
-
-func CGIF2_(p *Periph) RMIFCR {
-	return RMIFCR{mmio.UM32{&p.IFCR.U32, uint32(CGIF2)}}
-}
-
-func CTCIF2_(p *Periph) RMIFCR {
-	return RMIFCR{mmio.UM32{&p.IFCR.U32, uint32(CTCIF2)}}
-}
-
-func CHTIF2_(p *Periph) RMIFCR {
-	return RMIFCR{mmio.UM32{&p.IFCR.U32, uint32(CHTIF2)}}
-}
-
-func CTEIF2_(p *Periph) RMIFCR {
-	return RMIFCR{mmio.UM32{&p.IFCR.U32, uint32(CTEIF2)}}
-}
-
-func CGIF3_(p *Periph) RMIFCR {
-	return RMIFCR{mmio.UM32{&p.IFCR.U32, uint32(CGIF3)}}
-}
-
-func CTCIF3_(p *Periph) RMIFCR {
-	return RMIFCR{mmio.UM32{&p.IFCR.U32, uint32(CTCIF3)}}
-}
-
-func CHTIF3_(p *Periph) RMIFCR {
-	return RMIFCR{mmio.UM32{&p.IFCR.U32, uint32(CHTIF3)}}
-}
-
-func CTEIF3_(p *Periph) RMIFCR {
-	return RMIFCR{mmio.UM32{&p.IFCR.U32, uint32(CTEIF3)}}
-}
-
-func CGIF4_(p *Periph) RMIFCR {
-	return RMIFCR{mmio.UM32{&p.IFCR.U32, uint32(CGIF4)}}
-}
-
-func CTCIF4_(p *Periph) RMIFCR {
-	return RMIFCR{mmio.UM32{&p.IFCR.U32, uint32(CTCIF4)}}
-}
-
-func CHTIF4_(p *Periph) RMIFCR {
-	return RMIFCR{mmio.UM32{&p.IFCR.U32, uint32(CHTIF4)}}
-}
-
-func CTEIF4_(p *Periph) RMIFCR {
-	return RMIFCR{mmio.UM32{&p.IFCR.U32, uint32(CTEIF4)}}
-}
-
-func CGIF5_(p *Periph) RMIFCR {
-	return RMIFCR{mmio.UM32{&p.IFCR.U32, uint32(CGIF5)}}
-}
-
-func CTCIF5_(p *Periph) RMIFCR {
-	return RMIFCR{mmio.UM32{&p.IFCR.U32, uint32(CTCIF5)}}
-}
-
-func CHTIF5_(p *Periph) RMIFCR {
-	return RMIFCR{mmio.UM32{&p.IFCR.U32, uint32(CHTIF5)}}
-}
-
-func CTEIF5_(p *Periph) RMIFCR {
-	return RMIFCR{mmio.UM32{&p.IFCR.U32, uint32(CTEIF5)}}
-}
-
-func CGIF6_(p *Periph) RMIFCR {
-	return RMIFCR{mmio.UM32{&p.IFCR.U32, uint32(CGIF6)}}
-}
-
-func CTCIF6_(p *Periph) RMIFCR {
-	return RMIFCR{mmio.UM32{&p.IFCR.U32, uint32(CTCIF6)}}
-}
-
-func CHTIF6_(p *Periph) RMIFCR {
-	return RMIFCR{mmio.UM32{&p.IFCR.U32, uint32(CHTIF6)}}
-}
-
-func CTEIF6_(p *Periph) RMIFCR {
-	return RMIFCR{mmio.UM32{&p.IFCR.U32, uint32(CTEIF6)}}
-}
-
-func CGIF7_(p *Periph) RMIFCR {
-	return RMIFCR{mmio.UM32{&p.IFCR.U32, uint32(CGIF7)}}
-}
-
-func CTCIF7_(p *Periph) RMIFCR {
-	return RMIFCR{mmio.UM32{&p.IFCR.U32, uint32(CTCIF7)}}
-}
-
-func CHTIF7_(p *Periph) RMIFCR {
-	return RMIFCR{mmio.UM32{&p.IFCR.U32, uint32(CHTIF7)}}
-}
-
-func CTEIF7_(p *Periph) RMIFCR {
-	return RMIFCR{mmio.UM32{&p.IFCR.U32, uint32(CTEIF7)}}
-}
-
-type RC struct {
-	CR   RCR
-	NDTR RNDTR
-	PAR  RPAR
-	MAR  RMAR
+type SC struct {
+	CR   mmio.R32[CR]
+	NDTR mmio.R32[NDTR]
+	PAR  mmio.R32[PAR]
+	MAR  mmio.R32[MAR]
 	_    uint32
 }
 
 type CR uint32
 
-type RCR struct{ mmio.U32 }
-
-func (r *RCR) LoadBits(mask CR) CR  { return CR(r.U32.LoadBits(uint32(mask))) }
-func (r *RCR) StoreBits(mask, b CR) { r.U32.StoreBits(uint32(mask), uint32(b)) }
-func (r *RCR) SetBits(mask CR)      { r.U32.SetBits(uint32(mask)) }
-func (r *RCR) ClearBits(mask CR)    { r.U32.ClearBits(uint32(mask)) }
-func (r *RCR) Load() CR             { return CR(r.U32.Load()) }
-func (r *RCR) Store(b CR)           { r.U32.Store(uint32(b)) }
-
-type RMCR struct{ mmio.UM32 }
-
-func (rm RMCR) Load() CR   { return CR(rm.UM32.Load()) }
-func (rm RMCR) Store(b CR) { rm.UM32.Store(uint32(b)) }
-
-func EN_(p *Periph, n int) RMCR {
-	return RMCR{mmio.UM32{&p.C[n].CR.U32, uint32(EN)}}
-}
-
-func TCIE_(p *Periph, n int) RMCR {
-	return RMCR{mmio.UM32{&p.C[n].CR.U32, uint32(TCIE)}}
-}
-
-func HTIE_(p *Periph, n int) RMCR {
-	return RMCR{mmio.UM32{&p.C[n].CR.U32, uint32(HTIE)}}
-}
-
-func TEIE_(p *Periph, n int) RMCR {
-	return RMCR{mmio.UM32{&p.C[n].CR.U32, uint32(TEIE)}}
-}
-
-func DIR_(p *Periph, n int) RMCR {
-	return RMCR{mmio.UM32{&p.C[n].CR.U32, uint32(DIR)}}
-}
-
-func CIRC_(p *Periph, n int) RMCR {
-	return RMCR{mmio.UM32{&p.C[n].CR.U32, uint32(CIRC)}}
-}
-
-func PINC_(p *Periph, n int) RMCR {
-	return RMCR{mmio.UM32{&p.C[n].CR.U32, uint32(PINC)}}
-}
-
-func MINC_(p *Periph, n int) RMCR {
-	return RMCR{mmio.UM32{&p.C[n].CR.U32, uint32(MINC)}}
-}
-
-func PSIZE_(p *Periph, n int) RMCR {
-	return RMCR{mmio.UM32{&p.C[n].CR.U32, uint32(PSIZE)}}
-}
-
-func MSIZE_(p *Periph, n int) RMCR {
-	return RMCR{mmio.UM32{&p.C[n].CR.U32, uint32(MSIZE)}}
-}
-
-func PL_(p *Periph, n int) RMCR {
-	return RMCR{mmio.UM32{&p.C[n].CR.U32, uint32(PL)}}
-}
-
-func MEM2MEM_(p *Periph, n int) RMCR {
-	return RMCR{mmio.UM32{&p.C[n].CR.U32, uint32(MEM2MEM)}}
-}
+func EN_(p *Periph, i int) mmio.RM32[CR]      { return mmio.RM32[CR]{&p.C[i].CR, EN} }
+func TCIE_(p *Periph, i int) mmio.RM32[CR]    { return mmio.RM32[CR]{&p.C[i].CR, TCIE} }
+func HTIE_(p *Periph, i int) mmio.RM32[CR]    { return mmio.RM32[CR]{&p.C[i].CR, HTIE} }
+func TEIE_(p *Periph, i int) mmio.RM32[CR]    { return mmio.RM32[CR]{&p.C[i].CR, TEIE} }
+func DIR_(p *Periph, i int) mmio.RM32[CR]     { return mmio.RM32[CR]{&p.C[i].CR, DIR} }
+func CIRC_(p *Periph, i int) mmio.RM32[CR]    { return mmio.RM32[CR]{&p.C[i].CR, CIRC} }
+func PINC_(p *Periph, i int) mmio.RM32[CR]    { return mmio.RM32[CR]{&p.C[i].CR, PINC} }
+func MINC_(p *Periph, i int) mmio.RM32[CR]    { return mmio.RM32[CR]{&p.C[i].CR, MINC} }
+func PSIZE_(p *Periph, i int) mmio.RM32[CR]   { return mmio.RM32[CR]{&p.C[i].CR, PSIZE} }
+func MSIZE_(p *Periph, i int) mmio.RM32[CR]   { return mmio.RM32[CR]{&p.C[i].CR, MSIZE} }
+func PL_(p *Periph, i int) mmio.RM32[CR]      { return mmio.RM32[CR]{&p.C[i].CR, PL} }
+func MEM2MEM_(p *Periph, i int) mmio.RM32[CR] { return mmio.RM32[CR]{&p.C[i].CR, MEM2MEM} }
 
 type NDTR uint32
 
-type RNDTR struct{ mmio.U32 }
-
-func (r *RNDTR) LoadBits(mask NDTR) NDTR { return NDTR(r.U32.LoadBits(uint32(mask))) }
-func (r *RNDTR) StoreBits(mask, b NDTR)  { r.U32.StoreBits(uint32(mask), uint32(b)) }
-func (r *RNDTR) SetBits(mask NDTR)       { r.U32.SetBits(uint32(mask)) }
-func (r *RNDTR) ClearBits(mask NDTR)     { r.U32.ClearBits(uint32(mask)) }
-func (r *RNDTR) Load() NDTR              { return NDTR(r.U32.Load()) }
-func (r *RNDTR) Store(b NDTR)            { r.U32.Store(uint32(b)) }
-
-type RMNDTR struct{ mmio.UM32 }
-
-func (rm RMNDTR) Load() NDTR   { return NDTR(rm.UM32.Load()) }
-func (rm RMNDTR) Store(b NDTR) { rm.UM32.Store(uint32(b)) }
-
-func NDT_(p *Periph, n int) RMNDTR {
-	return RMNDTR{mmio.UM32{&p.C[n].NDTR.U32, uint32(NDT)}}
-}
+func NDT_(p *Periph, i int) mmio.RM32[NDTR] { return mmio.RM32[NDTR]{&p.C[i].NDTR, NDT} }
 
 type PAR uint32
 
-type RPAR struct{ mmio.U32 }
-
-func (r *RPAR) LoadBits(mask PAR) PAR { return PAR(r.U32.LoadBits(uint32(mask))) }
-func (r *RPAR) StoreBits(mask, b PAR) { r.U32.StoreBits(uint32(mask), uint32(b)) }
-func (r *RPAR) SetBits(mask PAR)      { r.U32.SetBits(uint32(mask)) }
-func (r *RPAR) ClearBits(mask PAR)    { r.U32.ClearBits(uint32(mask)) }
-func (r *RPAR) Load() PAR             { return PAR(r.U32.Load()) }
-func (r *RPAR) Store(b PAR)           { r.U32.Store(uint32(b)) }
-
-type RMPAR struct{ mmio.UM32 }
-
-func (rm RMPAR) Load() PAR   { return PAR(rm.UM32.Load()) }
-func (rm RMPAR) Store(b PAR) { rm.UM32.Store(uint32(b)) }
-
-func PA_(p *Periph, n int) RMPAR {
-	return RMPAR{mmio.UM32{&p.C[n].PAR.U32, uint32(PA)}}
-}
+func PA_(p *Periph, i int) mmio.RM32[PAR] { return mmio.RM32[PAR]{&p.C[i].PAR, PA} }
 
 type MAR uint32
 
-type RMAR struct{ mmio.U32 }
-
-func (r *RMAR) LoadBits(mask MAR) MAR { return MAR(r.U32.LoadBits(uint32(mask))) }
-func (r *RMAR) StoreBits(mask, b MAR) { r.U32.StoreBits(uint32(mask), uint32(b)) }
-func (r *RMAR) SetBits(mask MAR)      { r.U32.SetBits(uint32(mask)) }
-func (r *RMAR) ClearBits(mask MAR)    { r.U32.ClearBits(uint32(mask)) }
-func (r *RMAR) Load() MAR             { return MAR(r.U32.Load()) }
-func (r *RMAR) Store(b MAR)           { r.U32.Store(uint32(b)) }
-
-type RMMAR struct{ mmio.UM32 }
-
-func (rm RMMAR) Load() MAR   { return MAR(rm.UM32.Load()) }
-func (rm RMMAR) Store(b MAR) { rm.UM32.Store(uint32(b)) }
-
-func MA_(p *Periph, n int) RMMAR {
-	return RMMAR{mmio.UM32{&p.C[n].MAR.U32, uint32(MA)}}
-}
+func MA_(p *Periph, i int) mmio.RM32[MAR] { return mmio.RM32[MAR]{&p.C[i].MAR, MA} }
 
 type CSELR uint32
 
-type RCSELR struct{ mmio.U32 }
-
-func (r *RCSELR) LoadBits(mask CSELR) CSELR { return CSELR(r.U32.LoadBits(uint32(mask))) }
-func (r *RCSELR) StoreBits(mask, b CSELR)   { r.U32.StoreBits(uint32(mask), uint32(b)) }
-func (r *RCSELR) SetBits(mask CSELR)        { r.U32.SetBits(uint32(mask)) }
-func (r *RCSELR) ClearBits(mask CSELR)      { r.U32.ClearBits(uint32(mask)) }
-func (r *RCSELR) Load() CSELR               { return CSELR(r.U32.Load()) }
-func (r *RCSELR) Store(b CSELR)             { r.U32.Store(uint32(b)) }
-
-type RMCSELR struct{ mmio.UM32 }
-
-func (rm RMCSELR) Load() CSELR   { return CSELR(rm.UM32.Load()) }
-func (rm RMCSELR) Store(b CSELR) { rm.UM32.Store(uint32(b)) }
-
-func C1S_(p *Periph) RMCSELR {
-	return RMCSELR{mmio.UM32{&p.CSELR.U32, uint32(C1S)}}
-}
-
-func C2S_(p *Periph) RMCSELR {
-	return RMCSELR{mmio.UM32{&p.CSELR.U32, uint32(C2S)}}
-}
-
-func C3S_(p *Periph) RMCSELR {
-	return RMCSELR{mmio.UM32{&p.CSELR.U32, uint32(C3S)}}
-}
-
-func C4S_(p *Periph) RMCSELR {
-	return RMCSELR{mmio.UM32{&p.CSELR.U32, uint32(C4S)}}
-}
-
-func C5S_(p *Periph) RMCSELR {
-	return RMCSELR{mmio.UM32{&p.CSELR.U32, uint32(C5S)}}
-}
-
-func C6S_(p *Periph) RMCSELR {
-	return RMCSELR{mmio.UM32{&p.CSELR.U32, uint32(C6S)}}
-}
-
-func C7S_(p *Periph) RMCSELR {
-	return RMCSELR{mmio.UM32{&p.CSELR.U32, uint32(C7S)}}
-}
+func C1S_(p *Periph) mmio.RM32[CSELR] { return mmio.RM32[CSELR]{&p.CSELR, C1S} }
+func C2S_(p *Periph) mmio.RM32[CSELR] { return mmio.RM32[CSELR]{&p.CSELR, C2S} }
+func C3S_(p *Periph) mmio.RM32[CSELR] { return mmio.RM32[CSELR]{&p.CSELR, C3S} }
+func C4S_(p *Periph) mmio.RM32[CSELR] { return mmio.RM32[CSELR]{&p.CSELR, C4S} }
+func C5S_(p *Periph) mmio.RM32[CSELR] { return mmio.RM32[CSELR]{&p.CSELR, C5S} }
+func C6S_(p *Periph) mmio.RM32[CSELR] { return mmio.RM32[CSELR]{&p.CSELR, C6S} }
+func C7S_(p *Periph) mmio.RM32[CSELR] { return mmio.RM32[CSELR]{&p.CSELR, C7S} }

@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// +build stm32l4x6
+//go:build stm32l4x6
 
 package dma
 
@@ -12,16 +12,17 @@ import (
 )
 
 func (d *Controller) enableClock(_ bool) {
-	internal.AtomicSetBits(&rcc.RCC().AHB1ENR.U32, 1<<(rcc.DMA1ENn+d.num()))
+	mask := rcc.AHB1ENR(1) << (rcc.DMA1ENn + d.num())
+	internal.AtomicStoreBits(&rcc.RCC().AHB1ENR, mask, mask)
 	rcc.RCC().AHB1ENR.Load() // RCC delay (workaround for silicon bugs)
 }
 
 func (d *Controller) disableClock() {
-	internal.AtomicClearBits(&rcc.RCC().AHB1ENR.U32, 1<<(rcc.DMA1ENn+d.num()))
+	internal.AtomicStoreBits(&rcc.RCC().AHB1ENR, 1<<(rcc.DMA1ENn+d.num()), 0)
 }
 
 func (d *Controller) reset() {
-	mask := uint32(1) << (rcc.DMA1RSTn + d.num())
-	internal.AtomicSetBits(&rcc.RCC().AHB1RSTR.U32, mask)
-	internal.AtomicClearBits(&rcc.RCC().AHB1RSTR.U32, mask)
+	mask := rcc.AHB1RSTR(1) << (rcc.DMA1RSTn + d.num())
+	internal.AtomicStoreBits(&rcc.RCC().AHB1RSTR, mask, mask)
+	internal.AtomicStoreBits(&rcc.RCC().AHB1RSTR, mask, 0)
 }

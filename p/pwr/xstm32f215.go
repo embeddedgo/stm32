@@ -13,8 +13,8 @@ import (
 )
 
 type Periph struct {
-	CR  RCR
-	CSR RCSR
+	CR  mmio.R32[CR]
+	CSR mmio.R32[CSR]
 }
 
 func PWR() *Periph { return (*Periph)(unsafe.Pointer(uintptr(mmap.PWR_BASE))) }
@@ -29,88 +29,20 @@ func (p *Periph) Bus() bus.Bus {
 
 type CR uint32
 
-type RCR struct{ mmio.U32 }
-
-func (r *RCR) LoadBits(mask CR) CR  { return CR(r.U32.LoadBits(uint32(mask))) }
-func (r *RCR) StoreBits(mask, b CR) { r.U32.StoreBits(uint32(mask), uint32(b)) }
-func (r *RCR) SetBits(mask CR)      { r.U32.SetBits(uint32(mask)) }
-func (r *RCR) ClearBits(mask CR)    { r.U32.ClearBits(uint32(mask)) }
-func (r *RCR) Load() CR             { return CR(r.U32.Load()) }
-func (r *RCR) Store(b CR)           { r.U32.Store(uint32(b)) }
-
-type RMCR struct{ mmio.UM32 }
-
-func (rm RMCR) Load() CR   { return CR(rm.UM32.Load()) }
-func (rm RMCR) Store(b CR) { rm.UM32.Store(uint32(b)) }
-
-func LPDS_(p *Periph) RMCR {
-	return RMCR{mmio.UM32{&p.CR.U32, uint32(LPDS)}}
-}
-
-func PDDS_(p *Periph) RMCR {
-	return RMCR{mmio.UM32{&p.CR.U32, uint32(PDDS)}}
-}
-
-func CWUF_(p *Periph) RMCR {
-	return RMCR{mmio.UM32{&p.CR.U32, uint32(CWUF)}}
-}
-
-func CSBF_(p *Periph) RMCR {
-	return RMCR{mmio.UM32{&p.CR.U32, uint32(CSBF)}}
-}
-
-func PVDE_(p *Periph) RMCR {
-	return RMCR{mmio.UM32{&p.CR.U32, uint32(PVDE)}}
-}
-
-func PLS_(p *Periph) RMCR {
-	return RMCR{mmio.UM32{&p.CR.U32, uint32(PLS)}}
-}
-
-func DBP_(p *Periph) RMCR {
-	return RMCR{mmio.UM32{&p.CR.U32, uint32(DBP)}}
-}
-
-func FPDS_(p *Periph) RMCR {
-	return RMCR{mmio.UM32{&p.CR.U32, uint32(FPDS)}}
-}
+func LPDS_(p *Periph) mmio.RM32[CR] { return mmio.RM32[CR]{&p.CR, LPDS} }
+func PDDS_(p *Periph) mmio.RM32[CR] { return mmio.RM32[CR]{&p.CR, PDDS} }
+func CWUF_(p *Periph) mmio.RM32[CR] { return mmio.RM32[CR]{&p.CR, CWUF} }
+func CSBF_(p *Periph) mmio.RM32[CR] { return mmio.RM32[CR]{&p.CR, CSBF} }
+func PVDE_(p *Periph) mmio.RM32[CR] { return mmio.RM32[CR]{&p.CR, PVDE} }
+func PLS_(p *Periph) mmio.RM32[CR]  { return mmio.RM32[CR]{&p.CR, PLS} }
+func DBP_(p *Periph) mmio.RM32[CR]  { return mmio.RM32[CR]{&p.CR, DBP} }
+func FPDS_(p *Periph) mmio.RM32[CR] { return mmio.RM32[CR]{&p.CR, FPDS} }
 
 type CSR uint32
 
-type RCSR struct{ mmio.U32 }
-
-func (r *RCSR) LoadBits(mask CSR) CSR { return CSR(r.U32.LoadBits(uint32(mask))) }
-func (r *RCSR) StoreBits(mask, b CSR) { r.U32.StoreBits(uint32(mask), uint32(b)) }
-func (r *RCSR) SetBits(mask CSR)      { r.U32.SetBits(uint32(mask)) }
-func (r *RCSR) ClearBits(mask CSR)    { r.U32.ClearBits(uint32(mask)) }
-func (r *RCSR) Load() CSR             { return CSR(r.U32.Load()) }
-func (r *RCSR) Store(b CSR)           { r.U32.Store(uint32(b)) }
-
-type RMCSR struct{ mmio.UM32 }
-
-func (rm RMCSR) Load() CSR   { return CSR(rm.UM32.Load()) }
-func (rm RMCSR) Store(b CSR) { rm.UM32.Store(uint32(b)) }
-
-func WUF_(p *Periph) RMCSR {
-	return RMCSR{mmio.UM32{&p.CSR.U32, uint32(WUF)}}
-}
-
-func SBF_(p *Periph) RMCSR {
-	return RMCSR{mmio.UM32{&p.CSR.U32, uint32(SBF)}}
-}
-
-func PVDO_(p *Periph) RMCSR {
-	return RMCSR{mmio.UM32{&p.CSR.U32, uint32(PVDO)}}
-}
-
-func BRR_(p *Periph) RMCSR {
-	return RMCSR{mmio.UM32{&p.CSR.U32, uint32(BRR)}}
-}
-
-func EWUP_(p *Periph) RMCSR {
-	return RMCSR{mmio.UM32{&p.CSR.U32, uint32(EWUP)}}
-}
-
-func BRE_(p *Periph) RMCSR {
-	return RMCSR{mmio.UM32{&p.CSR.U32, uint32(BRE)}}
-}
+func WUF_(p *Periph) mmio.RM32[CSR]  { return mmio.RM32[CSR]{&p.CSR, WUF} }
+func SBF_(p *Periph) mmio.RM32[CSR]  { return mmio.RM32[CSR]{&p.CSR, SBF} }
+func PVDO_(p *Periph) mmio.RM32[CSR] { return mmio.RM32[CSR]{&p.CSR, PVDO} }
+func BRR_(p *Periph) mmio.RM32[CSR]  { return mmio.RM32[CSR]{&p.CSR, BRR} }
+func EWUP_(p *Periph) mmio.RM32[CSR] { return mmio.RM32[CSR]{&p.CSR, EWUP} }
+func BRE_(p *Periph) mmio.RM32[CSR]  { return mmio.RM32[CSR]{&p.CSR, BRE} }

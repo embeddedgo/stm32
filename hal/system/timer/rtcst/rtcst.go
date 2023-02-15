@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// +build noos
+//go:build noos
 
 // Package rtcst allows to setup the STM32 RTC type 2 peripheral as tickless
 // system timer. Although the RTC type 2 is originally designed to provide a
@@ -108,9 +108,9 @@ func StoreTime(t time.Time, i int) (n int) {
 	sec := t.Unix()
 	nsec := t.Nanosecond()
 	bkpr := &rtc.RTC().BKPR
-	bkpr[i].Store(rtc.BKPR(nsec))
-	bkpr[i+1].Store(rtc.BKPR(sec))
-	bkpr[i+2].Store(rtc.BKPR(sec >> 32))
+	bkpr[i].Store(uint32(nsec))
+	bkpr[i+1].Store(uint32(sec))
+	bkpr[i+2].Store(uint32(sec >> 32))
 	return 3
 }
 

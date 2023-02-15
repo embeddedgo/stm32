@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// +build stm32f215 stm32f407 stm32f412 stm32f7x6
+//go:build stm32f215 || stm32f407 || stm32f412 || stm32f7x6
 
 package exti
 
@@ -18,11 +18,11 @@ func riseTrigEnabled() Lines {
 }
 
 func enableRiseTrig(li Lines) {
-	internal.AtomicSetBits(&exti.EXTI().RTSR.U32, uint32(li))
+	internal.AtomicStoreBits(&exti.EXTI().RTSR, uint32(li), uint32(li))
 }
 
 func disableRiseTrig(li Lines) {
-	internal.AtomicClearBits(&exti.EXTI().RTSR.U32, uint32(li))
+	internal.AtomicStoreBits(&exti.EXTI().RTSR, uint32(li), 0)
 }
 
 func fallTrigEnabled() Lines {
@@ -30,15 +30,15 @@ func fallTrigEnabled() Lines {
 }
 
 func enableFallTrig(li Lines) {
-	internal.AtomicSetBits(&exti.EXTI().FTSR.U32, uint32(li))
+	internal.AtomicStoreBits(&exti.EXTI().FTSR, uint32(li), uint32(li))
 }
 
 func disableFallTrig(li Lines) {
-	internal.AtomicClearBits(&exti.EXTI().FTSR.U32, uint32(li))
+	internal.AtomicStoreBits(&exti.EXTI().FTSR, uint32(li), 0)
 }
 
 func trigger(li Lines) {
-	exti.EXTI().SWIER.Store(exti.SWIER(li))
+	exti.EXTI().SWIER.Store(uint32(li))
 }
 
 func irqEnabled() Lines {
@@ -46,11 +46,11 @@ func irqEnabled() Lines {
 }
 
 func enableIRQ(li Lines) {
-	internal.AtomicSetBits(&exti.EXTI().IMR.U32, uint32(li))
+	internal.AtomicStoreBits(&exti.EXTI().IMR, uint32(li), uint32(li))
 }
 
 func disableIRQ(li Lines) {
-	internal.AtomicClearBits(&exti.EXTI().IMR.U32, uint32(li))
+	internal.AtomicStoreBits(&exti.EXTI().IMR, uint32(li), 0)
 }
 
 func eventEnabled() Lines {
@@ -58,11 +58,11 @@ func eventEnabled() Lines {
 }
 
 func enableEvent(li Lines) {
-	internal.AtomicSetBits(&exti.EXTI().EMR.U32, uint32(li))
+	internal.AtomicStoreBits(&exti.EXTI().EMR, uint32(li), uint32(li))
 }
 
 func disableEvent(li Lines) {
-	internal.AtomicClearBits(&exti.EXTI().EMR.U32, uint32(li))
+	internal.AtomicStoreBits(&exti.EXTI().EMR, uint32(li), 0)
 }
 
 func pending() Lines {
@@ -70,5 +70,5 @@ func pending() Lines {
 }
 
 func clearPending(li Lines) {
-	exti.EXTI().PR.Store(exti.PR(li))
+	exti.EXTI().PR.Store(uint32(li))
 }

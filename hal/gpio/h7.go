@@ -2,11 +2,13 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// +build stm32h7x3
+//go:build stm32h7x3
 
 package gpio
 
 import (
+	"embedded/mmio"
+
 	"github.com/embeddedgo/stm32/hal/internal"
 	"github.com/embeddedgo/stm32/p/rcc"
 )
@@ -19,13 +21,13 @@ const (
 	veryHigh = 2  // 133 MHz (CL = 30 pF, VDD > 2.7 V)
 )
 
-func enreg() *rcc.RAHB4ENR   { return &rcc.RCC().AHB4ENR }
-func rstreg() *rcc.RAHB4RSTR { return &rcc.RCC().AHB4RSTR }
+func enreg() *mmio.R32[rcc.AHB4ENR]   { return &rcc.RCC().AHB4ENR }
+func rstreg() *mmio.R32[rcc.AHB4RSTR] { return &rcc.RCC().AHB4RSTR }
 
 func lpenaclk(pnum uint) {
-	internal.AtomicSetBits(&rcc.RCC().AHB4LPENR.U32, uint32(rcc.GPIOALPEN<<pnum))
+	internal.AtomicStoreBits(&rcc.RCC().AHB4LPENR, rcc.GPIOALPEN<<pnum, rcc.GPIOALPEN<<pnum)
 }
 
 func lpdisclk(pnum uint) {
-	internal.AtomicClearBits(&rcc.RCC().AHB4LPENR.U32, uint32(rcc.GPIOALPEN<<pnum))
+	internal.AtomicStoreBits(&rcc.RCC().AHB4LPENR, rcc.GPIOALPEN<<pnum, 0)
 }

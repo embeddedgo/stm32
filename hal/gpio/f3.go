@@ -2,12 +2,13 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// +build stm32f303
+//go:build stm32f303
 
 package gpio
 
 import (
-	"github.com/embeddedgo/stm32/hal/internal"
+	"embedded/mmio"
+
 	"github.com/embeddedgo/stm32/p/rcc"
 )
 
@@ -19,8 +20,8 @@ const (
 	veryHigh = 2  // Not supported.
 )
 
-func enreg() *rcc.RAHBENR   { return &rcc.RCC().AHBENR }
-func rstreg() *rcc.RAHBRSTR { return &rcc.RCC().AHBRSTR }
+func enreg() *mmio.R32[rcc.AHBENR]   { return &rcc.RCC().AHBENR }
+func rstreg() *mmio.R32[rcc.AHBRSTR] { return &rcc.RCC().AHBRSTR }
 
 func lpenaclk(pnum uint) {}
 func lpdisclk(pnum uint) {}

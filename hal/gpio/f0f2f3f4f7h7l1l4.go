@@ -3,7 +3,6 @@
 // license that can be found in the LICENSE file.
 
 //go:build stm32f215 || stm32f407 || stm32f412 || stm32f7x6 || stm32h7x3 || stm32l4x6
-// +build stm32f215 stm32f407 stm32f412 stm32f7x6 stm32h7x3 stm32l4x6
 
 package gpio
 
@@ -45,7 +44,7 @@ const (
 
 func enableClock(p *Port, lp bool) {
 	pnum := portnum(p)
-	internal.AtomicSetBits(&enreg().U32, uint32(rcc.GPIOAEN<<pnum))
+	internal.AtomicStoreBits(enreg(), rcc.GPIOAEN<<pnum, rcc.GPIOAEN<<pnum)
 	if lp {
 		lpenaclk(pnum)
 	} else {
@@ -55,13 +54,14 @@ func enableClock(p *Port, lp bool) {
 }
 
 func disableClock(p *Port) {
-	internal.AtomicClearBits(&enreg().U32, uint32(rcc.GPIOAEN<<portnum(p)))
+	internal.AtomicStoreBits(enreg(), rcc.GPIOAEN<<portnum(p), 0)
 }
 
 func reset(p *Port) {
 	pnum := portnum(p)
-	internal.AtomicSetBits(&rstreg().U32, uint32(rcc.GPIOARST<<pnum))
-	internal.AtomicClearBits(&rstreg().U32, uint32(rcc.GPIOARST<<pnum))
+	mask := rcc.GPIOARST << pnum
+	internal.AtomicStoreBits(rstreg(), mask, mask)
+	internal.AtomicStoreBits(rstreg(), mask, 0)
 }
 
 func setup(p *Port, n int, cfg *Config) {

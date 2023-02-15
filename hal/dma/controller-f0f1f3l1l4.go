@@ -14,19 +14,19 @@ import (
 )
 
 type channel struct {
-	cr   mmio.U32
-	ndtr mmio.U32
-	par  mmio.U32
-	mar  mmio.U32
+	cr   mmio.R32[uint32]
+	ndtr mmio.R32[uint32]
+	par  mmio.R32[uint32]
+	mar  mmio.R32[uint32]
 	_    uint32
 }
 
 type registers struct {
-	isr   mmio.U32
-	ifcr  mmio.U32
+	isr   mmio.R32[uint32]
+	ifcr  mmio.R32[uint32]
 	c     [7]channel
 	_     [5]uint32
-	cselr mmio.U32
+	cselr mmio.R32[uint32]
 }
 
 // cr

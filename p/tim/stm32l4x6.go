@@ -17,32 +17,32 @@
 //  TIM16  TIM16_BASE  APB2  -                                                        General purpose timers
 //  TIM17  TIM17_BASE  APB2  -                                                        General purpose timers
 // Registers:
-//  0x000 32  CR1           control register 1
-//  0x004 32  CR2           control register 2
-//  0x008 32  SMCR          slave mode control register
-//  0x00C 32  DIER          DMA/Interrupt enable register
-//  0x010 32  SR            status register
-//  0x014 32  EGR           event generation register
-//  0x018 32  CCMR1         capture/compare mode register 1
-//  0x01C 32  CCMR2         capture/compare mode register 2
-//  0x020 32  CCER          capture/compare enable register
-//  0x024 32  CNT           counter
-//  0x028 32  PSC           prescaler
-//  0x02C 32  ARR           auto-reload register
-//  0x030 32  RCR           repetition counter register
-//  0x034 32  CCR1(uint32)  capture/compare register 1
-//  0x038 32  CCR2(uint32)  capture/compare register 2
-//  0x03C 32  CCR3(uint32)  capture/compare register 3
-//  0x040 32  CCR4(uint32)  capture/compare register 4
-//  0x044 32  BDTR          break and dead-time register
-//  0x048 32  DCR           DMA control register
-//  0x04C 32  DMAR          DMA address for full transfer
-//  0x050 32  OR1           DMA address for full transfer
-//  0x054 32  CCMR3         capture/compare mode register 2
-//  0x058 32  CCR5(uint32)  capture/compare register 4
-//  0x05C 32  CCR6(uint32)  capture/compare register 4
-//  0x060 32  OR2           DMA address for full transfer
-//  0x064 32  OR3           DMA address for full transfer
+//  0x000 32  CR1    control register 1
+//  0x004 32  CR2    control register 2
+//  0x008 32  SMCR   slave mode control register
+//  0x00C 32  DIER   DMA/Interrupt enable register
+//  0x010 32  SR     status register
+//  0x014 32  EGR    event generation register
+//  0x018 32  CCMR1  capture/compare mode register 1
+//  0x01C 32  CCMR2  capture/compare mode register 2
+//  0x020 32  CCER   capture/compare enable register
+//  0x024 32  CNT    counter
+//  0x028 32  PSC    prescaler
+//  0x02C 32  ARR    auto-reload register
+//  0x030 32  RCR    repetition counter register
+//  0x034 32  CCR1   capture/compare register 1
+//  0x038 32  CCR2   capture/compare register 2
+//  0x03C 32  CCR3   capture/compare register 3
+//  0x040 32  CCR4   capture/compare register 4
+//  0x044 32  BDTR   break and dead-time register
+//  0x048 32  DCR    DMA control register
+//  0x04C 32  DMAR   DMA address for full transfer
+//  0x050 32  OR1    DMA address for full transfer
+//  0x054 32  CCMR3  capture/compare mode register 2
+//  0x058 32  CCR5   capture/compare register 4
+//  0x05C 32  CCR6   capture/compare register 4
+//  0x060 32  OR2    DMA address for full transfer
+//  0x064 32  OR3    DMA address for full transfer
 // Import:
 //  github.com/embeddedgo/stm32/p/bus
 //  github.com/embeddedgo/stm32/p/mmap
@@ -101,23 +101,25 @@ const (
 )
 
 const (
-	SMS  SMCR = 0x07 << 0  //+ Slave mode selection
-	TS   SMCR = 0x07 << 4  //+ Trigger selection
-	MSM  SMCR = 0x01 << 7  //+ Master/Slave mode
-	ETF  SMCR = 0x0F << 8  //+ External trigger filter
-	ETPS SMCR = 0x03 << 12 //+ External trigger prescaler
-	ECE  SMCR = 0x01 << 14 //+ External clock enable
-	ETP  SMCR = 0x01 << 15 //+ External trigger polarity
+	SMS   SMCR = 0x07 << 0  //+ Slave mode selection
+	TS    SMCR = 0x07 << 4  //+ Trigger selection
+	MSM   SMCR = 0x01 << 7  //+ Master/Slave mode
+	ETF   SMCR = 0x0F << 8  //+ External trigger filter
+	ETPS  SMCR = 0x03 << 12 //+ External trigger prescaler
+	ECE   SMCR = 0x01 << 14 //+ External clock enable
+	ETP   SMCR = 0x01 << 15 //+ External trigger polarity
+	SMS_2 SMCR = 0x01 << 16 //+ Slave mode selection
 )
 
 const (
-	SMSn  = 0
-	TSn   = 4
-	MSMn  = 7
-	ETFn  = 8
-	ETPSn = 12
-	ECEn  = 14
-	ETPn  = 15
+	SMSn   = 0
+	TSn    = 4
+	MSMn   = 7
+	ETFn   = 8
+	ETPSn  = 12
+	ECEn   = 14
+	ETPn   = 15
+	SMS_2n = 16
 )
 
 const (
@@ -219,6 +221,8 @@ const (
 	OC2PE  CCMR1 = 0x01 << 11 //+ Output Compare 2 preload enable
 	OC2M   CCMR1 = 0x07 << 12 //+ Output Compare 2 mode
 	OC2CE  CCMR1 = 0x01 << 15 //+ Output Compare 2 clear enable
+	OC1M_2 CCMR1 = 0x01 << 16 //+ Output Compare 1 mode
+	OC2M_2 CCMR1 = 0x01 << 24 //+ Output Compare 2 mode
 	ICPCS  CCMR1 = 0x03 << 2  //+ Input capture 1 prescaler
 	IC1F   CCMR1 = 0x0F << 4  //+ Input capture 1 filter
 	IC2PCS CCMR1 = 0x03 << 10 //+ Input capture 2 prescaler
@@ -236,6 +240,8 @@ const (
 	OC2PEn  = 11
 	OC2Mn   = 12
 	OC2CEn  = 15
+	OC1M_2n = 16
+	OC2M_2n = 24
 	ICPCSn  = 2
 	IC1Fn   = 4
 	IC2PCSn = 10
@@ -253,6 +259,8 @@ const (
 	OC4PE  CCMR2 = 0x01 << 11 //+ Output compare 4 preload enable
 	OC4M   CCMR2 = 0x07 << 12 //+ Output compare 4 mode
 	OC4CE  CCMR2 = 0x01 << 15 //+ Output compare 4 clear enable
+	OC3M_2 CCMR2 = 0x01 << 16 //+ Output compare 3 mode
+	OC4M_2 CCMR2 = 0x01 << 24 //+ Output compare 4 mode
 	IC3PSC CCMR2 = 0x03 << 2  //+ Input capture 3 prescaler
 	IC3F   CCMR2 = 0x0F << 4  //+ Input capture 3 filter
 	IC4PSC CCMR2 = 0x03 << 10 //+ Input capture 4 prescaler
@@ -270,6 +278,8 @@ const (
 	OC4PEn  = 11
 	OC4Mn   = 12
 	OC4CEn  = 15
+	OC3M_2n = 16
+	OC4M_2n = 24
 	IC3PSCn = 2
 	IC3Fn   = 4
 	IC4PSCn = 10

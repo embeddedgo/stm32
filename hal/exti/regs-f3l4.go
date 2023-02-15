@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// +build stm32f303 stm32l4x6
+//go:build stm32f303 || stm32l4x6
 
 package exti
 
@@ -20,19 +20,19 @@ func riseTrigEnabled() Lines {
 
 func enableRiseTrig(li Lines) {
 	if m := uint32(li); m != 0 {
-		internal.AtomicSetBits(&exti.EXTI().RTSR1.U32, m)
+		internal.AtomicStoreBits(&exti.EXTI().RTSR1, m, m)
 	}
 	if m := uint32(li >> 32); m != 0 {
-		internal.AtomicSetBits(&exti.EXTI().RTSR2.U32, m)
+		internal.AtomicStoreBits(&exti.EXTI().RTSR2, m, m)
 	}
 }
 
 func disableRiseTrig(li Lines) {
 	if m := uint32(li); m != 0 {
-		internal.AtomicClearBits(&exti.EXTI().RTSR1.U32, m)
+		internal.AtomicStoreBits(&exti.EXTI().RTSR1, m, 0)
 	}
 	if m := uint32(li >> 32); m != 0 {
-		internal.AtomicClearBits(&exti.EXTI().RTSR2.U32, m)
+		internal.AtomicStoreBits(&exti.EXTI().RTSR2, m, 0)
 	}
 }
 
@@ -43,27 +43,27 @@ func fallTrigEnabled() Lines {
 
 func enableFallTrig(li Lines) {
 	if m := uint32(li); m != 0 {
-		internal.AtomicSetBits(&exti.EXTI().FTSR1.U32, m)
+		internal.AtomicStoreBits(&exti.EXTI().FTSR1, m, m)
 	}
 	if m := uint32(li >> 32); m != 0 {
-		internal.AtomicSetBits(&exti.EXTI().FTSR2.U32, m)
+		internal.AtomicStoreBits(&exti.EXTI().FTSR2, m, m)
 	}
 }
 
 func disableFallTrig(li Lines) {
 	if m := uint32(li); m != 0 {
-		internal.AtomicClearBits(&exti.EXTI().FTSR1.U32, m)
+		internal.AtomicStoreBits(&exti.EXTI().FTSR1, m, 0)
 	}
 	if m := uint32(li >> 32); m != 0 {
-		internal.AtomicClearBits(&exti.EXTI().FTSR2.U32, m)
+		internal.AtomicStoreBits(&exti.EXTI().FTSR2, m, 0)
 	}
 }
 
 func trigger(li Lines) {
-	if m := exti.SWIER1(li); m != 0 {
+	if m := uint32(li); m != 0 {
 		exti.EXTI().SWIER1.Store(m)
 	}
-	if m := exti.SWIER2(li >> 32); m != 0 {
+	if m := uint32(li >> 32); m != 0 {
 		exti.EXTI().SWIER2.Store(m)
 	}
 }
@@ -75,55 +75,53 @@ func irqEnabled() Lines {
 
 func enableIRQ(li Lines) {
 	if m := uint32(li); m != 0 {
-		internal.AtomicSetBits(&exti.EXTI().IMR1.U32, m)
+		internal.AtomicStoreBits(&exti.EXTI().IMR1, m, m)
 	}
 	if m := uint32(li >> 32); m != 0 {
-		internal.AtomicSetBits(&exti.EXTI().IMR2.U32, m)
+		internal.AtomicStoreBits(&exti.EXTI().IMR2, m, m)
 	}
 }
 
 func disableIRQ(li Lines) {
 	if m := uint32(li); m != 0 {
-		internal.AtomicClearBits(&exti.EXTI().IMR1.U32, m)
+		internal.AtomicStoreBits(&exti.EXTI().IMR1, m, 0)
 	}
 	if m := uint32(li >> 32); m != 0 {
-		internal.AtomicClearBits(&exti.EXTI().IMR2.U32, m)
+		internal.AtomicStoreBits(&exti.EXTI().IMR2, m, 0)
 	}
 }
 
 func eventEnabled() Lines {
-	return Lines(exti.EXTI().EMR1.Load()) |
-		Lines(exti.EXTI().EMR2.Load())<<32
+	return Lines(exti.EXTI().EMR1.Load() | exti.EXTI().EMR2.Load()<<32)
 }
 
 func enableEvent(li Lines) {
 	if m := uint32(li); m != 0 {
-		internal.AtomicSetBits(&exti.EXTI().EMR1.U32, m)
+		internal.AtomicStoreBits(&exti.EXTI().EMR1, m, m)
 	}
 	if m := uint32(li >> 32); m != 0 {
-		internal.AtomicSetBits(&exti.EXTI().EMR2.U32, m)
+		internal.AtomicStoreBits(&exti.EXTI().EMR2, m, m)
 	}
 }
 
 func disableEvent(li Lines) {
 	if m := uint32(li); m != 0 {
-		internal.AtomicClearBits(&exti.EXTI().EMR1.U32, m)
+		internal.AtomicStoreBits(&exti.EXTI().EMR1, m, 0)
 	}
 	if m := uint32(li >> 32); m != 0 {
-		internal.AtomicClearBits(&exti.EXTI().EMR2.U32, m)
+		internal.AtomicStoreBits(&exti.EXTI().EMR2, m, 0)
 	}
 }
 
 func pending() Lines {
-	return Lines(exti.EXTI().PR1.Load()) |
-		Lines(exti.EXTI().PR2.Load())<<32
+	return Lines(exti.EXTI().PR1.Load() | exti.EXTI().PR2.Load()<<32)
 }
 
 func clearPending(li Lines) {
-	if m := exti.PR1(li); m != 0 {
+	if m := uint32(li); m != 0 {
 		exti.EXTI().PR1.Store(m)
 	}
-	if m := exti.PR2(li >> 32); m != 0 {
+	if m := uint32(li >> 32); m != 0 {
 		exti.EXTI().PR2.Store(m)
 	}
 }

@@ -7,9 +7,9 @@ rm -rf *
 
 svdxgen github.com/embeddedgo/stm32/p ../svd/*.svd
 
-for p in dma exti flash gpio pwr rcc rtc spi syscfg tim/tim1 tim/tim2 tim/tim3 tim/tim5 tim/tim6; do
+for p in dma exti flash gpio pwr rcc rtc spi syscfg tim; do
 	cd $p
-	xgen *.go
+	xgen -g *.go
 	for f in *.go; do
 		GOTARGET=$(basename $f .go)
 		case $GOTARGET in
