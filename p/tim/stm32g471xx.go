@@ -2,46 +2,53 @@
 
 //go:build stm32g471xx
 
-// Package tim2 provides access to the registers of the TIM peripheral.
+// Package tim provides access to the registers of the TIM peripheral.
 //
 // Instances:
-//  TIM2  TIM2_BASE  APB1  TIM2  Advanced-timers
-//  TIM3  TIM3_BASE  APB1  TIM3  Advanced-timers
-//  TIM4  TIM4_BASE  APB1  TIM4  Advanced-timers
-//  TIM5  TIM5_BASE  APB1  TIM5  Advanced-timers
+//  TIM1   TIM1_BASE   APB2  TIM1_BRK_TIM15,TIM1_UP_TIM16,TIM1_TRG_COM,TIM1_CC,TIM8_CC  Advanced-timers
+//  TIM2   TIM2_BASE   APB1  TIM2                                                       Advanced-timers
+//  TIM3   TIM3_BASE   APB1  TIM3                                                       Advanced-timers
+//  TIM4   TIM4_BASE   APB1  TIM4                                                       Advanced-timers
+//  TIM5   TIM5_BASE   APB1  TIM5                                                       Advanced-timers
+//  TIM6   TIM6_BASE   APB1  TIM6_DACUNDER*                                             Basic-timers
+//  TIM7   TIM7_BASE   APB1  TIM7                                                       Basic-timers
+//  TIM8   TIM8_BASE   APB2  TIM8_BRK,TIM8_UP,TIM8_TRG_COM                              Advanced-timers
+//  TIM15  TIM15_BASE  APB2  -                                                          General purpose timers
+//  TIM16  TIM16_BASE  APB2  -                                                          General purpose timers
+//  TIM17  TIM17_BASE  APB2  -                                                          General purpose timers
 // Registers:
-//  0x000 32  CR1        control register 1
-//  0x004 32  CR2        control register 2
-//  0x008 32  SMCR       slave mode control register
-//  0x00C 32  DIER       DMA/Interrupt enable register
-//  0x010 32  SR         status register
-//  0x014 32  EGR        event generation register
-//  0x018 32  CCMR1      capture/compare mode register 1
-//  0x01C 32  CCMR2      capture/compare mode register 2
-//  0x020 32  CCER       capture/compare enable register
-//  0x024 32  CNT        counter
-//  0x028 32  PSC        prescaler
-//  0x02C 32  ARR        auto-reload register
-//  0x030 32  RCR        repetition counter register
-//  0x034 32  CCR1(CCR)  capture/compare register 1
-//  0x038 32  CCR2(CCR)  capture/compare register 2
-//  0x03C 32  CCR3(CCR)  capture/compare register 3
-//  0x040 32  CCR4(CCR)  capture/compare register 4
-//  0x044 32  BDTR       break and dead-time register
-//  0x048 32  CCR5(CCR)  capture/compare register 4
-//  0x04C 32  CCR6(CCR)  capture/compare register 4
-//  0x050 32  CCMR3      capture/compare mode register 2
-//  0x054 32  DTR2       timer Deadtime Register 2
-//  0x058 32  ECR        DMA control register
-//  0x05C 32  TISEL      TIM timer input selection register
-//  0x060 32  AF1        TIM alternate function option register 1
-//  0x064 32  AF2        TIM alternate function option register 2
-//  0x3DC 32  DCR        control register
-//  0x3E0 32  DMAR       DMA address for full transfer
+//  0x000 32  CR1           control register 1
+//  0x004 32  CR2           control register 2
+//  0x008 32  SMCR          slave mode control register
+//  0x00C 32  DIER          DMA/Interrupt enable register
+//  0x010 32  SR            status register
+//  0x014 32  EGR           event generation register
+//  0x018 32  CCMR1         capture/compare mode register 1
+//  0x01C 32  CCMR2         capture/compare mode register 2
+//  0x020 32  CCER          capture/compare enable register
+//  0x024 32  CNT           counter
+//  0x028 32  PSC           prescaler
+//  0x02C 32  ARR           auto-reload register
+//  0x030 32  RCR           repetition counter register
+//  0x034 32  CCR1(uint32)  capture/compare register 1
+//  0x038 32  CCR2(uint32)  capture/compare register 2
+//  0x03C 32  CCR3(uint32)  capture/compare register 3
+//  0x040 32  CCR4(uint32)  capture/compare register 4
+//  0x044 32  BDTR          break and dead-time register
+//  0x048 32  CCR5(uint32)  capture/compare register 4
+//  0x04C 32  CCR6(uint32)  capture/compare register 4
+//  0x050 32  CCMR3         capture/compare mode register 2
+//  0x054 32  DTR2          timer Deadtime Register 2
+//  0x058 32  ECR           DMA control register
+//  0x05C 32  TISEL         TIM timer input selection register
+//  0x060 32  AF1           TIM alternate function option register 1
+//  0x064 32  AF2           TIM alternate function option register 2
+//  0x3DC 32  DCR           control register
+//  0x3E0 32  DMAR          DMA address for full transfer
 // Import:
 //  github.com/embeddedgo/stm32/p/bus
 //  github.com/embeddedgo/stm32/p/mmap
-package tim2
+package tim
 
 const (
 	CEN      CR1 = 0x01 << 0  //+ Counter enable
