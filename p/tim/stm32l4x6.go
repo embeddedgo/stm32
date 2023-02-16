@@ -102,6 +102,7 @@ const (
 
 const (
 	SMS   SMCR = 0x07 << 0  //+ Slave mode selection
+	OCCS  SMCR = 0x01 << 3  //+ OCREF clear selection
 	TS    SMCR = 0x07 << 4  //+ Trigger selection
 	MSM   SMCR = 0x01 << 7  //+ Master/Slave mode
 	ETF   SMCR = 0x0F << 8  //+ External trigger filter
@@ -113,6 +114,7 @@ const (
 
 const (
 	SMSn   = 0
+	OCCSn  = 3
 	TSn    = 4
 	MSMn   = 7
 	ETFn   = 8

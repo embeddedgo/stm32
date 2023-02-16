@@ -9,7 +9,7 @@ PLLCFGR:    enums added: PLLSRC_NONE, PLLSRC_MSI, PLLSRC_HSI, PLLSRC_HSE
 APB1ENR1:   fix SPI3EN
 APB1SMENR1: fix SPI3SMEN
 BDCR:       enums added: RTCSEL_NONE..RTCSEL_HSE
-TIM1:       OC1M_2, OC2M_2, OC3M_2, OC4M_2, SMS_2 added
+TIM1:       OC1M_2, OC2M_2, OC3M_2, OC4M_2, SMS_2, OCCS added
 -->
 
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
@@ -27990,6 +27990,12 @@ xs:noNamespaceSchemaLocation="CMSIS-SVD_Schema_1_1.xsd">
               <description>Trigger selection</description>
               <bitOffset>4</bitOffset>
               <bitWidth>3</bitWidth>
+            </field>
+            <field>
+              <name>OCCS</name>
+              <description>OCREF clear selection</description>
+              <bitOffset>3</bitOffset>
+              <bitWidth>1</bitWidth>
             </field>
             <field>
               <name>SMS</name>

@@ -95,6 +95,7 @@ func OIS4_(p *Periph) mmio.RM32[CR2]  { return mmio.RM32[CR2]{&p.CR2, OIS4} }
 type SMCR uint32
 
 func SMS_(p *Periph) mmio.RM32[SMCR]   { return mmio.RM32[SMCR]{&p.SMCR, SMS} }
+func OCCS_(p *Periph) mmio.RM32[SMCR]  { return mmio.RM32[SMCR]{&p.SMCR, OCCS} }
 func TS_(p *Periph) mmio.RM32[SMCR]    { return mmio.RM32[SMCR]{&p.SMCR, TS} }
 func MSM_(p *Periph) mmio.RM32[SMCR]   { return mmio.RM32[SMCR]{&p.SMCR, MSM} }
 func ETF_(p *Periph) mmio.RM32[SMCR]   { return mmio.RM32[SMCR]{&p.SMCR, ETF} }
