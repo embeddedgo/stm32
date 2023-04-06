@@ -2,6 +2,63 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+// Shell shows how to use the Embedded Go virtual filesystem.
+//
+// Two different filesystems are used here. First one is the console filesystem
+// you can find in fs/termfs package. It implemnts os.Stdin and os.Stdout files
+// as the Go runtime expects. The second one is the in RAM filesystem you can
+// find in the fs/ramfs package. This program allows to mount a mulitple such
+// filesystems and work with files through them (little RAM doesn't allow too
+// much).
+//
+// Since the STM32L476 has little RAM, the board/init package uses a simplified
+// console filesystem (termfs.LightFS) by default. The simple console provided
+// doesn't support neither CR/LF conversion nor remote echo. Use options of
+// your terminal emulator to provide local echo and convert CR and LF chars
+// properly. The working example for Linux is:
+//
+//	picocom -b 115200 --echo --imap lfcrlf --omap crlf /dev/ttyACM0
+//
+// Example:
+//
+//	date!> date
+//	1970-01-01 00:33:23 UTC
+//	date!> help date
+//
+//	date
+//	date YYYY-MM-DD hh:mm:ss
+//	date!> date 2023-04-06 13:15:11
+//	> date
+//	2023-04-06 13:15:19 UTC
+//	> help mount
+//	mount
+//	mount FSTYPE(FSARGS) PREFIX
+//	Supported filesystems:
+//
+//	ramfs(SIZE[,NAME])  in RAM file system
+//
+//	> mount ramfs(512,FS1) /myfs
+//	> mount ramfs(100,FS2) /mnt/fs2
+//	> mount
+//
+//	prefix                    fstype     fsname      opencnt available      used
+//	----------------------------------------------------------------------------
+//	/dev/console              lterm      USART2            2         0        -1
+//	/myfs                     ram        FS1               0       512         0
+//	/mnt/fs2                  ram        FS2               0       100         0
+//	> echo Hello World >/myfs/file1.txt
+//	> mount
+//
+//	prefix                   fstype     fsname      opencnt available      	used
+//	----------------------------------------------------------------------------
+//	/dev/console              lterm      USART2            2         0        -1
+//	/myfs                     ram        FS1               0       428        84
+//	/mnt/fs2                  ram        FS2               0       100         0
+//	> ls /myfs
+//	-rw-rw-rw-      13 2023-04-06 13:16:25 UTC file1.txt
+//	> cat /myfs/file1.txt
+//	Hello World
+//	>
 package main
 
 import (

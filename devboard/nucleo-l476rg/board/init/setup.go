@@ -19,6 +19,6 @@ func init() {
 	uart := usart2.Driver()
 	rx := gpio.PA().Pin(3)
 	tx := gpio.PA().Pin(2)
-	// Use "light" version of console because of small RAM.
+	// Use the "light" version of the console because of small RAM.
 	uartcon.SetupLight(uart, rx, tx, usart.Word8b, 115200, "USART2")
 }
