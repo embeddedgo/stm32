@@ -9,6 +9,10 @@
 package main
 
 import (
+	"io"
+	"net"
+	"time"
+
 	"github.com/embeddedgo/espat"
 	"github.com/embeddedgo/espat/espnet"
 	"github.com/embeddedgo/stm32/hal/gpio"
@@ -18,9 +22,20 @@ import (
 	"github.com/embeddedgo/stm32/hal/usart/usart1"
 )
 
+func logErr(err error) bool {
+	if err != nil {
+		if err != io.EOF {
+			println("error:", err.Error())
+		}
+		return true
+	}
+	return false
+}
+
 func fatalErr(err error) {
 	for err != nil {
-		println("error:", err.String())
+		println("error:", err.Error())
+		time.Sleep(time.Second)
 	}
 }
 
@@ -42,9 +57,47 @@ func main() {
 	u.EnableTx()
 	u.EnableRx(256)
 
+	print("\n* L7 ready *\n\n")
+
 	dev := espat.NewDevice("esp0", u, u)
 	fatalErr(dev.Init(true))
-	fatalErr(espnet.SetMultiConn(dev, true))
 	fatalErr(espnet.SetPasvRecv(dev, true))
 
+	for msg := range dev.Async() {
+		if msg == "WIFI GOT IP" {
+			break
+		}
+	}
+
+	ls, err := espnet.ListenDev(dev, "tcp", 1111)
+	fatalErr(err)
+
+	println("listen on:", ls.Addr().String())
+	for {
+		c, err := ls.Accept()
+		fatalErr(err)
+		go handle(c)
+	}
+}
+
+func handle(c net.Conn) {
+	var buf [64]byte
+	println("connect:", c.RemoteAddr().String())
+	_, err := io.WriteString(c, "Echo Server\n\n")
+	if logErr(err) {
+		goto end
+	}
+	for {
+		n, err := c.Read(buf[:])
+		if logErr(err) {
+			goto end
+		}
+		_, err = c.Write(buf[:n])
+		if logErr(err) {
+			goto end
+		}
+	}
+end:
+	c.Close()
+	println("close:  ", c.RemoteAddr().String())
 }
