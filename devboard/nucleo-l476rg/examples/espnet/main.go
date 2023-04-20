@@ -1,4 +1,4 @@
-// Copyright 2020 The Embedded Go Authors. All rights reserved.
+// Copyright 2023 The Embedded Go Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
@@ -71,7 +71,7 @@ func main() {
 		}
 	*/
 
-	ls, err := espnet.ListenDev(dev, "tcp", 1111)
+	ls, err := espnet.ListenDev(dev, "tcp", ":1111")
 	fatalErr(err)
 
 	println("listen on:", ls.Addr().String())
