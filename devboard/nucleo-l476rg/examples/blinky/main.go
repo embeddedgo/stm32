@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// This example shows the basic usage of available LED and button.
+// This example shows the basic usage of the available LED and button.
 package main
 
 import (
@@ -21,7 +21,7 @@ func delay() {
 }
 
 func main() {
-	for {
+	for i := 0; i < 4; i++ {
 		leds.User.SetOn()
 		delay()
 		leds.User.SetOff()

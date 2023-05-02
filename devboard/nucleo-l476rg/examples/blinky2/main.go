@@ -2,8 +2,8 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// Blinky2 shows the basic usage of available LED and button. It differs from
-// blinky in that it uses time.Timer instead of more obvious time.Sleep.
+// Blinky2 shows the basic usage of the available LED and button. It differs
+// from blinky in that it uses time.Timer instead of more obvious time.Sleep.
 
 package main
 
