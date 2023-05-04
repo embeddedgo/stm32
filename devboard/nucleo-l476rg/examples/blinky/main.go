@@ -21,7 +21,7 @@ func delay() {
 }
 
 func main() {
-	for i := 0; i < 4; i++ {
+	for {
 		leds.User.SetOn()
 		delay()
 		leds.User.SetOff()

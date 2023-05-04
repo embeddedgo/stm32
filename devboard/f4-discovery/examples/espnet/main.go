@@ -2,6 +2,10 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+// Espnet is ESP-AT based TCP echo server. See also ../espn for less memory
+// consuming version of this program and ../espat that uses the espat package
+// directly and and has even lower memory requirements. See also the same
+// example written for Nucleo-L476RG and other development boards.
 package main
 
 import (
@@ -48,20 +52,18 @@ func main() {
 	u.EnableTx()
 	u.EnableRx(256)
 
-	print("\n* F4 ready *\n\n")
-
 	dev := espat.NewDevice("esp0", u, u)
-	dev.Init(false)
+	fatalErr(dev.Init(true))
 	fatalErr(espnet.SetPasvRecv(dev, true))
 
-	/*
-		for msg := range dev.Async() {
-			println(msg)
-			if msg == "WIFI GOT IP" {
-				break
-			}
+	println("waiting for an IP address...")
+	for msg := range dev.Async() {
+		fatalErr(msg.Err)
+		println(msg.Str)
+		if msg.Str == "WIFI GOT IP" {
+			break
 		}
-	*/
+	}
 
 	ls, err := espnet.ListenDev(dev, "tcp", ":1111")
 	fatalErr(err)
@@ -75,16 +77,16 @@ func main() {
 }
 
 func handle(c net.Conn) {
+	var buf [64]byte
 	println("connected:", c.RemoteAddr().String())
 	_, err := io.WriteString(c, "Echo Server\n\n")
 	if logErr(err) {
 		return
 	}
-	var buf [64]byte
 	for {
 		n, err := c.Read(buf[:])
 		if err == io.EOF {
-			return
+			break
 		}
 		if logErr(err) {
 			return
@@ -94,4 +96,6 @@ func handle(c net.Conn) {
 			return
 		}
 	}
+	c.Close()
+	println("closed:  ", c.RemoteAddr().String())
 }

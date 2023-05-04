@@ -8,7 +8,6 @@
 package main
 
 import (
-	"io"
 	"time"
 
 	"github.com/embeddedgo/espat"
@@ -22,9 +21,7 @@ import (
 
 func logErr(err error) bool {
 	if err != nil {
-		if err != io.EOF {
-			println("error:", err.Error())
-		}
+		println("error:", err.Error())
 		return true
 	}
 	return false
@@ -55,67 +52,67 @@ func main() {
 	u.EnableTx()
 	u.EnableRx(256)
 
-	print("\n* L7 ready *\n\n")
+	time.Sleep(time.Second) // waiting for the ESP-AT module in case of power up
 
-	d := espat.NewDevice("esp0", u, u)
-	fatalErr(d.Init(false))
-	_, err := d.Cmd("+CIPMUX=1")
+	dev := espat.NewDevice("esp0", u, u)
+	fatalErr(dev.Init(true))
+	_, err := dev.Cmd("+CIPMUX=1")
 	fatalErr(err)
-	_, err = d.Cmd("+CIPRECVMODE=1")
+	_, err = dev.Cmd("+CIPRECVMODE=1")
 	fatalErr(err)
 
-	/*
-		for msg := range dev.Async() {
-			if msg == "WIFI GOT IP" {
-				break
-			}
+	println("waiting for an IP address...")
+	for msg := range dev.Async() {
+		fatalErr(msg.Err)
+		println(msg.Str)
+		if msg.Str == "WIFI GOT IP" {
+			break
 		}
-	*/
+	}
 
-	d.SetServer(true)
-	_, err = d.Cmd("+CIPSERVER=1,1111")
+	dev.SetServer(true)
+	_, err = dev.Cmd("+CIPSERVER=1,1111")
 	fatalErr(err)
 
+	println()
 	println("listen on :1111")
-	for conn := range d.Server() {
-		go handle(d, conn)
+	for conn := range dev.Server() {
+		go handle(conn)
 	}
 }
 
 var welcome = []byte("Echo Server\n\n")
 
-func handle(d *espat.Device, conn *espat.Conn) {
-	println("connect", conn.ID)
-	if logErr(send(d, conn, welcome)) {
+func handle(c *espat.Conn) {
+	println("connected:", c.ID)
+	if logErr(send(c, welcome)) {
 		return
 	}
 	var buf [64]byte
 	for {
-		if _, ok := <-conn.Ch; !ok {
-			goto end // connection closed by remote part
+		if _, ok := <-c.Ch; !ok {
+			break // connection closed by remote part
 		}
-		n, err := d.CmdInt("+CIPRECVDATA=", buf[:], conn.ID, len(buf))
+		n, err := c.Dev.CmdInt("+CIPRECVDATA=", buf[:], c.ID, len(buf))
 		if logErr(err) {
 			return
 		}
-		if logErr(send(d, conn, buf[:n])) {
+		if logErr(send(c, buf[:n])) {
 			return
 		}
 	}
-end:
-	d.Cmd("+CIPCLOSE=", conn.ID)
-	println("close", conn.ID)
+	println("closed:  ", c.ID)
 }
 
-func send(d *espat.Device, conn *espat.Conn, p []byte) error {
-	d.Lock()
-	defer d.Unlock()
-	if _, err := d.UnsafeCmd("+CIPSEND=", conn.ID, len(p)); err != nil {
+func send(c *espat.Conn, p []byte) error {
+	c.Dev.Lock()
+	defer c.Dev.Unlock()
+	if _, err := c.Dev.UnsafeCmd("+CIPSEND=", c.ID, len(p)); err != nil {
 		return err
 	}
-	if _, err := d.UnsafeWrite(p); err != nil {
+	if _, err := c.Dev.UnsafeWrite(p); err != nil {
 		return err
 	}
-	_, err := d.UnsafeCmd("")
+	_, err := c.Dev.UnsafeCmd("")
 	return err
 }

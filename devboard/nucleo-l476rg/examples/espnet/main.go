@@ -3,9 +3,10 @@
 // license that can be found in the LICENSE file.
 
 // Espnet is ESP-AT based TCP echo server. Because of the insufficient RAM in
-// STM32L476 it may work unstable. See ../espat for less memory consuming
-// version of this program that uses the espat package directly. See also
-// the same example written for F4-Discovery and other development boards.
+// STM32L476 it may work unstable. See ../espn for less memory consuming version
+// of this program and ../espat that uses the espat package directly and has
+// even lower memory requirements. See also the same example written for
+// F4-Discovery and other development boards.
 package main
 
 import (
@@ -24,9 +25,7 @@ import (
 
 func logErr(err error) bool {
 	if err != nil {
-		if err != io.EOF {
-			println("error:", err.Error())
-		}
+		println("error:", err.Error())
 		return true
 	}
 	return false
@@ -57,19 +56,18 @@ func main() {
 	u.EnableTx()
 	u.EnableRx(256)
 
-	print("\n* L7 ready *\n\n")
-
 	dev := espat.NewDevice("esp0", u, u)
-	fatalErr(dev.Init(false))
+	fatalErr(dev.Init(true))
 	fatalErr(espnet.SetPasvRecv(dev, true))
 
-	/*
-		for msg := range dev.Async() {
-			if msg == "WIFI GOT IP" {
-				break
-			}
+	println("waiting for an IP address...")
+	for msg := range dev.Async() {
+		fatalErr(msg.Err)
+		println(msg.Str)
+		if msg.Str == "WIFI GOT IP" {
+			break
 		}
-	*/
+	}
 
 	ls, err := espnet.ListenDev(dev, "tcp", ":1111")
 	fatalErr(err)
@@ -84,22 +82,24 @@ func main() {
 
 func handle(c net.Conn) {
 	var buf [64]byte
-	println("connect:", c.RemoteAddr().String())
+	println("connected:", c.RemoteAddr().String())
 	_, err := io.WriteString(c, "Echo Server\n\n")
 	if logErr(err) {
-		goto end
+		return
 	}
 	for {
 		n, err := c.Read(buf[:])
+		if err == io.EOF {
+			break
+		}
 		if logErr(err) {
-			goto end
+			return
 		}
 		_, err = c.Write(buf[:n])
 		if logErr(err) {
-			goto end
+			return
 		}
 	}
-end:
 	c.Close()
-	println("close:  ", c.RemoteAddr().String())
+	println("closed:  ", c.RemoteAddr().String())
 }
