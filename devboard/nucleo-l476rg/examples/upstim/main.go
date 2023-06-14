@@ -7,13 +7,13 @@
 // button release.
 //
 // As the onboard button isn't connected to any timer input and two timer
-// inputs are required to connect to the button you have to make two external
-// connections so the pins PC13 (button), PA0 (TIM8_ETR) and PB7 (TIM8_BKIN)
-// are connected togather.
+// inputs are required to be connected to the button you have to make two
+// external connections so the pins PC13 (button), PA0 (TIM8_ETR) and PB7
+// (TIM8_BKIN) are connected togather.
 //
-// This algorithm was originaly designed to switch fast to backup power source
-// in the event of a mains failure and switch back when mains restores but with
-// some dealy to avoid flapping.
+// This algorithm was originaly designed to switch immediately to backup power
+// source in the event of a mains failure and switch back when mains restores
+// but with some dealy to avoid flapping.
 package main
 
 import (

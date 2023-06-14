@@ -18,8 +18,8 @@ import (
 )
 
 var (
-	src = make ([]uint32, 2000)
-	dst = make ([]uint32, 2000)
+	src = make ([]uint32, 3000)
+	dst = make ([]uint32, 3000)
 	ch  dma.Channel
 	tce rtos.Note
 )

@@ -12,6 +12,6 @@ import (
 
 func main() {
 	for {
-		fmt.Println("Hello, World!")
+		fmt.Print("Hello, World!\r\n")
 	}
 }

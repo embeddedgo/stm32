@@ -6,9 +6,10 @@
 // up mmediately after pressing the button and go out 5 seconds after button
 // release.
 //
-// This algorithm was originaly designed to switch fast to backup power source
-// in the event of a mains failure and switch back when mains restores but with
-// some dealy to avoid flapping.
+// The algorithm presented in this example was originaly designed to control
+// the UPS switch-over. It switches fast to the backup power source in the
+// event of a mains failure and switch back when mains restores but with some
+// dealy to avoid flapping.
 package main
 
 import (
