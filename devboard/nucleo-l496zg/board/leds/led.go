@@ -40,6 +40,12 @@ func (d LED) Set(on int) {
 func (d LED) Get() int {
 	return int(gpio.P(d.prt()).LoadOut()>>d.pin()) & 1
 }
+func (d LED) Toggle() {
+	port := gpio.P(d.prt())
+	mask := gpio.Pins(1 << d.pin())
+	val := port.LoadOut() ^ mask
+	port.StorePins(mask, val)
+}
 func (d LED) Pin() gpio.Pin {
 	return gpio.P(d.prt()).Pin(int(d.pin()))
 }

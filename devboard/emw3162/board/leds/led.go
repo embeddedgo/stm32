@@ -46,6 +46,9 @@ func (d LED) Set(on int) {
 func (d LED) Get() int {
 	return int(gpio.P(d.prt()).LoadOut()>>d.pin())&1 ^ int(d&1)
 }
+func (d LED) Toggle() {
+	d.Set(d.Get() ^ 1)
+}
 func (d LED) Pin() gpio.Pin {
 	return gpio.P(d.prt()).Pin(int(d.pin()))
 }
