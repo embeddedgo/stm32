@@ -12,7 +12,7 @@ import (
 	"github.com/embeddedgo/stm32/hal/spi"
 	"github.com/embeddedgo/stm32/hal/spi/spi2"
 
-	_ "github.com/embeddedgo/stm32/devboard/f4-discovery/board/init"
+	_ "github.com/embeddedgo/stm32/devboard/f4-discovery/board/system"
 )
 
 func main() {

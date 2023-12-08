@@ -7,7 +7,7 @@ package leds
 import (
 	"github.com/embeddedgo/stm32/hal/gpio"
 
-	_ "github.com/embeddedgo/stm32/devboard/emw3162/board/init"
+	_ "github.com/embeddedgo/stm32/devboard/emw3162/board/system"
 )
 
 // Onboard LEDs

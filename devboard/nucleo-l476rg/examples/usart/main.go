@@ -16,7 +16,7 @@ import (
 	"github.com/embeddedgo/stm32/hal/usart"
 	"github.com/embeddedgo/stm32/hal/usart/usart1"
 
-	_ "github.com/embeddedgo/stm32/devboard/nucleo-l476rg/board/init"
+	_ "github.com/embeddedgo/stm32/devboard/nucleo-l476rg/board/system"
 )
 
 func main() {

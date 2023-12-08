@@ -1,8 +1,8 @@
-// Copyright 2020 The Embedded Go Authors. All rights reserved.
+// Copyright 2019 Michal Derkacz. All rights reserved.
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package init
+package system
 
 import (
 	"github.com/embeddedgo/stm32/hal/system"
@@ -10,8 +10,6 @@ import (
 )
 
 func init() {
-	// 480 MHz not supported, requires disabling Vcore overdrive before any WFE instruction
-	system.SetupPLL(25, 5, 80, 1, 2, 2) // 400 MHz
+	system.Setup168(8)
 	systick.Setup(2e6)
-	//rtcst.Setup(rtcst.LSE, 1, 32768)
 }

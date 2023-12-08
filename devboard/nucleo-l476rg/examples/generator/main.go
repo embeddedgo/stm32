@@ -26,7 +26,7 @@ import (
 	"github.com/embeddedgo/stm32/p/rcc"
 	"github.com/embeddedgo/stm32/p/tim"
 
-	_ "github.com/embeddedgo/stm32/devboard/nucleo-l476rg/board/init"
+	_ "github.com/embeddedgo/stm32/devboard/nucleo-l476rg/board/system"
 )
 
 func main() {
@@ -45,7 +45,7 @@ func main() {
 	RRC.APB2ENR.SetBits(rcc.TIM1EN)
 
 	const (
-		pwmmax  = 100
+		pwmmax  = 10
 		pwmmode = 6 // Mode 1
 	)
 

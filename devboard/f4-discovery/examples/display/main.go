@@ -16,7 +16,7 @@ import (
 	"github.com/embeddedgo/stm32/hal/spi"
 	"github.com/embeddedgo/stm32/hal/spi/spi2"
 
-	_ "github.com/embeddedgo/stm32/devboard/f4-discovery/board/init"
+	_ "github.com/embeddedgo/stm32/devboard/f4-discovery/board/system"
 )
 
 // The SPI2 speeds below are max. for this MCU but can be out of display spec.

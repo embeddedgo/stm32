@@ -2,15 +2,16 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// Onewire uses SkipROM (broadcast) addressing to configure and run all DS18x2x
-// temperature sensors on the 1-Wire bus conected to the LPUART2 interface. Next
-// it waits for all sensors to finish the conversion. After that is searchs for
-// individual sensors on the bus and communicates with them using conventional
-// MatchROM (unicast) adressing mode, reads and and prints the mesured
-// temperatures on the serial terminal connected to the LPUART1 interface.
+// Onewire uses broadcast addressing mode to efficiently start the temperature
+// conversion on all DS18x2x sensors on the 1-Wire bus simultaneously. The bus
+// should be connected to the UART6 (PC6 pin). Next it waits for all sensors to
+// finish the conversion. After that is searchs for the individual sensors on
+// the bus and communicates with them using conventional unicast adressing mode,
+// reads and and prints the mesured temperatures on the serial terminal
+// connected to the UART2 interface (PA2, PA3 pins).
 //
-// Starting conversion on many sensors at the same time requires much power so
-// it may not work in parasite power bus configuration.
+// Starting the conversion on many sensors at the same time requires much power
+// so it may not work in parasite power bus configuration.
 package main
 
 import (
@@ -25,7 +26,7 @@ import (
 	"github.com/embeddedgo/stm32/hal/usart/usart2"
 	"github.com/embeddedgo/stm32/hal/usart/usart6"
 
-	_ "github.com/embeddedgo/stm32/devboard/f4-discovery/board/init"
+	_ "github.com/embeddedgo/stm32/devboard/f4-discovery/board/system"
 )
 
 func main() {

@@ -2,8 +2,8 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// This example tests different ways of coping memory. It also shows how to use
-// DMA for memory to memory transfers.
+// Dma tests different ways of coping memory. It also shows how to use DMA for
+// memory to memory transfers.
 package main
 
 import (
@@ -14,7 +14,7 @@ import (
 	"github.com/embeddedgo/stm32/hal/dma"
 	"github.com/embeddedgo/stm32/hal/irq"
 
-	_ "github.com/embeddedgo/stm32/devboard/nucleo-l476rg/board/init"
+	_ "github.com/embeddedgo/stm32/devboard/nucleo-l476rg/board/system"
 )
 
 var (

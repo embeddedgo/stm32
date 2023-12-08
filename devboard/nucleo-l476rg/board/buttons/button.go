@@ -7,7 +7,7 @@ package buttons
 import (
 	"github.com/embeddedgo/stm32/hal/gpio"
 
-	_ "github.com/embeddedgo/stm32/devboard/nucleo-l476rg/board/init"
+	_ "github.com/embeddedgo/stm32/devboard/nucleo-l476rg/board/system"
 )
 
 // Onboard button
@@ -19,14 +19,14 @@ const (
 
 type Button uint8
 
-func (b Button) prt() int  { return int(b) >> 4 }
-func (b Button) pin() uint { return uint(b) & 15 }
+func prt(b Button) int  { return int(b) >> 4 }
+func pin(b Button) uint { return uint(b) & 15 }
 
 func (b Button) Read() int {
-	return int(gpio.P(b.prt()).Load()>>b.pin())&1 ^ 1
+	return int(gpio.P(prt(b)).Load()>>pin(b))&1 ^ 1
 }
 func (b Button) Pin() gpio.Pin {
-	return gpio.P(b.prt()).Pin(int(b.pin()))
+	return gpio.P(prt(b)).Pin(int(pin(b)))
 }
 
 func init() {

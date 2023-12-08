@@ -4,7 +4,7 @@
 
 package main
 
-import _ "github.com/embeddedgo/stm32/devboard/f4-discovery/board/init"
+import _ "github.com/embeddedgo/stm32/devboard/f4-discovery/board/system"
 
 func main() {
 	for {

@@ -7,7 +7,7 @@ package buttons
 import (
 	"github.com/embeddedgo/stm32/hal/gpio"
 
-	_ "github.com/embeddedgo/stm32/devboard/devebox-h743/board/init"
+	_ "github.com/embeddedgo/stm32/devboard/devebox-h743/board/system"
 )
 
 // Onboard buttons

@@ -7,7 +7,7 @@ package buttons
 import (
 	"github.com/embeddedgo/stm32/hal/gpio"
 
-	_ "github.com/embeddedgo/stm32/devboard/az3166/board/init"
+	_ "github.com/embeddedgo/stm32/devboard/az3166/board/system"
 )
 
 // Onboard buttons

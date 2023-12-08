@@ -10,12 +10,12 @@ import (
 	"math/rand"
 	"runtime"
 
-	_ "github.com/embeddedgo/stm32/devboard/nucleo-l496zg/board/init"
+	_ "github.com/embeddedgo/stm32/devboard/nucleo-l496zg/board/system"
 )
 
 func main() {
 	runtime.GOMAXPROCS(2)
-	
+
 	c := make(chan []uint32, 3)
 
 	go func() {

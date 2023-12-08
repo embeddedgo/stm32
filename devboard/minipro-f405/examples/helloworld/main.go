@@ -11,7 +11,7 @@ package main
 import (
 	"fmt"
 
-	_ "github.com/embeddedgo/stm32/devboard/minipro-f405/board/init"
+	_ "github.com/embeddedgo/stm32/devboard/minipro-f405/board/system"
 )
 
 func main() {

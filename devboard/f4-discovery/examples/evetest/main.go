@@ -17,7 +17,7 @@ import (
 
 	"github.com/embeddedgo/display/eve/examples/evetest"
 
-	_ "github.com/embeddedgo/stm32/devboard/f4-discovery/board/init"
+	_ "github.com/embeddedgo/stm32/devboard/f4-discovery/board/system"
 )
 
 var eveInt rtos.Note

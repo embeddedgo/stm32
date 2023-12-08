@@ -15,7 +15,7 @@ import (
 	"github.com/embeddedgo/stm32/hal/dma"
 	"github.com/embeddedgo/stm32/hal/irq"
 
-	_ "github.com/embeddedgo/stm32/devboard/f4-discovery/board/init"
+	_ "github.com/embeddedgo/stm32/devboard/f4-discovery/board/system"
 )
 
 var (
