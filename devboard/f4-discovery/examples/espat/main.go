@@ -3,22 +3,20 @@
 // license that can be found in the LICENSE file.
 
 // Espat is an ESP-AT based TCP echo server. It uses the espat package directly
-// (instead of espat/espnet). See ../espn for the example of the same TCP
-// server implemented using simpler interface of the espat/espn package.
-// Because of the insufficient RAM in STM32L476 you cannot use espat/espnet on
-// this MCU.
+// (instead of espat/espnet). See ../espnet for the example of the same TCP
+// server implemented using simpler interface of the espat/espnet package.
 package main
 
 import (
+	"strings"
 	"time"
 
 	"github.com/embeddedgo/espat"
-
 	"github.com/embeddedgo/stm32/hal/gpio"
-	"github.com/embeddedgo/stm32/hal/system"
-	"github.com/embeddedgo/stm32/hal/system/timer/rtcst"
 	"github.com/embeddedgo/stm32/hal/usart"
-	"github.com/embeddedgo/stm32/hal/usart/usart1"
+	"github.com/embeddedgo/stm32/hal/usart/usart2"
+
+	_ "github.com/embeddedgo/stm32/devboard/f4-discovery/board/system"
 )
 
 func logErr(err error) bool {
@@ -37,29 +35,28 @@ func fatalErr(err error) {
 }
 
 func main() {
-	system.Setup80(0, 0)
-	rtcst.Setup(rtcst.LSE, 1, 32768)
-
 	// GPIO pins assignment
 	pa := gpio.PA()
 	pa.EnableClock(true)
-	tx := pa.Pin(9)  // CN5 D8
-	rx := pa.Pin(10) // CN9 D2
+	tx := pa.Pin(2)
+	rx := pa.Pin(3)
 
 	// Configure and enable USART
-	u := usart1.Driver()
+	u := usart2.Driver()
 	u.UsePin(tx, usart.TXD)
 	u.UsePin(rx, usart.RXD)
 	u.Setup(usart.Word8b, 115200)
 	u.EnableTx()
 	u.EnableRx(256)
 
+	print("Initializing ESP-AT module... ")
 	dev := espat.NewDevice("esp0", u, u)
 	fatalErr(dev.Init(true))
 	_, err := dev.Cmd("+CIPMUX=1")
 	fatalErr(err)
 	_, err = dev.Cmd("+CIPRECVMODE=1")
 	fatalErr(err)
+	println("OK")
 
 	println("Waiting for an IP address...")
 	for msg := range dev.Async() {
@@ -69,6 +66,9 @@ func main() {
 			break
 		}
 	}
+	txt, err := dev.CmdStr("+CIPSTA?")
+	fatalErr(err)
+	println(strings.ReplaceAll(txt, "+CIPSTA:", ""))
 
 	const port = "1111"
 

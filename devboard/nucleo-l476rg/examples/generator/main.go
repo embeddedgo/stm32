@@ -20,6 +20,7 @@ import (
 	"fmt"
 	"os"
 	"strconv"
+	"strings"
 
 	"github.com/embeddedgo/stm32/hal/gpio"
 	"github.com/embeddedgo/stm32/p/bus"
@@ -45,11 +46,9 @@ func main() {
 	RRC.APB2ENR.SetBits(rcc.TIM1EN)
 
 	const (
-		pwmmax  = 10
-		pwmmode = 6 // Mode 1
+		maxDuty = 10
+		pwmMode = 6 // Mode 1
 	)
-
-	var pwmfreq int64 = 1000 // Hz
 
 	// Configure TIM1 to output PWM waveform on CH1N.
 	pclk := bus.APB2.Clock()
@@ -57,36 +56,56 @@ func main() {
 		pclk *= 2
 	}
 	t := tim.TIM1()
-	t.ARR.Store(pwmmax - 1)
-	t.CCMR1.Store(pwmmode<<tim.OC1Mn | tim.OC1PE)
+	t.ARR.Store(maxDuty - 1)
+	t.CCMR1.Store(pwmMode<<tim.OC1Mn | tim.OC1PE)
 	t.CCER.Store(tim.CC1E | tim.CC1NE)
 	t.BDTR.Store(tim.MOE)
 	t.EGR.Store(tim.UG)
 	t.CR1.Store(tim.ARPE | tim.CEN)
 
-	t.CCR1.Store(pwmmax / 2)
-
+	var (
+		freq int64 = 1000 // Hz
+		duty int64 = maxDuty / 2
+	)
 	r := bufio.NewReader(os.Stdin)
 	for {
-		t.PSC.Store(uint32(pclk/(pwmmax*pwmfreq) - 1))
+		t.CCR1.Store(uint32(duty))
+		t.PSC.Store(uint32(pclk/(maxDuty*freq) - 1))
 	again:
-		fmt.Printf("Freq: %d Hz. New freq [Hz]: ", pwmfreq)
+		fmt.Printf(
+			"Freq: %d Hz, duty: %d/%d.\nNew freq and duty: ",
+			freq, duty, maxDuty,
+		)
 		s, err := r.ReadString('\n')
 		if err != nil {
 			fmt.Println(err)
 			goto again
 		}
-		pwmfreq, err = strconv.ParseInt(s[:len(s)-1], 10, 64)
+		fields := strings.Fields(s)
+		if len(fields) != 2 {
+			fmt.Println("FREQ_HZ DUTY expected")
+			goto again
+		}
+		freq, err = strconv.ParseInt(fields[0], 10, 64)
 		if err != nil {
 			fmt.Println("new freq:", err)
 			goto again
 		}
-		if pwmfreq <= 0 {
+		if freq <= 0 {
 			fmt.Println("new freq <= 0")
 			goto again
 		}
-		if pwmfreq > pclk/pwmmax {
-			fmt.Println("new freq >", pclk/pwmmax)
+		if freq > pclk/maxDuty {
+			fmt.Println("new freq >", pclk/maxDuty)
+			goto again
+		}
+		duty, err = strconv.ParseInt(fields[1], 10, 64)
+		if err != nil {
+			fmt.Println("new duty:", err)
+			goto again
+		}
+		if uint64(duty) > 10 {
+			fmt.Println("new duty must be 0..10")
 			goto again
 		}
 	}

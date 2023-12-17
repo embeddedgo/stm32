@@ -3,8 +3,9 @@
 // license that can be found in the LICENSE file.
 
 // Espn is ESP-AT based TCP echo server. See also ../espat for slightly less
-// memory consuming version of this program that uses the espat package directly
-// and ../espnet that is more memory consuming version.
+// memory consuming version of this program that uses the espat package
+// directly. Because of the insufficient RAM in STM32L476 you cannot use
+// espat/espnet on this MCU.
 package main
 
 import (
@@ -57,7 +58,7 @@ func main() {
 	fatalErr(dev.Init(true))
 	fatalErr(espn.SetPasvRecv(dev, true))
 
-	println("waiting for an IP address...")
+	println("Waiting for an IP address...")
 	for msg := range dev.Async() {
 		fatalErr(msg.Err)
 		println(msg.Str)
@@ -69,7 +70,7 @@ func main() {
 	ls, err := espn.ListenDev(dev, "tcp", ":1111")
 	fatalErr(err)
 
-	println("listen on:", ls.Addr().String())
+	println("Listen on:", ls.Addr().String())
 	for {
 		c, err := ls.Accept()
 		fatalErr(err)
@@ -79,7 +80,7 @@ func main() {
 
 func handle(c *espn.Conn) {
 	var buf [64]byte
-	println("connected:", c.RemoteAddr().String())
+	println("Connected:", c.RemoteAddr().String())
 	_, err := io.WriteString(c, "Echo Server\n\n")
 	if logErr(err) {
 		return
@@ -98,5 +99,5 @@ func handle(c *espn.Conn) {
 		}
 	}
 	c.Close()
-	println("closed:  ", c.RemoteAddr().String())
+	println("Closed:   ", c.RemoteAddr().String())
 }

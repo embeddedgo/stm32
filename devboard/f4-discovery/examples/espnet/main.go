@@ -2,15 +2,16 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// Espnet is ESP-AT based TCP echo server. See also ../espn for less memory
-// consuming version of this program and ../espat that uses the espat package
-// directly and and has even lower memory requirements. See also the same
-// example written for Nucleo-L476RG and other development boards.
+// Espnet is an ESP-AT based TCP echo server. See also ../espat for the less
+// memory consuming  ../espat program that uses the espat package directly and
+// has much lower memory requirements. See also the same example written for
+// Nucleo-L476RG and Teensy 4 development boards.
 package main
 
 import (
 	"io"
 	"net"
+	"strings"
 	"time"
 
 	"github.com/embeddedgo/espat"
@@ -52,11 +53,13 @@ func main() {
 	u.EnableTx()
 	u.EnableRx(256)
 
+	print("Initializing ESP-AT module... ")
 	dev := espat.NewDevice("esp0", u, u)
 	fatalErr(dev.Init(true))
 	fatalErr(espnet.SetPasvRecv(dev, true))
+	println("OK")
 
-	println("waiting for an IP address...")
+	println("Waiting for an IP address...")
 	for msg := range dev.Async() {
 		fatalErr(msg.Err)
 		println(msg.Str)
@@ -64,11 +67,14 @@ func main() {
 			break
 		}
 	}
+	txt, err := dev.CmdStr("+CIPSTA?")
+	fatalErr(err)
+	println(strings.ReplaceAll(txt, "+CIPSTA:", ""))
 
 	ls, err := espnet.ListenDev(dev, "tcp", ":1111")
 	fatalErr(err)
 
-	println("listen on:", ls.Addr().String())
+	println("Listen on:", ls.Addr().String())
 	for {
 		c, err := ls.Accept()
 		fatalErr(err)
@@ -78,7 +84,7 @@ func main() {
 
 func handle(c net.Conn) {
 	var buf [64]byte
-	println("connected:", c.RemoteAddr().String())
+	println("Connected:", c.RemoteAddr().String())
 	_, err := io.WriteString(c, "Echo Server\n\n")
 	if logErr(err) {
 		return
@@ -97,5 +103,5 @@ func handle(c net.Conn) {
 		}
 	}
 	c.Close()
-	println("closed:  ", c.RemoteAddr().String())
+	println("Closed:   ", c.RemoteAddr().String())
 }
