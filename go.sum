@@ -1,4 +1,8 @@
-github.com/embeddedgo/display v1.1.0 h1:jXlY6/FeaUV89hX+ANGpTKogZWjhgno7vrCh86WA8aY=
-github.com/embeddedgo/display v1.1.0/go.mod h1:0sxxBoklqMbA1uBqEAg8Plntmwvt7cNsgxaf7UaS4yw=
+github.com/embeddedgo/display v1.1.1 h1:zoW/z0zafqMzR1gvRt7iky5iHrKDCzpOmai3AZWlMqA=
+github.com/embeddedgo/display v1.1.1/go.mod h1:0sxxBoklqMbA1uBqEAg8Plntmwvt7cNsgxaf7UaS4yw=
+github.com/embeddedgo/espat v0.2.2 h1:V+rDpWIacEJfJSttIlhV3i3+13t/uLgVwx8eU8mBtB0=
+github.com/embeddedgo/espat v0.2.2/go.mod h1:ymbAnBgrRht/G2FEAEBo20i8miBxHR9qdTpuQEJZxiw=
 github.com/embeddedgo/fs v0.1.0 h1:M4bOltC28+cWixII514NKExkrRzBnjWLaRbTvZ87kIE=
 github.com/embeddedgo/fs v0.1.0/go.mod h1:0PeMg4i1WKpXdRqXEktx9o0Wd9EIzwWD4KTBbvAvZ3Q=
+github.com/embeddedgo/onewire v0.0.1 h1:hBPrdAWhlPm85Rjalv9EsQZqdBQsRivEB8PUCE3jCPU=
+github.com/embeddedgo/onewire v0.0.1/go.mod h1:mE7/0ViDHif2lcs55jkcGEzTXNGNFBfyWfB4K5eZHOU=
