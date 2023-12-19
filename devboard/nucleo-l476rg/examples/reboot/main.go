@@ -2,7 +2,8 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// This example shows the basic usage of the available LED and button.
+// Reboot shows the way to perform unsafe reboot of the ST32L746 MCU. Unsafe
+// reboot simply restarts the software without reseting the hardware.
 package main
 
 import (
