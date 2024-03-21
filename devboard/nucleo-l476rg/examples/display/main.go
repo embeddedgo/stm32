@@ -34,7 +34,7 @@ func main() {
 
 	pb := gpio.PB()
 	pb.EnableClock(true)
-	reset := pb.Pin(1)
+	reset := pb.Pin(1) // optional
 	dc := pb.Pin(11)
 	csn := pb.Pin(12)
 	sck := pb.Pin(13)
@@ -51,26 +51,29 @@ func main() {
 	spidrv.UsePinMaster(miso, spi.MISO)
 	spidrv.UsePinMaster(mosi, spi.MOSI)
 	spidrv.UsePinMaster(csn, spi.NSS) // use hardware slave-select
-	dci := tftdci.NewSPI(spidrv, dc, spi.CPOL0|spi.CPHA0, writeClk, readClk)
-	//dci.UseCSN(csn, false) // use software slave-select
 
-	// Reset
+	// Hardware reset - optional
 
 	reset.Clear()
 	time.Sleep(time.Millisecond)
 	reset.Set()
 
-	// Run
+	//dp := displays.Adafruit_0i96_128x64_OLED_SSD1306()
+	//dp := displays.Adafruit_1i5_128x128_OLED_SSD1351()
+	//dp := displays.Adafruit_1i54_240x240_IPS_ST7789()
+	dp := displays.Adafruit_2i8_240x320_TFT_ILI9341()
+	//dp := displays.ERTFTM_1i54_240x240_IPS_ST7789()
+	//dp := displays.MSP4022_4i0_320x480_TFT_ILI9486()
+	//dp := displays.Waveshare_1i5_128x128_OLED_SSD1351()
 
-	//disp := displays.Adafruit_1i5_128x128_OLED_SSD1351(dci)
-	//disp := displays.Adafruit_1i54_240x240_IPS_ST7789(dci)
-	disp := displays.Adafruit_2i8_240x320_TFT_ILI9341(dci)
-	//disp := displays.ERTFTM_1i54_240x240_IPS_ST7789(dci)
-	//disp := displays.MSP4022_4i0_320x480_TFT_ILI9486(dci)
-	//disp := displays.Waveshare_1i5_128x128_OLED_SSD1351(dci)
+	dci := tftdci.NewSPI(spidrv, dc, spi.CPOL0|spi.CPHA0, dp.MaxReadClk, dp.MaxWriteClk)
+	//dci.UseCSN(csn, false) // use software slave-select
+
+	// Run
 
 	// STM32L476 has little RAM when it comes to Go programs. Reduce the number
 	// of examples below if you encounter an out of memory panic.
+	disp := dp.New(dci)
 	for {
 		examples.Colors(disp)
 		//examples.RotateDisplay(disp)

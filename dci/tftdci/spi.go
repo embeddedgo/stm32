@@ -29,7 +29,7 @@ var gpioOut = &gpio.Config{Mode: gpio.Out, Speed: gpio.High}
 // according to the display controller specification. Note that the maximum
 // speed may be limited by the concrete instance of STM32 SPI peripheral, the
 // bus topology and the specific display design.
-func NewSPI(drv *spi.Driver, dc gpio.Pin, mode spi.Config, wclkHz, rclkHz int) *SPI {
+func NewSPI(drv *spi.Driver, dc gpio.Pin, mode spi.Config, rclkHz, wclkHz int) *SPI {
 	dci := new(SPI)
 	dci.spi = drv
 	dci.dc = dc
@@ -71,7 +71,7 @@ func start(dci *SPI) {
 	dci.spi.Enable()
 }
 
-func (dci *SPI) Cmd(p []byte) {
+func (dci *SPI) Cmd(p []byte, _ int) {
 	if !dci.started {
 		start(dci)
 	}

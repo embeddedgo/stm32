@@ -19,13 +19,6 @@ import (
 	_ "github.com/embeddedgo/stm32/devboard/f4-discovery/board/system"
 )
 
-// The SPI2 speeds below are max. for this MCU but can be out of display spec.
-// If your display works unstable reduce to 10.5e6 and 5.25e6 or even more.
-const (
-	writeClk = 21e6
-	readClk  = 21e6
-)
-
 func main() {
 	// Assign GPIO pins
 
@@ -38,7 +31,7 @@ func main() {
 
 	pd := gpio.PD()
 	pd.EnableClock(true)
-	reset := pd.Pin(8)
+	reset := pd.Pin(8) // optional
 	dc := pd.Pin(10)
 
 	// Configure peripherals
@@ -51,28 +44,30 @@ func main() {
 	spidrv.UsePinMaster(miso, spi.MISO)
 	spidrv.UsePinMaster(mosi, spi.MOSI)
 	spidrv.UsePinMaster(csn, spi.NSS) // use hardware slave-select
-	dci := tftdci.NewSPI(spidrv, dc, spi.CPOL0|spi.CPHA0, writeClk, readClk)
-	//dci.UseCSN(csn, false) // use software slave-select
 
-	// Reset
+	// Hardware reset - optional
 
 	reset.Clear()
 	time.Sleep(time.Millisecond)
 	reset.Set()
 
+	//dp := displays.Adafruit_0i96_128x64_OLED_SSD1306()
+	//dp := displays.Adafruit_1i5_128x128_OLED_SSD1351()
+	//dp := displays.Adafruit_1i54_240x240_IPS_ST7789()
+	dp := displays.Adafruit_2i8_240x320_TFT_ILI9341()
+	//dp := displays.ERTFTM_1i54_240x240_IPS_ST7789()
+	//dp := displays.MSP4022_4i0_320x480_TFT_ILI9486()
+	//dp := displays.Waveshare_1i5_128x128_OLED_SSD1351()
+
+	dci := tftdci.NewSPI(spidrv, dc, spi.CPOL0|spi.CPHA0, 2*dp.MaxReadClk, 2*dp.MaxWriteClk)
+	//dci.UseCSN(csn, false) // use software slave-select
+
 	// Run
 
-	//disp := displays.Adafruit_0i96_128x64_OLED_SSD1306(dci)
-	//disp := displays.Adafruit_1i5_128x128_OLED_SSD1351(dci)
-	//disp := displays.Adafruit_1i54_240x240_IPS_ST7789(dci)
-	//disp := displays.Adafruit_2i8_240x320_TFT_ILI9341(dci)
-	//disp := displays.ERTFTM_1i54_240x240_IPS_ST7789(dci)
-	//disp := displays.MSP4022_4i0_320x480_TFT_ILI9486(dci)
-	disp := displays.Waveshare_1i5_128x128_OLED_SSD1351(dci)
-
+	disp := dp.New(dci)
 	for {
 		examples.RotateDisplay(disp)
-		//examples.DrawText(disp)
-		examples.GraphicsTest(disp)
+		examples.DrawText(disp)
+		//examples.GraphicsTest(disp)
 	}
 }
