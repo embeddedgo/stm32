@@ -31,7 +31,7 @@ func main() {
 
 	pd := gpio.PD()
 	pd.EnableClock(true)
-	reset := pd.Pin(8) // optional
+	reset := pd.Pin(8)
 	dc := pd.Pin(10)
 
 	// Configure peripherals
@@ -45,16 +45,15 @@ func main() {
 	spidrv.UsePinMaster(mosi, spi.MOSI)
 	spidrv.UsePinMaster(csn, spi.NSS) // use hardware slave-select
 
-	// Hardware reset - optional
-
+	// Hardware reset. Optional for most controllers (exception SSD1306).
 	reset.Clear()
 	time.Sleep(time.Millisecond)
 	reset.Set()
 
-	//dp := displays.Adafruit_0i96_128x64_OLED_SSD1306()
+	dp := displays.Adafruit_0i96_128x64_OLED_SSD1306()
 	//dp := displays.Adafruit_1i5_128x128_OLED_SSD1351()
 	//dp := displays.Adafruit_1i54_240x240_IPS_ST7789()
-	dp := displays.Adafruit_2i8_240x320_TFT_ILI9341()
+	//dp := displays.Adafruit_2i8_240x320_TFT_ILI9341()
 	//dp := displays.ERTFTM_1i54_240x240_IPS_ST7789()
 	//dp := displays.MSP4022_4i0_320x480_TFT_ILI9486()
 	//dp := displays.Waveshare_1i5_128x128_OLED_SSD1351()
@@ -72,6 +71,6 @@ func main() {
 	for {
 		examples.RotateDisplay(disp)
 		//examples.DrawText(disp)
-		//examples.GraphicsTest(disp)
+		examples.GraphicsTest(disp)
 	}
 }
