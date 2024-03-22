@@ -59,7 +59,11 @@ func main() {
 	//dp := displays.MSP4022_4i0_320x480_TFT_ILI9486()
 	//dp := displays.Waveshare_1i5_128x128_OLED_SSD1351()
 
-	dci := tftdci.NewSPI(spidrv, dc, spi.CPOL0|spi.CPHA0, 2*dp.MaxReadClk, 2*dp.MaxWriteClk)
+	// Most of the displays accept significant overclocking.
+	//dp.MaxReadClk *= 2
+	//dp.MaxWriteClk *= 2
+
+	dci := tftdci.NewSPI(spidrv, dc, spi.CPOL0|spi.CPHA0, dp.MaxWriteClk, dp.MaxWriteClk)
 	//dci.UseCSN(csn, false) // use software slave-select
 
 	// Run
@@ -67,7 +71,7 @@ func main() {
 	disp := dp.New(dci)
 	for {
 		examples.RotateDisplay(disp)
-		examples.DrawText(disp)
+		//examples.DrawText(disp)
 		//examples.GraphicsTest(disp)
 	}
 }

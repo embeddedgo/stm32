@@ -95,12 +95,19 @@ const (
 // baudrate.
 func (p *Periph) BR(baudrate int) Config {
 	pclk := p.Bus().Clock()
-	div := uint32((pclk + int64(baudrate) - 1) / int64(baudrate))
+	var div uint32
 	switch {
-	case div < 2:
-		div = 2
-	case div > 256:
+	case baudrate < 0:
+		panic("SPI baudrate < 0")
+	case baudrate == 0:
 		div = 256
+	default:
+		div = uint32((pclk + int64(baudrate) - 1) / int64(baudrate))
+		if div < 2 {
+			div = 2
+		} else if div > 256 {
+			div = 256
+		}
 	}
 	br := 31 - bits.LeadingZeros32(uint32(div-1))
 	return Config(br << brn)
