@@ -246,3 +246,19 @@ func (p *Periph) Store(word uint32) {
 func (p *Periph) Load() uint32 {
 	return rdr(p).Load()
 }
+
+func (p *Periph) EnableTx() {
+	p.cr1.SetBits(te)
+}
+
+func (p *Periph) DisableTx() {
+	p.cr1.ClearBits(te)
+}
+
+func (p *Periph) EnableRx() {
+	p.cr1.SetBits(re)
+}
+
+func (p *Periph) DisableRx() {
+	p.cr1.ClearBits(re)
+}
