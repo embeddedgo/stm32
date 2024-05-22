@@ -9,11 +9,22 @@ package main
 import (
 	"math/rand"
 	"runtime"
+	"runtime/debug"
 
 	_ "github.com/embeddedgo/stm32/devboard/f4-discovery/board/system"
 )
 
 func main() {
+	bi, ok := debug.ReadBuildInfo()
+	if ok {
+		println("GoVersion:", bi.GoVersion)
+		println("Path:     ", bi.Path)
+		println("Settings:")
+		for _, s := range bi.Settings {
+			print(" ", s.Key, "=", s.Value, "\n")
+		}
+	}
+
 	c := make(chan []uint32, 3)
 
 	go func() {

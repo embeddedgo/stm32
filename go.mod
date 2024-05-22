@@ -1,6 +1,6 @@
 module github.com/embeddedgo/stm32
 
-go 1.20
+go 1.22
 
 require (
 	github.com/embeddedgo/display v1.2.0
