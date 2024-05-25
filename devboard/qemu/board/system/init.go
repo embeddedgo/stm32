@@ -63,5 +63,5 @@ func termfsSetupLight(p *usart.Periph, name string) {
 
 func init() {
 	//systickSetup(2e6)
-	termfsSetupLight(usart.USART1(), "USART1")
+	//termfsSetupLight(usart.USART1(), "USART1")
 }

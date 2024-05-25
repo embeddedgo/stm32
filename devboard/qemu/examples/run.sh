@@ -2,4 +2,6 @@
 
 name=$(basename $(pwd))
 
-qemu-system-arm -machine netduinoplus2 -cpu cortex-m4 -nographic -monitor none -serial stdio -kernel $name.elf
+# -serial stdio
+
+qemu-system-arm -machine netduinoplus2 -cpu cortex-m4 -nographic -monitor none -serial none --semihosting-config enable=on,target=native,userspace=on -kernel $name.elf
