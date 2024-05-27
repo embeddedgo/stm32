@@ -11,7 +11,6 @@ import (
 	"os"
 
 	"github.com/embeddedgo/fs/semihostfs"
-	"github.com/embeddedgo/stm32/devboard/qemu/board/semihosting"
 )
 
 func panicErr(what string, err error) {
@@ -23,7 +22,7 @@ func panicErr(what string, err error) {
 func fatalErr(what string, err error) {
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "%s: %v\n", what, err)
-		semihosting.Exit()
+		os.Stderr.Close()
 	}
 }
 
@@ -51,19 +50,28 @@ func main() {
 	fmt.Print("Enter a number: ")
 	fmt.Scanf("%g", &x)
 
-	f, err := os.Create("/host/x.txt")
+	fname := "/host/x.txt"
+
+	fmt.Println("Writing", x, "to the", fname, "file.")
+	f, err := os.Create(fname)
 	fatalErr("create", err)
 	_, err = fmt.Fprintln(f, x)
 	fatalErr("write", err)
 	err = f.Close()
 	fatalErr("close", err)
 
-	f, err = os.Open("/host/x.txt")
+	fmt.Println("Reading from the", fname, "file:")
+	f, err = os.Open(fname)
 	fatalErr("open", err)
 	_, err = io.Copy(os.Stdout, f)
 	fatalErr("copy", err)
 	err = f.Close()
 	fatalErr("close", err)
 
-	semihosting.Exit()
+	fmt.Println("Delete", fname)
+	err = os.Remove(fname)
+	fatalErr("remove", err)
+
+	fmt.Println("Exit")
+	os.Stderr.Close() // graceful exit
 }
