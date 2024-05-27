@@ -5,58 +5,65 @@
 package main
 
 import (
+	"embedded/rtos"
 	"fmt"
+	"io"
+	"os"
 
+	"github.com/embeddedgo/fs/semihostfs"
 	"github.com/embeddedgo/stm32/devboard/qemu/board/semihosting"
 )
 
-var stdin, stdout, stderr *semihosting.File
+func panicErr(what string, err error) {
+	if err != nil {
+		panic(fmt.Sprintf("%s: %v\n", what, err))
+	}
+}
 
 func fatalErr(what string, err error) {
 	if err != nil {
-		fmt.Fprintf(stderr, "%s: %v\n", what, err)
+		fmt.Fprintf(os.Stderr, "%s: %v\n", what, err)
 		semihosting.Exit()
 	}
 }
 
-func init() {
-	var err error
-
-	stderr, err = semihosting.OpenFile(":tt", semihosting.A)
-	if err != nil {
-		panic("open stderr: " + err.Error())
-	}
-
-	stdout, err = semihosting.OpenFile(":tt", semihosting.W)
-	fatalErr("open stdout", err)
-
-	stdin, err = semihosting.OpenFile(":tt", semihosting.R)
-	fatalErr("open stdin", err)
+func debug(fd int, p []byte) int {
+	n, _ := os.Stderr.Write(p)
+	return n
 }
 
 func main() {
-	var buf [80]byte
+	fsys := semihostfs.New("SH1", "shdir")
+	rtos.Mount(fsys, "/host")
 
-	stdout.WriteString("enter: ")
-	n, err := stdin.Read(buf[:])
-	fatalErr("read", err)
-	stdout.WriteString("read: ")
-	stdout.Write(buf[:n])
+	var err error
+	os.Stderr, err = os.Open("/host/:stderr")
+	panicErr(":stderr", err)
+	rtos.SetSystemWriter(debug)
+	os.Stdout, err = os.Open("/host/:stdout")
+	fatalErr(":stdout", err)
+	os.Stdin, err = os.Open("/host/:stdin")
+	fatalErr(":stdin", err)
 
-	stdout.WriteString("write file\n")
-	f, err := semihosting.OpenFile("test.txt", semihosting.W)
-	fatalErr("open file for writting", err)
-	_, err = f.WriteString("12345678\n")
-	fatalErr("write to file", err)
-	f.Close()
+	fmt.Fprintln(os.Stderr, "Hello over stderr!")
 
-	stdout.WriteString("read file: ")
-	f, err = semihosting.OpenFile("test.txt", semihosting.R)
-	fatalErr("open file for reading", err)
-	n, err = f.Read(buf[:])
-	fatalErr("read from file", err)
-	f.Close()
-	stdout.Write(buf[:n])
+	var x float64
+	fmt.Print("Enter a number: ")
+	fmt.Scanf("%g", &x)
+
+	f, err := os.Create("/host/x.txt")
+	fatalErr("create", err)
+	_, err = fmt.Fprintln(f, x)
+	fatalErr("write", err)
+	err = f.Close()
+	fatalErr("close", err)
+
+	f, err = os.Open("/host/x.txt")
+	fatalErr("open", err)
+	_, err = io.Copy(os.Stdout, f)
+	fatalErr("copy", err)
+	err = f.Close()
+	fatalErr("close", err)
 
 	semihosting.Exit()
 }
