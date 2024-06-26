@@ -149,6 +149,23 @@ func (d *Driver) setupDMA(ch dma.Channel, mode dma.Mode, wordSize uintptr) {
 	ch.SetAddrP(unsafe.Pointer(&d.p.dr))
 }
 
+// Increasing minIRQLen from 8 to 16, tested with pix, gives any
+// improvement only for two cases:
+//
+//  Benchmark                Time (microseconds)
+//  Screen fill               586186 /  586131 = 1.0
+//  Text                      448674 /  452471 = .99
+//  Lines                    3877126 / 3794833 = 1.0
+//  Horiz/Vert Lines           67584 /   67562 = 1.0
+//  Rectangles (outline)       50840 /   49844 = 1.0
+//  Rectangles (filled)      1235121 / 1235051 = 1.0
+//  Circles (filled)          498528 /  369369 = 1.3
+//  Circles (outline)         336780 /  336711 = 1.0
+//  Triangles (outline)       244657 /  244626 = 1.0
+//  Triangles (filled)       1152320 / 1136675 = 1.0
+//  Rounded rects (outline)   176121 /  157225 = 1.1
+//  Rounded rects (filled)   2415537 / 2415044 = 1.0
+//
 const minIRQLen = 8
 
 func startDMA(ch dma.Channel, addr uintptr, n int) {
