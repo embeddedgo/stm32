@@ -12,10 +12,10 @@ import (
 )
 
 func delay() {
-	if buttons.User.Read() != 0 {
-		time.Sleep(time.Second / 7)
+	if buttons.K1.Read() != 0 {
+		time.Sleep(time.Second / 3)
 	} else {
-		time.Sleep(time.Second / 2)
+		time.Sleep(time.Second)
 	}
 }
 
