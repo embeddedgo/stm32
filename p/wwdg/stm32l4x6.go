@@ -5,14 +5,19 @@
 // Package wwdg provides access to the registers of the WWDG peripheral.
 //
 // Instances:
-//  WWDG  WWDG_BASE  APB1  WWDG  System window watchdog
+//
+//	WWDG  WWDG_BASE  APB1  WWDG  System window watchdog
+//
 // Registers:
-//  0x000 32  CR   Control register
-//  0x004 32  CFR  Configuration register
-//  0x008 32  SR   Status register
+//
+//	0x000 32  CR   Control register
+//	0x004 32  CFR  Configuration register
+//	0x008 32  SR   Status register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/bus
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/bus
+//	github.com/embeddedgo/stm32/p/mmap
 package wwdg
 
 const (

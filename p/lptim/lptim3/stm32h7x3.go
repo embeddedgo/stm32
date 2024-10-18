@@ -5,22 +5,27 @@
 // Package lptim3 provides access to the registers of the LPTIM peripheral.
 //
 // Instances:
-//  LPTIM3  LPTIM3_BASE  APB4  LPTIM3           Low power timer
-//  LPTIM4  LPTIM4_BASE  APB4  ETH_WKUP,LPTIM4  Low power timer
-//  LPTIM5  LPTIM5_BASE  APB4  LPTIM5           Low power timer
+//
+//	LPTIM3  LPTIM3_BASE  APB4  LPTIM3           Low power timer
+//	LPTIM4  LPTIM4_BASE  APB4  ETH_WKUP,LPTIM4  Low power timer
+//	LPTIM5  LPTIM5_BASE  APB4  LPTIM5           Low power timer
+//
 // Registers:
-//  0x000 32  ISR    Interrupt and Status Register
-//  0x004 32  ICR    Interrupt Clear Register
-//  0x008 32  IER    Interrupt Enable Register
-//  0x00C 32  CFGR   Configuration Register
-//  0x010 32  CR     Control Register
-//  0x014 32  CMP    Compare Register
-//  0x018 32  ARR    Autoreload Register
-//  0x01C 32  CNT    Counter Register
-//  0x024 32  CFGR2  LPTIM configuration register 2
+//
+//	0x000 32  ISR    Interrupt and Status Register
+//	0x004 32  ICR    Interrupt Clear Register
+//	0x008 32  IER    Interrupt Enable Register
+//	0x00C 32  CFGR   Configuration Register
+//	0x010 32  CR     Control Register
+//	0x014 32  CMP    Compare Register
+//	0x018 32  ARR    Autoreload Register
+//	0x01C 32  CNT    Counter Register
+//	0x024 32  CFGR2  LPTIM configuration register 2
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/bus
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/bus
+//	github.com/embeddedgo/stm32/p/mmap
 package lptim3
 
 const (

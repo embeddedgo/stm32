@@ -5,29 +5,34 @@
 // Package gpio provides access to the registers of the GPIO peripheral.
 //
 // Instances:
-//  GPIOA  GPIOA_BASE  AHB1  -  General-purpose I/Os
-//  GPIOB  GPIOB_BASE  AHB1  -  General-purpose I/Os
-//  GPIOC  GPIOC_BASE  AHB1  -  General-purpose I/Os
-//  GPIOD  GPIOD_BASE  AHB1  -  General-purpose I/Os
-//  GPIOE  GPIOE_BASE  AHB1  -  General-purpose I/Os
-//  GPIOF  GPIOF_BASE  AHB1  -  General-purpose I/Os
-//  GPIOG  GPIOG_BASE  AHB1  -  General-purpose I/Os
-//  GPIOH  GPIOH_BASE  AHB1  -  General-purpose I/Os
-//  GPIOI  GPIOI_BASE  AHB1  -  General-purpose I/Os
+//
+//	GPIOA  GPIOA_BASE  AHB1  -  General-purpose I/Os
+//	GPIOB  GPIOB_BASE  AHB1  -  General-purpose I/Os
+//	GPIOC  GPIOC_BASE  AHB1  -  General-purpose I/Os
+//	GPIOD  GPIOD_BASE  AHB1  -  General-purpose I/Os
+//	GPIOE  GPIOE_BASE  AHB1  -  General-purpose I/Os
+//	GPIOF  GPIOF_BASE  AHB1  -  General-purpose I/Os
+//	GPIOG  GPIOG_BASE  AHB1  -  General-purpose I/Os
+//	GPIOH  GPIOH_BASE  AHB1  -  General-purpose I/Os
+//	GPIOI  GPIOI_BASE  AHB1  -  General-purpose I/Os
+//
 // Registers:
-//  0x000 32  MODER    GPIO port mode register
-//  0x004 32  OTYPER   GPIO port output type register
-//  0x008 32  OSPEEDR  GPIO port output speed register
-//  0x00C 32  PUPDR    GPIO port pull-up/pull-down register
-//  0x010 32  IDR      GPIO port input data register
-//  0x014 32  ODR      GPIO port output data register
-//  0x018 32  BSRR     GPIO port bit set/reset register
-//  0x01C 32  LCKR     GPIO port configuration lock register
-//  0x020 32  AFRL     GPIO alternate function low register
-//  0x024 32  AFRH     GPIO alternate function high register
+//
+//	0x000 32  MODER    GPIO port mode register
+//	0x004 32  OTYPER   GPIO port output type register
+//	0x008 32  OSPEEDR  GPIO port output speed register
+//	0x00C 32  PUPDR    GPIO port pull-up/pull-down register
+//	0x010 32  IDR      GPIO port input data register
+//	0x014 32  ODR      GPIO port output data register
+//	0x018 32  BSRR     GPIO port bit set/reset register
+//	0x01C 32  LCKR     GPIO port configuration lock register
+//	0x020 32  AFRL     GPIO alternate function low register
+//	0x024 32  AFRH     GPIO alternate function high register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/bus
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/bus
+//	github.com/embeddedgo/stm32/p/mmap
 package gpio
 
 const (

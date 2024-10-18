@@ -5,31 +5,36 @@
 // Package dmad provides access to the registers of the DMA2D peripheral.
 //
 // Instances:
-//  DMA2D  DMA2D_BASE  AHB3  DMA2D  DMA2D
+//
+//	DMA2D  DMA2D_BASE  AHB3  DMA2D  DMA2D
+//
 // Registers:
-//  0x000 32  CR       DMA2D control register
-//  0x004 32  ISR      DMA2D Interrupt Status Register
-//  0x008 32  IFCR     DMA2D interrupt flag clear register
-//  0x00C 32  FGMAR    DMA2D foreground memory address register
-//  0x010 32  FGOR     DMA2D foreground offset register
-//  0x014 32  BGMAR    DMA2D background memory address register
-//  0x018 32  BGOR     DMA2D background offset register
-//  0x01C 32  FGPFCCR  DMA2D foreground PFC control register
-//  0x020 32  FGCOLR   DMA2D foreground color register
-//  0x024 32  BGPFCCR  DMA2D background PFC control register
-//  0x028 32  BGCOLR   DMA2D background color register
-//  0x02C 32  FGCMAR   DMA2D foreground CLUT memory address register
-//  0x030 32  BGCMAR   DMA2D background CLUT memory address register
-//  0x034 32  OPFCCR   DMA2D output PFC control register
-//  0x038 32  OCOLR    DMA2D output color register
-//  0x03C 32  OMAR     DMA2D output memory address register
-//  0x040 32  OOR      DMA2D output offset register
-//  0x044 32  NLR      DMA2D number of line register
-//  0x048 32  LWR      DMA2D line watermark register
-//  0x04C 32  AMTCR    DMA2D AXI master timer configuration register
+//
+//	0x000 32  CR       DMA2D control register
+//	0x004 32  ISR      DMA2D Interrupt Status Register
+//	0x008 32  IFCR     DMA2D interrupt flag clear register
+//	0x00C 32  FGMAR    DMA2D foreground memory address register
+//	0x010 32  FGOR     DMA2D foreground offset register
+//	0x014 32  BGMAR    DMA2D background memory address register
+//	0x018 32  BGOR     DMA2D background offset register
+//	0x01C 32  FGPFCCR  DMA2D foreground PFC control register
+//	0x020 32  FGCOLR   DMA2D foreground color register
+//	0x024 32  BGPFCCR  DMA2D background PFC control register
+//	0x028 32  BGCOLR   DMA2D background color register
+//	0x02C 32  FGCMAR   DMA2D foreground CLUT memory address register
+//	0x030 32  BGCMAR   DMA2D background CLUT memory address register
+//	0x034 32  OPFCCR   DMA2D output PFC control register
+//	0x038 32  OCOLR    DMA2D output color register
+//	0x03C 32  OMAR     DMA2D output memory address register
+//	0x040 32  OOR      DMA2D output offset register
+//	0x044 32  NLR      DMA2D number of line register
+//	0x048 32  LWR      DMA2D line watermark register
+//	0x04C 32  AMTCR    DMA2D AXI master timer configuration register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/bus
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/bus
+//	github.com/embeddedgo/stm32/p/mmap
 package dmad
 
 const (

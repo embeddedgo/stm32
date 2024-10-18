@@ -5,26 +5,31 @@
 // Package spi provides access to the registers of the I2S2ext peripheral.
 //
 // Instances:
-//  I2S2ext  I2S2ext_BASE  APB2  -     Serial peripheral interface
-//  I2S3ext  I2S3ext_BASE  APB2  -     Serial peripheral interface
-//  SPI1     SPI1_BASE     APB2  SPI1  Serial peripheral interface
-//  SPI2     SPI2_BASE     APB1  SPI2  Serial peripheral interface
-//  SPI3     SPI3_BASE     APB1  -     Serial peripheral interface
-//  SPI4     SPI4_BASE     APB2  SPI4  Serial peripheral interface
-//  SPI5     SPI5_BASE     -     -     Serial peripheral interface
+//
+//	I2S2ext  I2S2ext_BASE  APB2  -     Serial peripheral interface
+//	I2S3ext  I2S3ext_BASE  APB2  -     Serial peripheral interface
+//	SPI1     SPI1_BASE     APB2  SPI1  Serial peripheral interface
+//	SPI2     SPI2_BASE     APB1  SPI2  Serial peripheral interface
+//	SPI3     SPI3_BASE     APB1  -     Serial peripheral interface
+//	SPI4     SPI4_BASE     APB2  SPI4  Serial peripheral interface
+//	SPI5     SPI5_BASE     -     -     Serial peripheral interface
+//
 // Registers:
-//  0x000 32  CR1         control register 1
-//  0x004 32  CR2         control register 2
-//  0x008 32  SR          status register
-//  0x00C 32  DR(uint32)  data register
-//  0x010 32  CRCPR       CRC polynomial register
-//  0x014 32  RXCRCR      RX CRC register
-//  0x018 32  TXCRCR      TX CRC register
-//  0x01C 32  I2SCFGR     I2S configuration register
-//  0x020 32  I2SPR       I2S prescaler register
+//
+//	0x000 32  CR1      control register 1
+//	0x004 32  CR2      control register 2
+//	0x008 32  SR       status register
+//	0x00C 32  DR       data register
+//	0x010 32  CRCPR    CRC polynomial register
+//	0x014 32  RXCRCR   RX CRC register
+//	0x018 32  TXCRCR   TX CRC register
+//	0x01C 32  I2SCFGR  I2S configuration register
+//	0x020 32  I2SPR    I2S prescaler register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/bus
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/bus
+//	github.com/embeddedgo/stm32/p/mmap
 package spi
 
 const (
@@ -103,30 +108,6 @@ const (
 	OVRn    = 6
 	BSYn    = 7
 	TIFRFEn = 8
-)
-
-const (
-	CRCPOLY CRCPR = 0xFFFF << 0 //+ CRC polynomial register
-)
-
-const (
-	CRCPOLYn = 0
-)
-
-const (
-	RxCRC RXCRCR = 0xFFFF << 0 //+ Rx CRC register
-)
-
-const (
-	RxCRCn = 0
-)
-
-const (
-	TxCRC TXCRCR = 0xFFFF << 0 //+ Tx CRC register
-)
-
-const (
-	TxCRCn = 0
 )
 
 const (

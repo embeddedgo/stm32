@@ -5,48 +5,53 @@
 // Package otg_fs_device provides access to the registers of the OTG_FS_DEVICE peripheral.
 //
 // Instances:
-//  OTG_FS_DEVICE  OTG_FS_DEVICE_BASE  -  -  USB on the go full speed
+//
+//	OTG_FS_DEVICE  OTG_FS_DEVICE_BASE  -  -  USB on the go full speed
+//
 // Registers:
-//  0x000 32  FS_DCFG      OTG_FS device configuration register (OTG_FS_DCFG)
-//  0x004 32  FS_DCTL      OTG_FS device control register (OTG_FS_DCTL)
-//  0x008 32  FS_DSTS      OTG_FS device status register (OTG_FS_DSTS)
-//  0x010 32  FS_DIEPMSK   OTG_FS device IN endpoint common interrupt mask register (OTG_FS_DIEPMSK)
-//  0x014 32  FS_DOEPMSK   OTG_FS device OUT endpoint common interrupt mask register (OTG_FS_DOEPMSK)
-//  0x018 32  FS_DAINT     OTG_FS device all endpoints interrupt register (OTG_FS_DAINT)
-//  0x01C 32  FS_DAINTMSK  OTG_FS all endpoints interrupt mask register (OTG_FS_DAINTMSK)
-//  0x028 32  DVBUSDIS     OTG_FS device VBUS discharge time register
-//  0x02C 32  DVBUSPULSE   OTG_FS device VBUS pulsing time register
-//  0x034 32  DIEPEMPMSK   OTG_FS device IN endpoint FIFO empty interrupt mask register
-//  0x100 32  FS_DIEPCTL0  OTG_FS device control IN endpoint 0 control register (OTG_FS_DIEPCTL0)
-//  0x108 32  DIEPINT0     device endpoint-x interrupt register
-//  0x110 32  DIEPTSIZ0    device endpoint-0 transfer size register
-//  0x118 32  DTXFSTS0     OTG_FS device IN endpoint transmit FIFO status register
-//  0x120 32  DIEPCTL1     OTG device endpoint-1 control register
-//  0x128 32  DIEPINT1     device endpoint-1 interrupt register
-//  0x130 32  DIEPTSIZ1    device endpoint-1 transfer size register
-//  0x138 32  DTXFSTS1     OTG_FS device IN endpoint transmit FIFO status register
-//  0x140 32  DIEPCTL2     OTG device endpoint-2 control register
-//  0x148 32  DIEPINT2     device endpoint-2 interrupt register
-//  0x150 32  DIEPTSIZ2    device endpoint-2 transfer size register
-//  0x158 32  DTXFSTS2     OTG_FS device IN endpoint transmit FIFO status register
-//  0x160 32  DIEPCTL3     OTG device endpoint-3 control register
-//  0x168 32  DIEPINT3     device endpoint-3 interrupt register
-//  0x170 32  DIEPTSIZ3    device endpoint-3 transfer size register
-//  0x178 32  DTXFSTS3     OTG_FS device IN endpoint transmit FIFO status register
-//  0x300 32  DOEPCTL0     device endpoint-0 control register
-//  0x308 32  DOEPINT0     device endpoint-0 interrupt register
-//  0x310 32  DOEPTSIZ0    device OUT endpoint-0 transfer size register
-//  0x320 32  DOEPCTL1     device endpoint-1 control register
-//  0x328 32  DOEPINT1     device endpoint-1 interrupt register
-//  0x330 32  DOEPTSIZ1    device OUT endpoint-1 transfer size register
-//  0x340 32  DOEPCTL2     device endpoint-2 control register
-//  0x348 32  DOEPINT2     device endpoint-2 interrupt register
-//  0x350 32  DOEPTSIZ2    device OUT endpoint-2 transfer size register
-//  0x360 32  DOEPCTL3     device endpoint-3 control register
-//  0x368 32  DOEPINT3     device endpoint-3 interrupt register
-//  0x370 32  DOEPTSIZ3    device OUT endpoint-3 transfer size register
+//
+//	0x000 32  FS_DCFG      OTG_FS device configuration register (OTG_FS_DCFG)
+//	0x004 32  FS_DCTL      OTG_FS device control register (OTG_FS_DCTL)
+//	0x008 32  FS_DSTS      OTG_FS device status register (OTG_FS_DSTS)
+//	0x010 32  FS_DIEPMSK   OTG_FS device IN endpoint common interrupt mask register (OTG_FS_DIEPMSK)
+//	0x014 32  FS_DOEPMSK   OTG_FS device OUT endpoint common interrupt mask register (OTG_FS_DOEPMSK)
+//	0x018 32  FS_DAINT     OTG_FS device all endpoints interrupt register (OTG_FS_DAINT)
+//	0x01C 32  FS_DAINTMSK  OTG_FS all endpoints interrupt mask register (OTG_FS_DAINTMSK)
+//	0x028 32  DVBUSDIS     OTG_FS device VBUS discharge time register
+//	0x02C 32  DVBUSPULSE   OTG_FS device VBUS pulsing time register
+//	0x034 32  DIEPEMPMSK   OTG_FS device IN endpoint FIFO empty interrupt mask register
+//	0x100 32  FS_DIEPCTL0  OTG_FS device control IN endpoint 0 control register (OTG_FS_DIEPCTL0)
+//	0x108 32  DIEPINT0     device endpoint-x interrupt register
+//	0x110 32  DIEPTSIZ0    device endpoint-0 transfer size register
+//	0x118 32  DTXFSTS0     OTG_FS device IN endpoint transmit FIFO status register
+//	0x120 32  DIEPCTL1     OTG device endpoint-1 control register
+//	0x128 32  DIEPINT1     device endpoint-1 interrupt register
+//	0x130 32  DIEPTSIZ1    device endpoint-1 transfer size register
+//	0x138 32  DTXFSTS1     OTG_FS device IN endpoint transmit FIFO status register
+//	0x140 32  DIEPCTL2     OTG device endpoint-2 control register
+//	0x148 32  DIEPINT2     device endpoint-2 interrupt register
+//	0x150 32  DIEPTSIZ2    device endpoint-2 transfer size register
+//	0x158 32  DTXFSTS2     OTG_FS device IN endpoint transmit FIFO status register
+//	0x160 32  DIEPCTL3     OTG device endpoint-3 control register
+//	0x168 32  DIEPINT3     device endpoint-3 interrupt register
+//	0x170 32  DIEPTSIZ3    device endpoint-3 transfer size register
+//	0x178 32  DTXFSTS3     OTG_FS device IN endpoint transmit FIFO status register
+//	0x300 32  DOEPCTL0     device endpoint-0 control register
+//	0x308 32  DOEPINT0     device endpoint-0 interrupt register
+//	0x310 32  DOEPTSIZ0    device OUT endpoint-0 transfer size register
+//	0x320 32  DOEPCTL1     device endpoint-1 control register
+//	0x328 32  DOEPINT1     device endpoint-1 interrupt register
+//	0x330 32  DOEPTSIZ1    device OUT endpoint-1 transfer size register
+//	0x340 32  DOEPCTL2     device endpoint-2 control register
+//	0x348 32  DOEPINT2     device endpoint-2 interrupt register
+//	0x350 32  DOEPTSIZ2    device OUT endpoint-2 transfer size register
+//	0x360 32  DOEPCTL3     device endpoint-3 control register
+//	0x368 32  DOEPINT3     device endpoint-3 interrupt register
+//	0x370 32  DOEPTSIZ3    device OUT endpoint-3 transfer size register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package otg_fs_device
 
 const (

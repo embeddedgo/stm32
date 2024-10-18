@@ -5,48 +5,53 @@
 // Package ltdc provides access to the registers of the LTDC peripheral.
 //
 // Instances:
-//  LTDC  LTDC_BASE  APB3  LTDC,LTDC_ER  LCD-TFT Controller
+//
+//	LTDC  LTDC_BASE  APB3  LTDC,LTDC_ER  LCD-TFT Controller
+//
 // Registers:
-//  0x008 32  SSCR      Synchronization Size Configuration Register
-//  0x00C 32  BPCR      Back Porch Configuration Register
-//  0x010 32  AWCR      Active Width Configuration Register
-//  0x014 32  TWCR      Total Width Configuration Register
-//  0x018 32  GCR       Global Control Register
-//  0x024 32  SRCR      Shadow Reload Configuration Register
-//  0x02C 32  BCCR      Background Color Configuration Register
-//  0x034 32  IER       Interrupt Enable Register
-//  0x038 32  ISR       Interrupt Status Register
-//  0x03C 32  ICR       Interrupt Clear Register
-//  0x040 32  LIPCR     Line Interrupt Position Configuration Register
-//  0x044 32  CPSR      Current Position Status Register
-//  0x048 32  CDSR      Current Display Status Register
-//  0x084 32  L1CR      Layerx Control Register
-//  0x088 32  L1WHPCR   Layerx Window Horizontal Position Configuration Register
-//  0x08C 32  L1WVPCR   Layerx Window Vertical Position Configuration Register
-//  0x090 32  L1CKCR    Layerx Color Keying Configuration Register
-//  0x094 32  L1PFCR    Layerx Pixel Format Configuration Register
-//  0x098 32  L1CACR    Layerx Constant Alpha Configuration Register
-//  0x09C 32  L1DCCR    Layerx Default Color Configuration Register
-//  0x0A0 32  L1BFCR    Layerx Blending Factors Configuration Register
-//  0x0AC 32  L1CFBAR   Layerx Color Frame Buffer Address Register
-//  0x0B0 32  L1CFBLR   Layerx Color Frame Buffer Length Register
-//  0x0B4 32  L1CFBLNR  Layerx ColorFrame Buffer Line Number Register
-//  0x0C4 32  L1CLUTWR  Layerx CLUT Write Register
-//  0x104 32  L2CR      Layerx Control Register
-//  0x108 32  L2WHPCR   Layerx Window Horizontal Position Configuration Register
-//  0x10C 32  L2WVPCR   Layerx Window Vertical Position Configuration Register
-//  0x110 32  L2CKCR    Layerx Color Keying Configuration Register
-//  0x114 32  L2PFCR    Layerx Pixel Format Configuration Register
-//  0x118 32  L2CACR    Layerx Constant Alpha Configuration Register
-//  0x11C 32  L2DCCR    Layerx Default Color Configuration Register
-//  0x120 32  L2BFCR    Layerx Blending Factors Configuration Register
-//  0x12C 32  L2CFBAR   Layerx Color Frame Buffer Address Register
-//  0x130 32  L2CFBLR   Layerx Color Frame Buffer Length Register
-//  0x134 32  L2CFBLNR  Layerx ColorFrame Buffer Line Number Register
-//  0x144 32  L2CLUTWR  Layerx CLUT Write Register
+//
+//	0x008 32  SSCR      Synchronization Size Configuration Register
+//	0x00C 32  BPCR      Back Porch Configuration Register
+//	0x010 32  AWCR      Active Width Configuration Register
+//	0x014 32  TWCR      Total Width Configuration Register
+//	0x018 32  GCR       Global Control Register
+//	0x024 32  SRCR      Shadow Reload Configuration Register
+//	0x02C 32  BCCR      Background Color Configuration Register
+//	0x034 32  IER       Interrupt Enable Register
+//	0x038 32  ISR       Interrupt Status Register
+//	0x03C 32  ICR       Interrupt Clear Register
+//	0x040 32  LIPCR     Line Interrupt Position Configuration Register
+//	0x044 32  CPSR      Current Position Status Register
+//	0x048 32  CDSR      Current Display Status Register
+//	0x084 32  L1CR      Layerx Control Register
+//	0x088 32  L1WHPCR   Layerx Window Horizontal Position Configuration Register
+//	0x08C 32  L1WVPCR   Layerx Window Vertical Position Configuration Register
+//	0x090 32  L1CKCR    Layerx Color Keying Configuration Register
+//	0x094 32  L1PFCR    Layerx Pixel Format Configuration Register
+//	0x098 32  L1CACR    Layerx Constant Alpha Configuration Register
+//	0x09C 32  L1DCCR    Layerx Default Color Configuration Register
+//	0x0A0 32  L1BFCR    Layerx Blending Factors Configuration Register
+//	0x0AC 32  L1CFBAR   Layerx Color Frame Buffer Address Register
+//	0x0B0 32  L1CFBLR   Layerx Color Frame Buffer Length Register
+//	0x0B4 32  L1CFBLNR  Layerx ColorFrame Buffer Line Number Register
+//	0x0C4 32  L1CLUTWR  Layerx CLUT Write Register
+//	0x104 32  L2CR      Layerx Control Register
+//	0x108 32  L2WHPCR   Layerx Window Horizontal Position Configuration Register
+//	0x10C 32  L2WVPCR   Layerx Window Vertical Position Configuration Register
+//	0x110 32  L2CKCR    Layerx Color Keying Configuration Register
+//	0x114 32  L2PFCR    Layerx Pixel Format Configuration Register
+//	0x118 32  L2CACR    Layerx Constant Alpha Configuration Register
+//	0x11C 32  L2DCCR    Layerx Default Color Configuration Register
+//	0x120 32  L2BFCR    Layerx Blending Factors Configuration Register
+//	0x12C 32  L2CFBAR   Layerx Color Frame Buffer Address Register
+//	0x130 32  L2CFBLR   Layerx Color Frame Buffer Length Register
+//	0x134 32  L2CFBLNR  Layerx ColorFrame Buffer Line Number Register
+//	0x144 32  L2CLUTWR  Layerx CLUT Write Register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/bus
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/bus
+//	github.com/embeddedgo/stm32/p/mmap
 package ltdc
 
 const (

@@ -5,40 +5,45 @@
 // Package rcc provides access to the registers of the RCC peripheral.
 //
 // Instances:
-//  RCC  RCC_BASE  -  RCC  Reset and clock control
+//
+//	RCC  RCC_BASE  -  RCC  Reset and clock control
+//
 // Registers:
-//  0x000 32  CR           Clock control register
-//  0x004 32  ICSCR        Internal clock sources calibration register
-//  0x008 32  CFGR         Clock configuration register
-//  0x00C 32  PLLCFGR      PLL configuration register
-//  0x010 32  PLLSAI1CFGR  PLLSAI1 configuration register
-//  0x014 32  PLLSAI2CFGR  PLLSAI2 configuration register
-//  0x018 32  CIER         Clock interrupt enable register
-//  0x01C 32  CIFR         Clock interrupt flag register
-//  0x020 32  CICR         Clock interrupt clear register
-//  0x028 32  AHB1RSTR     AHB1 peripheral reset register
-//  0x02C 32  AHB2RSTR     AHB2 peripheral reset register
-//  0x030 32  AHB3RSTR     AHB3 peripheral reset register
-//  0x038 32  APB1RSTR1    APB1 peripheral reset register 1
-//  0x03C 32  APB1RSTR2    APB1 peripheral reset register 2
-//  0x040 32  APB2RSTR     APB2 peripheral reset register
-//  0x048 32  AHB1ENR      AHB1 peripheral clock enable register
-//  0x04C 32  AHB2ENR      AHB2 peripheral clock enable register
-//  0x050 32  AHB3ENR      AHB3 peripheral clock enable register
-//  0x058 32  APB1ENR1     APB1ENR1
-//  0x05C 32  APB1ENR2     APB1 peripheral clock enable register 2
-//  0x060 32  APB2ENR      APB2ENR
-//  0x068 32  AHB1SMENR    AHB1 peripheral clocks enable in Sleep and Stop modes register
-//  0x06C 32  AHB2SMENR    AHB2 peripheral clocks enable in Sleep and Stop modes register
-//  0x070 32  AHB3SMENR    AHB3 peripheral clocks enable in Sleep and Stop modes register
-//  0x078 32  APB1SMENR1   APB1SMENR1
-//  0x07C 32  APB1SMENR2   APB1 peripheral clocks enable in Sleep and Stop modes register 2
-//  0x080 32  APB2SMENR    APB2SMENR
-//  0x088 32  CCIPR        CCIPR
-//  0x090 32  BDCR         BDCR
-//  0x094 32  CSR          CSR
+//
+//	0x000 32  CR           Clock control register
+//	0x004 32  ICSCR        Internal clock sources calibration register
+//	0x008 32  CFGR         Clock configuration register
+//	0x00C 32  PLLCFGR      PLL configuration register
+//	0x010 32  PLLSAI1CFGR  PLLSAI1 configuration register
+//	0x014 32  PLLSAI2CFGR  PLLSAI2 configuration register
+//	0x018 32  CIER         Clock interrupt enable register
+//	0x01C 32  CIFR         Clock interrupt flag register
+//	0x020 32  CICR         Clock interrupt clear register
+//	0x028 32  AHB1RSTR     AHB1 peripheral reset register
+//	0x02C 32  AHB2RSTR     AHB2 peripheral reset register
+//	0x030 32  AHB3RSTR     AHB3 peripheral reset register
+//	0x038 32  APB1RSTR1    APB1 peripheral reset register 1
+//	0x03C 32  APB1RSTR2    APB1 peripheral reset register 2
+//	0x040 32  APB2RSTR     APB2 peripheral reset register
+//	0x048 32  AHB1ENR      AHB1 peripheral clock enable register
+//	0x04C 32  AHB2ENR      AHB2 peripheral clock enable register
+//	0x050 32  AHB3ENR      AHB3 peripheral clock enable register
+//	0x058 32  APB1ENR1     APB1ENR1
+//	0x05C 32  APB1ENR2     APB1 peripheral clock enable register 2
+//	0x060 32  APB2ENR      APB2ENR
+//	0x068 32  AHB1SMENR    AHB1 peripheral clocks enable in Sleep and Stop modes register
+//	0x06C 32  AHB2SMENR    AHB2 peripheral clocks enable in Sleep and Stop modes register
+//	0x070 32  AHB3SMENR    AHB3 peripheral clocks enable in Sleep and Stop modes register
+//	0x078 32  APB1SMENR1   APB1SMENR1
+//	0x07C 32  APB1SMENR2   APB1 peripheral clocks enable in Sleep and Stop modes register 2
+//	0x080 32  APB2SMENR    APB2SMENR
+//	0x088 32  CCIPR        CCIPR
+//	0x090 32  BDCR         BDCR
+//	0x094 32  CSR          CSR
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package rcc
 
 const (

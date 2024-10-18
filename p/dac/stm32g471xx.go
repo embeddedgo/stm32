@@ -5,37 +5,42 @@
 // Package dac provides access to the registers of the DAC peripheral.
 //
 // Instances:
-//  DAC1  DAC1_BASE  AHB2  TIM6_DACUNDER*  Digital-to-analog converter
-//  DAC2  DAC2_BASE  AHB2  TIM7_DACUNDER*  Digital-to-analog converter
-//  DAC3  DAC3_BASE  AHB2  TIM6_DACUNDER*  Digital-to-analog converter
-//  DAC4  DAC4_BASE  AHB2  TIM7_DACUNDER*  Digital-to-analog converter
+//
+//	DAC1  DAC1_BASE  AHB2  TIM6_DACUNDER*  Digital-to-analog converter
+//	DAC2  DAC2_BASE  AHB2  TIM7_DACUNDER*  Digital-to-analog converter
+//	DAC3  DAC3_BASE  AHB2  TIM6_DACUNDER*  Digital-to-analog converter
+//	DAC4  DAC4_BASE  AHB2  TIM7_DACUNDER*  Digital-to-analog converter
+//
 // Registers:
-//  0x000 32  DAC_CR       DAC control register
-//  0x004 32  DAC_SWTRGR   DAC software trigger register
-//  0x008 32  DAC_DHR12R1  DAC channel1 12-bit right-aligned data holding register
-//  0x00C 32  DAC_DHR12L1  DAC channel1 12-bit left aligned data holding register
-//  0x010 32  DAC_DHR8R1   DAC channel1 8-bit right aligned data holding register
-//  0x014 32  DAC_DHR12R2  DAC channel2 12-bit right aligned data holding register
-//  0x018 32  DAC_DHR12L2  DAC channel2 12-bit left aligned data holding register
-//  0x01C 32  DAC_DHR8R2   DAC channel2 8-bit right-aligned data holding register
-//  0x020 32  DAC_DHR12RD  Dual DAC 12-bit right-aligned data holding register
-//  0x024 32  DAC_DHR12LD  DUAL DAC 12-bit left aligned data holding register
-//  0x028 32  DAC_DHR8RD   DUAL DAC 8-bit right aligned data holding register
-//  0x02C 32  DAC_DOR1     DAC channel1 data output register
-//  0x030 32  DAC_DOR2     DAC channel2 data output register
-//  0x034 32  DAC_SR       DAC status register
-//  0x038 32  DAC_CCR      DAC calibration control register
-//  0x03C 32  DAC_MCR      DAC mode control register
-//  0x040 32  DAC_SHSR1    DAC Sample and Hold sample time register 1
-//  0x044 32  DAC_SHSR2    DAC Sample and Hold sample time register 2
-//  0x048 32  DAC_SHHR     DAC Sample and Hold hold time register
-//  0x04C 32  DAC_SHRR     DAC Sample and Hold refresh time register
-//  0x058 32  DAC_STR1     Sawtooth register
-//  0x05C 32  DAC_STR2     Sawtooth register
-//  0x060 32  DAC_STMODR   Sawtooth Mode register
+//
+//	0x000 32  DAC_CR       DAC control register
+//	0x004 32  DAC_SWTRGR   DAC software trigger register
+//	0x008 32  DAC_DHR12R1  DAC channel1 12-bit right-aligned data holding register
+//	0x00C 32  DAC_DHR12L1  DAC channel1 12-bit left aligned data holding register
+//	0x010 32  DAC_DHR8R1   DAC channel1 8-bit right aligned data holding register
+//	0x014 32  DAC_DHR12R2  DAC channel2 12-bit right aligned data holding register
+//	0x018 32  DAC_DHR12L2  DAC channel2 12-bit left aligned data holding register
+//	0x01C 32  DAC_DHR8R2   DAC channel2 8-bit right-aligned data holding register
+//	0x020 32  DAC_DHR12RD  Dual DAC 12-bit right-aligned data holding register
+//	0x024 32  DAC_DHR12LD  DUAL DAC 12-bit left aligned data holding register
+//	0x028 32  DAC_DHR8RD   DUAL DAC 8-bit right aligned data holding register
+//	0x02C 32  DAC_DOR1     DAC channel1 data output register
+//	0x030 32  DAC_DOR2     DAC channel2 data output register
+//	0x034 32  DAC_SR       DAC status register
+//	0x038 32  DAC_CCR      DAC calibration control register
+//	0x03C 32  DAC_MCR      DAC mode control register
+//	0x040 32  DAC_SHSR1    DAC Sample and Hold sample time register 1
+//	0x044 32  DAC_SHSR2    DAC Sample and Hold sample time register 2
+//	0x048 32  DAC_SHHR     DAC Sample and Hold hold time register
+//	0x04C 32  DAC_SHRR     DAC Sample and Hold refresh time register
+//	0x058 32  DAC_STR1     Sawtooth register
+//	0x05C 32  DAC_STR2     Sawtooth register
+//	0x060 32  DAC_STMODR   Sawtooth Mode register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/bus
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/bus
+//	github.com/embeddedgo/stm32/p/mmap
 package dac
 
 const (

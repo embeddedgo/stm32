@@ -5,14 +5,19 @@
 // Package stk provides access to the registers of the STK peripheral.
 //
 // Instances:
-//  STK  STK_BASE  -  -  SysTick timer
+//
+//	STK  STK_BASE  -  -  SysTick timer
+//
 // Registers:
-//  0x000 32  CTRL   SysTick control and status register
-//  0x004 32  LOAD   SysTick reload value register
-//  0x008 32  VAL    SysTick current value register
-//  0x00C 32  CALIB  SysTick calibration value register
+//
+//	0x000 32  CTRL   SysTick control and status register
+//	0x004 32  LOAD   SysTick reload value register
+//	0x008 32  VAL    SysTick current value register
+//	0x00C 32  CALIB  SysTick calibration value register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package stk
 
 const (

@@ -5,16 +5,21 @@
 // Package can_ccu provides access to the registers of the CAN_CCU peripheral.
 //
 // Instances:
-//  CAN_CCU  CAN_CCU_BASE  -  -  CCU registers
+//
+//	CAN_CCU  CAN_CCU_BASE  -  -  CCU registers
+//
 // Registers:
-//  0x000 32  CREL   Clock Calibration Unit Core Release Register
-//  0x004 32  CCFG   Calibration Configuration Register
-//  0x008 32  CSTAT  Calibration Status Register
-//  0x00C 32  CWD    Calibration Watchdog Register
-//  0x010 32  IR     Clock Calibration Unit Interrupt Register
-//  0x014 32  IE     Clock Calibration Unit Interrupt Enable Register
+//
+//	0x000 32  CREL   Clock Calibration Unit Core Release Register
+//	0x004 32  CCFG   Calibration Configuration Register
+//	0x008 32  CSTAT  Calibration Status Register
+//	0x00C 32  CWD    Calibration Watchdog Register
+//	0x010 32  IR     Clock Calibration Unit Interrupt Register
+//	0x014 32  IE     Clock Calibration Unit Interrupt Enable Register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package can_ccu
 
 const (

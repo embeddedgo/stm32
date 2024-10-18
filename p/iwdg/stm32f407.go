@@ -5,14 +5,19 @@
 // Package iwdg provides access to the registers of the IWDG peripheral.
 //
 // Instances:
-//  IWDG  IWDG_BASE  -  -  Independent watchdog
+//
+//	IWDG  IWDG_BASE  -  -  Independent watchdog
+//
 // Registers:
-//  0x000 32  KR   Key register
-//  0x004 32  PR   Prescaler register
-//  0x008 32  RLR  Reload register
-//  0x00C 32  SR   Status register
+//
+//	0x000 32  KR   Key register
+//	0x004 32  PR   Prescaler register
+//	0x008 32  RLR  Reload register
+//	0x00C 32  SR   Status register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package iwdg
 
 const (

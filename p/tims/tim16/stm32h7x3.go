@@ -5,29 +5,34 @@
 // Package tim16 provides access to the registers of the TIM peripheral.
 //
 // Instances:
-//  TIM16  TIM16_BASE  APB2  TIM16  General-purpose-timers
+//
+//	TIM16  TIM16_BASE  APB2  TIM16  General-purpose-timers
+//
 // Registers:
-//  0x000 32  CR1           control register 1
-//  0x004 32  CR2           control register 2
-//  0x00C 32  DIER          DMA/Interrupt enable register
-//  0x010 32  SR            status register
-//  0x014 32  EGR           event generation register
-//  0x018 32  CCMR1_Output  capture/compare mode register (output mode)
-//  0x018 32  CCMR1_Input   capture/compare mode register 1 (input mode)
-//  0x020 32  CCER          capture/compare enable register
-//  0x024 32  CNT           counter
-//  0x028 32  PSC           prescaler
-//  0x02C 32  ARR           auto-reload register
-//  0x030 32  RCR           repetition counter register
-//  0x034 32  CCR1          capture/compare register 1
-//  0x044 32  BDTR          break and dead-time register
-//  0x048 32  DCR           DMA control register
-//  0x04C 32  DMAR          DMA address for full transfer
-//  0x060 32  TIM16_AF1     TIM16 alternate function register 1
-//  0x068 32  TIM16_TISEL   TIM16 input selection register
+//
+//	0x000 32  CR1           control register 1
+//	0x004 32  CR2           control register 2
+//	0x00C 32  DIER          DMA/Interrupt enable register
+//	0x010 32  SR            status register
+//	0x014 32  EGR           event generation register
+//	0x018 32  CCMR1_Output  capture/compare mode register (output mode)
+//	0x018 32  CCMR1_Input   capture/compare mode register 1 (input mode)
+//	0x020 32  CCER          capture/compare enable register
+//	0x024 32  CNT           counter
+//	0x028 32  PSC           prescaler
+//	0x02C 32  ARR           auto-reload register
+//	0x030 32  RCR           repetition counter register
+//	0x034 32  CCR1          capture/compare register 1
+//	0x044 32  BDTR          break and dead-time register
+//	0x048 32  DCR           DMA control register
+//	0x04C 32  DMAR          DMA address for full transfer
+//	0x060 32  TIM16_AF1     TIM16 alternate function register 1
+//	0x068 32  TIM16_TISEL   TIM16 input selection register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/bus
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/bus
+//	github.com/embeddedgo/stm32/p/mmap
 package tim16
 
 const (

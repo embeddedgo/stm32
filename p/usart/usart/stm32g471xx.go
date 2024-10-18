@@ -5,25 +5,30 @@
 // Package usart provides access to the registers of the USART peripheral.
 //
 // Instances:
-//  USART1  USART1_BASE  APB2  USART1  Universal synchronous asynchronous receiver transmitter
-//  USART2  USART2_BASE  APB1  USART2  Universal synchronous asynchronous receiver transmitter
-//  USART3  USART3_BASE  APB1  USART3  Universal synchronous asynchronous receiver transmitter
+//
+//	USART1  USART1_BASE  APB2  USART1  Universal synchronous asynchronous receiver transmitter
+//	USART2  USART2_BASE  APB1  USART2  Universal synchronous asynchronous receiver transmitter
+//	USART3  USART3_BASE  APB1  USART3  Universal synchronous asynchronous receiver transmitter
+//
 // Registers:
-//  0x000 32  CR1    Control register 1
-//  0x004 32  CR2    Control register 2
-//  0x008 32  CR3    Control register 3
-//  0x00C 32  BRR    Baud rate register
-//  0x010 32  GTPR   Guard time and prescaler register
-//  0x014 32  RTOR   Receiver timeout register
-//  0x018 32  RQR    Request register
-//  0x01C 32  ISR    Interrupt & status register
-//  0x020 32  ICR    Interrupt flag clear register
-//  0x024 32  RDR    Receive data register
-//  0x028 32  TDR    Transmit data register
-//  0x02C 32  PRESC  USART prescaler register
+//
+//	0x000 32  CR1    Control register 1
+//	0x004 32  CR2    Control register 2
+//	0x008 32  CR3    Control register 3
+//	0x00C 32  BRR    Baud rate register
+//	0x010 32  GTPR   Guard time and prescaler register
+//	0x014 32  RTOR   Receiver timeout register
+//	0x018 32  RQR    Request register
+//	0x01C 32  ISR    Interrupt & status register
+//	0x020 32  ICR    Interrupt flag clear register
+//	0x024 32  RDR    Receive data register
+//	0x028 32  TDR    Transmit data register
+//	0x02C 32  PRESC  USART prescaler register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/bus
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/bus
+//	github.com/embeddedgo/stm32/p/mmap
 package usart
 
 const (

@@ -5,17 +5,22 @@
 // Package cec provides access to the registers of the CEC peripheral.
 //
 // Instances:
-//  CEC  CEC_BASE  APB1  CEC
+//
+//	CEC  CEC_BASE  APB1  CEC
+//
 // Registers:
-//  0x000 32  CR    CEC control register
-//  0x004 32  CFGR  This register is used to configure the HDMI-CEC controller. It is mandatory to write CEC_CFGR only when CECEN=0.
-//  0x008 32  TXDR  CEC Tx data register
-//  0x00C 32  RXDR  CEC Rx Data Register
-//  0x010 32  ISR   CEC Interrupt and Status Register
-//  0x014 32  IER   CEC interrupt enable register
+//
+//	0x000 32  CR    CEC control register
+//	0x004 32  CFGR  This register is used to configure the HDMI-CEC controller. It is mandatory to write CEC_CFGR only when CECEN=0.
+//	0x008 32  TXDR  CEC Tx data register
+//	0x00C 32  RXDR  CEC Rx Data Register
+//	0x010 32  ISR   CEC Interrupt and Status Register
+//	0x014 32  IER   CEC interrupt enable register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/bus
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/bus
+//	github.com/embeddedgo/stm32/p/mmap
 package cec
 
 const (

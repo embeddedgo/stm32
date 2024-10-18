@@ -5,124 +5,137 @@
 // Package dfsdm provides access to the registers of the DFSDM peripheral.
 //
 // Instances:
-//  DFSDM  DFSDM_BASE  -  DFSDM1_FLT0,DFSDM1_FLT1,DFSDM1_FLT2,DFSDM1_FLT3  Digital filter for sigma delta modulators
+//
+//	DFSDM  DFSDM_BASE  -  DFSDM1_FLT0,DFSDM1_FLT1,DFSDM1_FLT2,DFSDM1_FLT3  Digital filter for sigma delta modulators
+//
 // Registers:
-//  0x000 32  DFSDM_CHCFG0R1   DFSDM channel configuration 0 register 1
-//  0x004 32  DFSDM_CHCFG1R1   DFSDM channel configuration 1 register 1
-//  0x008 32  DFSDM_CHCFG2R1   DFSDM channel configuration 2 register 1
-//  0x00C 32  DFSDM_CHCFG3R1   DFSDM channel configuration 3 register 1
-//  0x010 32  DFSDM_CHCFG4R1   DFSDM channel configuration 4 register 1
-//  0x014 32  DFSDM_CHCFG5R1   DFSDM channel configuration 5 register 1
-//  0x018 32  DFSDM_CHCFG6R1   DFSDM channel configuration 6 register 1
-//  0x01C 32  DFSDM_CHCFG7R1   DFSDM channel configuration 7 register 1
-//  0x020 32  DFSDM_CHCFG0R2   DFSDM channel configuration 0 register 2
-//  0x024 32  DFSDM_CHCFG1R2   DFSDM channel configuration 1 register 2
-//  0x028 32  DFSDM_CHCFG2R2   DFSDM channel configuration 2 register 2
-//  0x02C 32  DFSDM_CHCFG3R2   DFSDM channel configuration 3 register 2
-//  0x030 32  DFSDM_CHCFG4R2   DFSDM channel configuration 4 register 2
-//  0x034 32  DFSDM_CHCFG5R2   DFSDM channel configuration 5 register 2
-//  0x038 32  DFSDM_CHCFG6R2   DFSDM channel configuration 6 register 2
-//  0x03C 32  DFSDM_CHCFG7R2   DFSDM channel configuration 7 register 2
-//  0x040 32  DFSDM_AWSCD0R    DFSDM analog watchdog and short-circuit detector register
-//  0x044 32  DFSDM_AWSCD1R    DFSDM analog watchdog and short-circuit detector register
-//  0x048 32  DFSDM_AWSCD2R    DFSDM analog watchdog and short-circuit detector register
-//  0x04C 32  DFSDM_AWSCD3R    DFSDM analog watchdog and short-circuit detector register
-//  0x050 32  DFSDM_AWSCD4R    DFSDM analog watchdog and short-circuit detector register
-//  0x054 32  DFSDM_AWSCD5R    DFSDM analog watchdog and short-circuit detector register
-//  0x058 32  DFSDM_AWSCD6R    DFSDM analog watchdog and short-circuit detector register
-//  0x05C 32  DFSDM_AWSCD7R    DFSDM analog watchdog and short-circuit detector register
-//  0x060 32  DFSDM_CHWDAT0R   DFSDM channel watchdog filter data register
-//  0x064 32  DFSDM_CHWDAT1R   DFSDM channel watchdog filter data register
-//  0x068 32  DFSDM_CHWDAT2R   DFSDM channel watchdog filter data register
-//  0x06C 32  DFSDM_CHWDAT3R   DFSDM channel watchdog filter data register
-//  0x070 32  DFSDM_CHWDAT4R   DFSDM channel watchdog filter data register
-//  0x074 32  DFSDM_CHWDAT5R   DFSDM channel watchdog filter data register
-//  0x078 32  DFSDM_CHWDAT6R   DFSDM channel watchdog filter data register
-//  0x07C 32  DFSDM_CHWDAT7R   DFSDM channel watchdog filter data register
-//  0x080 32  DFSDM_CHDATIN0R  DFSDM channel data input register
-//  0x084 32  DFSDM_CHDATIN1R  DFSDM channel data input register
-//  0x088 32  DFSDM_CHDATIN2R  DFSDM channel data input register
-//  0x08C 32  DFSDM_CHDATIN3R  DFSDM channel data input register
-//  0x090 32  DFSDM_CHDATIN4R  DFSDM channel data input register
-//  0x094 32  DFSDM_CHDATIN5R  DFSDM channel data input register
-//  0x098 32  DFSDM_CHDATIN6R  DFSDM channel data input register
-//  0x09C 32  DFSDM_CHDATIN7R  DFSDM channel data input register
-//  0x0A0 32  DFSDM0_CR1       DFSDM control register 1
-//  0x0A4 32  DFSDM1_CR1       DFSDM control register 1
-//  0x0A8 32  DFSDM2_CR1       DFSDM control register 1
-//  0x0AC 32  DFSDM3_CR1       DFSDM control register 1
-//  0x0B0 32  DFSDM0_CR2       DFSDM control register 2
-//  0x0B4 32  DFSDM1_CR2       DFSDM control register 2
-//  0x0B8 32  DFSDM2_CR2       DFSDM control register 2
-//  0x0BC 32  DFSDM3_CR2       DFSDM control register 2
-//  0x0C0 32  DFSDM0_ISR       DFSDM interrupt and status register
-//  0x0C4 32  DFSDM1_ISR       DFSDM interrupt and status register
-//  0x0C8 32  DFSDM2_ISR       DFSDM interrupt and status register
-//  0x0CC 32  DFSDM3_ISR       DFSDM interrupt and status register
-//  0x0D0 32  DFSDM0_ICR       DFSDM interrupt flag clear register
-//  0x0D4 32  DFSDM1_ICR       DFSDM interrupt flag clear register
-//  0x0D8 32  DFSDM2_ICR       DFSDM interrupt flag clear register
-//  0x0DC 32  DFSDM3_ICR       DFSDM interrupt flag clear register
-//  0x0E0 32  DFSDM0_JCHGR     DFSDM injected channel group selection register
-//  0x0E4 32  DFSDM1_JCHGR     DFSDM injected channel group selection register
-//  0x0E8 32  DFSDM2_JCHGR     DFSDM injected channel group selection register
-//  0x0EC 32  DFSDM3_JCHGR     DFSDM injected channel group selection register
-//  0x0F0 32  DFSDM0_FCR       DFSDM filter control register
-//  0x0F4 32  DFSDM1_FCR       DFSDM filter control register
-//  0x0F8 32  DFSDM2_FCR       DFSDM filter control register
-//  0x0FC 32  DFSDM3_FCR       DFSDM filter control register
-//  0x100 32  DFSDM0_JDATAR    DFSDM data register for injected group
-//  0x104 32  DFSDM1_JDATAR    DFSDM data register for injected group
-//  0x108 32  DFSDM2_JDATAR    DFSDM data register for injected group
-//  0x10C 32  DFSDM3_JDATAR    DFSDM data register for injected group
-//  0x110 32  DFSDM0_RDATAR    DFSDM data register for the regular channel
-//  0x114 32  DFSDM1_RDATAR    DFSDM data register for the regular channel
-//  0x118 32  DFSDM2_RDATAR    DFSDM data register for the regular channel
-//  0x11C 32  DFSDM3_RDATAR    DFSDM data register for the regular channel
-//  0x120 32  DFSDM0_AWHTR     DFSDM analog watchdog high threshold register
-//  0x124 32  DFSDM1_AWHTR     DFSDM analog watchdog high threshold register
-//  0x128 32  DFSDM2_AWHTR     DFSDM analog watchdog high threshold register
-//  0x12C 32  DFSDM3_AWHTR     DFSDM analog watchdog high threshold register
-//  0x130 32  DFSDM0_AWLTR     DFSDM analog watchdog low threshold register
-//  0x134 32  DFSDM1_AWLTR     DFSDM analog watchdog low threshold register
-//  0x138 32  DFSDM2_AWLTR     DFSDM analog watchdog low threshold register
-//  0x13C 32  DFSDM3_AWLTR     DFSDM analog watchdog low threshold register
-//  0x140 32  DFSDM0_AWSR      DFSDM analog watchdog status register
-//  0x144 32  DFSDM1_AWSR      DFSDM analog watchdog status register
-//  0x148 32  DFSDM2_AWSR      DFSDM analog watchdog status register
-//  0x14C 32  DFSDM3_AWSR      DFSDM analog watchdog status register
-//  0x150 32  DFSDM0_AWCFR     DFSDM analog watchdog clear flag register
-//  0x154 32  DFSDM1_AWCFR     DFSDM analog watchdog clear flag register
-//  0x158 32  DFSDM2_AWCFR     DFSDM analog watchdog clear flag register
-//  0x15C 32  DFSDM3_AWCFR     DFSDM analog watchdog clear flag register
-//  0x160 32  DFSDM0_EXMAX     DFSDM Extremes detector maximum register
-//  0x164 32  DFSDM1_EXMAX     DFSDM Extremes detector maximum register
-//  0x168 32  DFSDM2_EXMAX     DFSDM Extremes detector maximum register
-//  0x16C 32  DFSDM3_EXMAX     DFSDM Extremes detector maximum register
-//  0x170 32  DFSDM0_EXMIN     DFSDM Extremes detector minimum register
-//  0x174 32  DFSDM1_EXMIN     DFSDM Extremes detector minimum register
-//  0x178 32  DFSDM2_EXMIN     DFSDM Extremes detector minimum register
-//  0x17C 32  DFSDM3_EXMIN     DFSDM Extremes detector minimum register
-//  0x180 32  DFSDM0_CNVTIMR   DFSDM conversion timer register
-//  0x184 32  DFSDM1_CNVTIMR   DFSDM conversion timer register
-//  0x188 32  DFSDM2_CNVTIMR   DFSDM conversion timer register
-//  0x18C 32  DFSDM3_CNVTIMR   DFSDM conversion timer register
+//
+//	0x000 32  CH0CFGR1           channel configuration y register
+//	0x004 32  CH0CFGR2           channel configuration y register
+//	0x008 32  CH0AWSCDR          analog watchdog and short-circuit detector register
+//	0x00C 32  CH0WDATR           channel watchdog filter data register
+//	0x010 32  CH0DATINR          channel data input register
+//	0x014 32  CH0DLYR            channel y delay register
+//	0x020 32  CH1CFGR1           CH1CFGR1
+//	0x024 32  CH1CFGR2           CH1CFGR2
+//	0x028 32  CH1AWSCDR          CH1AWSCDR
+//	0x02C 32  CH1WDATR           CH1WDATR
+//	0x030 32  CH1DATINR          CH1DATINR
+//	0x034 32  CH1DLYR            channel y delay register
+//	0x040 32  CH2CFGR1           CH2CFGR1
+//	0x044 32  CH2CFGR2           CH2CFGR2
+//	0x048 32  CH2AWSCDR          CH2AWSCDR
+//	0x04C 32  CH2WDATR           CH2WDATR
+//	0x050 32  CH2DATINR          CH2DATINR
+//	0x054 32  CH2DLYR            channel y delay register
+//	0x060 32  CH3CFGR1           CH3CFGR1
+//	0x064 32  CH3CFGR2           CH3CFGR2
+//	0x068 32  CH3AWSCDR          CH3AWSCDR
+//	0x06C 32  CH3WDATR           CH3WDATR
+//	0x070 32  CH3DATINR          CH3DATINR
+//	0x074 32  CH3DLYR            channel y delay register
+//	0x080 32  CH4CFGR1           CH4CFGR1
+//	0x084 32  CH4CFGR2           CH4CFGR2
+//	0x088 32  CH4AWSCDR          CH4AWSCDR
+//	0x08C 32  CH4WDATR           CH4WDATR
+//	0x090 32  CH4DATINR          CH4DATINR
+//	0x094 32  CH4DLYR            channel y delay register
+//	0x0A0 32  CH5CFGR1           CH5CFGR1
+//	0x0A4 32  CH5CFGR2           CH5CFGR2
+//	0x0A8 32  CH5AWSCDR          CH5AWSCDR
+//	0x0AC 32  CH5WDATR           CH5WDATR
+//	0x0B0 32  CH5DATINR          CH5DATINR
+//	0x0B4 32  CH5DLYR            channel y delay register
+//	0x0C0 32  CH6CFGR1           CH6CFGR1
+//	0x0C4 32  CH6CFGR2           CH6CFGR2
+//	0x0C8 32  CH6AWSCDR          CH6AWSCDR
+//	0x0CC 32  CH6WDATR           CH6WDATR
+//	0x0D0 32  CH6DATINR          CH6DATINR
+//	0x0D4 32  CH6DLYR            channel y delay register
+//	0x0E0 32  CH7CFGR1           CH7CFGR1
+//	0x0E4 32  CH7CFGR2           CH7CFGR2
+//	0x0E8 32  CH7AWSCDR          CH7AWSCDR
+//	0x0EC 32  CH7WDATR           CH7WDATR
+//	0x0F0 32  CH7DATINR          CH7DATINR
+//	0x0F4 32  CH7DLYR            channel y delay register
+//	0x100 32  DFSDM_FLT0CR1      control register 1
+//	0x104 32  DFSDM_FLT0CR2      control register 2
+//	0x108 32  DFSDM_FLT0ISR      interrupt and status register
+//	0x10C 32  DFSDM_FLT0ICR      interrupt flag clear register
+//	0x110 32  DFSDM_FLT0JCHGR    injected channel group selection register
+//	0x114 32  DFSDM_FLT0FCR      filter control register
+//	0x118 32  DFSDM_FLT0JDATAR   data register for injected group
+//	0x11C 32  DFSDM_FLT0RDATAR   data register for the regular channel
+//	0x120 32  DFSDM_FLT0AWHTR    analog watchdog high threshold register
+//	0x124 32  DFSDM_FLT0AWLTR    analog watchdog low threshold register
+//	0x128 32  DFSDM_FLT0AWSR     analog watchdog status register
+//	0x12C 32  DFSDM_FLT0AWCFR    analog watchdog clear flag register
+//	0x130 32  DFSDM_FLT0EXMAX    Extremes detector maximum register
+//	0x134 32  DFSDM_FLT0EXMIN    Extremes detector minimum register
+//	0x138 32  DFSDM_FLT0CNVTIMR  conversion timer register
+//	0x180 32  DFSDM_FLT1CR1      control register 1
+//	0x184 32  DFSDM_FLT1CR2      control register 2
+//	0x188 32  DFSDM_FLT1ISR      interrupt and status register
+//	0x18C 32  DFSDM_FLT1ICR      interrupt flag clear register
+//	0x190 32  DFSDM_FLT1CHGR     injected channel group selection register
+//	0x194 32  DFSDM_FLT1FCR      filter control register
+//	0x198 32  DFSDM_FLT1JDATAR   data register for injected group
+//	0x19C 32  DFSDM_FLT1RDATAR   data register for the regular channel
+//	0x1A0 32  DFSDM_FLT1AWHTR    analog watchdog high threshold register
+//	0x1A4 32  DFSDM_FLT1AWLTR    analog watchdog low threshold register
+//	0x1A8 32  DFSDM_FLT1AWSR     analog watchdog status register
+//	0x1AC 32  DFSDM_FLT1AWCFR    analog watchdog clear flag register
+//	0x1B0 32  DFSDM_FLT1EXMAX    Extremes detector maximum register
+//	0x1B4 32  DFSDM_FLT1EXMIN    Extremes detector minimum register
+//	0x1B8 32  DFSDM_FLT1CNVTIMR  conversion timer register
+//	0x200 32  DFSDM_FLT2CR1      control register 1
+//	0x204 32  DFSDM_FLT2CR2      control register 2
+//	0x208 32  DFSDM_FLT2ISR      interrupt and status register
+//	0x20C 32  DFSDM_FLT2ICR      interrupt flag clear register
+//	0x210 32  DFSDM_FLT2JCHGR    injected channel group selection register
+//	0x214 32  DFSDM_FLT2FCR      filter control register
+//	0x218 32  DFSDM_FLT2JDATAR   data register for injected group
+//	0x21C 32  DFSDM_FLT2RDATAR   data register for the regular channel
+//	0x220 32  DFSDM_FLT2AWHTR    analog watchdog high threshold register
+//	0x224 32  DFSDM_FLT2AWLTR    analog watchdog low threshold register
+//	0x228 32  DFSDM_FLT2AWSR     analog watchdog status register
+//	0x22C 32  DFSDM_FLT2AWCFR    analog watchdog clear flag register
+//	0x230 32  DFSDM_FLT2EXMAX    Extremes detector maximum register
+//	0x234 32  DFSDM_FLT2EXMIN    Extremes detector minimum register
+//	0x238 32  DFSDM_FLT2CNVTIMR  conversion timer register
+//	0x280 32  DFSDM_FLT3CR1      control register 1
+//	0x284 32  DFSDM_FLT3CR2      control register 2
+//	0x288 32  DFSDM_FLT3ISR      interrupt and status register
+//	0x28C 32  DFSDM_FLT3ICR      interrupt flag clear register
+//	0x290 32  DFSDM_FLT3JCHGR    injected channel group selection register
+//	0x294 32  DFSDM_FLT3FCR      filter control register
+//	0x298 32  DFSDM_FLT3JDATAR   data register for injected group
+//	0x29C 32  DFSDM_FLT3RDATAR   data register for the regular channel
+//	0x2A0 32  DFSDM_FLT3AWHTR    analog watchdog high threshold register
+//	0x2A4 32  DFSDM_FLT3AWLTR    analog watchdog low threshold register
+//	0x2A8 32  DFSDM_FLT3AWSR     analog watchdog status register
+//	0x2AC 32  DFSDM_FLT3AWCFR    analog watchdog clear flag register
+//	0x2B0 32  DFSDM_FLT3EXMAX    Extremes detector maximum register
+//	0x2B4 32  DFSDM_FLT3EXMIN    Extremes detector minimum register
+//	0x2B8 32  DFSDM_FLT3CNVTIMR  conversion timer register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package dfsdm
 
 const (
-	SITP     DFSDM_CHCFG0R1 = 0x03 << 0  //+ Serial interface type for channel 0
-	SPICKSEL DFSDM_CHCFG0R1 = 0x03 << 2  //+ SPI clock select for channel 0
-	SCDEN    DFSDM_CHCFG0R1 = 0x01 << 5  //+ Short-circuit detector enable on channel 0
-	CKABEN   DFSDM_CHCFG0R1 = 0x01 << 6  //+ Clock absence detector enable on channel 0
-	CHEN     DFSDM_CHCFG0R1 = 0x01 << 7  //+ Channel 0 enable
-	CHINSEL  DFSDM_CHCFG0R1 = 0x01 << 8  //+ Channel inputs selection
-	DATMPX   DFSDM_CHCFG0R1 = 0x03 << 12 //+ Input data multiplexer for channel 0
-	DATPACK  DFSDM_CHCFG0R1 = 0x03 << 14 //+ Data packing mode in DFSDM_CHDATINyR register
-	CKOUTDIV DFSDM_CHCFG0R1 = 0xFF << 16 //+ Output serial clock divider
-	CKOUTSRC DFSDM_CHCFG0R1 = 0x01 << 30 //+ Output serial clock source selection
-	DFSDMEN  DFSDM_CHCFG0R1 = 0x01 << 31 //+ Global enable for DFSDM interface
+	SITP     CH0CFGR1 = 0x03 << 0  //+ SITP
+	SPICKSEL CH0CFGR1 = 0x03 << 2  //+ SPICKSEL
+	SCDEN    CH0CFGR1 = 0x01 << 5  //+ SCDEN
+	CKABEN   CH0CFGR1 = 0x01 << 6  //+ CKABEN
+	CHEN     CH0CFGR1 = 0x01 << 7  //+ CHEN
+	CHINSEL  CH0CFGR1 = 0x01 << 8  //+ CHINSEL
+	DATMPX   CH0CFGR1 = 0x03 << 12 //+ DATMPX
+	DATPACK  CH0CFGR1 = 0x03 << 14 //+ DATPACK
+	CKOUTDIV CH0CFGR1 = 0xFF << 16 //+ CKOUTDIV
+	CKOUTSRC CH0CFGR1 = 0x01 << 30 //+ CKOUTSRC
+	DFSDMEN  CH0CFGR1 = 0x01 << 31 //+ DFSDMEN
 )
 
 const (
@@ -140,17 +153,64 @@ const (
 )
 
 const (
-	SITP     DFSDM_CHCFG1R1 = 0x03 << 0  //+ Serial interface type for channel 1
-	SPICKSEL DFSDM_CHCFG1R1 = 0x03 << 2  //+ SPI clock select for channel 1
-	SCDEN    DFSDM_CHCFG1R1 = 0x01 << 5  //+ Short-circuit detector enable on channel 1
-	CKABEN   DFSDM_CHCFG1R1 = 0x01 << 6  //+ Clock absence detector enable on channel 1
-	CHEN     DFSDM_CHCFG1R1 = 0x01 << 7  //+ Channel 1 enable
-	CHINSEL  DFSDM_CHCFG1R1 = 0x01 << 8  //+ Channel inputs selection
-	DATMPX   DFSDM_CHCFG1R1 = 0x03 << 12 //+ Input data multiplexer for channel 1
-	DATPACK  DFSDM_CHCFG1R1 = 0x03 << 14 //+ Data packing mode in DFSDM_CHDATINyR register
-	CKOUTDIV DFSDM_CHCFG1R1 = 0xFF << 16 //+ Output serial clock divider
-	CKOUTSRC DFSDM_CHCFG1R1 = 0x01 << 30 //+ Output serial clock source selection
-	DFSDMEN  DFSDM_CHCFG1R1 = 0x01 << 31 //+ Global enable for DFSDM interface
+	DTRBS  CH0CFGR2 = 0x1F << 3     //+ DTRBS
+	OFFSET CH0CFGR2 = 0xFFFFFF << 8 //+ OFFSET
+)
+
+const (
+	DTRBSn  = 3
+	OFFSETn = 8
+)
+
+const (
+	SCDT   CH0AWSCDR = 0xFF << 0  //+ SCDT
+	BKSCD  CH0AWSCDR = 0x0F << 12 //+ BKSCD
+	AWFOSR CH0AWSCDR = 0x1F << 16 //+ AWFOSR
+	AWFORD CH0AWSCDR = 0x03 << 22 //+ AWFORD
+)
+
+const (
+	SCDTn   = 0
+	BKSCDn  = 12
+	AWFOSRn = 16
+	AWFORDn = 22
+)
+
+const (
+	WDATA CH0WDATR = 0xFFFF << 0 //+ WDATA
+)
+
+const (
+	WDATAn = 0
+)
+
+const (
+	INDAT0 CH0DATINR = 0xFFFF << 0  //+ INDAT0
+	INDAT1 CH0DATINR = 0xFFFF << 16 //+ INDAT1
+)
+
+const (
+	INDAT0n = 0
+	INDAT1n = 16
+)
+
+const (
+	PLSSKP CH0DLYR = 0x3F << 0 //+ PLSSKP
+)
+
+const (
+	PLSSKPn = 0
+)
+
+const (
+	SITP     CH1CFGR1 = 0x03 << 0  //+ SITP
+	SPICKSEL CH1CFGR1 = 0x03 << 2  //+ SPICKSEL
+	SCDEN    CH1CFGR1 = 0x01 << 5  //+ SCDEN
+	CKABEN   CH1CFGR1 = 0x01 << 6  //+ CKABEN
+	CHEN     CH1CFGR1 = 0x01 << 7  //+ CHEN
+	CHINSEL  CH1CFGR1 = 0x01 << 8  //+ CHINSEL
+	DATMPX   CH1CFGR1 = 0x03 << 12 //+ DATMPX
+	DATPACK  CH1CFGR1 = 0x03 << 14 //+ DATPACK
 )
 
 const (
@@ -162,23 +222,67 @@ const (
 	CHINSELn  = 8
 	DATMPXn   = 12
 	DATPACKn  = 14
-	CKOUTDIVn = 16
-	CKOUTSRCn = 30
-	DFSDMENn  = 31
 )
 
 const (
-	SITP     DFSDM_CHCFG2R1 = 0x03 << 0  //+ Serial interface type for channel 2
-	SPICKSEL DFSDM_CHCFG2R1 = 0x03 << 2  //+ SPI clock select for channel 2
-	SCDEN    DFSDM_CHCFG2R1 = 0x01 << 5  //+ Short-circuit detector enable on channel 2
-	CKABEN   DFSDM_CHCFG2R1 = 0x01 << 6  //+ Clock absence detector enable on channel 2
-	CHEN     DFSDM_CHCFG2R1 = 0x01 << 7  //+ Channel 2 enable
-	CHINSEL  DFSDM_CHCFG2R1 = 0x01 << 8  //+ Channel inputs selection
-	DATMPX   DFSDM_CHCFG2R1 = 0x03 << 12 //+ Input data multiplexer for channel 2
-	DATPACK  DFSDM_CHCFG2R1 = 0x03 << 14 //+ Data packing mode in DFSDM_CHDATINyR register
-	CKOUTDIV DFSDM_CHCFG2R1 = 0xFF << 16 //+ Output serial clock divider
-	CKOUTSRC DFSDM_CHCFG2R1 = 0x01 << 30 //+ Output serial clock source selection
-	DFSDMEN  DFSDM_CHCFG2R1 = 0x01 << 31 //+ Global enable for DFSDM interface
+	DTRBS  CH1CFGR2 = 0x1F << 3     //+ DTRBS
+	OFFSET CH1CFGR2 = 0xFFFFFF << 8 //+ OFFSET
+)
+
+const (
+	DTRBSn  = 3
+	OFFSETn = 8
+)
+
+const (
+	SCDT   CH1AWSCDR = 0xFF << 0  //+ SCDT
+	BKSCD  CH1AWSCDR = 0x0F << 12 //+ BKSCD
+	AWFOSR CH1AWSCDR = 0x1F << 16 //+ AWFOSR
+	AWFORD CH1AWSCDR = 0x03 << 22 //+ AWFORD
+)
+
+const (
+	SCDTn   = 0
+	BKSCDn  = 12
+	AWFOSRn = 16
+	AWFORDn = 22
+)
+
+const (
+	WDATA CH1WDATR = 0xFFFF << 0 //+ WDATA
+)
+
+const (
+	WDATAn = 0
+)
+
+const (
+	INDAT0 CH1DATINR = 0xFFFF << 0  //+ INDAT0
+	INDAT1 CH1DATINR = 0xFFFF << 16 //+ INDAT1
+)
+
+const (
+	INDAT0n = 0
+	INDAT1n = 16
+)
+
+const (
+	PLSSKP CH1DLYR = 0x3F << 0 //+ PLSSKP
+)
+
+const (
+	PLSSKPn = 0
+)
+
+const (
+	SITP     CH2CFGR1 = 0x03 << 0  //+ SITP
+	SPICKSEL CH2CFGR1 = 0x03 << 2  //+ SPICKSEL
+	SCDEN    CH2CFGR1 = 0x01 << 5  //+ SCDEN
+	CKABEN   CH2CFGR1 = 0x01 << 6  //+ CKABEN
+	CHEN     CH2CFGR1 = 0x01 << 7  //+ CHEN
+	CHINSEL  CH2CFGR1 = 0x01 << 8  //+ CHINSEL
+	DATMPX   CH2CFGR1 = 0x03 << 12 //+ DATMPX
+	DATPACK  CH2CFGR1 = 0x03 << 14 //+ DATPACK
 )
 
 const (
@@ -190,23 +294,67 @@ const (
 	CHINSELn  = 8
 	DATMPXn   = 12
 	DATPACKn  = 14
-	CKOUTDIVn = 16
-	CKOUTSRCn = 30
-	DFSDMENn  = 31
 )
 
 const (
-	SITP     DFSDM_CHCFG3R1 = 0x03 << 0  //+ Serial interface type for channel 3
-	SPICKSEL DFSDM_CHCFG3R1 = 0x03 << 2  //+ SPI clock select for channel 3
-	SCDEN    DFSDM_CHCFG3R1 = 0x01 << 5  //+ Short-circuit detector enable on channel 3
-	CKABEN   DFSDM_CHCFG3R1 = 0x01 << 6  //+ Clock absence detector enable on channel 3
-	CHEN     DFSDM_CHCFG3R1 = 0x01 << 7  //+ Channel 3 enable
-	CHINSEL  DFSDM_CHCFG3R1 = 0x01 << 8  //+ Channel inputs selection
-	DATMPX   DFSDM_CHCFG3R1 = 0x03 << 12 //+ Input data multiplexer for channel 3
-	DATPACK  DFSDM_CHCFG3R1 = 0x03 << 14 //+ Data packing mode in DFSDM_CHDATINyR register
-	CKOUTDIV DFSDM_CHCFG3R1 = 0xFF << 16 //+ Output serial clock divider
-	CKOUTSRC DFSDM_CHCFG3R1 = 0x01 << 30 //+ Output serial clock source selection
-	DFSDMEN  DFSDM_CHCFG3R1 = 0x01 << 31 //+ Global enable for DFSDM interface
+	DTRBS  CH2CFGR2 = 0x1F << 3     //+ DTRBS
+	OFFSET CH2CFGR2 = 0xFFFFFF << 8 //+ OFFSET
+)
+
+const (
+	DTRBSn  = 3
+	OFFSETn = 8
+)
+
+const (
+	SCDT   CH2AWSCDR = 0xFF << 0  //+ SCDT
+	BKSCD  CH2AWSCDR = 0x0F << 12 //+ BKSCD
+	AWFOSR CH2AWSCDR = 0x1F << 16 //+ AWFOSR
+	AWFORD CH2AWSCDR = 0x03 << 22 //+ AWFORD
+)
+
+const (
+	SCDTn   = 0
+	BKSCDn  = 12
+	AWFOSRn = 16
+	AWFORDn = 22
+)
+
+const (
+	WDATA CH2WDATR = 0xFFFF << 0 //+ WDATA
+)
+
+const (
+	WDATAn = 0
+)
+
+const (
+	INDAT0 CH2DATINR = 0xFFFF << 0  //+ INDAT0
+	INDAT1 CH2DATINR = 0xFFFF << 16 //+ INDAT1
+)
+
+const (
+	INDAT0n = 0
+	INDAT1n = 16
+)
+
+const (
+	PLSSKP CH2DLYR = 0x3F << 0 //+ PLSSKP
+)
+
+const (
+	PLSSKPn = 0
+)
+
+const (
+	SITP     CH3CFGR1 = 0x03 << 0  //+ SITP
+	SPICKSEL CH3CFGR1 = 0x03 << 2  //+ SPICKSEL
+	SCDEN    CH3CFGR1 = 0x01 << 5  //+ SCDEN
+	CKABEN   CH3CFGR1 = 0x01 << 6  //+ CKABEN
+	CHEN     CH3CFGR1 = 0x01 << 7  //+ CHEN
+	CHINSEL  CH3CFGR1 = 0x01 << 8  //+ CHINSEL
+	DATMPX   CH3CFGR1 = 0x03 << 12 //+ DATMPX
+	DATPACK  CH3CFGR1 = 0x03 << 14 //+ DATPACK
 )
 
 const (
@@ -218,23 +366,67 @@ const (
 	CHINSELn  = 8
 	DATMPXn   = 12
 	DATPACKn  = 14
-	CKOUTDIVn = 16
-	CKOUTSRCn = 30
-	DFSDMENn  = 31
 )
 
 const (
-	SITP     DFSDM_CHCFG4R1 = 0x03 << 0  //+ Serial interface type for channel 4
-	SPICKSEL DFSDM_CHCFG4R1 = 0x03 << 2  //+ SPI clock select for channel 4
-	SCDEN    DFSDM_CHCFG4R1 = 0x01 << 5  //+ Short-circuit detector enable on channel 4
-	CKABEN   DFSDM_CHCFG4R1 = 0x01 << 6  //+ Clock absence detector enable on channel 4
-	CHEN     DFSDM_CHCFG4R1 = 0x01 << 7  //+ Channel 4 enable
-	CHINSEL  DFSDM_CHCFG4R1 = 0x01 << 8  //+ Channel inputs selection
-	DATMPX   DFSDM_CHCFG4R1 = 0x03 << 12 //+ Input data multiplexer for channel 4
-	DATPACK  DFSDM_CHCFG4R1 = 0x03 << 14 //+ Data packing mode in DFSDM_CHDATINyR register
-	CKOUTDIV DFSDM_CHCFG4R1 = 0xFF << 16 //+ Output serial clock divider
-	CKOUTSRC DFSDM_CHCFG4R1 = 0x01 << 30 //+ Output serial clock source selection
-	DFSDMEN  DFSDM_CHCFG4R1 = 0x01 << 31 //+ Global enable for DFSDM interface
+	DTRBS  CH3CFGR2 = 0x1F << 3     //+ DTRBS
+	OFFSET CH3CFGR2 = 0xFFFFFF << 8 //+ OFFSET
+)
+
+const (
+	DTRBSn  = 3
+	OFFSETn = 8
+)
+
+const (
+	SCDT   CH3AWSCDR = 0xFF << 0  //+ SCDT
+	BKSCD  CH3AWSCDR = 0x0F << 12 //+ BKSCD
+	AWFOSR CH3AWSCDR = 0x1F << 16 //+ AWFOSR
+	AWFORD CH3AWSCDR = 0x03 << 22 //+ AWFORD
+)
+
+const (
+	SCDTn   = 0
+	BKSCDn  = 12
+	AWFOSRn = 16
+	AWFORDn = 22
+)
+
+const (
+	WDATA CH3WDATR = 0xFFFF << 0 //+ WDATA
+)
+
+const (
+	WDATAn = 0
+)
+
+const (
+	INDAT0 CH3DATINR = 0xFFFF << 0  //+ INDAT0
+	INDAT1 CH3DATINR = 0xFFFF << 16 //+ INDAT1
+)
+
+const (
+	INDAT0n = 0
+	INDAT1n = 16
+)
+
+const (
+	PLSSKP CH3DLYR = 0x3F << 0 //+ PLSSKP
+)
+
+const (
+	PLSSKPn = 0
+)
+
+const (
+	SITP     CH4CFGR1 = 0x03 << 0  //+ SITP
+	SPICKSEL CH4CFGR1 = 0x03 << 2  //+ SPICKSEL
+	SCDEN    CH4CFGR1 = 0x01 << 5  //+ SCDEN
+	CKABEN   CH4CFGR1 = 0x01 << 6  //+ CKABEN
+	CHEN     CH4CFGR1 = 0x01 << 7  //+ CHEN
+	CHINSEL  CH4CFGR1 = 0x01 << 8  //+ CHINSEL
+	DATMPX   CH4CFGR1 = 0x03 << 12 //+ DATMPX
+	DATPACK  CH4CFGR1 = 0x03 << 14 //+ DATPACK
 )
 
 const (
@@ -246,23 +438,67 @@ const (
 	CHINSELn  = 8
 	DATMPXn   = 12
 	DATPACKn  = 14
-	CKOUTDIVn = 16
-	CKOUTSRCn = 30
-	DFSDMENn  = 31
 )
 
 const (
-	SITP     DFSDM_CHCFG5R1 = 0x03 << 0  //+ Serial interface type for channel 5
-	SPICKSEL DFSDM_CHCFG5R1 = 0x03 << 2  //+ SPI clock select for channel 5
-	SCDEN    DFSDM_CHCFG5R1 = 0x01 << 5  //+ Short-circuit detector enable on channel 5
-	CKABEN   DFSDM_CHCFG5R1 = 0x01 << 6  //+ Clock absence detector enable on channel 5
-	CHEN     DFSDM_CHCFG5R1 = 0x01 << 7  //+ Channel 5 enable
-	CHINSEL  DFSDM_CHCFG5R1 = 0x01 << 8  //+ Channel inputs selection
-	DATMPX   DFSDM_CHCFG5R1 = 0x03 << 12 //+ Input data multiplexer for channel 5
-	DATPACK  DFSDM_CHCFG5R1 = 0x03 << 14 //+ Data packing mode in DFSDM_CHDATINyR register
-	CKOUTDIV DFSDM_CHCFG5R1 = 0xFF << 16 //+ Output serial clock divider
-	CKOUTSRC DFSDM_CHCFG5R1 = 0x01 << 30 //+ Output serial clock source selection
-	DFSDMEN  DFSDM_CHCFG5R1 = 0x01 << 31 //+ Global enable for DFSDM interface
+	DTRBS  CH4CFGR2 = 0x1F << 3     //+ DTRBS
+	OFFSET CH4CFGR2 = 0xFFFFFF << 8 //+ OFFSET
+)
+
+const (
+	DTRBSn  = 3
+	OFFSETn = 8
+)
+
+const (
+	SCDT   CH4AWSCDR = 0xFF << 0  //+ SCDT
+	BKSCD  CH4AWSCDR = 0x0F << 12 //+ BKSCD
+	AWFOSR CH4AWSCDR = 0x1F << 16 //+ AWFOSR
+	AWFORD CH4AWSCDR = 0x03 << 22 //+ AWFORD
+)
+
+const (
+	SCDTn   = 0
+	BKSCDn  = 12
+	AWFOSRn = 16
+	AWFORDn = 22
+)
+
+const (
+	WDATA CH4WDATR = 0xFFFF << 0 //+ WDATA
+)
+
+const (
+	WDATAn = 0
+)
+
+const (
+	INDAT0 CH4DATINR = 0xFFFF << 0  //+ INDAT0
+	INDAT1 CH4DATINR = 0xFFFF << 16 //+ INDAT1
+)
+
+const (
+	INDAT0n = 0
+	INDAT1n = 16
+)
+
+const (
+	PLSSKP CH4DLYR = 0x3F << 0 //+ PLSSKP
+)
+
+const (
+	PLSSKPn = 0
+)
+
+const (
+	SITP     CH5CFGR1 = 0x03 << 0  //+ SITP
+	SPICKSEL CH5CFGR1 = 0x03 << 2  //+ SPICKSEL
+	SCDEN    CH5CFGR1 = 0x01 << 5  //+ SCDEN
+	CKABEN   CH5CFGR1 = 0x01 << 6  //+ CKABEN
+	CHEN     CH5CFGR1 = 0x01 << 7  //+ CHEN
+	CHINSEL  CH5CFGR1 = 0x01 << 8  //+ CHINSEL
+	DATMPX   CH5CFGR1 = 0x03 << 12 //+ DATMPX
+	DATPACK  CH5CFGR1 = 0x03 << 14 //+ DATPACK
 )
 
 const (
@@ -274,23 +510,67 @@ const (
 	CHINSELn  = 8
 	DATMPXn   = 12
 	DATPACKn  = 14
-	CKOUTDIVn = 16
-	CKOUTSRCn = 30
-	DFSDMENn  = 31
 )
 
 const (
-	SITP     DFSDM_CHCFG6R1 = 0x03 << 0  //+ Serial interface type for channel 6
-	SPICKSEL DFSDM_CHCFG6R1 = 0x03 << 2  //+ SPI clock select for channel 6
-	SCDEN    DFSDM_CHCFG6R1 = 0x01 << 5  //+ Short-circuit detector enable on channel 6
-	CKABEN   DFSDM_CHCFG6R1 = 0x01 << 6  //+ Clock absence detector enable on channel 6
-	CHEN     DFSDM_CHCFG6R1 = 0x01 << 7  //+ Channel 6 enable
-	CHINSEL  DFSDM_CHCFG6R1 = 0x01 << 8  //+ Channel inputs selection
-	DATMPX   DFSDM_CHCFG6R1 = 0x03 << 12 //+ Input data multiplexer for channel 6
-	DATPACK  DFSDM_CHCFG6R1 = 0x03 << 14 //+ Data packing mode in DFSDM_CHDATINyR register
-	CKOUTDIV DFSDM_CHCFG6R1 = 0xFF << 16 //+ Output serial clock divider
-	CKOUTSRC DFSDM_CHCFG6R1 = 0x01 << 30 //+ Output serial clock source selection
-	DFSDMEN  DFSDM_CHCFG6R1 = 0x01 << 31 //+ Global enable for DFSDM interface
+	DTRBS  CH5CFGR2 = 0x1F << 3     //+ DTRBS
+	OFFSET CH5CFGR2 = 0xFFFFFF << 8 //+ OFFSET
+)
+
+const (
+	DTRBSn  = 3
+	OFFSETn = 8
+)
+
+const (
+	SCDT   CH5AWSCDR = 0xFF << 0  //+ SCDT
+	BKSCD  CH5AWSCDR = 0x0F << 12 //+ BKSCD
+	AWFOSR CH5AWSCDR = 0x1F << 16 //+ AWFOSR
+	AWFORD CH5AWSCDR = 0x03 << 22 //+ AWFORD
+)
+
+const (
+	SCDTn   = 0
+	BKSCDn  = 12
+	AWFOSRn = 16
+	AWFORDn = 22
+)
+
+const (
+	WDATA CH5WDATR = 0xFFFF << 0 //+ WDATA
+)
+
+const (
+	WDATAn = 0
+)
+
+const (
+	INDAT0 CH5DATINR = 0xFFFF << 0  //+ INDAT0
+	INDAT1 CH5DATINR = 0xFFFF << 16 //+ INDAT1
+)
+
+const (
+	INDAT0n = 0
+	INDAT1n = 16
+)
+
+const (
+	PLSSKP CH5DLYR = 0x3F << 0 //+ PLSSKP
+)
+
+const (
+	PLSSKPn = 0
+)
+
+const (
+	SITP     CH6CFGR1 = 0x03 << 0  //+ SITP
+	SPICKSEL CH6CFGR1 = 0x03 << 2  //+ SPICKSEL
+	SCDEN    CH6CFGR1 = 0x01 << 5  //+ SCDEN
+	CKABEN   CH6CFGR1 = 0x01 << 6  //+ CKABEN
+	CHEN     CH6CFGR1 = 0x01 << 7  //+ CHEN
+	CHINSEL  CH6CFGR1 = 0x01 << 8  //+ CHINSEL
+	DATMPX   CH6CFGR1 = 0x03 << 12 //+ DATMPX
+	DATPACK  CH6CFGR1 = 0x03 << 14 //+ DATPACK
 )
 
 const (
@@ -302,23 +582,67 @@ const (
 	CHINSELn  = 8
 	DATMPXn   = 12
 	DATPACKn  = 14
-	CKOUTDIVn = 16
-	CKOUTSRCn = 30
-	DFSDMENn  = 31
 )
 
 const (
-	SITP     DFSDM_CHCFG7R1 = 0x03 << 0  //+ Serial interface type for channel 7
-	SPICKSEL DFSDM_CHCFG7R1 = 0x03 << 2  //+ SPI clock select for channel 7
-	SCDEN    DFSDM_CHCFG7R1 = 0x01 << 5  //+ Short-circuit detector enable on channel 7
-	CKABEN   DFSDM_CHCFG7R1 = 0x01 << 6  //+ Clock absence detector enable on channel 7
-	CHEN     DFSDM_CHCFG7R1 = 0x01 << 7  //+ Channel 7 enable
-	CHINSEL  DFSDM_CHCFG7R1 = 0x01 << 8  //+ Channel inputs selection
-	DATMPX   DFSDM_CHCFG7R1 = 0x03 << 12 //+ Input data multiplexer for channel 7
-	DATPACK  DFSDM_CHCFG7R1 = 0x03 << 14 //+ Data packing mode in DFSDM_CHDATINyR register
-	CKOUTDIV DFSDM_CHCFG7R1 = 0xFF << 16 //+ Output serial clock divider
-	CKOUTSRC DFSDM_CHCFG7R1 = 0x01 << 30 //+ Output serial clock source selection
-	DFSDMEN  DFSDM_CHCFG7R1 = 0x01 << 31 //+ Global enable for DFSDM interface
+	DTRBS  CH6CFGR2 = 0x1F << 3     //+ DTRBS
+	OFFSET CH6CFGR2 = 0xFFFFFF << 8 //+ OFFSET
+)
+
+const (
+	DTRBSn  = 3
+	OFFSETn = 8
+)
+
+const (
+	SCDT   CH6AWSCDR = 0xFF << 0  //+ SCDT
+	BKSCD  CH6AWSCDR = 0x0F << 12 //+ BKSCD
+	AWFOSR CH6AWSCDR = 0x1F << 16 //+ AWFOSR
+	AWFORD CH6AWSCDR = 0x03 << 22 //+ AWFORD
+)
+
+const (
+	SCDTn   = 0
+	BKSCDn  = 12
+	AWFOSRn = 16
+	AWFORDn = 22
+)
+
+const (
+	WDATA CH6WDATR = 0xFFFF << 0 //+ WDATA
+)
+
+const (
+	WDATAn = 0
+)
+
+const (
+	INDAT0 CH6DATINR = 0xFFFF << 0  //+ INDAT0
+	INDAT1 CH6DATINR = 0xFFFF << 16 //+ INDAT1
+)
+
+const (
+	INDAT0n = 0
+	INDAT1n = 16
+)
+
+const (
+	PLSSKP CH6DLYR = 0x3F << 0 //+ PLSSKP
+)
+
+const (
+	PLSSKPn = 0
+)
+
+const (
+	SITP     CH7CFGR1 = 0x03 << 0  //+ SITP
+	SPICKSEL CH7CFGR1 = 0x03 << 2  //+ SPICKSEL
+	SCDEN    CH7CFGR1 = 0x01 << 5  //+ SCDEN
+	CKABEN   CH7CFGR1 = 0x01 << 6  //+ CKABEN
+	CHEN     CH7CFGR1 = 0x01 << 7  //+ CHEN
+	CHINSEL  CH7CFGR1 = 0x01 << 8  //+ CHINSEL
+	DATMPX   CH7CFGR1 = 0x03 << 12 //+ DATMPX
+	DATPACK  CH7CFGR1 = 0x03 << 14 //+ DATPACK
 )
 
 const (
@@ -330,24 +654,11 @@ const (
 	CHINSELn  = 8
 	DATMPXn   = 12
 	DATPACKn  = 14
-	CKOUTDIVn = 16
-	CKOUTSRCn = 30
-	DFSDMENn  = 31
 )
 
 const (
-	DTRBS  DFSDM_CHCFG0R2 = 0x1F << 3     //+ Data right bit-shift for channel 0
-	OFFSET DFSDM_CHCFG0R2 = 0xFFFFFF << 8 //+ 24-bit calibration offset for channel 0
-)
-
-const (
-	DTRBSn  = 3
-	OFFSETn = 8
-)
-
-const (
-	DTRBS  DFSDM_CHCFG1R2 = 0x1F << 3     //+ Data right bit-shift for channel 1
-	OFFSET DFSDM_CHCFG1R2 = 0xFFFFFF << 8 //+ 24-bit calibration offset for channel 1
+	DTRBS  CH7CFGR2 = 0x1F << 3     //+ DTRBS
+	OFFSET CH7CFGR2 = 0xFFFFFF << 8 //+ OFFSET
 )
 
 const (
@@ -356,70 +667,10 @@ const (
 )
 
 const (
-	DTRBS  DFSDM_CHCFG2R2 = 0x1F << 3     //+ Data right bit-shift for channel 2
-	OFFSET DFSDM_CHCFG2R2 = 0xFFFFFF << 8 //+ 24-bit calibration offset for channel 2
-)
-
-const (
-	DTRBSn  = 3
-	OFFSETn = 8
-)
-
-const (
-	DTRBS  DFSDM_CHCFG3R2 = 0x1F << 3     //+ Data right bit-shift for channel 3
-	OFFSET DFSDM_CHCFG3R2 = 0xFFFFFF << 8 //+ 24-bit calibration offset for channel 3
-)
-
-const (
-	DTRBSn  = 3
-	OFFSETn = 8
-)
-
-const (
-	DTRBS  DFSDM_CHCFG4R2 = 0x1F << 3     //+ Data right bit-shift for channel 4
-	OFFSET DFSDM_CHCFG4R2 = 0xFFFFFF << 8 //+ 24-bit calibration offset for channel 4
-)
-
-const (
-	DTRBSn  = 3
-	OFFSETn = 8
-)
-
-const (
-	DTRBS  DFSDM_CHCFG5R2 = 0x1F << 3     //+ Data right bit-shift for channel 5
-	OFFSET DFSDM_CHCFG5R2 = 0xFFFFFF << 8 //+ 24-bit calibration offset for channel 5
-)
-
-const (
-	DTRBSn  = 3
-	OFFSETn = 8
-)
-
-const (
-	DTRBS  DFSDM_CHCFG6R2 = 0x1F << 3     //+ Data right bit-shift for channel 6
-	OFFSET DFSDM_CHCFG6R2 = 0xFFFFFF << 8 //+ 24-bit calibration offset for channel 6
-)
-
-const (
-	DTRBSn  = 3
-	OFFSETn = 8
-)
-
-const (
-	DTRBS  DFSDM_CHCFG7R2 = 0x1F << 3     //+ Data right bit-shift for channel 7
-	OFFSET DFSDM_CHCFG7R2 = 0xFFFFFF << 8 //+ 24-bit calibration offset for channel 7
-)
-
-const (
-	DTRBSn  = 3
-	OFFSETn = 8
-)
-
-const (
-	SCDT   DFSDM_AWSCD0R = 0xFF << 0  //+ short-circuit detector threshold for channel 0
-	BKSCD  DFSDM_AWSCD0R = 0x0F << 12 //+ Break signal assignment for short-circuit detector on channel 0
-	AWFOSR DFSDM_AWSCD0R = 0x1F << 16 //+ Analog watchdog filter oversampling ratio (decimation rate) on channel 0
-	AWFORD DFSDM_AWSCD0R = 0x03 << 22 //+ Analog watchdog Sinc filter order on channel 0
+	SCDT   CH7AWSCDR = 0xFF << 0  //+ SCDT
+	BKSCD  CH7AWSCDR = 0x0F << 12 //+ BKSCD
+	AWFOSR CH7AWSCDR = 0x1F << 16 //+ AWFOSR
+	AWFORD CH7AWSCDR = 0x03 << 22 //+ AWFORD
 )
 
 const (
@@ -430,105 +681,7 @@ const (
 )
 
 const (
-	SCDT   DFSDM_AWSCD1R = 0xFF << 0  //+ short-circuit detector threshold for channel 1
-	BKSCD  DFSDM_AWSCD1R = 0x0F << 12 //+ Break signal assignment for short-circuit detector on channel 1
-	AWFOSR DFSDM_AWSCD1R = 0x1F << 16 //+ Analog watchdog filter oversampling ratio (decimation rate) on channel 1
-	AWFORD DFSDM_AWSCD1R = 0x03 << 22 //+ Analog watchdog Sinc filter order on channel 1
-)
-
-const (
-	SCDTn   = 0
-	BKSCDn  = 12
-	AWFOSRn = 16
-	AWFORDn = 22
-)
-
-const (
-	SCDT   DFSDM_AWSCD2R = 0xFF << 0  //+ short-circuit detector threshold for channel 2
-	BKSCD  DFSDM_AWSCD2R = 0x0F << 12 //+ Break signal assignment for short-circuit detector on channel 2
-	AWFOSR DFSDM_AWSCD2R = 0x1F << 16 //+ Analog watchdog filter oversampling ratio (decimation rate) on channel 2
-	AWFORD DFSDM_AWSCD2R = 0x03 << 22 //+ Analog watchdog Sinc filter order on channel 2
-)
-
-const (
-	SCDTn   = 0
-	BKSCDn  = 12
-	AWFOSRn = 16
-	AWFORDn = 22
-)
-
-const (
-	SCDT   DFSDM_AWSCD3R = 0xFF << 0  //+ short-circuit detector threshold for channel 3
-	BKSCD  DFSDM_AWSCD3R = 0x0F << 12 //+ Break signal assignment for short-circuit detector on channel 3
-	AWFOSR DFSDM_AWSCD3R = 0x1F << 16 //+ Analog watchdog filter oversampling ratio (decimation rate) on channel 3
-	AWFORD DFSDM_AWSCD3R = 0x03 << 22 //+ Analog watchdog Sinc filter order on channel 3
-)
-
-const (
-	SCDTn   = 0
-	BKSCDn  = 12
-	AWFOSRn = 16
-	AWFORDn = 22
-)
-
-const (
-	SCDT   DFSDM_AWSCD4R = 0xFF << 0  //+ short-circuit detector threshold for channel 4
-	BKSCD  DFSDM_AWSCD4R = 0x0F << 12 //+ Break signal assignment for short-circuit detector on channel 4
-	AWFOSR DFSDM_AWSCD4R = 0x1F << 16 //+ Analog watchdog filter oversampling ratio (decimation rate) on channel 4
-	AWFORD DFSDM_AWSCD4R = 0x03 << 22 //+ Analog watchdog Sinc filter order on channel 4
-)
-
-const (
-	SCDTn   = 0
-	BKSCDn  = 12
-	AWFOSRn = 16
-	AWFORDn = 22
-)
-
-const (
-	SCDT   DFSDM_AWSCD5R = 0xFF << 0  //+ short-circuit detector threshold for channel 5
-	BKSCD  DFSDM_AWSCD5R = 0x0F << 12 //+ Break signal assignment for short-circuit detector on channel 5
-	AWFOSR DFSDM_AWSCD5R = 0x1F << 16 //+ Analog watchdog filter oversampling ratio (decimation rate) on channel 5
-	AWFORD DFSDM_AWSCD5R = 0x03 << 22 //+ Analog watchdog Sinc filter order on channel 5
-)
-
-const (
-	SCDTn   = 0
-	BKSCDn  = 12
-	AWFOSRn = 16
-	AWFORDn = 22
-)
-
-const (
-	SCDT   DFSDM_AWSCD6R = 0xFF << 0  //+ short-circuit detector threshold for channel 6
-	BKSCD  DFSDM_AWSCD6R = 0x0F << 12 //+ Break signal assignment for short-circuit detector on channel 6
-	AWFOSR DFSDM_AWSCD6R = 0x1F << 16 //+ Analog watchdog filter oversampling ratio (decimation rate) on channel 6
-	AWFORD DFSDM_AWSCD6R = 0x03 << 22 //+ Analog watchdog Sinc filter order on channel 6
-)
-
-const (
-	SCDTn   = 0
-	BKSCDn  = 12
-	AWFOSRn = 16
-	AWFORDn = 22
-)
-
-const (
-	SCDT   DFSDM_AWSCD7R = 0xFF << 0  //+ short-circuit detector threshold for channel 7
-	BKSCD  DFSDM_AWSCD7R = 0x0F << 12 //+ Break signal assignment for short-circuit detector on channel 7
-	AWFOSR DFSDM_AWSCD7R = 0x1F << 16 //+ Analog watchdog filter oversampling ratio (decimation rate) on channel 7
-	AWFORD DFSDM_AWSCD7R = 0x03 << 22 //+ Analog watchdog Sinc filter order on channel 7
-)
-
-const (
-	SCDTn   = 0
-	BKSCDn  = 12
-	AWFOSRn = 16
-	AWFORDn = 22
-)
-
-const (
-	WDATA DFSDM_CHWDAT0R = 0xFFFF << 0 //+ Input channel y watchdog data
+	WDATA CH7WDATR = 0xFFFF << 0 //+ WDATA
 )
 
 const (
@@ -536,64 +689,8 @@ const (
 )
 
 const (
-	WDATA DFSDM_CHWDAT1R = 0xFFFF << 0 //+ Input channel y watchdog data
-)
-
-const (
-	WDATAn = 0
-)
-
-const (
-	WDATA DFSDM_CHWDAT2R = 0xFFFF << 0 //+ Input channel y watchdog data
-)
-
-const (
-	WDATAn = 0
-)
-
-const (
-	WDATA DFSDM_CHWDAT3R = 0xFFFF << 0 //+ Input channel y watchdog data
-)
-
-const (
-	WDATAn = 0
-)
-
-const (
-	WDATA DFSDM_CHWDAT4R = 0xFFFF << 0 //+ Input channel y watchdog data
-)
-
-const (
-	WDATAn = 0
-)
-
-const (
-	WDATA DFSDM_CHWDAT5R = 0xFFFF << 0 //+ Input channel y watchdog data
-)
-
-const (
-	WDATAn = 0
-)
-
-const (
-	WDATA DFSDM_CHWDAT6R = 0xFFFF << 0 //+ Input channel y watchdog data
-)
-
-const (
-	WDATAn = 0
-)
-
-const (
-	WDATA DFSDM_CHWDAT7R = 0xFFFF << 0 //+ Input channel y watchdog data
-)
-
-const (
-	WDATAn = 0
-)
-
-const (
-	INDAT0 DFSDM_CHDATIN0R = 0xFFFF << 0  //+ Input data for channel 0
-	INDAT1 DFSDM_CHDATIN0R = 0xFFFF << 16 //+ Input data for channel 1
+	INDAT0 CH7DATINR = 0xFFFF << 0  //+ INDAT0
+	INDAT1 CH7DATINR = 0xFFFF << 16 //+ INDAT1
 )
 
 const (
@@ -602,90 +699,28 @@ const (
 )
 
 const (
-	INDAT0 DFSDM_CHDATIN1R = 0xFFFF << 0  //+ Input data for channel 1
-	INDAT1 DFSDM_CHDATIN1R = 0xFFFF << 16 //+ Input data for channel 2
+	PLSSKP CH7DLYR = 0x3F << 0 //+ PLSSKP
 )
 
 const (
-	INDAT0n = 0
-	INDAT1n = 16
+	PLSSKPn = 0
 )
 
 const (
-	INDAT0 DFSDM_CHDATIN2R = 0xFFFF << 0  //+ Input data for channel 2
-	INDAT1 DFSDM_CHDATIN2R = 0xFFFF << 16 //+ Input data for channel 3
-)
-
-const (
-	INDAT0n = 0
-	INDAT1n = 16
-)
-
-const (
-	INDAT0 DFSDM_CHDATIN3R = 0xFFFF << 0  //+ Input data for channel 3
-	INDAT1 DFSDM_CHDATIN3R = 0xFFFF << 16 //+ Input data for channel 4
-)
-
-const (
-	INDAT0n = 0
-	INDAT1n = 16
-)
-
-const (
-	INDAT0 DFSDM_CHDATIN4R = 0xFFFF << 0  //+ Input data for channel 4
-	INDAT1 DFSDM_CHDATIN4R = 0xFFFF << 16 //+ Input data for channel 5
-)
-
-const (
-	INDAT0n = 0
-	INDAT1n = 16
-)
-
-const (
-	INDAT0 DFSDM_CHDATIN5R = 0xFFFF << 0  //+ Input data for channel 5
-	INDAT1 DFSDM_CHDATIN5R = 0xFFFF << 16 //+ Input data for channel 6
-)
-
-const (
-	INDAT0n = 0
-	INDAT1n = 16
-)
-
-const (
-	INDAT0 DFSDM_CHDATIN6R = 0xFFFF << 0  //+ Input data for channel 6
-	INDAT1 DFSDM_CHDATIN6R = 0xFFFF << 16 //+ Input data for channel 7
-)
-
-const (
-	INDAT0n = 0
-	INDAT1n = 16
-)
-
-const (
-	INDAT0 DFSDM_CHDATIN7R = 0xFFFF << 0  //+ Input data for channel 7
-	INDAT1 DFSDM_CHDATIN7R = 0xFFFF << 16 //+ Input data for channel 8
-)
-
-const (
-	INDAT0n = 0
-	INDAT1n = 16
-)
-
-const (
-	DFEN     DFSDM0_CR1 = 0x01 << 0  //+ DFSDM enable
-	JSWSTART DFSDM0_CR1 = 0x01 << 1  //+ Start a conversion of the injected group of channels
-	JSYNC    DFSDM0_CR1 = 0x01 << 3  //+ Launch an injected conversion synchronously with the DFSDM0 JSWSTART trigger
-	JSCAN    DFSDM0_CR1 = 0x01 << 4  //+ Scanning conversion mode for injected conversions
-	JDMAEN   DFSDM0_CR1 = 0x01 << 5  //+ DMA channel enabled to read data for the injected channel group
-	JEXTSEL  DFSDM0_CR1 = 0x1F << 8  //+ Trigger signal selection for launching injected conversions
-	JEXTEN   DFSDM0_CR1 = 0x03 << 13 //+ Trigger enable and trigger edge selection for injected conversions
-	RSWSTART DFSDM0_CR1 = 0x01 << 17 //+ Software start of a conversion on the regular channel
-	RCONT    DFSDM0_CR1 = 0x01 << 18 //+ Continuous mode selection for regular conversions
-	RSYNC    DFSDM0_CR1 = 0x01 << 19 //+ Launch regular conversion synchronously with DFSDM0
-	RDMAEN   DFSDM0_CR1 = 0x01 << 21 //+ DMA channel enabled to read data for the regular conversion
-	RCH      DFSDM0_CR1 = 0x07 << 24 //+ Regular channel selection
-	FAST     DFSDM0_CR1 = 0x01 << 29 //+ Fast conversion mode selection for regular conversions
-	AWFSEL   DFSDM0_CR1 = 0x01 << 30 //+ Analog watchdog fast mode select
+	DFEN     DFSDM_FLT0CR1 = 0x01 << 0  //+ DFSDM enable
+	JSWSTART DFSDM_FLT0CR1 = 0x01 << 1  //+ Start a conversion of the injected group of channels
+	JSYNC    DFSDM_FLT0CR1 = 0x01 << 3  //+ Launch an injected conversion synchronously with the DFSDM0 JSWSTART trigger
+	JSCAN    DFSDM_FLT0CR1 = 0x01 << 4  //+ Scanning conversion mode for injected conversions
+	JDMAEN   DFSDM_FLT0CR1 = 0x01 << 5  //+ DMA channel enabled to read data for the injected channel group
+	JEXTSEL  DFSDM_FLT0CR1 = 0x07 << 8  //+ Trigger signal selection for launching injected conversions
+	JEXTEN   DFSDM_FLT0CR1 = 0x03 << 13 //+ Trigger enable and trigger edge selection for injected conversions
+	RSWSTART DFSDM_FLT0CR1 = 0x01 << 17 //+ Software start of a conversion on the regular channel
+	RCONT    DFSDM_FLT0CR1 = 0x01 << 18 //+ Continuous mode selection for regular conversions
+	RSYNC    DFSDM_FLT0CR1 = 0x01 << 19 //+ Launch regular conversion synchronously with DFSDM0
+	RDMAEN   DFSDM_FLT0CR1 = 0x01 << 21 //+ DMA channel enabled to read data for the regular conversion
+	RCH      DFSDM_FLT0CR1 = 0x07 << 24 //+ Regular channel selection
+	FAST     DFSDM_FLT0CR1 = 0x01 << 29 //+ Fast conversion mode selection for regular conversions
+	AWFSEL   DFSDM_FLT0CR1 = 0x01 << 30 //+ Analog watchdog fast mode select
 )
 
 const (
@@ -706,117 +741,15 @@ const (
 )
 
 const (
-	DFEN     DFSDM1_CR1 = 0x01 << 0  //+ DFSDM enable
-	JSWSTART DFSDM1_CR1 = 0x01 << 1  //+ Start a conversion of the injected group of channels
-	JSYNC    DFSDM1_CR1 = 0x01 << 3  //+ Launch an injected conversion synchronously with the DFSDM0 JSWSTART trigger
-	JSCAN    DFSDM1_CR1 = 0x01 << 4  //+ Scanning conversion mode for injected conversions
-	JDMAEN   DFSDM1_CR1 = 0x01 << 5  //+ DMA channel enabled to read data for the injected channel group
-	JEXTSEL  DFSDM1_CR1 = 0x1F << 8  //+ Trigger signal selection for launching injected conversions
-	JEXTEN   DFSDM1_CR1 = 0x03 << 13 //+ Trigger enable and trigger edge selection for injected conversions
-	RSWSTART DFSDM1_CR1 = 0x01 << 17 //+ Software start of a conversion on the regular channel
-	RCONT    DFSDM1_CR1 = 0x01 << 18 //+ Continuous mode selection for regular conversions
-	RSYNC    DFSDM1_CR1 = 0x01 << 19 //+ Launch regular conversion synchronously with DFSDM0
-	RDMAEN   DFSDM1_CR1 = 0x01 << 21 //+ DMA channel enabled to read data for the regular conversion
-	RCH      DFSDM1_CR1 = 0x07 << 24 //+ Regular channel selection
-	FAST     DFSDM1_CR1 = 0x01 << 29 //+ Fast conversion mode selection for regular conversions
-	AWFSEL   DFSDM1_CR1 = 0x01 << 30 //+ Analog watchdog fast mode select
-)
-
-const (
-	DFENn     = 0
-	JSWSTARTn = 1
-	JSYNCn    = 3
-	JSCANn    = 4
-	JDMAENn   = 5
-	JEXTSELn  = 8
-	JEXTENn   = 13
-	RSWSTARTn = 17
-	RCONTn    = 18
-	RSYNCn    = 19
-	RDMAENn   = 21
-	RCHn      = 24
-	FASTn     = 29
-	AWFSELn   = 30
-)
-
-const (
-	DFEN     DFSDM2_CR1 = 0x01 << 0  //+ DFSDM enable
-	JSWSTART DFSDM2_CR1 = 0x01 << 1  //+ Start a conversion of the injected group of channels
-	JSYNC    DFSDM2_CR1 = 0x01 << 3  //+ Launch an injected conversion synchronously with the DFSDM0 JSWSTART trigger
-	JSCAN    DFSDM2_CR1 = 0x01 << 4  //+ Scanning conversion mode for injected conversions
-	JDMAEN   DFSDM2_CR1 = 0x01 << 5  //+ DMA channel enabled to read data for the injected channel group
-	JEXTSEL  DFSDM2_CR1 = 0x1F << 8  //+ Trigger signal selection for launching injected conversions
-	JEXTEN   DFSDM2_CR1 = 0x03 << 13 //+ Trigger enable and trigger edge selection for injected conversions
-	RSWSTART DFSDM2_CR1 = 0x01 << 17 //+ Software start of a conversion on the regular channel
-	RCONT    DFSDM2_CR1 = 0x01 << 18 //+ Continuous mode selection for regular conversions
-	RSYNC    DFSDM2_CR1 = 0x01 << 19 //+ Launch regular conversion synchronously with DFSDM0
-	RDMAEN   DFSDM2_CR1 = 0x01 << 21 //+ DMA channel enabled to read data for the regular conversion
-	RCH      DFSDM2_CR1 = 0x07 << 24 //+ Regular channel selection
-	FAST     DFSDM2_CR1 = 0x01 << 29 //+ Fast conversion mode selection for regular conversions
-	AWFSEL   DFSDM2_CR1 = 0x01 << 30 //+ Analog watchdog fast mode select
-)
-
-const (
-	DFENn     = 0
-	JSWSTARTn = 1
-	JSYNCn    = 3
-	JSCANn    = 4
-	JDMAENn   = 5
-	JEXTSELn  = 8
-	JEXTENn   = 13
-	RSWSTARTn = 17
-	RCONTn    = 18
-	RSYNCn    = 19
-	RDMAENn   = 21
-	RCHn      = 24
-	FASTn     = 29
-	AWFSELn   = 30
-)
-
-const (
-	DFEN     DFSDM3_CR1 = 0x01 << 0  //+ DFSDM enable
-	JSWSTART DFSDM3_CR1 = 0x01 << 1  //+ Start a conversion of the injected group of channels
-	JSYNC    DFSDM3_CR1 = 0x01 << 3  //+ Launch an injected conversion synchronously with the DFSDM0 JSWSTART trigger
-	JSCAN    DFSDM3_CR1 = 0x01 << 4  //+ Scanning conversion mode for injected conversions
-	JDMAEN   DFSDM3_CR1 = 0x01 << 5  //+ DMA channel enabled to read data for the injected channel group
-	JEXTSEL  DFSDM3_CR1 = 0x1F << 8  //+ Trigger signal selection for launching injected conversions
-	JEXTEN   DFSDM3_CR1 = 0x03 << 13 //+ Trigger enable and trigger edge selection for injected conversions
-	RSWSTART DFSDM3_CR1 = 0x01 << 17 //+ Software start of a conversion on the regular channel
-	RCONT    DFSDM3_CR1 = 0x01 << 18 //+ Continuous mode selection for regular conversions
-	RSYNC    DFSDM3_CR1 = 0x01 << 19 //+ Launch regular conversion synchronously with DFSDM0
-	RDMAEN   DFSDM3_CR1 = 0x01 << 21 //+ DMA channel enabled to read data for the regular conversion
-	RCH      DFSDM3_CR1 = 0x07 << 24 //+ Regular channel selection
-	FAST     DFSDM3_CR1 = 0x01 << 29 //+ Fast conversion mode selection for regular conversions
-	AWFSEL   DFSDM3_CR1 = 0x01 << 30 //+ Analog watchdog fast mode select
-)
-
-const (
-	DFENn     = 0
-	JSWSTARTn = 1
-	JSYNCn    = 3
-	JSCANn    = 4
-	JDMAENn   = 5
-	JEXTSELn  = 8
-	JEXTENn   = 13
-	RSWSTARTn = 17
-	RCONTn    = 18
-	RSYNCn    = 19
-	RDMAENn   = 21
-	RCHn      = 24
-	FASTn     = 29
-	AWFSELn   = 30
-)
-
-const (
-	JEOCIE DFSDM0_CR2 = 0x01 << 0  //+ Injected end of conversion interrupt enable
-	REOCIE DFSDM0_CR2 = 0x01 << 1  //+ Regular end of conversion interrupt enable
-	JOVRIE DFSDM0_CR2 = 0x01 << 2  //+ Injected data overrun interrupt enable
-	ROVRIE DFSDM0_CR2 = 0x01 << 3  //+ Regular data overrun interrupt enable
-	AWDIE  DFSDM0_CR2 = 0x01 << 4  //+ Analog watchdog interrupt enable
-	SCDIE  DFSDM0_CR2 = 0x01 << 5  //+ Short-circuit detector interrupt enable
-	CKABIE DFSDM0_CR2 = 0x01 << 6  //+ Clock absence interrupt enable
-	EXCH   DFSDM0_CR2 = 0xFF << 8  //+ Extremes detector channel selection
-	AWDCH  DFSDM0_CR2 = 0xFF << 16 //+ Analog watchdog channel selection
+	JEOCIE DFSDM_FLT0CR2 = 0x01 << 0  //+ Injected end of conversion interrupt enable
+	REOCIE DFSDM_FLT0CR2 = 0x01 << 1  //+ Regular end of conversion interrupt enable
+	JOVRIE DFSDM_FLT0CR2 = 0x01 << 2  //+ Injected data overrun interrupt enable
+	ROVRIE DFSDM_FLT0CR2 = 0x01 << 3  //+ Regular data overrun interrupt enable
+	AWDIE  DFSDM_FLT0CR2 = 0x01 << 4  //+ Analog watchdog interrupt enable
+	SCDIE  DFSDM_FLT0CR2 = 0x01 << 5  //+ Short-circuit detector interrupt enable
+	CKABIE DFSDM_FLT0CR2 = 0x01 << 6  //+ Clock absence interrupt enable
+	EXCH   DFSDM_FLT0CR2 = 0xFF << 8  //+ Extremes detector channel selection
+	AWDCH  DFSDM_FLT0CR2 = 0xFF << 16 //+ Analog watchdog channel selection
 )
 
 const (
@@ -832,87 +765,15 @@ const (
 )
 
 const (
-	JEOCIE DFSDM1_CR2 = 0x01 << 0  //+ Injected end of conversion interrupt enable
-	REOCIE DFSDM1_CR2 = 0x01 << 1  //+ Regular end of conversion interrupt enable
-	JOVRIE DFSDM1_CR2 = 0x01 << 2  //+ Injected data overrun interrupt enable
-	ROVRIE DFSDM1_CR2 = 0x01 << 3  //+ Regular data overrun interrupt enable
-	AWDIE  DFSDM1_CR2 = 0x01 << 4  //+ Analog watchdog interrupt enable
-	SCDIE  DFSDM1_CR2 = 0x01 << 5  //+ Short-circuit detector interrupt enable
-	CKABIE DFSDM1_CR2 = 0x01 << 6  //+ Clock absence interrupt enable
-	EXCH   DFSDM1_CR2 = 0xFF << 8  //+ Extremes detector channel selection
-	AWDCH  DFSDM1_CR2 = 0xFF << 16 //+ Analog watchdog channel selection
-)
-
-const (
-	JEOCIEn = 0
-	REOCIEn = 1
-	JOVRIEn = 2
-	ROVRIEn = 3
-	AWDIEn  = 4
-	SCDIEn  = 5
-	CKABIEn = 6
-	EXCHn   = 8
-	AWDCHn  = 16
-)
-
-const (
-	JEOCIE DFSDM2_CR2 = 0x01 << 0  //+ Injected end of conversion interrupt enable
-	REOCIE DFSDM2_CR2 = 0x01 << 1  //+ Regular end of conversion interrupt enable
-	JOVRIE DFSDM2_CR2 = 0x01 << 2  //+ Injected data overrun interrupt enable
-	ROVRIE DFSDM2_CR2 = 0x01 << 3  //+ Regular data overrun interrupt enable
-	AWDIE  DFSDM2_CR2 = 0x01 << 4  //+ Analog watchdog interrupt enable
-	SCDIE  DFSDM2_CR2 = 0x01 << 5  //+ Short-circuit detector interrupt enable
-	CKABIE DFSDM2_CR2 = 0x01 << 6  //+ Clock absence interrupt enable
-	EXCH   DFSDM2_CR2 = 0xFF << 8  //+ Extremes detector channel selection
-	AWDCH  DFSDM2_CR2 = 0xFF << 16 //+ Analog watchdog channel selection
-)
-
-const (
-	JEOCIEn = 0
-	REOCIEn = 1
-	JOVRIEn = 2
-	ROVRIEn = 3
-	AWDIEn  = 4
-	SCDIEn  = 5
-	CKABIEn = 6
-	EXCHn   = 8
-	AWDCHn  = 16
-)
-
-const (
-	JEOCIE DFSDM3_CR2 = 0x01 << 0  //+ Injected end of conversion interrupt enable
-	REOCIE DFSDM3_CR2 = 0x01 << 1  //+ Regular end of conversion interrupt enable
-	JOVRIE DFSDM3_CR2 = 0x01 << 2  //+ Injected data overrun interrupt enable
-	ROVRIE DFSDM3_CR2 = 0x01 << 3  //+ Regular data overrun interrupt enable
-	AWDIE  DFSDM3_CR2 = 0x01 << 4  //+ Analog watchdog interrupt enable
-	SCDIE  DFSDM3_CR2 = 0x01 << 5  //+ Short-circuit detector interrupt enable
-	CKABIE DFSDM3_CR2 = 0x01 << 6  //+ Clock absence interrupt enable
-	EXCH   DFSDM3_CR2 = 0xFF << 8  //+ Extremes detector channel selection
-	AWDCH  DFSDM3_CR2 = 0xFF << 16 //+ Analog watchdog channel selection
-)
-
-const (
-	JEOCIEn = 0
-	REOCIEn = 1
-	JOVRIEn = 2
-	ROVRIEn = 3
-	AWDIEn  = 4
-	SCDIEn  = 5
-	CKABIEn = 6
-	EXCHn   = 8
-	AWDCHn  = 16
-)
-
-const (
-	JEOCF DFSDM0_ISR = 0x01 << 0  //+ End of injected conversion flag
-	REOCF DFSDM0_ISR = 0x01 << 1  //+ End of regular conversion flag
-	JOVRF DFSDM0_ISR = 0x01 << 2  //+ Injected conversion overrun flag
-	ROVRF DFSDM0_ISR = 0x01 << 3  //+ Regular conversion overrun flag
-	AWDF  DFSDM0_ISR = 0x01 << 4  //+ Analog watchdog
-	JCIP  DFSDM0_ISR = 0x01 << 13 //+ Injected conversion in progress status
-	RCIP  DFSDM0_ISR = 0x01 << 14 //+ Regular conversion in progress status
-	CKABF DFSDM0_ISR = 0xFF << 16 //+ Clock absence flag
-	SCDF  DFSDM0_ISR = 0xFF << 24 //+ short-circuit detector flag
+	JEOCF DFSDM_FLT0ISR = 0x01 << 0  //+ End of injected conversion flag
+	REOCF DFSDM_FLT0ISR = 0x01 << 1  //+ End of regular conversion flag
+	JOVRF DFSDM_FLT0ISR = 0x01 << 2  //+ Injected conversion overrun flag
+	ROVRF DFSDM_FLT0ISR = 0x01 << 3  //+ Regular conversion overrun flag
+	AWDF  DFSDM_FLT0ISR = 0x01 << 4  //+ Analog watchdog
+	JCIP  DFSDM_FLT0ISR = 0x01 << 13 //+ Injected conversion in progress status
+	RCIP  DFSDM_FLT0ISR = 0x01 << 14 //+ Regular conversion in progress status
+	CKABF DFSDM_FLT0ISR = 0xFF << 16 //+ Clock absence flag
+	SCDF  DFSDM_FLT0ISR = 0xFF << 24 //+ short-circuit detector flag
 )
 
 const (
@@ -928,82 +789,10 @@ const (
 )
 
 const (
-	JEOCF DFSDM1_ISR = 0x01 << 0  //+ End of injected conversion flag
-	REOCF DFSDM1_ISR = 0x01 << 1  //+ End of regular conversion flag
-	JOVRF DFSDM1_ISR = 0x01 << 2  //+ Injected conversion overrun flag
-	ROVRF DFSDM1_ISR = 0x01 << 3  //+ Regular conversion overrun flag
-	AWDF  DFSDM1_ISR = 0x01 << 4  //+ Analog watchdog
-	JCIP  DFSDM1_ISR = 0x01 << 13 //+ Injected conversion in progress status
-	RCIP  DFSDM1_ISR = 0x01 << 14 //+ Regular conversion in progress status
-	CKABF DFSDM1_ISR = 0xFF << 16 //+ Clock absence flag
-	SCDF  DFSDM1_ISR = 0xFF << 24 //+ short-circuit detector flag
-)
-
-const (
-	JEOCFn = 0
-	REOCFn = 1
-	JOVRFn = 2
-	ROVRFn = 3
-	AWDFn  = 4
-	JCIPn  = 13
-	RCIPn  = 14
-	CKABFn = 16
-	SCDFn  = 24
-)
-
-const (
-	JEOCF DFSDM2_ISR = 0x01 << 0  //+ End of injected conversion flag
-	REOCF DFSDM2_ISR = 0x01 << 1  //+ End of regular conversion flag
-	JOVRF DFSDM2_ISR = 0x01 << 2  //+ Injected conversion overrun flag
-	ROVRF DFSDM2_ISR = 0x01 << 3  //+ Regular conversion overrun flag
-	AWDF  DFSDM2_ISR = 0x01 << 4  //+ Analog watchdog
-	JCIP  DFSDM2_ISR = 0x01 << 13 //+ Injected conversion in progress status
-	RCIP  DFSDM2_ISR = 0x01 << 14 //+ Regular conversion in progress status
-	CKABF DFSDM2_ISR = 0xFF << 16 //+ Clock absence flag
-	SCDF  DFSDM2_ISR = 0xFF << 24 //+ short-circuit detector flag
-)
-
-const (
-	JEOCFn = 0
-	REOCFn = 1
-	JOVRFn = 2
-	ROVRFn = 3
-	AWDFn  = 4
-	JCIPn  = 13
-	RCIPn  = 14
-	CKABFn = 16
-	SCDFn  = 24
-)
-
-const (
-	JEOCF DFSDM3_ISR = 0x01 << 0  //+ End of injected conversion flag
-	REOCF DFSDM3_ISR = 0x01 << 1  //+ End of regular conversion flag
-	JOVRF DFSDM3_ISR = 0x01 << 2  //+ Injected conversion overrun flag
-	ROVRF DFSDM3_ISR = 0x01 << 3  //+ Regular conversion overrun flag
-	AWDF  DFSDM3_ISR = 0x01 << 4  //+ Analog watchdog
-	JCIP  DFSDM3_ISR = 0x01 << 13 //+ Injected conversion in progress status
-	RCIP  DFSDM3_ISR = 0x01 << 14 //+ Regular conversion in progress status
-	CKABF DFSDM3_ISR = 0xFF << 16 //+ Clock absence flag
-	SCDF  DFSDM3_ISR = 0xFF << 24 //+ short-circuit detector flag
-)
-
-const (
-	JEOCFn = 0
-	REOCFn = 1
-	JOVRFn = 2
-	ROVRFn = 3
-	AWDFn  = 4
-	JCIPn  = 13
-	RCIPn  = 14
-	CKABFn = 16
-	SCDFn  = 24
-)
-
-const (
-	CLRJOVRF DFSDM0_ICR = 0x01 << 2  //+ Clear the injected conversion overrun flag
-	CLRROVRF DFSDM0_ICR = 0x01 << 3  //+ Clear the regular conversion overrun flag
-	CLRCKABF DFSDM0_ICR = 0xFF << 16 //+ Clear the clock absence flag
-	CLRSCDF  DFSDM0_ICR = 0xFF << 24 //+ Clear the short-circuit detector flag
+	CLRJOVRF DFSDM_FLT0ICR = 0x01 << 2  //+ Clear the injected conversion overrun flag
+	CLRROVRF DFSDM_FLT0ICR = 0x01 << 3  //+ Clear the regular conversion overrun flag
+	CLRCKABF DFSDM_FLT0ICR = 0xFF << 16 //+ Clear the clock absence flag
+	CLRSCDF  DFSDM_FLT0ICR = 0xFF << 24 //+ Clear the short-circuit detector flag
 )
 
 const (
@@ -1014,49 +803,7 @@ const (
 )
 
 const (
-	CLRJOVRF DFSDM1_ICR = 0x01 << 2  //+ Clear the injected conversion overrun flag
-	CLRROVRF DFSDM1_ICR = 0x01 << 3  //+ Clear the regular conversion overrun flag
-	CLRCKABF DFSDM1_ICR = 0xFF << 16 //+ Clear the clock absence flag
-	CLRSCDF  DFSDM1_ICR = 0xFF << 24 //+ Clear the short-circuit detector flag
-)
-
-const (
-	CLRJOVRFn = 2
-	CLRROVRFn = 3
-	CLRCKABFn = 16
-	CLRSCDFn  = 24
-)
-
-const (
-	CLRJOVRF DFSDM2_ICR = 0x01 << 2  //+ Clear the injected conversion overrun flag
-	CLRROVRF DFSDM2_ICR = 0x01 << 3  //+ Clear the regular conversion overrun flag
-	CLRCKABF DFSDM2_ICR = 0xFF << 16 //+ Clear the clock absence flag
-	CLRSCDF  DFSDM2_ICR = 0xFF << 24 //+ Clear the short-circuit detector flag
-)
-
-const (
-	CLRJOVRFn = 2
-	CLRROVRFn = 3
-	CLRCKABFn = 16
-	CLRSCDFn  = 24
-)
-
-const (
-	CLRJOVRF DFSDM3_ICR = 0x01 << 2  //+ Clear the injected conversion overrun flag
-	CLRROVRF DFSDM3_ICR = 0x01 << 3  //+ Clear the regular conversion overrun flag
-	CLRCKABF DFSDM3_ICR = 0xFF << 16 //+ Clear the clock absence flag
-	CLRSCDF  DFSDM3_ICR = 0xFF << 24 //+ Clear the short-circuit detector flag
-)
-
-const (
-	CLRJOVRFn = 2
-	CLRROVRFn = 3
-	CLRCKABFn = 16
-	CLRSCDFn  = 24
-)
-
-const (
-	JCHG DFSDM0_JCHGR = 0xFF << 0 //+ Injected channel group selection
+	JCHG DFSDM_FLT0JCHGR = 0xFF << 0 //+ Injected channel group selection
 )
 
 const (
@@ -1064,33 +811,9 @@ const (
 )
 
 const (
-	JCHG DFSDM1_JCHGR = 0xFF << 0 //+ Injected channel group selection
-)
-
-const (
-	JCHGn = 0
-)
-
-const (
-	JCHG DFSDM2_JCHGR = 0xFF << 0 //+ Injected channel group selection
-)
-
-const (
-	JCHGn = 0
-)
-
-const (
-	JCHG DFSDM3_JCHGR = 0xFF << 0 //+ Injected channel group selection
-)
-
-const (
-	JCHGn = 0
-)
-
-const (
-	IOSR DFSDM0_FCR = 0xFF << 0   //+ Integrator oversampling ratio (averaging length)
-	FOSR DFSDM0_FCR = 0x3FF << 16 //+ Sinc filter oversampling ratio (decimation rate)
-	FORD DFSDM0_FCR = 0x07 << 29  //+ Sinc filter order
+	IOSR DFSDM_FLT0FCR = 0xFF << 0   //+ Integrator oversampling ratio (averaging length)
+	FOSR DFSDM_FLT0FCR = 0x3FF << 16 //+ Sinc filter oversampling ratio (decimation rate)
+	FORD DFSDM_FLT0FCR = 0x07 << 29  //+ Sinc filter order
 )
 
 const (
@@ -1100,44 +823,8 @@ const (
 )
 
 const (
-	IOSR DFSDM1_FCR = 0xFF << 0   //+ Integrator oversampling ratio (averaging length)
-	FOSR DFSDM1_FCR = 0x3FF << 16 //+ Sinc filter oversampling ratio (decimation rate)
-	FORD DFSDM1_FCR = 0x07 << 29  //+ Sinc filter order
-)
-
-const (
-	IOSRn = 0
-	FOSRn = 16
-	FORDn = 29
-)
-
-const (
-	IOSR DFSDM2_FCR = 0xFF << 0   //+ Integrator oversampling ratio (averaging length)
-	FOSR DFSDM2_FCR = 0x3FF << 16 //+ Sinc filter oversampling ratio (decimation rate)
-	FORD DFSDM2_FCR = 0x07 << 29  //+ Sinc filter order
-)
-
-const (
-	IOSRn = 0
-	FOSRn = 16
-	FORDn = 29
-)
-
-const (
-	IOSR DFSDM3_FCR = 0xFF << 0   //+ Integrator oversampling ratio (averaging length)
-	FOSR DFSDM3_FCR = 0x3FF << 16 //+ Sinc filter oversampling ratio (decimation rate)
-	FORD DFSDM3_FCR = 0x07 << 29  //+ Sinc filter order
-)
-
-const (
-	IOSRn = 0
-	FOSRn = 16
-	FORDn = 29
-)
-
-const (
-	JDATACH DFSDM0_JDATAR = 0x07 << 0     //+ Injected channel most recently converted
-	JDATA   DFSDM0_JDATAR = 0xFFFFFF << 8 //+ Injected group conversion data
+	JDATACH DFSDM_FLT0JDATAR = 0x07 << 0     //+ Injected channel most recently converted
+	JDATA   DFSDM_FLT0JDATAR = 0xFFFFFF << 8 //+ Injected group conversion data
 )
 
 const (
@@ -1146,39 +833,9 @@ const (
 )
 
 const (
-	JDATACH DFSDM1_JDATAR = 0x07 << 0     //+ Injected channel most recently converted
-	JDATA   DFSDM1_JDATAR = 0xFFFFFF << 8 //+ Injected group conversion data
-)
-
-const (
-	JDATACHn = 0
-	JDATAn   = 8
-)
-
-const (
-	JDATACH DFSDM2_JDATAR = 0x07 << 0     //+ Injected channel most recently converted
-	JDATA   DFSDM2_JDATAR = 0xFFFFFF << 8 //+ Injected group conversion data
-)
-
-const (
-	JDATACHn = 0
-	JDATAn   = 8
-)
-
-const (
-	JDATACH DFSDM3_JDATAR = 0x07 << 0     //+ Injected channel most recently converted
-	JDATA   DFSDM3_JDATAR = 0xFFFFFF << 8 //+ Injected group conversion data
-)
-
-const (
-	JDATACHn = 0
-	JDATAn   = 8
-)
-
-const (
-	RDATACH DFSDM0_RDATAR = 0x07 << 0     //+ Regular channel most recently converted
-	RPEND   DFSDM0_RDATAR = 0x01 << 4     //+ Regular channel pending data
-	RDATA   DFSDM0_RDATAR = 0xFFFFFF << 8 //+ Regular channel conversion data
+	RDATACH DFSDM_FLT0RDATAR = 0x07 << 0     //+ Regular channel most recently converted
+	RPEND   DFSDM_FLT0RDATAR = 0x01 << 4     //+ Regular channel pending data
+	RDATA   DFSDM_FLT0RDATAR = 0xFFFFFF << 8 //+ Regular channel conversion data
 )
 
 const (
@@ -1188,44 +845,8 @@ const (
 )
 
 const (
-	RDATACH DFSDM1_RDATAR = 0x07 << 0     //+ Regular channel most recently converted
-	RPEND   DFSDM1_RDATAR = 0x01 << 4     //+ Regular channel pending data
-	RDATA   DFSDM1_RDATAR = 0xFFFFFF << 8 //+ Regular channel conversion data
-)
-
-const (
-	RDATACHn = 0
-	RPENDn   = 4
-	RDATAn   = 8
-)
-
-const (
-	RDATACH DFSDM2_RDATAR = 0x07 << 0     //+ Regular channel most recently converted
-	RPEND   DFSDM2_RDATAR = 0x01 << 4     //+ Regular channel pending data
-	RDATA   DFSDM2_RDATAR = 0xFFFFFF << 8 //+ Regular channel conversion data
-)
-
-const (
-	RDATACHn = 0
-	RPENDn   = 4
-	RDATAn   = 8
-)
-
-const (
-	RDATACH DFSDM3_RDATAR = 0x07 << 0     //+ Regular channel most recently converted
-	RPEND   DFSDM3_RDATAR = 0x01 << 4     //+ Regular channel pending data
-	RDATA   DFSDM3_RDATAR = 0xFFFFFF << 8 //+ Regular channel conversion data
-)
-
-const (
-	RDATACHn = 0
-	RPENDn   = 4
-	RDATAn   = 8
-)
-
-const (
-	BKAWH DFSDM0_AWHTR = 0x0F << 0     //+ Break signal assignment to analog watchdog high threshold event
-	AWHT  DFSDM0_AWHTR = 0xFFFFFF << 8 //+ Analog watchdog high threshold
+	BKAWH DFSDM_FLT0AWHTR = 0x0F << 0     //+ Break signal assignment to analog watchdog high threshold event
+	AWHT  DFSDM_FLT0AWHTR = 0xFFFFFF << 8 //+ Analog watchdog high threshold
 )
 
 const (
@@ -1234,38 +855,8 @@ const (
 )
 
 const (
-	BKAWH DFSDM1_AWHTR = 0x0F << 0     //+ Break signal assignment to analog watchdog high threshold event
-	AWHT  DFSDM1_AWHTR = 0xFFFFFF << 8 //+ Analog watchdog high threshold
-)
-
-const (
-	BKAWHn = 0
-	AWHTn  = 8
-)
-
-const (
-	BKAWH DFSDM2_AWHTR = 0x0F << 0     //+ Break signal assignment to analog watchdog high threshold event
-	AWHT  DFSDM2_AWHTR = 0xFFFFFF << 8 //+ Analog watchdog high threshold
-)
-
-const (
-	BKAWHn = 0
-	AWHTn  = 8
-)
-
-const (
-	BKAWH DFSDM3_AWHTR = 0x0F << 0     //+ Break signal assignment to analog watchdog high threshold event
-	AWHT  DFSDM3_AWHTR = 0xFFFFFF << 8 //+ Analog watchdog high threshold
-)
-
-const (
-	BKAWHn = 0
-	AWHTn  = 8
-)
-
-const (
-	BKAWL DFSDM0_AWLTR = 0x0F << 0     //+ Break signal assignment to analog watchdog low threshold event
-	AWLT  DFSDM0_AWLTR = 0xFFFFFF << 8 //+ Analog watchdog low threshold
+	BKAWL DFSDM_FLT0AWLTR = 0x0F << 0     //+ Break signal assignment to analog watchdog low threshold event
+	AWLT  DFSDM_FLT0AWLTR = 0xFFFFFF << 8 //+ Analog watchdog low threshold
 )
 
 const (
@@ -1274,38 +865,8 @@ const (
 )
 
 const (
-	BKAWL DFSDM1_AWLTR = 0x0F << 0     //+ Break signal assignment to analog watchdog low threshold event
-	AWLT  DFSDM1_AWLTR = 0xFFFFFF << 8 //+ Analog watchdog low threshold
-)
-
-const (
-	BKAWLn = 0
-	AWLTn  = 8
-)
-
-const (
-	BKAWL DFSDM2_AWLTR = 0x0F << 0     //+ Break signal assignment to analog watchdog low threshold event
-	AWLT  DFSDM2_AWLTR = 0xFFFFFF << 8 //+ Analog watchdog low threshold
-)
-
-const (
-	BKAWLn = 0
-	AWLTn  = 8
-)
-
-const (
-	BKAWL DFSDM3_AWLTR = 0x0F << 0     //+ Break signal assignment to analog watchdog low threshold event
-	AWLT  DFSDM3_AWLTR = 0xFFFFFF << 8 //+ Analog watchdog low threshold
-)
-
-const (
-	BKAWLn = 0
-	AWLTn  = 8
-)
-
-const (
-	AWLTF DFSDM0_AWSR = 0xFF << 0 //+ Analog watchdog low threshold flag
-	AWHTF DFSDM0_AWSR = 0xFF << 8 //+ Analog watchdog high threshold flag
+	AWLTF DFSDM_FLT0AWSR = 0xFF << 0 //+ Analog watchdog low threshold flag
+	AWHTF DFSDM_FLT0AWSR = 0xFF << 8 //+ Analog watchdog high threshold flag
 )
 
 const (
@@ -1314,38 +875,8 @@ const (
 )
 
 const (
-	AWLTF DFSDM1_AWSR = 0xFF << 0 //+ Analog watchdog low threshold flag
-	AWHTF DFSDM1_AWSR = 0xFF << 8 //+ Analog watchdog high threshold flag
-)
-
-const (
-	AWLTFn = 0
-	AWHTFn = 8
-)
-
-const (
-	AWLTF DFSDM2_AWSR = 0xFF << 0 //+ Analog watchdog low threshold flag
-	AWHTF DFSDM2_AWSR = 0xFF << 8 //+ Analog watchdog high threshold flag
-)
-
-const (
-	AWLTFn = 0
-	AWHTFn = 8
-)
-
-const (
-	AWLTF DFSDM3_AWSR = 0xFF << 0 //+ Analog watchdog low threshold flag
-	AWHTF DFSDM3_AWSR = 0xFF << 8 //+ Analog watchdog high threshold flag
-)
-
-const (
-	AWLTFn = 0
-	AWHTFn = 8
-)
-
-const (
-	CLRAWLTF DFSDM0_AWCFR = 0xFF << 0 //+ Clear the analog watchdog low threshold flag
-	CLRAWHTF DFSDM0_AWCFR = 0xFF << 8 //+ Clear the analog watchdog high threshold flag
+	CLRAWLTF DFSDM_FLT0AWCFR = 0xFF << 0 //+ Clear the analog watchdog low threshold flag
+	CLRAWHTF DFSDM_FLT0AWCFR = 0xFF << 8 //+ Clear the analog watchdog high threshold flag
 )
 
 const (
@@ -1354,38 +885,8 @@ const (
 )
 
 const (
-	CLRAWLTF DFSDM1_AWCFR = 0xFF << 0 //+ Clear the analog watchdog low threshold flag
-	CLRAWHTF DFSDM1_AWCFR = 0xFF << 8 //+ Clear the analog watchdog high threshold flag
-)
-
-const (
-	CLRAWLTFn = 0
-	CLRAWHTFn = 8
-)
-
-const (
-	CLRAWLTF DFSDM2_AWCFR = 0xFF << 0 //+ Clear the analog watchdog low threshold flag
-	CLRAWHTF DFSDM2_AWCFR = 0xFF << 8 //+ Clear the analog watchdog high threshold flag
-)
-
-const (
-	CLRAWLTFn = 0
-	CLRAWHTFn = 8
-)
-
-const (
-	CLRAWLTF DFSDM3_AWCFR = 0xFF << 0 //+ Clear the analog watchdog low threshold flag
-	CLRAWHTF DFSDM3_AWCFR = 0xFF << 8 //+ Clear the analog watchdog high threshold flag
-)
-
-const (
-	CLRAWLTFn = 0
-	CLRAWHTFn = 8
-)
-
-const (
-	EXMAXCH DFSDM0_EXMAX = 0x07 << 0     //+ Extremes detector maximum data channel
-	EXMAX   DFSDM0_EXMAX = 0xFFFFFF << 8 //+ Extremes detector maximum value
+	EXMAXCH DFSDM_FLT0EXMAX = 0x07 << 0     //+ Extremes detector maximum data channel
+	EXMAX   DFSDM_FLT0EXMAX = 0xFFFFFF << 8 //+ Extremes detector maximum value
 )
 
 const (
@@ -1394,38 +895,8 @@ const (
 )
 
 const (
-	EXMAXCH DFSDM1_EXMAX = 0x07 << 0     //+ Extremes detector maximum data channel
-	EXMAX   DFSDM1_EXMAX = 0xFFFFFF << 8 //+ Extremes detector maximum value
-)
-
-const (
-	EXMAXCHn = 0
-	EXMAXn   = 8
-)
-
-const (
-	EXMAXCH DFSDM2_EXMAX = 0x07 << 0     //+ Extremes detector maximum data channel
-	EXMAX   DFSDM2_EXMAX = 0xFFFFFF << 8 //+ Extremes detector maximum value
-)
-
-const (
-	EXMAXCHn = 0
-	EXMAXn   = 8
-)
-
-const (
-	EXMAXCH DFSDM3_EXMAX = 0x07 << 0     //+ Extremes detector maximum data channel
-	EXMAX   DFSDM3_EXMAX = 0xFFFFFF << 8 //+ Extremes detector maximum value
-)
-
-const (
-	EXMAXCHn = 0
-	EXMAXn   = 8
-)
-
-const (
-	EXMINCH DFSDM0_EXMIN = 0x07 << 0     //+ Extremes detector minimum data channel
-	EXMIN   DFSDM0_EXMIN = 0xFFFFFF << 8 //+ Extremes detector minimum value
+	EXMINCH DFSDM_FLT0EXMIN = 0x07 << 0     //+ Extremes detector minimum data channel
+	EXMIN   DFSDM_FLT0EXMIN = 0xFFFFFF << 8 //+ EXMIN
 )
 
 const (
@@ -1434,37 +905,7 @@ const (
 )
 
 const (
-	EXMINCH DFSDM1_EXMIN = 0x07 << 0     //+ Extremes detector minimum data channel
-	EXMIN   DFSDM1_EXMIN = 0xFFFFFF << 8 //+ Extremes detector minimum value
-)
-
-const (
-	EXMINCHn = 0
-	EXMINn   = 8
-)
-
-const (
-	EXMINCH DFSDM2_EXMIN = 0x07 << 0     //+ Extremes detector minimum data channel
-	EXMIN   DFSDM2_EXMIN = 0xFFFFFF << 8 //+ Extremes detector minimum value
-)
-
-const (
-	EXMINCHn = 0
-	EXMINn   = 8
-)
-
-const (
-	EXMINCH DFSDM3_EXMIN = 0x07 << 0     //+ Extremes detector minimum data channel
-	EXMIN   DFSDM3_EXMIN = 0xFFFFFF << 8 //+ Extremes detector minimum value
-)
-
-const (
-	EXMINCHn = 0
-	EXMINn   = 8
-)
-
-const (
-	CNVCNT DFSDM0_CNVTIMR = 0xFFFFFFF << 4 //+ 28-bit timer counting conversion time
+	CNVCNT DFSDM_FLT0CNVTIMR = 0xFFFFFFF << 4 //+ 28-bit timer counting conversion time t = CNVCNT[27:0] / fDFSDM_CKIN
 )
 
 const (
@@ -1472,7 +913,205 @@ const (
 )
 
 const (
-	CNVCNT DFSDM1_CNVTIMR = 0xFFFFFFF << 4 //+ 28-bit timer counting conversion time
+	DFEN     DFSDM_FLT1CR1 = 0x01 << 0  //+ DFSDM enable
+	JSWSTART DFSDM_FLT1CR1 = 0x01 << 1  //+ Start a conversion of the injected group of channels
+	JSYNC    DFSDM_FLT1CR1 = 0x01 << 3  //+ Launch an injected conversion synchronously with the DFSDM0 JSWSTART trigger
+	JSCAN    DFSDM_FLT1CR1 = 0x01 << 4  //+ Scanning conversion mode for injected conversions
+	JDMAEN   DFSDM_FLT1CR1 = 0x01 << 5  //+ DMA channel enabled to read data for the injected channel group
+	JEXTSEL  DFSDM_FLT1CR1 = 0x07 << 8  //+ Trigger signal selection for launching injected conversions
+	JEXTEN   DFSDM_FLT1CR1 = 0x03 << 13 //+ Trigger enable and trigger edge selection for injected conversions
+	RSWSTART DFSDM_FLT1CR1 = 0x01 << 17 //+ Software start of a conversion on the regular channel
+	RCONT    DFSDM_FLT1CR1 = 0x01 << 18 //+ Continuous mode selection for regular conversions
+	RSYNC    DFSDM_FLT1CR1 = 0x01 << 19 //+ Launch regular conversion synchronously with DFSDM0
+	RDMAEN   DFSDM_FLT1CR1 = 0x01 << 21 //+ DMA channel enabled to read data for the regular conversion
+	RCH      DFSDM_FLT1CR1 = 0x07 << 24 //+ Regular channel selection
+	FAST     DFSDM_FLT1CR1 = 0x01 << 29 //+ Fast conversion mode selection for regular conversions
+	AWFSEL   DFSDM_FLT1CR1 = 0x01 << 30 //+ Analog watchdog fast mode select
+)
+
+const (
+	DFENn     = 0
+	JSWSTARTn = 1
+	JSYNCn    = 3
+	JSCANn    = 4
+	JDMAENn   = 5
+	JEXTSELn  = 8
+	JEXTENn   = 13
+	RSWSTARTn = 17
+	RCONTn    = 18
+	RSYNCn    = 19
+	RDMAENn   = 21
+	RCHn      = 24
+	FASTn     = 29
+	AWFSELn   = 30
+)
+
+const (
+	JEOCIE DFSDM_FLT1CR2 = 0x01 << 0  //+ Injected end of conversion interrupt enable
+	REOCIE DFSDM_FLT1CR2 = 0x01 << 1  //+ Regular end of conversion interrupt enable
+	JOVRIE DFSDM_FLT1CR2 = 0x01 << 2  //+ Injected data overrun interrupt enable
+	ROVRIE DFSDM_FLT1CR2 = 0x01 << 3  //+ Regular data overrun interrupt enable
+	AWDIE  DFSDM_FLT1CR2 = 0x01 << 4  //+ Analog watchdog interrupt enable
+	SCDIE  DFSDM_FLT1CR2 = 0x01 << 5  //+ Short-circuit detector interrupt enable
+	CKABIE DFSDM_FLT1CR2 = 0x01 << 6  //+ Clock absence interrupt enable
+	EXCH   DFSDM_FLT1CR2 = 0xFF << 8  //+ Extremes detector channel selection
+	AWDCH  DFSDM_FLT1CR2 = 0xFF << 16 //+ Analog watchdog channel selection
+)
+
+const (
+	JEOCIEn = 0
+	REOCIEn = 1
+	JOVRIEn = 2
+	ROVRIEn = 3
+	AWDIEn  = 4
+	SCDIEn  = 5
+	CKABIEn = 6
+	EXCHn   = 8
+	AWDCHn  = 16
+)
+
+const (
+	JEOCF DFSDM_FLT1ISR = 0x01 << 0  //+ End of injected conversion flag
+	REOCF DFSDM_FLT1ISR = 0x01 << 1  //+ End of regular conversion flag
+	JOVRF DFSDM_FLT1ISR = 0x01 << 2  //+ Injected conversion overrun flag
+	ROVRF DFSDM_FLT1ISR = 0x01 << 3  //+ Regular conversion overrun flag
+	AWDF  DFSDM_FLT1ISR = 0x01 << 4  //+ Analog watchdog
+	JCIP  DFSDM_FLT1ISR = 0x01 << 13 //+ Injected conversion in progress status
+	RCIP  DFSDM_FLT1ISR = 0x01 << 14 //+ Regular conversion in progress status
+	CKABF DFSDM_FLT1ISR = 0xFF << 16 //+ Clock absence flag
+	SCDF  DFSDM_FLT1ISR = 0xFF << 24 //+ short-circuit detector flag
+)
+
+const (
+	JEOCFn = 0
+	REOCFn = 1
+	JOVRFn = 2
+	ROVRFn = 3
+	AWDFn  = 4
+	JCIPn  = 13
+	RCIPn  = 14
+	CKABFn = 16
+	SCDFn  = 24
+)
+
+const (
+	CLRJOVRF DFSDM_FLT1ICR = 0x01 << 2  //+ Clear the injected conversion overrun flag
+	CLRROVRF DFSDM_FLT1ICR = 0x01 << 3  //+ Clear the regular conversion overrun flag
+	CLRCKABF DFSDM_FLT1ICR = 0xFF << 16 //+ Clear the clock absence flag
+	CLRSCDF  DFSDM_FLT1ICR = 0xFF << 24 //+ Clear the short-circuit detector flag
+)
+
+const (
+	CLRJOVRFn = 2
+	CLRROVRFn = 3
+	CLRCKABFn = 16
+	CLRSCDFn  = 24
+)
+
+const (
+	JCHG DFSDM_FLT1CHGR = 0xFF << 0 //+ Injected channel group selection
+)
+
+const (
+	JCHGn = 0
+)
+
+const (
+	IOSR DFSDM_FLT1FCR = 0xFF << 0   //+ Integrator oversampling ratio (averaging length)
+	FOSR DFSDM_FLT1FCR = 0x3FF << 16 //+ Sinc filter oversampling ratio (decimation rate)
+	FORD DFSDM_FLT1FCR = 0x07 << 29  //+ Sinc filter order
+)
+
+const (
+	IOSRn = 0
+	FOSRn = 16
+	FORDn = 29
+)
+
+const (
+	JDATACH DFSDM_FLT1JDATAR = 0x07 << 0     //+ Injected channel most recently converted
+	JDATA   DFSDM_FLT1JDATAR = 0xFFFFFF << 8 //+ Injected group conversion data
+)
+
+const (
+	JDATACHn = 0
+	JDATAn   = 8
+)
+
+const (
+	RDATACH DFSDM_FLT1RDATAR = 0x07 << 0     //+ Regular channel most recently converted
+	RPEND   DFSDM_FLT1RDATAR = 0x01 << 4     //+ Regular channel pending data
+	RDATA   DFSDM_FLT1RDATAR = 0xFFFFFF << 8 //+ Regular channel conversion data
+)
+
+const (
+	RDATACHn = 0
+	RPENDn   = 4
+	RDATAn   = 8
+)
+
+const (
+	BKAWH DFSDM_FLT1AWHTR = 0x0F << 0     //+ Break signal assignment to analog watchdog high threshold event
+	AWHT  DFSDM_FLT1AWHTR = 0xFFFFFF << 8 //+ Analog watchdog high threshold
+)
+
+const (
+	BKAWHn = 0
+	AWHTn  = 8
+)
+
+const (
+	BKAWL DFSDM_FLT1AWLTR = 0x0F << 0     //+ Break signal assignment to analog watchdog low threshold event
+	AWLT  DFSDM_FLT1AWLTR = 0xFFFFFF << 8 //+ Analog watchdog low threshold
+)
+
+const (
+	BKAWLn = 0
+	AWLTn  = 8
+)
+
+const (
+	AWLTF DFSDM_FLT1AWSR = 0xFF << 0 //+ Analog watchdog low threshold flag
+	AWHTF DFSDM_FLT1AWSR = 0xFF << 8 //+ Analog watchdog high threshold flag
+)
+
+const (
+	AWLTFn = 0
+	AWHTFn = 8
+)
+
+const (
+	CLRAWLTF DFSDM_FLT1AWCFR = 0xFF << 0 //+ Clear the analog watchdog low threshold flag
+	CLRAWHTF DFSDM_FLT1AWCFR = 0xFF << 8 //+ Clear the analog watchdog high threshold flag
+)
+
+const (
+	CLRAWLTFn = 0
+	CLRAWHTFn = 8
+)
+
+const (
+	EXMAXCH DFSDM_FLT1EXMAX = 0x07 << 0     //+ Extremes detector maximum data channel
+	EXMAX   DFSDM_FLT1EXMAX = 0xFFFFFF << 8 //+ Extremes detector maximum value
+)
+
+const (
+	EXMAXCHn = 0
+	EXMAXn   = 8
+)
+
+const (
+	EXMINCH DFSDM_FLT1EXMIN = 0x07 << 0     //+ Extremes detector minimum data channel
+	EXMIN   DFSDM_FLT1EXMIN = 0xFFFFFF << 8 //+ EXMIN
+)
+
+const (
+	EXMINCHn = 0
+	EXMINn   = 8
+)
+
+const (
+	CNVCNT DFSDM_FLT1CNVTIMR = 0xFFFFFFF << 4 //+ 28-bit timer counting conversion time t = CNVCNT[27:0] / fDFSDM_CKIN
 )
 
 const (
@@ -1480,7 +1119,205 @@ const (
 )
 
 const (
-	CNVCNT DFSDM2_CNVTIMR = 0xFFFFFFF << 4 //+ 28-bit timer counting conversion time
+	DFEN     DFSDM_FLT2CR1 = 0x01 << 0  //+ DFSDM enable
+	JSWSTART DFSDM_FLT2CR1 = 0x01 << 1  //+ Start a conversion of the injected group of channels
+	JSYNC    DFSDM_FLT2CR1 = 0x01 << 3  //+ Launch an injected conversion synchronously with the DFSDM0 JSWSTART trigger
+	JSCAN    DFSDM_FLT2CR1 = 0x01 << 4  //+ Scanning conversion mode for injected conversions
+	JDMAEN   DFSDM_FLT2CR1 = 0x01 << 5  //+ DMA channel enabled to read data for the injected channel group
+	JEXTSEL  DFSDM_FLT2CR1 = 0x07 << 8  //+ Trigger signal selection for launching injected conversions
+	JEXTEN   DFSDM_FLT2CR1 = 0x03 << 13 //+ Trigger enable and trigger edge selection for injected conversions
+	RSWSTART DFSDM_FLT2CR1 = 0x01 << 17 //+ Software start of a conversion on the regular channel
+	RCONT    DFSDM_FLT2CR1 = 0x01 << 18 //+ Continuous mode selection for regular conversions
+	RSYNC    DFSDM_FLT2CR1 = 0x01 << 19 //+ Launch regular conversion synchronously with DFSDM0
+	RDMAEN   DFSDM_FLT2CR1 = 0x01 << 21 //+ DMA channel enabled to read data for the regular conversion
+	RCH      DFSDM_FLT2CR1 = 0x07 << 24 //+ Regular channel selection
+	FAST     DFSDM_FLT2CR1 = 0x01 << 29 //+ Fast conversion mode selection for regular conversions
+	AWFSEL   DFSDM_FLT2CR1 = 0x01 << 30 //+ Analog watchdog fast mode select
+)
+
+const (
+	DFENn     = 0
+	JSWSTARTn = 1
+	JSYNCn    = 3
+	JSCANn    = 4
+	JDMAENn   = 5
+	JEXTSELn  = 8
+	JEXTENn   = 13
+	RSWSTARTn = 17
+	RCONTn    = 18
+	RSYNCn    = 19
+	RDMAENn   = 21
+	RCHn      = 24
+	FASTn     = 29
+	AWFSELn   = 30
+)
+
+const (
+	JEOCIE DFSDM_FLT2CR2 = 0x01 << 0  //+ Injected end of conversion interrupt enable
+	REOCIE DFSDM_FLT2CR2 = 0x01 << 1  //+ Regular end of conversion interrupt enable
+	JOVRIE DFSDM_FLT2CR2 = 0x01 << 2  //+ Injected data overrun interrupt enable
+	ROVRIE DFSDM_FLT2CR2 = 0x01 << 3  //+ Regular data overrun interrupt enable
+	AWDIE  DFSDM_FLT2CR2 = 0x01 << 4  //+ Analog watchdog interrupt enable
+	SCDIE  DFSDM_FLT2CR2 = 0x01 << 5  //+ Short-circuit detector interrupt enable
+	CKABIE DFSDM_FLT2CR2 = 0x01 << 6  //+ Clock absence interrupt enable
+	EXCH   DFSDM_FLT2CR2 = 0xFF << 8  //+ Extremes detector channel selection
+	AWDCH  DFSDM_FLT2CR2 = 0xFF << 16 //+ Analog watchdog channel selection
+)
+
+const (
+	JEOCIEn = 0
+	REOCIEn = 1
+	JOVRIEn = 2
+	ROVRIEn = 3
+	AWDIEn  = 4
+	SCDIEn  = 5
+	CKABIEn = 6
+	EXCHn   = 8
+	AWDCHn  = 16
+)
+
+const (
+	JEOCF DFSDM_FLT2ISR = 0x01 << 0  //+ End of injected conversion flag
+	REOCF DFSDM_FLT2ISR = 0x01 << 1  //+ End of regular conversion flag
+	JOVRF DFSDM_FLT2ISR = 0x01 << 2  //+ Injected conversion overrun flag
+	ROVRF DFSDM_FLT2ISR = 0x01 << 3  //+ Regular conversion overrun flag
+	AWDF  DFSDM_FLT2ISR = 0x01 << 4  //+ Analog watchdog
+	JCIP  DFSDM_FLT2ISR = 0x01 << 13 //+ Injected conversion in progress status
+	RCIP  DFSDM_FLT2ISR = 0x01 << 14 //+ Regular conversion in progress status
+	CKABF DFSDM_FLT2ISR = 0xFF << 16 //+ Clock absence flag
+	SCDF  DFSDM_FLT2ISR = 0xFF << 24 //+ short-circuit detector flag
+)
+
+const (
+	JEOCFn = 0
+	REOCFn = 1
+	JOVRFn = 2
+	ROVRFn = 3
+	AWDFn  = 4
+	JCIPn  = 13
+	RCIPn  = 14
+	CKABFn = 16
+	SCDFn  = 24
+)
+
+const (
+	CLRJOVRF DFSDM_FLT2ICR = 0x01 << 2  //+ Clear the injected conversion overrun flag
+	CLRROVRF DFSDM_FLT2ICR = 0x01 << 3  //+ Clear the regular conversion overrun flag
+	CLRCKABF DFSDM_FLT2ICR = 0xFF << 16 //+ Clear the clock absence flag
+	CLRSCDF  DFSDM_FLT2ICR = 0xFF << 24 //+ Clear the short-circuit detector flag
+)
+
+const (
+	CLRJOVRFn = 2
+	CLRROVRFn = 3
+	CLRCKABFn = 16
+	CLRSCDFn  = 24
+)
+
+const (
+	JCHG DFSDM_FLT2JCHGR = 0xFF << 0 //+ Injected channel group selection
+)
+
+const (
+	JCHGn = 0
+)
+
+const (
+	IOSR DFSDM_FLT2FCR = 0xFF << 0   //+ Integrator oversampling ratio (averaging length)
+	FOSR DFSDM_FLT2FCR = 0x3FF << 16 //+ Sinc filter oversampling ratio (decimation rate)
+	FORD DFSDM_FLT2FCR = 0x07 << 29  //+ Sinc filter order
+)
+
+const (
+	IOSRn = 0
+	FOSRn = 16
+	FORDn = 29
+)
+
+const (
+	JDATACH DFSDM_FLT2JDATAR = 0x07 << 0     //+ Injected channel most recently converted
+	JDATA   DFSDM_FLT2JDATAR = 0xFFFFFF << 8 //+ Injected group conversion data
+)
+
+const (
+	JDATACHn = 0
+	JDATAn   = 8
+)
+
+const (
+	RDATACH DFSDM_FLT2RDATAR = 0x07 << 0     //+ Regular channel most recently converted
+	RPEND   DFSDM_FLT2RDATAR = 0x01 << 4     //+ Regular channel pending data
+	RDATA   DFSDM_FLT2RDATAR = 0xFFFFFF << 8 //+ Regular channel conversion data
+)
+
+const (
+	RDATACHn = 0
+	RPENDn   = 4
+	RDATAn   = 8
+)
+
+const (
+	BKAWH DFSDM_FLT2AWHTR = 0x0F << 0     //+ Break signal assignment to analog watchdog high threshold event
+	AWHT  DFSDM_FLT2AWHTR = 0xFFFFFF << 8 //+ Analog watchdog high threshold
+)
+
+const (
+	BKAWHn = 0
+	AWHTn  = 8
+)
+
+const (
+	BKAWL DFSDM_FLT2AWLTR = 0x0F << 0     //+ Break signal assignment to analog watchdog low threshold event
+	AWLT  DFSDM_FLT2AWLTR = 0xFFFFFF << 8 //+ Analog watchdog low threshold
+)
+
+const (
+	BKAWLn = 0
+	AWLTn  = 8
+)
+
+const (
+	AWLTF DFSDM_FLT2AWSR = 0xFF << 0 //+ Analog watchdog low threshold flag
+	AWHTF DFSDM_FLT2AWSR = 0xFF << 8 //+ Analog watchdog high threshold flag
+)
+
+const (
+	AWLTFn = 0
+	AWHTFn = 8
+)
+
+const (
+	CLRAWLTF DFSDM_FLT2AWCFR = 0xFF << 0 //+ Clear the analog watchdog low threshold flag
+	CLRAWHTF DFSDM_FLT2AWCFR = 0xFF << 8 //+ Clear the analog watchdog high threshold flag
+)
+
+const (
+	CLRAWLTFn = 0
+	CLRAWHTFn = 8
+)
+
+const (
+	EXMAXCH DFSDM_FLT2EXMAX = 0x07 << 0     //+ Extremes detector maximum data channel
+	EXMAX   DFSDM_FLT2EXMAX = 0xFFFFFF << 8 //+ Extremes detector maximum value
+)
+
+const (
+	EXMAXCHn = 0
+	EXMAXn   = 8
+)
+
+const (
+	EXMINCH DFSDM_FLT2EXMIN = 0x07 << 0     //+ Extremes detector minimum data channel
+	EXMIN   DFSDM_FLT2EXMIN = 0xFFFFFF << 8 //+ EXMIN
+)
+
+const (
+	EXMINCHn = 0
+	EXMINn   = 8
+)
+
+const (
+	CNVCNT DFSDM_FLT2CNVTIMR = 0xFFFFFFF << 4 //+ 28-bit timer counting conversion time t = CNVCNT[27:0] / fDFSDM_CKIN
 )
 
 const (
@@ -1488,7 +1325,205 @@ const (
 )
 
 const (
-	CNVCNT DFSDM3_CNVTIMR = 0xFFFFFFF << 4 //+ 28-bit timer counting conversion time
+	DFEN     DFSDM_FLT3CR1 = 0x01 << 0  //+ DFSDM enable
+	JSWSTART DFSDM_FLT3CR1 = 0x01 << 1  //+ Start a conversion of the injected group of channels
+	JSYNC    DFSDM_FLT3CR1 = 0x01 << 3  //+ Launch an injected conversion synchronously with the DFSDM0 JSWSTART trigger
+	JSCAN    DFSDM_FLT3CR1 = 0x01 << 4  //+ Scanning conversion mode for injected conversions
+	JDMAEN   DFSDM_FLT3CR1 = 0x01 << 5  //+ DMA channel enabled to read data for the injected channel group
+	JEXTSEL  DFSDM_FLT3CR1 = 0x07 << 8  //+ Trigger signal selection for launching injected conversions
+	JEXTEN   DFSDM_FLT3CR1 = 0x03 << 13 //+ Trigger enable and trigger edge selection for injected conversions
+	RSWSTART DFSDM_FLT3CR1 = 0x01 << 17 //+ Software start of a conversion on the regular channel
+	RCONT    DFSDM_FLT3CR1 = 0x01 << 18 //+ Continuous mode selection for regular conversions
+	RSYNC    DFSDM_FLT3CR1 = 0x01 << 19 //+ Launch regular conversion synchronously with DFSDM0
+	RDMAEN   DFSDM_FLT3CR1 = 0x01 << 21 //+ DMA channel enabled to read data for the regular conversion
+	RCH      DFSDM_FLT3CR1 = 0x07 << 24 //+ Regular channel selection
+	FAST     DFSDM_FLT3CR1 = 0x01 << 29 //+ Fast conversion mode selection for regular conversions
+	AWFSEL   DFSDM_FLT3CR1 = 0x01 << 30 //+ Analog watchdog fast mode select
+)
+
+const (
+	DFENn     = 0
+	JSWSTARTn = 1
+	JSYNCn    = 3
+	JSCANn    = 4
+	JDMAENn   = 5
+	JEXTSELn  = 8
+	JEXTENn   = 13
+	RSWSTARTn = 17
+	RCONTn    = 18
+	RSYNCn    = 19
+	RDMAENn   = 21
+	RCHn      = 24
+	FASTn     = 29
+	AWFSELn   = 30
+)
+
+const (
+	JEOCIE DFSDM_FLT3CR2 = 0x01 << 0  //+ Injected end of conversion interrupt enable
+	REOCIE DFSDM_FLT3CR2 = 0x01 << 1  //+ Regular end of conversion interrupt enable
+	JOVRIE DFSDM_FLT3CR2 = 0x01 << 2  //+ Injected data overrun interrupt enable
+	ROVRIE DFSDM_FLT3CR2 = 0x01 << 3  //+ Regular data overrun interrupt enable
+	AWDIE  DFSDM_FLT3CR2 = 0x01 << 4  //+ Analog watchdog interrupt enable
+	SCDIE  DFSDM_FLT3CR2 = 0x01 << 5  //+ Short-circuit detector interrupt enable
+	CKABIE DFSDM_FLT3CR2 = 0x01 << 6  //+ Clock absence interrupt enable
+	EXCH   DFSDM_FLT3CR2 = 0xFF << 8  //+ Extremes detector channel selection
+	AWDCH  DFSDM_FLT3CR2 = 0xFF << 16 //+ Analog watchdog channel selection
+)
+
+const (
+	JEOCIEn = 0
+	REOCIEn = 1
+	JOVRIEn = 2
+	ROVRIEn = 3
+	AWDIEn  = 4
+	SCDIEn  = 5
+	CKABIEn = 6
+	EXCHn   = 8
+	AWDCHn  = 16
+)
+
+const (
+	JEOCF DFSDM_FLT3ISR = 0x01 << 0  //+ End of injected conversion flag
+	REOCF DFSDM_FLT3ISR = 0x01 << 1  //+ End of regular conversion flag
+	JOVRF DFSDM_FLT3ISR = 0x01 << 2  //+ Injected conversion overrun flag
+	ROVRF DFSDM_FLT3ISR = 0x01 << 3  //+ Regular conversion overrun flag
+	AWDF  DFSDM_FLT3ISR = 0x01 << 4  //+ Analog watchdog
+	JCIP  DFSDM_FLT3ISR = 0x01 << 13 //+ Injected conversion in progress status
+	RCIP  DFSDM_FLT3ISR = 0x01 << 14 //+ Regular conversion in progress status
+	CKABF DFSDM_FLT3ISR = 0xFF << 16 //+ Clock absence flag
+	SCDF  DFSDM_FLT3ISR = 0xFF << 24 //+ short-circuit detector flag
+)
+
+const (
+	JEOCFn = 0
+	REOCFn = 1
+	JOVRFn = 2
+	ROVRFn = 3
+	AWDFn  = 4
+	JCIPn  = 13
+	RCIPn  = 14
+	CKABFn = 16
+	SCDFn  = 24
+)
+
+const (
+	CLRJOVRF DFSDM_FLT3ICR = 0x01 << 2  //+ Clear the injected conversion overrun flag
+	CLRROVRF DFSDM_FLT3ICR = 0x01 << 3  //+ Clear the regular conversion overrun flag
+	CLRCKABF DFSDM_FLT3ICR = 0xFF << 16 //+ Clear the clock absence flag
+	CLRSCDF  DFSDM_FLT3ICR = 0xFF << 24 //+ Clear the short-circuit detector flag
+)
+
+const (
+	CLRJOVRFn = 2
+	CLRROVRFn = 3
+	CLRCKABFn = 16
+	CLRSCDFn  = 24
+)
+
+const (
+	JCHG DFSDM_FLT3JCHGR = 0xFF << 0 //+ Injected channel group selection
+)
+
+const (
+	JCHGn = 0
+)
+
+const (
+	IOSR DFSDM_FLT3FCR = 0xFF << 0   //+ Integrator oversampling ratio (averaging length)
+	FOSR DFSDM_FLT3FCR = 0x3FF << 16 //+ Sinc filter oversampling ratio (decimation rate)
+	FORD DFSDM_FLT3FCR = 0x07 << 29  //+ Sinc filter order
+)
+
+const (
+	IOSRn = 0
+	FOSRn = 16
+	FORDn = 29
+)
+
+const (
+	JDATACH DFSDM_FLT3JDATAR = 0x07 << 0     //+ Injected channel most recently converted
+	JDATA   DFSDM_FLT3JDATAR = 0xFFFFFF << 8 //+ Injected group conversion data
+)
+
+const (
+	JDATACHn = 0
+	JDATAn   = 8
+)
+
+const (
+	RDATACH DFSDM_FLT3RDATAR = 0x07 << 0     //+ Regular channel most recently converted
+	RPEND   DFSDM_FLT3RDATAR = 0x01 << 4     //+ Regular channel pending data
+	RDATA   DFSDM_FLT3RDATAR = 0xFFFFFF << 8 //+ Regular channel conversion data
+)
+
+const (
+	RDATACHn = 0
+	RPENDn   = 4
+	RDATAn   = 8
+)
+
+const (
+	BKAWH DFSDM_FLT3AWHTR = 0x0F << 0     //+ Break signal assignment to analog watchdog high threshold event
+	AWHT  DFSDM_FLT3AWHTR = 0xFFFFFF << 8 //+ Analog watchdog high threshold
+)
+
+const (
+	BKAWHn = 0
+	AWHTn  = 8
+)
+
+const (
+	BKAWL DFSDM_FLT3AWLTR = 0x0F << 0     //+ Break signal assignment to analog watchdog low threshold event
+	AWLT  DFSDM_FLT3AWLTR = 0xFFFFFF << 8 //+ Analog watchdog low threshold
+)
+
+const (
+	BKAWLn = 0
+	AWLTn  = 8
+)
+
+const (
+	AWLTF DFSDM_FLT3AWSR = 0xFF << 0 //+ Analog watchdog low threshold flag
+	AWHTF DFSDM_FLT3AWSR = 0xFF << 8 //+ Analog watchdog high threshold flag
+)
+
+const (
+	AWLTFn = 0
+	AWHTFn = 8
+)
+
+const (
+	CLRAWLTF DFSDM_FLT3AWCFR = 0xFF << 0 //+ Clear the analog watchdog low threshold flag
+	CLRAWHTF DFSDM_FLT3AWCFR = 0xFF << 8 //+ Clear the analog watchdog high threshold flag
+)
+
+const (
+	CLRAWLTFn = 0
+	CLRAWHTFn = 8
+)
+
+const (
+	EXMAXCH DFSDM_FLT3EXMAX = 0x07 << 0     //+ Extremes detector maximum data channel
+	EXMAX   DFSDM_FLT3EXMAX = 0xFFFFFF << 8 //+ Extremes detector maximum value
+)
+
+const (
+	EXMAXCHn = 0
+	EXMAXn   = 8
+)
+
+const (
+	EXMINCH DFSDM_FLT3EXMIN = 0x07 << 0     //+ Extremes detector minimum data channel
+	EXMIN   DFSDM_FLT3EXMIN = 0xFFFFFF << 8 //+ EXMIN
+)
+
+const (
+	EXMINCHn = 0
+	EXMINn   = 8
+)
+
+const (
+	CNVCNT DFSDM_FLT3CNVTIMR = 0xFFFFFFF << 4 //+ 28-bit timer counting conversion time t = CNVCNT[27:0] / fDFSDM_CKIN
 )
 
 const (

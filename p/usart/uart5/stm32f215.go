@@ -5,17 +5,22 @@
 // Package uart5 provides access to the registers of the UART peripheral.
 //
 // Instances:
-//  UART5  UART5_BASE  APB1  UART5  Universal synchronous asynchronous receiver transmitter
+//
+//	UART5  UART5_BASE  APB1  UART5  Universal synchronous asynchronous receiver transmitter
+//
 // Registers:
-//  0x000 32  SR   Status register
-//  0x004 32  DR   Data register
-//  0x008 32  BRR  Baud rate register
-//  0x00C 32  CR1  Control register 1
-//  0x010 32  CR2  Control register 2
-//  0x014 32  CR3  Control register 3
+//
+//	0x000 32  SR   Status register
+//	0x004 32  DR   Data register
+//	0x008 32  BRR  Baud rate register
+//	0x00C 32  CR1  Control register 1
+//	0x010 32  CR2  Control register 2
+//	0x014 32  CR3  Control register 3
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/bus
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/bus
+//	github.com/embeddedgo/stm32/p/mmap
 package uart5
 
 const (

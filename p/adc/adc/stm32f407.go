@@ -5,33 +5,38 @@
 // Package adc provides access to the registers of the ADC peripheral.
 //
 // Instances:
-//  ADC1  ADC1_BASE  APB2  ADC+  Analog-to-digital converter
-//  ADC2  ADC2_BASE  APB2  ADC+  Analog-to-digital converter
-//  ADC3  ADC3_BASE  APB2  ADC+  Analog-to-digital converter
+//
+//	ADC1  ADC1_BASE  APB2  ADC+  Analog-to-digital converter
+//	ADC2  ADC2_BASE  APB2  ADC+  Analog-to-digital converter
+//	ADC3  ADC3_BASE  APB2  ADC+  Analog-to-digital converter
+//
 // Registers:
-//  0x000 32  SR     status register
-//  0x004 32  CR1    control register 1
-//  0x008 32  CR2    control register 2
-//  0x00C 32  SMPR1  sample time register 1
-//  0x010 32  SMPR2  sample time register 2
-//  0x014 32  JOFR1  injected channel data offset register x
-//  0x018 32  JOFR2  injected channel data offset register x
-//  0x01C 32  JOFR3  injected channel data offset register x
-//  0x020 32  JOFR4  injected channel data offset register x
-//  0x024 32  HTR    watchdog higher threshold register
-//  0x028 32  LTR    watchdog lower threshold register
-//  0x02C 32  SQR1   regular sequence register 1
-//  0x030 32  SQR2   regular sequence register 2
-//  0x034 32  SQR3   regular sequence register 3
-//  0x038 32  JSQR   injected sequence register
-//  0x03C 32  JDR1   injected data register x
-//  0x040 32  JDR2   injected data register x
-//  0x044 32  JDR3   injected data register x
-//  0x048 32  JDR4   injected data register x
-//  0x04C 32  DR     regular data register
+//
+//	0x000 32  SR     status register
+//	0x004 32  CR1    control register 1
+//	0x008 32  CR2    control register 2
+//	0x00C 32  SMPR1  sample time register 1
+//	0x010 32  SMPR2  sample time register 2
+//	0x014 32  JOFR1  injected channel data offset register x
+//	0x018 32  JOFR2  injected channel data offset register x
+//	0x01C 32  JOFR3  injected channel data offset register x
+//	0x020 32  JOFR4  injected channel data offset register x
+//	0x024 32  HTR    watchdog higher threshold register
+//	0x028 32  LTR    watchdog lower threshold register
+//	0x02C 32  SQR1   regular sequence register 1
+//	0x030 32  SQR2   regular sequence register 2
+//	0x034 32  SQR3   regular sequence register 3
+//	0x038 32  JSQR   injected sequence register
+//	0x03C 32  JDR1   injected data register x
+//	0x040 32  JDR2   injected data register x
+//	0x044 32  JDR3   injected data register x
+//	0x048 32  JDR4   injected data register x
+//	0x04C 32  DR     regular data register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/bus
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/bus
+//	github.com/embeddedgo/stm32/p/mmap
 package adc
 
 const (

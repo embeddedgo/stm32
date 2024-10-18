@@ -2,26 +2,31 @@
 
 //go:build stm32f407
 
-// Package ic provides access to the registers of the I2C peripheral.
+// Package i2c provides access to the registers of the I2C peripheral.
 //
 // Instances:
-//  I2C1  I2C1_BASE  APB1  I2C1_EV,I2C1_ER  Inter-integrated circuit
-//  I2C2  I2C2_BASE  APB1  I2C2_EV,I2C2_ER  Inter-integrated circuit
-//  I2C3  I2C3_BASE  APB1  I2C3_EV,I2C3_ER  Inter-integrated circuit
+//
+//	I2C1  I2C1_BASE  APB1  I2C1_EV,I2C1_ER  Inter-integrated circuit
+//	I2C2  I2C2_BASE  APB1  I2C2_EV,I2C2_ER  Inter-integrated circuit
+//	I2C3  I2C3_BASE  APB1  I2C3_EV,I2C3_ER  Inter-integrated circuit
+//
 // Registers:
-//  0x000 32  CR1    Control register 1
-//  0x004 32  CR2    Control register 2
-//  0x008 32  OAR1   Own address register 1
-//  0x00C 32  OAR2   Own address register 2
-//  0x010 32  DR     Data register
-//  0x014 32  SR1    Status register 1
-//  0x018 32  SR2    Status register 2
-//  0x01C 32  CCR    Clock control register
-//  0x020 32  TRISE  TRISE register
+//
+//	0x000 32  CR1    Control register 1
+//	0x004 32  CR2    Control register 2
+//	0x008 32  OAR1   Own address register 1
+//	0x00C 32  OAR2   Own address register 2
+//	0x010 32  DR     Data register
+//	0x014 32  SR1    Status register 1
+//	0x018 32  SR2    Status register 2
+//	0x01C 32  CCR    Clock control register
+//	0x020 32  TRISE  TRISE register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/bus
-//  github.com/embeddedgo/stm32/p/mmap
-package ic
+//
+//	github.com/embeddedgo/stm32/p/bus
+//	github.com/embeddedgo/stm32/p/mmap
+package i2c
 
 const (
 	PE        CR1 = 0x01 << 0  //+ Peripheral enable

@@ -5,21 +5,26 @@
 // Package ethernet_ptp provides access to the registers of the Ethernet_PTP peripheral.
 //
 // Instances:
-//  Ethernet_PTP  Ethernet_PTP_BASE  -  -  Ethernet: Precision time protocol
+//
+//	Ethernet_PTP  Ethernet_PTP_BASE  -  -  Ethernet: Precision time protocol
+//
 // Registers:
-//  0x000 32  PTPTSCR   Ethernet PTP time stamp control register
-//  0x004 32  PTPSSIR   Ethernet PTP subsecond increment register
-//  0x008 32  PTPTSHR   Ethernet PTP time stamp high register
-//  0x00C 32  PTPTSLR   Ethernet PTP time stamp low register
-//  0x010 32  PTPTSHUR  Ethernet PTP time stamp high update register
-//  0x014 32  PTPTSLUR  Ethernet PTP time stamp low update register
-//  0x018 32  PTPTSAR   Ethernet PTP time stamp addend register
-//  0x01C 32  PTPTTHR   Ethernet PTP target time high register
-//  0x020 32  PTPTTLR   Ethernet PTP target time low register
-//  0x028 32  PTPTSSR   Ethernet PTP time stamp status register
-//  0x02C 32  PTPPPSCR  Ethernet PTP PPS control register
+//
+//	0x000 32  PTPTSCR   Ethernet PTP time stamp control register
+//	0x004 32  PTPSSIR   Ethernet PTP subsecond increment register
+//	0x008 32  PTPTSHR   Ethernet PTP time stamp high register
+//	0x00C 32  PTPTSLR   Ethernet PTP time stamp low register
+//	0x010 32  PTPTSHUR  Ethernet PTP time stamp high update register
+//	0x014 32  PTPTSLUR  Ethernet PTP time stamp low update register
+//	0x018 32  PTPTSAR   Ethernet PTP time stamp addend register
+//	0x01C 32  PTPTTHR   Ethernet PTP target time high register
+//	0x020 32  PTPTTLR   Ethernet PTP target time low register
+//	0x028 32  PTPTSSR   Ethernet PTP time stamp status register
+//	0x02C 32  PTPPPSCR  Ethernet PTP PPS control register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package ethernet_ptp
 
 const (

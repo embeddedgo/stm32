@@ -13,7 +13,7 @@ for p in dma exti flash gpio pwr rcc rtc spi syscfg tim; do
 	for f in *.go; do
 		GOTARGET=$(basename $f .go)
 		case $GOTARGET in
-		stm32f*|stm32l*)
+		stm32f*|stm32l*|stm32h*)
 			GOOS=noos GOARCH=thumb $(emgo env GOROOT)/bin/go build -tags $GOTARGET
 			;;
 		esac

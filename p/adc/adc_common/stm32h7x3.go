@@ -5,15 +5,20 @@
 // Package adc_common provides access to the registers of the ADC3_Common peripheral.
 //
 // Instances:
-//  ADC12_Common  ADC12_Common_BASE  -  ADC1_2  Analog-to-Digital Converter
-//  ADC3_Common   ADC3_Common_BASE   -  -       Analog-to-Digital Converter
+//
+//	ADC12_Common  ADC12_Common_BASE  -  ADC1_2  Analog-to-Digital Converter
+//	ADC3_Common   ADC3_Common_BASE   -  -       Analog-to-Digital Converter
+//
 // Registers:
-//  0x000 32  CSR   ADC Common status register
-//  0x008 32  CCR   ADC common control register
-//  0x00C 32  CDR   ADC common regular data register for dual and triple modes
-//  0x010 32  CDR2  ADC x common regular data register for 32-bit dual mode
+//
+//	0x000 32  CSR   ADC Common status register
+//	0x008 32  CCR   ADC common control register
+//	0x00C 32  CDR   ADC common regular data register for dual and triple modes
+//	0x010 32  CDR2  ADC x common regular data register for 32-bit dual mode
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package adc_common
 
 const (
@@ -67,25 +72,25 @@ const (
 )
 
 const (
-	DUAL   CCR = 0x1F << 0  //+ Dual ADC mode selection
-	DELAY  CCR = 0x0F << 8  //+ Delay between 2 sampling phases
-	DAMDF  CCR = 0x03 << 14 //+ Dual ADC Mode Data Format
-	CKMODE CCR = 0x03 << 16 //+ ADC clock mode
-	PRESC  CCR = 0x0F << 18 //+ ADC prescaler
-	VREFEN CCR = 0x01 << 22 //+ VREFINT enable
-	TSEN   CCR = 0x01 << 23 //+ Temperature sensor enable
-	VBATEN CCR = 0x01 << 24 //+ VBAT enable
+	DUAL     CCR = 0x1F << 0  //+ Dual ADC mode selection
+	DELAY    CCR = 0x0F << 8  //+ Delay between 2 sampling phases
+	DAMDF    CCR = 0x03 << 14 //+ Dual ADC Mode Data Format
+	CKMODE   CCR = 0x03 << 16 //+ ADC clock mode
+	PRESC    CCR = 0x0F << 18 //+ ADC prescaler
+	VREFEN   CCR = 0x01 << 22 //+ VREFINT enable
+	VSENSEEN CCR = 0x01 << 23 //+ Temperature sensor enable
+	VBATEN   CCR = 0x01 << 24 //+ VBAT enable
 )
 
 const (
-	DUALn   = 0
-	DELAYn  = 8
-	DAMDFn  = 14
-	CKMODEn = 16
-	PRESCn  = 18
-	VREFENn = 22
-	TSENn   = 23
-	VBATENn = 24
+	DUALn     = 0
+	DELAYn    = 8
+	DAMDFn    = 14
+	CKMODEn   = 16
+	PRESCn    = 18
+	VREFENn   = 22
+	VSENSEENn = 23
+	VBATENn   = 24
 )
 
 const (

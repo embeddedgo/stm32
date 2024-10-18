@@ -5,13 +5,18 @@
 // Package fpu provides access to the registers of the FPU peripheral.
 //
 // Instances:
-//  FPU  FPU_BASE  -  FPU*  Floting point unit
+//
+//	FPU  FPU_BASE  -  FPU*  Floting point unit
+//
 // Registers:
-//  0x000 32  FPCCR  Floating-point context control register
-//  0x004 32  FPCAR  Floating-point context address register
-//  0x008 32  FPSCR  Floating-point status control register
+//
+//	0x000 32  FPCCR  Floating-point context control register
+//	0x004 32  FPCAR  Floating-point context address register
+//	0x008 32  FPSCR  Floating-point status control register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package fpu
 
 const (

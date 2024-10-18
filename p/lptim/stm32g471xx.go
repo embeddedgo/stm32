@@ -5,19 +5,24 @@
 // Package lptim provides access to the registers of the LPTIMER peripheral.
 //
 // Instances:
-//  LPTIMER1  LPTIMER1_BASE  -  -  Low power timer
+//
+//	LPTIMER1  LPTIMER1_BASE  -  -  Low power timer
+//
 // Registers:
-//  0x000 32  ISR   Interrupt and Status Register
-//  0x004 32  ICR   Interrupt Clear Register
-//  0x008 32  IER   Interrupt Enable Register
-//  0x00C 32  CFGR  Configuration Register
-//  0x010 32  CR    Control Register
-//  0x014 32  CMP   Compare Register
-//  0x018 32  ARR   Autoreload Register
-//  0x01C 32  CNT   Counter Register
-//  0x020 32  OR    option register
+//
+//	0x000 32  ISR   Interrupt and Status Register
+//	0x004 32  ICR   Interrupt Clear Register
+//	0x008 32  IER   Interrupt Enable Register
+//	0x00C 32  CFGR  Configuration Register
+//	0x010 32  CR    Control Register
+//	0x014 32  CMP   Compare Register
+//	0x018 32  ARR   Autoreload Register
+//	0x01C 32  CNT   Counter Register
+//	0x020 32  OR    option register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package lptim
 
 const (

@@ -17,9 +17,9 @@ type Periph struct {
 	CR2     mmio.R32[CR2]
 	SR      mmio.R32[SR]
 	DR      mmio.R32[uint32]
-	CRCPR   mmio.R32[CRCPR]
-	RXCRCR  mmio.R32[RXCRCR]
-	TXCRCR  mmio.R32[TXCRCR]
+	CRCPR   mmio.R32[uint32]
+	RXCRCR  mmio.R32[uint32]
+	TXCRCR  mmio.R32[uint32]
 	I2SCFGR mmio.R32[I2SCFGR]
 	I2SPR   mmio.R32[I2SPR]
 }
@@ -83,18 +83,6 @@ func MODF_(p *Periph) mmio.RM32[SR]   { return mmio.RM32[SR]{&p.SR, MODF} }
 func OVR_(p *Periph) mmio.RM32[SR]    { return mmio.RM32[SR]{&p.SR, OVR} }
 func BSY_(p *Periph) mmio.RM32[SR]    { return mmio.RM32[SR]{&p.SR, BSY} }
 func TIFRFE_(p *Periph) mmio.RM32[SR] { return mmio.RM32[SR]{&p.SR, TIFRFE} }
-
-type CRCPR uint32
-
-func CRCPOLY_(p *Periph) mmio.RM32[CRCPR] { return mmio.RM32[CRCPR]{&p.CRCPR, CRCPOLY} }
-
-type RXCRCR uint32
-
-func RxCRC_(p *Periph) mmio.RM32[RXCRCR] { return mmio.RM32[RXCRCR]{&p.RXCRCR, RxCRC} }
-
-type TXCRCR uint32
-
-func TxCRC_(p *Periph) mmio.RM32[TXCRCR] { return mmio.RM32[TXCRCR]{&p.TXCRCR, TxCRC} }
 
 type I2SCFGR uint32
 

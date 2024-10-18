@@ -5,12 +5,17 @@
 // Package vrefbuf provides access to the registers of the VREFBUF peripheral.
 //
 // Instances:
-//  VREFBUF  VREFBUF_BASE  -  -
+//
+//	VREFBUF  VREFBUF_BASE  -  -
+//
 // Registers:
-//  0x000 32  CSR  VREFBUF control and status register
-//  0x004 32  CCR  VREFBUF calibration control register
+//
+//	0x000 32  CSR  VREFBUF control and status register
+//	0x004 32  CCR  VREFBUF calibration control register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package vrefbuf
 
 const (

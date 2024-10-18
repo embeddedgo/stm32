@@ -5,64 +5,69 @@
 // Package rcc provides access to the registers of the RCC peripheral.
 //
 // Instances:
-//  RCC  RCC_BASE  -  RCC  Reset and clock control
+//
+//	RCC  RCC_BASE  -  RCC  Reset and clock control
+//
 // Registers:
-//  0x000 32  CR          clock control register
-//  0x004 32  ICSCR       RCC Internal Clock Source Calibration Register
-//  0x008 32  CRRCR       RCC Clock Recovery RC Register
-//  0x010 32  CFGR        RCC Clock Configuration Register
-//  0x018 32  D1CFGR      RCC Domain 1 Clock Configuration Register
-//  0x01C 32  D2CFGR      RCC Domain 2 Clock Configuration Register
-//  0x020 32  D3CFGR      RCC Domain 3 Clock Configuration Register
-//  0x028 32  PLLCKSELR   RCC PLLs Clock Source Selection Register
-//  0x02C 32  PLLCFGR     RCC PLLs Configuration Register
-//  0x030 32  PLL1DIVR    RCC PLL1 Dividers Configuration Register
-//  0x034 32  PLL1FRACR   RCC PLL1 Fractional Divider Register
-//  0x038 32  PLL2DIVR    RCC PLL2 Dividers Configuration Register
-//  0x03C 32  PLL2FRACR   RCC PLL2 Fractional Divider Register
-//  0x040 32  PLL3DIVR    RCC PLL3 Dividers Configuration Register
-//  0x044 32  PLL3FRACR   RCC PLL3 Fractional Divider Register
-//  0x04C 32  D1CCIPR     RCC Domain 1 Kernel Clock Configuration Register
-//  0x050 32  D2CCIP1R    RCC Domain 2 Kernel Clock Configuration Register
-//  0x054 32  D2CCIP2R    RCC Domain 2 Kernel Clock Configuration Register
-//  0x058 32  D3CCIPR     RCC Domain 3 Kernel Clock Configuration Register
-//  0x060 32  CIER        RCC Clock Source Interrupt Enable Register
-//  0x064 32  CIFR        RCC Clock Source Interrupt Flag Register
-//  0x068 32  CICR        RCC Clock Source Interrupt Clear Register
-//  0x070 32  BDCR        RCC Backup Domain Control Register
-//  0x074 32  CSR         RCC Clock Control and Status Register
-//  0x07C 32  AHB3RSTR    RCC AHB3 Reset Register
-//  0x080 32  AHB1RSTR    RCC AHB1 Peripheral Reset Register
-//  0x084 32  AHB2RSTR    RCC AHB2 Peripheral Reset Register
-//  0x088 32  AHB4RSTR    RCC AHB4 Peripheral Reset Register
-//  0x08C 32  APB3RSTR    RCC APB3 Peripheral Reset Register
-//  0x090 32  APB1LRSTR   RCC APB1 Peripheral Reset Register
-//  0x094 32  APB1HRSTR   RCC APB1 Peripheral Reset Register
-//  0x098 32  APB2RSTR    RCC APB2 Peripheral Reset Register
-//  0x09C 32  APB4RSTR    RCC APB4 Peripheral Reset Register
-//  0x0A0 32  GCR         RCC Global Control Register
-//  0x0A8 32  D3AMR       RCC D3 Autonomous mode Register
-//  0x0D0 32  RSR         RCC Reset Status Register
-//  0x0D4 32  AHB3ENR     RCC AHB3 Clock Register
-//  0x0D8 32  AHB1ENR     RCC AHB1 Clock Register
-//  0x0DC 32  AHB2ENR     RCC AHB2 Clock Register
-//  0x0E0 32  AHB4ENR     RCC AHB4 Clock Register
-//  0x0E4 32  APB3ENR     RCC APB3 Clock Register
-//  0x0E8 32  APB1LENR    RCC APB1 Clock Register
-//  0x0EC 32  APB1HENR    RCC APB1 Clock Register
-//  0x0F0 32  APB2ENR     RCC APB2 Clock Register
-//  0x0F4 32  APB4ENR     RCC APB4 Clock Register
-//  0x0FC 32  AHB3LPENR   RCC AHB3 Sleep Clock Register
-//  0x100 32  AHB1LPENR   RCC AHB1 Sleep Clock Register
-//  0x104 32  AHB2LPENR   RCC AHB2 Sleep Clock Register
-//  0x108 32  AHB4LPENR   RCC AHB4 Sleep Clock Register
-//  0x10C 32  APB3LPENR   RCC APB3 Sleep Clock Register
-//  0x110 32  APB1LLPENR  RCC APB1 Low Sleep Clock Register
-//  0x114 32  APB1HLPENR  RCC APB1 High Sleep Clock Register
-//  0x118 32  APB2LPENR   RCC APB2 Sleep Clock Register
-//  0x11C 32  APB4LPENR   RCC APB4 Sleep Clock Register
+//
+//	0x000 32  CR          clock control register
+//	0x004 32  ICSCR       RCC Internal Clock Source Calibration Register
+//	0x008 32  CRRCR       RCC Clock Recovery RC Register
+//	0x010 32  CFGR        RCC Clock Configuration Register
+//	0x018 32  D1CFGR      RCC Domain 1 Clock Configuration Register
+//	0x01C 32  D2CFGR      RCC Domain 2 Clock Configuration Register
+//	0x020 32  D3CFGR      RCC Domain 3 Clock Configuration Register
+//	0x028 32  PLLCKSELR   RCC PLLs Clock Source Selection Register
+//	0x02C 32  PLLCFGR     RCC PLLs Configuration Register
+//	0x030 32  PLL1DIVR    RCC PLL1 Dividers Configuration Register
+//	0x034 32  PLL1FRACR   RCC PLL1 Fractional Divider Register
+//	0x038 32  PLL2DIVR    RCC PLL2 Dividers Configuration Register
+//	0x03C 32  PLL2FRACR   RCC PLL2 Fractional Divider Register
+//	0x040 32  PLL3DIVR    RCC PLL3 Dividers Configuration Register
+//	0x044 32  PLL3FRACR   RCC PLL3 Fractional Divider Register
+//	0x04C 32  D1CCIPR     RCC Domain 1 Kernel Clock Configuration Register
+//	0x050 32  D2CCIP1R    RCC Domain 2 Kernel Clock Configuration Register
+//	0x054 32  D2CCIP2R    RCC Domain 2 Kernel Clock Configuration Register
+//	0x058 32  D3CCIPR     RCC Domain 3 Kernel Clock Configuration Register
+//	0x060 32  CIER        RCC Clock Source Interrupt Enable Register
+//	0x064 32  CIFR        RCC Clock Source Interrupt Flag Register
+//	0x068 32  CICR        RCC Clock Source Interrupt Clear Register
+//	0x070 32  BDCR        RCC Backup Domain Control Register
+//	0x074 32  CSR         RCC Clock Control and Status Register
+//	0x07C 32  AHB3RSTR    RCC AHB3 Reset Register
+//	0x080 32  AHB1RSTR    RCC AHB1 Peripheral Reset Register
+//	0x084 32  AHB2RSTR    RCC AHB2 Peripheral Reset Register
+//	0x088 32  AHB4RSTR    RCC AHB4 Peripheral Reset Register
+//	0x08C 32  APB3RSTR    RCC APB3 Peripheral Reset Register
+//	0x090 32  APB1LRSTR   RCC APB1 Peripheral Reset Register
+//	0x094 32  APB1HRSTR   RCC APB1 Peripheral Reset Register
+//	0x098 32  APB2RSTR    RCC APB2 Peripheral Reset Register
+//	0x09C 32  APB4RSTR    RCC APB4 Peripheral Reset Register
+//	0x0A0 32  GCR         RCC Global Control Register
+//	0x0A8 32  D3AMR       RCC D3 Autonomous mode Register
+//	0x0D0 32  RSR         RCC Reset Status Register
+//	0x0D4 32  AHB3ENR     RCC AHB3 Clock Register
+//	0x0D8 32  AHB1ENR     RCC AHB1 Clock Register
+//	0x0DC 32  AHB2ENR     RCC AHB2 Clock Register
+//	0x0E0 32  AHB4ENR     RCC AHB4 Clock Register
+//	0x0E4 32  APB3ENR     RCC APB3 Clock Register
+//	0x0E8 32  APB1LENR    RCC APB1 Clock Register
+//	0x0EC 32  APB1HENR    RCC APB1 Clock Register
+//	0x0F0 32  APB2ENR     RCC APB2 Clock Register
+//	0x0F4 32  APB4ENR     RCC APB4 Clock Register
+//	0x0FC 32  AHB3LPENR   RCC AHB3 Sleep Clock Register
+//	0x100 32  AHB1LPENR   RCC AHB1 Sleep Clock Register
+//	0x104 32  AHB2LPENR   RCC AHB2 Sleep Clock Register
+//	0x108 32  AHB4LPENR   RCC AHB4 Sleep Clock Register
+//	0x10C 32  APB3LPENR   RCC APB3 Sleep Clock Register
+//	0x110 32  APB1LLPENR  RCC APB1 Low Sleep Clock Register
+//	0x114 32  APB1HLPENR  RCC APB1 High Sleep Clock Register
+//	0x118 32  APB2LPENR   RCC APB2 Sleep Clock Register
+//	0x11C 32  APB4LPENR   RCC APB4 Sleep Clock Register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package rcc
 
 const (
@@ -140,12 +145,12 @@ const (
 const (
 	SW          CFGR = 0x07 << 0  //+ System clock switch
 	SW_HSI      CFGR = 0x00 << 0  //  HSI oscillator selected as system clock
-	SW_CSI      CFGR = 0x01 << 0  //  HSE oscillator selected as system clock
+	SW_CSI      CFGR = 0x01 << 0  //  CSI oscillator selected as system clock
 	SW_HSE      CFGR = 0x02 << 0  //  HSE oscillator selected as system clock
 	SW_PLL1     CFGR = 0x03 << 0  //  PLL1 selected as system clock
 	SWS         CFGR = 0x07 << 3  //+ System clock switch status
 	SWS_HSI     CFGR = 0x00 << 3  //  HSI oscillator used as system clock
-	SWS_CSI     CFGR = 0x01 << 3  //  HSE oscillator used as system clock
+	SWS_CSI     CFGR = 0x01 << 3  //  CSI oscillator used as system clock
 	SWS_HSE     CFGR = 0x02 << 3  //  HSE oscillator used as system clock
 	SWS_PLL1    CFGR = 0x03 << 3  //  PLL1 used as system clock
 	STOPWUCK    CFGR = 0x01 << 6  //+ System clock selection after a wake up from system Stop
@@ -208,7 +213,7 @@ const (
 	PLLSRC_HSI  PLLCKSELR = 0x00 << 0  //  HSI selected as PLL clock
 	PLLSRC_CSI  PLLCKSELR = 0x01 << 0  //  CSI selected as PLL clock
 	PLLSRC_HSE  PLLCKSELR = 0x02 << 0  //  HSE selected as PLL clock
-	PLLSRC_NONE PLLCKSELR = 0x03 << 0  //  PL1 used as system clock
+	PLLSRC_NONE PLLCKSELR = 0x03 << 0  //  No clock to DIVMx divider and PLLs
 	DIVM1       PLLCKSELR = 0x3F << 4  //+ Prescaler for PLL1
 	DIVM2       PLLCKSELR = 0x3F << 12 //+ Prescaler for PLL2
 	DIVM3       PLLCKSELR = 0x3F << 20 //+ Prescaler for PLL3
@@ -286,17 +291,17 @@ const (
 )
 
 const (
-	DIVN2 PLL2DIVR = 0x1FF << 0 //+ Multiplication factor for PLL2 VCO
-	DIVP2 PLL2DIVR = 0x7F << 9  //+ PLL2 DIVP division factor
-	DIVQ2 PLL2DIVR = 0x7F << 16 //+ PLL2 DIVQ division factor
-	DIVR2 PLL2DIVR = 0x7F << 24 //+ PLL2 DIVR division factor
+	DIVN2  PLL2DIVR = 0x1FF << 0 //+ Multiplication factor for PLL1 VCO
+	DIVP12 PLL2DIVR = 0x7F << 9  //+ PLL1 DIVP division factor
+	DIVQ2  PLL2DIVR = 0x7F << 16 //+ PLL1 DIVQ division factor
+	DIVR2  PLL2DIVR = 0x7F << 24 //+ PLL1 DIVR division factor
 )
 
 const (
-	DIVN2n = 0
-	DIVP2n = 9
-	DIVQ2n = 16
-	DIVR2n = 24
+	DIVN2n  = 0
+	DIVP12n = 9
+	DIVQ2n  = 16
+	DIVR2n  = 24
 )
 
 const (

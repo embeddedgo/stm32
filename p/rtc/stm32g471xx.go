@@ -5,30 +5,35 @@
 // Package rtc provides access to the registers of the RTC peripheral.
 //
 // Instances:
-//  RTC  RTC_BASE  -  RTC_TAMP_CSS_LSE,RTC_WKUP,RTC_ALARM  Real-time clock
+//
+//	RTC  RTC_BASE  -  RTC_TAMP_CSS_LSE,RTC_WKUP,RTC_ALARM  Real-time clock
+//
 // Registers:
-//  0x000 32  TR                 time register
-//  0x004 32  DR                 date register
-//  0x008 32  SSR                sub second register
-//  0x00C 32  ICSR               initialization and status register
-//  0x010 32  PRER               prescaler register
-//  0x014 32  WUTR               wakeup timer register
-//  0x018 32  CR                 control register
-//  0x024 32  WPR                write protection register
-//  0x028 32  CALR               calibration register
-//  0x02C 32  SHIFTR             shift control register
-//  0x030 32  TSTR(TR)           time stamp time register
-//  0x034 32  TSDR(DR)           time stamp date register
-//  0x038 32  TSSSR(SSR)         timestamp sub second register
-//  0x040 32  ALRMAR(ALRMR)      alarm A register
-//  0x044 32  ALRMASSR(ALRMSSR)  alarm A sub second register
-//  0x048 32  ALRMBR(ALRMR)      alarm B register
-//  0x04C 32  ALRMBSSR(ALRMSSR)  alarm B sub second register
-//  0x050 32  SR                 status register
-//  0x054 32  MISR               status register
-//  0x05C 32  SCR                status register
+//
+//	0x000 32  TR                 time register
+//	0x004 32  DR                 date register
+//	0x008 32  SSR                sub second register
+//	0x00C 32  ICSR               initialization and status register
+//	0x010 32  PRER               prescaler register
+//	0x014 32  WUTR               wakeup timer register
+//	0x018 32  CR                 control register
+//	0x024 32  WPR                write protection register
+//	0x028 32  CALR               calibration register
+//	0x02C 32  SHIFTR             shift control register
+//	0x030 32  TSTR(TR)           time stamp time register
+//	0x034 32  TSDR(DR)           time stamp date register
+//	0x038 32  TSSSR(SSR)         timestamp sub second register
+//	0x040 32  ALRMAR(ALRMR)      alarm A register
+//	0x044 32  ALRMASSR(ALRMSSR)  alarm A sub second register
+//	0x048 32  ALRMBR(ALRMR)      alarm B register
+//	0x04C 32  ALRMBSSR(ALRMSSR)  alarm B sub second register
+//	0x050 32  SR                 status register
+//	0x054 32  MISR               status register
+//	0x05C 32  SCR                status register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package rtc
 
 const (

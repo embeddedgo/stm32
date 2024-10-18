@@ -5,23 +5,28 @@
 // Package usb provides access to the registers of the USB_FS_device peripheral.
 //
 // Instances:
-//  USB_FS_device  USB_FS_device_BASE  -  -  USB_FS_device
+//
+//	USB_FS_device  USB_FS_device_BASE  -  -  USB_FS_device
+//
 // Registers:
-//  0x000 32  EP0R    USB endpoint n register
-//  0x004 32  EP1R    USB endpoint n register
-//  0x008 32  EP2R    USB endpoint n register
-//  0x00C 32  EP3R    USB endpoint n register
-//  0x010 32  EP4R    USB endpoint n register
-//  0x014 32  EP5R    USB endpoint n register
-//  0x018 32  EP6R    USB endpoint n register
-//  0x01C 32  EP7R    USB endpoint n register
-//  0x040 32  CNTR    USB control register
-//  0x044 32  ISTR    USB interrupt status register
-//  0x048 32  FNR     USB frame number register
-//  0x04C 32  DADDR   USB device address
-//  0x050 32  BTABLE  Buffer table address
+//
+//	0x000 32  EP0R    USB endpoint n register
+//	0x004 32  EP1R    USB endpoint n register
+//	0x008 32  EP2R    USB endpoint n register
+//	0x00C 32  EP3R    USB endpoint n register
+//	0x010 32  EP4R    USB endpoint n register
+//	0x014 32  EP5R    USB endpoint n register
+//	0x018 32  EP6R    USB endpoint n register
+//	0x01C 32  EP7R    USB endpoint n register
+//	0x040 32  CNTR    USB control register
+//	0x044 32  ISTR    USB interrupt status register
+//	0x048 32  FNR     USB frame number register
+//	0x04C 32  DADDR   USB device address
+//	0x050 32  BTABLE  Buffer table address
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package usb
 
 const (

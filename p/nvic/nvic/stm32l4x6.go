@@ -5,46 +5,51 @@
 // Package nvic provides access to the registers of the NVIC peripheral.
 //
 // Instances:
-//  NVIC  NVIC_BASE  -  -  Nested Vectored Interrupt Controller
+//
+//	NVIC  NVIC_BASE  -  -  Nested Vectored Interrupt Controller
+//
 // Registers:
-//  0x000 32  ISER0  Interrupt Set-Enable Register
-//  0x004 32  ISER1  Interrupt Set-Enable Register
-//  0x008 32  ISER2  Interrupt Set-Enable Register
-//  0x080 32  ICER0  Interrupt Clear-Enable Register
-//  0x084 32  ICER1  Interrupt Clear-Enable Register
-//  0x088 32  ICER2  Interrupt Clear-Enable Register
-//  0x100 32  ISPR0  Interrupt Set-Pending Register
-//  0x104 32  ISPR1  Interrupt Set-Pending Register
-//  0x108 32  ISPR2  Interrupt Set-Pending Register
-//  0x180 32  ICPR0  Interrupt Clear-Pending Register
-//  0x184 32  ICPR1  Interrupt Clear-Pending Register
-//  0x188 32  ICPR2  Interrupt Clear-Pending Register
-//  0x200 32  IABR0  Interrupt Active Bit Register
-//  0x204 32  IABR1  Interrupt Active Bit Register
-//  0x208 32  IABR2  Interrupt Active Bit Register
-//  0x300 32  IPR0   Interrupt Priority Register
-//  0x304 32  IPR1   Interrupt Priority Register
-//  0x308 32  IPR2   Interrupt Priority Register
-//  0x30C 32  IPR3   Interrupt Priority Register
-//  0x310 32  IPR4   Interrupt Priority Register
-//  0x314 32  IPR5   Interrupt Priority Register
-//  0x318 32  IPR6   Interrupt Priority Register
-//  0x31C 32  IPR7   Interrupt Priority Register
-//  0x320 32  IPR8   Interrupt Priority Register
-//  0x324 32  IPR9   Interrupt Priority Register
-//  0x328 32  IPR10  Interrupt Priority Register
-//  0x32C 32  IPR11  Interrupt Priority Register
-//  0x330 32  IPR12  Interrupt Priority Register
-//  0x334 32  IPR13  Interrupt Priority Register
-//  0x338 32  IPR14  Interrupt Priority Register
-//  0x33C 32  IPR15  Interrupt Priority Register
-//  0x340 32  IPR16  Interrupt Priority Register
-//  0x344 32  IPR17  Interrupt Priority Register
-//  0x348 32  IPR18  Interrupt Priority Register
-//  0x34C 32  IPR19  Interrupt Priority Register
-//  0x350 32  IPR20  Interrupt Priority Register
+//
+//	0x000 32  ISER0  Interrupt Set-Enable Register
+//	0x004 32  ISER1  Interrupt Set-Enable Register
+//	0x008 32  ISER2  Interrupt Set-Enable Register
+//	0x080 32  ICER0  Interrupt Clear-Enable Register
+//	0x084 32  ICER1  Interrupt Clear-Enable Register
+//	0x088 32  ICER2  Interrupt Clear-Enable Register
+//	0x100 32  ISPR0  Interrupt Set-Pending Register
+//	0x104 32  ISPR1  Interrupt Set-Pending Register
+//	0x108 32  ISPR2  Interrupt Set-Pending Register
+//	0x180 32  ICPR0  Interrupt Clear-Pending Register
+//	0x184 32  ICPR1  Interrupt Clear-Pending Register
+//	0x188 32  ICPR2  Interrupt Clear-Pending Register
+//	0x200 32  IABR0  Interrupt Active Bit Register
+//	0x204 32  IABR1  Interrupt Active Bit Register
+//	0x208 32  IABR2  Interrupt Active Bit Register
+//	0x300 32  IPR0   Interrupt Priority Register
+//	0x304 32  IPR1   Interrupt Priority Register
+//	0x308 32  IPR2   Interrupt Priority Register
+//	0x30C 32  IPR3   Interrupt Priority Register
+//	0x310 32  IPR4   Interrupt Priority Register
+//	0x314 32  IPR5   Interrupt Priority Register
+//	0x318 32  IPR6   Interrupt Priority Register
+//	0x31C 32  IPR7   Interrupt Priority Register
+//	0x320 32  IPR8   Interrupt Priority Register
+//	0x324 32  IPR9   Interrupt Priority Register
+//	0x328 32  IPR10  Interrupt Priority Register
+//	0x32C 32  IPR11  Interrupt Priority Register
+//	0x330 32  IPR12  Interrupt Priority Register
+//	0x334 32  IPR13  Interrupt Priority Register
+//	0x338 32  IPR14  Interrupt Priority Register
+//	0x33C 32  IPR15  Interrupt Priority Register
+//	0x340 32  IPR16  Interrupt Priority Register
+//	0x344 32  IPR17  Interrupt Priority Register
+//	0x348 32  IPR18  Interrupt Priority Register
+//	0x34C 32  IPR19  Interrupt Priority Register
+//	0x350 32  IPR20  Interrupt Priority Register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package nvic
 
 const (

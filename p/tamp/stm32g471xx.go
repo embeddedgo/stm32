@@ -5,49 +5,54 @@
 // Package tamp provides access to the registers of the TAMP peripheral.
 //
 // Instances:
-//  TAMP  TAMP_BASE  -  -  Tamper and backup registers
+//
+//	TAMP  TAMP_BASE  -  -  Tamper and backup registers
+//
 // Registers:
-//  0x000 32  CR1     control register 1
-//  0x004 32  CR2     control register 2
-//  0x00C 32  FLTCR   TAMP filter control register
-//  0x02C 32  IER     TAMP interrupt enable register
-//  0x030 32  SR      TAMP status register
-//  0x034 32  MISR    TAMP masked interrupt status register
-//  0x03C 32  SCR     TAMP status clear register
-//  0x100 32  BKP0R   TAMP backup register
-//  0x104 32  BKP1R   TAMP backup register
-//  0x108 32  BKP2R   TAMP backup register
-//  0x10C 32  BKP3R   TAMP backup register
-//  0x110 32  BKP4R   TAMP backup register
-//  0x114 32  BKP5R   TAMP backup register
-//  0x118 32  BKP6R   TAMP backup register
-//  0x11C 32  BKP7R   TAMP backup register
-//  0x120 32  BKP8R   TAMP backup register
-//  0x124 32  BKP9R   TAMP backup register
-//  0x128 32  BKP10R  TAMP backup register
-//  0x12C 32  BKP11R  TAMP backup register
-//  0x130 32  BKP12R  TAMP backup register
-//  0x134 32  BKP13R  TAMP backup register
-//  0x138 32  BKP14R  TAMP backup register
-//  0x13C 32  BKP15R  TAMP backup register
-//  0x140 32  BKP16R  TAMP backup register
-//  0x144 32  BKP17R  TAMP backup register
-//  0x148 32  BKP18R  TAMP backup register
-//  0x14C 32  BKP19R  TAMP backup register
-//  0x150 32  BKP20R  TAMP backup register
-//  0x154 32  BKP21R  TAMP backup register
-//  0x158 32  BKP22R  TAMP backup register
-//  0x15C 32  BKP23R  TAMP backup register
-//  0x160 32  BKP24R  TAMP backup register
-//  0x164 32  BKP25R  TAMP backup register
-//  0x168 32  BKP26R  TAMP backup register
-//  0x16C 32  BKP27R  TAMP backup register
-//  0x170 32  BKP28R  TAMP backup register
-//  0x174 32  BKP29R  TAMP backup register
-//  0x178 32  BKP30R  TAMP backup register
-//  0x17C 32  BKP31R  TAMP backup register
+//
+//	0x000 32  CR1     control register 1
+//	0x004 32  CR2     control register 2
+//	0x00C 32  FLTCR   TAMP filter control register
+//	0x02C 32  IER     TAMP interrupt enable register
+//	0x030 32  SR      TAMP status register
+//	0x034 32  MISR    TAMP masked interrupt status register
+//	0x03C 32  SCR     TAMP status clear register
+//	0x100 32  BKP0R   TAMP backup register
+//	0x104 32  BKP1R   TAMP backup register
+//	0x108 32  BKP2R   TAMP backup register
+//	0x10C 32  BKP3R   TAMP backup register
+//	0x110 32  BKP4R   TAMP backup register
+//	0x114 32  BKP5R   TAMP backup register
+//	0x118 32  BKP6R   TAMP backup register
+//	0x11C 32  BKP7R   TAMP backup register
+//	0x120 32  BKP8R   TAMP backup register
+//	0x124 32  BKP9R   TAMP backup register
+//	0x128 32  BKP10R  TAMP backup register
+//	0x12C 32  BKP11R  TAMP backup register
+//	0x130 32  BKP12R  TAMP backup register
+//	0x134 32  BKP13R  TAMP backup register
+//	0x138 32  BKP14R  TAMP backup register
+//	0x13C 32  BKP15R  TAMP backup register
+//	0x140 32  BKP16R  TAMP backup register
+//	0x144 32  BKP17R  TAMP backup register
+//	0x148 32  BKP18R  TAMP backup register
+//	0x14C 32  BKP19R  TAMP backup register
+//	0x150 32  BKP20R  TAMP backup register
+//	0x154 32  BKP21R  TAMP backup register
+//	0x158 32  BKP22R  TAMP backup register
+//	0x15C 32  BKP23R  TAMP backup register
+//	0x160 32  BKP24R  TAMP backup register
+//	0x164 32  BKP25R  TAMP backup register
+//	0x168 32  BKP26R  TAMP backup register
+//	0x16C 32  BKP27R  TAMP backup register
+//	0x170 32  BKP28R  TAMP backup register
+//	0x174 32  BKP29R  TAMP backup register
+//	0x178 32  BKP30R  TAMP backup register
+//	0x17C 32  BKP31R  TAMP backup register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package tamp
 
 const (

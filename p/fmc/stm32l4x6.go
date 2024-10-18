@@ -5,18 +5,23 @@
 // Package fmc provides access to the registers of the FMC peripheral.
 //
 // Instances:
-//  FMC  FMC_BASE  AHB3  FMC,FPU*  Flexible memory controller
+//
+//	FMC  FMC_BASE  AHB3  FMC,FPU*  Flexible memory controller
+//
 // Registers:
-//  0x000 32  BCT{CR,TR}[4]  chip-select control and timing registers
-//  0x080 32  PCR            PC Card/NAND Flash control register 3
-//  0x084 32  SR             FIFO status and interrupt register 3
-//  0x088 32  PMEM           Common memory space timing register 3
-//  0x08C 32  PATT           Attribute memory space timing register 3
-//  0x094 32  ECCR           ECC result register 3
-//  0x104 32  BWTR[4]        write timing registers
+//
+//	0x000 32  BCT{CR,TR}[4]  chip-select control and timing registers
+//	0x080 32  PCR            PC Card/NAND Flash control register 3
+//	0x084 32  SR             FIFO status and interrupt register 3
+//	0x088 32  PMEM           Common memory space timing register 3
+//	0x08C 32  PATT           Attribute memory space timing register 3
+//	0x094 32  ECCR           ECC result register 3
+//	0x104 32  BWTR[4]        write timing registers
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/bus
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/bus
+//	github.com/embeddedgo/stm32/p/mmap
 package fmc
 
 const (

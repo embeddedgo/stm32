@@ -5,14 +5,19 @@
 // Package rng provides access to the registers of the RNG peripheral.
 //
 // Instances:
-//  RNG  RNG_BASE  AHB2  -
+//
+//	RNG  RNG_BASE  AHB2  -
+//
 // Registers:
-//  0x000 32  CR  RNG control register
-//  0x004 32  SR  RNG status register
-//  0x008 32  DR  The RNG_DR register is a read-only register that delivers a 32-bit random value when read. The content of this register is valid when DRDY= 1, even if RNGEN=0.
+//
+//	0x000 32  CR  RNG control register
+//	0x004 32  SR  RNG status register
+//	0x008 32  DR  The RNG_DR register is a read-only register that delivers a 32-bit random value when read. The content of this register is valid when DRDY= 1, even if RNGEN=0.
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/bus
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/bus
+//	github.com/embeddedgo/stm32/p/mmap
 package rng
 
 const (

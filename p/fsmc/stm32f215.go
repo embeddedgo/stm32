@@ -5,28 +5,33 @@
 // Package fsmc provides access to the registers of the FSMC peripheral.
 //
 // Instances:
-//  FSMC  FSMC_BASE  AHB3  FSMC  Flexible static memory controller
+//
+//	FSMC  FSMC_BASE  AHB3  FSMC  Flexible static memory controller
+//
 // Registers:
-//  0x000 32  BCT{CR,TR}[4]  chip-select control and timing registers
-//  0x060 32  PCR2           PC Card/NAND Flash control register 2
-//  0x064 32  SR2            FIFO status and interrupt register 2
-//  0x068 32  PMEM2          Common memory space timing register 2
-//  0x06C 32  PATT2          Attribute memory space timing register 2
-//  0x074 32  ECCR2          ECC result register 2
-//  0x080 32  PCR3           PC Card/NAND Flash control register 3
-//  0x084 32  SR3            FIFO status and interrupt register 3
-//  0x088 32  PMEM3          Common memory space timing register 3
-//  0x08C 32  PATT3          Attribute memory space timing register 3
-//  0x094 32  ECCR3          ECC result register 3
-//  0x0A0 32  PCR4           PC Card/NAND Flash control register 4
-//  0x0A4 32  SR4            FIFO status and interrupt register 4
-//  0x0A8 32  PMEM4          Common memory space timing register 4
-//  0x0AC 32  PATT4          Attribute memory space timing register 4
-//  0x0B0 32  PIO4           I/O space timing register 4
-//  0x104 32  BWTR[4]        write timing registers
+//
+//	0x000 32  BCT{CR,TR}[4]  chip-select control and timing registers
+//	0x060 32  PCR2           PC Card/NAND Flash control register 2
+//	0x064 32  SR2            FIFO status and interrupt register 2
+//	0x068 32  PMEM2          Common memory space timing register 2
+//	0x06C 32  PATT2          Attribute memory space timing register 2
+//	0x074 32  ECCR2          ECC result register 2
+//	0x080 32  PCR3           PC Card/NAND Flash control register 3
+//	0x084 32  SR3            FIFO status and interrupt register 3
+//	0x088 32  PMEM3          Common memory space timing register 3
+//	0x08C 32  PATT3          Attribute memory space timing register 3
+//	0x094 32  ECCR3          ECC result register 3
+//	0x0A0 32  PCR4           PC Card/NAND Flash control register 4
+//	0x0A4 32  SR4            FIFO status and interrupt register 4
+//	0x0A8 32  PMEM4          Common memory space timing register 4
+//	0x0AC 32  PATT4          Attribute memory space timing register 4
+//	0x0B0 32  PIO4           I/O space timing register 4
+//	0x104 32  BWTR[4]        write timing registers
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/bus
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/bus
+//	github.com/embeddedgo/stm32/p/mmap
 package fsmc
 
 const (

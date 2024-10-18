@@ -5,19 +5,24 @@
 // Package pwr provides access to the registers of the PWR peripheral.
 //
 // Instances:
-//  PWR  PWR_BASE  -  -
+//
+//	PWR  PWR_BASE  -  -
+//
 // Registers:
-//  0x000 32  CR1      PWR control register 1
-//  0x004 32  CSR1     PWR control status register 1
-//  0x008 32  CR2      This register is not reset by wakeup from Standby mode, RESET signal and VDD POR. It is only reset by VSW POR and VSWRST reset. This register shall not be accessed when VSWRST bit in RCC_BDCR register resets the VSW domain.After reset, PWR_CR2 register is write-protected. Prior to modifying its content, the DBP bit in PWR_CR1 register must be set to disable the write protection.
-//  0x00C 32  CR3      Reset only by POR only, not reset by wakeup from Standby mode and RESET pad. The lower byte of this register is written once after POR and shall be written before changing VOS level or ck_sys clock frequency. No limitation applies to the upper bytes.Programming data corresponding to an invalid combination of SDLEVEL, SDEXTHP, SDEN, LDOEN and BYPASS bits (see Table9) will be ignored: data will not be written, the written-once mechanism will lock the register and any further write access will be ignored. The default supply configuration will be kept and the ACTVOSRDY bit in PWR control status register 1 (PWR_CSR1) will go on indicating invalid voltage levels. The system shall be power cycled before writing a new value.
-//  0x010 32  CPUCR    This register allows controlling CPU1 power.
-//  0x018 32  D3CR     This register allows controlling D3 domain power.Following reset VOSRDY will be read 1 by software
-//  0x020 32  WKUPCR   reset only by system reset, not reset by wakeup from Standby mode5 wait states are required when writing this register (when clearing a WKUPF bit in PWR_WKUPFR, the AHB write access will complete after the WKUPF has been cleared).
-//  0x024 32  WKUPFR   reset only by system reset, not reset by wakeup from Standby mode
-//  0x028 32  WKUPEPR  Reset only by system reset, not reset by wakeup from Standby mode
+//
+//	0x000 32  CR1      PWR control register 1
+//	0x004 32  CSR1     PWR control status register 1
+//	0x008 32  CR2      This register is not reset by wakeup from Standby mode, RESET signal and VDD POR. It is only reset by VSW POR and VSWRST reset. This register shall not be accessed when VSWRST bit in RCC_BDCR register resets the VSW domain.After reset, PWR_CR2 register is write-protected. Prior to modifying its content, the DBP bit in PWR_CR1 register must be set to disable the write protection.
+//	0x00C 32  CR3      Reset only by POR only, not reset by wakeup from Standby mode and RESET pad. The lower byte of this register is written once after POR and shall be written before changing VOS level or ck_sys clock frequency. No limitation applies to the upper bytes.Programming data corresponding to an invalid combination of SDLEVEL, SDEXTHP, SDEN, LDOEN and BYPASS bits (see Table9) will be ignored: data will not be written, the written-once mechanism will lock the register and any further write access will be ignored. The default supply configuration will be kept and the ACTVOSRDY bit in PWR control status register 1 (PWR_CSR1) will go on indicating invalid voltage levels. The system shall be power cycled before writing a new value.
+//	0x010 32  CPUCR    This register allows controlling CPU1 power.
+//	0x018 32  D3CR     This register allows controlling D3 domain power.Following reset VOSRDY will be read 1 by software
+//	0x020 32  WKUPCR   reset only by system reset, not reset by wakeup from Standby mode5 wait states are required when writing this register (when clearing a WKUPF bit in PWR_WKUPFR, the AHB write access will complete after the WKUPF has been cleared).
+//	0x024 32  WKUPFR   reset only by system reset, not reset by wakeup from Standby mode
+//	0x028 32  WKUPEPR  Reset only by system reset, not reset by wakeup from Standby mode
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package pwr
 
 const (

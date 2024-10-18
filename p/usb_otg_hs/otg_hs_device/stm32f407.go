@@ -5,75 +5,80 @@
 // Package otg_hs_device provides access to the registers of the OTG_HS_DEVICE peripheral.
 //
 // Instances:
-//  OTG_HS_DEVICE  OTG_HS_DEVICE_BASE  -  -  USB on the go high speed
+//
+//	OTG_HS_DEVICE  OTG_HS_DEVICE_BASE  -  -  USB on the go high speed
+//
 // Registers:
-//  0x000 32  OTG_HS_DCFG          OTG_HS device configuration register
-//  0x004 32  OTG_HS_DCTL          OTG_HS device control register
-//  0x008 32  OTG_HS_DSTS          OTG_HS device status register
-//  0x010 32  OTG_HS_DIEPMSK       OTG_HS device IN endpoint common interrupt mask register
-//  0x014 32  OTG_HS_DOEPMSK       OTG_HS device OUT endpoint common interrupt mask register
-//  0x018 32  OTG_HS_DAINT         OTG_HS device all endpoints interrupt register
-//  0x01C 32  OTG_HS_DAINTMSK      OTG_HS all endpoints interrupt mask register
-//  0x028 32  OTG_HS_DVBUSDIS      OTG_HS device VBUS discharge time register
-//  0x02C 32  OTG_HS_DVBUSPULSE    OTG_HS device VBUS pulsing time register
-//  0x030 32  OTG_HS_DTHRCTL       OTG_HS Device threshold control register
-//  0x034 32  OTG_HS_DIEPEMPMSK    OTG_HS device IN endpoint FIFO empty interrupt mask register
-//  0x038 32  OTG_HS_DEACHINT      OTG_HS device each endpoint interrupt register
-//  0x03C 32  OTG_HS_DEACHINTMSK   OTG_HS device each endpoint interrupt register mask
-//  0x040 32  OTG_HS_DIEPEACHMSK1  OTG_HS device each in endpoint-1 interrupt register
-//  0x080 32  OTG_HS_DOEPEACHMSK1  OTG_HS device each OUT endpoint-1 interrupt register
-//  0x100 32  OTG_HS_DIEPCTL0      OTG device endpoint-0 control register
-//  0x108 32  OTG_HS_DIEPINT0      OTG device endpoint-0 interrupt register
-//  0x110 32  OTG_HS_DIEPTSIZ0     OTG_HS device IN endpoint 0 transfer size register
-//  0x114 32  OTG_HS_DIEPDMA1      OTG_HS device endpoint-1 DMA address register
-//  0x118 32  OTG_HS_DTXFSTS0      OTG_HS device IN endpoint transmit FIFO status register
-//  0x120 32  OTG_HS_DIEPCTL1      OTG device endpoint-1 control register
-//  0x128 32  OTG_HS_DIEPINT1      OTG device endpoint-1 interrupt register
-//  0x130 32  OTG_HS_DIEPTSIZ1     OTG_HS device endpoint transfer size register
-//  0x134 32  OTG_HS_DIEPDMA2      OTG_HS device endpoint-2 DMA address register
-//  0x138 32  OTG_HS_DTXFSTS1      OTG_HS device IN endpoint transmit FIFO status register
-//  0x140 32  OTG_HS_DIEPCTL2      OTG device endpoint-2 control register
-//  0x148 32  OTG_HS_DIEPINT2      OTG device endpoint-2 interrupt register
-//  0x150 32  OTG_HS_DIEPTSIZ2     OTG_HS device endpoint transfer size register
-//  0x154 32  OTG_HS_DIEPDMA3      OTG_HS device endpoint-3 DMA address register
-//  0x158 32  OTG_HS_DTXFSTS2      OTG_HS device IN endpoint transmit FIFO status register
-//  0x160 32  OTG_HS_DIEPCTL3      OTG device endpoint-3 control register
-//  0x168 32  OTG_HS_DIEPINT3      OTG device endpoint-3 interrupt register
-//  0x170 32  OTG_HS_DIEPTSIZ3     OTG_HS device endpoint transfer size register
-//  0x174 32  OTG_HS_DIEPDMA4      OTG_HS device endpoint-4 DMA address register
-//  0x178 32  OTG_HS_DTXFSTS3      OTG_HS device IN endpoint transmit FIFO status register
-//  0x180 32  OTG_HS_DIEPCTL4      OTG device endpoint-4 control register
-//  0x188 32  OTG_HS_DIEPINT4      OTG device endpoint-4 interrupt register
-//  0x190 32  OTG_HS_DIEPTSIZ4     OTG_HS device endpoint transfer size register
-//  0x194 32  OTG_HS_DIEPDMA5      OTG_HS device endpoint-5 DMA address register
-//  0x198 32  OTG_HS_DTXFSTS4      OTG_HS device IN endpoint transmit FIFO status register
-//  0x1A0 32  OTG_HS_DIEPCTL5      OTG device endpoint-5 control register
-//  0x1A8 32  OTG_HS_DIEPINT5      OTG device endpoint-5 interrupt register
-//  0x1B0 32  OTG_HS_DIEPTSIZ5     OTG_HS device endpoint transfer size register
-//  0x1B8 32  OTG_HS_DTXFSTS5      OTG_HS device IN endpoint transmit FIFO status register
-//  0x1C0 32  OTG_HS_DIEPCTL6      OTG device endpoint-6 control register
-//  0x1C8 32  OTG_HS_DIEPINT6      OTG device endpoint-6 interrupt register
-//  0x1E0 32  OTG_HS_DIEPCTL7      OTG device endpoint-7 control register
-//  0x1E8 32  OTG_HS_DIEPINT7      OTG device endpoint-7 interrupt register
-//  0x300 32  OTG_HS_DOEPCTL0      OTG_HS device control OUT endpoint 0 control register
-//  0x308 32  OTG_HS_DOEPINT0      OTG_HS device endpoint-0 interrupt register
-//  0x310 32  OTG_HS_DOEPTSIZ0     OTG_HS device endpoint-1 transfer size register
-//  0x320 32  OTG_HS_DOEPCTL1      OTG device endpoint-1 control register
-//  0x328 32  OTG_HS_DOEPINT1      OTG_HS device endpoint-1 interrupt register
-//  0x330 32  OTG_HS_DOEPTSIZ1     OTG_HS device endpoint-2 transfer size register
-//  0x340 32  OTG_HS_DOEPCTL2      OTG device endpoint-2 control register
-//  0x348 32  OTG_HS_DOEPINT2      OTG_HS device endpoint-2 interrupt register
-//  0x350 32  OTG_HS_DOEPTSIZ2     OTG_HS device endpoint-3 transfer size register
-//  0x360 32  OTG_HS_DOEPCTL3      OTG device endpoint-3 control register
-//  0x368 32  OTG_HS_DOEPINT3      OTG_HS device endpoint-3 interrupt register
-//  0x370 32  OTG_HS_DOEPTSIZ3     OTG_HS device endpoint-4 transfer size register
-//  0x388 32  OTG_HS_DOEPINT4      OTG_HS device endpoint-4 interrupt register
-//  0x390 32  OTG_HS_DOEPTSIZ4     OTG_HS device endpoint-5 transfer size register
-//  0x3A8 32  OTG_HS_DOEPINT5      OTG_HS device endpoint-5 interrupt register
-//  0x3C8 32  OTG_HS_DOEPINT6      OTG_HS device endpoint-6 interrupt register
-//  0x3E8 32  OTG_HS_DOEPINT7      OTG_HS device endpoint-7 interrupt register
+//
+//	0x000 32  OTG_HS_DCFG          OTG_HS device configuration register
+//	0x004 32  OTG_HS_DCTL          OTG_HS device control register
+//	0x008 32  OTG_HS_DSTS          OTG_HS device status register
+//	0x010 32  OTG_HS_DIEPMSK       OTG_HS device IN endpoint common interrupt mask register
+//	0x014 32  OTG_HS_DOEPMSK       OTG_HS device OUT endpoint common interrupt mask register
+//	0x018 32  OTG_HS_DAINT         OTG_HS device all endpoints interrupt register
+//	0x01C 32  OTG_HS_DAINTMSK      OTG_HS all endpoints interrupt mask register
+//	0x028 32  OTG_HS_DVBUSDIS      OTG_HS device VBUS discharge time register
+//	0x02C 32  OTG_HS_DVBUSPULSE    OTG_HS device VBUS pulsing time register
+//	0x030 32  OTG_HS_DTHRCTL       OTG_HS Device threshold control register
+//	0x034 32  OTG_HS_DIEPEMPMSK    OTG_HS device IN endpoint FIFO empty interrupt mask register
+//	0x038 32  OTG_HS_DEACHINT      OTG_HS device each endpoint interrupt register
+//	0x03C 32  OTG_HS_DEACHINTMSK   OTG_HS device each endpoint interrupt register mask
+//	0x040 32  OTG_HS_DIEPEACHMSK1  OTG_HS device each in endpoint-1 interrupt register
+//	0x080 32  OTG_HS_DOEPEACHMSK1  OTG_HS device each OUT endpoint-1 interrupt register
+//	0x100 32  OTG_HS_DIEPCTL0      OTG device endpoint-0 control register
+//	0x108 32  OTG_HS_DIEPINT0      OTG device endpoint-0 interrupt register
+//	0x110 32  OTG_HS_DIEPTSIZ0     OTG_HS device IN endpoint 0 transfer size register
+//	0x114 32  OTG_HS_DIEPDMA1      OTG_HS device endpoint-1 DMA address register
+//	0x118 32  OTG_HS_DTXFSTS0      OTG_HS device IN endpoint transmit FIFO status register
+//	0x120 32  OTG_HS_DIEPCTL1      OTG device endpoint-1 control register
+//	0x128 32  OTG_HS_DIEPINT1      OTG device endpoint-1 interrupt register
+//	0x130 32  OTG_HS_DIEPTSIZ1     OTG_HS device endpoint transfer size register
+//	0x134 32  OTG_HS_DIEPDMA2      OTG_HS device endpoint-2 DMA address register
+//	0x138 32  OTG_HS_DTXFSTS1      OTG_HS device IN endpoint transmit FIFO status register
+//	0x140 32  OTG_HS_DIEPCTL2      OTG device endpoint-2 control register
+//	0x148 32  OTG_HS_DIEPINT2      OTG device endpoint-2 interrupt register
+//	0x150 32  OTG_HS_DIEPTSIZ2     OTG_HS device endpoint transfer size register
+//	0x154 32  OTG_HS_DIEPDMA3      OTG_HS device endpoint-3 DMA address register
+//	0x158 32  OTG_HS_DTXFSTS2      OTG_HS device IN endpoint transmit FIFO status register
+//	0x160 32  OTG_HS_DIEPCTL3      OTG device endpoint-3 control register
+//	0x168 32  OTG_HS_DIEPINT3      OTG device endpoint-3 interrupt register
+//	0x170 32  OTG_HS_DIEPTSIZ3     OTG_HS device endpoint transfer size register
+//	0x174 32  OTG_HS_DIEPDMA4      OTG_HS device endpoint-4 DMA address register
+//	0x178 32  OTG_HS_DTXFSTS3      OTG_HS device IN endpoint transmit FIFO status register
+//	0x180 32  OTG_HS_DIEPCTL4      OTG device endpoint-4 control register
+//	0x188 32  OTG_HS_DIEPINT4      OTG device endpoint-4 interrupt register
+//	0x190 32  OTG_HS_DIEPTSIZ4     OTG_HS device endpoint transfer size register
+//	0x194 32  OTG_HS_DIEPDMA5      OTG_HS device endpoint-5 DMA address register
+//	0x198 32  OTG_HS_DTXFSTS4      OTG_HS device IN endpoint transmit FIFO status register
+//	0x1A0 32  OTG_HS_DIEPCTL5      OTG device endpoint-5 control register
+//	0x1A8 32  OTG_HS_DIEPINT5      OTG device endpoint-5 interrupt register
+//	0x1B0 32  OTG_HS_DIEPTSIZ5     OTG_HS device endpoint transfer size register
+//	0x1B8 32  OTG_HS_DTXFSTS5      OTG_HS device IN endpoint transmit FIFO status register
+//	0x1C0 32  OTG_HS_DIEPCTL6      OTG device endpoint-6 control register
+//	0x1C8 32  OTG_HS_DIEPINT6      OTG device endpoint-6 interrupt register
+//	0x1E0 32  OTG_HS_DIEPCTL7      OTG device endpoint-7 control register
+//	0x1E8 32  OTG_HS_DIEPINT7      OTG device endpoint-7 interrupt register
+//	0x300 32  OTG_HS_DOEPCTL0      OTG_HS device control OUT endpoint 0 control register
+//	0x308 32  OTG_HS_DOEPINT0      OTG_HS device endpoint-0 interrupt register
+//	0x310 32  OTG_HS_DOEPTSIZ0     OTG_HS device endpoint-1 transfer size register
+//	0x320 32  OTG_HS_DOEPCTL1      OTG device endpoint-1 control register
+//	0x328 32  OTG_HS_DOEPINT1      OTG_HS device endpoint-1 interrupt register
+//	0x330 32  OTG_HS_DOEPTSIZ1     OTG_HS device endpoint-2 transfer size register
+//	0x340 32  OTG_HS_DOEPCTL2      OTG device endpoint-2 control register
+//	0x348 32  OTG_HS_DOEPINT2      OTG_HS device endpoint-2 interrupt register
+//	0x350 32  OTG_HS_DOEPTSIZ2     OTG_HS device endpoint-3 transfer size register
+//	0x360 32  OTG_HS_DOEPCTL3      OTG device endpoint-3 control register
+//	0x368 32  OTG_HS_DOEPINT3      OTG_HS device endpoint-3 interrupt register
+//	0x370 32  OTG_HS_DOEPTSIZ3     OTG_HS device endpoint-4 transfer size register
+//	0x388 32  OTG_HS_DOEPINT4      OTG_HS device endpoint-4 interrupt register
+//	0x390 32  OTG_HS_DOEPTSIZ4     OTG_HS device endpoint-5 transfer size register
+//	0x3A8 32  OTG_HS_DOEPINT5      OTG_HS device endpoint-5 interrupt register
+//	0x3C8 32  OTG_HS_DOEPINT6      OTG_HS device endpoint-6 interrupt register
+//	0x3E8 32  OTG_HS_DOEPINT7      OTG_HS device endpoint-7 interrupt register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package otg_hs_device
 
 const (

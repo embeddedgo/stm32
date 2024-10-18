@@ -5,41 +5,46 @@
 // Package adc1 provides access to the registers of the ADC peripheral.
 //
 // Instances:
-//  ADC1  ADC1_BASE  AHB2  ADC1_2+  Analog-to-Digital Converter
-//  ADC2  ADC2_BASE  AHB2  ADC1_2+  Analog-to-Digital Converter
+//
+//	ADC1  ADC1_BASE  AHB2  ADC1_2+  Analog-to-Digital Converter
+//	ADC2  ADC2_BASE  AHB2  ADC1_2+  Analog-to-Digital Converter
+//
 // Registers:
-//  0x000 32  ISR      interrupt and status register
-//  0x004 32  IER      interrupt enable register
-//  0x008 32  CR       control register
-//  0x00C 32  CFGR     configuration register
-//  0x010 32  CFGR2    configuration register
-//  0x014 32  SMPR1    sample time register 1
-//  0x018 32  SMPR2    sample time register 2
-//  0x020 32  TR1      watchdog threshold register 1
-//  0x024 32  TR2      watchdog threshold register
-//  0x028 32  TR3      watchdog threshold register 3
-//  0x030 32  SQR1     regular sequence register 1
-//  0x034 32  SQR2     regular sequence register 2
-//  0x038 32  SQR3     regular sequence register 3
-//  0x03C 32  SQR4     regular sequence register 4
-//  0x040 32  DR       regular Data Register
-//  0x04C 32  JSQR     injected sequence register
-//  0x060 32  OFR1     offset register 1
-//  0x064 32  OFR2     offset register 2
-//  0x068 32  OFR3     offset register 3
-//  0x06C 32  OFR4     offset register 4
-//  0x080 32  JDR1     injected data register 1
-//  0x084 32  JDR2     injected data register 2
-//  0x088 32  JDR3     injected data register 3
-//  0x08C 32  JDR4     injected data register 4
-//  0x0A0 32  AWD2CR   Analog Watchdog 2 Configuration Register
-//  0x0A4 32  AWD3CR   Analog Watchdog 3 Configuration Register
-//  0x0B0 32  DIFSEL   Differential Mode Selection Register 2
-//  0x0B4 32  CALFACT  Calibration Factors
-//  0x0C0 32  GCOMP    Gain compensation Register
+//
+//	0x000 32  ISR      interrupt and status register
+//	0x004 32  IER      interrupt enable register
+//	0x008 32  CR       control register
+//	0x00C 32  CFGR     configuration register
+//	0x010 32  CFGR2    configuration register
+//	0x014 32  SMPR1    sample time register 1
+//	0x018 32  SMPR2    sample time register 2
+//	0x020 32  TR1      watchdog threshold register 1
+//	0x024 32  TR2      watchdog threshold register
+//	0x028 32  TR3      watchdog threshold register 3
+//	0x030 32  SQR1     regular sequence register 1
+//	0x034 32  SQR2     regular sequence register 2
+//	0x038 32  SQR3     regular sequence register 3
+//	0x03C 32  SQR4     regular sequence register 4
+//	0x040 32  DR       regular Data Register
+//	0x04C 32  JSQR     injected sequence register
+//	0x060 32  OFR1     offset register 1
+//	0x064 32  OFR2     offset register 2
+//	0x068 32  OFR3     offset register 3
+//	0x06C 32  OFR4     offset register 4
+//	0x080 32  JDR1     injected data register 1
+//	0x084 32  JDR2     injected data register 2
+//	0x088 32  JDR3     injected data register 3
+//	0x08C 32  JDR4     injected data register 4
+//	0x0A0 32  AWD2CR   Analog Watchdog 2 Configuration Register
+//	0x0A4 32  AWD3CR   Analog Watchdog 3 Configuration Register
+//	0x0B0 32  DIFSEL   Differential Mode Selection Register 2
+//	0x0B4 32  CALFACT  Calibration Factors
+//	0x0C0 32  GCOMP    Gain compensation Register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/bus
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/bus
+//	github.com/embeddedgo/stm32/p/mmap
 package adc1
 
 const (

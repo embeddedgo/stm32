@@ -190,10 +190,10 @@ func FRACN1_(p *Periph) mmio.RM32[PLL1FRACR] { return mmio.RM32[PLL1FRACR]{&p.PL
 
 type PLL2DIVR uint32
 
-func DIVN2_(p *Periph) mmio.RM32[PLL2DIVR] { return mmio.RM32[PLL2DIVR]{&p.PLL2DIVR, DIVN2} }
-func DIVP2_(p *Periph) mmio.RM32[PLL2DIVR] { return mmio.RM32[PLL2DIVR]{&p.PLL2DIVR, DIVP2} }
-func DIVQ2_(p *Periph) mmio.RM32[PLL2DIVR] { return mmio.RM32[PLL2DIVR]{&p.PLL2DIVR, DIVQ2} }
-func DIVR2_(p *Periph) mmio.RM32[PLL2DIVR] { return mmio.RM32[PLL2DIVR]{&p.PLL2DIVR, DIVR2} }
+func DIVN2_(p *Periph) mmio.RM32[PLL2DIVR]  { return mmio.RM32[PLL2DIVR]{&p.PLL2DIVR, DIVN2} }
+func DIVP12_(p *Periph) mmio.RM32[PLL2DIVR] { return mmio.RM32[PLL2DIVR]{&p.PLL2DIVR, DIVP12} }
+func DIVQ2_(p *Periph) mmio.RM32[PLL2DIVR]  { return mmio.RM32[PLL2DIVR]{&p.PLL2DIVR, DIVQ2} }
+func DIVR2_(p *Periph) mmio.RM32[PLL2DIVR]  { return mmio.RM32[PLL2DIVR]{&p.PLL2DIVR, DIVR2} }
 
 type PLL2FRACR uint32
 

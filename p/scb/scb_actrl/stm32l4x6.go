@@ -5,11 +5,16 @@
 // Package scb_actrl provides access to the registers of the SCB_ACTRL peripheral.
 //
 // Instances:
-//  SCB_ACTRL  SCB_ACTRL_BASE  -  -  System control block ACTLR
+//
+//	SCB_ACTRL  SCB_ACTRL_BASE  -  -  System control block ACTLR
+//
 // Registers:
-//  0x000 32  ACTRL  Auxiliary control register
+//
+//	0x000 32  ACTRL  Auxiliary control register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package scb_actrl
 
 const (

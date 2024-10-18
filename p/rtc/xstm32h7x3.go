@@ -165,5 +165,5 @@ type ALRMSSR uint32
 
 type OR uint32
 
-func ALARM_TYPE_(p *Periph) mmio.RM32[OR] { return mmio.RM32[OR]{&p.OR, ALARM_TYPE} }
-func OUT_RMP_(p *Periph) mmio.RM32[OR]    { return mmio.RM32[OR]{&p.OR, OUT_RMP} }
+func RTC_ALARM_TYPE_(p *Periph) mmio.RM32[OR] { return mmio.RM32[OR]{&p.OR, RTC_ALARM_TYPE} }
+func RTC_OUT_RMP_(p *Periph) mmio.RM32[OR]    { return mmio.RM32[OR]{&p.OR, RTC_OUT_RMP} }

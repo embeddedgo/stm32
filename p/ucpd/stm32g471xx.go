@@ -5,24 +5,29 @@
 // Package ucpd provides access to the registers of the UCPD peripheral.
 //
 // Instances:
-//  UCPD1  UCPD1_BASE  -  UCPD1  UCPD1
+//
+//	UCPD1  UCPD1_BASE  -  UCPD1  UCPD1
+//
 // Registers:
-//  0x000 32  CFG1        UCPD configuration register 1
-//  0x004 32  CFG2        UCPD configuration register 2
-//  0x00C 32  CR          UCPD configuration register 2
-//  0x010 32  IMR         UCPD Interrupt Mask Register
-//  0x014 32  SR          UCPD Status Register
-//  0x018 32  ICR         UCPD Interrupt Clear Register
-//  0x01C 32  TX_ORDSET   UCPD Tx Ordered Set Type Register
-//  0x020 32  TX_PAYSZ    UCPD Tx Paysize Register
-//  0x024 32  TXDR        UCPD Tx Data Register
-//  0x028 32  RX_ORDSET   UCPD Rx Ordered Set Register
-//  0x02C 32  RX_PAYSZ    UCPD Rx Paysize Register
-//  0x030 32  RXDR        UCPD Rx Data Register
-//  0x034 32  RX_ORDEXT1  UCPD Rx Ordered Set Extension Register 1
-//  0x038 32  RX_ORDEXT2  UCPD Rx Ordered Set Extension Register 2
+//
+//	0x000 32  CFG1        UCPD configuration register 1
+//	0x004 32  CFG2        UCPD configuration register 2
+//	0x00C 32  CR          UCPD configuration register 2
+//	0x010 32  IMR         UCPD Interrupt Mask Register
+//	0x014 32  SR          UCPD Status Register
+//	0x018 32  ICR         UCPD Interrupt Clear Register
+//	0x01C 32  TX_ORDSET   UCPD Tx Ordered Set Type Register
+//	0x020 32  TX_PAYSZ    UCPD Tx Paysize Register
+//	0x024 32  TXDR        UCPD Tx Data Register
+//	0x028 32  RX_ORDSET   UCPD Rx Ordered Set Register
+//	0x02C 32  RX_PAYSZ    UCPD Rx Paysize Register
+//	0x030 32  RXDR        UCPD Rx Data Register
+//	0x034 32  RX_ORDEXT1  UCPD Rx Ordered Set Extension Register 1
+//	0x038 32  RX_ORDEXT2  UCPD Rx Ordered Set Extension Register 2
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package ucpd
 
 const (

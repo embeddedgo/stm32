@@ -5,28 +5,33 @@
 // Package tsc provides access to the registers of the TSC peripheral.
 //
 // Instances:
-//  TSC  TSC_BASE  AHB1  TSC  Touch sensing controller
+//
+//	TSC  TSC_BASE  AHB1  TSC  Touch sensing controller
+//
 // Registers:
-//  0x000 32  CR      control register
-//  0x004 32  IER     interrupt enable register
-//  0x008 32  ICR     interrupt clear register
-//  0x00C 32  ISR     interrupt status register
-//  0x010 32  IOHCR   I/O hysteresis control register
-//  0x018 32  IOASCR  I/O analog switch control register
-//  0x020 32  IOSCR   I/O sampling control register
-//  0x028 32  IOCCR   I/O channel control register
-//  0x030 32  IOGCSR  I/O group control status register
-//  0x034 32  IOG1CR  I/O group x counter register
-//  0x038 32  IOG2CR  I/O group x counter register
-//  0x03C 32  IOG3CR  I/O group x counter register
-//  0x040 32  IOG4CR  I/O group x counter register
-//  0x044 32  IOG5CR  I/O group x counter register
-//  0x048 32  IOG6CR  I/O group x counter register
-//  0x04C 32  IOG7CR  I/O group x counter register
-//  0x050 32  IOG8CR  I/O group x counter register
+//
+//	0x000 32  CR      control register
+//	0x004 32  IER     interrupt enable register
+//	0x008 32  ICR     interrupt clear register
+//	0x00C 32  ISR     interrupt status register
+//	0x010 32  IOHCR   I/O hysteresis control register
+//	0x018 32  IOASCR  I/O analog switch control register
+//	0x020 32  IOSCR   I/O sampling control register
+//	0x028 32  IOCCR   I/O channel control register
+//	0x030 32  IOGCSR  I/O group control status register
+//	0x034 32  IOG1CR  I/O group x counter register
+//	0x038 32  IOG2CR  I/O group x counter register
+//	0x03C 32  IOG3CR  I/O group x counter register
+//	0x040 32  IOG4CR  I/O group x counter register
+//	0x044 32  IOG5CR  I/O group x counter register
+//	0x048 32  IOG6CR  I/O group x counter register
+//	0x04C 32  IOG7CR  I/O group x counter register
+//	0x050 32  IOG8CR  I/O group x counter register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/bus
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/bus
+//	github.com/embeddedgo/stm32/p/mmap
 package tsc
 
 const (

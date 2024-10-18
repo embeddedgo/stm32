@@ -2,29 +2,34 @@
 
 //go:build stm32h7x3
 
-// Package ic provides access to the registers of the I2C peripheral.
+// Package i2c provides access to the registers of the I2C peripheral.
 //
 // Instances:
-//  I2C1  I2C1_BASE  APB1  I2C1_EV,I2C1_ER  I2C
-//  I2C2  I2C2_BASE  APB1  I2C2_EV,I2C2_ER  I2C
-//  I2C3  I2C3_BASE  APB1  I2C3_EV,I2C3_ER  I2C
-//  I2C4  I2C4_BASE  APB4  I2C4_EV,I2C4_ER  I2C
+//
+//	I2C1  I2C1_BASE  APB1  I2C1_EV,I2C1_ER
+//	I2C2  I2C2_BASE  APB1  I2C2_EV,I2C2_ER
+//	I2C3  I2C3_BASE  APB1  I2C3_EV,I2C3_ER
+//	I2C4  I2C4_BASE  APB4  I2C4_EV,I2C4_ER
+//
 // Registers:
-//  0x000 32  CR1       Access: No wait states, except if a write access occurs while a write access to this register is ongoing. In this case, wait states are inserted in the second write access until the previous one is completed. The latency of the second write access can be up to 2 x PCLK1 + 6 x I2CCLK.
-//  0x004 32  CR2       Access: No wait states, except if a write access occurs while a write access to this register is ongoing. In this case, wait states are inserted in the second write access until the previous one is completed. The latency of the second write access can be up to 2 x PCLK1 + 6 x I2CCLK.
-//  0x008 32  OAR1      Access: No wait states, except if a write access occurs while a write access to this register is ongoing. In this case, wait states are inserted in the second write access until the previous one is completed. The latency of the second write access can be up to 2 x PCLK1 + 6 x I2CCLK.
-//  0x00C 32  OAR2      Access: No wait states, except if a write access occurs while a write access to this register is ongoing. In this case, wait states are inserted in the second write access until the previous one is completed. The latency of the second write access can be up to 2 x PCLK1 + 6 x I2CCLK.
-//  0x010 32  TIMINGR   Access: No wait states
-//  0x014 32  TIMEOUTR  Access: No wait states, except if a write access occurs while a write access to this register is ongoing. In this case, wait states are inserted in the second write access until the previous one is completed. The latency of the second write access can be up to 2 x PCLK1 + 6 x I2CCLK.
-//  0x018 32  ISR       Access: No wait states
-//  0x01C 32  ICR       Access: No wait states
-//  0x020 32  PECR      Access: No wait states
-//  0x024 32  RXDR      Access: No wait states
-//  0x028 32  TXDR      Access: No wait states
+//
+//	0x000 32  CR1       Access: No wait states, except if a write access occurs while a write access to this register is ongoing. In this case, wait states are inserted in the second write access until the previous one is completed. The latency of the second write access can be up to 2 x PCLK1 + 6 x I2CCLK.
+//	0x004 32  CR2       Access: No wait states, except if a write access occurs while a write access to this register is ongoing. In this case, wait states are inserted in the second write access until the previous one is completed. The latency of the second write access can be up to 2 x PCLK1 + 6 x I2CCLK.
+//	0x008 32  OAR1      Access: No wait states, except if a write access occurs while a write access to this register is ongoing. In this case, wait states are inserted in the second write access until the previous one is completed. The latency of the second write access can be up to 2 x PCLK1 + 6 x I2CCLK.
+//	0x00C 32  OAR2      Access: No wait states, except if a write access occurs while a write access to this register is ongoing. In this case, wait states are inserted in the second write access until the previous one is completed. The latency of the second write access can be up to 2 x PCLK1 + 6 x I2CCLK.
+//	0x010 32  TIMINGR   Access: No wait states
+//	0x014 32  TIMEOUTR  Access: No wait states, except if a write access occurs while a write access to this register is ongoing. In this case, wait states are inserted in the second write access until the previous one is completed. The latency of the second write access can be up to 2 x PCLK1 + 6 x I2CCLK.
+//	0x018 32  ISR       Access: No wait states
+//	0x01C 32  ICR       Access: No wait states
+//	0x020 32  PECR      Access: No wait states
+//	0x024 32  RXDR      Access: No wait states
+//	0x028 32  TXDR      Access: No wait states
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/bus
-//  github.com/embeddedgo/stm32/p/mmap
-package ic
+//
+//	github.com/embeddedgo/stm32/p/bus
+//	github.com/embeddedgo/stm32/p/mmap
+package i2c
 
 const (
 	PE        CR1 = 0x01 << 0  //+ Peripheral enable Note: When PE=0, the I2C SCL and SDA lines are released. Internal state machines and status bits are put back to their reset value. When cleared, PE must be kept low for at least 3 APB clock cycles.

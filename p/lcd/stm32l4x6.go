@@ -5,23 +5,28 @@
 // Package lcd provides access to the registers of the LCD peripheral.
 //
 // Instances:
-//  LCD  LCD_BASE  APB1  LCD  Liquid crystal display controller
+//
+//	LCD  LCD_BASE  APB1  LCD  Liquid crystal display controller
+//
 // Registers:
-//  0x000 32  CR        control register
-//  0x004 32  FCR       frame control register
-//  0x008 32  SR        status register
-//  0x00C 32  CLR       clear register
-//  0x014 32  RAM_COM0  display memory
-//  0x01C 32  RAM_COM1  display memory
-//  0x024 32  RAM_COM2  display memory
-//  0x02C 32  RAM_COM3  display memory
-//  0x034 32  RAM_COM4  display memory
-//  0x03C 32  RAM_COM5  display memory
-//  0x044 32  RAM_COM6  display memory
-//  0x04C 32  RAM_COM7  display memory
+//
+//	0x000 32  CR        control register
+//	0x004 32  FCR       frame control register
+//	0x008 32  SR        status register
+//	0x00C 32  CLR       clear register
+//	0x014 32  RAM_COM0  display memory
+//	0x01C 32  RAM_COM1  display memory
+//	0x024 32  RAM_COM2  display memory
+//	0x02C 32  RAM_COM3  display memory
+//	0x034 32  RAM_COM4  display memory
+//	0x03C 32  RAM_COM5  display memory
+//	0x044 32  RAM_COM6  display memory
+//	0x04C 32  RAM_COM7  display memory
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/bus
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/bus
+//	github.com/embeddedgo/stm32/p/mmap
 package lcd
 
 const (

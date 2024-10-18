@@ -5,83 +5,88 @@
 // Package hash provides access to the registers of the HASH peripheral.
 //
 // Instances:
-//  HASH  HASH_BASE  AHB2  HASH_RNG  Hash processor
+//
+//	HASH  HASH_BASE  AHB2  HASH_RNG  Hash processor
+//
 // Registers:
-//  0x000 32  CR        control register
-//  0x004 32  DIN       data input register
-//  0x008 32  STR       start register
-//  0x00C 32  HR0       digest registers
-//  0x010 32  HR1       digest registers
-//  0x014 32  HR2       digest registers
-//  0x018 32  HR3       digest registers
-//  0x01C 32  HR4       digest registers
-//  0x020 32  IMR       interrupt enable register
-//  0x024 32  SR        status register
-//  0x0F8 32  CSR0      context swap registers
-//  0x0FC 32  CSR1      context swap registers
-//  0x100 32  CSR2      context swap registers
-//  0x104 32  CSR3      context swap registers
-//  0x108 32  CSR4      context swap registers
-//  0x10C 32  CSR5      context swap registers
-//  0x110 32  CSR6      context swap registers
-//  0x114 32  CSR7      context swap registers
-//  0x118 32  CSR8      context swap registers
-//  0x11C 32  CSR9      context swap registers
-//  0x120 32  CSR10     context swap registers
-//  0x124 32  CSR11     context swap registers
-//  0x128 32  CSR12     context swap registers
-//  0x12C 32  CSR13     context swap registers
-//  0x130 32  CSR14     context swap registers
-//  0x134 32  CSR15     context swap registers
-//  0x138 32  CSR16     context swap registers
-//  0x13C 32  CSR17     context swap registers
-//  0x140 32  CSR18     context swap registers
-//  0x144 32  CSR19     context swap registers
-//  0x148 32  CSR20     context swap registers
-//  0x14C 32  CSR21     context swap registers
-//  0x150 32  CSR22     context swap registers
-//  0x154 32  CSR23     context swap registers
-//  0x158 32  CSR24     context swap registers
-//  0x15C 32  CSR25     context swap registers
-//  0x160 32  CSR26     context swap registers
-//  0x164 32  CSR27     context swap registers
-//  0x168 32  CSR28     context swap registers
-//  0x16C 32  CSR29     context swap registers
-//  0x170 32  CSR30     context swap registers
-//  0x174 32  CSR31     context swap registers
-//  0x178 32  CSR32     context swap registers
-//  0x17C 32  CSR33     context swap registers
-//  0x180 32  CSR34     context swap registers
-//  0x184 32  CSR35     context swap registers
-//  0x188 32  CSR36     context swap registers
-//  0x18C 32  CSR37     context swap registers
-//  0x190 32  CSR38     context swap registers
-//  0x194 32  CSR39     context swap registers
-//  0x198 32  CSR40     context swap registers
-//  0x19C 32  CSR41     context swap registers
-//  0x1A0 32  CSR42     context swap registers
-//  0x1A4 32  CSR43     context swap registers
-//  0x1A8 32  CSR44     context swap registers
-//  0x1AC 32  CSR45     context swap registers
-//  0x1B0 32  CSR46     context swap registers
-//  0x1B4 32  CSR47     context swap registers
-//  0x1B8 32  CSR48     context swap registers
-//  0x1BC 32  CSR49     context swap registers
-//  0x1C0 32  CSR50     context swap registers
-//  0x1C4 32  CSR51     context swap registers
-//  0x1C8 32  CSR52     context swap registers
-//  0x1CC 32  CSR53     context swap registers
-//  0x310 32  HASH_HR0  HASH digest register
-//  0x314 32  HASH_HR1  read-only
-//  0x318 32  HASH_HR2  read-only
-//  0x31C 32  HASH_HR3  read-only
-//  0x320 32  HASH_HR4  read-only
-//  0x324 32  HASH_HR5  read-only
-//  0x328 32  HASH_HR6  read-only
-//  0x32C 32  HASH_HR7  read-only
+//
+//	0x000 32  CR        control register
+//	0x004 32  DIN       data input register
+//	0x008 32  STR       start register
+//	0x00C 32  HR0       digest registers
+//	0x010 32  HR1       digest registers
+//	0x014 32  HR2       digest registers
+//	0x018 32  HR3       digest registers
+//	0x01C 32  HR4       digest registers
+//	0x020 32  IMR       interrupt enable register
+//	0x024 32  SR        status register
+//	0x0F8 32  CSR0      context swap registers
+//	0x0FC 32  CSR1      context swap registers
+//	0x100 32  CSR2      context swap registers
+//	0x104 32  CSR3      context swap registers
+//	0x108 32  CSR4      context swap registers
+//	0x10C 32  CSR5      context swap registers
+//	0x110 32  CSR6      context swap registers
+//	0x114 32  CSR7      context swap registers
+//	0x118 32  CSR8      context swap registers
+//	0x11C 32  CSR9      context swap registers
+//	0x120 32  CSR10     context swap registers
+//	0x124 32  CSR11     context swap registers
+//	0x128 32  CSR12     context swap registers
+//	0x12C 32  CSR13     context swap registers
+//	0x130 32  CSR14     context swap registers
+//	0x134 32  CSR15     context swap registers
+//	0x138 32  CSR16     context swap registers
+//	0x13C 32  CSR17     context swap registers
+//	0x140 32  CSR18     context swap registers
+//	0x144 32  CSR19     context swap registers
+//	0x148 32  CSR20     context swap registers
+//	0x14C 32  CSR21     context swap registers
+//	0x150 32  CSR22     context swap registers
+//	0x154 32  CSR23     context swap registers
+//	0x158 32  CSR24     context swap registers
+//	0x15C 32  CSR25     context swap registers
+//	0x160 32  CSR26     context swap registers
+//	0x164 32  CSR27     context swap registers
+//	0x168 32  CSR28     context swap registers
+//	0x16C 32  CSR29     context swap registers
+//	0x170 32  CSR30     context swap registers
+//	0x174 32  CSR31     context swap registers
+//	0x178 32  CSR32     context swap registers
+//	0x17C 32  CSR33     context swap registers
+//	0x180 32  CSR34     context swap registers
+//	0x184 32  CSR35     context swap registers
+//	0x188 32  CSR36     context swap registers
+//	0x18C 32  CSR37     context swap registers
+//	0x190 32  CSR38     context swap registers
+//	0x194 32  CSR39     context swap registers
+//	0x198 32  CSR40     context swap registers
+//	0x19C 32  CSR41     context swap registers
+//	0x1A0 32  CSR42     context swap registers
+//	0x1A4 32  CSR43     context swap registers
+//	0x1A8 32  CSR44     context swap registers
+//	0x1AC 32  CSR45     context swap registers
+//	0x1B0 32  CSR46     context swap registers
+//	0x1B4 32  CSR47     context swap registers
+//	0x1B8 32  CSR48     context swap registers
+//	0x1BC 32  CSR49     context swap registers
+//	0x1C0 32  CSR50     context swap registers
+//	0x1C4 32  CSR51     context swap registers
+//	0x1C8 32  CSR52     context swap registers
+//	0x1CC 32  CSR53     context swap registers
+//	0x310 32  HASH_HR0  HASH digest register
+//	0x314 32  HASH_HR1  read-only
+//	0x318 32  HASH_HR2  read-only
+//	0x31C 32  HASH_HR3  read-only
+//	0x320 32  HASH_HR4  read-only
+//	0x324 32  HASH_HR5  read-only
+//	0x328 32  HASH_HR6  read-only
+//	0x32C 32  HASH_HR7  read-only
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/bus
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/bus
+//	github.com/embeddedgo/stm32/p/mmap
 package hash
 
 const (

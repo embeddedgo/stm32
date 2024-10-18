@@ -5,110 +5,115 @@
 // Package dfsdm provides access to the registers of the DFSDM peripheral.
 //
 // Instances:
-//  DFSDM1  DFSDM1_BASE  -  DFSDM1_FLT3,DFSDM1_FLT0,DFSDM1_FLT1,DFSDM1_FLT2  Digital filter for sigma delta modulators
+//
+//	DFSDM1  DFSDM1_BASE  -  DFSDM1_FLT3,DFSDM1_FLT0,DFSDM1_FLT1,DFSDM1_FLT2  Digital filter for sigma delta modulators
+//
 // Registers:
-//  0x000 32  CHCFG0R1        channel configuration y register
-//  0x004 32  CHCFG0R2        channel configuration y register
-//  0x008 32  AWSCD0R         analog watchdog and short-circuit detector register
-//  0x00C 32  CHWDAT0R        channel watchdog filter data register
-//  0x010 32  CHDATIN0R       channel data input register
-//  0x020 32  CHCFG1R1        CHCFG1R1
-//  0x024 32  CHCFG1R2        CHCFG1R2
-//  0x028 32  AWSCD1R         AWSCD1R
-//  0x02C 32  CHWDAT1R        CHWDAT1R
-//  0x030 32  CHDATIN1R       CHDATIN1R
-//  0x040 32  CHCFG2R1        CHCFG2R1
-//  0x044 32  CHCFG2R2        CHCFG2R2
-//  0x048 32  AWSCD2R         AWSCD2R
-//  0x04C 32  CHWDAT2R        CHWDAT2R
-//  0x050 32  CHDATIN2R       CHDATIN2R
-//  0x060 32  CHCFG3R1        CHCFG3R1
-//  0x064 32  CHCFG3R2        CHCFG3R2
-//  0x068 32  AWSCD3R         AWSCD3R
-//  0x06C 32  CHWDAT3R        CHWDAT3R
-//  0x070 32  CHDATIN3R       CHDATIN3R
-//  0x080 32  CHCFG4R1        CHCFG4R1
-//  0x084 32  CHCFG4R2        CHCFG4R2
-//  0x088 32  AWSCD4R         AWSCD4R
-//  0x08C 32  CHWDAT4R        CHWDAT4R
-//  0x090 32  CHDATIN4R       CHDATIN4R
-//  0x0A0 32  CHCFG5R1        CHCFG5R1
-//  0x0A4 32  CHCFG5R2        CHCFG5R2
-//  0x0A8 32  AWSCD5R         AWSCD5R
-//  0x0AC 32  CHWDAT5R        CHWDAT5R
-//  0x0B0 32  CHDATIN5R       CHDATIN5R
-//  0x0C0 32  CHCFG6R1        CHCFG6R1
-//  0x0C4 32  CHCFG6R2        CHCFG6R2
-//  0x0C8 32  AWSCD6R         AWSCD6R
-//  0x0CC 32  CHWDAT6R        CHWDAT6R
-//  0x0D0 32  CHDATIN6R       CHDATIN6R
-//  0x0E0 32  CHCFG7R1        CHCFG7R1
-//  0x0E4 32  CHCFG7R2        CHCFG7R2
-//  0x0E8 32  AWSCD7R         AWSCD7R
-//  0x0EC 32  CHWDAT7R        CHWDAT7R
-//  0x0F0 32  CHDATIN7R       CHDATIN7R
-//  0x100 32  DFSDM0_CR1      control register 1
-//  0x104 32  DFSDM0_CR2      control register 2
-//  0x108 32  DFSDM0_ISR      interrupt and status register
-//  0x10C 32  DFSDM0_ICR      interrupt flag clear register
-//  0x110 32  DFSDM0_JCHGR    injected channel group selection register
-//  0x114 32  DFSDM0_FCR      filter control register
-//  0x118 32  DFSDM0_JDATAR   data register for injected group
-//  0x11C 32  DFSDM0_RDATAR   data register for the regular channel
-//  0x120 32  DFSDM0_AWHTR    analog watchdog high threshold register
-//  0x124 32  DFSDM0_AWLTR    analog watchdog low threshold register
-//  0x128 32  DFSDM0_AWSR     analog watchdog status register
-//  0x12C 32  DFSDM0_AWCFR    analog watchdog clear flag register
-//  0x130 32  DFSDM0_EXMAX    Extremes detector maximum register
-//  0x134 32  DFSDM0_EXMIN    Extremes detector minimum register
-//  0x138 32  DFSDM0_CNVTIMR  conversion timer register
-//  0x200 32  DFSDM1_CR1      control register 1
-//  0x204 32  DFSDM1_CR2      control register 2
-//  0x208 32  DFSDM1_ISR      interrupt and status register
-//  0x20C 32  DFSDM1_ICR      interrupt flag clear register
-//  0x210 32  DFSDM1_JCHGR    injected channel group selection register
-//  0x214 32  DFSDM1_FCR      filter control register
-//  0x218 32  DFSDM1_JDATAR   data register for injected group
-//  0x21C 32  DFSDM1_RDATAR   data register for the regular channel
-//  0x220 32  DFSDM1_AWHTR    analog watchdog high threshold register
-//  0x224 32  DFSDM1_AWLTR    analog watchdog low threshold register
-//  0x228 32  DFSDM1_AWSR     analog watchdog status register
-//  0x22C 32  DFSDM1_AWCFR    analog watchdog clear flag register
-//  0x230 32  DFSDM1_EXMAX    Extremes detector maximum register
-//  0x234 32  DFSDM1_EXMIN    Extremes detector minimum register
-//  0x238 32  DFSDM1_CNVTIMR  conversion timer register
-//  0x300 32  DFSDM2_CR1      control register 1
-//  0x304 32  DFSDM2_CR2      control register 2
-//  0x308 32  DFSDM2_ISR      interrupt and status register
-//  0x30C 32  DFSDM2_ICR      interrupt flag clear register
-//  0x310 32  DFSDM2_JCHGR    injected channel group selection register
-//  0x314 32  DFSDM2_FCR      filter control register
-//  0x318 32  DFSDM2_JDATAR   data register for injected group
-//  0x31C 32  DFSDM2_RDATAR   data register for the regular channel
-//  0x320 32  DFSDM2_AWHTR    analog watchdog high threshold register
-//  0x324 32  DFSDM2_AWLTR    analog watchdog low threshold register
-//  0x328 32  DFSDM2_AWSR     analog watchdog status register
-//  0x32C 32  DFSDM2_AWCFR    analog watchdog clear flag register
-//  0x330 32  DFSDM2_EXMAX    Extremes detector maximum register
-//  0x334 32  DFSDM2_EXMIN    Extremes detector minimum register
-//  0x338 32  DFSDM2_CNVTIMR  conversion timer register
-//  0x400 32  DFSDM3_CR1      control register 1
-//  0x404 32  DFSDM3_CR2      control register 2
-//  0x408 32  DFSDM3_ISR      interrupt and status register
-//  0x40C 32  DFSDM3_ICR      interrupt flag clear register
-//  0x410 32  DFSDM3_JCHGR    injected channel group selection register
-//  0x414 32  DFSDM3_FCR      filter control register
-//  0x418 32  DFSDM3_JDATAR   data register for injected group
-//  0x41C 32  DFSDM3_RDATAR   data register for the regular channel
-//  0x420 32  DFSDM3_AWHTR    analog watchdog high threshold register
-//  0x424 32  DFSDM3_AWLTR    analog watchdog low threshold register
-//  0x428 32  DFSDM3_AWSR     analog watchdog status register
-//  0x42C 32  DFSDM3_AWCFR    analog watchdog clear flag register
-//  0x430 32  DFSDM3_EXMAX    Extremes detector maximum register
-//  0x434 32  DFSDM3_EXMIN    Extremes detector minimum register
-//  0x438 32  DFSDM3_CNVTIMR  conversion timer register
+//
+//	0x000 32  CHCFG0R1        channel configuration y register
+//	0x004 32  CHCFG0R2        channel configuration y register
+//	0x008 32  AWSCD0R         analog watchdog and short-circuit detector register
+//	0x00C 32  CHWDAT0R        channel watchdog filter data register
+//	0x010 32  CHDATIN0R       channel data input register
+//	0x020 32  CHCFG1R1        CHCFG1R1
+//	0x024 32  CHCFG1R2        CHCFG1R2
+//	0x028 32  AWSCD1R         AWSCD1R
+//	0x02C 32  CHWDAT1R        CHWDAT1R
+//	0x030 32  CHDATIN1R       CHDATIN1R
+//	0x040 32  CHCFG2R1        CHCFG2R1
+//	0x044 32  CHCFG2R2        CHCFG2R2
+//	0x048 32  AWSCD2R         AWSCD2R
+//	0x04C 32  CHWDAT2R        CHWDAT2R
+//	0x050 32  CHDATIN2R       CHDATIN2R
+//	0x060 32  CHCFG3R1        CHCFG3R1
+//	0x064 32  CHCFG3R2        CHCFG3R2
+//	0x068 32  AWSCD3R         AWSCD3R
+//	0x06C 32  CHWDAT3R        CHWDAT3R
+//	0x070 32  CHDATIN3R       CHDATIN3R
+//	0x080 32  CHCFG4R1        CHCFG4R1
+//	0x084 32  CHCFG4R2        CHCFG4R2
+//	0x088 32  AWSCD4R         AWSCD4R
+//	0x08C 32  CHWDAT4R        CHWDAT4R
+//	0x090 32  CHDATIN4R       CHDATIN4R
+//	0x0A0 32  CHCFG5R1        CHCFG5R1
+//	0x0A4 32  CHCFG5R2        CHCFG5R2
+//	0x0A8 32  AWSCD5R         AWSCD5R
+//	0x0AC 32  CHWDAT5R        CHWDAT5R
+//	0x0B0 32  CHDATIN5R       CHDATIN5R
+//	0x0C0 32  CHCFG6R1        CHCFG6R1
+//	0x0C4 32  CHCFG6R2        CHCFG6R2
+//	0x0C8 32  AWSCD6R         AWSCD6R
+//	0x0CC 32  CHWDAT6R        CHWDAT6R
+//	0x0D0 32  CHDATIN6R       CHDATIN6R
+//	0x0E0 32  CHCFG7R1        CHCFG7R1
+//	0x0E4 32  CHCFG7R2        CHCFG7R2
+//	0x0E8 32  AWSCD7R         AWSCD7R
+//	0x0EC 32  CHWDAT7R        CHWDAT7R
+//	0x0F0 32  CHDATIN7R       CHDATIN7R
+//	0x100 32  DFSDM0_CR1      control register 1
+//	0x104 32  DFSDM0_CR2      control register 2
+//	0x108 32  DFSDM0_ISR      interrupt and status register
+//	0x10C 32  DFSDM0_ICR      interrupt flag clear register
+//	0x110 32  DFSDM0_JCHGR    injected channel group selection register
+//	0x114 32  DFSDM0_FCR      filter control register
+//	0x118 32  DFSDM0_JDATAR   data register for injected group
+//	0x11C 32  DFSDM0_RDATAR   data register for the regular channel
+//	0x120 32  DFSDM0_AWHTR    analog watchdog high threshold register
+//	0x124 32  DFSDM0_AWLTR    analog watchdog low threshold register
+//	0x128 32  DFSDM0_AWSR     analog watchdog status register
+//	0x12C 32  DFSDM0_AWCFR    analog watchdog clear flag register
+//	0x130 32  DFSDM0_EXMAX    Extremes detector maximum register
+//	0x134 32  DFSDM0_EXMIN    Extremes detector minimum register
+//	0x138 32  DFSDM0_CNVTIMR  conversion timer register
+//	0x200 32  DFSDM1_CR1      control register 1
+//	0x204 32  DFSDM1_CR2      control register 2
+//	0x208 32  DFSDM1_ISR      interrupt and status register
+//	0x20C 32  DFSDM1_ICR      interrupt flag clear register
+//	0x210 32  DFSDM1_JCHGR    injected channel group selection register
+//	0x214 32  DFSDM1_FCR      filter control register
+//	0x218 32  DFSDM1_JDATAR   data register for injected group
+//	0x21C 32  DFSDM1_RDATAR   data register for the regular channel
+//	0x220 32  DFSDM1_AWHTR    analog watchdog high threshold register
+//	0x224 32  DFSDM1_AWLTR    analog watchdog low threshold register
+//	0x228 32  DFSDM1_AWSR     analog watchdog status register
+//	0x22C 32  DFSDM1_AWCFR    analog watchdog clear flag register
+//	0x230 32  DFSDM1_EXMAX    Extremes detector maximum register
+//	0x234 32  DFSDM1_EXMIN    Extremes detector minimum register
+//	0x238 32  DFSDM1_CNVTIMR  conversion timer register
+//	0x300 32  DFSDM2_CR1      control register 1
+//	0x304 32  DFSDM2_CR2      control register 2
+//	0x308 32  DFSDM2_ISR      interrupt and status register
+//	0x30C 32  DFSDM2_ICR      interrupt flag clear register
+//	0x310 32  DFSDM2_JCHGR    injected channel group selection register
+//	0x314 32  DFSDM2_FCR      filter control register
+//	0x318 32  DFSDM2_JDATAR   data register for injected group
+//	0x31C 32  DFSDM2_RDATAR   data register for the regular channel
+//	0x320 32  DFSDM2_AWHTR    analog watchdog high threshold register
+//	0x324 32  DFSDM2_AWLTR    analog watchdog low threshold register
+//	0x328 32  DFSDM2_AWSR     analog watchdog status register
+//	0x32C 32  DFSDM2_AWCFR    analog watchdog clear flag register
+//	0x330 32  DFSDM2_EXMAX    Extremes detector maximum register
+//	0x334 32  DFSDM2_EXMIN    Extremes detector minimum register
+//	0x338 32  DFSDM2_CNVTIMR  conversion timer register
+//	0x400 32  DFSDM3_CR1      control register 1
+//	0x404 32  DFSDM3_CR2      control register 2
+//	0x408 32  DFSDM3_ISR      interrupt and status register
+//	0x40C 32  DFSDM3_ICR      interrupt flag clear register
+//	0x410 32  DFSDM3_JCHGR    injected channel group selection register
+//	0x414 32  DFSDM3_FCR      filter control register
+//	0x418 32  DFSDM3_JDATAR   data register for injected group
+//	0x41C 32  DFSDM3_RDATAR   data register for the regular channel
+//	0x420 32  DFSDM3_AWHTR    analog watchdog high threshold register
+//	0x424 32  DFSDM3_AWLTR    analog watchdog low threshold register
+//	0x428 32  DFSDM3_AWSR     analog watchdog status register
+//	0x42C 32  DFSDM3_AWCFR    analog watchdog clear flag register
+//	0x430 32  DFSDM3_EXMAX    Extremes detector maximum register
+//	0x434 32  DFSDM3_EXMIN    Extremes detector minimum register
+//	0x438 32  DFSDM3_CNVTIMR  conversion timer register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package dfsdm
 
 const (

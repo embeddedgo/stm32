@@ -5,220 +5,225 @@
 // Package mdma provides access to the registers of the MDMA peripheral.
 //
 // Instances:
-//  MDMA  MDMA_BASE  AHB3  MDMA
+//
+//	MDMA  MDMA_BASE  AHB3  MDMA
+//
 // Registers:
-//  0x000 32  MDMA_GISR0     MDMA Global Interrupt/Status Register
-//  0x040 32  MDMA_C0ISR     MDMA channel x interrupt/status register
-//  0x044 32  MDMA_C0IFCR    MDMA channel x interrupt flag clear register
-//  0x048 32  MDMA_C0ESR     MDMA Channel x error status register
-//  0x04C 32  MDMA_C0CR      This register is used to control the concerned channel.
-//  0x050 32  MDMA_C0TCR     This register is used to configure the concerned channel.
-//  0x054 32  MDMA_C0BNDTR   MDMA Channel x block number of data register
-//  0x058 32  MDMA_C0SAR     MDMA channel x source address register
-//  0x05C 32  MDMA_C0DAR     MDMA channel x destination address register
-//  0x060 32  MDMA_C0BRUR    MDMA channel x Block Repeat address Update register
-//  0x064 32  MDMA_C0LAR     MDMA channel x Link Address register
-//  0x068 32  MDMA_C0TBR     MDMA channel x Trigger and Bus selection Register
-//  0x070 32  MDMA_C0MAR     MDMA channel x Mask address register
-//  0x074 32  MDMA_C0MDR     MDMA channel x Mask Data register
-//  0x080 32  MDMA_C1ISR     MDMA channel x interrupt/status register
-//  0x084 32  MDMA_C1IFCR    MDMA channel x interrupt flag clear register
-//  0x088 32  MDMA_C1ESR     MDMA Channel x error status register
-//  0x08C 32  MDMA_C1CR      This register is used to control the concerned channel.
-//  0x090 32  MDMA_C1TCR     This register is used to configure the concerned channel.
-//  0x094 32  MDMA_C1BNDTR   MDMA Channel x block number of data register
-//  0x098 32  MDMA_C1SAR     MDMA channel x source address register
-//  0x09C 32  MDMA_C1DAR     MDMA channel x destination address register
-//  0x0A0 32  MDMA_C1BRUR    MDMA channel x Block Repeat address Update register
-//  0x0A4 32  MDMA_C1LAR     MDMA channel x Link Address register
-//  0x0A8 32  MDMA_C1TBR     MDMA channel x Trigger and Bus selection Register
-//  0x0B0 32  MDMA_C1MAR     MDMA channel x Mask address register
-//  0x0B4 32  MDMA_C1MDR     MDMA channel x Mask Data register
-//  0x0C0 32  MDMA_C2ISR     MDMA channel x interrupt/status register
-//  0x0C4 32  MDMA_C2IFCR    MDMA channel x interrupt flag clear register
-//  0x0C8 32  MDMA_C2ESR     MDMA Channel x error status register
-//  0x0CC 32  MDMA_C2CR      This register is used to control the concerned channel.
-//  0x0D0 32  MDMA_C2TCR     This register is used to configure the concerned channel.
-//  0x0D4 32  MDMA_C2BNDTR   MDMA Channel x block number of data register
-//  0x0D8 32  MDMA_C2SAR     MDMA channel x source address register
-//  0x0DC 32  MDMA_C2DAR     MDMA channel x destination address register
-//  0x0E0 32  MDMA_C2BRUR    MDMA channel x Block Repeat address Update register
-//  0x0E4 32  MDMA_C2LAR     MDMA channel x Link Address register
-//  0x0E8 32  MDMA_C2TBR     MDMA channel x Trigger and Bus selection Register
-//  0x0F0 32  MDMA_C2MAR     MDMA channel x Mask address register
-//  0x0F4 32  MDMA_C2MDR     MDMA channel x Mask Data register
-//  0x100 32  MDMA_C3ISR     MDMA channel x interrupt/status register
-//  0x104 32  MDMA_C3IFCR    MDMA channel x interrupt flag clear register
-//  0x108 32  MDMA_C3ESR     MDMA Channel x error status register
-//  0x10C 32  MDMA_C3CR      This register is used to control the concerned channel.
-//  0x110 32  MDMA_C3TCR     This register is used to configure the concerned channel.
-//  0x114 32  MDMA_C3BNDTR   MDMA Channel x block number of data register
-//  0x118 32  MDMA_C3SAR     MDMA channel x source address register
-//  0x11C 32  MDMA_C3DAR     MDMA channel x destination address register
-//  0x120 32  MDMA_C3BRUR    MDMA channel x Block Repeat address Update register
-//  0x124 32  MDMA_C3LAR     MDMA channel x Link Address register
-//  0x128 32  MDMA_C3TBR     MDMA channel x Trigger and Bus selection Register
-//  0x130 32  MDMA_C3MAR     MDMA channel x Mask address register
-//  0x134 32  MDMA_C3MDR     MDMA channel x Mask Data register
-//  0x140 32  MDMA_C4ISR     MDMA channel x interrupt/status register
-//  0x144 32  MDMA_C4IFCR    MDMA channel x interrupt flag clear register
-//  0x148 32  MDMA_C4ESR     MDMA Channel x error status register
-//  0x14C 32  MDMA_C4CR      This register is used to control the concerned channel.
-//  0x150 32  MDMA_C4TCR     This register is used to configure the concerned channel.
-//  0x154 32  MDMA_C4BNDTR   MDMA Channel x block number of data register
-//  0x158 32  MDMA_C4SAR     MDMA channel x source address register
-//  0x15C 32  MDMA_C4DAR     MDMA channel x destination address register
-//  0x160 32  MDMA_C4BRUR    MDMA channel x Block Repeat address Update register
-//  0x164 32  MDMA_C4LAR     MDMA channel x Link Address register
-//  0x168 32  MDMA_C4TBR     MDMA channel x Trigger and Bus selection Register
-//  0x170 32  MDMA_C4MAR     MDMA channel x Mask address register
-//  0x174 32  MDMA_C4MDR     MDMA channel x Mask Data register
-//  0x180 32  MDMA_C5ISR     MDMA channel x interrupt/status register
-//  0x184 32  MDMA_C5IFCR    MDMA channel x interrupt flag clear register
-//  0x188 32  MDMA_C5ESR     MDMA Channel x error status register
-//  0x18C 32  MDMA_C5CR      This register is used to control the concerned channel.
-//  0x190 32  MDMA_C5TCR     This register is used to configure the concerned channel.
-//  0x194 32  MDMA_C5BNDTR   MDMA Channel x block number of data register
-//  0x198 32  MDMA_C5SAR     MDMA channel x source address register
-//  0x19C 32  MDMA_C5DAR     MDMA channel x destination address register
-//  0x1A0 32  MDMA_C5BRUR    MDMA channel x Block Repeat address Update register
-//  0x1A4 32  MDMA_C5LAR     MDMA channel x Link Address register
-//  0x1A8 32  MDMA_C5TBR     MDMA channel x Trigger and Bus selection Register
-//  0x1B0 32  MDMA_C5MAR     MDMA channel x Mask address register
-//  0x1B4 32  MDMA_C5MDR     MDMA channel x Mask Data register
-//  0x1C0 32  MDMA_C6ISR     MDMA channel x interrupt/status register
-//  0x1C4 32  MDMA_C6IFCR    MDMA channel x interrupt flag clear register
-//  0x1C8 32  MDMA_C6ESR     MDMA Channel x error status register
-//  0x1CC 32  MDMA_C6CR      This register is used to control the concerned channel.
-//  0x1D0 32  MDMA_C6TCR     This register is used to configure the concerned channel.
-//  0x1D4 32  MDMA_C6BNDTR   MDMA Channel x block number of data register
-//  0x1D8 32  MDMA_C6SAR     MDMA channel x source address register
-//  0x1DC 32  MDMA_C6DAR     MDMA channel x destination address register
-//  0x1E0 32  MDMA_C6BRUR    MDMA channel x Block Repeat address Update register
-//  0x1E4 32  MDMA_C6LAR     MDMA channel x Link Address register
-//  0x1E8 32  MDMA_C6TBR     MDMA channel x Trigger and Bus selection Register
-//  0x1F0 32  MDMA_C6MAR     MDMA channel x Mask address register
-//  0x1F4 32  MDMA_C6MDR     MDMA channel x Mask Data register
-//  0x200 32  MDMA_C7ISR     MDMA channel x interrupt/status register
-//  0x204 32  MDMA_C7IFCR    MDMA channel x interrupt flag clear register
-//  0x208 32  MDMA_C7ESR     MDMA Channel x error status register
-//  0x20C 32  MDMA_C7CR      This register is used to control the concerned channel.
-//  0x210 32  MDMA_C7TCR     This register is used to configure the concerned channel.
-//  0x214 32  MDMA_C7BNDTR   MDMA Channel x block number of data register
-//  0x218 32  MDMA_C7SAR     MDMA channel x source address register
-//  0x21C 32  MDMA_C7DAR     MDMA channel x destination address register
-//  0x220 32  MDMA_C7BRUR    MDMA channel x Block Repeat address Update register
-//  0x224 32  MDMA_C7LAR     MDMA channel x Link Address register
-//  0x228 32  MDMA_C7TBR     MDMA channel x Trigger and Bus selection Register
-//  0x230 32  MDMA_C7MAR     MDMA channel x Mask address register
-//  0x234 32  MDMA_C7MDR     MDMA channel x Mask Data register
-//  0x240 32  MDMA_C8ISR     MDMA channel x interrupt/status register
-//  0x244 32  MDMA_C8IFCR    MDMA channel x interrupt flag clear register
-//  0x248 32  MDMA_C8ESR     MDMA Channel x error status register
-//  0x24C 32  MDMA_C8CR      This register is used to control the concerned channel.
-//  0x250 32  MDMA_C8TCR     This register is used to configure the concerned channel.
-//  0x254 32  MDMA_C8BNDTR   MDMA Channel x block number of data register
-//  0x258 32  MDMA_C8SAR     MDMA channel x source address register
-//  0x25C 32  MDMA_C8DAR     MDMA channel x destination address register
-//  0x260 32  MDMA_C8BRUR    MDMA channel x Block Repeat address Update register
-//  0x264 32  MDMA_C8LAR     MDMA channel x Link Address register
-//  0x268 32  MDMA_C8TBR     MDMA channel x Trigger and Bus selection Register
-//  0x270 32  MDMA_C8MAR     MDMA channel x Mask address register
-//  0x274 32  MDMA_C8MDR     MDMA channel x Mask Data register
-//  0x280 32  MDMA_C9ISR     MDMA channel x interrupt/status register
-//  0x284 32  MDMA_C9IFCR    MDMA channel x interrupt flag clear register
-//  0x288 32  MDMA_C9ESR     MDMA Channel x error status register
-//  0x28C 32  MDMA_C9CR      This register is used to control the concerned channel.
-//  0x290 32  MDMA_C9TCR     This register is used to configure the concerned channel.
-//  0x294 32  MDMA_C9BNDTR   MDMA Channel x block number of data register
-//  0x298 32  MDMA_C9SAR     MDMA channel x source address register
-//  0x29C 32  MDMA_C9DAR     MDMA channel x destination address register
-//  0x2A0 32  MDMA_C9BRUR    MDMA channel x Block Repeat address Update register
-//  0x2A4 32  MDMA_C9LAR     MDMA channel x Link Address register
-//  0x2A8 32  MDMA_C9TBR     MDMA channel x Trigger and Bus selection Register
-//  0x2B0 32  MDMA_C9MAR     MDMA channel x Mask address register
-//  0x2B4 32  MDMA_C9MDR     MDMA channel x Mask Data register
-//  0x2C0 32  MDMA_C10ISR    MDMA channel x interrupt/status register
-//  0x2C4 32  MDMA_C10IFCR   MDMA channel x interrupt flag clear register
-//  0x2C8 32  MDMA_C10ESR    MDMA Channel x error status register
-//  0x2CC 32  MDMA_C10CR     This register is used to control the concerned channel.
-//  0x2D0 32  MDMA_C10TCR    This register is used to configure the concerned channel.
-//  0x2D4 32  MDMA_C10BNDTR  MDMA Channel x block number of data register
-//  0x2D8 32  MDMA_C10SAR    MDMA channel x source address register
-//  0x2DC 32  MDMA_C10DAR    MDMA channel x destination address register
-//  0x2E0 32  MDMA_C10BRUR   MDMA channel x Block Repeat address Update register
-//  0x2E4 32  MDMA_C10LAR    MDMA channel x Link Address register
-//  0x2E8 32  MDMA_C10TBR    MDMA channel x Trigger and Bus selection Register
-//  0x2F0 32  MDMA_C10MAR    MDMA channel x Mask address register
-//  0x2F4 32  MDMA_C10MDR    MDMA channel x Mask Data register
-//  0x300 32  MDMA_C11ISR    MDMA channel x interrupt/status register
-//  0x304 32  MDMA_C11IFCR   MDMA channel x interrupt flag clear register
-//  0x308 32  MDMA_C11ESR    MDMA Channel x error status register
-//  0x30C 32  MDMA_C11CR     This register is used to control the concerned channel.
-//  0x310 32  MDMA_C11TCR    This register is used to configure the concerned channel.
-//  0x314 32  MDMA_C11BNDTR  MDMA Channel x block number of data register
-//  0x318 32  MDMA_C11SAR    MDMA channel x source address register
-//  0x31C 32  MDMA_C11DAR    MDMA channel x destination address register
-//  0x320 32  MDMA_C11BRUR   MDMA channel x Block Repeat address Update register
-//  0x324 32  MDMA_C11LAR    MDMA channel x Link Address register
-//  0x328 32  MDMA_C11TBR    MDMA channel x Trigger and Bus selection Register
-//  0x330 32  MDMA_C11MAR    MDMA channel x Mask address register
-//  0x334 32  MDMA_C11MDR    MDMA channel x Mask Data register
-//  0x340 32  MDMA_C12ISR    MDMA channel x interrupt/status register
-//  0x344 32  MDMA_C12IFCR   MDMA channel x interrupt flag clear register
-//  0x348 32  MDMA_C12ESR    MDMA Channel x error status register
-//  0x34C 32  MDMA_C12CR     This register is used to control the concerned channel.
-//  0x350 32  MDMA_C12TCR    This register is used to configure the concerned channel.
-//  0x354 32  MDMA_C12BNDTR  MDMA Channel x block number of data register
-//  0x358 32  MDMA_C12SAR    MDMA channel x source address register
-//  0x35C 32  MDMA_C12DAR    MDMA channel x destination address register
-//  0x360 32  MDMA_C12BRUR   MDMA channel x Block Repeat address Update register
-//  0x364 32  MDMA_C12LAR    MDMA channel x Link Address register
-//  0x368 32  MDMA_C12TBR    MDMA channel x Trigger and Bus selection Register
-//  0x370 32  MDMA_C12MAR    MDMA channel x Mask address register
-//  0x374 32  MDMA_C12MDR    MDMA channel x Mask Data register
-//  0x380 32  MDMA_C13ISR    MDMA channel x interrupt/status register
-//  0x384 32  MDMA_C13IFCR   MDMA channel x interrupt flag clear register
-//  0x388 32  MDMA_C13ESR    MDMA Channel x error status register
-//  0x38C 32  MDMA_C13CR     This register is used to control the concerned channel.
-//  0x390 32  MDMA_C13TCR    This register is used to configure the concerned channel.
-//  0x394 32  MDMA_C13BNDTR  MDMA Channel x block number of data register
-//  0x398 32  MDMA_C13SAR    MDMA channel x source address register
-//  0x39C 32  MDMA_C13DAR    MDMA channel x destination address register
-//  0x3A0 32  MDMA_C13BRUR   MDMA channel x Block Repeat address Update register
-//  0x3A4 32  MDMA_C13LAR    MDMA channel x Link Address register
-//  0x3A8 32  MDMA_C13TBR    MDMA channel x Trigger and Bus selection Register
-//  0x3B0 32  MDMA_C13MAR    MDMA channel x Mask address register
-//  0x3B4 32  MDMA_C13MDR    MDMA channel x Mask Data register
-//  0x3C0 32  MDMA_C14ISR    MDMA channel x interrupt/status register
-//  0x3C4 32  MDMA_C14IFCR   MDMA channel x interrupt flag clear register
-//  0x3C8 32  MDMA_C14ESR    MDMA Channel x error status register
-//  0x3CC 32  MDMA_C14CR     This register is used to control the concerned channel.
-//  0x3D0 32  MDMA_C14TCR    This register is used to configure the concerned channel.
-//  0x3D4 32  MDMA_C14BNDTR  MDMA Channel x block number of data register
-//  0x3D8 32  MDMA_C14SAR    MDMA channel x source address register
-//  0x3DC 32  MDMA_C14DAR    MDMA channel x destination address register
-//  0x3E0 32  MDMA_C14BRUR   MDMA channel x Block Repeat address Update register
-//  0x3E4 32  MDMA_C14LAR    MDMA channel x Link Address register
-//  0x3E8 32  MDMA_C14TBR    MDMA channel x Trigger and Bus selection Register
-//  0x3F0 32  MDMA_C14MAR    MDMA channel x Mask address register
-//  0x3F4 32  MDMA_C14MDR    MDMA channel x Mask Data register
-//  0x400 32  MDMA_C15ISR    MDMA channel x interrupt/status register
-//  0x404 32  MDMA_C15IFCR   MDMA channel x interrupt flag clear register
-//  0x408 32  MDMA_C15ESR    MDMA Channel x error status register
-//  0x40C 32  MDMA_C15CR     This register is used to control the concerned channel.
-//  0x410 32  MDMA_C15TCR    This register is used to configure the concerned channel.
-//  0x414 32  MDMA_C15BNDTR  MDMA Channel x block number of data register
-//  0x418 32  MDMA_C15SAR    MDMA channel x source address register
-//  0x41C 32  MDMA_C15DAR    MDMA channel x destination address register
-//  0x420 32  MDMA_C15BRUR   MDMA channel x Block Repeat address Update register
-//  0x424 32  MDMA_C15LAR    MDMA channel x Link Address register
-//  0x428 32  MDMA_C15TBR    MDMA channel x Trigger and Bus selection Register
-//  0x430 32  MDMA_C15MAR    MDMA channel x Mask address register
-//  0x434 32  MDMA_C15MDR    MDMA channel x Mask Data register
+//
+//	0x000 32  MDMA_GISR0     MDMA Global Interrupt/Status Register
+//	0x040 32  MDMA_C0ISR     MDMA channel x interrupt/status register
+//	0x044 32  MDMA_C0IFCR    MDMA channel x interrupt flag clear register
+//	0x048 32  MDMA_C0ESR     MDMA Channel x error status register
+//	0x04C 32  MDMA_C0CR      This register is used to control the concerned channel.
+//	0x050 32  MDMA_C0TCR     This register is used to configure the concerned channel.
+//	0x054 32  MDMA_C0BNDTR   MDMA Channel x block number of data register
+//	0x058 32  MDMA_C0SAR     MDMA channel x source address register
+//	0x05C 32  MDMA_C0DAR     MDMA channel x destination address register
+//	0x060 32  MDMA_C0BRUR    MDMA channel x Block Repeat address Update register
+//	0x064 32  MDMA_C0LAR     MDMA channel x Link Address register
+//	0x068 32  MDMA_C0TBR     MDMA channel x Trigger and Bus selection Register
+//	0x070 32  MDMA_C0MAR     MDMA channel x Mask address register
+//	0x074 32  MDMA_C0MDR     MDMA channel x Mask Data register
+//	0x080 32  MDMA_C1ISR     MDMA channel x interrupt/status register
+//	0x084 32  MDMA_C1IFCR    MDMA channel x interrupt flag clear register
+//	0x088 32  MDMA_C1ESR     MDMA Channel x error status register
+//	0x08C 32  MDMA_C1CR      This register is used to control the concerned channel.
+//	0x090 32  MDMA_C1TCR     This register is used to configure the concerned channel.
+//	0x094 32  MDMA_C1BNDTR   MDMA Channel x block number of data register
+//	0x098 32  MDMA_C1SAR     MDMA channel x source address register
+//	0x09C 32  MDMA_C1DAR     MDMA channel x destination address register
+//	0x0A0 32  MDMA_C1BRUR    MDMA channel x Block Repeat address Update register
+//	0x0A4 32  MDMA_C1LAR     MDMA channel x Link Address register
+//	0x0A8 32  MDMA_C1TBR     MDMA channel x Trigger and Bus selection Register
+//	0x0B0 32  MDMA_C1MAR     MDMA channel x Mask address register
+//	0x0B4 32  MDMA_C1MDR     MDMA channel x Mask Data register
+//	0x0C0 32  MDMA_C2ISR     MDMA channel x interrupt/status register
+//	0x0C4 32  MDMA_C2IFCR    MDMA channel x interrupt flag clear register
+//	0x0C8 32  MDMA_C2ESR     MDMA Channel x error status register
+//	0x0CC 32  MDMA_C2CR      This register is used to control the concerned channel.
+//	0x0D0 32  MDMA_C2TCR     This register is used to configure the concerned channel.
+//	0x0D4 32  MDMA_C2BNDTR   MDMA Channel x block number of data register
+//	0x0D8 32  MDMA_C2SAR     MDMA channel x source address register
+//	0x0DC 32  MDMA_C2DAR     MDMA channel x destination address register
+//	0x0E0 32  MDMA_C2BRUR    MDMA channel x Block Repeat address Update register
+//	0x0E4 32  MDMA_C2LAR     MDMA channel x Link Address register
+//	0x0E8 32  MDMA_C2TBR     MDMA channel x Trigger and Bus selection Register
+//	0x0F0 32  MDMA_C2MAR     MDMA channel x Mask address register
+//	0x0F4 32  MDMA_C2MDR     MDMA channel x Mask Data register
+//	0x100 32  MDMA_C3ISR     MDMA channel x interrupt/status register
+//	0x104 32  MDMA_C3IFCR    MDMA channel x interrupt flag clear register
+//	0x108 32  MDMA_C3ESR     MDMA Channel x error status register
+//	0x10C 32  MDMA_C3CR      This register is used to control the concerned channel.
+//	0x110 32  MDMA_C3TCR     This register is used to configure the concerned channel.
+//	0x114 32  MDMA_C3BNDTR   MDMA Channel x block number of data register
+//	0x118 32  MDMA_C3SAR     MDMA channel x source address register
+//	0x11C 32  MDMA_C3DAR     MDMA channel x destination address register
+//	0x120 32  MDMA_C3BRUR    MDMA channel x Block Repeat address Update register
+//	0x124 32  MDMA_C3LAR     MDMA channel x Link Address register
+//	0x128 32  MDMA_C3TBR     MDMA channel x Trigger and Bus selection Register
+//	0x130 32  MDMA_C3MAR     MDMA channel x Mask address register
+//	0x134 32  MDMA_C3MDR     MDMA channel x Mask Data register
+//	0x140 32  MDMA_C4ISR     MDMA channel x interrupt/status register
+//	0x144 32  MDMA_C4IFCR    MDMA channel x interrupt flag clear register
+//	0x148 32  MDMA_C4ESR     MDMA Channel x error status register
+//	0x14C 32  MDMA_C4CR      This register is used to control the concerned channel.
+//	0x150 32  MDMA_C4TCR     This register is used to configure the concerned channel.
+//	0x154 32  MDMA_C4BNDTR   MDMA Channel x block number of data register
+//	0x158 32  MDMA_C4SAR     MDMA channel x source address register
+//	0x15C 32  MDMA_C4DAR     MDMA channel x destination address register
+//	0x160 32  MDMA_C4BRUR    MDMA channel x Block Repeat address Update register
+//	0x164 32  MDMA_C4LAR     MDMA channel x Link Address register
+//	0x168 32  MDMA_C4TBR     MDMA channel x Trigger and Bus selection Register
+//	0x170 32  MDMA_C4MAR     MDMA channel x Mask address register
+//	0x174 32  MDMA_C4MDR     MDMA channel x Mask Data register
+//	0x180 32  MDMA_C5ISR     MDMA channel x interrupt/status register
+//	0x184 32  MDMA_C5IFCR    MDMA channel x interrupt flag clear register
+//	0x188 32  MDMA_C5ESR     MDMA Channel x error status register
+//	0x18C 32  MDMA_C5CR      This register is used to control the concerned channel.
+//	0x190 32  MDMA_C5TCR     This register is used to configure the concerned channel.
+//	0x194 32  MDMA_C5BNDTR   MDMA Channel x block number of data register
+//	0x198 32  MDMA_C5SAR     MDMA channel x source address register
+//	0x19C 32  MDMA_C5DAR     MDMA channel x destination address register
+//	0x1A0 32  MDMA_C5BRUR    MDMA channel x Block Repeat address Update register
+//	0x1A4 32  MDMA_C5LAR     MDMA channel x Link Address register
+//	0x1A8 32  MDMA_C5TBR     MDMA channel x Trigger and Bus selection Register
+//	0x1B0 32  MDMA_C5MAR     MDMA channel x Mask address register
+//	0x1B4 32  MDMA_C5MDR     MDMA channel x Mask Data register
+//	0x1C0 32  MDMA_C6ISR     MDMA channel x interrupt/status register
+//	0x1C4 32  MDMA_C6IFCR    MDMA channel x interrupt flag clear register
+//	0x1C8 32  MDMA_C6ESR     MDMA Channel x error status register
+//	0x1CC 32  MDMA_C6CR      This register is used to control the concerned channel.
+//	0x1D0 32  MDMA_C6TCR     This register is used to configure the concerned channel.
+//	0x1D4 32  MDMA_C6BNDTR   MDMA Channel x block number of data register
+//	0x1D8 32  MDMA_C6SAR     MDMA channel x source address register
+//	0x1DC 32  MDMA_C6DAR     MDMA channel x destination address register
+//	0x1E0 32  MDMA_C6BRUR    MDMA channel x Block Repeat address Update register
+//	0x1E4 32  MDMA_C6LAR     MDMA channel x Link Address register
+//	0x1E8 32  MDMA_C6TBR     MDMA channel x Trigger and Bus selection Register
+//	0x1F0 32  MDMA_C6MAR     MDMA channel x Mask address register
+//	0x1F4 32  MDMA_C6MDR     MDMA channel x Mask Data register
+//	0x200 32  MDMA_C7ISR     MDMA channel x interrupt/status register
+//	0x204 32  MDMA_C7IFCR    MDMA channel x interrupt flag clear register
+//	0x208 32  MDMA_C7ESR     MDMA Channel x error status register
+//	0x20C 32  MDMA_C7CR      This register is used to control the concerned channel.
+//	0x210 32  MDMA_C7TCR     This register is used to configure the concerned channel.
+//	0x214 32  MDMA_C7BNDTR   MDMA Channel x block number of data register
+//	0x218 32  MDMA_C7SAR     MDMA channel x source address register
+//	0x21C 32  MDMA_C7DAR     MDMA channel x destination address register
+//	0x220 32  MDMA_C7BRUR    MDMA channel x Block Repeat address Update register
+//	0x224 32  MDMA_C7LAR     MDMA channel x Link Address register
+//	0x228 32  MDMA_C7TBR     MDMA channel x Trigger and Bus selection Register
+//	0x230 32  MDMA_C7MAR     MDMA channel x Mask address register
+//	0x234 32  MDMA_C7MDR     MDMA channel x Mask Data register
+//	0x240 32  MDMA_C8ISR     MDMA channel x interrupt/status register
+//	0x244 32  MDMA_C8IFCR    MDMA channel x interrupt flag clear register
+//	0x248 32  MDMA_C8ESR     MDMA Channel x error status register
+//	0x24C 32  MDMA_C8CR      This register is used to control the concerned channel.
+//	0x250 32  MDMA_C8TCR     This register is used to configure the concerned channel.
+//	0x254 32  MDMA_C8BNDTR   MDMA Channel x block number of data register
+//	0x258 32  MDMA_C8SAR     MDMA channel x source address register
+//	0x25C 32  MDMA_C8DAR     MDMA channel x destination address register
+//	0x260 32  MDMA_C8BRUR    MDMA channel x Block Repeat address Update register
+//	0x264 32  MDMA_C8LAR     MDMA channel x Link Address register
+//	0x268 32  MDMA_C8TBR     MDMA channel x Trigger and Bus selection Register
+//	0x270 32  MDMA_C8MAR     MDMA channel x Mask address register
+//	0x274 32  MDMA_C8MDR     MDMA channel x Mask Data register
+//	0x280 32  MDMA_C9ISR     MDMA channel x interrupt/status register
+//	0x284 32  MDMA_C9IFCR    MDMA channel x interrupt flag clear register
+//	0x288 32  MDMA_C9ESR     MDMA Channel x error status register
+//	0x28C 32  MDMA_C9CR      This register is used to control the concerned channel.
+//	0x290 32  MDMA_C9TCR     This register is used to configure the concerned channel.
+//	0x294 32  MDMA_C9BNDTR   MDMA Channel x block number of data register
+//	0x298 32  MDMA_C9SAR     MDMA channel x source address register
+//	0x29C 32  MDMA_C9DAR     MDMA channel x destination address register
+//	0x2A0 32  MDMA_C9BRUR    MDMA channel x Block Repeat address Update register
+//	0x2A4 32  MDMA_C9LAR     MDMA channel x Link Address register
+//	0x2A8 32  MDMA_C9TBR     MDMA channel x Trigger and Bus selection Register
+//	0x2B0 32  MDMA_C9MAR     MDMA channel x Mask address register
+//	0x2B4 32  MDMA_C9MDR     MDMA channel x Mask Data register
+//	0x2C0 32  MDMA_C10ISR    MDMA channel x interrupt/status register
+//	0x2C4 32  MDMA_C10IFCR   MDMA channel x interrupt flag clear register
+//	0x2C8 32  MDMA_C10ESR    MDMA Channel x error status register
+//	0x2CC 32  MDMA_C10CR     This register is used to control the concerned channel.
+//	0x2D0 32  MDMA_C10TCR    This register is used to configure the concerned channel.
+//	0x2D4 32  MDMA_C10BNDTR  MDMA Channel x block number of data register
+//	0x2D8 32  MDMA_C10SAR    MDMA channel x source address register
+//	0x2DC 32  MDMA_C10DAR    MDMA channel x destination address register
+//	0x2E0 32  MDMA_C10BRUR   MDMA channel x Block Repeat address Update register
+//	0x2E4 32  MDMA_C10LAR    MDMA channel x Link Address register
+//	0x2E8 32  MDMA_C10TBR    MDMA channel x Trigger and Bus selection Register
+//	0x2F0 32  MDMA_C10MAR    MDMA channel x Mask address register
+//	0x2F4 32  MDMA_C10MDR    MDMA channel x Mask Data register
+//	0x300 32  MDMA_C11ISR    MDMA channel x interrupt/status register
+//	0x304 32  MDMA_C11IFCR   MDMA channel x interrupt flag clear register
+//	0x308 32  MDMA_C11ESR    MDMA Channel x error status register
+//	0x30C 32  MDMA_C11CR     This register is used to control the concerned channel.
+//	0x310 32  MDMA_C11TCR    This register is used to configure the concerned channel.
+//	0x314 32  MDMA_C11BNDTR  MDMA Channel x block number of data register
+//	0x318 32  MDMA_C11SAR    MDMA channel x source address register
+//	0x31C 32  MDMA_C11DAR    MDMA channel x destination address register
+//	0x320 32  MDMA_C11BRUR   MDMA channel x Block Repeat address Update register
+//	0x324 32  MDMA_C11LAR    MDMA channel x Link Address register
+//	0x328 32  MDMA_C11TBR    MDMA channel x Trigger and Bus selection Register
+//	0x330 32  MDMA_C11MAR    MDMA channel x Mask address register
+//	0x334 32  MDMA_C11MDR    MDMA channel x Mask Data register
+//	0x340 32  MDMA_C12ISR    MDMA channel x interrupt/status register
+//	0x344 32  MDMA_C12IFCR   MDMA channel x interrupt flag clear register
+//	0x348 32  MDMA_C12ESR    MDMA Channel x error status register
+//	0x34C 32  MDMA_C12CR     This register is used to control the concerned channel.
+//	0x350 32  MDMA_C12TCR    This register is used to configure the concerned channel.
+//	0x354 32  MDMA_C12BNDTR  MDMA Channel x block number of data register
+//	0x358 32  MDMA_C12SAR    MDMA channel x source address register
+//	0x35C 32  MDMA_C12DAR    MDMA channel x destination address register
+//	0x360 32  MDMA_C12BRUR   MDMA channel x Block Repeat address Update register
+//	0x364 32  MDMA_C12LAR    MDMA channel x Link Address register
+//	0x368 32  MDMA_C12TBR    MDMA channel x Trigger and Bus selection Register
+//	0x370 32  MDMA_C12MAR    MDMA channel x Mask address register
+//	0x374 32  MDMA_C12MDR    MDMA channel x Mask Data register
+//	0x380 32  MDMA_C13ISR    MDMA channel x interrupt/status register
+//	0x384 32  MDMA_C13IFCR   MDMA channel x interrupt flag clear register
+//	0x388 32  MDMA_C13ESR    MDMA Channel x error status register
+//	0x38C 32  MDMA_C13CR     This register is used to control the concerned channel.
+//	0x390 32  MDMA_C13TCR    This register is used to configure the concerned channel.
+//	0x394 32  MDMA_C13BNDTR  MDMA Channel x block number of data register
+//	0x398 32  MDMA_C13SAR    MDMA channel x source address register
+//	0x39C 32  MDMA_C13DAR    MDMA channel x destination address register
+//	0x3A0 32  MDMA_C13BRUR   MDMA channel x Block Repeat address Update register
+//	0x3A4 32  MDMA_C13LAR    MDMA channel x Link Address register
+//	0x3A8 32  MDMA_C13TBR    MDMA channel x Trigger and Bus selection Register
+//	0x3B0 32  MDMA_C13MAR    MDMA channel x Mask address register
+//	0x3B4 32  MDMA_C13MDR    MDMA channel x Mask Data register
+//	0x3C0 32  MDMA_C14ISR    MDMA channel x interrupt/status register
+//	0x3C4 32  MDMA_C14IFCR   MDMA channel x interrupt flag clear register
+//	0x3C8 32  MDMA_C14ESR    MDMA Channel x error status register
+//	0x3CC 32  MDMA_C14CR     This register is used to control the concerned channel.
+//	0x3D0 32  MDMA_C14TCR    This register is used to configure the concerned channel.
+//	0x3D4 32  MDMA_C14BNDTR  MDMA Channel x block number of data register
+//	0x3D8 32  MDMA_C14SAR    MDMA channel x source address register
+//	0x3DC 32  MDMA_C14DAR    MDMA channel x destination address register
+//	0x3E0 32  MDMA_C14BRUR   MDMA channel x Block Repeat address Update register
+//	0x3E4 32  MDMA_C14LAR    MDMA channel x Link Address register
+//	0x3E8 32  MDMA_C14TBR    MDMA channel x Trigger and Bus selection Register
+//	0x3F0 32  MDMA_C14MAR    MDMA channel x Mask address register
+//	0x3F4 32  MDMA_C14MDR    MDMA channel x Mask Data register
+//	0x400 32  MDMA_C15ISR    MDMA channel x interrupt/status register
+//	0x404 32  MDMA_C15IFCR   MDMA channel x interrupt flag clear register
+//	0x408 32  MDMA_C15ESR    MDMA Channel x error status register
+//	0x40C 32  MDMA_C15CR     This register is used to control the concerned channel.
+//	0x410 32  MDMA_C15TCR    This register is used to configure the concerned channel.
+//	0x414 32  MDMA_C15BNDTR  MDMA Channel x block number of data register
+//	0x418 32  MDMA_C15SAR    MDMA channel x source address register
+//	0x41C 32  MDMA_C15DAR    MDMA channel x destination address register
+//	0x420 32  MDMA_C15BRUR   MDMA channel x Block Repeat address Update register
+//	0x424 32  MDMA_C15LAR    MDMA channel x Link Address register
+//	0x428 32  MDMA_C15TBR    MDMA channel x Trigger and Bus selection Register
+//	0x430 32  MDMA_C15MAR    MDMA channel x Mask address register
+//	0x434 32  MDMA_C15MDR    MDMA channel x Mask Data register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/bus
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/bus
+//	github.com/embeddedgo/stm32/p/mmap
 package mdma
 
 const (

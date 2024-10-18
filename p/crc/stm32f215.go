@@ -5,14 +5,19 @@
 // Package crc provides access to the registers of the CRC peripheral.
 //
 // Instances:
-//  CRC  CRC_BASE  AHB1  -  cyclic redundancy check calculation unit
+//
+//	CRC  CRC_BASE  AHB1  -  cyclic redundancy check calculation unit
+//
 // Registers:
-//  0x000 32  DR   Data register
-//  0x004 32  IDR  Independent data register
-//  0x008 32  CR   Control register
+//
+//	0x000 32  DR   Data register
+//	0x004 32  IDR  Independent data register
+//	0x008 32  CR   Control register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/bus
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/bus
+//	github.com/embeddedgo/stm32/p/mmap
 package crc
 
 const (

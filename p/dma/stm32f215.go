@@ -5,15 +5,20 @@
 // Package dma provides access to the registers of the DMA peripheral.
 //
 // Instances:
-//  DMA1  DMA1_BASE  AHB1  DMA1_STREAM0,DMA1_STREAM1,DMA1_STREAM2,DMA1_STREAM3,DMA1_STREAM4,DMA1_STREAM5,DMA1_STREAM6,DMA1_STREAM7  DMA controller
-//  DMA2  DMA2_BASE  AHB1  DMA2_STREAM0,DMA2_STREAM1,DMA2_STREAM2,DMA2_STREAM3,DMA2_STREAM4,DMA2_STREAM5,DMA2_STREAM6,DMA2_STREAM7  DMA controller
+//
+//	DMA1  DMA1_BASE  AHB1  DMA1_STREAM0,DMA1_STREAM1,DMA1_STREAM2,DMA1_STREAM3,DMA1_STREAM4,DMA1_STREAM5,DMA1_STREAM6,DMA1_STREAM7  DMA controller
+//	DMA2  DMA2_BASE  AHB1  DMA2_STREAM0,DMA2_STREAM1,DMA2_STREAM2,DMA2_STREAM3,DMA2_STREAM4,DMA2_STREAM5,DMA2_STREAM6,DMA2_STREAM7  DMA controller
+//
 // Registers:
-//  0x000 32  ISR[2]                           interrupt status register
-//  0x008 32  IFCR[2]                          interrupt flag clear register
-//  0x010 32  S{CR,NDTR,PAR,M0AR,M1AR,FCR}[8]  stream configuration and controll registers
+//
+//	0x000 32  ISR[2]                           interrupt status register
+//	0x008 32  IFCR[2]                          interrupt flag clear register
+//	0x010 32  S{CR,NDTR,PAR,M0AR,M1AR,FCR}[8]  stream configuration and controll registers
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/bus
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/bus
+//	github.com/embeddedgo/stm32/p/mmap
 package dma
 
 const (

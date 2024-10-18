@@ -5,24 +5,29 @@
 // Package ethernet_dma provides access to the registers of the Ethernet_DMA peripheral.
 //
 // Instances:
-//  Ethernet_DMA  Ethernet_DMA_BASE  -  -  Ethernet: DMA controller operation
+//
+//	Ethernet_DMA  Ethernet_DMA_BASE  -  -  Ethernet: DMA controller operation
+//
 // Registers:
-//  0x000 32  DMABMR     Ethernet DMA bus mode register
-//  0x004 32  DMATPDR    Ethernet DMA transmit poll demand register
-//  0x008 32  DMARPDR    EHERNET DMA receive poll demand register
-//  0x00C 32  DMARDLAR   Ethernet DMA receive descriptor list address register
-//  0x010 32  DMATDLAR   Ethernet DMA transmit descriptor list address register
-//  0x014 32  DMASR      Ethernet DMA status register
-//  0x018 32  DMAOMR     Ethernet DMA operation mode register
-//  0x01C 32  DMAIER     Ethernet DMA interrupt enable register
-//  0x020 32  DMAMFBOCR  Ethernet DMA missed frame and buffer overflow counter register
-//  0x024 32  DMARSWTR   Ethernet DMA receive status watchdog timer register
-//  0x048 32  DMACHTDR   Ethernet DMA current host transmit descriptor register
-//  0x04C 32  DMACHRDR   Ethernet DMA current host receive descriptor register
-//  0x050 32  DMACHTBAR  Ethernet DMA current host transmit buffer address register
-//  0x054 32  DMACHRBAR  Ethernet DMA current host receive buffer address register
+//
+//	0x000 32  DMABMR     Ethernet DMA bus mode register
+//	0x004 32  DMATPDR    Ethernet DMA transmit poll demand register
+//	0x008 32  DMARPDR    EHERNET DMA receive poll demand register
+//	0x00C 32  DMARDLAR   Ethernet DMA receive descriptor list address register
+//	0x010 32  DMATDLAR   Ethernet DMA transmit descriptor list address register
+//	0x014 32  DMASR      Ethernet DMA status register
+//	0x018 32  DMAOMR     Ethernet DMA operation mode register
+//	0x01C 32  DMAIER     Ethernet DMA interrupt enable register
+//	0x020 32  DMAMFBOCR  Ethernet DMA missed frame and buffer overflow counter register
+//	0x024 32  DMARSWTR   Ethernet DMA receive status watchdog timer register
+//	0x048 32  DMACHTDR   Ethernet DMA current host transmit descriptor register
+//	0x04C 32  DMACHRDR   Ethernet DMA current host receive descriptor register
+//	0x050 32  DMACHTBAR  Ethernet DMA current host transmit buffer address register
+//	0x054 32  DMACHRBAR  Ethernet DMA current host receive buffer address register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package ethernet_dma
 
 const (

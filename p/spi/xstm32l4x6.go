@@ -17,9 +17,9 @@ type Periph struct {
 	CR2    mmio.R32[CR2]
 	SR     mmio.R32[SR]
 	DR     mmio.R32[uint32]
-	CRCPR  mmio.R32[CRCPR]
-	RXCRCR mmio.R32[RXCRCR]
-	TXCRCR mmio.R32[TXCRCR]
+	CRCPR  mmio.R32[uint32]
+	RXCRCR mmio.R32[uint32]
+	TXCRCR mmio.R32[uint32]
 }
 
 func SPI1() *Periph { return (*Periph)(unsafe.Pointer(uintptr(mmap.SPI1_BASE))) }
@@ -82,15 +82,3 @@ func BSY_(p *Periph) mmio.RM32[SR]    { return mmio.RM32[SR]{&p.SR, BSY} }
 func TIFRFE_(p *Periph) mmio.RM32[SR] { return mmio.RM32[SR]{&p.SR, TIFRFE} }
 func FRLVL_(p *Periph) mmio.RM32[SR]  { return mmio.RM32[SR]{&p.SR, FRLVL} }
 func FTLVL_(p *Periph) mmio.RM32[SR]  { return mmio.RM32[SR]{&p.SR, FTLVL} }
-
-type CRCPR uint32
-
-func CRCPOLY_(p *Periph) mmio.RM32[CRCPR] { return mmio.RM32[CRCPR]{&p.CRCPR, CRCPOLY} }
-
-type RXCRCR uint32
-
-func RxCRC_(p *Periph) mmio.RM32[RXCRCR] { return mmio.RM32[RXCRCR]{&p.RXCRCR, RxCRC} }
-
-type TXCRCR uint32
-
-func TxCRC_(p *Periph) mmio.RM32[TXCRCR] { return mmio.RM32[TXCRCR]{&p.TXCRCR, TxCRC} }

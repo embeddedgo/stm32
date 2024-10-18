@@ -5,35 +5,40 @@
 // Package aes provides access to the registers of the AES peripheral.
 //
 // Instances:
-//  AES  AES_BASE  AHB2  AES  Advanced encryption standard hardware accelerator
+//
+//	AES  AES_BASE  AHB2  AES  Advanced encryption standard hardware accelerator
+//
 // Registers:
-//  0x000 32  CR      control register
-//  0x004 32  SR      status register
-//  0x008 32  DINR    data input register
-//  0x00C 32  DOUTR   data output register
-//  0x010 32  KEYR0   key register 0
-//  0x014 32  KEYR1   key register 1
-//  0x018 32  KEYR2   key register 2
-//  0x01C 32  KEYR3   key register 3
-//  0x020 32  IVR0    initialization vector register 0
-//  0x024 32  IVR1    initialization vector register 1
-//  0x028 32  IVR2    initialization vector register 2
-//  0x02C 32  IVR3    initialization vector register 3
-//  0x030 32  KEYR4   key register 4
-//  0x034 32  KEYR5   key register 5
-//  0x038 32  KEYR6   key register 6
-//  0x03C 32  KEYR7   key register 7
-//  0x040 32  SUSP0R  suspend registers
-//  0x044 32  SUSP1R  suspend registers
-//  0x048 32  SUSP2R  suspend registers
-//  0x04C 32  SUSP3R  suspend registers
-//  0x050 32  SUSP4R  suspend registers
-//  0x054 32  SUSP5R  suspend registers
-//  0x058 32  SUSP6R  suspend registers
-//  0x05C 32  SUSP7R  suspend registers
+//
+//	0x000 32  CR      control register
+//	0x004 32  SR      status register
+//	0x008 32  DINR    data input register
+//	0x00C 32  DOUTR   data output register
+//	0x010 32  KEYR0   key register 0
+//	0x014 32  KEYR1   key register 1
+//	0x018 32  KEYR2   key register 2
+//	0x01C 32  KEYR3   key register 3
+//	0x020 32  IVR0    initialization vector register 0
+//	0x024 32  IVR1    initialization vector register 1
+//	0x028 32  IVR2    initialization vector register 2
+//	0x02C 32  IVR3    initialization vector register 3
+//	0x030 32  KEYR4   key register 4
+//	0x034 32  KEYR5   key register 5
+//	0x038 32  KEYR6   key register 6
+//	0x03C 32  KEYR7   key register 7
+//	0x040 32  SUSP0R  suspend registers
+//	0x044 32  SUSP1R  suspend registers
+//	0x048 32  SUSP2R  suspend registers
+//	0x04C 32  SUSP3R  suspend registers
+//	0x050 32  SUSP4R  suspend registers
+//	0x054 32  SUSP5R  suspend registers
+//	0x058 32  SUSP6R  suspend registers
+//	0x05C 32  SUSP7R  suspend registers
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/bus
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/bus
+//	github.com/embeddedgo/stm32/p/mmap
 package aes
 
 const (

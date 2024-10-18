@@ -5,23 +5,28 @@
 // Package spdifrx provides access to the registers of the SPDIFRX peripheral.
 //
 // Instances:
-//  SPDIFRX  SPDIFRX_BASE  APB1  SPDIF  Receiver Interface
+//
+//	SPDIFRX  SPDIFRX_BASE  APB1  SPDIF  Receiver Interface
+//
 // Registers:
-//  0x000 32  CR     Control register
-//  0x004 32  IMR    Interrupt mask register
-//  0x008 32  SR     Status register
-//  0x00C 32  IFCR   Interrupt Flag Clear register
-//  0x010 32  DR_00  Data input register
-//  0x010 32  DR_10  Data input register
-//  0x010 32  DR_01  Data input register
-//  0x014 32  CSR    Channel Status register
-//  0x018 32  DIR    Debug Information register
-//  0x3F4 32  VERR   SPDIFRX version register
-//  0x3F8 32  IDR    SPDIFRX identification register
-//  0x3FC 32  SIDR   SPDIFRX size identification register
+//
+//	0x000 32  CR     Control register
+//	0x004 32  IMR    Interrupt mask register
+//	0x008 32  SR     Status register
+//	0x00C 32  IFCR   Interrupt Flag Clear register
+//	0x010 32  DR_00  Data input register
+//	0x010 32  DR_01  Data input register
+//	0x010 32  DR_10  Data input register
+//	0x014 32  CSR    Channel Status register
+//	0x018 32  DIR    Debug Information register
+//	0x3F4 32  VERR   SPDIFRX version register
+//	0x3F8 32  IDR    SPDIFRX identification register
+//	0x3FC 32  SIDR   SPDIFRX size identification register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/bus
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/bus
+//	github.com/embeddedgo/stm32/p/mmap
 package spdifrx
 
 const (
@@ -139,16 +144,6 @@ const (
 )
 
 const (
-	DRNL1 DR_10 = 0xFFFF << 0  //+ Data value
-	DRNL2 DR_10 = 0xFFFF << 16 //+ Data value
-)
-
-const (
-	DRNL1n = 0
-	DRNL2n = 16
-)
-
-const (
 	PE DR_01 = 0x01 << 0     //+ Parity Error bit
 	V  DR_01 = 0x01 << 1     //+ Validity bit
 	U  DR_01 = 0x01 << 2     //+ User bit
@@ -164,6 +159,16 @@ const (
 	Cn  = 3
 	PTn = 4
 	DRn = 8
+)
+
+const (
+	DRNL1 DR_10 = 0xFFFF << 0  //+ Data value
+	DRNL2 DR_10 = 0xFFFF << 16 //+ Data value
+)
+
+const (
+	DRNL1n = 0
+	DRNL2n = 16
 )
 
 const (

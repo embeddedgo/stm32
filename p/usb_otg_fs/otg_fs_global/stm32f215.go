@@ -5,29 +5,34 @@
 // Package otg_fs_global provides access to the registers of the OTG_FS_GLOBAL peripheral.
 //
 // Instances:
-//  OTG_FS_GLOBAL  OTG_FS_GLOBAL_BASE  -  OTG_FS_WKUP,OTG_FS  USB on the go full speed
+//
+//	OTG_FS_GLOBAL  OTG_FS_GLOBAL_BASE  -  OTG_FS_WKUP,OTG_FS  USB on the go full speed
+//
 // Registers:
-//  0x000 32  FS_GOTGCTL           OTG_FS control and status register (OTG_FS_GOTGCTL)
-//  0x004 32  FS_GOTGINT           OTG_FS interrupt register (OTG_FS_GOTGINT)
-//  0x008 32  FS_GAHBCFG           OTG_FS AHB configuration register (OTG_FS_GAHBCFG)
-//  0x00C 32  FS_GUSBCFG           OTG_FS USB configuration register (OTG_FS_GUSBCFG)
-//  0x010 32  FS_GRSTCTL           OTG_FS reset register (OTG_FS_GRSTCTL)
-//  0x014 32  FS_GINTSTS           OTG_FS core interrupt register (OTG_FS_GINTSTS)
-//  0x018 32  FS_GINTMSK           OTG_FS interrupt mask register (OTG_FS_GINTMSK)
-//  0x01C 32  FS_GRXSTSR_Device    OTG_FS Receive status debug read(Device mode)
-//  0x01C 32  FS_GRXSTSR_Host      OTG_FS Receive status debug read(Host mode)
-//  0x024 32  FS_GRXFSIZ           OTG_FS Receive FIFO size register (OTG_FS_GRXFSIZ)
-//  0x028 32  FS_GNPTXFSIZ_Device  OTG_FS non-periodic transmit FIFO size register (Device mode)
-//  0x028 32  FS_GNPTXFSIZ_Host    OTG_FS non-periodic transmit FIFO size register (Host mode)
-//  0x02C 32  FS_GNPTXSTS          OTG_FS non-periodic transmit FIFO/queue status register (OTG_FS_GNPTXSTS)
-//  0x038 32  FS_GCCFG             OTG_FS general core configuration register (OTG_FS_GCCFG)
-//  0x03C 32  FS_CID               core ID register
-//  0x100 32  FS_HPTXFSIZ          OTG_FS Host periodic transmit FIFO size register (OTG_FS_HPTXFSIZ)
-//  0x104 32  FS_DIEPTXF1          OTG_FS device IN endpoint transmit FIFO size register (OTG_FS_DIEPTXF2)
-//  0x108 32  FS_DIEPTXF2          OTG_FS device IN endpoint transmit FIFO size register (OTG_FS_DIEPTXF3)
-//  0x10C 32  FS_DIEPTXF3          OTG_FS device IN endpoint transmit FIFO size register (OTG_FS_DIEPTXF4)
+//
+//	0x000 32  FS_GOTGCTL           OTG_FS control and status register (OTG_FS_GOTGCTL)
+//	0x004 32  FS_GOTGINT           OTG_FS interrupt register (OTG_FS_GOTGINT)
+//	0x008 32  FS_GAHBCFG           OTG_FS AHB configuration register (OTG_FS_GAHBCFG)
+//	0x00C 32  FS_GUSBCFG           OTG_FS USB configuration register (OTG_FS_GUSBCFG)
+//	0x010 32  FS_GRSTCTL           OTG_FS reset register (OTG_FS_GRSTCTL)
+//	0x014 32  FS_GINTSTS           OTG_FS core interrupt register (OTG_FS_GINTSTS)
+//	0x018 32  FS_GINTMSK           OTG_FS interrupt mask register (OTG_FS_GINTMSK)
+//	0x01C 32  FS_GRXSTSR_Device    OTG_FS Receive status debug read(Device mode)
+//	0x01C 32  FS_GRXSTSR_Host      OTG_FS Receive status debug read(Host mode)
+//	0x024 32  FS_GRXFSIZ           OTG_FS Receive FIFO size register (OTG_FS_GRXFSIZ)
+//	0x028 32  FS_GNPTXFSIZ_Device  OTG_FS non-periodic transmit FIFO size register (Device mode)
+//	0x028 32  FS_GNPTXFSIZ_Host    OTG_FS non-periodic transmit FIFO size register (Host mode)
+//	0x02C 32  FS_GNPTXSTS          OTG_FS non-periodic transmit FIFO/queue status register (OTG_FS_GNPTXSTS)
+//	0x038 32  FS_GCCFG             OTG_FS general core configuration register (OTG_FS_GCCFG)
+//	0x03C 32  FS_CID               core ID register
+//	0x100 32  FS_HPTXFSIZ          OTG_FS Host periodic transmit FIFO size register (OTG_FS_HPTXFSIZ)
+//	0x104 32  FS_DIEPTXF1          OTG_FS device IN endpoint transmit FIFO size register (OTG_FS_DIEPTXF2)
+//	0x108 32  FS_DIEPTXF2          OTG_FS device IN endpoint transmit FIFO size register (OTG_FS_DIEPTXF3)
+//	0x10C 32  FS_DIEPTXF3          OTG_FS device IN endpoint transmit FIFO size register (OTG_FS_DIEPTXF4)
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package otg_fs_global
 
 const (

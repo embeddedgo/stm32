@@ -5,15 +5,20 @@
 // Package dma provides access to the registers of the DMA peripheral.
 //
 // Instances:
-//  DMA1  DMA1_BASE  AHB1  DMA_STR0,DMA_STR1,DMA1_STR7                                                                                                   DMA controller
-//  DMA2  DMA2_BASE  AHB1  DMA_STR2,DMA_STR3,DMA_STR4,DMA_STR5,DMA_STR6,DMA2_STR0,DMA2_STR1,DMA2_STR2,DMA2_STR3,DMA2_STR4,DMA2_STR5,DMA2_STR6,DMA2_STR7  DMA controller
+//
+//	DMA1  DMA1_BASE  AHB1  DMA_STR0,DMA_STR1,DMA1_STR7                                                                                                   DMA controller
+//	DMA2  DMA2_BASE  AHB1  DMA_STR2,DMA_STR3,DMA_STR4,DMA_STR5,DMA_STR6,DMA2_STR0,DMA2_STR1,DMA2_STR2,DMA2_STR3,DMA2_STR4,DMA2_STR5,DMA2_STR6,DMA2_STR7  DMA controller
+//
 // Registers:
-//  0x000 32  ISR[2]                           interrupt status register
-//  0x008 32  IFCR[2]                          interrupt flag clear register
-//  0x010 32  S{CR,NDTR,PAR,M0AR,M1AR,FCR}[8]  stream configuration and controll registers
+//
+//	0x000 32  ISR[2]                           interrupt status register
+//	0x008 32  IFCR[2]                          interrupt flag clear register
+//	0x010 32  S{CR,NDTR,PAR,M0AR,M1AR,FCR}[8]  stream configuration and controll registers
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/bus
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/bus
+//	github.com/embeddedgo/stm32/p/mmap
 package dma
 
 const (

@@ -5,46 +5,51 @@
 // Package adc provides access to the registers of the ADC peripheral.
 //
 // Instances:
-//  ADC1  ADC1_BASE  AHB1  ADC3+  Analog to Digital Converter
-//  ADC2  ADC2_BASE  AHB1  ADC3+  Analog to Digital Converter
-//  ADC3  ADC3_BASE  AHB4  ADC3+  Analog to Digital Converter
+//
+//	ADC1  ADC1_BASE  AHB1  ADC3+  Analog to Digital Converter
+//	ADC2  ADC2_BASE  AHB1  ADC3+  Analog to Digital Converter
+//	ADC3  ADC3_BASE  AHB4  ADC3+  Analog to Digital Converter
+//
 // Registers:
-//  0x000 32  ISR       ADC interrupt and status register
-//  0x004 32  IER       ADC interrupt enable register
-//  0x008 32  CR        ADC control register
-//  0x00C 32  CFGR      ADC configuration register 1
-//  0x010 32  CFGR2     ADC configuration register 2
-//  0x014 32  SMPR1     ADC sampling time register 1
-//  0x018 32  SMPR2     ADC sampling time register 2
-//  0x01C 32  PCSEL     ADC pre channel selection register
-//  0x020 32  LTR1      ADC analog watchdog 1 threshold register
-//  0x024 32  LHTR1     ADC analog watchdog 2 threshold register
-//  0x030 32  SQR1      ADC group regular sequencer ranks register 1
-//  0x034 32  SQR2      ADC group regular sequencer ranks register 2
-//  0x038 32  SQR3      ADC group regular sequencer ranks register 3
-//  0x03C 32  SQR4      ADC group regular sequencer ranks register 4
-//  0x040 32  DR        ADC group regular conversion data register
-//  0x04C 32  JSQR      ADC group injected sequencer register
-//  0x060 32  OFR1      ADC offset number 1 register
-//  0x064 32  OFR2      ADC offset number 2 register
-//  0x068 32  OFR3      ADC offset number 3 register
-//  0x06C 32  OFR4      ADC offset number 4 register
-//  0x080 32  JDR1      ADC group injected sequencer rank 1 register
-//  0x084 32  JDR2      ADC group injected sequencer rank 2 register
-//  0x088 32  JDR3      ADC group injected sequencer rank 3 register
-//  0x08C 32  JDR4      ADC group injected sequencer rank 4 register
-//  0x0A0 32  AWD2CR    ADC analog watchdog 2 configuration register
-//  0x0A4 32  AWD3CR    ADC analog watchdog 3 configuration register
-//  0x0B0 32  LTR2      ADC watchdog lower threshold register 2
-//  0x0B4 32  HTR2      ADC watchdog higher threshold register 2
-//  0x0B8 32  LTR3      ADC watchdog lower threshold register 3
-//  0x0BC 32  HTR3      ADC watchdog higher threshold register 3
-//  0x0C0 32  DIFSEL    ADC channel differential or single-ended mode selection register
-//  0x0C4 32  CALFACT   ADC calibration factors register
-//  0x0C8 32  CALFACT2  ADC Calibration Factor register 2
+//
+//	0x000 32  ISR       ADC interrupt and status register
+//	0x004 32  IER       ADC interrupt enable register
+//	0x008 32  CR        ADC control register
+//	0x00C 32  CFGR      ADC configuration register 1
+//	0x010 32  CFGR2     ADC configuration register 2
+//	0x014 32  SMPR1     ADC sampling time register 1
+//	0x018 32  SMPR2     ADC sampling time register 2
+//	0x01C 32  PCSEL     ADC pre channel selection register
+//	0x020 32  LTR1      ADC analog watchdog 1 threshold register
+//	0x024 32  LHTR1     ADC analog watchdog 2 threshold register
+//	0x030 32  SQR1      ADC group regular sequencer ranks register 1
+//	0x034 32  SQR2      ADC group regular sequencer ranks register 2
+//	0x038 32  SQR3      ADC group regular sequencer ranks register 3
+//	0x03C 32  SQR4      ADC group regular sequencer ranks register 4
+//	0x040 32  DR        ADC group regular conversion data register
+//	0x04C 32  JSQR      ADC group injected sequencer register
+//	0x060 32  OFR1      ADC offset number 1 register
+//	0x064 32  OFR2      ADC offset number 2 register
+//	0x068 32  OFR3      ADC offset number 3 register
+//	0x06C 32  OFR4      ADC offset number 4 register
+//	0x080 32  JDR1      ADC group injected sequencer rank 1 register
+//	0x084 32  JDR2      ADC group injected sequencer rank 2 register
+//	0x088 32  JDR3      ADC group injected sequencer rank 3 register
+//	0x08C 32  JDR4      ADC group injected sequencer rank 4 register
+//	0x0A0 32  AWD2CR    ADC analog watchdog 2 configuration register
+//	0x0A4 32  AWD3CR    ADC analog watchdog 3 configuration register
+//	0x0B0 32  LTR2      ADC watchdog lower threshold register 2
+//	0x0B4 32  HTR2      ADC watchdog higher threshold register 2
+//	0x0B8 32  LTR3      ADC watchdog lower threshold register 3
+//	0x0BC 32  HTR3      ADC watchdog higher threshold register 3
+//	0x0C0 32  DIFSEL    ADC channel differential or single-ended mode selection register
+//	0x0C4 32  CALFACT   ADC calibration factors register
+//	0x0C8 32  CALFACT2  ADC Calibration Factor register 2
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/bus
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/bus
+//	github.com/embeddedgo/stm32/p/mmap
 package adc
 
 const (

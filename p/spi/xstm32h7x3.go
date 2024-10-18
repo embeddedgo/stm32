@@ -21,14 +21,14 @@ type Periph struct {
 	SR      mmio.R32[SR]
 	IFCR    mmio.R32[IFCR]
 	_       uint32
-	TXDR    mmio.R32[TXDR]
+	TXDR    mmio.R32[uint32]
 	_       [3]uint32
-	RXDR    mmio.R32[RXDR]
+	RXDR    mmio.R32[uint32]
 	_       [3]uint32
-	CRCPOLY mmio.R32[CRCPOLY]
-	TXCRC   mmio.R32[TXCRC]
-	RXCRC   mmio.R32[RXCRC]
-	UDRDR   mmio.R32[UDRDR]
+	CRCPOLY mmio.R32[uint32]
+	TXCRC   mmio.R32[uint32]
+	RXCRC   mmio.R32[uint32]
+	UDRDR   mmio.R32[uint32]
 	CGFR    mmio.R32[CGFR]
 }
 
@@ -145,30 +145,6 @@ func TIFREC_(p *Periph) mmio.RM32[IFCR] { return mmio.RM32[IFCR]{&p.IFCR, TIFREC
 func MODFC_(p *Periph) mmio.RM32[IFCR]  { return mmio.RM32[IFCR]{&p.IFCR, MODFC} }
 func TSERFC_(p *Periph) mmio.RM32[IFCR] { return mmio.RM32[IFCR]{&p.IFCR, TSERFC} }
 func SUSPC_(p *Periph) mmio.RM32[IFCR]  { return mmio.RM32[IFCR]{&p.IFCR, SUSPC} }
-
-type TXDR uint32
-
-func TXDR_(p *Periph) mmio.RM32[TXDR] { return mmio.RM32[TXDR]{&p.TXDR, TXDR} }
-
-type RXDR uint32
-
-func RXDR_(p *Periph) mmio.RM32[RXDR] { return mmio.RM32[RXDR]{&p.RXDR, RXDR} }
-
-type CRCPOLY uint32
-
-func CRCPOLY_(p *Periph) mmio.RM32[CRCPOLY] { return mmio.RM32[CRCPOLY]{&p.CRCPOLY, CRCPOLY} }
-
-type TXCRC uint32
-
-func TXCRC_(p *Periph) mmio.RM32[TXCRC] { return mmio.RM32[TXCRC]{&p.TXCRC, TXCRC} }
-
-type RXCRC uint32
-
-func RXCRC_(p *Periph) mmio.RM32[RXCRC] { return mmio.RM32[RXCRC]{&p.RXCRC, RXCRC} }
-
-type UDRDR uint32
-
-func UDRDR_(p *Periph) mmio.RM32[UDRDR] { return mmio.RM32[UDRDR]{&p.UDRDR, UDRDR} }
 
 type CGFR uint32
 

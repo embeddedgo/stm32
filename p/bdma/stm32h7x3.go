@@ -5,200 +5,311 @@
 // Package bdma provides access to the registers of the BDMA peripheral.
 //
 // Instances:
-//  BDMA  BDMA_BASE  AHB4  BDMA_CH1,BDMA_CH2,BDMA_CH3,BDMA_CH4,BDMA_CH5,BDMA_CH6,BDMA_CH7,BDMA_CH8
+//
+//	BDMA  BDMA_BASE  AHB4  BDMA_CH0,BDMA_CH1,BDMA_CH2,BDMA_CH3,BDMA_CH4,BDMA_CH5,BDMA_CH6,BDMA_CH7
+//
 // Registers:
-//  0x000 32  ISR     DMA interrupt status register
-//  0x004 32  IFCR    DMA interrupt flag clear register
-//  0x008 32  CCR1    DMA channel x configuration register
-//  0x00C 32  CNDTR1  DMA channel x number of data register
-//  0x010 32  CPAR1   This register must not be written when the channel is enabled.
-//  0x014 32  CMAR1   This register must not be written when the channel is enabled.
-//  0x01C 32  CCR2    DMA channel x configuration register
-//  0x020 32  CNDTR2  DMA channel x number of data register
-//  0x024 32  CPAR2   This register must not be written when the channel is enabled.
-//  0x028 32  CMAR2   This register must not be written when the channel is enabled.
-//  0x030 32  CCR3    DMA channel x configuration register
-//  0x034 32  CNDTR3  DMA channel x number of data register
-//  0x038 32  CPAR3   This register must not be written when the channel is enabled.
-//  0x03C 32  CMAR3   This register must not be written when the channel is enabled.
-//  0x044 32  CCR4    DMA channel x configuration register
-//  0x048 32  CNDTR4  DMA channel x number of data register
-//  0x04C 32  CPAR4   This register must not be written when the channel is enabled.
-//  0x050 32  CMAR4   This register must not be written when the channel is enabled.
-//  0x058 32  CCR5    DMA channel x configuration register
-//  0x05C 32  CNDTR5  DMA channel x number of data register
-//  0x060 32  CPAR5   This register must not be written when the channel is enabled.
-//  0x064 32  CMAR5   This register must not be written when the channel is enabled.
-//  0x06C 32  CCR6    DMA channel x configuration register
-//  0x070 32  CNDTR6  DMA channel x number of data register
-//  0x074 32  CPAR6   This register must not be written when the channel is enabled.
-//  0x078 32  CMAR6   This register must not be written when the channel is enabled.
-//  0x080 32  CCR7    DMA channel x configuration register
-//  0x084 32  CNDTR7  DMA channel x number of data register
-//  0x088 32  CPAR7   This register must not be written when the channel is enabled.
-//  0x08C 32  CMAR7   This register must not be written when the channel is enabled.
-//  0x094 32  CCR8    DMA channel x configuration register
-//  0x098 32  CNDTR8  DMA channel x number of data register
-//  0x09C 32  CPAR8   This register must not be written when the channel is enabled.
-//  0x0A0 32  CMAR8   This register must not be written when the channel is enabled.
+//
+//	0x000 32  BDMA_ISR     BDMA interrupt status register
+//	0x004 32  BDMA_IFCR    BDMA interrupt flag clear register
+//	0x008 32  BDMA_CCR0    BDMA channel 0 configuration register
+//	0x00C 32  BDMA_CNDTR0
+//	0x010 32  BDMA_CPAR0
+//	0x014 32  BDMA_CM0AR0
+//	0x018 32  BDMA_CM1AR0
+//	0x01C 32  BDMA_CCR1    BDMA channel 1 configuration register
+//	0x020 32  BDMA_CNDTR1
+//	0x024 32  BDMA_CPAR1
+//	0x028 32  BDMA_CM0AR1
+//	0x02C 32  BDMA_CM1AR1
+//	0x030 32  BDMA_CCR2    BDMA channel 2 configuration register
+//	0x034 32  BDMA_CNDTR2
+//	0x038 32  BDMA_CPAR2
+//	0x03C 32  BDMA_CM0AR2
+//	0x040 32  BDMA_CM1AR2
+//	0x044 32  BDMA_CCR3    BDMA channel 3 configuration register
+//	0x048 32  BDMA_CNDTR3
+//	0x04C 32  BDMA_CPAR3
+//	0x050 32  BDMA_CM0AR3
+//	0x054 32  BDMA_CM1AR3
+//	0x058 32  BDMA_CCR4    BDMA channel 4 configuration register
+//	0x05C 32  BDMA_CNDTR4
+//	0x060 32  BDMA_CPAR4
+//	0x064 32  BDMA_CM0AR4
+//	0x068 32  BDMA_CM1AR4
+//	0x06C 32  BDMA_CCR5    BDMA channel 5 configuration register
+//	0x070 32  BDMA_CNDTR5
+//	0x074 32  BDMA_CPAR5
+//	0x078 32  BDMA_CM0AR5
+//	0x07C 32  BDMA_CM1AR5
+//	0x080 32  BDMA_CCR6    BDMA channel 6 configuration register
+//	0x084 32  BDMA_CNDTR6
+//	0x088 32  BDMA_CPAR6
+//	0x08C 32  BDMA_CM0AR6
+//	0x090 32  BDMA_CM1AR6
+//	0x094 32  BDMA_CCR7    BDMA channel 7 configuration register
+//	0x098 32  BDMA_CNDTR7
+//	0x09C 32  BDMA_CPAR7
+//	0x0A0 32  BDMA_CM0AR7
+//	0x0A4 32  BDMA_CM1AR7
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/bus
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/bus
+//	github.com/embeddedgo/stm32/p/mmap
 package bdma
 
 const (
-	GIF1  ISR = 0x01 << 0  //+ Channel x global interrupt flag (x = 1..8) This bit is set by hardware. It is cleared by software writing 1 to the corresponding bit in the DMA_IFCR register.
-	TCIF1 ISR = 0x01 << 1  //+ Channel x transfer complete flag (x = 1..8) This bit is set by hardware. It is cleared by software writing 1 to the corresponding bit in the DMA_IFCR register.
-	HTIF1 ISR = 0x01 << 2  //+ Channel x half transfer flag (x = 1..8) This bit is set by hardware. It is cleared by software writing 1 to the corresponding bit in the DMA_IFCR register.
-	TEIF1 ISR = 0x01 << 3  //+ Channel x transfer error flag (x = 1..8) This bit is set by hardware. It is cleared by software writing 1 to the corresponding bit in the DMA_IFCR register.
-	GIF2  ISR = 0x01 << 4  //+ Channel x global interrupt flag (x = 1..8) This bit is set by hardware. It is cleared by software writing 1 to the corresponding bit in the DMA_IFCR register.
-	TCIF2 ISR = 0x01 << 5  //+ Channel x transfer complete flag (x = 1..8) This bit is set by hardware. It is cleared by software writing 1 to the corresponding bit in the DMA_IFCR register.
-	HTIF2 ISR = 0x01 << 6  //+ Channel x half transfer flag (x = 1..8) This bit is set by hardware. It is cleared by software writing 1 to the corresponding bit in the DMA_IFCR register.
-	TEIF2 ISR = 0x01 << 7  //+ Channel x transfer error flag (x = 1..8) This bit is set by hardware. It is cleared by software writing 1 to the corresponding bit in the DMA_IFCR register.
-	GIF3  ISR = 0x01 << 8  //+ Channel x global interrupt flag (x = 1..8) This bit is set by hardware. It is cleared by software writing 1 to the corresponding bit in the DMA_IFCR register.
-	TCIF3 ISR = 0x01 << 9  //+ Channel x transfer complete flag (x = 1..8) This bit is set by hardware. It is cleared by software writing 1 to the corresponding bit in the DMA_IFCR register.
-	HTIF3 ISR = 0x01 << 10 //+ Channel x half transfer flag (x = 1..8) This bit is set by hardware. It is cleared by software writing 1 to the corresponding bit in the DMA_IFCR register.
-	TEIF3 ISR = 0x01 << 11 //+ Channel x transfer error flag (x = 1..8) This bit is set by hardware. It is cleared by software writing 1 to the corresponding bit in the DMA_IFCR register.
-	GIF4  ISR = 0x01 << 12 //+ Channel x global interrupt flag (x = 1..8) This bit is set by hardware. It is cleared by software writing 1 to the corresponding bit in the DMA_IFCR register.
-	TCIF4 ISR = 0x01 << 13 //+ Channel x transfer complete flag (x = 1..8) This bit is set by hardware. It is cleared by software writing 1 to the corresponding bit in the DMA_IFCR register.
-	HTIF4 ISR = 0x01 << 14 //+ Channel x half transfer flag (x = 1..8) This bit is set by hardware. It is cleared by software writing 1 to the corresponding bit in the DMA_IFCR register.
-	TEIF4 ISR = 0x01 << 15 //+ Channel x transfer error flag (x = 1..8) This bit is set by hardware. It is cleared by software writing 1 to the corresponding bit in the DMA_IFCR register.
-	GIF5  ISR = 0x01 << 16 //+ Channel x global interrupt flag (x = 1..8) This bit is set by hardware. It is cleared by software writing 1 to the corresponding bit in the DMA_IFCR register.
-	TCIF5 ISR = 0x01 << 17 //+ Channel x transfer complete flag (x = 1..8) This bit is set by hardware. It is cleared by software writing 1 to the corresponding bit in the DMA_IFCR register.
-	HTIF5 ISR = 0x01 << 18 //+ Channel x half transfer flag (x = 1..8) This bit is set by hardware. It is cleared by software writing 1 to the corresponding bit in the DMA_IFCR register.
-	TEIF5 ISR = 0x01 << 19 //+ Channel x transfer error flag (x = 1..8) This bit is set by hardware. It is cleared by software writing 1 to the corresponding bit in the DMA_IFCR register.
-	GIF6  ISR = 0x01 << 20 //+ Channel x global interrupt flag (x = 1..8) This bit is set by hardware. It is cleared by software writing 1 to the corresponding bit in the DMA_IFCR register.
-	TCIF6 ISR = 0x01 << 21 //+ Channel x transfer complete flag (x = 1..8) This bit is set by hardware. It is cleared by software writing 1 to the corresponding bit in the DMA_IFCR register.
-	HTIF6 ISR = 0x01 << 22 //+ Channel x half transfer flag (x = 1..8) This bit is set by hardware. It is cleared by software writing 1 to the corresponding bit in the DMA_IFCR register.
-	TEIF6 ISR = 0x01 << 23 //+ Channel x transfer error flag (x = 1..8) This bit is set by hardware. It is cleared by software writing 1 to the corresponding bit in the DMA_IFCR register.
-	GIF7  ISR = 0x01 << 24 //+ Channel x global interrupt flag (x = 1..8) This bit is set by hardware. It is cleared by software writing 1 to the corresponding bit in the DMA_IFCR register.
-	TCIF7 ISR = 0x01 << 25 //+ Channel x transfer complete flag (x = 1..8) This bit is set by hardware. It is cleared by software writing 1 to the corresponding bit in the DMA_IFCR register.
-	HTIF7 ISR = 0x01 << 26 //+ Channel x half transfer flag (x = 1..8) This bit is set by hardware. It is cleared by software writing 1 to the corresponding bit in the DMA_IFCR register.
-	TEIF7 ISR = 0x01 << 27 //+ Channel x transfer error flag (x = 1..8) This bit is set by hardware. It is cleared by software writing 1 to the corresponding bit in the DMA_IFCR register.
-	GIF8  ISR = 0x01 << 28 //+ Channel x global interrupt flag (x = 1..8) This bit is set by hardware. It is cleared by software writing 1 to the corresponding bit in the DMA_IFCR register.
-	TCIF8 ISR = 0x01 << 29 //+ Channel x transfer complete flag (x = 1..8) This bit is set by hardware. It is cleared by software writing 1 to the corresponding bit in the DMA_IFCR register.
-	HTIF8 ISR = 0x01 << 30 //+ Channel x half transfer flag (x = 1..8) This bit is set by hardware. It is cleared by software writing 1 to the corresponding bit in the DMA_IFCR register.
-	TEIF8 ISR = 0x01 << 31 //+ Channel x transfer error flag (x = 1..8) This bit is set by hardware. It is cleared by software writing 1 to the corresponding bit in the DMA_IFCR register.
+	GIF0  BDMA_ISR = 0x01 << 0  //+ global interrupt flag for channel 0
+	B_0x0 BDMA_ISR = 0x00 << 0  //  no TE, HT or TC event
+	B_0x1 BDMA_ISR = 0x01 << 0  //  a TE, HT or TC event occurred
+	TCIF0 BDMA_ISR = 0x01 << 1  //+ transfer complete (TC) flag for channel 0
+	B_0x0 BDMA_ISR = 0x00 << 1  //  no TC event
+	B_0x1 BDMA_ISR = 0x01 << 1  //  a TC event occurred
+	HTIF0 BDMA_ISR = 0x01 << 2  //+ half transfer (HT) flag for channel 0
+	B_0x0 BDMA_ISR = 0x00 << 2  //  no HT event
+	B_0x1 BDMA_ISR = 0x01 << 2  //  a HT event occurred
+	TEIF0 BDMA_ISR = 0x01 << 3  //+ transfer error (TE) flag for channel 0
+	B_0x0 BDMA_ISR = 0x00 << 3  //  no TE event
+	B_0x1 BDMA_ISR = 0x01 << 3  //  a TE event occurred
+	GIF1  BDMA_ISR = 0x01 << 4  //+ global interrupt flag for channel 1
+	B_0x0 BDMA_ISR = 0x00 << 4  //  no TE, HT or TC event
+	B_0x1 BDMA_ISR = 0x01 << 4  //  a TE, HT or TC event occurred
+	TCIF1 BDMA_ISR = 0x01 << 5  //+ transfer complete (TC) flag for channel 1
+	B_0x0 BDMA_ISR = 0x00 << 5  //  no TC event
+	B_0x1 BDMA_ISR = 0x01 << 5  //  a TC event occurred
+	HTIF1 BDMA_ISR = 0x01 << 6  //+ half transfer (HT) flag for channel 1
+	B_0x0 BDMA_ISR = 0x00 << 6  //  no HT event
+	B_0x1 BDMA_ISR = 0x01 << 6  //  a HT event occurred
+	TEIF1 BDMA_ISR = 0x01 << 7  //+ transfer error (TE) flag for channel 1
+	B_0x0 BDMA_ISR = 0x00 << 7  //  no TE event
+	B_0x1 BDMA_ISR = 0x01 << 7  //  a TE event occurred
+	GIF2  BDMA_ISR = 0x01 << 8  //+ global interrupt flag for channel 2
+	B_0x0 BDMA_ISR = 0x00 << 8  //  no TE, HT or TC event
+	B_0x1 BDMA_ISR = 0x01 << 8  //  a TE, HT or TC event occurred
+	TCIF2 BDMA_ISR = 0x01 << 9  //+ transfer complete (TC) flag for channel 2
+	B_0x0 BDMA_ISR = 0x00 << 9  //  no TC event
+	B_0x1 BDMA_ISR = 0x01 << 9  //  a TC event occurred
+	HTIF2 BDMA_ISR = 0x01 << 10 //+ half transfer (HT) flag for channel 2
+	B_0x0 BDMA_ISR = 0x00 << 10 //  no HT event
+	B_0x1 BDMA_ISR = 0x01 << 10 //  a HT event occurred
+	TEIF2 BDMA_ISR = 0x01 << 11 //+ transfer error (TE) flag for channel 2
+	B_0x0 BDMA_ISR = 0x00 << 11 //  no TE event
+	B_0x1 BDMA_ISR = 0x01 << 11 //  a TE event occurred
+	GIF3  BDMA_ISR = 0x01 << 12 //+ global interrupt flag for channel 3
+	B_0x0 BDMA_ISR = 0x00 << 12 //  no TE, HT or TC event
+	B_0x1 BDMA_ISR = 0x01 << 12 //  a TE, HT or TC event occurred
+	TCIF3 BDMA_ISR = 0x01 << 13 //+ transfer complete (TC) flag for channel 3
+	B_0x0 BDMA_ISR = 0x00 << 13 //  no TC event
+	B_0x1 BDMA_ISR = 0x01 << 13 //  a TC event occurred
+	HTIF3 BDMA_ISR = 0x01 << 14 //+ half transfer (HT) flag for channel 3
+	B_0x0 BDMA_ISR = 0x00 << 14 //  no HT event
+	B_0x1 BDMA_ISR = 0x01 << 14 //  a HT event occurred
+	TEIF3 BDMA_ISR = 0x01 << 15 //+ transfer error (TE) flag for channel 3
+	B_0x0 BDMA_ISR = 0x00 << 15 //  no TE event
+	B_0x1 BDMA_ISR = 0x01 << 15 //  a TE event occurred
+	GIF4  BDMA_ISR = 0x01 << 16 //+ global interrupt flag for channel 4
+	B_0x0 BDMA_ISR = 0x00 << 16 //  no TE, HT or TC event
+	B_0x1 BDMA_ISR = 0x01 << 16 //  a TE, HT or TC event occurred
+	TCIF4 BDMA_ISR = 0x01 << 17 //+ transfer complete (TC) flag for channel 4
+	B_0x0 BDMA_ISR = 0x00 << 17 //  no TC event
+	B_0x1 BDMA_ISR = 0x01 << 17 //  a TC event occurred
+	HTIF4 BDMA_ISR = 0x01 << 18 //+ half transfer (HT) flag for channel 4
+	B_0x0 BDMA_ISR = 0x00 << 18 //  no HT event
+	B_0x1 BDMA_ISR = 0x01 << 18 //  a HT event occurred
+	TEIF4 BDMA_ISR = 0x01 << 19 //+ transfer error (TE) flag for channel 4
+	B_0x0 BDMA_ISR = 0x00 << 19 //  no TE event
+	B_0x1 BDMA_ISR = 0x01 << 19 //  a TE event occurred
+	GIF5  BDMA_ISR = 0x01 << 20 //+ global interrupt flag for channel 5
+	B_0x0 BDMA_ISR = 0x00 << 20 //  no TE, HT or TC event
+	B_0x1 BDMA_ISR = 0x01 << 20 //  a TE, HT or TC event occurred
+	TCIF5 BDMA_ISR = 0x01 << 21 //+ transfer complete (TC) flag for channel 5
+	B_0x0 BDMA_ISR = 0x00 << 21 //  no TC event
+	B_0x1 BDMA_ISR = 0x01 << 21 //  a TC event occurred
+	HTIF5 BDMA_ISR = 0x01 << 22 //+ half transfer (HT) flag for channel 5
+	B_0x0 BDMA_ISR = 0x00 << 22 //  no HT event
+	B_0x1 BDMA_ISR = 0x01 << 22 //  a HT event occurred
+	TEIF5 BDMA_ISR = 0x01 << 23 //+ transfer error (TE) flag for channel 5
+	B_0x0 BDMA_ISR = 0x00 << 23 //  no TE event
+	B_0x1 BDMA_ISR = 0x01 << 23 //  a TE event occurred
+	GIF6  BDMA_ISR = 0x01 << 24 //+ global interrupt flag for channel 6
+	B_0x0 BDMA_ISR = 0x00 << 24 //  no TE, HT or TC event
+	B_0x1 BDMA_ISR = 0x01 << 24 //  a TE, HT or TC event occurred
+	TCIF6 BDMA_ISR = 0x01 << 25 //+ transfer complete (TC) flag for channel 6
+	B_0x0 BDMA_ISR = 0x00 << 25 //  no TC event
+	B_0x1 BDMA_ISR = 0x01 << 25 //  a TC event occurred
+	HTIF6 BDMA_ISR = 0x01 << 26 //+ half transfer (HT) flag for channel 6
+	B_0x0 BDMA_ISR = 0x00 << 26 //  no HT event
+	B_0x1 BDMA_ISR = 0x01 << 26 //  a HT event occurred
+	TEIF6 BDMA_ISR = 0x01 << 27 //+ transfer error (TE) flag for channel 6
+	B_0x0 BDMA_ISR = 0x00 << 27 //  no TE event
+	B_0x1 BDMA_ISR = 0x01 << 27 //  a TE event occurred
+	GIF7  BDMA_ISR = 0x01 << 28 //+ global interrupt flag for channel 7
+	B_0x0 BDMA_ISR = 0x00 << 28 //  no TE, HT or TC event
+	B_0x1 BDMA_ISR = 0x01 << 28 //  a TE, HT or TC event occurred
+	TCIF7 BDMA_ISR = 0x01 << 29 //+ transfer complete (TC) flag for channel 7
+	B_0x0 BDMA_ISR = 0x00 << 29 //  no TC event
+	B_0x1 BDMA_ISR = 0x01 << 29 //  a TC event occurred
+	HTIF7 BDMA_ISR = 0x01 << 30 //+ half transfer (HT) flag for channel 7
+	B_0x0 BDMA_ISR = 0x00 << 30 //  no HT event
+	B_0x1 BDMA_ISR = 0x01 << 30 //  a HT event occurred
+	TEIF7 BDMA_ISR = 0x01 << 31 //+ transfer error (TE) flag for channel 7
+	B_0x0 BDMA_ISR = 0x00 << 31 //  no TE event
+	B_0x1 BDMA_ISR = 0x01 << 31 //  a TE event occurred
 )
 
 const (
-	GIF1n  = 0
-	TCIF1n = 1
-	HTIF1n = 2
-	TEIF1n = 3
-	GIF2n  = 4
-	TCIF2n = 5
-	HTIF2n = 6
-	TEIF2n = 7
-	GIF3n  = 8
-	TCIF3n = 9
-	HTIF3n = 10
-	TEIF3n = 11
-	GIF4n  = 12
-	TCIF4n = 13
-	HTIF4n = 14
-	TEIF4n = 15
-	GIF5n  = 16
-	TCIF5n = 17
-	HTIF5n = 18
-	TEIF5n = 19
-	GIF6n  = 20
-	TCIF6n = 21
-	HTIF6n = 22
-	TEIF6n = 23
-	GIF7n  = 24
-	TCIF7n = 25
-	HTIF7n = 26
-	TEIF7n = 27
-	GIF8n  = 28
-	TCIF8n = 29
-	HTIF8n = 30
-	TEIF8n = 31
+	GIF0n  = 0
+	TCIF0n = 1
+	HTIF0n = 2
+	TEIF0n = 3
+	GIF1n  = 4
+	TCIF1n = 5
+	HTIF1n = 6
+	TEIF1n = 7
+	GIF2n  = 8
+	TCIF2n = 9
+	HTIF2n = 10
+	TEIF2n = 11
+	GIF3n  = 12
+	TCIF3n = 13
+	HTIF3n = 14
+	TEIF3n = 15
+	GIF4n  = 16
+	TCIF4n = 17
+	HTIF4n = 18
+	TEIF4n = 19
+	GIF5n  = 20
+	TCIF5n = 21
+	HTIF5n = 22
+	TEIF5n = 23
+	GIF6n  = 24
+	TCIF6n = 25
+	HTIF6n = 26
+	TEIF6n = 27
+	GIF7n  = 28
+	TCIF7n = 29
+	HTIF7n = 30
+	TEIF7n = 31
 )
 
 const (
-	CGIF1  IFCR = 0x01 << 0  //+ Channel x global interrupt clear This bit is set and cleared by software.
-	CTCIF1 IFCR = 0x01 << 1  //+ Channel x transfer complete clear This bit is set and cleared by software.
-	CHTIF1 IFCR = 0x01 << 2  //+ Channel x half transfer clear This bit is set and cleared by software.
-	CTEIF1 IFCR = 0x01 << 3  //+ Channel x transfer error clear This bit is set and cleared by software.
-	CGIF2  IFCR = 0x01 << 4  //+ Channel x global interrupt clear This bit is set and cleared by software.
-	CTCIF2 IFCR = 0x01 << 5  //+ Channel x transfer complete clear This bit is set and cleared by software.
-	CHTIF2 IFCR = 0x01 << 6  //+ Channel x half transfer clear This bit is set and cleared by software.
-	CTEIF2 IFCR = 0x01 << 7  //+ Channel x transfer error clear This bit is set and cleared by software.
-	CGIF3  IFCR = 0x01 << 8  //+ Channel x global interrupt clear This bit is set and cleared by software.
-	CTCIF3 IFCR = 0x01 << 9  //+ Channel x transfer complete clear This bit is set and cleared by software.
-	CHTIF3 IFCR = 0x01 << 10 //+ Channel x half transfer clear This bit is set and cleared by software.
-	CTEIF3 IFCR = 0x01 << 11 //+ Channel x transfer error clear This bit is set and cleared by software.
-	CGIF4  IFCR = 0x01 << 12 //+ Channel x global interrupt clear This bit is set and cleared by software.
-	CTCIF4 IFCR = 0x01 << 13 //+ Channel x transfer complete clear This bit is set and cleared by software.
-	CHTIF4 IFCR = 0x01 << 14 //+ Channel x half transfer clear This bit is set and cleared by software.
-	CTEIF4 IFCR = 0x01 << 15 //+ Channel x transfer error clear This bit is set and cleared by software.
-	CGIF5  IFCR = 0x01 << 16 //+ Channel x global interrupt clear This bit is set and cleared by software.
-	CTCIF5 IFCR = 0x01 << 17 //+ Channel x transfer complete clear This bit is set and cleared by software.
-	CHTIF5 IFCR = 0x01 << 18 //+ Channel x half transfer clear This bit is set and cleared by software.
-	CTEIF5 IFCR = 0x01 << 19 //+ Channel x transfer error clear This bit is set and cleared by software.
-	CGIF6  IFCR = 0x01 << 20 //+ Channel x global interrupt clear This bit is set and cleared by software.
-	CTCIF6 IFCR = 0x01 << 21 //+ Channel x transfer complete clear This bit is set and cleared by software.
-	CHTIF6 IFCR = 0x01 << 22 //+ Channel x half transfer clear This bit is set and cleared by software.
-	CTEIF6 IFCR = 0x01 << 23 //+ Channel x transfer error clear This bit is set and cleared by software.
-	CGIF7  IFCR = 0x01 << 24 //+ Channel x global interrupt clear This bit is set and cleared by software.
-	CTCIF7 IFCR = 0x01 << 25 //+ Channel x transfer complete clear This bit is set and cleared by software.
-	CHTIF7 IFCR = 0x01 << 26 //+ Channel x half transfer clear This bit is set and cleared by software.
-	CTEIF7 IFCR = 0x01 << 27 //+ Channel x transfer error clear This bit is set and cleared by software.
-	CGIF8  IFCR = 0x01 << 28 //+ Channel x global interrupt clear This bit is set and cleared by software.
-	CTCIF8 IFCR = 0x01 << 29 //+ Channel x transfer complete clear This bit is set and cleared by software.
-	CHTIF8 IFCR = 0x01 << 30 //+ Channel x half transfer clear This bit is set and cleared by software.
-	CTEIF8 IFCR = 0x01 << 31 //+ Channel x transfer error clear This bit is set and cleared by software.
+	CGIF0  BDMA_IFCR = 0x01 << 0  //+ global interrupt flag clear for channel 0
+	CTCIF0 BDMA_IFCR = 0x01 << 1  //+ transfer complete flag clear for channel 0
+	CHTIF0 BDMA_IFCR = 0x01 << 2  //+ half transfer flag clear for channel 0
+	CTEIF0 BDMA_IFCR = 0x01 << 3  //+ transfer error flag clear for channel 0
+	CGIF1  BDMA_IFCR = 0x01 << 4  //+ global interrupt flag clear for channel 0
+	CTCIF1 BDMA_IFCR = 0x01 << 5  //+ transfer complete flag clear for channel 1
+	CHTIF1 BDMA_IFCR = 0x01 << 6  //+ half transfer flag clear for channel 1
+	CTEIF1 BDMA_IFCR = 0x01 << 7  //+ transfer error flag clear for channel 1
+	CGIF2  BDMA_IFCR = 0x01 << 8  //+ global interrupt flag clear for channel 2
+	CTCIF2 BDMA_IFCR = 0x01 << 9  //+ transfer complete flag clear for channel 2
+	CHTIF2 BDMA_IFCR = 0x01 << 10 //+ half transfer flag clear for channe2
+	CTEIF2 BDMA_IFCR = 0x01 << 11 //+ transfer error flag clear for channel 2
+	CGIF3  BDMA_IFCR = 0x01 << 12 //+ global interrupt flag clear for channel 3
+	CTCIF3 BDMA_IFCR = 0x01 << 13 //+ transfer complete flag clear for channel 3
+	CHTIF3 BDMA_IFCR = 0x01 << 14 //+ half transfer flag clear for channel 3
+	CTEIF3 BDMA_IFCR = 0x01 << 15 //+ transfer error flag clear for channel 3
+	CGIF4  BDMA_IFCR = 0x01 << 16 //+ global interrupt flag clear for channel 4
+	CTCIF4 BDMA_IFCR = 0x01 << 17 //+ transfer complete flag clear for channel 4
+	CHTIF4 BDMA_IFCR = 0x01 << 18 //+ half transfer flag clear for channel 4
+	CTEIF4 BDMA_IFCR = 0x01 << 19 //+ transfer error flag clear for channel 4
+	CGIF5  BDMA_IFCR = 0x01 << 20 //+ global interrupt flag clear for channel 5
+	CTCIF5 BDMA_IFCR = 0x01 << 21 //+ transfer complete flag clear for channel 5
+	CHTIF5 BDMA_IFCR = 0x01 << 22 //+ half transfer flag clear for channel 5
+	CTEIF5 BDMA_IFCR = 0x01 << 23 //+ transfer error flag clear for channel 5
+	CGIF6  BDMA_IFCR = 0x01 << 24 //+ global interrupt flag clear for channel 6
+	CTCIF6 BDMA_IFCR = 0x01 << 25 //+ transfer complete flag clear for channel 6
+	CHTIF6 BDMA_IFCR = 0x01 << 26 //+ half transfer flag clear for channel 6
+	CTEIF6 BDMA_IFCR = 0x01 << 27 //+ transfer error flag clear for channel 6
+	CGIF7  BDMA_IFCR = 0x01 << 28 //+ global interrupt flag clear for channel 7
+	CTCIF7 BDMA_IFCR = 0x01 << 29 //+ transfer complete flag clear for channel 7
+	CHTIF7 BDMA_IFCR = 0x01 << 30 //+ half transfer flag clear for channel 7
+	CTEIF7 BDMA_IFCR = 0x01 << 31 //+ transfer error flag clear for channel 7
 )
 
 const (
-	CGIF1n  = 0
-	CTCIF1n = 1
-	CHTIF1n = 2
-	CTEIF1n = 3
-	CGIF2n  = 4
-	CTCIF2n = 5
-	CHTIF2n = 6
-	CTEIF2n = 7
-	CGIF3n  = 8
-	CTCIF3n = 9
-	CHTIF3n = 10
-	CTEIF3n = 11
-	CGIF4n  = 12
-	CTCIF4n = 13
-	CHTIF4n = 14
-	CTEIF4n = 15
-	CGIF5n  = 16
-	CTCIF5n = 17
-	CHTIF5n = 18
-	CTEIF5n = 19
-	CGIF6n  = 20
-	CTCIF6n = 21
-	CHTIF6n = 22
-	CTEIF6n = 23
-	CGIF7n  = 24
-	CTCIF7n = 25
-	CHTIF7n = 26
-	CTEIF7n = 27
-	CGIF8n  = 28
-	CTCIF8n = 29
-	CHTIF8n = 30
-	CTEIF8n = 31
+	CGIF0n  = 0
+	CTCIF0n = 1
+	CHTIF0n = 2
+	CTEIF0n = 3
+	CGIF1n  = 4
+	CTCIF1n = 5
+	CHTIF1n = 6
+	CTEIF1n = 7
+	CGIF2n  = 8
+	CTCIF2n = 9
+	CHTIF2n = 10
+	CTEIF2n = 11
+	CGIF3n  = 12
+	CTCIF3n = 13
+	CHTIF3n = 14
+	CTEIF3n = 15
+	CGIF4n  = 16
+	CTCIF4n = 17
+	CHTIF4n = 18
+	CTEIF4n = 19
+	CGIF5n  = 20
+	CTCIF5n = 21
+	CHTIF5n = 22
+	CTEIF5n = 23
+	CGIF6n  = 24
+	CTCIF6n = 25
+	CHTIF6n = 26
+	CTEIF6n = 27
+	CGIF7n  = 28
+	CTCIF7n = 29
+	CHTIF7n = 30
+	CTEIF7n = 31
 )
 
 const (
-	EN      CCR1 = 0x01 << 0  //+ Channel enable This bit is set and cleared by software.
-	TCIE    CCR1 = 0x01 << 1  //+ Transfer complete interrupt enable This bit is set and cleared by software.
-	HTIE    CCR1 = 0x01 << 2  //+ Half transfer interrupt enable This bit is set and cleared by software.
-	TEIE    CCR1 = 0x01 << 3  //+ Transfer error interrupt enable This bit is set and cleared by software.
-	DIR     CCR1 = 0x01 << 4  //+ Data transfer direction This bit is set and cleared by software.
-	CIRC    CCR1 = 0x01 << 5  //+ Circular mode This bit is set and cleared by software.
-	PINC    CCR1 = 0x01 << 6  //+ Peripheral increment mode This bit is set and cleared by software.
-	MINC    CCR1 = 0x01 << 7  //+ Memory increment mode This bit is set and cleared by software.
-	PSIZE   CCR1 = 0x03 << 8  //+ Peripheral size These bits are set and cleared by software.
-	MSIZE   CCR1 = 0x03 << 10 //+ Memory size These bits are set and cleared by software.
-	PL      CCR1 = 0x03 << 12 //+ Channel priority level These bits are set and cleared by software.
-	MEM2MEM CCR1 = 0x01 << 14 //+ Memory to memory mode This bit is set and cleared by software.
+	EN      BDMA_CCR0 = 0x01 << 0  //+ channel enable When a channel transfer error occurs, this bit is cleared by hardware. It can not be set again by software (channel x re-activated) until the TEIFx bit of the BDMA_ISR register is cleared (by setting the CTEIFx bit of the BDMA_IFCR register). Note: this bit is set and cleared by software.
+	B_0x0   BDMA_CCR0 = 0x00 << 0  //  disabled
+	B_0x1   BDMA_CCR0 = 0x01 << 0  //  enabled
+	TCIE    BDMA_CCR0 = 0x01 << 1  //+ transfer complete interrupt enable Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR0 = 0x00 << 1  //  disabled
+	B_0x1   BDMA_CCR0 = 0x01 << 1  //  enabled
+	HTIE    BDMA_CCR0 = 0x01 << 2  //+ half transfer interrupt enable Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR0 = 0x00 << 2  //  disabled
+	B_0x1   BDMA_CCR0 = 0x01 << 2  //  enabled
+	TEIE    BDMA_CCR0 = 0x01 << 3  //+ transfer error interrupt enable Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR0 = 0x00 << 3  //  disabled
+	B_0x1   BDMA_CCR0 = 0x01 << 3  //  enabled
+	DIR     BDMA_CCR0 = 0x01 << 4  //+ data transfer direction This bit must be set only in memory-to-peripheral and peripheral-to-memory modes. Source attributes are defined by PSIZE and PINC, plus the BDMA_CPARx register. This is still valid in a memory-to-memory mode. Destination attributes are defined by MSIZE and MINC, plus the BDMA_CM0/1ARx register. This is still valid in a peripheral-to-peripheral mode. Destination attributes are defined by PSIZE and PINC, plus the BDMA_CPARx register. This is still valid in a memory-to-memory mode. Source attributes are defined by MSIZE and MINC, plus the BDMA_CM0/1ARx register. This is still valid in a peripheral-to-peripheral mode. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR0 = 0x00 << 4  //  read from peripheral
+	B_0x1   BDMA_CCR0 = 0x01 << 4  //  read from memory
+	CIRC    BDMA_CCR0 = 0x01 << 5  //+ circular mode Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR0 = 0x00 << 5  //  disabled
+	B_0x1   BDMA_CCR0 = 0x01 << 5  //  enabled
+	PINC    BDMA_CCR0 = 0x01 << 6  //+ peripheral increment mode Defines the increment mode for each DMA transfer to the identified peripheral. n memory-to-memory mode, this field identifies the memory destination if DIR = 1 and the memory source if DIR = 0. In peripheral-to-peripheral mode, this field identifies the peripheral destination if DIR = 1 and the peripheral source if DIR = 0. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR0 = 0x00 << 6  //  disabled
+	B_0x1   BDMA_CCR0 = 0x01 << 6  //  enabled
+	MINC    BDMA_CCR0 = 0x01 << 7  //+ memory increment mode Defines the increment mode for each DMA transfer to the identified memory. In memory-to-memory mode, this field identifies the memory source if DIR = 1 and the memory destination if DIR = 0. In peripheral-to-peripheral mode, this field identifies the peripheral source if DIR = 1 and the peripheral destination if DIR = 0. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR0 = 0x00 << 7  //  disabled
+	B_0x1   BDMA_CCR0 = 0x01 << 7  //  enabled
+	PSIZE   BDMA_CCR0 = 0x03 << 8  //+ peripheral size Defines the data size of each DMA transfer to the identified peripheral. In memory-to-memory mode, this field identifies the memory destination if DIR = 1 and the memory source if DIR = 0. In peripheral-to-peripheral mode, this field identifies the peripheral destination if DIR = 1 and the peripheral source if DIR = 0. Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR0 = 0x00 << 8  //  8 bits
+	B_0x1   BDMA_CCR0 = 0x01 << 8  //  16 bits
+	B_0x2   BDMA_CCR0 = 0x02 << 8  //  32 bits
+	MSIZE   BDMA_CCR0 = 0x03 << 10 //+ memory size Defines the data size of each DMA transfer to the identified memory. In memory-to-memory mode, this field identifies the memory source if DIR = 1 and the memory destination if DIR = 0. In peripheral-to-peripheral mode, this field identifies the peripheral source if DIR = 1 and the peripheral destination if DIR = 0. Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR0 = 0x00 << 10 //  8 bits
+	B_0x1   BDMA_CCR0 = 0x01 << 10 //  16 bits
+	B_0x2   BDMA_CCR0 = 0x02 << 10 //  32 bits
+	PL      BDMA_CCR0 = 0x03 << 12 //+ priority level Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR0 = 0x00 << 12 //  low
+	B_0x1   BDMA_CCR0 = 0x01 << 12 //  medium
+	B_0x2   BDMA_CCR0 = 0x02 << 12 //  high
+	B_0x3   BDMA_CCR0 = 0x03 << 12 //  very high
+	MEM2MEM BDMA_CCR0 = 0x01 << 14 //+ memory-to-memory mode Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR0 = 0x00 << 14 //  disabled
+	B_0x1   BDMA_CCR0 = 0x01 << 14 //  enabled
+	DBM     BDMA_CCR0 = 0x01 << 15 //+ double-buffer mode This bit must be set only in memory-to-peripheral and peripheral-to-memory transfers (MEM2MEM=0). The CIRC bit must also be set in double buffer mode. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR0 = 0x00 << 15 //  disabled (no memory address switch at the end of the BDMA transfer)
+	B_0x1   BDMA_CCR0 = 0x01 << 15 //  enabled (memory address switched at the end of the BDMA transfer)
+	CT      BDMA_CCR0 = 0x01 << 16 //+ current target memory of DMA transfer in double-buffer mode This bit is toggled by hardware at the end of each channel transfer in double-buffer mode. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR0 = 0x00 << 16 //  memory 0 (addressed by the BDMA_CM0AR pointer)
+	B_0x1   BDMA_CCR0 = 0x01 << 16 //  memory 1 (addressed by the BDMA_CM1AR pointer)
 )
 
 const (
@@ -214,10 +325,12 @@ const (
 	MSIZEn   = 10
 	PLn      = 12
 	MEM2MEMn = 14
+	DBMn     = 15
+	CTn      = 16
 )
 
 const (
-	NDT CNDTR1 = 0xFFFF << 0 //+ Number of data to transfer Number of data to be transferred (0 up to 65535). This register can only be written when the channel is disabled. Once the channel is enabled, this register is read-only, indicating the remaining bytes to be transmitted. This register decrements after each DMA transfer. Once the transfer is completed, this register can either stay at zero or be reloaded automatically by the value previously programmed if the channel is configured in auto-reload mode. If this register is zero, no transaction can be served whether the channel is enabled or not.
+	NDT BDMA_CNDTR0 = 0xFFFF << 0 //+ number of data to transfer (0 to 216 - 1) This field is updated by hardware when the channel is enabled: It is decremented after each single BDMA ‘read followed by write’ transfer, indicating the remaining amount of data items to transfer. It is kept at zero when the programmed amount of data to transfer is reached, if the channel is not in circular mode (CIRC = 0 in the BDMA_CCRx register). It is reloaded automatically by the previously programmed value, when the transfer is complete, if the channel is in circular mode (CIRC = 1). If this field is zero, no transfer can be served whatever the channel status (enabled or not). Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
 )
 
 const (
@@ -225,7 +338,7 @@ const (
 )
 
 const (
-	PA CPAR1 = 0xFFFFFFFF << 0 //+ Peripheral address Base address of the peripheral data register from/to which the data will be read/written. When PSIZE is 01 (16-bit), the PA[0] bit is ignored. Access is automatically aligned to a half-word address. When PSIZE is 10 (32-bit), PA[1:0] are ignored. Access is automatically aligned to a word address.
+	PA BDMA_CPAR0 = 0xFFFFFFFF << 0 //+ peripheral address It contains the base address of the peripheral data register from/to which the data is read/written. When PSIZE[1:0] = 01 (16 bits), bit 0 of PA[31:0] is ignored. Access is automatically aligned to a half-word address. When PSIZE = 10 (32 bits), bits 1 and 0 of PA[31:0] are ignored. Access is automatically aligned to a word address. In memory-to-memory mode, this register identifies the memory destination address if DIR = 1 and the memory source address if DIR = 0. In peripheral-to-peripheral mode, this register identifies the peripheral destination address DIR = 1 and the peripheral source address if DIR = 0. Note: this register is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
 )
 
 const (
@@ -233,7 +346,7 @@ const (
 )
 
 const (
-	MA CMAR1 = 0xFFFFFFFF << 0 //+ Memory address Base address of the memory area from/to which the data will be read/written. When MSIZE is 01 (16-bit), the MA[0] bit is ignored. Access is automatically aligned to a half-word address. When MSIZE is 10 (32-bit), MA[1:0] are ignored. Access is automatically aligned to a word address.
+	MA BDMA_CM0AR0 = 0xFFFFFFFF << 0 //+ peripheral address It contains the base address of the memory from/to which the data is read/written. When MSIZE[1:0] = 01 (16 bits), bit 0 of MA[31:0] is ignored. Access is automatically aligned to a half-word address. When MSIZE = 10 (32 bits), bits 1 and 0 of MA[31:0] are ignored. Access is automatically aligned to a word address. In memory-to-memory mode, this register identifies the memory source address if DIR = 1 and the memory destination address if DIR = 0. In peripheral-to-peripheral mode, this register identifies the peripheral source address DIR = 1 and the peripheral destination address if DIR = 0. Note: this register is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
 )
 
 const (
@@ -241,53 +354,7 @@ const (
 )
 
 const (
-	EN      CCR2 = 0x01 << 0  //+ Channel enable This bit is set and cleared by software.
-	TCIE    CCR2 = 0x01 << 1  //+ Transfer complete interrupt enable This bit is set and cleared by software.
-	HTIE    CCR2 = 0x01 << 2  //+ Half transfer interrupt enable This bit is set and cleared by software.
-	TEIE    CCR2 = 0x01 << 3  //+ Transfer error interrupt enable This bit is set and cleared by software.
-	DIR     CCR2 = 0x01 << 4  //+ Data transfer direction This bit is set and cleared by software.
-	CIRC    CCR2 = 0x01 << 5  //+ Circular mode This bit is set and cleared by software.
-	PINC    CCR2 = 0x01 << 6  //+ Peripheral increment mode This bit is set and cleared by software.
-	MINC    CCR2 = 0x01 << 7  //+ Memory increment mode This bit is set and cleared by software.
-	PSIZE   CCR2 = 0x03 << 8  //+ Peripheral size These bits are set and cleared by software.
-	MSIZE   CCR2 = 0x03 << 10 //+ Memory size These bits are set and cleared by software.
-	PL      CCR2 = 0x03 << 12 //+ Channel priority level These bits are set and cleared by software.
-	MEM2MEM CCR2 = 0x01 << 14 //+ Memory to memory mode This bit is set and cleared by software.
-)
-
-const (
-	ENn      = 0
-	TCIEn    = 1
-	HTIEn    = 2
-	TEIEn    = 3
-	DIRn     = 4
-	CIRCn    = 5
-	PINCn    = 6
-	MINCn    = 7
-	PSIZEn   = 8
-	MSIZEn   = 10
-	PLn      = 12
-	MEM2MEMn = 14
-)
-
-const (
-	NDT CNDTR2 = 0xFFFF << 0 //+ Number of data to transfer Number of data to be transferred (0 up to 65535). This register can only be written when the channel is disabled. Once the channel is enabled, this register is read-only, indicating the remaining bytes to be transmitted. This register decrements after each DMA transfer. Once the transfer is completed, this register can either stay at zero or be reloaded automatically by the value previously programmed if the channel is configured in auto-reload mode. If this register is zero, no transaction can be served whether the channel is enabled or not.
-)
-
-const (
-	NDTn = 0
-)
-
-const (
-	PA CPAR2 = 0xFFFFFFFF << 0 //+ Peripheral address Base address of the peripheral data register from/to which the data will be read/written. When PSIZE is 01 (16-bit), the PA[0] bit is ignored. Access is automatically aligned to a half-word address. When PSIZE is 10 (32-bit), PA[1:0] are ignored. Access is automatically aligned to a word address.
-)
-
-const (
-	PAn = 0
-)
-
-const (
-	MA CMAR2 = 0xFFFFFFFF << 0 //+ Memory address Base address of the memory area from/to which the data will be read/written. When MSIZE is 01 (16-bit), the MA[0] bit is ignored. Access is automatically aligned to a half-word address. When MSIZE is 10 (32-bit), MA[1:0] are ignored. Access is automatically aligned to a word address.
+	MA BDMA_CM1AR0 = 0xFFFFFFFF << 0 //+ peripheral address It contains the base address of the memory from/to which the data is read/written. When MSIZE[1:0] = 01 (16 bits), bit 0 of MA[31:0] is ignored. Access is automatically aligned to a half-word address. When MSIZE = 10 (32 bits), bits 1 and 0 of MA[31:0] are ignored. Access is automatically aligned to a word address. In memory-to-memory mode, this register identifies the memory source address if DIR = 1 and the memory destination address if DIR = 0. In peripheral-to-peripheral mode, this register identifies the peripheral source address DIR = 1 and the peripheral destination address if DIR = 0. Note: this register is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
 )
 
 const (
@@ -295,18 +362,52 @@ const (
 )
 
 const (
-	EN      CCR3 = 0x01 << 0  //+ Channel enable This bit is set and cleared by software.
-	TCIE    CCR3 = 0x01 << 1  //+ Transfer complete interrupt enable This bit is set and cleared by software.
-	HTIE    CCR3 = 0x01 << 2  //+ Half transfer interrupt enable This bit is set and cleared by software.
-	TEIE    CCR3 = 0x01 << 3  //+ Transfer error interrupt enable This bit is set and cleared by software.
-	DIR     CCR3 = 0x01 << 4  //+ Data transfer direction This bit is set and cleared by software.
-	CIRC    CCR3 = 0x01 << 5  //+ Circular mode This bit is set and cleared by software.
-	PINC    CCR3 = 0x01 << 6  //+ Peripheral increment mode This bit is set and cleared by software.
-	MINC    CCR3 = 0x01 << 7  //+ Memory increment mode This bit is set and cleared by software.
-	PSIZE   CCR3 = 0x03 << 8  //+ Peripheral size These bits are set and cleared by software.
-	MSIZE   CCR3 = 0x03 << 10 //+ Memory size These bits are set and cleared by software.
-	PL      CCR3 = 0x03 << 12 //+ Channel priority level These bits are set and cleared by software.
-	MEM2MEM CCR3 = 0x01 << 14 //+ Memory to memory mode This bit is set and cleared by software.
+	EN      BDMA_CCR1 = 0x01 << 0  //+ channel enable When a channel transfer error occurs, this bit is cleared by hardware. It can not be set again by software (channel x re-activated) until the TEIFx bit of the BDMA_ISR register is cleared (by setting the CTEIFx bit of the BDMA_IFCR register). Note: this bit is set and cleared by software.
+	B_0x0   BDMA_CCR1 = 0x00 << 0  //  disabled
+	B_0x1   BDMA_CCR1 = 0x01 << 0  //  enabled
+	TCIE    BDMA_CCR1 = 0x01 << 1  //+ transfer complete interrupt enable Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR1 = 0x00 << 1  //  disabled
+	B_0x1   BDMA_CCR1 = 0x01 << 1  //  enabled
+	HTIE    BDMA_CCR1 = 0x01 << 2  //+ half transfer interrupt enable Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR1 = 0x00 << 2  //  disabled
+	B_0x1   BDMA_CCR1 = 0x01 << 2  //  enabled
+	TEIE    BDMA_CCR1 = 0x01 << 3  //+ transfer error interrupt enable Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR1 = 0x00 << 3  //  disabled
+	B_0x1   BDMA_CCR1 = 0x01 << 3  //  enabled
+	DIR     BDMA_CCR1 = 0x01 << 4  //+ data transfer direction This bit must be set only in memory-to-peripheral and peripheral-to-memory modes. Source attributes are defined by PSIZE and PINC, plus the BDMA_CPARx register. This is still valid in a memory-to-memory mode. Destination attributes are defined by MSIZE and MINC, plus the BDMA_CM0/1ARx register. This is still valid in a peripheral-to-peripheral mode. Destination attributes are defined by PSIZE and PINC, plus the BDMA_CPARx register. This is still valid in a memory-to-memory mode. Source attributes are defined by MSIZE and MINC, plus the BDMA_CM0/1ARx register. This is still valid in a peripheral-to-peripheral mode. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR1 = 0x00 << 4  //  read from peripheral
+	B_0x1   BDMA_CCR1 = 0x01 << 4  //  read from memory
+	CIRC    BDMA_CCR1 = 0x01 << 5  //+ circular mode Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR1 = 0x00 << 5  //  disabled
+	B_0x1   BDMA_CCR1 = 0x01 << 5  //  enabled
+	PINC    BDMA_CCR1 = 0x01 << 6  //+ peripheral increment mode Defines the increment mode for each DMA transfer to the identified peripheral. n memory-to-memory mode, this field identifies the memory destination if DIR = 1 and the memory source if DIR = 0. In peripheral-to-peripheral mode, this field identifies the peripheral destination if DIR = 1 and the peripheral source if DIR = 0. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR1 = 0x00 << 6  //  disabled
+	B_0x1   BDMA_CCR1 = 0x01 << 6  //  enabled
+	MINC    BDMA_CCR1 = 0x01 << 7  //+ memory increment mode Defines the increment mode for each DMA transfer to the identified memory. In memory-to-memory mode, this field identifies the memory source if DIR = 1 and the memory destination if DIR = 0. In peripheral-to-peripheral mode, this field identifies the peripheral source if DIR = 1 and the peripheral destination if DIR = 0. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR1 = 0x00 << 7  //  disabled
+	B_0x1   BDMA_CCR1 = 0x01 << 7  //  enabled
+	PSIZE   BDMA_CCR1 = 0x03 << 8  //+ peripheral size Defines the data size of each DMA transfer to the identified peripheral. In memory-to-memory mode, this field identifies the memory destination if DIR = 1 and the memory source if DIR = 0. In peripheral-to-peripheral mode, this field identifies the peripheral destination if DIR = 1 and the peripheral source if DIR = 0. Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR1 = 0x00 << 8  //  8 bits
+	B_0x1   BDMA_CCR1 = 0x01 << 8  //  16 bits
+	B_0x2   BDMA_CCR1 = 0x02 << 8  //  32 bits
+	MSIZE   BDMA_CCR1 = 0x03 << 10 //+ memory size Defines the data size of each DMA transfer to the identified memory. In memory-to-memory mode, this field identifies the memory source if DIR = 1 and the memory destination if DIR = 0. In peripheral-to-peripheral mode, this field identifies the peripheral source if DIR = 1 and the peripheral destination if DIR = 0. Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR1 = 0x00 << 10 //  8 bits
+	B_0x1   BDMA_CCR1 = 0x01 << 10 //  16 bits
+	B_0x2   BDMA_CCR1 = 0x02 << 10 //  32 bits
+	PL      BDMA_CCR1 = 0x03 << 12 //+ priority level Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR1 = 0x00 << 12 //  low
+	B_0x1   BDMA_CCR1 = 0x01 << 12 //  medium
+	B_0x2   BDMA_CCR1 = 0x02 << 12 //  high
+	B_0x3   BDMA_CCR1 = 0x03 << 12 //  very high
+	MEM2MEM BDMA_CCR1 = 0x01 << 14 //+ memory-to-memory mode Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR1 = 0x00 << 14 //  disabled
+	B_0x1   BDMA_CCR1 = 0x01 << 14 //  enabled
+	DBM     BDMA_CCR1 = 0x01 << 15 //+ double-buffer mode This bit must be set only in memory-to-peripheral and peripheral-to-memory transfers (MEM2MEM=0). The CIRC bit must also be set in double buffer mode. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR1 = 0x00 << 15 //  disabled (no memory address switch at the end of the BDMA transfer)
+	B_0x1   BDMA_CCR1 = 0x01 << 15 //  enabled (memory address switched at the end of the BDMA transfer)
+	CT      BDMA_CCR1 = 0x01 << 16 //+ current target memory of DMA transfer in double-buffer mode This bit is toggled by hardware at the end of each channel transfer in double-buffer mode. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR1 = 0x00 << 16 //  memory 0 (addressed by the BDMA_CM0AR pointer)
+	B_0x1   BDMA_CCR1 = 0x01 << 16 //  memory 1 (addressed by the BDMA_CM1AR pointer)
 )
 
 const (
@@ -322,10 +423,12 @@ const (
 	MSIZEn   = 10
 	PLn      = 12
 	MEM2MEMn = 14
+	DBMn     = 15
+	CTn      = 16
 )
 
 const (
-	NDT CNDTR3 = 0xFFFF << 0 //+ Number of data to transfer Number of data to be transferred (0 up to 65535). This register can only be written when the channel is disabled. Once the channel is enabled, this register is read-only, indicating the remaining bytes to be transmitted. This register decrements after each DMA transfer. Once the transfer is completed, this register can either stay at zero or be reloaded automatically by the value previously programmed if the channel is configured in auto-reload mode. If this register is zero, no transaction can be served whether the channel is enabled or not.
+	NDT BDMA_CNDTR1 = 0xFFFF << 0 //+ number of data to transfer (0 to 216 - 1) This field is updated by hardware when the channel is enabled: It is decremented after each single BDMA ‘read followed by write’ transfer, indicating the remaining amount of data items to transfer. It is kept at zero when the programmed amount of data to transfer is reached, if the channel is not in circular mode (CIRC = 0 in the BDMA_CCRx register). It is reloaded automatically by the previously programmed value, when the transfer is complete, if the channel is in circular mode (CIRC = 1). If this field is zero, no transfer can be served whatever the channel status (enabled or not). Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
 )
 
 const (
@@ -333,7 +436,7 @@ const (
 )
 
 const (
-	PA CPAR3 = 0xFFFFFFFF << 0 //+ Peripheral address Base address of the peripheral data register from/to which the data will be read/written. When PSIZE is 01 (16-bit), the PA[0] bit is ignored. Access is automatically aligned to a half-word address. When PSIZE is 10 (32-bit), PA[1:0] are ignored. Access is automatically aligned to a word address.
+	PA BDMA_CPAR1 = 0xFFFFFFFF << 0 //+ peripheral address It contains the base address of the peripheral data register from/to which the data is read/written. When PSIZE[1:0] = 01 (16 bits), bit 0 of PA[31:0] is ignored. Access is automatically aligned to a half-word address. When PSIZE = 10 (32 bits), bits 1 and 0 of PA[31:0] are ignored. Access is automatically aligned to a word address. In memory-to-memory mode, this register identifies the memory destination address if DIR = 1 and the memory source address if DIR = 0. In peripheral-to-peripheral mode, this register identifies the peripheral destination address DIR = 1 and the peripheral source address if DIR = 0. Note: this register is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
 )
 
 const (
@@ -341,7 +444,7 @@ const (
 )
 
 const (
-	MA CMAR3 = 0xFFFFFFFF << 0 //+ Memory address Base address of the memory area from/to which the data will be read/written. When MSIZE is 01 (16-bit), the MA[0] bit is ignored. Access is automatically aligned to a half-word address. When MSIZE is 10 (32-bit), MA[1:0] are ignored. Access is automatically aligned to a word address.
+	MA BDMA_CM0AR1 = 0xFFFFFFFF << 0 //+ peripheral address It contains the base address of the memory from/to which the data is read/written. When MSIZE[1:0] = 01 (16 bits), bit 0 of MA[31:0] is ignored. Access is automatically aligned to a half-word address. When MSIZE = 10 (32 bits), bits 1 and 0 of MA[31:0] are ignored. Access is automatically aligned to a word address. In memory-to-memory mode, this register identifies the memory source address if DIR = 1 and the memory destination address if DIR = 0. In peripheral-to-peripheral mode, this register identifies the peripheral source address DIR = 1 and the peripheral destination address if DIR = 0. Note: this register is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
 )
 
 const (
@@ -349,53 +452,7 @@ const (
 )
 
 const (
-	EN      CCR4 = 0x01 << 0  //+ Channel enable This bit is set and cleared by software.
-	TCIE    CCR4 = 0x01 << 1  //+ Transfer complete interrupt enable This bit is set and cleared by software.
-	HTIE    CCR4 = 0x01 << 2  //+ Half transfer interrupt enable This bit is set and cleared by software.
-	TEIE    CCR4 = 0x01 << 3  //+ Transfer error interrupt enable This bit is set and cleared by software.
-	DIR     CCR4 = 0x01 << 4  //+ Data transfer direction This bit is set and cleared by software.
-	CIRC    CCR4 = 0x01 << 5  //+ Circular mode This bit is set and cleared by software.
-	PINC    CCR4 = 0x01 << 6  //+ Peripheral increment mode This bit is set and cleared by software.
-	MINC    CCR4 = 0x01 << 7  //+ Memory increment mode This bit is set and cleared by software.
-	PSIZE   CCR4 = 0x03 << 8  //+ Peripheral size These bits are set and cleared by software.
-	MSIZE   CCR4 = 0x03 << 10 //+ Memory size These bits are set and cleared by software.
-	PL      CCR4 = 0x03 << 12 //+ Channel priority level These bits are set and cleared by software.
-	MEM2MEM CCR4 = 0x01 << 14 //+ Memory to memory mode This bit is set and cleared by software.
-)
-
-const (
-	ENn      = 0
-	TCIEn    = 1
-	HTIEn    = 2
-	TEIEn    = 3
-	DIRn     = 4
-	CIRCn    = 5
-	PINCn    = 6
-	MINCn    = 7
-	PSIZEn   = 8
-	MSIZEn   = 10
-	PLn      = 12
-	MEM2MEMn = 14
-)
-
-const (
-	NDT CNDTR4 = 0xFFFF << 0 //+ Number of data to transfer Number of data to be transferred (0 up to 65535). This register can only be written when the channel is disabled. Once the channel is enabled, this register is read-only, indicating the remaining bytes to be transmitted. This register decrements after each DMA transfer. Once the transfer is completed, this register can either stay at zero or be reloaded automatically by the value previously programmed if the channel is configured in auto-reload mode. If this register is zero, no transaction can be served whether the channel is enabled or not.
-)
-
-const (
-	NDTn = 0
-)
-
-const (
-	PA CPAR4 = 0xFFFFFFFF << 0 //+ Peripheral address Base address of the peripheral data register from/to which the data will be read/written. When PSIZE is 01 (16-bit), the PA[0] bit is ignored. Access is automatically aligned to a half-word address. When PSIZE is 10 (32-bit), PA[1:0] are ignored. Access is automatically aligned to a word address.
-)
-
-const (
-	PAn = 0
-)
-
-const (
-	MA CMAR4 = 0xFFFFFFFF << 0 //+ Memory address Base address of the memory area from/to which the data will be read/written. When MSIZE is 01 (16-bit), the MA[0] bit is ignored. Access is automatically aligned to a half-word address. When MSIZE is 10 (32-bit), MA[1:0] are ignored. Access is automatically aligned to a word address.
+	MA BDMA_CM1AR1 = 0xFFFFFFFF << 0 //+ peripheral address It contains the base address of the memory from/to which the data is read/written. When MSIZE[1:0] = 01 (16 bits), bit 0 of MA[31:0] is ignored. Access is automatically aligned to a half-word address. When MSIZE = 10 (32 bits), bits 1 and 0 of MA[31:0] are ignored. Access is automatically aligned to a word address. In memory-to-memory mode, this register identifies the memory source address if DIR = 1 and the memory destination address if DIR = 0. In peripheral-to-peripheral mode, this register identifies the peripheral source address DIR = 1 and the peripheral destination address if DIR = 0. Note: this register is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
 )
 
 const (
@@ -403,18 +460,52 @@ const (
 )
 
 const (
-	EN      CCR5 = 0x01 << 0  //+ Channel enable This bit is set and cleared by software.
-	TCIE    CCR5 = 0x01 << 1  //+ Transfer complete interrupt enable This bit is set and cleared by software.
-	HTIE    CCR5 = 0x01 << 2  //+ Half transfer interrupt enable This bit is set and cleared by software.
-	TEIE    CCR5 = 0x01 << 3  //+ Transfer error interrupt enable This bit is set and cleared by software.
-	DIR     CCR5 = 0x01 << 4  //+ Data transfer direction This bit is set and cleared by software.
-	CIRC    CCR5 = 0x01 << 5  //+ Circular mode This bit is set and cleared by software.
-	PINC    CCR5 = 0x01 << 6  //+ Peripheral increment mode This bit is set and cleared by software.
-	MINC    CCR5 = 0x01 << 7  //+ Memory increment mode This bit is set and cleared by software.
-	PSIZE   CCR5 = 0x03 << 8  //+ Peripheral size These bits are set and cleared by software.
-	MSIZE   CCR5 = 0x03 << 10 //+ Memory size These bits are set and cleared by software.
-	PL      CCR5 = 0x03 << 12 //+ Channel priority level These bits are set and cleared by software.
-	MEM2MEM CCR5 = 0x01 << 14 //+ Memory to memory mode This bit is set and cleared by software.
+	EN      BDMA_CCR2 = 0x01 << 0  //+ channel enable When a channel transfer error occurs, this bit is cleared by hardware. It can not be set again by software (channel x re-activated) until the TEIFx bit of the BDMA_ISR register is cleared (by setting the CTEIFx bit of the BDMA_IFCR register). Note: this bit is set and cleared by software.
+	B_0x0   BDMA_CCR2 = 0x00 << 0  //  disabled
+	B_0x1   BDMA_CCR2 = 0x01 << 0  //  enabled
+	TCIE    BDMA_CCR2 = 0x01 << 1  //+ transfer complete interrupt enable Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR2 = 0x00 << 1  //  disabled
+	B_0x1   BDMA_CCR2 = 0x01 << 1  //  enabled
+	HTIE    BDMA_CCR2 = 0x01 << 2  //+ half transfer interrupt enable Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR2 = 0x00 << 2  //  disabled
+	B_0x1   BDMA_CCR2 = 0x01 << 2  //  enabled
+	TEIE    BDMA_CCR2 = 0x01 << 3  //+ transfer error interrupt enable Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR2 = 0x00 << 3  //  disabled
+	B_0x1   BDMA_CCR2 = 0x01 << 3  //  enabled
+	DIR     BDMA_CCR2 = 0x01 << 4  //+ data transfer direction This bit must be set only in memory-to-peripheral and peripheral-to-memory modes. Source attributes are defined by PSIZE and PINC, plus the BDMA_CPARx register. This is still valid in a memory-to-memory mode. Destination attributes are defined by MSIZE and MINC, plus the BDMA_CM0/1ARx register. This is still valid in a peripheral-to-peripheral mode. Destination attributes are defined by PSIZE and PINC, plus the BDMA_CPARx register. This is still valid in a memory-to-memory mode. Source attributes are defined by MSIZE and MINC, plus the BDMA_CM0/1ARx register. This is still valid in a peripheral-to-peripheral mode. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR2 = 0x00 << 4  //  read from peripheral
+	B_0x1   BDMA_CCR2 = 0x01 << 4  //  read from memory
+	CIRC    BDMA_CCR2 = 0x01 << 5  //+ circular mode Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR2 = 0x00 << 5  //  disabled
+	B_0x1   BDMA_CCR2 = 0x01 << 5  //  enabled
+	PINC    BDMA_CCR2 = 0x01 << 6  //+ peripheral increment mode Defines the increment mode for each DMA transfer to the identified peripheral. n memory-to-memory mode, this field identifies the memory destination if DIR = 1 and the memory source if DIR = 0. In peripheral-to-peripheral mode, this field identifies the peripheral destination if DIR = 1 and the peripheral source if DIR = 0. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR2 = 0x00 << 6  //  disabled
+	B_0x1   BDMA_CCR2 = 0x01 << 6  //  enabled
+	MINC    BDMA_CCR2 = 0x01 << 7  //+ memory increment mode Defines the increment mode for each DMA transfer to the identified memory. In memory-to-memory mode, this field identifies the memory source if DIR = 1 and the memory destination if DIR = 0. In peripheral-to-peripheral mode, this field identifies the peripheral source if DIR = 1 and the peripheral destination if DIR = 0. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR2 = 0x00 << 7  //  disabled
+	B_0x1   BDMA_CCR2 = 0x01 << 7  //  enabled
+	PSIZE   BDMA_CCR2 = 0x03 << 8  //+ peripheral size Defines the data size of each DMA transfer to the identified peripheral. In memory-to-memory mode, this field identifies the memory destination if DIR = 1 and the memory source if DIR = 0. In peripheral-to-peripheral mode, this field identifies the peripheral destination if DIR = 1 and the peripheral source if DIR = 0. Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR2 = 0x00 << 8  //  8 bits
+	B_0x1   BDMA_CCR2 = 0x01 << 8  //  16 bits
+	B_0x2   BDMA_CCR2 = 0x02 << 8  //  32 bits
+	MSIZE   BDMA_CCR2 = 0x03 << 10 //+ memory size Defines the data size of each DMA transfer to the identified memory. In memory-to-memory mode, this field identifies the memory source if DIR = 1 and the memory destination if DIR = 0. In peripheral-to-peripheral mode, this field identifies the peripheral source if DIR = 1 and the peripheral destination if DIR = 0. Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR2 = 0x00 << 10 //  8 bits
+	B_0x1   BDMA_CCR2 = 0x01 << 10 //  16 bits
+	B_0x2   BDMA_CCR2 = 0x02 << 10 //  32 bits
+	PL      BDMA_CCR2 = 0x03 << 12 //+ priority level Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR2 = 0x00 << 12 //  low
+	B_0x1   BDMA_CCR2 = 0x01 << 12 //  medium
+	B_0x2   BDMA_CCR2 = 0x02 << 12 //  high
+	B_0x3   BDMA_CCR2 = 0x03 << 12 //  very high
+	MEM2MEM BDMA_CCR2 = 0x01 << 14 //+ memory-to-memory mode Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR2 = 0x00 << 14 //  disabled
+	B_0x1   BDMA_CCR2 = 0x01 << 14 //  enabled
+	DBM     BDMA_CCR2 = 0x01 << 15 //+ double-buffer mode This bit must be set only in memory-to-peripheral and peripheral-to-memory transfers (MEM2MEM=0). The CIRC bit must also be set in double buffer mode. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR2 = 0x00 << 15 //  disabled (no memory address switch at the end of the BDMA transfer)
+	B_0x1   BDMA_CCR2 = 0x01 << 15 //  enabled (memory address switched at the end of the BDMA transfer)
+	CT      BDMA_CCR2 = 0x01 << 16 //+ current target memory of DMA transfer in double-buffer mode This bit is toggled by hardware at the end of each channel transfer in double-buffer mode. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR2 = 0x00 << 16 //  memory 0 (addressed by the BDMA_CM0AR pointer)
+	B_0x1   BDMA_CCR2 = 0x01 << 16 //  memory 1 (addressed by the BDMA_CM1AR pointer)
 )
 
 const (
@@ -430,10 +521,12 @@ const (
 	MSIZEn   = 10
 	PLn      = 12
 	MEM2MEMn = 14
+	DBMn     = 15
+	CTn      = 16
 )
 
 const (
-	NDT CNDTR5 = 0xFFFF << 0 //+ Number of data to transfer Number of data to be transferred (0 up to 65535). This register can only be written when the channel is disabled. Once the channel is enabled, this register is read-only, indicating the remaining bytes to be transmitted. This register decrements after each DMA transfer. Once the transfer is completed, this register can either stay at zero or be reloaded automatically by the value previously programmed if the channel is configured in auto-reload mode. If this register is zero, no transaction can be served whether the channel is enabled or not.
+	NDT BDMA_CNDTR2 = 0xFFFF << 0 //+ number of data to transfer (0 to 216 - 1) This field is updated by hardware when the channel is enabled: It is decremented after each single BDMA ‘read followed by write’ transfer, indicating the remaining amount of data items to transfer. It is kept at zero when the programmed amount of data to transfer is reached, if the channel is not in circular mode (CIRC = 0 in the BDMA_CCRx register). It is reloaded automatically by the previously programmed value, when the transfer is complete, if the channel is in circular mode (CIRC = 1). If this field is zero, no transfer can be served whatever the channel status (enabled or not). Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
 )
 
 const (
@@ -441,7 +534,7 @@ const (
 )
 
 const (
-	PA CPAR5 = 0xFFFFFFFF << 0 //+ Peripheral address Base address of the peripheral data register from/to which the data will be read/written. When PSIZE is 01 (16-bit), the PA[0] bit is ignored. Access is automatically aligned to a half-word address. When PSIZE is 10 (32-bit), PA[1:0] are ignored. Access is automatically aligned to a word address.
+	PA BDMA_CPAR2 = 0xFFFFFFFF << 0 //+ peripheral address It contains the base address of the peripheral data register from/to which the data is read/written. When PSIZE[1:0] = 01 (16 bits), bit 0 of PA[31:0] is ignored. Access is automatically aligned to a half-word address. When PSIZE = 10 (32 bits), bits 1 and 0 of PA[31:0] are ignored. Access is automatically aligned to a word address. In memory-to-memory mode, this register identifies the memory destination address if DIR = 1 and the memory source address if DIR = 0. In peripheral-to-peripheral mode, this register identifies the peripheral destination address DIR = 1 and the peripheral source address if DIR = 0. Note: this register is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
 )
 
 const (
@@ -449,7 +542,7 @@ const (
 )
 
 const (
-	MA CMAR5 = 0xFFFFFFFF << 0 //+ Memory address Base address of the memory area from/to which the data will be read/written. When MSIZE is 01 (16-bit), the MA[0] bit is ignored. Access is automatically aligned to a half-word address. When MSIZE is 10 (32-bit), MA[1:0] are ignored. Access is automatically aligned to a word address.
+	MA BDMA_CM0AR2 = 0xFFFFFFFF << 0 //+ peripheral address It contains the base address of the memory from/to which the data is read/written. When MSIZE[1:0] = 01 (16 bits), bit 0 of MA[31:0] is ignored. Access is automatically aligned to a half-word address. When MSIZE = 10 (32 bits), bits 1 and 0 of MA[31:0] are ignored. Access is automatically aligned to a word address. In memory-to-memory mode, this register identifies the memory source address if DIR = 1 and the memory destination address if DIR = 0. In peripheral-to-peripheral mode, this register identifies the peripheral source address DIR = 1 and the peripheral destination address if DIR = 0. Note: this register is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
 )
 
 const (
@@ -457,53 +550,7 @@ const (
 )
 
 const (
-	EN      CCR6 = 0x01 << 0  //+ Channel enable This bit is set and cleared by software.
-	TCIE    CCR6 = 0x01 << 1  //+ Transfer complete interrupt enable This bit is set and cleared by software.
-	HTIE    CCR6 = 0x01 << 2  //+ Half transfer interrupt enable This bit is set and cleared by software.
-	TEIE    CCR6 = 0x01 << 3  //+ Transfer error interrupt enable This bit is set and cleared by software.
-	DIR     CCR6 = 0x01 << 4  //+ Data transfer direction This bit is set and cleared by software.
-	CIRC    CCR6 = 0x01 << 5  //+ Circular mode This bit is set and cleared by software.
-	PINC    CCR6 = 0x01 << 6  //+ Peripheral increment mode This bit is set and cleared by software.
-	MINC    CCR6 = 0x01 << 7  //+ Memory increment mode This bit is set and cleared by software.
-	PSIZE   CCR6 = 0x03 << 8  //+ Peripheral size These bits are set and cleared by software.
-	MSIZE   CCR6 = 0x03 << 10 //+ Memory size These bits are set and cleared by software.
-	PL      CCR6 = 0x03 << 12 //+ Channel priority level These bits are set and cleared by software.
-	MEM2MEM CCR6 = 0x01 << 14 //+ Memory to memory mode This bit is set and cleared by software.
-)
-
-const (
-	ENn      = 0
-	TCIEn    = 1
-	HTIEn    = 2
-	TEIEn    = 3
-	DIRn     = 4
-	CIRCn    = 5
-	PINCn    = 6
-	MINCn    = 7
-	PSIZEn   = 8
-	MSIZEn   = 10
-	PLn      = 12
-	MEM2MEMn = 14
-)
-
-const (
-	NDT CNDTR6 = 0xFFFF << 0 //+ Number of data to transfer Number of data to be transferred (0 up to 65535). This register can only be written when the channel is disabled. Once the channel is enabled, this register is read-only, indicating the remaining bytes to be transmitted. This register decrements after each DMA transfer. Once the transfer is completed, this register can either stay at zero or be reloaded automatically by the value previously programmed if the channel is configured in auto-reload mode. If this register is zero, no transaction can be served whether the channel is enabled or not.
-)
-
-const (
-	NDTn = 0
-)
-
-const (
-	PA CPAR6 = 0xFFFFFFFF << 0 //+ Peripheral address Base address of the peripheral data register from/to which the data will be read/written. When PSIZE is 01 (16-bit), the PA[0] bit is ignored. Access is automatically aligned to a half-word address. When PSIZE is 10 (32-bit), PA[1:0] are ignored. Access is automatically aligned to a word address.
-)
-
-const (
-	PAn = 0
-)
-
-const (
-	MA CMAR6 = 0xFFFFFFFF << 0 //+ Memory address Base address of the memory area from/to which the data will be read/written. When MSIZE is 01 (16-bit), the MA[0] bit is ignored. Access is automatically aligned to a half-word address. When MSIZE is 10 (32-bit), MA[1:0] are ignored. Access is automatically aligned to a word address.
+	MA BDMA_CM1AR2 = 0xFFFFFFFF << 0 //+ peripheral address It contains the base address of the memory from/to which the data is read/written. When MSIZE[1:0] = 01 (16 bits), bit 0 of MA[31:0] is ignored. Access is automatically aligned to a half-word address. When MSIZE = 10 (32 bits), bits 1 and 0 of MA[31:0] are ignored. Access is automatically aligned to a word address. In memory-to-memory mode, this register identifies the memory source address if DIR = 1 and the memory destination address if DIR = 0. In peripheral-to-peripheral mode, this register identifies the peripheral source address DIR = 1 and the peripheral destination address if DIR = 0. Note: this register is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
 )
 
 const (
@@ -511,18 +558,52 @@ const (
 )
 
 const (
-	EN      CCR7 = 0x01 << 0  //+ Channel enable This bit is set and cleared by software.
-	TCIE    CCR7 = 0x01 << 1  //+ Transfer complete interrupt enable This bit is set and cleared by software.
-	HTIE    CCR7 = 0x01 << 2  //+ Half transfer interrupt enable This bit is set and cleared by software.
-	TEIE    CCR7 = 0x01 << 3  //+ Transfer error interrupt enable This bit is set and cleared by software.
-	DIR     CCR7 = 0x01 << 4  //+ Data transfer direction This bit is set and cleared by software.
-	CIRC    CCR7 = 0x01 << 5  //+ Circular mode This bit is set and cleared by software.
-	PINC    CCR7 = 0x01 << 6  //+ Peripheral increment mode This bit is set and cleared by software.
-	MINC    CCR7 = 0x01 << 7  //+ Memory increment mode This bit is set and cleared by software.
-	PSIZE   CCR7 = 0x03 << 8  //+ Peripheral size These bits are set and cleared by software.
-	MSIZE   CCR7 = 0x03 << 10 //+ Memory size These bits are set and cleared by software.
-	PL      CCR7 = 0x03 << 12 //+ Channel priority level These bits are set and cleared by software.
-	MEM2MEM CCR7 = 0x01 << 14 //+ Memory to memory mode This bit is set and cleared by software.
+	EN      BDMA_CCR3 = 0x01 << 0  //+ channel enable When a channel transfer error occurs, this bit is cleared by hardware. It can not be set again by software (channel x re-activated) until the TEIFx bit of the BDMA_ISR register is cleared (by setting the CTEIFx bit of the BDMA_IFCR register). Note: this bit is set and cleared by software.
+	B_0x0   BDMA_CCR3 = 0x00 << 0  //  disabled
+	B_0x1   BDMA_CCR3 = 0x01 << 0  //  enabled
+	TCIE    BDMA_CCR3 = 0x01 << 1  //+ transfer complete interrupt enable Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR3 = 0x00 << 1  //  disabled
+	B_0x1   BDMA_CCR3 = 0x01 << 1  //  enabled
+	HTIE    BDMA_CCR3 = 0x01 << 2  //+ half transfer interrupt enable Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR3 = 0x00 << 2  //  disabled
+	B_0x1   BDMA_CCR3 = 0x01 << 2  //  enabled
+	TEIE    BDMA_CCR3 = 0x01 << 3  //+ transfer error interrupt enable Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR3 = 0x00 << 3  //  disabled
+	B_0x1   BDMA_CCR3 = 0x01 << 3  //  enabled
+	DIR     BDMA_CCR3 = 0x01 << 4  //+ data transfer direction This bit must be set only in memory-to-peripheral and peripheral-to-memory modes. Source attributes are defined by PSIZE and PINC, plus the BDMA_CPARx register. This is still valid in a memory-to-memory mode. Destination attributes are defined by MSIZE and MINC, plus the BDMA_CM0/1ARx register. This is still valid in a peripheral-to-peripheral mode. Destination attributes are defined by PSIZE and PINC, plus the BDMA_CPARx register. This is still valid in a memory-to-memory mode. Source attributes are defined by MSIZE and MINC, plus the BDMA_CM0/1ARx register. This is still valid in a peripheral-to-peripheral mode. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR3 = 0x00 << 4  //  read from peripheral
+	B_0x1   BDMA_CCR3 = 0x01 << 4  //  read from memory
+	CIRC    BDMA_CCR3 = 0x01 << 5  //+ circular mode Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR3 = 0x00 << 5  //  disabled
+	B_0x1   BDMA_CCR3 = 0x01 << 5  //  enabled
+	PINC    BDMA_CCR3 = 0x01 << 6  //+ peripheral increment mode Defines the increment mode for each DMA transfer to the identified peripheral. n memory-to-memory mode, this field identifies the memory destination if DIR = 1 and the memory source if DIR = 0. In peripheral-to-peripheral mode, this field identifies the peripheral destination if DIR = 1 and the peripheral source if DIR = 0. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR3 = 0x00 << 6  //  disabled
+	B_0x1   BDMA_CCR3 = 0x01 << 6  //  enabled
+	MINC    BDMA_CCR3 = 0x01 << 7  //+ memory increment mode Defines the increment mode for each DMA transfer to the identified memory. In memory-to-memory mode, this field identifies the memory source if DIR = 1 and the memory destination if DIR = 0. In peripheral-to-peripheral mode, this field identifies the peripheral source if DIR = 1 and the peripheral destination if DIR = 0. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR3 = 0x00 << 7  //  disabled
+	B_0x1   BDMA_CCR3 = 0x01 << 7  //  enabled
+	PSIZE   BDMA_CCR3 = 0x03 << 8  //+ peripheral size Defines the data size of each DMA transfer to the identified peripheral. In memory-to-memory mode, this field identifies the memory destination if DIR = 1 and the memory source if DIR = 0. In peripheral-to-peripheral mode, this field identifies the peripheral destination if DIR = 1 and the peripheral source if DIR = 0. Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR3 = 0x00 << 8  //  8 bits
+	B_0x1   BDMA_CCR3 = 0x01 << 8  //  16 bits
+	B_0x2   BDMA_CCR3 = 0x02 << 8  //  32 bits
+	MSIZE   BDMA_CCR3 = 0x03 << 10 //+ memory size Defines the data size of each DMA transfer to the identified memory. In memory-to-memory mode, this field identifies the memory source if DIR = 1 and the memory destination if DIR = 0. In peripheral-to-peripheral mode, this field identifies the peripheral source if DIR = 1 and the peripheral destination if DIR = 0. Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR3 = 0x00 << 10 //  8 bits
+	B_0x1   BDMA_CCR3 = 0x01 << 10 //  16 bits
+	B_0x2   BDMA_CCR3 = 0x02 << 10 //  32 bits
+	PL      BDMA_CCR3 = 0x03 << 12 //+ priority level Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR3 = 0x00 << 12 //  low
+	B_0x1   BDMA_CCR3 = 0x01 << 12 //  medium
+	B_0x2   BDMA_CCR3 = 0x02 << 12 //  high
+	B_0x3   BDMA_CCR3 = 0x03 << 12 //  very high
+	MEM2MEM BDMA_CCR3 = 0x01 << 14 //+ memory-to-memory mode Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR3 = 0x00 << 14 //  disabled
+	B_0x1   BDMA_CCR3 = 0x01 << 14 //  enabled
+	DBM     BDMA_CCR3 = 0x01 << 15 //+ double-buffer mode This bit must be set only in memory-to-peripheral and peripheral-to-memory transfers (MEM2MEM=0). The CIRC bit must also be set in double buffer mode. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR3 = 0x00 << 15 //  disabled (no memory address switch at the end of the BDMA transfer)
+	B_0x1   BDMA_CCR3 = 0x01 << 15 //  enabled (memory address switched at the end of the BDMA transfer)
+	CT      BDMA_CCR3 = 0x01 << 16 //+ current target memory of DMA transfer in double-buffer mode This bit is toggled by hardware at the end of each channel transfer in double-buffer mode. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR3 = 0x00 << 16 //  memory 0 (addressed by the BDMA_CM0AR pointer)
+	B_0x1   BDMA_CCR3 = 0x01 << 16 //  memory 1 (addressed by the BDMA_CM1AR pointer)
 )
 
 const (
@@ -538,10 +619,12 @@ const (
 	MSIZEn   = 10
 	PLn      = 12
 	MEM2MEMn = 14
+	DBMn     = 15
+	CTn      = 16
 )
 
 const (
-	NDT CNDTR7 = 0xFFFF << 0 //+ Number of data to transfer Number of data to be transferred (0 up to 65535). This register can only be written when the channel is disabled. Once the channel is enabled, this register is read-only, indicating the remaining bytes to be transmitted. This register decrements after each DMA transfer. Once the transfer is completed, this register can either stay at zero or be reloaded automatically by the value previously programmed if the channel is configured in auto-reload mode. If this register is zero, no transaction can be served whether the channel is enabled or not.
+	NDT BDMA_CNDTR3 = 0xFFFF << 0 //+ number of data to transfer (0 to 216 - 1) This field is updated by hardware when the channel is enabled: It is decremented after each single BDMA ‘read followed by write’ transfer, indicating the remaining amount of data items to transfer. It is kept at zero when the programmed amount of data to transfer is reached, if the channel is not in circular mode (CIRC = 0 in the BDMA_CCRx register). It is reloaded automatically by the previously programmed value, when the transfer is complete, if the channel is in circular mode (CIRC = 1). If this field is zero, no transfer can be served whatever the channel status (enabled or not). Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
 )
 
 const (
@@ -549,7 +632,7 @@ const (
 )
 
 const (
-	PA CPAR7 = 0xFFFFFFFF << 0 //+ Peripheral address Base address of the peripheral data register from/to which the data will be read/written. When PSIZE is 01 (16-bit), the PA[0] bit is ignored. Access is automatically aligned to a half-word address. When PSIZE is 10 (32-bit), PA[1:0] are ignored. Access is automatically aligned to a word address.
+	PA BDMA_CPAR3 = 0xFFFFFFFF << 0 //+ peripheral address It contains the base address of the peripheral data register from/to which the data is read/written. When PSIZE[1:0] = 01 (16 bits), bit 0 of PA[31:0] is ignored. Access is automatically aligned to a half-word address. When PSIZE = 10 (32 bits), bits 1 and 0 of PA[31:0] are ignored. Access is automatically aligned to a word address. In memory-to-memory mode, this register identifies the memory destination address if DIR = 1 and the memory source address if DIR = 0. In peripheral-to-peripheral mode, this register identifies the peripheral destination address DIR = 1 and the peripheral source address if DIR = 0. Note: this register is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
 )
 
 const (
@@ -557,7 +640,7 @@ const (
 )
 
 const (
-	MA CMAR7 = 0xFFFFFFFF << 0 //+ Memory address Base address of the memory area from/to which the data will be read/written. When MSIZE is 01 (16-bit), the MA[0] bit is ignored. Access is automatically aligned to a half-word address. When MSIZE is 10 (32-bit), MA[1:0] are ignored. Access is automatically aligned to a word address.
+	MA BDMA_CM0AR3 = 0xFFFFFFFF << 0 //+ peripheral address It contains the base address of the memory from/to which the data is read/written. When MSIZE[1:0] = 01 (16 bits), bit 0 of MA[31:0] is ignored. Access is automatically aligned to a half-word address. When MSIZE = 10 (32 bits), bits 1 and 0 of MA[31:0] are ignored. Access is automatically aligned to a word address. In memory-to-memory mode, this register identifies the memory source address if DIR = 1 and the memory destination address if DIR = 0. In peripheral-to-peripheral mode, this register identifies the peripheral source address DIR = 1 and the peripheral destination address if DIR = 0. Note: this register is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
 )
 
 const (
@@ -565,18 +648,60 @@ const (
 )
 
 const (
-	EN      CCR8 = 0x01 << 0  //+ Channel enable This bit is set and cleared by software.
-	TCIE    CCR8 = 0x01 << 1  //+ Transfer complete interrupt enable This bit is set and cleared by software.
-	HTIE    CCR8 = 0x01 << 2  //+ Half transfer interrupt enable This bit is set and cleared by software.
-	TEIE    CCR8 = 0x01 << 3  //+ Transfer error interrupt enable This bit is set and cleared by software.
-	DIR     CCR8 = 0x01 << 4  //+ Data transfer direction This bit is set and cleared by software.
-	CIRC    CCR8 = 0x01 << 5  //+ Circular mode This bit is set and cleared by software.
-	PINC    CCR8 = 0x01 << 6  //+ Peripheral increment mode This bit is set and cleared by software.
-	MINC    CCR8 = 0x01 << 7  //+ Memory increment mode This bit is set and cleared by software.
-	PSIZE   CCR8 = 0x03 << 8  //+ Peripheral size These bits are set and cleared by software.
-	MSIZE   CCR8 = 0x03 << 10 //+ Memory size These bits are set and cleared by software.
-	PL      CCR8 = 0x03 << 12 //+ Channel priority level These bits are set and cleared by software.
-	MEM2MEM CCR8 = 0x01 << 14 //+ Memory to memory mode This bit is set and cleared by software.
+	MA BDMA_CM1AR3 = 0xFFFFFFFF << 0 //+ peripheral address It contains the base address of the memory from/to which the data is read/written. When MSIZE[1:0] = 01 (16 bits), bit 0 of MA[31:0] is ignored. Access is automatically aligned to a half-word address. When MSIZE = 10 (32 bits), bits 1 and 0 of MA[31:0] are ignored. Access is automatically aligned to a word address. In memory-to-memory mode, this register identifies the memory source address if DIR = 1 and the memory destination address if DIR = 0. In peripheral-to-peripheral mode, this register identifies the peripheral source address DIR = 1 and the peripheral destination address if DIR = 0. Note: this register is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
+)
+
+const (
+	MAn = 0
+)
+
+const (
+	EN      BDMA_CCR4 = 0x01 << 0  //+ channel enable When a channel transfer error occurs, this bit is cleared by hardware. It can not be set again by software (channel x re-activated) until the TEIFx bit of the BDMA_ISR register is cleared (by setting the CTEIFx bit of the BDMA_IFCR register). Note: this bit is set and cleared by software.
+	B_0x0   BDMA_CCR4 = 0x00 << 0  //  disabled
+	B_0x1   BDMA_CCR4 = 0x01 << 0  //  enabled
+	TCIE    BDMA_CCR4 = 0x01 << 1  //+ transfer complete interrupt enable Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR4 = 0x00 << 1  //  disabled
+	B_0x1   BDMA_CCR4 = 0x01 << 1  //  enabled
+	HTIE    BDMA_CCR4 = 0x01 << 2  //+ half transfer interrupt enable Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR4 = 0x00 << 2  //  disabled
+	B_0x1   BDMA_CCR4 = 0x01 << 2  //  enabled
+	TEIE    BDMA_CCR4 = 0x01 << 3  //+ transfer error interrupt enable Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR4 = 0x00 << 3  //  disabled
+	B_0x1   BDMA_CCR4 = 0x01 << 3  //  enabled
+	DIR     BDMA_CCR4 = 0x01 << 4  //+ data transfer direction This bit must be set only in memory-to-peripheral and peripheral-to-memory modes. Source attributes are defined by PSIZE and PINC, plus the BDMA_CPARx register. This is still valid in a memory-to-memory mode. Destination attributes are defined by MSIZE and MINC, plus the BDMA_CM0/1ARx register. This is still valid in a peripheral-to-peripheral mode. Destination attributes are defined by PSIZE and PINC, plus the BDMA_CPARx register. This is still valid in a memory-to-memory mode. Source attributes are defined by MSIZE and MINC, plus the BDMA_CM0/1ARx register. This is still valid in a peripheral-to-peripheral mode. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR4 = 0x00 << 4  //  read from peripheral
+	B_0x1   BDMA_CCR4 = 0x01 << 4  //  read from memory
+	CIRC    BDMA_CCR4 = 0x01 << 5  //+ circular mode Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR4 = 0x00 << 5  //  disabled
+	B_0x1   BDMA_CCR4 = 0x01 << 5  //  enabled
+	PINC    BDMA_CCR4 = 0x01 << 6  //+ peripheral increment mode Defines the increment mode for each DMA transfer to the identified peripheral. n memory-to-memory mode, this field identifies the memory destination if DIR = 1 and the memory source if DIR = 0. In peripheral-to-peripheral mode, this field identifies the peripheral destination if DIR = 1 and the peripheral source if DIR = 0. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR4 = 0x00 << 6  //  disabled
+	B_0x1   BDMA_CCR4 = 0x01 << 6  //  enabled
+	MINC    BDMA_CCR4 = 0x01 << 7  //+ memory increment mode Defines the increment mode for each DMA transfer to the identified memory. In memory-to-memory mode, this field identifies the memory source if DIR = 1 and the memory destination if DIR = 0. In peripheral-to-peripheral mode, this field identifies the peripheral source if DIR = 1 and the peripheral destination if DIR = 0. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR4 = 0x00 << 7  //  disabled
+	B_0x1   BDMA_CCR4 = 0x01 << 7  //  enabled
+	PSIZE   BDMA_CCR4 = 0x03 << 8  //+ peripheral size Defines the data size of each DMA transfer to the identified peripheral. In memory-to-memory mode, this field identifies the memory destination if DIR = 1 and the memory source if DIR = 0. In peripheral-to-peripheral mode, this field identifies the peripheral destination if DIR = 1 and the peripheral source if DIR = 0. Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR4 = 0x00 << 8  //  8 bits
+	B_0x1   BDMA_CCR4 = 0x01 << 8  //  16 bits
+	B_0x2   BDMA_CCR4 = 0x02 << 8  //  32 bits
+	MSIZE   BDMA_CCR4 = 0x03 << 10 //+ memory size Defines the data size of each DMA transfer to the identified memory. In memory-to-memory mode, this field identifies the memory source if DIR = 1 and the memory destination if DIR = 0. In peripheral-to-peripheral mode, this field identifies the peripheral source if DIR = 1 and the peripheral destination if DIR = 0. Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR4 = 0x00 << 10 //  8 bits
+	B_0x1   BDMA_CCR4 = 0x01 << 10 //  16 bits
+	B_0x2   BDMA_CCR4 = 0x02 << 10 //  32 bits
+	PL      BDMA_CCR4 = 0x03 << 12 //+ priority level Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR4 = 0x00 << 12 //  low
+	B_0x1   BDMA_CCR4 = 0x01 << 12 //  medium
+	B_0x2   BDMA_CCR4 = 0x02 << 12 //  high
+	B_0x3   BDMA_CCR4 = 0x03 << 12 //  very high
+	MEM2MEM BDMA_CCR4 = 0x01 << 14 //+ memory-to-memory mode Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR4 = 0x00 << 14 //  disabled
+	B_0x1   BDMA_CCR4 = 0x01 << 14 //  enabled
+	DBM     BDMA_CCR4 = 0x01 << 15 //+ double-buffer mode This bit must be set only in memory-to-peripheral and peripheral-to-memory transfers (MEM2MEM=0). The CIRC bit must also be set in double buffer mode. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR4 = 0x00 << 15 //  disabled (no memory address switch at the end of the BDMA transfer)
+	B_0x1   BDMA_CCR4 = 0x01 << 15 //  enabled (memory address switched at the end of the BDMA transfer)
+	CT      BDMA_CCR4 = 0x01 << 16 //+ current target memory of DMA transfer in double-buffer mode This bit is toggled by hardware at the end of each channel transfer in double-buffer mode. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR4 = 0x00 << 16 //  memory 0 (addressed by the BDMA_CM0AR pointer)
+	B_0x1   BDMA_CCR4 = 0x01 << 16 //  memory 1 (addressed by the BDMA_CM1AR pointer)
 )
 
 const (
@@ -592,10 +717,12 @@ const (
 	MSIZEn   = 10
 	PLn      = 12
 	MEM2MEMn = 14
+	DBMn     = 15
+	CTn      = 16
 )
 
 const (
-	NDT CNDTR8 = 0xFFFF << 0 //+ Number of data to transfer Number of data to be transferred (0 up to 65535). This register can only be written when the channel is disabled. Once the channel is enabled, this register is read-only, indicating the remaining bytes to be transmitted. This register decrements after each DMA transfer. Once the transfer is completed, this register can either stay at zero or be reloaded automatically by the value previously programmed if the channel is configured in auto-reload mode. If this register is zero, no transaction can be served whether the channel is enabled or not.
+	NDT BDMA_CNDTR4 = 0xFFFF << 0 //+ number of data to transfer (0 to 216 - 1) This field is updated by hardware when the channel is enabled: It is decremented after each single BDMA ‘read followed by write’ transfer, indicating the remaining amount of data items to transfer. It is kept at zero when the programmed amount of data to transfer is reached, if the channel is not in circular mode (CIRC = 0 in the BDMA_CCRx register). It is reloaded automatically by the previously programmed value, when the transfer is complete, if the channel is in circular mode (CIRC = 1). If this field is zero, no transfer can be served whatever the channel status (enabled or not). Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
 )
 
 const (
@@ -603,7 +730,7 @@ const (
 )
 
 const (
-	PA CPAR8 = 0xFFFFFFFF << 0 //+ Peripheral address Base address of the peripheral data register from/to which the data will be read/written. When PSIZE is 01 (16-bit), the PA[0] bit is ignored. Access is automatically aligned to a half-word address. When PSIZE is 10 (32-bit), PA[1:0] are ignored. Access is automatically aligned to a word address.
+	PA BDMA_CPAR4 = 0xFFFFFFFF << 0 //+ peripheral address It contains the base address of the peripheral data register from/to which the data is read/written. When PSIZE[1:0] = 01 (16 bits), bit 0 of PA[31:0] is ignored. Access is automatically aligned to a half-word address. When PSIZE = 10 (32 bits), bits 1 and 0 of PA[31:0] are ignored. Access is automatically aligned to a word address. In memory-to-memory mode, this register identifies the memory destination address if DIR = 1 and the memory source address if DIR = 0. In peripheral-to-peripheral mode, this register identifies the peripheral destination address DIR = 1 and the peripheral source address if DIR = 0. Note: this register is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
 )
 
 const (
@@ -611,7 +738,309 @@ const (
 )
 
 const (
-	MA CMAR8 = 0xFFFFFFFF << 0 //+ Memory address Base address of the memory area from/to which the data will be read/written. When MSIZE is 01 (16-bit), the MA[0] bit is ignored. Access is automatically aligned to a half-word address. When MSIZE is 10 (32-bit), MA[1:0] are ignored. Access is automatically aligned to a word address.
+	MA BDMA_CM0AR4 = 0xFFFFFFFF << 0 //+ peripheral address It contains the base address of the memory from/to which the data is read/written. When MSIZE[1:0] = 01 (16 bits), bit 0 of MA[31:0] is ignored. Access is automatically aligned to a half-word address. When MSIZE = 10 (32 bits), bits 1 and 0 of MA[31:0] are ignored. Access is automatically aligned to a word address. In memory-to-memory mode, this register identifies the memory source address if DIR = 1 and the memory destination address if DIR = 0. In peripheral-to-peripheral mode, this register identifies the peripheral source address DIR = 1 and the peripheral destination address if DIR = 0. Note: this register is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
+)
+
+const (
+	MAn = 0
+)
+
+const (
+	MA BDMA_CM1AR4 = 0xFFFFFFFF << 0 //+ peripheral address It contains the base address of the memory from/to which the data is read/written. When MSIZE[1:0] = 01 (16 bits), bit 0 of MA[31:0] is ignored. Access is automatically aligned to a half-word address. When MSIZE = 10 (32 bits), bits 1 and 0 of MA[31:0] are ignored. Access is automatically aligned to a word address. In memory-to-memory mode, this register identifies the memory source address if DIR = 1 and the memory destination address if DIR = 0. In peripheral-to-peripheral mode, this register identifies the peripheral source address DIR = 1 and the peripheral destination address if DIR = 0. Note: this register is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
+)
+
+const (
+	MAn = 0
+)
+
+const (
+	EN      BDMA_CCR5 = 0x01 << 0  //+ channel enable When a channel transfer error occurs, this bit is cleared by hardware. It can not be set again by software (channel x re-activated) until the TEIFx bit of the BDMA_ISR register is cleared (by setting the CTEIFx bit of the BDMA_IFCR register). Note: this bit is set and cleared by software.
+	B_0x0   BDMA_CCR5 = 0x00 << 0  //  disabled
+	B_0x1   BDMA_CCR5 = 0x01 << 0  //  enabled
+	TCIE    BDMA_CCR5 = 0x01 << 1  //+ transfer complete interrupt enable Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR5 = 0x00 << 1  //  disabled
+	B_0x1   BDMA_CCR5 = 0x01 << 1  //  enabled
+	HTIE    BDMA_CCR5 = 0x01 << 2  //+ half transfer interrupt enable Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR5 = 0x00 << 2  //  disabled
+	B_0x1   BDMA_CCR5 = 0x01 << 2  //  enabled
+	TEIE    BDMA_CCR5 = 0x01 << 3  //+ transfer error interrupt enable Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR5 = 0x00 << 3  //  disabled
+	B_0x1   BDMA_CCR5 = 0x01 << 3  //  enabled
+	DIR     BDMA_CCR5 = 0x01 << 4  //+ data transfer direction This bit must be set only in memory-to-peripheral and peripheral-to-memory modes. Source attributes are defined by PSIZE and PINC, plus the BDMA_CPARx register. This is still valid in a memory-to-memory mode. Destination attributes are defined by MSIZE and MINC, plus the BDMA_CM0/1ARx register. This is still valid in a peripheral-to-peripheral mode. Destination attributes are defined by PSIZE and PINC, plus the BDMA_CPARx register. This is still valid in a memory-to-memory mode. Source attributes are defined by MSIZE and MINC, plus the BDMA_CM0/1ARx register. This is still valid in a peripheral-to-peripheral mode. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR5 = 0x00 << 4  //  read from peripheral
+	B_0x1   BDMA_CCR5 = 0x01 << 4  //  read from memory
+	CIRC    BDMA_CCR5 = 0x01 << 5  //+ circular mode Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR5 = 0x00 << 5  //  disabled
+	B_0x1   BDMA_CCR5 = 0x01 << 5  //  enabled
+	PINC    BDMA_CCR5 = 0x01 << 6  //+ peripheral increment mode Defines the increment mode for each DMA transfer to the identified peripheral. n memory-to-memory mode, this field identifies the memory destination if DIR = 1 and the memory source if DIR = 0. In peripheral-to-peripheral mode, this field identifies the peripheral destination if DIR = 1 and the peripheral source if DIR = 0. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR5 = 0x00 << 6  //  disabled
+	B_0x1   BDMA_CCR5 = 0x01 << 6  //  enabled
+	MINC    BDMA_CCR5 = 0x01 << 7  //+ memory increment mode Defines the increment mode for each DMA transfer to the identified memory. In memory-to-memory mode, this field identifies the memory source if DIR = 1 and the memory destination if DIR = 0. In peripheral-to-peripheral mode, this field identifies the peripheral source if DIR = 1 and the peripheral destination if DIR = 0. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR5 = 0x00 << 7  //  disabled
+	B_0x1   BDMA_CCR5 = 0x01 << 7  //  enabled
+	PSIZE   BDMA_CCR5 = 0x03 << 8  //+ peripheral size Defines the data size of each DMA transfer to the identified peripheral. In memory-to-memory mode, this field identifies the memory destination if DIR = 1 and the memory source if DIR = 0. In peripheral-to-peripheral mode, this field identifies the peripheral destination if DIR = 1 and the peripheral source if DIR = 0. Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR5 = 0x00 << 8  //  8 bits
+	B_0x1   BDMA_CCR5 = 0x01 << 8  //  16 bits
+	B_0x2   BDMA_CCR5 = 0x02 << 8  //  32 bits
+	MSIZE   BDMA_CCR5 = 0x03 << 10 //+ memory size Defines the data size of each DMA transfer to the identified memory. In memory-to-memory mode, this field identifies the memory source if DIR = 1 and the memory destination if DIR = 0. In peripheral-to-peripheral mode, this field identifies the peripheral source if DIR = 1 and the peripheral destination if DIR = 0. Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR5 = 0x00 << 10 //  8 bits
+	B_0x1   BDMA_CCR5 = 0x01 << 10 //  16 bits
+	B_0x2   BDMA_CCR5 = 0x02 << 10 //  32 bits
+	PL      BDMA_CCR5 = 0x03 << 12 //+ priority level Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR5 = 0x00 << 12 //  low
+	B_0x1   BDMA_CCR5 = 0x01 << 12 //  medium
+	B_0x2   BDMA_CCR5 = 0x02 << 12 //  high
+	B_0x3   BDMA_CCR5 = 0x03 << 12 //  very high
+	MEM2MEM BDMA_CCR5 = 0x01 << 14 //+ memory-to-memory mode Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR5 = 0x00 << 14 //  disabled
+	B_0x1   BDMA_CCR5 = 0x01 << 14 //  enabled
+	DBM     BDMA_CCR5 = 0x01 << 15 //+ double-buffer mode This bit must be set only in memory-to-peripheral and peripheral-to-memory transfers (MEM2MEM=0). The CIRC bit must also be set in double buffer mode. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR5 = 0x00 << 15 //  disabled (no memory address switch at the end of the BDMA transfer)
+	B_0x1   BDMA_CCR5 = 0x01 << 15 //  enabled (memory address switched at the end of the BDMA transfer)
+	CT      BDMA_CCR5 = 0x01 << 16 //+ current target memory of DMA transfer in double-buffer mode This bit is toggled by hardware at the end of each channel transfer in double-buffer mode. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR5 = 0x00 << 16 //  memory 0 (addressed by the BDMA_CM0AR pointer)
+	B_0x1   BDMA_CCR5 = 0x01 << 16 //  memory 1 (addressed by the BDMA_CM1AR pointer)
+)
+
+const (
+	ENn      = 0
+	TCIEn    = 1
+	HTIEn    = 2
+	TEIEn    = 3
+	DIRn     = 4
+	CIRCn    = 5
+	PINCn    = 6
+	MINCn    = 7
+	PSIZEn   = 8
+	MSIZEn   = 10
+	PLn      = 12
+	MEM2MEMn = 14
+	DBMn     = 15
+	CTn      = 16
+)
+
+const (
+	NDT BDMA_CNDTR5 = 0xFFFF << 0 //+ number of data to transfer (0 to 216 - 1) This field is updated by hardware when the channel is enabled: It is decremented after each single BDMA ‘read followed by write’ transfer, indicating the remaining amount of data items to transfer. It is kept at zero when the programmed amount of data to transfer is reached, if the channel is not in circular mode (CIRC = 0 in the BDMA_CCRx register). It is reloaded automatically by the previously programmed value, when the transfer is complete, if the channel is in circular mode (CIRC = 1). If this field is zero, no transfer can be served whatever the channel status (enabled or not). Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+)
+
+const (
+	NDTn = 0
+)
+
+const (
+	PA BDMA_CPAR5 = 0xFFFFFFFF << 0 //+ peripheral address It contains the base address of the peripheral data register from/to which the data is read/written. When PSIZE[1:0] = 01 (16 bits), bit 0 of PA[31:0] is ignored. Access is automatically aligned to a half-word address. When PSIZE = 10 (32 bits), bits 1 and 0 of PA[31:0] are ignored. Access is automatically aligned to a word address. In memory-to-memory mode, this register identifies the memory destination address if DIR = 1 and the memory source address if DIR = 0. In peripheral-to-peripheral mode, this register identifies the peripheral destination address DIR = 1 and the peripheral source address if DIR = 0. Note: this register is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
+)
+
+const (
+	PAn = 0
+)
+
+const (
+	MA BDMA_CM0AR5 = 0xFFFFFFFF << 0 //+ peripheral address It contains the base address of the memory from/to which the data is read/written. When MSIZE[1:0] = 01 (16 bits), bit 0 of MA[31:0] is ignored. Access is automatically aligned to a half-word address. When MSIZE = 10 (32 bits), bits 1 and 0 of MA[31:0] are ignored. Access is automatically aligned to a word address. In memory-to-memory mode, this register identifies the memory source address if DIR = 1 and the memory destination address if DIR = 0. In peripheral-to-peripheral mode, this register identifies the peripheral source address DIR = 1 and the peripheral destination address if DIR = 0. Note: this register is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
+)
+
+const (
+	MAn = 0
+)
+
+const (
+	MA BDMA_CM1AR5 = 0xFFFFFFFF << 0 //+ peripheral address It contains the base address of the memory from/to which the data is read/written. When MSIZE[1:0] = 01 (16 bits), bit 0 of MA[31:0] is ignored. Access is automatically aligned to a half-word address. When MSIZE = 10 (32 bits), bits 1 and 0 of MA[31:0] are ignored. Access is automatically aligned to a word address. In memory-to-memory mode, this register identifies the memory source address if DIR = 1 and the memory destination address if DIR = 0. In peripheral-to-peripheral mode, this register identifies the peripheral source address DIR = 1 and the peripheral destination address if DIR = 0. Note: this register is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
+)
+
+const (
+	MAn = 0
+)
+
+const (
+	EN      BDMA_CCR6 = 0x01 << 0  //+ channel enable When a channel transfer error occurs, this bit is cleared by hardware. It can not be set again by software (channel x re-activated) until the TEIFx bit of the BDMA_ISR register is cleared (by setting the CTEIFx bit of the BDMA_IFCR register). Note: this bit is set and cleared by software.
+	B_0x0   BDMA_CCR6 = 0x00 << 0  //  disabled
+	B_0x1   BDMA_CCR6 = 0x01 << 0  //  enabled
+	TCIE    BDMA_CCR6 = 0x01 << 1  //+ transfer complete interrupt enable Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR6 = 0x00 << 1  //  disabled
+	B_0x1   BDMA_CCR6 = 0x01 << 1  //  enabled
+	HTIE    BDMA_CCR6 = 0x01 << 2  //+ half transfer interrupt enable Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR6 = 0x00 << 2  //  disabled
+	B_0x1   BDMA_CCR6 = 0x01 << 2  //  enabled
+	TEIE    BDMA_CCR6 = 0x01 << 3  //+ transfer error interrupt enable Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR6 = 0x00 << 3  //  disabled
+	B_0x1   BDMA_CCR6 = 0x01 << 3  //  enabled
+	DIR     BDMA_CCR6 = 0x01 << 4  //+ data transfer direction This bit must be set only in memory-to-peripheral and peripheral-to-memory modes. Source attributes are defined by PSIZE and PINC, plus the BDMA_CPARx register. This is still valid in a memory-to-memory mode. Destination attributes are defined by MSIZE and MINC, plus the BDMA_CM0/1ARx register. This is still valid in a peripheral-to-peripheral mode. Destination attributes are defined by PSIZE and PINC, plus the BDMA_CPARx register. This is still valid in a memory-to-memory mode. Source attributes are defined by MSIZE and MINC, plus the BDMA_CM0/1ARx register. This is still valid in a peripheral-to-peripheral mode. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR6 = 0x00 << 4  //  read from peripheral
+	B_0x1   BDMA_CCR6 = 0x01 << 4  //  read from memory
+	CIRC    BDMA_CCR6 = 0x01 << 5  //+ circular mode Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR6 = 0x00 << 5  //  disabled
+	B_0x1   BDMA_CCR6 = 0x01 << 5  //  enabled
+	PINC    BDMA_CCR6 = 0x01 << 6  //+ peripheral increment mode Defines the increment mode for each DMA transfer to the identified peripheral. n memory-to-memory mode, this field identifies the memory destination if DIR = 1 and the memory source if DIR = 0. In peripheral-to-peripheral mode, this field identifies the peripheral destination if DIR = 1 and the peripheral source if DIR = 0. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR6 = 0x00 << 6  //  disabled
+	B_0x1   BDMA_CCR6 = 0x01 << 6  //  enabled
+	MINC    BDMA_CCR6 = 0x01 << 7  //+ memory increment mode Defines the increment mode for each DMA transfer to the identified memory. In memory-to-memory mode, this field identifies the memory source if DIR = 1 and the memory destination if DIR = 0. In peripheral-to-peripheral mode, this field identifies the peripheral source if DIR = 1 and the peripheral destination if DIR = 0. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR6 = 0x00 << 7  //  disabled
+	B_0x1   BDMA_CCR6 = 0x01 << 7  //  enabled
+	PSIZE   BDMA_CCR6 = 0x03 << 8  //+ peripheral size Defines the data size of each DMA transfer to the identified peripheral. In memory-to-memory mode, this field identifies the memory destination if DIR = 1 and the memory source if DIR = 0. In peripheral-to-peripheral mode, this field identifies the peripheral destination if DIR = 1 and the peripheral source if DIR = 0. Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR6 = 0x00 << 8  //  8 bits
+	B_0x1   BDMA_CCR6 = 0x01 << 8  //  16 bits
+	B_0x2   BDMA_CCR6 = 0x02 << 8  //  32 bits
+	MSIZE   BDMA_CCR6 = 0x03 << 10 //+ memory size Defines the data size of each DMA transfer to the identified memory. In memory-to-memory mode, this field identifies the memory source if DIR = 1 and the memory destination if DIR = 0. In peripheral-to-peripheral mode, this field identifies the peripheral source if DIR = 1 and the peripheral destination if DIR = 0. Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR6 = 0x00 << 10 //  8 bits
+	B_0x1   BDMA_CCR6 = 0x01 << 10 //  16 bits
+	B_0x2   BDMA_CCR6 = 0x02 << 10 //  32 bits
+	PL      BDMA_CCR6 = 0x03 << 12 //+ priority level Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR6 = 0x00 << 12 //  low
+	B_0x1   BDMA_CCR6 = 0x01 << 12 //  medium
+	B_0x2   BDMA_CCR6 = 0x02 << 12 //  high
+	B_0x3   BDMA_CCR6 = 0x03 << 12 //  very high
+	MEM2MEM BDMA_CCR6 = 0x01 << 14 //+ memory-to-memory mode Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR6 = 0x00 << 14 //  disabled
+	B_0x1   BDMA_CCR6 = 0x01 << 14 //  enabled
+	DBM     BDMA_CCR6 = 0x01 << 15 //+ double-buffer mode This bit must be set only in memory-to-peripheral and peripheral-to-memory transfers (MEM2MEM=0). The CIRC bit must also be set in double buffer mode. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR6 = 0x00 << 15 //  disabled (no memory address switch at the end of the BDMA transfer)
+	B_0x1   BDMA_CCR6 = 0x01 << 15 //  enabled (memory address switched at the end of the BDMA transfer)
+	CT      BDMA_CCR6 = 0x01 << 16 //+ current target memory of DMA transfer in double-buffer mode This bit is toggled by hardware at the end of each channel transfer in double-buffer mode. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR6 = 0x00 << 16 //  memory 0 (addressed by the BDMA_CM0AR pointer)
+	B_0x1   BDMA_CCR6 = 0x01 << 16 //  memory 1 (addressed by the BDMA_CM1AR pointer)
+)
+
+const (
+	ENn      = 0
+	TCIEn    = 1
+	HTIEn    = 2
+	TEIEn    = 3
+	DIRn     = 4
+	CIRCn    = 5
+	PINCn    = 6
+	MINCn    = 7
+	PSIZEn   = 8
+	MSIZEn   = 10
+	PLn      = 12
+	MEM2MEMn = 14
+	DBMn     = 15
+	CTn      = 16
+)
+
+const (
+	NDT BDMA_CNDTR6 = 0xFFFF << 0 //+ number of data to transfer (0 to 216 - 1) This field is updated by hardware when the channel is enabled: It is decremented after each single BDMA ‘read followed by write’ transfer, indicating the remaining amount of data items to transfer. It is kept at zero when the programmed amount of data to transfer is reached, if the channel is not in circular mode (CIRC = 0 in the BDMA_CCRx register). It is reloaded automatically by the previously programmed value, when the transfer is complete, if the channel is in circular mode (CIRC = 1). If this field is zero, no transfer can be served whatever the channel status (enabled or not). Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+)
+
+const (
+	NDTn = 0
+)
+
+const (
+	PA BDMA_CPAR6 = 0xFFFFFFFF << 0 //+ peripheral address It contains the base address of the peripheral data register from/to which the data is read/written. When PSIZE[1:0] = 01 (16 bits), bit 0 of PA[31:0] is ignored. Access is automatically aligned to a half-word address. When PSIZE = 10 (32 bits), bits 1 and 0 of PA[31:0] are ignored. Access is automatically aligned to a word address. In memory-to-memory mode, this register identifies the memory destination address if DIR = 1 and the memory source address if DIR = 0. In peripheral-to-peripheral mode, this register identifies the peripheral destination address DIR = 1 and the peripheral source address if DIR = 0. Note: this register is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
+)
+
+const (
+	PAn = 0
+)
+
+const (
+	MA BDMA_CM0AR6 = 0xFFFFFFFF << 0 //+ peripheral address It contains the base address of the memory from/to which the data is read/written. When MSIZE[1:0] = 01 (16 bits), bit 0 of MA[31:0] is ignored. Access is automatically aligned to a half-word address. When MSIZE = 10 (32 bits), bits 1 and 0 of MA[31:0] are ignored. Access is automatically aligned to a word address. In memory-to-memory mode, this register identifies the memory source address if DIR = 1 and the memory destination address if DIR = 0. In peripheral-to-peripheral mode, this register identifies the peripheral source address DIR = 1 and the peripheral destination address if DIR = 0. Note: this register is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
+)
+
+const (
+	MAn = 0
+)
+
+const (
+	MA BDMA_CM1AR6 = 0xFFFFFFFF << 0 //+ peripheral address It contains the base address of the memory from/to which the data is read/written. When MSIZE[1:0] = 01 (16 bits), bit 0 of MA[31:0] is ignored. Access is automatically aligned to a half-word address. When MSIZE = 10 (32 bits), bits 1 and 0 of MA[31:0] are ignored. Access is automatically aligned to a word address. In memory-to-memory mode, this register identifies the memory source address if DIR = 1 and the memory destination address if DIR = 0. In peripheral-to-peripheral mode, this register identifies the peripheral source address DIR = 1 and the peripheral destination address if DIR = 0. Note: this register is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
+)
+
+const (
+	MAn = 0
+)
+
+const (
+	EN      BDMA_CCR7 = 0x01 << 0  //+ channel enable When a channel transfer error occurs, this bit is cleared by hardware. It can not be set again by software (channel x re-activated) until the TEIFx bit of the BDMA_ISR register is cleared (by setting the CTEIFx bit of the BDMA_IFCR register). Note: this bit is set and cleared by software.
+	B_0x0   BDMA_CCR7 = 0x00 << 0  //  disabled
+	B_0x1   BDMA_CCR7 = 0x01 << 0  //  enabled
+	TCIE    BDMA_CCR7 = 0x01 << 1  //+ transfer complete interrupt enable Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR7 = 0x00 << 1  //  disabled
+	B_0x1   BDMA_CCR7 = 0x01 << 1  //  enabled
+	HTIE    BDMA_CCR7 = 0x01 << 2  //+ half transfer interrupt enable Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR7 = 0x00 << 2  //  disabled
+	B_0x1   BDMA_CCR7 = 0x01 << 2  //  enabled
+	TEIE    BDMA_CCR7 = 0x01 << 3  //+ transfer error interrupt enable Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR7 = 0x00 << 3  //  disabled
+	B_0x1   BDMA_CCR7 = 0x01 << 3  //  enabled
+	DIR     BDMA_CCR7 = 0x01 << 4  //+ data transfer direction This bit must be set only in memory-to-peripheral and peripheral-to-memory modes. Source attributes are defined by PSIZE and PINC, plus the BDMA_CPARx register. This is still valid in a memory-to-memory mode. Destination attributes are defined by MSIZE and MINC, plus the BDMA_CM0/1ARx register. This is still valid in a peripheral-to-peripheral mode. Destination attributes are defined by PSIZE and PINC, plus the BDMA_CPARx register. This is still valid in a memory-to-memory mode. Source attributes are defined by MSIZE and MINC, plus the BDMA_CM0/1ARx register. This is still valid in a peripheral-to-peripheral mode. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR7 = 0x00 << 4  //  read from peripheral
+	B_0x1   BDMA_CCR7 = 0x01 << 4  //  read from memory
+	CIRC    BDMA_CCR7 = 0x01 << 5  //+ circular mode Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR7 = 0x00 << 5  //  disabled
+	B_0x1   BDMA_CCR7 = 0x01 << 5  //  enabled
+	PINC    BDMA_CCR7 = 0x01 << 6  //+ peripheral increment mode Defines the increment mode for each DMA transfer to the identified peripheral. n memory-to-memory mode, this field identifies the memory destination if DIR = 1 and the memory source if DIR = 0. In peripheral-to-peripheral mode, this field identifies the peripheral destination if DIR = 1 and the peripheral source if DIR = 0. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR7 = 0x00 << 6  //  disabled
+	B_0x1   BDMA_CCR7 = 0x01 << 6  //  enabled
+	MINC    BDMA_CCR7 = 0x01 << 7  //+ memory increment mode Defines the increment mode for each DMA transfer to the identified memory. In memory-to-memory mode, this field identifies the memory source if DIR = 1 and the memory destination if DIR = 0. In peripheral-to-peripheral mode, this field identifies the peripheral source if DIR = 1 and the peripheral destination if DIR = 0. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR7 = 0x00 << 7  //  disabled
+	B_0x1   BDMA_CCR7 = 0x01 << 7  //  enabled
+	PSIZE   BDMA_CCR7 = 0x03 << 8  //+ peripheral size Defines the data size of each DMA transfer to the identified peripheral. In memory-to-memory mode, this field identifies the memory destination if DIR = 1 and the memory source if DIR = 0. In peripheral-to-peripheral mode, this field identifies the peripheral destination if DIR = 1 and the peripheral source if DIR = 0. Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR7 = 0x00 << 8  //  8 bits
+	B_0x1   BDMA_CCR7 = 0x01 << 8  //  16 bits
+	B_0x2   BDMA_CCR7 = 0x02 << 8  //  32 bits
+	MSIZE   BDMA_CCR7 = 0x03 << 10 //+ memory size Defines the data size of each DMA transfer to the identified memory. In memory-to-memory mode, this field identifies the memory source if DIR = 1 and the memory destination if DIR = 0. In peripheral-to-peripheral mode, this field identifies the peripheral source if DIR = 1 and the peripheral destination if DIR = 0. Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR7 = 0x00 << 10 //  8 bits
+	B_0x1   BDMA_CCR7 = 0x01 << 10 //  16 bits
+	B_0x2   BDMA_CCR7 = 0x02 << 10 //  32 bits
+	PL      BDMA_CCR7 = 0x03 << 12 //+ priority level Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR7 = 0x00 << 12 //  low
+	B_0x1   BDMA_CCR7 = 0x01 << 12 //  medium
+	B_0x2   BDMA_CCR7 = 0x02 << 12 //  high
+	B_0x3   BDMA_CCR7 = 0x03 << 12 //  very high
+	MEM2MEM BDMA_CCR7 = 0x01 << 14 //+ memory-to-memory mode Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR7 = 0x00 << 14 //  disabled
+	B_0x1   BDMA_CCR7 = 0x01 << 14 //  enabled
+	DBM     BDMA_CCR7 = 0x01 << 15 //+ double-buffer mode This bit must be set only in memory-to-peripheral and peripheral-to-memory transfers (MEM2MEM=0). The CIRC bit must also be set in double buffer mode. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR7 = 0x00 << 15 //  disabled (no memory address switch at the end of the BDMA transfer)
+	B_0x1   BDMA_CCR7 = 0x01 << 15 //  enabled (memory address switched at the end of the BDMA transfer)
+	CT      BDMA_CCR7 = 0x01 << 16 //+ current target memory of DMA transfer in double-buffer mode This bit is toggled by hardware at the end of each channel transfer in double-buffer mode. Note: this bit is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+	B_0x0   BDMA_CCR7 = 0x00 << 16 //  memory 0 (addressed by the BDMA_CM0AR pointer)
+	B_0x1   BDMA_CCR7 = 0x01 << 16 //  memory 1 (addressed by the BDMA_CM1AR pointer)
+)
+
+const (
+	ENn      = 0
+	TCIEn    = 1
+	HTIEn    = 2
+	TEIEn    = 3
+	DIRn     = 4
+	CIRCn    = 5
+	PINCn    = 6
+	MINCn    = 7
+	PSIZEn   = 8
+	MSIZEn   = 10
+	PLn      = 12
+	MEM2MEMn = 14
+	DBMn     = 15
+	CTn      = 16
+)
+
+const (
+	NDT BDMA_CNDTR7 = 0xFFFF << 0 //+ number of data to transfer (0 to 216 - 1) This field is updated by hardware when the channel is enabled: It is decremented after each single BDMA ‘read followed by write’ transfer, indicating the remaining amount of data items to transfer. It is kept at zero when the programmed amount of data to transfer is reached, if the channel is not in circular mode (CIRC = 0 in the BDMA_CCRx register). It is reloaded automatically by the previously programmed value, when the transfer is complete, if the channel is in circular mode (CIRC = 1). If this field is zero, no transfer can be served whatever the channel status (enabled or not). Note: this field is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is read-only when the channel is enabled (EN = 1).
+)
+
+const (
+	NDTn = 0
+)
+
+const (
+	PA BDMA_CPAR7 = 0xFFFFFFFF << 0 //+ peripheral address It contains the base address of the peripheral data register from/to which the data is read/written. When PSIZE[1:0] = 01 (16 bits), bit 0 of PA[31:0] is ignored. Access is automatically aligned to a half-word address. When PSIZE = 10 (32 bits), bits 1 and 0 of PA[31:0] are ignored. Access is automatically aligned to a word address. In memory-to-memory mode, this register identifies the memory destination address if DIR = 1 and the memory source address if DIR = 0. In peripheral-to-peripheral mode, this register identifies the peripheral destination address DIR = 1 and the peripheral source address if DIR = 0. Note: this register is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
+)
+
+const (
+	PAn = 0
+)
+
+const (
+	MA BDMA_CM0AR7 = 0xFFFFFFFF << 0 //+ peripheral address It contains the base address of the memory from/to which the data is read/written. When MSIZE[1:0] = 01 (16 bits), bit 0 of MA[31:0] is ignored. Access is automatically aligned to a half-word address. When MSIZE = 10 (32 bits), bits 1 and 0 of MA[31:0] are ignored. Access is automatically aligned to a word address. In memory-to-memory mode, this register identifies the memory source address if DIR = 1 and the memory destination address if DIR = 0. In peripheral-to-peripheral mode, this register identifies the peripheral source address DIR = 1 and the peripheral destination address if DIR = 0. Note: this register is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
+)
+
+const (
+	MAn = 0
+)
+
+const (
+	MA BDMA_CM1AR7 = 0xFFFFFFFF << 0 //+ peripheral address It contains the base address of the memory from/to which the data is read/written. When MSIZE[1:0] = 01 (16 bits), bit 0 of MA[31:0] is ignored. Access is automatically aligned to a half-word address. When MSIZE = 10 (32 bits), bits 1 and 0 of MA[31:0] are ignored. Access is automatically aligned to a word address. In memory-to-memory mode, this register identifies the memory source address if DIR = 1 and the memory destination address if DIR = 0. In peripheral-to-peripheral mode, this register identifies the peripheral source address DIR = 1 and the peripheral destination address if DIR = 0. Note: this register is set and cleared by software. It must not be written when the channel is enabled (EN = 1). It is not read-only when the channel is enabled (EN = 1).
 )
 
 const (

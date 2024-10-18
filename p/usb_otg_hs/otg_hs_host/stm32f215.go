@@ -5,89 +5,94 @@
 // Package otg_hs_host provides access to the registers of the OTG_HS_HOST peripheral.
 //
 // Instances:
-//  OTG_HS_HOST  OTG_HS_HOST_BASE  -  -  USB on the go high speed
+//
+//	OTG_HS_HOST  OTG_HS_HOST_BASE  -  -  USB on the go high speed
+//
 // Registers:
-//  0x000 32  OTG_HS_HCFG        OTG_HS host configuration register
-//  0x004 32  OTG_HS_HFIR        OTG_HS Host frame interval register
-//  0x008 32  OTG_HS_HFNUM       OTG_HS host frame number/frame time remaining register
-//  0x010 32  OTG_HS_HPTXSTS     OTG_HS_Host periodic transmit FIFO/queue status register
-//  0x014 32  OTG_HS_HAINT       OTG_HS Host all channels interrupt register
-//  0x018 32  OTG_HS_HAINTMSK    OTG_HS host all channels interrupt mask register
-//  0x040 32  OTG_HS_HPRT        OTG_HS host port control and status register
-//  0x100 32  OTG_HS_HCCHAR0     OTG_HS host channel-0 characteristics register
-//  0x104 32  OTG_HS_HCSPLT0     OTG_HS host channel-0 split control register
-//  0x108 32  OTG_HS_HCINT0      OTG_HS host channel-11 interrupt register
-//  0x10C 32  OTG_HS_HCINTMSK0   OTG_HS host channel-11 interrupt mask register
-//  0x110 32  OTG_HS_HCTSIZ0     OTG_HS host channel-11 transfer size register
-//  0x114 32  OTG_HS_HCDMA0      OTG_HS host channel-0 DMA address register
-//  0x120 32  OTG_HS_HCCHAR1     OTG_HS host channel-1 characteristics register
-//  0x124 32  OTG_HS_HCSPLT1     OTG_HS host channel-1 split control register
-//  0x128 32  OTG_HS_HCINT1      OTG_HS host channel-1 interrupt register
-//  0x12C 32  OTG_HS_HCINTMSK1   OTG_HS host channel-1 interrupt mask register
-//  0x130 32  OTG_HS_HCTSIZ1     OTG_HS host channel-1 transfer size register
-//  0x134 32  OTG_HS_HCDMA1      OTG_HS host channel-1 DMA address register
-//  0x140 32  OTG_HS_HCCHAR2     OTG_HS host channel-2 characteristics register
-//  0x144 32  OTG_HS_HCSPLT2     OTG_HS host channel-2 split control register
-//  0x148 32  OTG_HS_HCINT2      OTG_HS host channel-2 interrupt register
-//  0x14C 32  OTG_HS_HCINTMSK2   OTG_HS host channel-2 interrupt mask register
-//  0x150 32  OTG_HS_HCTSIZ2     OTG_HS host channel-2 transfer size register
-//  0x154 32  OTG_HS_HCDMA2      OTG_HS host channel-2 DMA address register
-//  0x160 32  OTG_HS_HCCHAR3     OTG_HS host channel-3 characteristics register
-//  0x164 32  OTG_HS_HCSPLT3     OTG_HS host channel-3 split control register
-//  0x168 32  OTG_HS_HCINT3      OTG_HS host channel-3 interrupt register
-//  0x16C 32  OTG_HS_HCINTMSK3   OTG_HS host channel-3 interrupt mask register
-//  0x170 32  OTG_HS_HCTSIZ3     OTG_HS host channel-3 transfer size register
-//  0x174 32  OTG_HS_HCDMA3      OTG_HS host channel-3 DMA address register
-//  0x180 32  OTG_HS_HCCHAR4     OTG_HS host channel-4 characteristics register
-//  0x184 32  OTG_HS_HCSPLT4     OTG_HS host channel-4 split control register
-//  0x188 32  OTG_HS_HCINT4      OTG_HS host channel-4 interrupt register
-//  0x18C 32  OTG_HS_HCINTMSK4   OTG_HS host channel-4 interrupt mask register
-//  0x190 32  OTG_HS_HCTSIZ4     OTG_HS host channel-4 transfer size register
-//  0x194 32  OTG_HS_HCDMA4      OTG_HS host channel-4 DMA address register
-//  0x1A0 32  OTG_HS_HCCHAR5     OTG_HS host channel-5 characteristics register
-//  0x1A4 32  OTG_HS_HCSPLT5     OTG_HS host channel-5 split control register
-//  0x1A8 32  OTG_HS_HCINT5      OTG_HS host channel-5 interrupt register
-//  0x1AC 32  OTG_HS_HCINTMSK5   OTG_HS host channel-5 interrupt mask register
-//  0x1B0 32  OTG_HS_HCTSIZ5     OTG_HS host channel-5 transfer size register
-//  0x1B4 32  OTG_HS_HCDMA5      OTG_HS host channel-5 DMA address register
-//  0x1C0 32  OTG_HS_HCCHAR6     OTG_HS host channel-6 characteristics register
-//  0x1C4 32  OTG_HS_HCSPLT6     OTG_HS host channel-6 split control register
-//  0x1C8 32  OTG_HS_HCINT6      OTG_HS host channel-6 interrupt register
-//  0x1CC 32  OTG_HS_HCINTMSK6   OTG_HS host channel-6 interrupt mask register
-//  0x1D0 32  OTG_HS_HCTSIZ6     OTG_HS host channel-6 transfer size register
-//  0x1D4 32  OTG_HS_HCDMA6      OTG_HS host channel-6 DMA address register
-//  0x1E0 32  OTG_HS_HCCHAR7     OTG_HS host channel-7 characteristics register
-//  0x1E4 32  OTG_HS_HCSPLT7     OTG_HS host channel-7 split control register
-//  0x1E8 32  OTG_HS_HCINT7      OTG_HS host channel-7 interrupt register
-//  0x1EC 32  OTG_HS_HCINTMSK7   OTG_HS host channel-7 interrupt mask register
-//  0x1F0 32  OTG_HS_HCTSIZ7     OTG_HS host channel-7 transfer size register
-//  0x1F4 32  OTG_HS_HCDMA7      OTG_HS host channel-7 DMA address register
-//  0x200 32  OTG_HS_HCCHAR8     OTG_HS host channel-8 characteristics register
-//  0x204 32  OTG_HS_HCSPLT8     OTG_HS host channel-8 split control register
-//  0x208 32  OTG_HS_HCINT8      OTG_HS host channel-8 interrupt register
-//  0x20C 32  OTG_HS_HCINTMSK8   OTG_HS host channel-8 interrupt mask register
-//  0x210 32  OTG_HS_HCTSIZ8     OTG_HS host channel-8 transfer size register
-//  0x214 32  OTG_HS_HCDMA8      OTG_HS host channel-8 DMA address register
-//  0x220 32  OTG_HS_HCCHAR9     OTG_HS host channel-9 characteristics register
-//  0x224 32  OTG_HS_HCSPLT9     OTG_HS host channel-9 split control register
-//  0x228 32  OTG_HS_HCINT9      OTG_HS host channel-9 interrupt register
-//  0x22C 32  OTG_HS_HCINTMSK9   OTG_HS host channel-9 interrupt mask register
-//  0x230 32  OTG_HS_HCTSIZ9     OTG_HS host channel-9 transfer size register
-//  0x234 32  OTG_HS_HCDMA9      OTG_HS host channel-9 DMA address register
-//  0x240 32  OTG_HS_HCCHAR10    OTG_HS host channel-10 characteristics register
-//  0x244 32  OTG_HS_HCSPLT10    OTG_HS host channel-10 split control register
-//  0x248 32  OTG_HS_HCINT10     OTG_HS host channel-10 interrupt register
-//  0x24C 32  OTG_HS_HCINTMSK10  OTG_HS host channel-10 interrupt mask register
-//  0x250 32  OTG_HS_HCTSIZ10    OTG_HS host channel-10 transfer size register
-//  0x254 32  OTG_HS_HCDMA10     OTG_HS host channel-10 DMA address register
-//  0x260 32  OTG_HS_HCCHAR11    OTG_HS host channel-11 characteristics register
-//  0x264 32  OTG_HS_HCSPLT11    OTG_HS host channel-11 split control register
-//  0x268 32  OTG_HS_HCINT11     OTG_HS host channel-11 interrupt register
-//  0x26C 32  OTG_HS_HCINTMSK11  OTG_HS host channel-11 interrupt mask register
-//  0x270 32  OTG_HS_HCTSIZ11    OTG_HS host channel-11 transfer size register
-//  0x274 32  OTG_HS_HCDMA11     OTG_HS host channel-11 DMA address register
+//
+//	0x000 32  OTG_HS_HCFG        OTG_HS host configuration register
+//	0x004 32  OTG_HS_HFIR        OTG_HS Host frame interval register
+//	0x008 32  OTG_HS_HFNUM       OTG_HS host frame number/frame time remaining register
+//	0x010 32  OTG_HS_HPTXSTS     OTG_HS_Host periodic transmit FIFO/queue status register
+//	0x014 32  OTG_HS_HAINT       OTG_HS Host all channels interrupt register
+//	0x018 32  OTG_HS_HAINTMSK    OTG_HS host all channels interrupt mask register
+//	0x040 32  OTG_HS_HPRT        OTG_HS host port control and status register
+//	0x100 32  OTG_HS_HCCHAR0     OTG_HS host channel-0 characteristics register
+//	0x104 32  OTG_HS_HCSPLT0     OTG_HS host channel-0 split control register
+//	0x108 32  OTG_HS_HCINT0      OTG_HS host channel-11 interrupt register
+//	0x10C 32  OTG_HS_HCINTMSK0   OTG_HS host channel-11 interrupt mask register
+//	0x110 32  OTG_HS_HCTSIZ0     OTG_HS host channel-11 transfer size register
+//	0x114 32  OTG_HS_HCDMA0      OTG_HS host channel-0 DMA address register
+//	0x120 32  OTG_HS_HCCHAR1     OTG_HS host channel-1 characteristics register
+//	0x124 32  OTG_HS_HCSPLT1     OTG_HS host channel-1 split control register
+//	0x128 32  OTG_HS_HCINT1      OTG_HS host channel-1 interrupt register
+//	0x12C 32  OTG_HS_HCINTMSK1   OTG_HS host channel-1 interrupt mask register
+//	0x130 32  OTG_HS_HCTSIZ1     OTG_HS host channel-1 transfer size register
+//	0x134 32  OTG_HS_HCDMA1      OTG_HS host channel-1 DMA address register
+//	0x140 32  OTG_HS_HCCHAR2     OTG_HS host channel-2 characteristics register
+//	0x144 32  OTG_HS_HCSPLT2     OTG_HS host channel-2 split control register
+//	0x148 32  OTG_HS_HCINT2      OTG_HS host channel-2 interrupt register
+//	0x14C 32  OTG_HS_HCINTMSK2   OTG_HS host channel-2 interrupt mask register
+//	0x150 32  OTG_HS_HCTSIZ2     OTG_HS host channel-2 transfer size register
+//	0x154 32  OTG_HS_HCDMA2      OTG_HS host channel-2 DMA address register
+//	0x160 32  OTG_HS_HCCHAR3     OTG_HS host channel-3 characteristics register
+//	0x164 32  OTG_HS_HCSPLT3     OTG_HS host channel-3 split control register
+//	0x168 32  OTG_HS_HCINT3      OTG_HS host channel-3 interrupt register
+//	0x16C 32  OTG_HS_HCINTMSK3   OTG_HS host channel-3 interrupt mask register
+//	0x170 32  OTG_HS_HCTSIZ3     OTG_HS host channel-3 transfer size register
+//	0x174 32  OTG_HS_HCDMA3      OTG_HS host channel-3 DMA address register
+//	0x180 32  OTG_HS_HCCHAR4     OTG_HS host channel-4 characteristics register
+//	0x184 32  OTG_HS_HCSPLT4     OTG_HS host channel-4 split control register
+//	0x188 32  OTG_HS_HCINT4      OTG_HS host channel-4 interrupt register
+//	0x18C 32  OTG_HS_HCINTMSK4   OTG_HS host channel-4 interrupt mask register
+//	0x190 32  OTG_HS_HCTSIZ4     OTG_HS host channel-4 transfer size register
+//	0x194 32  OTG_HS_HCDMA4      OTG_HS host channel-4 DMA address register
+//	0x1A0 32  OTG_HS_HCCHAR5     OTG_HS host channel-5 characteristics register
+//	0x1A4 32  OTG_HS_HCSPLT5     OTG_HS host channel-5 split control register
+//	0x1A8 32  OTG_HS_HCINT5      OTG_HS host channel-5 interrupt register
+//	0x1AC 32  OTG_HS_HCINTMSK5   OTG_HS host channel-5 interrupt mask register
+//	0x1B0 32  OTG_HS_HCTSIZ5     OTG_HS host channel-5 transfer size register
+//	0x1B4 32  OTG_HS_HCDMA5      OTG_HS host channel-5 DMA address register
+//	0x1C0 32  OTG_HS_HCCHAR6     OTG_HS host channel-6 characteristics register
+//	0x1C4 32  OTG_HS_HCSPLT6     OTG_HS host channel-6 split control register
+//	0x1C8 32  OTG_HS_HCINT6      OTG_HS host channel-6 interrupt register
+//	0x1CC 32  OTG_HS_HCINTMSK6   OTG_HS host channel-6 interrupt mask register
+//	0x1D0 32  OTG_HS_HCTSIZ6     OTG_HS host channel-6 transfer size register
+//	0x1D4 32  OTG_HS_HCDMA6      OTG_HS host channel-6 DMA address register
+//	0x1E0 32  OTG_HS_HCCHAR7     OTG_HS host channel-7 characteristics register
+//	0x1E4 32  OTG_HS_HCSPLT7     OTG_HS host channel-7 split control register
+//	0x1E8 32  OTG_HS_HCINT7      OTG_HS host channel-7 interrupt register
+//	0x1EC 32  OTG_HS_HCINTMSK7   OTG_HS host channel-7 interrupt mask register
+//	0x1F0 32  OTG_HS_HCTSIZ7     OTG_HS host channel-7 transfer size register
+//	0x1F4 32  OTG_HS_HCDMA7      OTG_HS host channel-7 DMA address register
+//	0x200 32  OTG_HS_HCCHAR8     OTG_HS host channel-8 characteristics register
+//	0x204 32  OTG_HS_HCSPLT8     OTG_HS host channel-8 split control register
+//	0x208 32  OTG_HS_HCINT8      OTG_HS host channel-8 interrupt register
+//	0x20C 32  OTG_HS_HCINTMSK8   OTG_HS host channel-8 interrupt mask register
+//	0x210 32  OTG_HS_HCTSIZ8     OTG_HS host channel-8 transfer size register
+//	0x214 32  OTG_HS_HCDMA8      OTG_HS host channel-8 DMA address register
+//	0x220 32  OTG_HS_HCCHAR9     OTG_HS host channel-9 characteristics register
+//	0x224 32  OTG_HS_HCSPLT9     OTG_HS host channel-9 split control register
+//	0x228 32  OTG_HS_HCINT9      OTG_HS host channel-9 interrupt register
+//	0x22C 32  OTG_HS_HCINTMSK9   OTG_HS host channel-9 interrupt mask register
+//	0x230 32  OTG_HS_HCTSIZ9     OTG_HS host channel-9 transfer size register
+//	0x234 32  OTG_HS_HCDMA9      OTG_HS host channel-9 DMA address register
+//	0x240 32  OTG_HS_HCCHAR10    OTG_HS host channel-10 characteristics register
+//	0x244 32  OTG_HS_HCSPLT10    OTG_HS host channel-10 split control register
+//	0x248 32  OTG_HS_HCINT10     OTG_HS host channel-10 interrupt register
+//	0x24C 32  OTG_HS_HCINTMSK10  OTG_HS host channel-10 interrupt mask register
+//	0x250 32  OTG_HS_HCTSIZ10    OTG_HS host channel-10 transfer size register
+//	0x254 32  OTG_HS_HCDMA10     OTG_HS host channel-10 DMA address register
+//	0x260 32  OTG_HS_HCCHAR11    OTG_HS host channel-11 characteristics register
+//	0x264 32  OTG_HS_HCSPLT11    OTG_HS host channel-11 split control register
+//	0x268 32  OTG_HS_HCINT11     OTG_HS host channel-11 interrupt register
+//	0x26C 32  OTG_HS_HCINTMSK11  OTG_HS host channel-11 interrupt mask register
+//	0x270 32  OTG_HS_HCTSIZ11    OTG_HS host channel-11 transfer size register
+//	0x274 32  OTG_HS_HCDMA11     OTG_HS host channel-11 DMA address register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package otg_hs_host
 
 const (

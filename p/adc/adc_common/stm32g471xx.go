@@ -5,14 +5,19 @@
 // Package adc_common provides access to the registers of the ADC12_Common peripheral.
 //
 // Instances:
-//  ADC12_Common   ADC12_Common_BASE   -  -  Analog-to-Digital Converter
-//  ADC345_Common  ADC345_Common_BASE  -  -  Analog-to-Digital Converter
+//
+//	ADC12_Common   ADC12_Common_BASE   -  -  Analog-to-Digital Converter
+//	ADC345_Common  ADC345_Common_BASE  -  -  Analog-to-Digital Converter
+//
 // Registers:
-//  0x000 32  CSR  ADC Common status register
-//  0x008 32  CCR  ADC common control register
-//  0x00C 32  CDR  ADC common regular data register for dual and triple modes
+//
+//	0x000 32  CSR  ADC Common status register
+//	0x008 32  CCR  ADC common control register
+//	0x00C 32  CDR  ADC common regular data register for dual and triple modes
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package adc_common
 
 const (

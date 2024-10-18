@@ -5,22 +5,27 @@
 // Package i2c4 provides access to the registers of the I2C peripheral.
 //
 // Instances:
-//  I2C4  I2C4_BASE  APB1  -  Inter-integrated circuit
+//
+//	I2C4  I2C4_BASE  APB1  -  Inter-integrated circuit
+//
 // Registers:
-//  0x000 32  CR1       Control register 1
-//  0x004 32  CR2       Control register 2
-//  0x008 32  OAR1      Own address register 1
-//  0x00C 32  OAR2      Own address register 2
-//  0x010 32  TIMINGR   Timing register
-//  0x014 32  TIMEOUTR  Timeout register
-//  0x018 32  ISR       Interrupt and Status register
-//  0x01C 32  ICR       Interrupt clear register
-//  0x020 32  PECR      PEC register
-//  0x024 32  RXDR      Receive data register
-//  0x028 32  TXDR      Transmit data register
+//
+//	0x000 32  CR1       Control register 1
+//	0x004 32  CR2       Control register 2
+//	0x008 32  OAR1      Own address register 1
+//	0x00C 32  OAR2      Own address register 2
+//	0x010 32  TIMINGR   Timing register
+//	0x014 32  TIMEOUTR  Timeout register
+//	0x018 32  ISR       Interrupt and Status register
+//	0x01C 32  ICR       Interrupt clear register
+//	0x020 32  PECR      PEC register
+//	0x024 32  RXDR      Receive data register
+//	0x028 32  TXDR      Transmit data register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/bus
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/bus
+//	github.com/embeddedgo/stm32/p/mmap
 package i2c4
 
 const (

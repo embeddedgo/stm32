@@ -5,15 +5,20 @@
 // Package dbgmcu provides access to the registers of the DBGMCU peripheral.
 //
 // Instances:
-//  DBGMCU  DBGMCU_BASE  -  -  Debug support
+//
+//	DBGMCU  DBGMCU_BASE  -  -  Debug support
+//
 // Registers:
-//  0x000 32  IDCODE    MCU Device ID Code Register
-//  0x004 32  CR        Debug MCU Configuration Register
-//  0x008 32  APB1L_FZ  APB Low Freeze Register 1
-//  0x00C 32  APB1H_FZ  APB Low Freeze Register 2
-//  0x010 32  APB2_FZ   APB High Freeze Register
+//
+//	0x000 32  IDCODE    MCU Device ID Code Register
+//	0x004 32  CR        Debug MCU Configuration Register
+//	0x008 32  APB1L_FZ  APB Low Freeze Register 1
+//	0x00C 32  APB1H_FZ  APB Low Freeze Register 2
+//	0x010 32  APB2_FZ   APB High Freeze Register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package dbgmcu
 
 const (

@@ -5,33 +5,38 @@
 // Package sai provides access to the registers of the SAI peripheral.
 //
 // Instances:
-//  SAI1  SAI1_BASE  APB2  SAI1
-//  SAI2  SAI2_BASE  APB2  SAI2
-//  SAI3  SAI3_BASE  APB2  SAI3
-//  SAI4  SAI4_BASE  APB4  SAI4
+//
+//	SAI1  SAI1_BASE  APB2  SAI1
+//	SAI2  SAI2_BASE  APB2  SAI2
+//	SAI3  SAI3_BASE  APB2  SAI3
+//	SAI4  SAI4_BASE  APB4  SAI4
+//
 // Registers:
-//  0x000 32  SAI_GCR     Global configuration register
-//  0x004 32  SAI_ACR1    Configuration register 1
-//  0x008 32  SAI_ACR2    Configuration register 2
-//  0x00C 32  SAI_AFRCR   This register has no meaning in AC97 and SPDIF audio protocol
-//  0x010 32  SAI_ASLOTR  This register has no meaning in AC97 and SPDIF audio protocol
-//  0x014 32  SAI_AIM     Interrupt mask register 2
-//  0x018 32  SAI_ASR     Status register
-//  0x01C 32  SAI_ACLRFR  Clear flag register
-//  0x020 32  SAI_ADR     Data register
-//  0x024 32  SAI_BCR1    Configuration register 1
-//  0x028 32  SAI_BCR2    Configuration register 2
-//  0x02C 32  SAI_BFRCR   This register has no meaning in AC97 and SPDIF audio protocol
-//  0x030 32  SAI_BSLOTR  This register has no meaning in AC97 and SPDIF audio protocol
-//  0x034 32  SAI_BIM     Interrupt mask register 2
-//  0x038 32  SAI_BSR     Status register
-//  0x03C 32  SAI_BCLRFR  Clear flag register
-//  0x040 32  SAI_BDR     Data register
-//  0x044 32  SAI_PDMCR   PDM control register
-//  0x048 32  SAI_PDMDLY  PDM delay register
+//
+//	0x000 32  SAI_GCR     Global configuration register
+//	0x004 32  SAI_ACR1    Configuration register 1
+//	0x008 32  SAI_ACR2    Configuration register 2
+//	0x00C 32  SAI_AFRCR   This register has no meaning in AC97 and SPDIF audio protocol
+//	0x010 32  SAI_ASLOTR  This register has no meaning in AC97 and SPDIF audio protocol
+//	0x014 32  SAI_AIM     Interrupt mask register 2
+//	0x018 32  SAI_ASR     Status register
+//	0x01C 32  SAI_ACLRFR  Clear flag register
+//	0x020 32  SAI_ADR     Data register
+//	0x024 32  SAI_BCR1    Configuration register 1
+//	0x028 32  SAI_BCR2    Configuration register 2
+//	0x02C 32  SAI_BFRCR   This register has no meaning in AC97 and SPDIF audio protocol
+//	0x030 32  SAI_BSLOTR  This register has no meaning in AC97 and SPDIF audio protocol
+//	0x034 32  SAI_BIM     Interrupt mask register 2
+//	0x038 32  SAI_BSR     Status register
+//	0x03C 32  SAI_BCLRFR  Clear flag register
+//	0x040 32  SAI_BDR     Data register
+//	0x044 32  SAI_PDMCR   PDM control register
+//	0x048 32  SAI_PDMDLY  PDM delay register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/bus
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/bus
+//	github.com/embeddedgo/stm32/p/mmap
 package sai
 
 const (

@@ -5,20 +5,25 @@
 // Package exti provides access to the registers of the EXTI peripheral.
 //
 // Instances:
-//  EXTI  EXTI_BASE  -  PVD_PVM,EXTI0,EXTI1,EXTI2,EXTI3,EXTI4,EXTI9_5,EXTI15_10  External interrupt/event controller
+//
+//	EXTI  EXTI_BASE  -  PVD_PVM,EXTI0,EXTI1,EXTI2,EXTI3,EXTI4,EXTI9_5,EXTI15_10  External interrupt/event controller
+//
 // Registers:
-//  0x000 32  IMR1    Interrupt mask register
-//  0x004 32  EMR1    Event mask register
-//  0x008 32  RTSR1   Rising Trigger selection register
-//  0x00C 32  FTSR1   Falling Trigger selection register
-//  0x010 32  SWIER1  Software interrupt event register
-//  0x014 32  PR1     Pending register
-//  0x020 32  IMR2    Interrupt mask register
-//  0x024 32  EMR2    Event mask register
-//  0x028 32  RTSR2   Rising Trigger selection register
-//  0x02C 32  FTSR2   Falling Trigger selection register
-//  0x030 32  SWIER2  Software interrupt event register
-//  0x034 32  PR2     Pending register
+//
+//	0x000 32  IMR1    Interrupt mask register
+//	0x004 32  EMR1    Event mask register
+//	0x008 32  RTSR1   Rising Trigger selection register
+//	0x00C 32  FTSR1   Falling Trigger selection register
+//	0x010 32  SWIER1  Software interrupt event register
+//	0x014 32  PR1     Pending register
+//	0x020 32  IMR2    Interrupt mask register
+//	0x024 32  EMR2    Event mask register
+//	0x028 32  RTSR2   Rising Trigger selection register
+//	0x02C 32  FTSR2   Falling Trigger selection register
+//	0x030 32  SWIER2  Software interrupt event register
+//	0x034 32  PR2     Pending register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package exti

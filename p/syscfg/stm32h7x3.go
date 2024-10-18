@@ -5,35 +5,40 @@
 // Package syscfg provides access to the registers of the SYSCFG peripheral.
 //
 // Instances:
-//  SYSCFG  SYSCFG_BASE  APB4  -  System configuration controller
+//
+//	SYSCFG  SYSCFG_BASE  APB4  -  System configuration controller
+//
 // Registers:
-//  0x004 32  PMCR       peripheral mode configuration register
-//  0x008 32  EXTICR[4]  select GPIO port for EXTI line (4 x 4bit)
-//  0x020 32  CCCSR      compensation cell control/status register
-//  0x024 32  CCVR       SYSCFG compensation cell value register
-//  0x028 32  CCCR       SYSCFG compensation cell code register
-//  0x02C 32  PWRCR      SYSCFG power control register
-//  0x124 32  PKGR       SYSCFG package register
-//  0x300 32  UR0        SYSCFG user register 0
-//  0x308 32  UR2        SYSCFG user register 2
-//  0x30C 32  UR3        SYSCFG user register 3
-//  0x310 32  UR4        SYSCFG user register 4
-//  0x314 32  UR5        SYSCFG user register 5
-//  0x318 32  UR6        SYSCFG user register 6
-//  0x31C 32  UR7        SYSCFG user register 7
-//  0x320 32  UR8        SYSCFG user register 8
-//  0x324 32  UR9        SYSCFG user register 9
-//  0x328 32  UR10       SYSCFG user register 10
-//  0x32C 32  UR11       SYSCFG user register 11
-//  0x330 32  UR12       SYSCFG user register 12
-//  0x334 32  UR13       SYSCFG user register 13
-//  0x338 32  UR14       SYSCFG user register 14
-//  0x33C 32  UR15       SYSCFG user register 15
-//  0x340 32  UR16       SYSCFG user register 16
-//  0x344 32  UR17       SYSCFG user register 17
+//
+//	0x004 32  PMCR       peripheral mode configuration register
+//	0x008 32  EXTICR[4]  select GPIO port for EXTI line (4 x 4bit)
+//	0x020 32  CCCSR      compensation cell control/status register
+//	0x024 32  CCVR       SYSCFG compensation cell value register
+//	0x028 32  CCCR       SYSCFG compensation cell code register
+//	0x02C 32  PWRCR      SYSCFG power control register
+//	0x124 32  PKGR       SYSCFG package register
+//	0x300 32  UR0        SYSCFG user register 0
+//	0x308 32  UR2        SYSCFG user register 2
+//	0x30C 32  UR3        SYSCFG user register 3
+//	0x310 32  UR4        SYSCFG user register 4
+//	0x314 32  UR5        SYSCFG user register 5
+//	0x318 32  UR6        SYSCFG user register 6
+//	0x31C 32  UR7        SYSCFG user register 7
+//	0x320 32  UR8        SYSCFG user register 8
+//	0x324 32  UR9        SYSCFG user register 9
+//	0x328 32  UR10       SYSCFG user register 10
+//	0x32C 32  UR11       SYSCFG user register 11
+//	0x330 32  UR12       SYSCFG user register 12
+//	0x334 32  UR13       SYSCFG user register 13
+//	0x338 32  UR14       SYSCFG user register 14
+//	0x33C 32  UR15       SYSCFG user register 15
+//	0x340 32  UR16       SYSCFG user register 16
+//	0x344 32  UR17       SYSCFG user register 17
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/bus
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/bus
+//	github.com/embeddedgo/stm32/p/mmap
 package syscfg
 
 const (

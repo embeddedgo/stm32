@@ -5,49 +5,54 @@
 // Package otg_fs_host provides access to the registers of the OTG_FS_HOST peripheral.
 //
 // Instances:
-//  OTG_FS_HOST  OTG_FS_HOST_BASE  -  -  USB on the go full speed
+//
+//	OTG_FS_HOST  OTG_FS_HOST_BASE  -  -  USB on the go full speed
+//
 // Registers:
-//  0x000 32  FS_HCFG       OTG_FS host configuration register (OTG_FS_HCFG)
-//  0x004 32  HFIR          OTG_FS Host frame interval register
-//  0x008 32  FS_HFNUM      OTG_FS host frame number/frame time remaining register (OTG_FS_HFNUM)
-//  0x010 32  FS_HPTXSTS    OTG_FS_Host periodic transmit FIFO/queue status register (OTG_FS_HPTXSTS)
-//  0x014 32  HAINT         OTG_FS Host all channels interrupt register
-//  0x018 32  HAINTMSK      OTG_FS host all channels interrupt mask register
-//  0x040 32  FS_HPRT       OTG_FS host port control and status register (OTG_FS_HPRT)
-//  0x100 32  FS_HCCHAR0    OTG_FS host channel-0 characteristics register (OTG_FS_HCCHAR0)
-//  0x108 32  FS_HCINT0     OTG_FS host channel-0 interrupt register (OTG_FS_HCINT0)
-//  0x10C 32  FS_HCINTMSK0  OTG_FS host channel-0 mask register (OTG_FS_HCINTMSK0)
-//  0x110 32  FS_HCTSIZ0    OTG_FS host channel-0 transfer size register
-//  0x120 32  FS_HCCHAR1    OTG_FS host channel-1 characteristics register (OTG_FS_HCCHAR1)
-//  0x128 32  FS_HCINT1     OTG_FS host channel-1 interrupt register (OTG_FS_HCINT1)
-//  0x12C 32  FS_HCINTMSK1  OTG_FS host channel-1 mask register (OTG_FS_HCINTMSK1)
-//  0x130 32  FS_HCTSIZ1    OTG_FS host channel-1 transfer size register
-//  0x140 32  FS_HCCHAR2    OTG_FS host channel-2 characteristics register (OTG_FS_HCCHAR2)
-//  0x148 32  FS_HCINT2     OTG_FS host channel-2 interrupt register (OTG_FS_HCINT2)
-//  0x14C 32  FS_HCINTMSK2  OTG_FS host channel-2 mask register (OTG_FS_HCINTMSK2)
-//  0x150 32  FS_HCTSIZ2    OTG_FS host channel-2 transfer size register
-//  0x160 32  FS_HCCHAR3    OTG_FS host channel-3 characteristics register (OTG_FS_HCCHAR3)
-//  0x168 32  FS_HCINT3     OTG_FS host channel-3 interrupt register (OTG_FS_HCINT3)
-//  0x16C 32  FS_HCINTMSK3  OTG_FS host channel-3 mask register (OTG_FS_HCINTMSK3)
-//  0x170 32  FS_HCTSIZ3    OTG_FS host channel-3 transfer size register
-//  0x180 32  FS_HCCHAR4    OTG_FS host channel-4 characteristics register (OTG_FS_HCCHAR4)
-//  0x188 32  FS_HCINT4     OTG_FS host channel-4 interrupt register (OTG_FS_HCINT4)
-//  0x18C 32  FS_HCINTMSK4  OTG_FS host channel-4 mask register (OTG_FS_HCINTMSK4)
-//  0x190 32  FS_HCTSIZ4    OTG_FS host channel-x transfer size register
-//  0x1A0 32  FS_HCCHAR5    OTG_FS host channel-5 characteristics register (OTG_FS_HCCHAR5)
-//  0x1A8 32  FS_HCINT5     OTG_FS host channel-5 interrupt register (OTG_FS_HCINT5)
-//  0x1AC 32  FS_HCINTMSK5  OTG_FS host channel-5 mask register (OTG_FS_HCINTMSK5)
-//  0x1B0 32  FS_HCTSIZ5    OTG_FS host channel-5 transfer size register
-//  0x1C0 32  FS_HCCHAR6    OTG_FS host channel-6 characteristics register (OTG_FS_HCCHAR6)
-//  0x1C8 32  FS_HCINT6     OTG_FS host channel-6 interrupt register (OTG_FS_HCINT6)
-//  0x1CC 32  FS_HCINTMSK6  OTG_FS host channel-6 mask register (OTG_FS_HCINTMSK6)
-//  0x1D0 32  FS_HCTSIZ6    OTG_FS host channel-6 transfer size register
-//  0x1E0 32  FS_HCCHAR7    OTG_FS host channel-7 characteristics register (OTG_FS_HCCHAR7)
-//  0x1E8 32  FS_HCINT7     OTG_FS host channel-7 interrupt register (OTG_FS_HCINT7)
-//  0x1EC 32  FS_HCINTMSK7  OTG_FS host channel-7 mask register (OTG_FS_HCINTMSK7)
-//  0x1F0 32  FS_HCTSIZ7    OTG_FS host channel-7 transfer size register
+//
+//	0x000 32  FS_HCFG       OTG_FS host configuration register (OTG_FS_HCFG)
+//	0x004 32  HFIR          OTG_FS Host frame interval register
+//	0x008 32  FS_HFNUM      OTG_FS host frame number/frame time remaining register (OTG_FS_HFNUM)
+//	0x010 32  FS_HPTXSTS    OTG_FS_Host periodic transmit FIFO/queue status register (OTG_FS_HPTXSTS)
+//	0x014 32  HAINT         OTG_FS Host all channels interrupt register
+//	0x018 32  HAINTMSK      OTG_FS host all channels interrupt mask register
+//	0x040 32  FS_HPRT       OTG_FS host port control and status register (OTG_FS_HPRT)
+//	0x100 32  FS_HCCHAR0    OTG_FS host channel-0 characteristics register (OTG_FS_HCCHAR0)
+//	0x108 32  FS_HCINT0     OTG_FS host channel-0 interrupt register (OTG_FS_HCINT0)
+//	0x10C 32  FS_HCINTMSK0  OTG_FS host channel-0 mask register (OTG_FS_HCINTMSK0)
+//	0x110 32  FS_HCTSIZ0    OTG_FS host channel-0 transfer size register
+//	0x120 32  FS_HCCHAR1    OTG_FS host channel-1 characteristics register (OTG_FS_HCCHAR1)
+//	0x128 32  FS_HCINT1     OTG_FS host channel-1 interrupt register (OTG_FS_HCINT1)
+//	0x12C 32  FS_HCINTMSK1  OTG_FS host channel-1 mask register (OTG_FS_HCINTMSK1)
+//	0x130 32  FS_HCTSIZ1    OTG_FS host channel-1 transfer size register
+//	0x140 32  FS_HCCHAR2    OTG_FS host channel-2 characteristics register (OTG_FS_HCCHAR2)
+//	0x148 32  FS_HCINT2     OTG_FS host channel-2 interrupt register (OTG_FS_HCINT2)
+//	0x14C 32  FS_HCINTMSK2  OTG_FS host channel-2 mask register (OTG_FS_HCINTMSK2)
+//	0x150 32  FS_HCTSIZ2    OTG_FS host channel-2 transfer size register
+//	0x160 32  FS_HCCHAR3    OTG_FS host channel-3 characteristics register (OTG_FS_HCCHAR3)
+//	0x168 32  FS_HCINT3     OTG_FS host channel-3 interrupt register (OTG_FS_HCINT3)
+//	0x16C 32  FS_HCINTMSK3  OTG_FS host channel-3 mask register (OTG_FS_HCINTMSK3)
+//	0x170 32  FS_HCTSIZ3    OTG_FS host channel-3 transfer size register
+//	0x180 32  FS_HCCHAR4    OTG_FS host channel-4 characteristics register (OTG_FS_HCCHAR4)
+//	0x188 32  FS_HCINT4     OTG_FS host channel-4 interrupt register (OTG_FS_HCINT4)
+//	0x18C 32  FS_HCINTMSK4  OTG_FS host channel-4 mask register (OTG_FS_HCINTMSK4)
+//	0x190 32  FS_HCTSIZ4    OTG_FS host channel-x transfer size register
+//	0x1A0 32  FS_HCCHAR5    OTG_FS host channel-5 characteristics register (OTG_FS_HCCHAR5)
+//	0x1A8 32  FS_HCINT5     OTG_FS host channel-5 interrupt register (OTG_FS_HCINT5)
+//	0x1AC 32  FS_HCINTMSK5  OTG_FS host channel-5 mask register (OTG_FS_HCINTMSK5)
+//	0x1B0 32  FS_HCTSIZ5    OTG_FS host channel-5 transfer size register
+//	0x1C0 32  FS_HCCHAR6    OTG_FS host channel-6 characteristics register (OTG_FS_HCCHAR6)
+//	0x1C8 32  FS_HCINT6     OTG_FS host channel-6 interrupt register (OTG_FS_HCINT6)
+//	0x1CC 32  FS_HCINTMSK6  OTG_FS host channel-6 mask register (OTG_FS_HCINTMSK6)
+//	0x1D0 32  FS_HCTSIZ6    OTG_FS host channel-6 transfer size register
+//	0x1E0 32  FS_HCCHAR7    OTG_FS host channel-7 characteristics register (OTG_FS_HCCHAR7)
+//	0x1E8 32  FS_HCINT7     OTG_FS host channel-7 interrupt register (OTG_FS_HCINT7)
+//	0x1EC 32  FS_HCINTMSK7  OTG_FS host channel-7 mask register (OTG_FS_HCINTMSK7)
+//	0x1F0 32  FS_HCTSIZ7    OTG_FS host channel-7 transfer size register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package otg_fs_host
 
 const (

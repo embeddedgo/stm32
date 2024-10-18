@@ -5,16 +5,21 @@
 // Package syscfg provides access to the registers of the SYSCFG peripheral.
 //
 // Instances:
-//  SYSCFG  SYSCFG_BASE  APB2  -  System configuration controller
+//
+//	SYSCFG  SYSCFG_BASE  APB2  -  System configuration controller
+//
 // Registers:
-//  0x000 32  MEMRM       memory remap register
-//  0x004 32  PMC         peripheral mode configuration register
-//  0x008 32  EXTICR[4]   select GPIO port for EXTI line (4 x 4bit)
-//  0x020 32  CMPCR       Compensation cell control register
-//  0x02C 32  I2C_BUFOUT  I2C_BUFOUT
+//
+//	0x000 32  MEMRM       memory remap register
+//	0x004 32  PMC         peripheral mode configuration register
+//	0x008 32  EXTICR[4]   select GPIO port for EXTI line (4 x 4bit)
+//	0x020 32  CMPCR       Compensation cell control register
+//	0x02C 32  I2C_BUFOUT  I2C_BUFOUT
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/bus
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/bus
+//	github.com/embeddedgo/stm32/p/mmap
 package syscfg
 
 const (

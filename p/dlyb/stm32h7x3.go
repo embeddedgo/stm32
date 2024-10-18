@@ -5,14 +5,19 @@
 // Package dlyb provides access to the registers of the DELAY_Block_SDMMC peripheral.
 //
 // Instances:
-//  DELAY_Block_QUADSPI  DELAY_Block_QUADSPI_BASE  -  WKUP+  DELAY_Block_SDMMC1
-//  DELAY_Block_SDMMC1   DELAY_Block_SDMMC1_BASE   -  WKUP+  DELAY_Block_SDMMC1
-//  DELAY_Block_SDMMC2   DELAY_Block_SDMMC2_BASE   -  WKUP+  DELAY_Block_SDMMC1
+//
+//	DELAY_Block_QUADSPI  DELAY_Block_QUADSPI_BASE  -  WKUP+  DELAY_Block_SDMMC1
+//	DELAY_Block_SDMMC1   DELAY_Block_SDMMC1_BASE   -  WKUP+  DELAY_Block_SDMMC1
+//	DELAY_Block_SDMMC2   DELAY_Block_SDMMC2_BASE   -  WKUP+  DELAY_Block_SDMMC1
+//
 // Registers:
-//  0x000 32  CR    DLYB control register
-//  0x004 32  CFGR  DLYB configuration register
+//
+//	0x000 32  CR    DLYB control register
+//	0x004 32  CFGR  DLYB configuration register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package dlyb
 
 const (

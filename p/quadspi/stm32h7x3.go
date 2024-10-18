@@ -5,23 +5,28 @@
 // Package quadspi provides access to the registers of the QUADSPI peripheral.
 //
 // Instances:
-//  QUADSPI  QUADSPI_BASE  -  QUADSPI
+//
+//	QUADSPI  QUADSPI_BASE  -  QUADSPI
+//
 // Registers:
-//  0x000 32  CR     QUADSPI control register
-//  0x004 32  DCR    QUADSPI device configuration register
-//  0x008 32  SR     QUADSPI status register
-//  0x00C 32  FCR    QUADSPI flag clear register
-//  0x010 32  DLR    QUADSPI data length register
-//  0x014 32  CCR    QUADSPI communication configuration register
-//  0x018 32  AR     QUADSPI address register
-//  0x01C 32  ABR    QUADSPI alternate bytes registers
-//  0x020 32  DR     QUADSPI data register
-//  0x024 32  PSMKR  QUADSPI polling status mask register
-//  0x028 32  PSMAR  QUADSPI polling status match register
-//  0x02C 32  PIR    QUADSPI polling interval register
-//  0x030 32  LPTR   QUADSPI low-power timeout register
+//
+//	0x000 32  CR     QUADSPI control register
+//	0x004 32  DCR    QUADSPI device configuration register
+//	0x008 32  SR     QUADSPI status register
+//	0x00C 32  FCR    QUADSPI flag clear register
+//	0x010 32  DLR    QUADSPI data length register
+//	0x014 32  CCR    QUADSPI communication configuration register
+//	0x018 32  AR     QUADSPI address register
+//	0x01C 32  ABR    QUADSPI alternate bytes registers
+//	0x020 32  DR     QUADSPI data register
+//	0x024 32  PSMKR  QUADSPI polling status mask register
+//	0x028 32  PSMAR  QUADSPI polling status match register
+//	0x02C 32  PIR    QUADSPI polling interval register
+//	0x030 32  LPTR   QUADSPI low-power timeout register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package quadspi
 
 const (

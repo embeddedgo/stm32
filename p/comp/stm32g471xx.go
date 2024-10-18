@@ -5,14 +5,19 @@
 // Package comp provides access to the registers of the COMP peripheral.
 //
 // Instances:
-//  COMP  COMP_BASE  -  COMP1_2_3,COMP4  Comparator control and status register
+//
+//	COMP  COMP_BASE  -  COMP1_2_3,COMP4  Comparator control and status register
+//
 // Registers:
-//  0x000 32  COMP_C1CSR  Comparator control/status register
-//  0x004 32  COMP_C2CSR  Comparator control/status register
-//  0x008 32  COMP_C3CSR  Comparator control/status register
-//  0x012 32  COMP_C4CSR  Comparator control/status register
+//
+//	0x000 32  COMP_C1CSR  Comparator control/status register
+//	0x004 32  COMP_C2CSR  Comparator control/status register
+//	0x008 32  COMP_C3CSR  Comparator control/status register
+//	0x012 32  COMP_C4CSR  Comparator control/status register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package comp
 
 const (

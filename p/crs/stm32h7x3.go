@@ -5,15 +5,20 @@
 // Package crs provides access to the registers of the CRS peripheral.
 //
 // Instances:
-//  CRS  CRS_BASE  APB1  CRS
+//
+//	CRS  CRS_BASE  APB1  CRS
+//
 // Registers:
-//  0x000 32  CR    CRS control register
-//  0x004 32  CFGR  This register can be written only when the frequency error counter is disabled (CEN bit is cleared in CRS_CR). When the counter is enabled, this register is write-protected.
-//  0x008 32  ISR   CRS interrupt and status register
-//  0x00C 32  ICR   CRS interrupt flag clear register
+//
+//	0x000 32  CR    CRS control register
+//	0x004 32  CFGR  This register can be written only when the frequency error counter is disabled (CEN bit is cleared in CRS_CR). When the counter is enabled, this register is write-protected.
+//	0x008 32  ISR   CRS interrupt and status register
+//	0x00C 32  ICR   CRS interrupt flag clear register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/bus
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/bus
+//	github.com/embeddedgo/stm32/p/mmap
 package crs
 
 const (

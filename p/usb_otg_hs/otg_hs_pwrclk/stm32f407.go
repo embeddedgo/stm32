@@ -5,11 +5,16 @@
 // Package otg_hs_pwrclk provides access to the registers of the OTG_HS_PWRCLK peripheral.
 //
 // Instances:
-//  OTG_HS_PWRCLK  OTG_HS_PWRCLK_BASE  -  -  USB on the go high speed
+//
+//	OTG_HS_PWRCLK  OTG_HS_PWRCLK_BASE  -  -  USB on the go high speed
+//
 // Registers:
-//  0x000 32  OTG_HS_PCGCR  Power and clock gating control register
+//
+//	0x000 32  OTG_HS_PCGCR  Power and clock gating control register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package otg_hs_pwrclk
 
 const (

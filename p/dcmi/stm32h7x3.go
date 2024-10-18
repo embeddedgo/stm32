@@ -5,21 +5,26 @@
 // Package dcmi provides access to the registers of the DCMI peripheral.
 //
 // Instances:
-//  DCMI  DCMI_BASE  -  DCMI  Digital camera interface
+//
+//	DCMI  DCMI_BASE  -  DCMI  Digital camera interface
+//
 // Registers:
-//  0x000 32  CR      control register 1
-//  0x004 32  SR      status register
-//  0x008 32  RIS     raw interrupt status register
-//  0x00C 32  IER     interrupt enable register
-//  0x010 32  MIS     masked interrupt status register
-//  0x014 32  ICR     interrupt clear register
-//  0x018 32  ESCR    embedded synchronization code register
-//  0x01C 32  ESUR    embedded synchronization unmask register
-//  0x020 32  CWSTRT  crop window start
-//  0x024 32  CWSIZE  crop window size
-//  0x028 32  DR      data register
+//
+//	0x000 32  CR      control register 1
+//	0x004 32  SR      status register
+//	0x008 32  RIS     raw interrupt status register
+//	0x00C 32  IER     interrupt enable register
+//	0x010 32  MIS     masked interrupt status register
+//	0x014 32  ICR     interrupt clear register
+//	0x018 32  ESCR    embedded synchronization code register
+//	0x01C 32  ESUR    embedded synchronization unmask register
+//	0x020 32  CWSTRT  crop window start
+//	0x024 32  CWSIZE  crop window size
+//	0x028 32  DR      data register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package dcmi
 
 const (

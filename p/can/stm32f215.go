@@ -5,101 +5,106 @@
 // Package can provides access to the registers of the CAN peripheral.
 //
 // Instances:
-//  CAN1  CAN1_BASE  APB1  CAN1_TX,CAN1_RX0,CAN1_RX1,CAN1_SCE  Controller area network
-//  CAN2  CAN2_BASE  APB1  CAN2_TX,CAN2_RX0,CAN2_RX1,CAN2_SCE  Controller area network
+//
+//	CAN1  CAN1_BASE  APB1  CAN1_TX,CAN1_RX0,CAN1_RX1,CAN1_SCE  Controller area network
+//	CAN2  CAN2_BASE  APB1  CAN2_TX,CAN2_RX0,CAN2_RX1,CAN2_SCE  Controller area network
+//
 // Registers:
-//  0x000 32  MCR    master control register
-//  0x004 32  MSR    master status register
-//  0x008 32  TSR    transmit status register
-//  0x00C 32  RF0R   receive FIFO 0 register
-//  0x010 32  RF1R   receive FIFO 1 register
-//  0x014 32  IER    interrupt enable register
-//  0x018 32  ESR    interrupt enable register
-//  0x01C 32  BTR    bit timing register
-//  0x180 32  TI0R   TX mailbox identifier register
-//  0x184 32  TDT0R  mailbox data length control and time stamp register
-//  0x188 32  TDL0R  mailbox data low register
-//  0x18C 32  TDH0R  mailbox data high register
-//  0x190 32  TI1R   mailbox identifier register
-//  0x194 32  TDT1R  mailbox data length control and time stamp register
-//  0x198 32  TDL1R  mailbox data low register
-//  0x19C 32  TDH1R  mailbox data high register
-//  0x1A0 32  TI2R   mailbox identifier register
-//  0x1A4 32  TDT2R  mailbox data length control and time stamp register
-//  0x1A8 32  TDL2R  mailbox data low register
-//  0x1AC 32  TDH2R  mailbox data high register
-//  0x1B0 32  RI0R   receive FIFO mailbox identifier register
-//  0x1B4 32  RDT0R  mailbox data high register
-//  0x1B8 32  RDL0R  mailbox data high register
-//  0x1BC 32  RDH0R  receive FIFO mailbox data high register
-//  0x1C0 32  RI1R   mailbox data high register
-//  0x1C4 32  RDT1R  mailbox data high register
-//  0x1C8 32  RDL1R  mailbox data high register
-//  0x1CC 32  RDH1R  mailbox data high register
-//  0x200 32  FMR    filter master register
-//  0x204 32  FM1R   filter mode register
-//  0x20C 32  FS1R   filter scale register
-//  0x214 32  FFA1R  filter FIFO assignment register
-//  0x21C 32  FA1R   filter activation register
-//  0x240 32  F0R1   Filter bank 0 register 1
-//  0x244 32  F0R2   Filter bank 0 register 2
-//  0x248 32  F1R1   Filter bank 1 register 1
-//  0x24C 32  F1R2   Filter bank 1 register 2
-//  0x250 32  F2R1   Filter bank 2 register 1
-//  0x254 32  F2R2   Filter bank 2 register 2
-//  0x258 32  F3R1   Filter bank 3 register 1
-//  0x25C 32  F3R2   Filter bank 3 register 2
-//  0x260 32  F4R1   Filter bank 4 register 1
-//  0x264 32  F4R2   Filter bank 4 register 2
-//  0x268 32  F5R1   Filter bank 5 register 1
-//  0x26C 32  F5R2   Filter bank 5 register 2
-//  0x270 32  F6R1   Filter bank 6 register 1
-//  0x274 32  F6R2   Filter bank 6 register 2
-//  0x278 32  F7R1   Filter bank 7 register 1
-//  0x27C 32  F7R2   Filter bank 7 register 2
-//  0x280 32  F8R1   Filter bank 8 register 1
-//  0x284 32  F8R2   Filter bank 8 register 2
-//  0x288 32  F9R1   Filter bank 9 register 1
-//  0x28C 32  F9R2   Filter bank 9 register 2
-//  0x290 32  F10R1  Filter bank 10 register 1
-//  0x294 32  F10R2  Filter bank 10 register 2
-//  0x298 32  F11R1  Filter bank 11 register 1
-//  0x29C 32  F11R2  Filter bank 11 register 2
-//  0x2A0 32  F12R1  Filter bank 4 register 1
-//  0x2A4 32  F12R2  Filter bank 12 register 2
-//  0x2A8 32  F13R1  Filter bank 13 register 1
-//  0x2AC 32  F13R2  Filter bank 13 register 2
-//  0x2B0 32  F14R1  Filter bank 14 register 1
-//  0x2B4 32  F14R2  Filter bank 14 register 2
-//  0x2B8 32  F15R1  Filter bank 15 register 1
-//  0x2BC 32  F15R2  Filter bank 15 register 2
-//  0x2C0 32  F16R1  Filter bank 16 register 1
-//  0x2C4 32  F16R2  Filter bank 16 register 2
-//  0x2C8 32  F17R1  Filter bank 17 register 1
-//  0x2CC 32  F17R2  Filter bank 17 register 2
-//  0x2D0 32  F18R1  Filter bank 18 register 1
-//  0x2D4 32  F18R2  Filter bank 18 register 2
-//  0x2D8 32  F19R1  Filter bank 19 register 1
-//  0x2DC 32  F19R2  Filter bank 19 register 2
-//  0x2E0 32  F20R1  Filter bank 20 register 1
-//  0x2E4 32  F20R2  Filter bank 20 register 2
-//  0x2E8 32  F21R1  Filter bank 21 register 1
-//  0x2EC 32  F21R2  Filter bank 21 register 2
-//  0x2F0 32  F22R1  Filter bank 22 register 1
-//  0x2F4 32  F22R2  Filter bank 22 register 2
-//  0x2F8 32  F23R1  Filter bank 23 register 1
-//  0x2FC 32  F23R2  Filter bank 23 register 2
-//  0x300 32  F24R1  Filter bank 24 register 1
-//  0x304 32  F24R2  Filter bank 24 register 2
-//  0x308 32  F25R1  Filter bank 25 register 1
-//  0x30C 32  F25R2  Filter bank 25 register 2
-//  0x310 32  F26R1  Filter bank 26 register 1
-//  0x314 32  F26R2  Filter bank 26 register 2
-//  0x318 32  F27R1  Filter bank 27 register 1
-//  0x31C 32  F27R2  Filter bank 27 register 2
+//
+//	0x000 32  MCR    master control register
+//	0x004 32  MSR    master status register
+//	0x008 32  TSR    transmit status register
+//	0x00C 32  RF0R   receive FIFO 0 register
+//	0x010 32  RF1R   receive FIFO 1 register
+//	0x014 32  IER    interrupt enable register
+//	0x018 32  ESR    interrupt enable register
+//	0x01C 32  BTR    bit timing register
+//	0x180 32  TI0R   TX mailbox identifier register
+//	0x184 32  TDT0R  mailbox data length control and time stamp register
+//	0x188 32  TDL0R  mailbox data low register
+//	0x18C 32  TDH0R  mailbox data high register
+//	0x190 32  TI1R   mailbox identifier register
+//	0x194 32  TDT1R  mailbox data length control and time stamp register
+//	0x198 32  TDL1R  mailbox data low register
+//	0x19C 32  TDH1R  mailbox data high register
+//	0x1A0 32  TI2R   mailbox identifier register
+//	0x1A4 32  TDT2R  mailbox data length control and time stamp register
+//	0x1A8 32  TDL2R  mailbox data low register
+//	0x1AC 32  TDH2R  mailbox data high register
+//	0x1B0 32  RI0R   receive FIFO mailbox identifier register
+//	0x1B4 32  RDT0R  mailbox data high register
+//	0x1B8 32  RDL0R  mailbox data high register
+//	0x1BC 32  RDH0R  receive FIFO mailbox data high register
+//	0x1C0 32  RI1R   mailbox data high register
+//	0x1C4 32  RDT1R  mailbox data high register
+//	0x1C8 32  RDL1R  mailbox data high register
+//	0x1CC 32  RDH1R  mailbox data high register
+//	0x200 32  FMR    filter master register
+//	0x204 32  FM1R   filter mode register
+//	0x20C 32  FS1R   filter scale register
+//	0x214 32  FFA1R  filter FIFO assignment register
+//	0x21C 32  FA1R   filter activation register
+//	0x240 32  F0R1   Filter bank 0 register 1
+//	0x244 32  F0R2   Filter bank 0 register 2
+//	0x248 32  F1R1   Filter bank 1 register 1
+//	0x24C 32  F1R2   Filter bank 1 register 2
+//	0x250 32  F2R1   Filter bank 2 register 1
+//	0x254 32  F2R2   Filter bank 2 register 2
+//	0x258 32  F3R1   Filter bank 3 register 1
+//	0x25C 32  F3R2   Filter bank 3 register 2
+//	0x260 32  F4R1   Filter bank 4 register 1
+//	0x264 32  F4R2   Filter bank 4 register 2
+//	0x268 32  F5R1   Filter bank 5 register 1
+//	0x26C 32  F5R2   Filter bank 5 register 2
+//	0x270 32  F6R1   Filter bank 6 register 1
+//	0x274 32  F6R2   Filter bank 6 register 2
+//	0x278 32  F7R1   Filter bank 7 register 1
+//	0x27C 32  F7R2   Filter bank 7 register 2
+//	0x280 32  F8R1   Filter bank 8 register 1
+//	0x284 32  F8R2   Filter bank 8 register 2
+//	0x288 32  F9R1   Filter bank 9 register 1
+//	0x28C 32  F9R2   Filter bank 9 register 2
+//	0x290 32  F10R1  Filter bank 10 register 1
+//	0x294 32  F10R2  Filter bank 10 register 2
+//	0x298 32  F11R1  Filter bank 11 register 1
+//	0x29C 32  F11R2  Filter bank 11 register 2
+//	0x2A0 32  F12R1  Filter bank 4 register 1
+//	0x2A4 32  F12R2  Filter bank 12 register 2
+//	0x2A8 32  F13R1  Filter bank 13 register 1
+//	0x2AC 32  F13R2  Filter bank 13 register 2
+//	0x2B0 32  F14R1  Filter bank 14 register 1
+//	0x2B4 32  F14R2  Filter bank 14 register 2
+//	0x2B8 32  F15R1  Filter bank 15 register 1
+//	0x2BC 32  F15R2  Filter bank 15 register 2
+//	0x2C0 32  F16R1  Filter bank 16 register 1
+//	0x2C4 32  F16R2  Filter bank 16 register 2
+//	0x2C8 32  F17R1  Filter bank 17 register 1
+//	0x2CC 32  F17R2  Filter bank 17 register 2
+//	0x2D0 32  F18R1  Filter bank 18 register 1
+//	0x2D4 32  F18R2  Filter bank 18 register 2
+//	0x2D8 32  F19R1  Filter bank 19 register 1
+//	0x2DC 32  F19R2  Filter bank 19 register 2
+//	0x2E0 32  F20R1  Filter bank 20 register 1
+//	0x2E4 32  F20R2  Filter bank 20 register 2
+//	0x2E8 32  F21R1  Filter bank 21 register 1
+//	0x2EC 32  F21R2  Filter bank 21 register 2
+//	0x2F0 32  F22R1  Filter bank 22 register 1
+//	0x2F4 32  F22R2  Filter bank 22 register 2
+//	0x2F8 32  F23R1  Filter bank 23 register 1
+//	0x2FC 32  F23R2  Filter bank 23 register 2
+//	0x300 32  F24R1  Filter bank 24 register 1
+//	0x304 32  F24R2  Filter bank 24 register 2
+//	0x308 32  F25R1  Filter bank 25 register 1
+//	0x30C 32  F25R2  Filter bank 25 register 2
+//	0x310 32  F26R1  Filter bank 26 register 1
+//	0x314 32  F26R2  Filter bank 26 register 2
+//	0x318 32  F27R1  Filter bank 27 register 1
+//	0x31C 32  F27R2  Filter bank 27 register 2
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/bus
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/bus
+//	github.com/embeddedgo/stm32/p/mmap
 package can
 
 const (

@@ -5,23 +5,28 @@
 // Package jpeg provides access to the registers of the JPEG peripheral.
 //
 // Instances:
-//  JPEG  JPEG_BASE  -  JPEG
+//
+//	JPEG  JPEG_BASE  -  JPEG
+//
 // Registers:
-//  0x000 32  CONFR0   JPEG codec control register
-//  0x004 32  CONFR1   JPEG codec configuration register 1
-//  0x008 32  CONFR2   JPEG codec configuration register 2
-//  0x00C 32  CONFR3   JPEG codec configuration register 3
-//  0x010 32  CONFRN1  JPEG codec configuration register 4-7
-//  0x014 32  CONFRN2  JPEG codec configuration register 4-7
-//  0x018 32  CONFRN3  JPEG codec configuration register 4-7
-//  0x01C 32  CONFRN4  JPEG codec configuration register 4-7
-//  0x030 32  CR       JPEG control register
-//  0x034 32  SR       JPEG status register
-//  0x038 32  CFR      JPEG clear flag register
-//  0x040 32  DIR      JPEG data input register
-//  0x044 32  DOR      JPEG data output register
+//
+//	0x000 32  CONFR0   JPEG codec control register
+//	0x004 32  CONFR1   JPEG codec configuration register 1
+//	0x008 32  CONFR2   JPEG codec configuration register 2
+//	0x00C 32  CONFR3   JPEG codec configuration register 3
+//	0x010 32  CONFRN1  JPEG codec configuration register 4-7
+//	0x014 32  CONFRN2  JPEG codec configuration register 4-7
+//	0x018 32  CONFRN3  JPEG codec configuration register 4-7
+//	0x01C 32  CONFRN4  JPEG codec configuration register 4-7
+//	0x030 32  CR       JPEG control register
+//	0x034 32  SR       JPEG status register
+//	0x038 32  CFR      JPEG clear flag register
+//	0x040 32  DIR      JPEG data input register
+//	0x044 32  DOR      JPEG data output register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package jpeg
 
 const (

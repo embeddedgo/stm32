@@ -5,31 +5,36 @@
 // Package ethernet_dma provides access to the registers of the Ethernet_DMA peripheral.
 //
 // Instances:
-//  Ethernet_DMA  Ethernet_DMA_BASE  -  -  Ethernet: DMA mode register (DMA)
+//
+//	Ethernet_DMA  Ethernet_DMA_BASE  -  -  Ethernet: DMA mode register (DMA)
+//
 // Registers:
-//  0x000 32  DMAMR       DMA mode register
-//  0x004 32  DMASBMR     System bus mode register
-//  0x008 32  DMAISR      Interrupt status register
-//  0x00C 32  DMADSR      Debug status register
-//  0x100 32  DMACCR      Channel control register
-//  0x104 32  DMACTxCR    Channel transmit control register
-//  0x108 32  DMACRxCR    Channel receive control register
-//  0x114 32  DMACTxDLAR  Channel Tx descriptor list address register
-//  0x11C 32  DMACRxDLAR  Channel Rx descriptor list address register
-//  0x120 32  DMACTxDTPR  Channel Tx descriptor tail pointer register
-//  0x128 32  DMACRxDTPR  Channel Rx descriptor tail pointer register
-//  0x12C 32  DMACTxRLR   Channel Tx descriptor ring length register
-//  0x130 32  DMACRxRLR   Channel Rx descriptor ring length register
-//  0x134 32  DMACIER     Channel interrupt enable register
-//  0x138 32  DMACRxIWTR  Channel Rx interrupt watchdog timer register
-//  0x144 32  DMACCATxDR  Channel current application transmit descriptor register
-//  0x14C 32  DMACCARxDR  Channel current application receive descriptor register
-//  0x154 32  DMACCATxBR  Channel current application transmit buffer register
-//  0x15C 32  DMACCARxBR  Channel current application receive buffer register
-//  0x160 32  DMACSR      Channel status register
-//  0x16C 32  DMACMFCR    Channel missed frame count register
+//
+//	0x000 32  DMAMR       DMA mode register
+//	0x004 32  DMASBMR     System bus mode register
+//	0x008 32  DMAISR      Interrupt status register
+//	0x00C 32  DMADSR      Debug status register
+//	0x100 32  DMACCR      Channel control register
+//	0x104 32  DMACTxCR    Channel transmit control register
+//	0x108 32  DMACRxCR    Channel receive control register
+//	0x114 32  DMACTxDLAR  Channel Tx descriptor list address register
+//	0x11C 32  DMACRxDLAR  Channel Rx descriptor list address register
+//	0x120 32  DMACTxDTPR  Channel Tx descriptor tail pointer register
+//	0x128 32  DMACRxDTPR  Channel Rx descriptor tail pointer register
+//	0x12C 32  DMACTxRLR   Channel Tx descriptor ring length register
+//	0x130 32  DMACRxRLR   Channel Rx descriptor ring length register
+//	0x134 32  DMACIER     Channel interrupt enable register
+//	0x138 32  DMACRxIWTR  Channel Rx interrupt watchdog timer register
+//	0x144 32  DMACCATxDR  Channel current application transmit descriptor register
+//	0x14C 32  DMACCARxDR  Channel current application receive descriptor register
+//	0x154 32  DMACCATxBR  Channel current application transmit buffer register
+//	0x15C 32  DMACCARxBR  Channel current application receive buffer register
+//	0x160 32  DMACSR      Channel status register
+//	0x16C 32  DMACMFCR    Channel missed frame count register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package ethernet_dma
 
 const (

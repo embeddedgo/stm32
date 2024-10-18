@@ -5,20 +5,25 @@
 // Package swpmi provides access to the registers of the SWPMI peripheral.
 //
 // Instances:
-//  SWPMI1  SWPMI1_BASE  APB1  SWPMI1  Single Wire Protocol Master Interface
+//
+//	SWPMI1  SWPMI1_BASE  APB1  SWPMI1  Single Wire Protocol Master Interface
+//
 // Registers:
-//  0x000 32  CR   SWPMI Configuration/Control register
-//  0x004 32  BRR  SWPMI Bitrate register
-//  0x00C 32  ISR  SWPMI Interrupt and Status register
-//  0x010 32  ICR  SWPMI Interrupt Flag Clear register
-//  0x014 32  IER  SWPMI Interrupt Enable register
-//  0x018 32  RFL  SWPMI Receive Frame Length register
-//  0x01C 32  TDR  SWPMI Transmit data register
-//  0x020 32  RDR  SWPMI Receive data register
-//  0x024 32  OR   SWPMI Option register
+//
+//	0x000 32  CR   SWPMI Configuration/Control register
+//	0x004 32  BRR  SWPMI Bitrate register
+//	0x00C 32  ISR  SWPMI Interrupt and Status register
+//	0x010 32  ICR  SWPMI Interrupt Flag Clear register
+//	0x014 32  IER  SWPMI Interrupt Enable register
+//	0x018 32  RFL  SWPMI Receive Frame Length register
+//	0x01C 32  TDR  SWPMI Transmit data register
+//	0x020 32  RDR  SWPMI Receive data register
+//	0x024 32  OR   SWPMI Option register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/bus
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/bus
+//	github.com/embeddedgo/stm32/p/mmap
 package swpmi
 
 const (

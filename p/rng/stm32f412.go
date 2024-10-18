@@ -5,14 +5,19 @@
 // Package rng provides access to the registers of the RNG peripheral.
 //
 // Instances:
-//  RNG  RNG_BASE  AHB2  HASH_RNG  Random number generator
+//
+//	RNG  RNG_BASE  AHB2  HASH_RNG  Random number generator
+//
 // Registers:
-//  0x000 32  CR  control register
-//  0x004 32  SR  status register
-//  0x008 32  DR  data register
+//
+//	0x000 32  CR  control register
+//	0x004 32  SR  status register
+//	0x008 32  DR  data register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/bus
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/bus
+//	github.com/embeddedgo/stm32/p/mmap
 package rng
 
 const (

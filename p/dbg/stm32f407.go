@@ -5,14 +5,19 @@
 // Package dbg provides access to the registers of the DBG peripheral.
 //
 // Instances:
-//  DBG  DBG_BASE  -  -  Debug support
+//
+//	DBG  DBG_BASE  -  -  Debug support
+//
 // Registers:
-//  0x000 32  DBGMCU_IDCODE   IDCODE
-//  0x004 32  DBGMCU_CR       Control Register
-//  0x008 32  DBGMCU_APB1_FZ  Debug MCU APB1 Freeze registe
-//  0x00C 32  DBGMCU_APB2_FZ  Debug MCU APB2 Freeze registe
+//
+//	0x000 32  DBGMCU_IDCODE   IDCODE
+//	0x004 32  DBGMCU_CR       Control Register
+//	0x008 32  DBGMCU_APB1_FZ  Debug MCU APB1 Freeze registe
+//	0x00C 32  DBGMCU_APB2_FZ  Debug MCU APB2 Freeze registe
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package dbg
 
 const (

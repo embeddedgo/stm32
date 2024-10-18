@@ -5,46 +5,51 @@
 // Package cryp provides access to the registers of the CRYP peripheral.
 //
 // Instances:
-//  CRYP  CRYP_BASE  -  CRYP  Cryptographic processor
+//
+//	CRYP  CRYP_BASE  -  CRYP  Cryptographic processor
+//
 // Registers:
-//  0x000 32  CR          control register
-//  0x004 32  SR          status register
-//  0x008 32  DIN         data input register
-//  0x00C 32  DOUT        data output register
-//  0x010 32  DMACR       DMA control register
-//  0x014 32  IMSCR       interrupt mask set/clear register
-//  0x018 32  RISR        raw interrupt status register
-//  0x01C 32  MISR        masked interrupt status register
-//  0x020 32  K0LR        key registers
-//  0x024 32  K0RR        key registers
-//  0x028 32  K1LR        key registers
-//  0x02C 32  K1RR        key registers
-//  0x030 32  K2LR        key registers
-//  0x034 32  K2RR        key registers
-//  0x038 32  K3LR        key registers
-//  0x03C 32  K3RR        key registers
-//  0x040 32  IV0LR       initialization vector registers
-//  0x044 32  IV0RR       initialization vector registers
-//  0x048 32  IV1LR       initialization vector registers
-//  0x04C 32  IV1RR       initialization vector registers
-//  0x050 32  CSGCMCCM0R  context swap register
-//  0x054 32  CSGCMCCM1R  context swap register
-//  0x058 32  CSGCMCCM2R  context swap register
-//  0x05C 32  CSGCMCCM3R  context swap register
-//  0x060 32  CSGCMCCM4R  context swap register
-//  0x064 32  CSGCMCCM5R  context swap register
-//  0x068 32  CSGCMCCM6R  context swap register
-//  0x06C 32  CSGCMCCM7R  context swap register
-//  0x070 32  CSGCM0R     context swap register
-//  0x074 32  CSGCM1R     context swap register
-//  0x078 32  CSGCM2R     context swap register
-//  0x07C 32  CSGCM3R     context swap register
-//  0x080 32  CSGCM4R     context swap register
-//  0x084 32  CSGCM5R     context swap register
-//  0x088 32  CSGCM6R     context swap register
-//  0x08C 32  CSGCM7R     context swap register
+//
+//	0x000 32  CR          control register
+//	0x004 32  SR          status register
+//	0x008 32  DIN         data input register
+//	0x00C 32  DOUT        data output register
+//	0x010 32  DMACR       DMA control register
+//	0x014 32  IMSCR       interrupt mask set/clear register
+//	0x018 32  RISR        raw interrupt status register
+//	0x01C 32  MISR        masked interrupt status register
+//	0x020 32  K0LR        key registers
+//	0x024 32  K0RR        key registers
+//	0x028 32  K1LR        key registers
+//	0x02C 32  K1RR        key registers
+//	0x030 32  K2LR        key registers
+//	0x034 32  K2RR        key registers
+//	0x038 32  K3LR        key registers
+//	0x03C 32  K3RR        key registers
+//	0x040 32  IV0LR       initialization vector registers
+//	0x044 32  IV0RR       initialization vector registers
+//	0x048 32  IV1LR       initialization vector registers
+//	0x04C 32  IV1RR       initialization vector registers
+//	0x050 32  CSGCMCCM0R  context swap register
+//	0x054 32  CSGCMCCM1R  context swap register
+//	0x058 32  CSGCMCCM2R  context swap register
+//	0x05C 32  CSGCMCCM3R  context swap register
+//	0x060 32  CSGCMCCM4R  context swap register
+//	0x064 32  CSGCMCCM5R  context swap register
+//	0x068 32  CSGCMCCM6R  context swap register
+//	0x06C 32  CSGCMCCM7R  context swap register
+//	0x070 32  CSGCM0R     context swap register
+//	0x074 32  CSGCM1R     context swap register
+//	0x078 32  CSGCM2R     context swap register
+//	0x07C 32  CSGCM3R     context swap register
+//	0x080 32  CSGCM4R     context swap register
+//	0x084 32  CSGCM5R     context swap register
+//	0x088 32  CSGCM6R     context swap register
+//	0x08C 32  CSGCM7R     context swap register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package cryp
 
 const (

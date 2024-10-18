@@ -5,11 +5,16 @@
 // Package nvic_stir provides access to the registers of the NVIC_STIR peripheral.
 //
 // Instances:
-//  NVIC_STIR  NVIC_STIR_BASE  -  -  Nested vectored interrupt controller
+//
+//	NVIC_STIR  NVIC_STIR_BASE  -  -  Nested vectored interrupt controller
+//
 // Registers:
-//  0x000 32  STIR  Software trigger interrupt register
+//
+//	0x000 32  STIR  Software trigger interrupt register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package nvic_stir
 
 const (

@@ -5,65 +5,87 @@
 // Package otg_hs_global provides access to the registers of the OTG1_HS_GLOBAL peripheral.
 //
 // Instances:
-//  OTG1_HS_GLOBAL  OTG1_HS_GLOBAL_BASE  -  -                                                                                         USB 1 on the go high speed
-//  OTG2_HS_GLOBAL  OTG2_HS_GLOBAL_BASE  -  OTG_HS_EP1_OUT,OTG_HS_EP1_IN,OTG_HS_WKUP,OTG_HS,OTG_FS_EP1_OUT,OTG_FS_EP1_IN,OTG_FS_WKUP  USB 1 on the go high speed
+//
+//	OTG1_HS_GLOBAL  OTG1_HS_GLOBAL_BASE  -  OTG_HS_EP1_OUT,OTG_HS_EP1_IN,OTG_HS_WKUP,OTG_HS  USB 1 on the go high speed
+//	OTG2_HS_GLOBAL  OTG2_HS_GLOBAL_BASE  -  OTG_FS_EP1_OUT,OTG_FS_EP1_IN,OTG_FS_WKUP         USB 1 on the go high speed
+//
 // Registers:
-//  0x000 32  OTG_HS_GOTGCTL          OTG_HS control and status register
-//  0x004 32  OTG_HS_GOTGINT          OTG_HS interrupt register
-//  0x008 32  OTG_HS_GAHBCFG          OTG_HS AHB configuration register
-//  0x00C 32  OTG_HS_GUSBCFG          OTG_HS USB configuration register
-//  0x010 32  OTG_HS_GRSTCTL          OTG_HS reset register
-//  0x014 32  OTG_HS_GINTSTS          OTG_HS core interrupt register
-//  0x018 32  OTG_HS_GINTMSK          OTG_HS interrupt mask register
-//  0x01C 32  OTG_HS_GRXSTSR_Host     OTG_HS Receive status debug read register (host mode)
-//  0x01C 32  OTG_HS_GRXSTSR_Device   OTG_HS Receive status debug read register (peripheral mode mode)
-//  0x020 32  OTG_HS_GRXSTSP_Host     OTG_HS status read and pop register (host mode)
-//  0x020 32  OTG_HS_GRXSTSP_Device   OTG_HS status read and pop register (peripheral mode)
-//  0x024 32  OTG_HS_GRXFSIZ          OTG_HS Receive FIFO size register
-//  0x028 32  OTG_HS_HNPTXFSIZ_Host   OTG_HS nonperiodic transmit FIFO size register (host mode)
-//  0x028 32  OTG_HS_DIEPTXF0_Device  Endpoint 0 transmit FIFO size (peripheral mode)
-//  0x02C 32  OTG_HS_GNPTXSTS         OTG_HS nonperiodic transmit FIFO/queue status register
-//  0x038 32  OTG_HS_GCCFG            OTG_HS general core configuration register
-//  0x03C 32  OTG_HS_CID              OTG_HS core ID register
-//  0x054 32  OTG_HS_GLPMCFG          OTG core LPM configuration register
-//  0x100 32  OTG_HS_HPTXFSIZ         OTG_HS Host periodic transmit FIFO size register
-//  0x104 32  OTG_HS_DIEPTXF1         OTG_HS device IN endpoint transmit FIFO size register
-//  0x108 32  OTG_HS_DIEPTXF2         OTG_HS device IN endpoint transmit FIFO size register
-//  0x11C 32  OTG_HS_DIEPTXF3         OTG_HS device IN endpoint transmit FIFO size register
-//  0x120 32  OTG_HS_DIEPTXF4         OTG_HS device IN endpoint transmit FIFO size register
-//  0x124 32  OTG_HS_DIEPTXF5         OTG_HS device IN endpoint transmit FIFO size register
-//  0x128 32  OTG_HS_DIEPTXF6         OTG_HS device IN endpoint transmit FIFO size register
-//  0x12C 32  OTG_HS_DIEPTXF7         OTG_HS device IN endpoint transmit FIFO size register
+//
+//	0x000 32  OTG_HS_GOTGCTL          OTG_HS control and status register
+//	0x004 32  OTG_HS_GOTGINT          OTG_HS interrupt register
+//	0x008 32  OTG_HS_GAHBCFG          OTG_HS AHB configuration register
+//	0x00C 32  OTG_HS_GUSBCFG          OTG_HS USB configuration register
+//	0x010 32  OTG_HS_GRSTCTL          OTG_HS reset register
+//	0x014 32  OTG_HS_GINTSTS          OTG_HS core interrupt register
+//	0x018 32  OTG_HS_GINTMSK          OTG_HS interrupt mask register
+//	0x01C 32  OTG_HS_GRXSTSR_Host     OTG_HS Receive status debug read register (host mode)
+//	0x01C 32  OTG_HS_GRXSTSR_Device   OTG_HS Receive status debug read register (peripheral mode mode)
+//	0x020 32  OTG_HS_GRXSTSP_Host     OTG_HS status read and pop register (host mode)
+//	0x020 32  OTG_HS_GRXSTSP_Device   OTG_HS status read and pop register (peripheral mode)
+//	0x024 32  OTG_HS_GRXFSIZ          OTG_HS Receive FIFO size register
+//	0x028 32  OTG_HS_HNPTXFSIZ_Host   OTG_HS nonperiodic transmit FIFO size register (host mode)
+//	0x028 32  OTG_HS_DIEPTXF0_Device  Endpoint 0 transmit FIFO size (peripheral mode)
+//	0x02C 32  OTG_HS_GNPTXSTS         OTG_HS nonperiodic transmit FIFO/queue status register
+//	0x038 32  OTG_HS_GCCFG            OTG_HS general core configuration register
+//	0x03C 32  OTG_HS_CID              OTG_HS core ID register
+//	0x054 32  OTG_HS_GLPMCFG          OTG core LPM configuration register
+//	0x100 32  OTG_HS_HPTXFSIZ         OTG_HS Host periodic transmit FIFO size register
+//	0x104 32  OTG_HS_DIEPTXF1         OTG_HS device IN endpoint transmit FIFO size register
+//	0x108 32  OTG_HS_DIEPTXF2         OTG_HS device IN endpoint transmit FIFO size register
+//	0x10C 32  OTG_HS_DIEPTXF3         OTG_HS device IN endpoint transmit FIFO size register
+//	0x110 32  OTG_HS_DIEPTXF4         OTG_HS device IN endpoint transmit FIFO size register
+//	0x114 32  OTG_HS_DIEPTXF5         OTG_HS device IN endpoint transmit FIFO size register
+//	0x118 32  OTG_HS_DIEPTXF6         OTG_HS device IN endpoint transmit FIFO size register
+//	0x11C 32  OTG_HS_DIEPTXF7         OTG_HS device IN endpoint transmit FIFO size register
+//	0x120 32  OTG_DIEPTXF8
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package otg_hs_global
 
 const (
-	SRQSCS  OTG_HS_GOTGCTL = 0x01 << 0  //+ Session request success
-	SRQ     OTG_HS_GOTGCTL = 0x01 << 1  //+ Session request
-	HNGSCS  OTG_HS_GOTGCTL = 0x01 << 8  //+ Host negotiation success
-	HNPRQ   OTG_HS_GOTGCTL = 0x01 << 9  //+ HNP request
-	HSHNPEN OTG_HS_GOTGCTL = 0x01 << 10 //+ Host set HNP enable
-	DHNPEN  OTG_HS_GOTGCTL = 0x01 << 11 //+ Device HNP enabled
-	EHEN    OTG_HS_GOTGCTL = 0x01 << 12 //+ Embedded host enable
-	CIDSTS  OTG_HS_GOTGCTL = 0x01 << 16 //+ Connector ID status
-	DBCT    OTG_HS_GOTGCTL = 0x01 << 17 //+ Long/short debounce time
-	ASVLD   OTG_HS_GOTGCTL = 0x01 << 18 //+ A-session valid
-	BSVLD   OTG_HS_GOTGCTL = 0x01 << 19 //+ B-session valid
+	SRQSCS    OTG_HS_GOTGCTL = 0x01 << 0  //+ Session request success
+	SRQ       OTG_HS_GOTGCTL = 0x01 << 1  //+ Session request
+	VBVALOEN  OTG_HS_GOTGCTL = 0x01 << 2  //+ VBUS valid override enable
+	VBVALOVAL OTG_HS_GOTGCTL = 0x01 << 3  //+ VBUS valid override value
+	AVALOEN   OTG_HS_GOTGCTL = 0x01 << 4  //+ A-peripheral session valid override enable
+	AVALOVAL  OTG_HS_GOTGCTL = 0x01 << 5  //+ A-peripheral session valid override value
+	BVALOEN   OTG_HS_GOTGCTL = 0x01 << 6  //+ B-peripheral session valid override enable.
+	BVALOVAL  OTG_HS_GOTGCTL = 0x01 << 7  //+ B-peripheral session valid override value
+	HNGSCS    OTG_HS_GOTGCTL = 0x01 << 8  //+ Host negotiation success
+	HNPRQ     OTG_HS_GOTGCTL = 0x01 << 9  //+ HNP request
+	HSHNPEN   OTG_HS_GOTGCTL = 0x01 << 10 //+ Host set HNP enable
+	DHNPEN    OTG_HS_GOTGCTL = 0x01 << 11 //+ Device HNP enabled
+	EHEN      OTG_HS_GOTGCTL = 0x01 << 12 //+ Embedded host enable
+	CIDSTS    OTG_HS_GOTGCTL = 0x01 << 16 //+ Connector ID status
+	DBCT      OTG_HS_GOTGCTL = 0x01 << 17 //+ Long/short debounce time
+	ASVLD     OTG_HS_GOTGCTL = 0x01 << 18 //+ A-session valid
+	BSVLD     OTG_HS_GOTGCTL = 0x01 << 19 //+ B-session valid
+	OTGVER    OTG_HS_GOTGCTL = 0x01 << 20 //+ OTG version
+	CURMOD    OTG_HS_GOTGCTL = 0x01 << 21 //+ Current mode of operation
 )
 
 const (
-	SRQSCSn  = 0
-	SRQn     = 1
-	HNGSCSn  = 8
-	HNPRQn   = 9
-	HSHNPENn = 10
-	DHNPENn  = 11
-	EHENn    = 12
-	CIDSTSn  = 16
-	DBCTn    = 17
-	ASVLDn   = 18
-	BSVLDn   = 19
+	SRQSCSn    = 0
+	SRQn       = 1
+	VBVALOENn  = 2
+	VBVALOVALn = 3
+	AVALOENn   = 4
+	AVALOVALn  = 5
+	BVALOENn   = 6
+	BVALOVALn  = 7
+	HNGSCSn    = 8
+	HNPRQn     = 9
+	HSHNPENn   = 10
+	DHNPENn    = 11
+	EHENn      = 12
+	CIDSTSn    = 16
+	DBCTn      = 17
+	ASVLDn     = 18
+	BSVLDn     = 19
+	OTGVERn    = 20
+	CURMODn    = 21
 )
 
 const (
@@ -525,6 +547,16 @@ const (
 const (
 	INEPTXSA OTG_HS_DIEPTXF7 = 0xFFFF << 0  //+ IN endpoint FIFOx transmit RAM start address
 	INEPTXFD OTG_HS_DIEPTXF7 = 0xFFFF << 16 //+ IN endpoint TxFIFO depth
+)
+
+const (
+	INEPTXSAn = 0
+	INEPTXFDn = 16
+)
+
+const (
+	INEPTXSA OTG_DIEPTXF8 = 0xFFFF << 0  //+ IN endpoint FIFOx transmit RAM start address This field contains the memory start address for IN endpoint transmit FIFOx. The address must be aligned with a 32-bit memory location.
+	INEPTXFD OTG_DIEPTXF8 = 0xFFFF << 16 //+ IN endpoint Tx FIFO depth This value is in terms of 32-bit words. Minimum value is 16
 )
 
 const (

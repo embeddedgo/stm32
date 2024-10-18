@@ -5,23 +5,28 @@
 // Package spi provides access to the registers of the SPI peripheral.
 //
 // Instances:
-//  SPI1  SPI1_BASE  APB2  SPI1  Serial peripheral interface/Inter-IC sound
-//  SPI2  SPI2_BASE  APB1  SPI2  Serial peripheral interface/Inter-IC sound
-//  SPI3  SPI3_BASE  APB1  SPI3  Serial peripheral interface/Inter-IC sound
-//  SPI4  SPI4_BASE  APB2  SPI4  Serial peripheral interface/Inter-IC sound
+//
+//	SPI1  SPI1_BASE  APB2  SPI1  Serial peripheral interface/Inter-IC sound
+//	SPI2  SPI2_BASE  APB1  SPI2  Serial peripheral interface/Inter-IC sound
+//	SPI3  SPI3_BASE  APB1  SPI3  Serial peripheral interface/Inter-IC sound
+//	SPI4  SPI4_BASE  APB2  SPI4  Serial peripheral interface/Inter-IC sound
+//
 // Registers:
-//  0x000 32  CR1         control register 1
-//  0x004 32  CR2         control register 2
-//  0x008 32  SR          status register
-//  0x00C 32  DR(uint32)  data register
-//  0x010 32  CRCPR       CRC polynomial register
-//  0x014 32  RXCRCR      RX CRC register
-//  0x018 32  TXCRCR      TX CRC register
-//  0x01C 32  I2SCFGR     configuration register
-//  0x020 32  I2SPR       prescaler register
+//
+//	0x000 32  CR1      control register 1
+//	0x004 32  CR2      control register 2
+//	0x008 32  SR       status register
+//	0x00C 32  DR       data register
+//	0x010 32  CRCPR    CRC polynomial register
+//	0x014 32  RXCRCR   RX CRC register
+//	0x018 32  TXCRCR   TX CRC register
+//	0x01C 32  I2SCFGR  configuration register
+//	0x020 32  I2SPR    prescaler register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/bus
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/bus
+//	github.com/embeddedgo/stm32/p/mmap
 package spi
 
 const (
@@ -110,30 +115,6 @@ const (
 	TIFRFEn = 8
 	FRLVLn  = 9
 	FTLVLn  = 11
-)
-
-const (
-	CRCPOLY CRCPR = 0xFFFF << 0 //+ CRC polynomial register
-)
-
-const (
-	CRCPOLYn = 0
-)
-
-const (
-	RxCRC RXCRCR = 0xFFFF << 0 //+ Rx CRC register
-)
-
-const (
-	RxCRCn = 0
-)
-
-const (
-	TxCRC TXCRCR = 0xFFFF << 0 //+ Tx CRC register
-)
-
-const (
-	TxCRCn = 0
 )
 
 const (

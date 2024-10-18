@@ -5,23 +5,28 @@
 // Package aes provides access to the registers of the AES peripheral.
 //
 // Instances:
-//  AES  AES_BASE  AHB2  AES  Advanced encryption standard hardware accelerator
+//
+//	AES  AES_BASE  AHB2  AES  Advanced encryption standard hardware accelerator
+//
 // Registers:
-//  0x000 32  CR     control register
-//  0x004 32  SR     status register
-//  0x008 32  DINR   data input register
-//  0x00C 32  DOUTR  data output register
-//  0x010 32  KEYR0  key register 0
-//  0x014 32  KEYR1  key register 1
-//  0x018 32  KEYR2  key register 2
-//  0x01C 32  KEYR3  key register 3
-//  0x020 32  IVR0   initialization vector register 0
-//  0x024 32  IVR1   initialization vector register 1
-//  0x028 32  IVR2   initialization vector register 2
-//  0x02C 32  IVR3   initialization vector register 3
+//
+//	0x000 32  CR     control register
+//	0x004 32  SR     status register
+//	0x008 32  DINR   data input register
+//	0x00C 32  DOUTR  data output register
+//	0x010 32  KEYR0  key register 0
+//	0x014 32  KEYR1  key register 1
+//	0x018 32  KEYR2  key register 2
+//	0x01C 32  KEYR3  key register 3
+//	0x020 32  IVR0   initialization vector register 0
+//	0x024 32  IVR1   initialization vector register 1
+//	0x028 32  IVR2   initialization vector register 2
+//	0x02C 32  IVR3   initialization vector register 3
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/bus
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/bus
+//	github.com/embeddedgo/stm32/p/mmap
 package aes
 
 const (

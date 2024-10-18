@@ -5,15 +5,20 @@
 // Package crs provides access to the registers of the CRS peripheral.
 //
 // Instances:
-//  CRS  CRS_BASE  APB1  CRS  Clock recovery system
+//
+//	CRS  CRS_BASE  APB1  CRS  Clock recovery system
+//
 // Registers:
-//  0x000 32  CR    control register
-//  0x004 32  CFGR  configuration register
-//  0x008 32  ISR   interrupt and status register
-//  0x00C 32  ICR   interrupt flag clear register
+//
+//	0x000 32  CR    control register
+//	0x004 32  CFGR  configuration register
+//	0x008 32  ISR   interrupt and status register
+//	0x00C 32  ICR   interrupt flag clear register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/bus
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/bus
+//	github.com/embeddedgo/stm32/p/mmap
 package crs
 
 const (

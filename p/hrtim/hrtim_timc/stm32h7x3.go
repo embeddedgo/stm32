@@ -5,37 +5,42 @@
 // Package hrtim_timc provides access to the registers of the HRTIM_TIMC peripheral.
 //
 // Instances:
-//  HRTIM_TIMC  HRTIM_TIMC_BASE  -  HRTIM_TIMB  High Resolution Timer: TIMC
+//
+//	HRTIM_TIMC  HRTIM_TIMC_BASE  -  HRTIM_TIMB  High Resolution Timer: TIMC
+//
 // Registers:
-//  0x000 32  TIMCCR     Timerx Control Register
-//  0x004 32  TIMCISR    Timerx Interrupt Status Register
-//  0x008 32  TIMCICR    Timerx Interrupt Clear Register
-//  0x00C 32  TIMCDIER5  TIMxDIER5
-//  0x010 32  CNTCR      Timerx Counter Register
-//  0x014 32  PERCR      Timerx Period Register
-//  0x018 32  REPCR      Timerx Repetition Register
-//  0x01C 32  CMP1CR     Timerx Compare 1 Register
-//  0x020 32  CMP1CCR    Timerx Compare 1 Compound Register
-//  0x024 32  CMP2CR     Timerx Compare 2 Register
-//  0x028 32  CMP3CR     Timerx Compare 3 Register
-//  0x02C 32  CMP4CR     Timerx Compare 4 Register
-//  0x030 32  CPT1CR     Timerx Capture 1 Register
-//  0x034 32  CPT2CR     Timerx Capture 2 Register
-//  0x038 32  DTCR       Timerx Deadtime Register
-//  0x03C 32  SETC1R     Timerx Output1 Set Register
-//  0x040 32  RSTC1R     Timerx Output1 Reset Register
-//  0x044 32  SETC2R     Timerx Output2 Set Register
-//  0x048 32  RSTC2R     Timerx Output2 Reset Register
-//  0x04C 32  EEFCR1     Timerx External Event Filtering Register 1
-//  0x050 32  EEFCR2     Timerx External Event Filtering Register 2
-//  0x054 32  RSTCR      TimerA Reset Register
-//  0x058 32  CHPCR      Timerx Chopper Register
-//  0x05C 32  CPT1CCR    Timerx Capture 2 Control Register
-//  0x060 32  CPT2CCR    CPT2xCR
-//  0x064 32  OUTCR      Timerx Output Register
-//  0x068 32  FLTCR      Timerx Fault Register
+//
+//	0x000 32  TIMCCR     Timerx Control Register
+//	0x004 32  TIMCISR    Timerx Interrupt Status Register
+//	0x008 32  TIMCICR    Timerx Interrupt Clear Register
+//	0x00C 32  TIMCDIER5  TIMxDIER5
+//	0x010 32  CNTCR      Timerx Counter Register
+//	0x014 32  PERCR      Timerx Period Register
+//	0x018 32  REPCR      Timerx Repetition Register
+//	0x01C 32  CMP1CR     Timerx Compare 1 Register
+//	0x020 32  CMP1CCR    Timerx Compare 1 Compound Register
+//	0x024 32  CMP2CR     Timerx Compare 2 Register
+//	0x028 32  CMP3CR     Timerx Compare 3 Register
+//	0x02C 32  CMP4CR     Timerx Compare 4 Register
+//	0x030 32  CPT1CR     Timerx Capture 1 Register
+//	0x034 32  CPT2CR     Timerx Capture 2 Register
+//	0x038 32  DTCR       Timerx Deadtime Register
+//	0x03C 32  SETC1R     Timerx Output1 Set Register
+//	0x040 32  RSTC1R     Timerx Output1 Reset Register
+//	0x044 32  SETC2R     Timerx Output2 Set Register
+//	0x048 32  RSTC2R     Timerx Output2 Reset Register
+//	0x04C 32  EEFCR1     Timerx External Event Filtering Register 1
+//	0x050 32  EEFCR2     Timerx External Event Filtering Register 2
+//	0x054 32  RSTCR      TimerA Reset Register
+//	0x058 32  CHPCR      Timerx Chopper Register
+//	0x05C 32  CPT1CCR    Timerx Capture 2 Control Register
+//	0x060 32  CPT2CCR    CPT2xCR
+//	0x064 32  OUTCR      Timerx Output Register
+//	0x068 32  FLTCR      Timerx Fault Register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package hrtim_timc
 
 const (

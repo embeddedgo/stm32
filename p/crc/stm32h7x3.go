@@ -5,16 +5,21 @@
 // Package crc provides access to the registers of the CRC peripheral.
 //
 // Instances:
-//  CRC  CRC_BASE  AHB4  -  Cryptographic processor
+//
+//	CRC  CRC_BASE  AHB4  -  Cryptographic processor
+//
 // Registers:
-//  0x000 32  DR    Data register
-//  0x004 32  IDR   Independent Data register
-//  0x008 32  CR    Control register
-//  0x00C 32  INIT  Initial CRC value
-//  0x010 32  POL   CRC polynomial
+//
+//	0x000 32  DR    Data register
+//	0x004 32  IDR   Independent Data register
+//	0x008 32  CR    Control register
+//	0x010 32  INIT  Initial CRC value
+//	0x014 32  POL   CRC polynomial
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/bus
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/bus
+//	github.com/embeddedgo/stm32/p/mmap
 package crc
 
 const (

@@ -5,28 +5,33 @@
 // Package sai provides access to the registers of the SAI peripheral.
 //
 // Instances:
-//  SAI1  SAI1_BASE  APB2  SAI1  Serial audio interface
-//  SAI2  SAI2_BASE  APB2  SAI2  Serial audio interface
+//
+//	SAI1  SAI1_BASE  APB2  SAI1  Serial audio interface
+//	SAI2  SAI2_BASE  APB2  SAI2  Serial audio interface
+//
 // Registers:
-//  0x004 32  ACR1    AConfiguration register 1
-//  0x008 32  ACR2    AConfiguration register 2
-//  0x00C 32  AFRCR   AFRCR
-//  0x010 32  ASLOTR  ASlot register
-//  0x014 32  AIM     AInterrupt mask register2
-//  0x018 32  ASR     AStatus register
-//  0x01C 32  ACLRFR  AClear flag register
-//  0x020 32  ADR     AData register
-//  0x024 32  BCR1    BConfiguration register 1
-//  0x028 32  BCR2    BConfiguration register 2
-//  0x02C 32  BFRCR   BFRCR
-//  0x030 32  BSLOTR  BSlot register
-//  0x034 32  BIM     BInterrupt mask register2
-//  0x038 32  BSR     BStatus register
-//  0x03C 32  BCLRFR  BClear flag register
-//  0x040 32  BDR     BData register
+//
+//	0x004 32  ACR1    AConfiguration register 1
+//	0x008 32  ACR2    AConfiguration register 2
+//	0x00C 32  AFRCR   AFRCR
+//	0x010 32  ASLOTR  ASlot register
+//	0x014 32  AIM     AInterrupt mask register2
+//	0x018 32  ASR     AStatus register
+//	0x01C 32  ACLRFR  AClear flag register
+//	0x020 32  ADR     AData register
+//	0x024 32  BCR1    BConfiguration register 1
+//	0x028 32  BCR2    BConfiguration register 2
+//	0x02C 32  BFRCR   BFRCR
+//	0x030 32  BSLOTR  BSlot register
+//	0x034 32  BIM     BInterrupt mask register2
+//	0x038 32  BSR     BStatus register
+//	0x03C 32  BCLRFR  BClear flag register
+//	0x040 32  BDR     BData register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/bus
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/bus
+//	github.com/embeddedgo/stm32/p/mmap
 package sai
 
 const (

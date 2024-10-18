@@ -5,26 +5,31 @@
 // Package sai provides access to the registers of the SAI peripheral.
 //
 // Instances:
-//  SAI1  SAI1_BASE  -  -  Serial audio interface
+//
+//	SAI1  SAI1_BASE  -  -  Serial audio interface
+//
 // Registers:
-//  0x004 32  SAI_ACR1    SAI AConfiguration register 1
-//  0x008 32  SAI_ACR2    SAI AConfiguration register 2
-//  0x00C 32  SAI_AFRCR   SAI AFrame configuration register
-//  0x010 32  SAI_ASLOTR  SAI ASlot register
-//  0x014 32  SAI_AIM     SAI AInterrupt mask register2
-//  0x018 32  SAI_ASR     SAI AStatus register
-//  0x01C 32  SAI_ACLRFR  SAI AClear flag register
-//  0x020 32  SAI_ADR     SAI AData register
-//  0x024 32  SAI_BCR1    SAI BConfiguration register 1
-//  0x028 32  SAI_BCR2    SAI BConfiguration register 2
-//  0x02C 32  SAI_BFRCR   SAI BFrame configuration register
-//  0x030 32  SAI_BSLOTR  SAI BSlot register
-//  0x034 32  SAI_BIM     SAI BInterrupt mask register2
-//  0x038 32  SAI_BSR     SAI BStatus register
-//  0x03C 32  SAI_BCLRFR  SAI BClear flag register
-//  0x040 32  SAI_BDR     SAI BData register
+//
+//	0x004 32  SAI_ACR1    SAI AConfiguration register 1
+//	0x008 32  SAI_ACR2    SAI AConfiguration register 2
+//	0x00C 32  SAI_AFRCR   SAI AFrame configuration register
+//	0x010 32  SAI_ASLOTR  SAI ASlot register
+//	0x014 32  SAI_AIM     SAI AInterrupt mask register2
+//	0x018 32  SAI_ASR     SAI AStatus register
+//	0x01C 32  SAI_ACLRFR  SAI AClear flag register
+//	0x020 32  SAI_ADR     SAI AData register
+//	0x024 32  SAI_BCR1    SAI BConfiguration register 1
+//	0x028 32  SAI_BCR2    SAI BConfiguration register 2
+//	0x02C 32  SAI_BFRCR   SAI BFrame configuration register
+//	0x030 32  SAI_BSLOTR  SAI BSlot register
+//	0x034 32  SAI_BIM     SAI BInterrupt mask register2
+//	0x038 32  SAI_BSR     SAI BStatus register
+//	0x03C 32  SAI_BCLRFR  SAI BClear flag register
+//	0x040 32  SAI_BDR     SAI BData register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package sai
 
 const (

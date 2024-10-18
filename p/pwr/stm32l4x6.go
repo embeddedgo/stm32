@@ -5,19 +5,24 @@
 // Package pwr provides access to the registers of the PWR peripheral.
 //
 // Instances:
-//  PWR  PWR_BASE  APB1  -  Power control
+//
+//	PWR  PWR_BASE  APB1  -  Power control
+//
 // Registers:
-//  0x000 32  CR1                 Power control register 1
-//  0x004 32  CR2                 Power control register 2
-//  0x008 32  CR3                 Power control register 3
-//  0x00C 32  CR4                 Power control register 4
-//  0x010 32  SR1                 Power status register 1
-//  0x014 32  SR2                 Power status register 2
-//  0x018 32  SCR                 Power status clear register
-//  0x020 32  PUDC{PUCR,PDCR}[8]  Power Port x pull-up/pull-down control registers
+//
+//	0x000 32  CR1                 Power control register 1
+//	0x004 32  CR2                 Power control register 2
+//	0x008 32  CR3                 Power control register 3
+//	0x00C 32  CR4                 Power control register 4
+//	0x010 32  SR1                 Power status register 1
+//	0x014 32  SR2                 Power status register 2
+//	0x018 32  SCR                 Power status clear register
+//	0x020 32  PUDC{PUCR,PDCR}[8]  Power Port x pull-up/pull-down control registers
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/bus
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/bus
+//	github.com/embeddedgo/stm32/p/mmap
 package pwr
 
 const (

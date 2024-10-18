@@ -5,56 +5,61 @@
 // Package axi provides access to the registers of the AXI peripheral.
 //
 // Instances:
-//  AXI  AXI_BASE  -  -  AXI interconnect registers
+//
+//	AXI  AXI_BASE  -  -  AXI interconnect registers
+//
 // Registers:
-//  0x1FD0  32  AXI_PERIPH_ID_4          AXI interconnect - peripheral ID4 register
-//  0x1FE0  32  AXI_PERIPH_ID_0          AXI interconnect - peripheral ID0 register
-//  0x1FE4  32  AXI_PERIPH_ID_1          AXI interconnect - peripheral ID1 register
-//  0x1FE8  32  AXI_PERIPH_ID_2          AXI interconnect - peripheral ID2 register
-//  0x1FEC  32  AXI_PERIPH_ID_3          AXI interconnect - peripheral ID3 register
-//  0x1FF0  32  AXI_COMP_ID_0            AXI interconnect - component ID0 register
-//  0x1FF4  32  AXI_COMP_ID_1            AXI interconnect - component ID1 register
-//  0x1FF8  32  AXI_COMP_ID_2            AXI interconnect - component ID2 register
-//  0x1FFC  32  AXI_COMP_ID_3            AXI interconnect - component ID3 register
-//  0x2008  32  AXI_TARG1_FN_MOD_ISS_BM  AXI interconnect - TARG x bus matrix issuing functionality register
-//  0x2024  32  AXI_TARG1_FN_MOD2        AXI interconnect - TARG x bus matrix functionality 2 register
-//  0x202C  32  AXI_TARG1_FN_MOD_LB      AXI interconnect - TARG x long burst functionality modification
-//  0x2108  32  AXI_TARG1_FN_MOD         AXI interconnect - TARG x long burst functionality modification
-//  0x3008  32  AXI_TARG2_FN_MOD_ISS_BM  AXI interconnect - TARG x bus matrix issuing functionality register
-//  0x3024  32  AXI_TARG2_FN_MOD2        AXI interconnect - TARG x bus matrix functionality 2 register
-//  0x302C  32  AXI_TARG2_FN_MOD_LB      AXI interconnect - TARG x long burst functionality modification
-//  0x3108  32  AXI_TARG2_FN_MOD         AXI interconnect - TARG x long burst functionality modification
-//  0x4008  32  AXI_TARG3_FN_MOD_ISS_BM  AXI interconnect - TARG x bus matrix issuing functionality register
-//  0x5008  32  AXI_TARG4_FN_MOD_ISS_BM  AXI interconnect - TARG x bus matrix issuing functionality register
-//  0x6008  32  AXI_TARG5_FN_MOD_ISS_BM  AXI interconnect - TARG x bus matrix issuing functionality register
-//  0x7008  32  AXI_TARG6_FN_MOD_ISS_BM  AXI interconnect - TARG x bus matrix issuing functionality register
-//  0x800C  32  AXI_TARG7_FN_MOD_ISS_BM  AXI interconnect - TARG x bus matrix issuing functionality register
-//  0x8024  32  AXI_TARG7_FN_MOD2        AXI interconnect - TARG x bus matrix functionality 2 register
-//  0x8108  32  AXI_TARG7_FN_MOD         AXI interconnect - TARG x long burst functionality modification
-//  0x42024 32  AXI_INI1_FN_MOD2         AXI interconnect - INI x functionality modification 2 register
-//  0x42028 32  AXI_INI1_FN_MOD_AHB      AXI interconnect - INI x AHB functionality modification register
-//  0x42100 32  AXI_INI1_READ_QOS        AXI interconnect - INI x read QoS register
-//  0x42104 32  AXI_INI1_WRITE_QOS       AXI interconnect - INI x write QoS register
-//  0x42108 32  AXI_INI1_FN_MOD          AXI interconnect - INI x issuing functionality modification register
-//  0x43100 32  AXI_INI2_READ_QOS        AXI interconnect - INI x read QoS register
-//  0x43104 32  AXI_INI2_WRITE_QOS       AXI interconnect - INI x write QoS register
-//  0x43108 32  AXI_INI2_FN_MOD          AXI interconnect - INI x issuing functionality modification register
-//  0x44024 32  AXI_INI3_FN_MOD2         AXI interconnect - INI x functionality modification 2 register
-//  0x44028 32  AXI_INI3_FN_MOD_AHB      AXI interconnect - INI x AHB functionality modification register
-//  0x44100 32  AXI_INI3_READ_QOS        AXI interconnect - INI x read QoS register
-//  0x44104 32  AXI_INI3_WRITE_QOS       AXI interconnect - INI x write QoS register
-//  0x44108 32  AXI_INI3_FN_MOD          AXI interconnect - INI x issuing functionality modification register
-//  0x45100 32  AXI_INI4_READ_QOS        AXI interconnect - INI x read QoS register
-//  0x45104 32  AXI_INI4_WRITE_QOS       AXI interconnect - INI x write QoS register
-//  0x45108 32  AXI_INI4_FN_MOD          AXI interconnect - INI x issuing functionality modification register
-//  0x46100 32  AXI_INI5_READ_QOS        AXI interconnect - INI x read QoS register
-//  0x46104 32  AXI_INI5_WRITE_QOS       AXI interconnect - INI x write QoS register
-//  0x46108 32  AXI_INI5_FN_MOD          AXI interconnect - INI x issuing functionality modification register
-//  0x47100 32  AXI_INI6_READ_QOS        AXI interconnect - INI x read QoS register
-//  0x47104 32  AXI_INI6_WRITE_QOS       AXI interconnect - INI x write QoS register
-//  0x47108 32  AXI_INI6_FN_MOD          AXI interconnect - INI x issuing functionality modification register
+//
+//	0x1FD0  32  AXI_PERIPH_ID_4          AXI interconnect - peripheral ID4 register
+//	0x1FE0  32  AXI_PERIPH_ID_0          AXI interconnect - peripheral ID0 register
+//	0x1FE4  32  AXI_PERIPH_ID_1          AXI interconnect - peripheral ID1 register
+//	0x1FE8  32  AXI_PERIPH_ID_2          AXI interconnect - peripheral ID2 register
+//	0x1FEC  32  AXI_PERIPH_ID_3          AXI interconnect - peripheral ID3 register
+//	0x1FF0  32  AXI_COMP_ID_0            AXI interconnect - component ID0 register
+//	0x1FF4  32  AXI_COMP_ID_1            AXI interconnect - component ID1 register
+//	0x1FF8  32  AXI_COMP_ID_2            AXI interconnect - component ID2 register
+//	0x1FFC  32  AXI_COMP_ID_3            AXI interconnect - component ID3 register
+//	0x2008  32  AXI_TARG1_FN_MOD_ISS_BM  AXI interconnect - TARG x bus matrix issuing functionality register
+//	0x2024  32  AXI_TARG1_FN_MOD2        AXI interconnect - TARG x bus matrix functionality 2 register
+//	0x202C  32  AXI_TARG1_FN_MOD_LB      AXI interconnect - TARG x long burst functionality modification
+//	0x2108  32  AXI_TARG1_FN_MOD         AXI interconnect - TARG x long burst functionality modification
+//	0x3008  32  AXI_TARG2_FN_MOD_ISS_BM  AXI interconnect - TARG x bus matrix issuing functionality register
+//	0x3024  32  AXI_TARG2_FN_MOD2        AXI interconnect - TARG x bus matrix functionality 2 register
+//	0x302C  32  AXI_TARG2_FN_MOD_LB      AXI interconnect - TARG x long burst functionality modification
+//	0x3108  32  AXI_TARG2_FN_MOD         AXI interconnect - TARG x long burst functionality modification
+//	0x4008  32  AXI_TARG3_FN_MOD_ISS_BM  AXI interconnect - TARG x bus matrix issuing functionality register
+//	0x5008  32  AXI_TARG4_FN_MOD_ISS_BM  AXI interconnect - TARG x bus matrix issuing functionality register
+//	0x6008  32  AXI_TARG5_FN_MOD_ISS_BM  AXI interconnect - TARG x bus matrix issuing functionality register
+//	0x7008  32  AXI_TARG6_FN_MOD_ISS_BM  AXI interconnect - TARG x bus matrix issuing functionality register
+//	0x800C  32  AXI_TARG7_FN_MOD_ISS_BM  AXI interconnect - TARG x bus matrix issuing functionality register
+//	0x8024  32  AXI_TARG7_FN_MOD2        AXI interconnect - TARG x bus matrix functionality 2 register
+//	0x8108  32  AXI_TARG7_FN_MOD         AXI interconnect - TARG x long burst functionality modification
+//	0x42024 32  AXI_INI1_FN_MOD2         AXI interconnect - INI x functionality modification 2 register
+//	0x42028 32  AXI_INI1_FN_MOD_AHB      AXI interconnect - INI x AHB functionality modification register
+//	0x42100 32  AXI_INI1_READ_QOS        AXI interconnect - INI x read QoS register
+//	0x42104 32  AXI_INI1_WRITE_QOS       AXI interconnect - INI x write QoS register
+//	0x42108 32  AXI_INI1_FN_MOD          AXI interconnect - INI x issuing functionality modification register
+//	0x43100 32  AXI_INI2_READ_QOS        AXI interconnect - INI x read QoS register
+//	0x43104 32  AXI_INI2_WRITE_QOS       AXI interconnect - INI x write QoS register
+//	0x43108 32  AXI_INI2_FN_MOD          AXI interconnect - INI x issuing functionality modification register
+//	0x44024 32  AXI_INI3_FN_MOD2         AXI interconnect - INI x functionality modification 2 register
+//	0x44028 32  AXI_INI3_FN_MOD_AHB      AXI interconnect - INI x AHB functionality modification register
+//	0x44100 32  AXI_INI3_READ_QOS        AXI interconnect - INI x read QoS register
+//	0x44104 32  AXI_INI3_WRITE_QOS       AXI interconnect - INI x write QoS register
+//	0x44108 32  AXI_INI3_FN_MOD          AXI interconnect - INI x issuing functionality modification register
+//	0x45100 32  AXI_INI4_READ_QOS        AXI interconnect - INI x read QoS register
+//	0x45104 32  AXI_INI4_WRITE_QOS       AXI interconnect - INI x write QoS register
+//	0x45108 32  AXI_INI4_FN_MOD          AXI interconnect - INI x issuing functionality modification register
+//	0x46100 32  AXI_INI5_READ_QOS        AXI interconnect - INI x read QoS register
+//	0x46104 32  AXI_INI5_WRITE_QOS       AXI interconnect - INI x write QoS register
+//	0x46108 32  AXI_INI5_FN_MOD          AXI interconnect - INI x issuing functionality modification register
+//	0x47100 32  AXI_INI6_READ_QOS        AXI interconnect - INI x read QoS register
+//	0x47104 32  AXI_INI6_WRITE_QOS       AXI interconnect - INI x write QoS register
+//	0x47108 32  AXI_INI6_FN_MOD          AXI interconnect - INI x issuing functionality modification register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package axi
 
 const (

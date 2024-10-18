@@ -5,31 +5,36 @@
 // Package gpio provides access to the registers of the GPIOA peripheral.
 //
 // Instances:
-//  GPIOA  GPIOA_BASE  AHB4  -
-//  GPIOB  GPIOB_BASE  AHB4  -
-//  GPIOC  GPIOC_BASE  AHB4  -
-//  GPIOD  GPIOD_BASE  AHB4  -
-//  GPIOE  GPIOE_BASE  AHB4  -
-//  GPIOF  GPIOF_BASE  AHB4  -
-//  GPIOG  GPIOG_BASE  AHB4  -
-//  GPIOH  GPIOH_BASE  AHB4  -
-//  GPIOI  GPIOI_BASE  AHB4  -
-//  GPIOJ  GPIOJ_BASE  AHB4  -
-//  GPIOK  GPIOK_BASE  AHB4  -
+//
+//	GPIOA  GPIOA_BASE  AHB4  -
+//	GPIOB  GPIOB_BASE  AHB4  -
+//	GPIOC  GPIOC_BASE  AHB4  -
+//	GPIOD  GPIOD_BASE  AHB4  -
+//	GPIOE  GPIOE_BASE  AHB4  -
+//	GPIOF  GPIOF_BASE  AHB4  -
+//	GPIOG  GPIOG_BASE  AHB4  -
+//	GPIOH  GPIOH_BASE  AHB4  -
+//	GPIOI  GPIOI_BASE  AHB4  -
+//	GPIOJ  GPIOJ_BASE  AHB4  -
+//	GPIOK  GPIOK_BASE  AHB4  -
+//
 // Registers:
-//  0x000 32  MODER    GPIO port mode register
-//  0x004 32  OTYPER   GPIO port output type register
-//  0x008 32  OSPEEDR  GPIO port output speed register
-//  0x00C 32  PUPDR    GPIO port pull-up/pull-down register
-//  0x010 32  IDR      GPIO port input data register
-//  0x014 32  ODR      GPIO port output data register
-//  0x018 32  BSRR     GPIO port bit set/reset register
-//  0x01C 32  LCKR     This register is used to lock the configuration of the port bits when a correct write sequence is applied to bit 16 (LCKK). The value of bits [15:0] is used to lock the configuration of the GPIO. During the write sequence, the value of LCKR[15:0] must not change. When the LOCK sequence has been applied on a port bit, the value of this port bit can no longer be modified until the next MCU reset or peripheral reset.A specific write sequence is used to write to the GPIOx_LCKR register. Only word access (32-bit long) is allowed during this locking sequence.Each lock bit freezes a specific configuration register (control and alternate function registers).
-//  0x020 32  AFRL     GPIO alternate function low register
-//  0x024 32  AFRH     GPIO alternate function high register
+//
+//	0x000 32  MODER    GPIO port mode register
+//	0x004 32  OTYPER   GPIO port output type register
+//	0x008 32  OSPEEDR  GPIO port output speed register
+//	0x00C 32  PUPDR    GPIO port pull-up/pull-down register
+//	0x010 32  IDR      GPIO port input data register
+//	0x014 32  ODR      GPIO port output data register
+//	0x018 32  BSRR     GPIO port bit set/reset register
+//	0x01C 32  LCKR     This register is used to lock the configuration of the port bits when a correct write sequence is applied to bit 16 (LCKK). The value of bits [15:0] is used to lock the configuration of the GPIO. During the write sequence, the value of LCKR[15:0] must not change. When the LOCK sequence has been applied on a port bit, the value of this port bit can no longer be modified until the next MCU reset or peripheral reset.A specific write sequence is used to write to the GPIOx_LCKR register. Only word access (32-bit long) is allowed during this locking sequence.Each lock bit freezes a specific configuration register (control and alternate function registers).
+//	0x020 32  AFRL     GPIO alternate function low register
+//	0x024 32  AFRH     GPIO alternate function high register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/bus
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/bus
+//	github.com/embeddedgo/stm32/p/mmap
 package gpio
 
 const (

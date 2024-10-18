@@ -5,81 +5,86 @@
 // Package hsem provides access to the registers of the HSEM peripheral.
 //
 // Instances:
-//  HSEM  HSEM_BASE  AHB4  HSEM0
+//
+//	HSEM  HSEM_BASE  AHB4  HSEM0
+//
 // Registers:
-//  0x000 32  HSEM_R0     HSEM register HSEM_R0 HSEM_R31
-//  0x004 32  HSEM_R1     HSEM register HSEM_R0 HSEM_R31
-//  0x008 32  HSEM_R2     HSEM register HSEM_R0 HSEM_R31
-//  0x00C 32  HSEM_R3     HSEM register HSEM_R0 HSEM_R31
-//  0x010 32  HSEM_R4     HSEM register HSEM_R0 HSEM_R31
-//  0x014 32  HSEM_R5     HSEM register HSEM_R0 HSEM_R31
-//  0x018 32  HSEM_R6     HSEM register HSEM_R0 HSEM_R31
-//  0x01C 32  HSEM_R7     HSEM register HSEM_R0 HSEM_R31
-//  0x020 32  HSEM_R8     HSEM register HSEM_R0 HSEM_R31
-//  0x024 32  HSEM_R9     HSEM register HSEM_R0 HSEM_R31
-//  0x028 32  HSEM_R10    HSEM register HSEM_R0 HSEM_R31
-//  0x02C 32  HSEM_R11    HSEM register HSEM_R0 HSEM_R31
-//  0x030 32  HSEM_R12    HSEM register HSEM_R0 HSEM_R31
-//  0x034 32  HSEM_R13    HSEM register HSEM_R0 HSEM_R31
-//  0x038 32  HSEM_R14    HSEM register HSEM_R0 HSEM_R31
-//  0x03C 32  HSEM_R15    HSEM register HSEM_R0 HSEM_R31
-//  0x040 32  HSEM_R16    HSEM register HSEM_R0 HSEM_R31
-//  0x044 32  HSEM_R17    HSEM register HSEM_R0 HSEM_R31
-//  0x048 32  HSEM_R18    HSEM register HSEM_R0 HSEM_R31
-//  0x04C 32  HSEM_R19    HSEM register HSEM_R0 HSEM_R31
-//  0x050 32  HSEM_R20    HSEM register HSEM_R0 HSEM_R31
-//  0x054 32  HSEM_R21    HSEM register HSEM_R0 HSEM_R31
-//  0x058 32  HSEM_R22    HSEM register HSEM_R0 HSEM_R31
-//  0x05C 32  HSEM_R23    HSEM register HSEM_R0 HSEM_R31
-//  0x060 32  HSEM_R24    HSEM register HSEM_R0 HSEM_R31
-//  0x064 32  HSEM_R25    HSEM register HSEM_R0 HSEM_R31
-//  0x068 32  HSEM_R26    HSEM register HSEM_R0 HSEM_R31
-//  0x06C 32  HSEM_R27    HSEM register HSEM_R0 HSEM_R31
-//  0x070 32  HSEM_R28    HSEM register HSEM_R0 HSEM_R31
-//  0x074 32  HSEM_R29    HSEM register HSEM_R0 HSEM_R31
-//  0x078 32  HSEM_R30    HSEM register HSEM_R0 HSEM_R31
-//  0x07C 32  HSEM_R31    HSEM register HSEM_R0 HSEM_R31
-//  0x080 32  HSEM_RLR0   HSEM Read lock register
-//  0x084 32  HSEM_RLR1   HSEM Read lock register
-//  0x088 32  HSEM_RLR2   HSEM Read lock register
-//  0x08C 32  HSEM_RLR3   HSEM Read lock register
-//  0x090 32  HSEM_RLR4   HSEM Read lock register
-//  0x094 32  HSEM_RLR5   HSEM Read lock register
-//  0x098 32  HSEM_RLR6   HSEM Read lock register
-//  0x09C 32  HSEM_RLR7   HSEM Read lock register
-//  0x0A0 32  HSEM_RLR8   HSEM Read lock register
-//  0x0A4 32  HSEM_RLR9   HSEM Read lock register
-//  0x0A8 32  HSEM_RLR10  HSEM Read lock register
-//  0x0AC 32  HSEM_RLR11  HSEM Read lock register
-//  0x0B0 32  HSEM_RLR12  HSEM Read lock register
-//  0x0B4 32  HSEM_RLR13  HSEM Read lock register
-//  0x0B8 32  HSEM_RLR14  HSEM Read lock register
-//  0x0BC 32  HSEM_RLR15  HSEM Read lock register
-//  0x0C0 32  HSEM_RLR16  HSEM Read lock register
-//  0x0C4 32  HSEM_RLR17  HSEM Read lock register
-//  0x0C8 32  HSEM_RLR18  HSEM Read lock register
-//  0x0CC 32  HSEM_RLR19  HSEM Read lock register
-//  0x0D0 32  HSEM_RLR20  HSEM Read lock register
-//  0x0D4 32  HSEM_RLR21  HSEM Read lock register
-//  0x0D8 32  HSEM_RLR22  HSEM Read lock register
-//  0x0DC 32  HSEM_RLR23  HSEM Read lock register
-//  0x0E0 32  HSEM_RLR24  HSEM Read lock register
-//  0x0E4 32  HSEM_RLR25  HSEM Read lock register
-//  0x0E8 32  HSEM_RLR26  HSEM Read lock register
-//  0x0EC 32  HSEM_RLR27  HSEM Read lock register
-//  0x0F0 32  HSEM_RLR28  HSEM Read lock register
-//  0x0F4 32  HSEM_RLR29  HSEM Read lock register
-//  0x0F8 32  HSEM_RLR30  HSEM Read lock register
-//  0x0FC 32  HSEM_RLR31  HSEM Read lock register
-//  0x100 32  HSEM_IER    HSEM Interrupt enable register
-//  0x104 32  HSEM_ICR    HSEM Interrupt clear register
-//  0x108 32  HSEM_ISR    HSEM Interrupt status register
-//  0x10C 32  HSEM_MISR   HSEM Masked interrupt status register
-//  0x140 32  HSEM_CR     HSEM Clear register
-//  0x144 32  HSEM_KEYR   HSEM Interrupt clear register
+//
+//	0x000 32  HSEM_R0     HSEM register HSEM_R0 HSEM_R31
+//	0x004 32  HSEM_R1     HSEM register HSEM_R0 HSEM_R31
+//	0x008 32  HSEM_R2     HSEM register HSEM_R0 HSEM_R31
+//	0x00C 32  HSEM_R3     HSEM register HSEM_R0 HSEM_R31
+//	0x010 32  HSEM_R4     HSEM register HSEM_R0 HSEM_R31
+//	0x014 32  HSEM_R5     HSEM register HSEM_R0 HSEM_R31
+//	0x018 32  HSEM_R6     HSEM register HSEM_R0 HSEM_R31
+//	0x01C 32  HSEM_R7     HSEM register HSEM_R0 HSEM_R31
+//	0x020 32  HSEM_R8     HSEM register HSEM_R0 HSEM_R31
+//	0x024 32  HSEM_R9     HSEM register HSEM_R0 HSEM_R31
+//	0x028 32  HSEM_R10    HSEM register HSEM_R0 HSEM_R31
+//	0x02C 32  HSEM_R11    HSEM register HSEM_R0 HSEM_R31
+//	0x030 32  HSEM_R12    HSEM register HSEM_R0 HSEM_R31
+//	0x034 32  HSEM_R13    HSEM register HSEM_R0 HSEM_R31
+//	0x038 32  HSEM_R14    HSEM register HSEM_R0 HSEM_R31
+//	0x03C 32  HSEM_R15    HSEM register HSEM_R0 HSEM_R31
+//	0x040 32  HSEM_R16    HSEM register HSEM_R0 HSEM_R31
+//	0x044 32  HSEM_R17    HSEM register HSEM_R0 HSEM_R31
+//	0x048 32  HSEM_R18    HSEM register HSEM_R0 HSEM_R31
+//	0x04C 32  HSEM_R19    HSEM register HSEM_R0 HSEM_R31
+//	0x050 32  HSEM_R20    HSEM register HSEM_R0 HSEM_R31
+//	0x054 32  HSEM_R21    HSEM register HSEM_R0 HSEM_R31
+//	0x058 32  HSEM_R22    HSEM register HSEM_R0 HSEM_R31
+//	0x05C 32  HSEM_R23    HSEM register HSEM_R0 HSEM_R31
+//	0x060 32  HSEM_R24    HSEM register HSEM_R0 HSEM_R31
+//	0x064 32  HSEM_R25    HSEM register HSEM_R0 HSEM_R31
+//	0x068 32  HSEM_R26    HSEM register HSEM_R0 HSEM_R31
+//	0x06C 32  HSEM_R27    HSEM register HSEM_R0 HSEM_R31
+//	0x070 32  HSEM_R28    HSEM register HSEM_R0 HSEM_R31
+//	0x074 32  HSEM_R29    HSEM register HSEM_R0 HSEM_R31
+//	0x078 32  HSEM_R30    HSEM register HSEM_R0 HSEM_R31
+//	0x07C 32  HSEM_R31    HSEM register HSEM_R0 HSEM_R31
+//	0x080 32  HSEM_RLR0   HSEM Read lock register
+//	0x084 32  HSEM_RLR1   HSEM Read lock register
+//	0x088 32  HSEM_RLR2   HSEM Read lock register
+//	0x08C 32  HSEM_RLR3   HSEM Read lock register
+//	0x090 32  HSEM_RLR4   HSEM Read lock register
+//	0x094 32  HSEM_RLR5   HSEM Read lock register
+//	0x098 32  HSEM_RLR6   HSEM Read lock register
+//	0x09C 32  HSEM_RLR7   HSEM Read lock register
+//	0x0A0 32  HSEM_RLR8   HSEM Read lock register
+//	0x0A4 32  HSEM_RLR9   HSEM Read lock register
+//	0x0A8 32  HSEM_RLR10  HSEM Read lock register
+//	0x0AC 32  HSEM_RLR11  HSEM Read lock register
+//	0x0B0 32  HSEM_RLR12  HSEM Read lock register
+//	0x0B4 32  HSEM_RLR13  HSEM Read lock register
+//	0x0B8 32  HSEM_RLR14  HSEM Read lock register
+//	0x0BC 32  HSEM_RLR15  HSEM Read lock register
+//	0x0C0 32  HSEM_RLR16  HSEM Read lock register
+//	0x0C4 32  HSEM_RLR17  HSEM Read lock register
+//	0x0C8 32  HSEM_RLR18  HSEM Read lock register
+//	0x0CC 32  HSEM_RLR19  HSEM Read lock register
+//	0x0D0 32  HSEM_RLR20  HSEM Read lock register
+//	0x0D4 32  HSEM_RLR21  HSEM Read lock register
+//	0x0D8 32  HSEM_RLR22  HSEM Read lock register
+//	0x0DC 32  HSEM_RLR23  HSEM Read lock register
+//	0x0E0 32  HSEM_RLR24  HSEM Read lock register
+//	0x0E4 32  HSEM_RLR25  HSEM Read lock register
+//	0x0E8 32  HSEM_RLR26  HSEM Read lock register
+//	0x0EC 32  HSEM_RLR27  HSEM Read lock register
+//	0x0F0 32  HSEM_RLR28  HSEM Read lock register
+//	0x0F4 32  HSEM_RLR29  HSEM Read lock register
+//	0x0F8 32  HSEM_RLR30  HSEM Read lock register
+//	0x0FC 32  HSEM_RLR31  HSEM Read lock register
+//	0x100 32  HSEM_IER    HSEM Interrupt enable register
+//	0x104 32  HSEM_ICR    HSEM Interrupt clear register
+//	0x108 32  HSEM_ISR    HSEM Interrupt status register
+//	0x10C 32  HSEM_MISR   HSEM Masked interrupt status register
+//	0x140 32  HSEM_CR     HSEM Clear register
+//	0x144 32  HSEM_KEYR   HSEM Interrupt clear register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/bus
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/bus
+//	github.com/embeddedgo/stm32/p/mmap
 package hsem
 
 const (

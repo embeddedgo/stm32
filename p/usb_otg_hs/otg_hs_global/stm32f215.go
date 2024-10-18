@@ -5,35 +5,40 @@
 // Package otg_hs_global provides access to the registers of the OTG_HS_GLOBAL peripheral.
 //
 // Instances:
-//  OTG_HS_GLOBAL  OTG_HS_GLOBAL_BASE  -  OTG_HS_EP1_OUT,OTG_HS_EP1_IN,OTG_HS_WKUP,OTG_HS  USB on the go high speed
+//
+//	OTG_HS_GLOBAL  OTG_HS_GLOBAL_BASE  -  OTG_HS_EP1_OUT,OTG_HS_EP1_IN,OTG_HS_WKUP,OTG_HS  USB on the go high speed
+//
 // Registers:
-//  0x000 32  OTG_HS_GOTGCTL             OTG_HS control and status register
-//  0x004 32  OTG_HS_GOTGINT             OTG_HS interrupt register
-//  0x008 32  OTG_HS_GAHBCFG             OTG_HS AHB configuration register
-//  0x00C 32  OTG_HS_GUSBCFG             OTG_HS USB configuration register
-//  0x010 32  OTG_HS_GRSTCTL             OTG_HS reset register
-//  0x014 32  OTG_HS_GINTSTS             OTG_HS core interrupt register
-//  0x018 32  OTG_HS_GINTMSK             OTG_HS interrupt mask register
-//  0x01C 32  OTG_HS_GRXSTSR_Host        OTG_HS Receive status debug read register (host mode)
-//  0x01C 32  OTG_HS_GRXSTSR_Peripheral  OTG_HS Receive status debug read register (peripheral mode mode)
-//  0x020 32  OTG_HS_GRXSTSP_Host        OTG_HS status read and pop register (host mode)
-//  0x020 32  OTG_HS_GRXSTSP_Peripheral  OTG_HS status read and pop register (peripheral mode)
-//  0x024 32  OTG_HS_GRXFSIZ             OTG_HS Receive FIFO size register
-//  0x028 32  OTG_HS_TX0FSIZ_Peripheral  Endpoint 0 transmit FIFO size (peripheral mode)
-//  0x028 32  OTG_HS_GNPTXFSIZ_Host      OTG_HS nonperiodic transmit FIFO size register (host mode)
-//  0x02C 32  OTG_HS_GNPTXSTS            OTG_HS nonperiodic transmit FIFO/queue status register
-//  0x038 32  OTG_HS_GCCFG               OTG_HS general core configuration register
-//  0x03C 32  OTG_HS_CID                 OTG_HS core ID register
-//  0x100 32  OTG_HS_HPTXFSIZ            OTG_HS Host periodic transmit FIFO size register
-//  0x104 32  OTG_HS_DIEPTXF1            OTG_HS device IN endpoint transmit FIFO size register
-//  0x108 32  OTG_HS_DIEPTXF2            OTG_HS device IN endpoint transmit FIFO size register
-//  0x11C 32  OTG_HS_DIEPTXF3            OTG_HS device IN endpoint transmit FIFO size register
-//  0x120 32  OTG_HS_DIEPTXF4            OTG_HS device IN endpoint transmit FIFO size register
-//  0x124 32  OTG_HS_DIEPTXF5            OTG_HS device IN endpoint transmit FIFO size register
-//  0x128 32  OTG_HS_DIEPTXF6            OTG_HS device IN endpoint transmit FIFO size register
-//  0x12C 32  OTG_HS_DIEPTXF7            OTG_HS device IN endpoint transmit FIFO size register
+//
+//	0x000 32  OTG_HS_GOTGCTL             OTG_HS control and status register
+//	0x004 32  OTG_HS_GOTGINT             OTG_HS interrupt register
+//	0x008 32  OTG_HS_GAHBCFG             OTG_HS AHB configuration register
+//	0x00C 32  OTG_HS_GUSBCFG             OTG_HS USB configuration register
+//	0x010 32  OTG_HS_GRSTCTL             OTG_HS reset register
+//	0x014 32  OTG_HS_GINTSTS             OTG_HS core interrupt register
+//	0x018 32  OTG_HS_GINTMSK             OTG_HS interrupt mask register
+//	0x01C 32  OTG_HS_GRXSTSR_Host        OTG_HS Receive status debug read register (host mode)
+//	0x01C 32  OTG_HS_GRXSTSR_Peripheral  OTG_HS Receive status debug read register (peripheral mode mode)
+//	0x020 32  OTG_HS_GRXSTSP_Host        OTG_HS status read and pop register (host mode)
+//	0x020 32  OTG_HS_GRXSTSP_Peripheral  OTG_HS status read and pop register (peripheral mode)
+//	0x024 32  OTG_HS_GRXFSIZ             OTG_HS Receive FIFO size register
+//	0x028 32  OTG_HS_GNPTXFSIZ_Host      OTG_HS nonperiodic transmit FIFO size register (host mode)
+//	0x028 32  OTG_HS_TX0FSIZ_Peripheral  Endpoint 0 transmit FIFO size (peripheral mode)
+//	0x02C 32  OTG_HS_GNPTXSTS            OTG_HS nonperiodic transmit FIFO/queue status register
+//	0x038 32  OTG_HS_GCCFG               OTG_HS general core configuration register
+//	0x03C 32  OTG_HS_CID                 OTG_HS core ID register
+//	0x100 32  OTG_HS_HPTXFSIZ            OTG_HS Host periodic transmit FIFO size register
+//	0x104 32  OTG_HS_DIEPTXF1            OTG_HS device IN endpoint transmit FIFO size register
+//	0x108 32  OTG_HS_DIEPTXF2            OTG_HS device IN endpoint transmit FIFO size register
+//	0x11C 32  OTG_HS_DIEPTXF3            OTG_HS device IN endpoint transmit FIFO size register
+//	0x120 32  OTG_HS_DIEPTXF4            OTG_HS device IN endpoint transmit FIFO size register
+//	0x124 32  OTG_HS_DIEPTXF5            OTG_HS device IN endpoint transmit FIFO size register
+//	0x128 32  OTG_HS_DIEPTXF6            OTG_HS device IN endpoint transmit FIFO size register
+//	0x12C 32  OTG_HS_DIEPTXF7            OTG_HS device IN endpoint transmit FIFO size register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package otg_hs_global
 
 const (
@@ -345,16 +350,6 @@ const (
 )
 
 const (
-	TX0FSA OTG_HS_TX0FSIZ_Peripheral = 0xFFFF << 0  //+ Endpoint 0 transmit RAM start address
-	TX0FD  OTG_HS_TX0FSIZ_Peripheral = 0xFFFF << 16 //+ Endpoint 0 TxFIFO depth
-)
-
-const (
-	TX0FSAn = 0
-	TX0FDn  = 16
-)
-
-const (
 	NPTXFSA OTG_HS_GNPTXFSIZ_Host = 0xFFFF << 0  //+ Nonperiodic transmit RAM start address
 	NPTXFD  OTG_HS_GNPTXFSIZ_Host = 0xFFFF << 16 //+ Nonperiodic TxFIFO depth
 )
@@ -362,6 +357,16 @@ const (
 const (
 	NPTXFSAn = 0
 	NPTXFDn  = 16
+)
+
+const (
+	TX0FSA OTG_HS_TX0FSIZ_Peripheral = 0xFFFF << 0  //+ Endpoint 0 transmit RAM start address
+	TX0FD  OTG_HS_TX0FSIZ_Peripheral = 0xFFFF << 16 //+ Endpoint 0 TxFIFO depth
+)
+
+const (
+	TX0FSAn = 0
+	TX0FDn  = 16
 )
 
 const (

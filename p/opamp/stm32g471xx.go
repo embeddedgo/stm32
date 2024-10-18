@@ -5,16 +5,21 @@
 // Package opamp provides access to the registers of the OPAMP peripheral.
 //
 // Instances:
-//  OPAMP  OPAMP_BASE  -  -  Operational amplifiers
+//
+//	OPAMP  OPAMP_BASE  -  -  Operational amplifiers
+//
 // Registers:
-//  0x000 32  OPAMP1_CSR   OPAMP1 control/status register
-//  0x004 32  OPAMP2_CSR   OPAMP2 control/status register
-//  0x008 32  OPAMP3_CSR   OPAMP3 control/status register
-//  0x018 32  OPAMP1_TCMR  OPAMP1 control/status register
-//  0x01C 32  OPAMP2_TCMR  OPAMP2 control/status register
-//  0x020 32  OPAMP3_TCMR  OPAMP3 control/status register
+//
+//	0x000 32  OPAMP1_CSR   OPAMP1 control/status register
+//	0x004 32  OPAMP2_CSR   OPAMP2 control/status register
+//	0x008 32  OPAMP3_CSR   OPAMP3 control/status register
+//	0x018 32  OPAMP1_TCMR  OPAMP1 control/status register
+//	0x01C 32  OPAMP2_TCMR  OPAMP2 control/status register
+//	0x020 32  OPAMP3_TCMR  OPAMP3 control/status register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package opamp
 
 const (

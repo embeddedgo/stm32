@@ -5,33 +5,38 @@
 // Package rcc provides access to the registers of the RCC peripheral.
 //
 // Instances:
-//  RCC  RCC_BASE  -  RCC  Reset and clock control
+//
+//	RCC  RCC_BASE  -  RCC  Reset and clock control
+//
 // Registers:
-//  0x000 32  CR          clock control register
-//  0x004 32  PLLCFGR     PLL configuration register
-//  0x008 32  CFGR        clock configuration register
-//  0x00C 32  CIR         clock interrupt register
-//  0x010 32  AHB1RSTR    AHB1 peripheral reset register
-//  0x014 32  AHB2RSTR    AHB2 peripheral reset register
-//  0x018 32  AHB3RSTR    AHB3 peripheral reset register
-//  0x020 32  APB1RSTR    APB1 peripheral reset register
-//  0x024 32  APB2RSTR    APB2 peripheral reset register
-//  0x030 32  AHB1ENR     AHB1 peripheral clock register
-//  0x034 32  AHB2ENR     AHB2 peripheral clock enable register
-//  0x038 32  AHB3ENR     AHB3 peripheral clock enable register
-//  0x040 32  APB1ENR     APB1 peripheral clock enable register
-//  0x044 32  APB2ENR     APB2 peripheral clock enable register
-//  0x050 32  AHB1LPENR   AHB1 peripheral clock enable in low power mode register
-//  0x054 32  AHB2LPENR   AHB2 peripheral clock enable in low power mode register
-//  0x058 32  AHB3LPENR   AHB3 peripheral clock enable in low power mode register
-//  0x060 32  APB1LPENR   APB1 peripheral clock enable in low power mode register
-//  0x064 32  APB2LPENR   APB2 peripheral clock enabled in low power mode register
-//  0x070 32  BDCR        Backup domain control register
-//  0x074 32  CSR         clock control & status register
-//  0x080 32  SSCGR       spread spectrum clock generation register
-//  0x084 32  PLLI2SCFGR  PLLI2S configuration register
+//
+//	0x000 32  CR          clock control register
+//	0x004 32  PLLCFGR     PLL configuration register
+//	0x008 32  CFGR        clock configuration register
+//	0x00C 32  CIR         clock interrupt register
+//	0x010 32  AHB1RSTR    AHB1 peripheral reset register
+//	0x014 32  AHB2RSTR    AHB2 peripheral reset register
+//	0x018 32  AHB3RSTR    AHB3 peripheral reset register
+//	0x020 32  APB1RSTR    APB1 peripheral reset register
+//	0x024 32  APB2RSTR    APB2 peripheral reset register
+//	0x030 32  AHB1ENR     AHB1 peripheral clock register
+//	0x034 32  AHB2ENR     AHB2 peripheral clock enable register
+//	0x038 32  AHB3ENR     AHB3 peripheral clock enable register
+//	0x040 32  APB1ENR     APB1 peripheral clock enable register
+//	0x044 32  APB2ENR     APB2 peripheral clock enable register
+//	0x050 32  AHB1LPENR   AHB1 peripheral clock enable in low power mode register
+//	0x054 32  AHB2LPENR   AHB2 peripheral clock enable in low power mode register
+//	0x058 32  AHB3LPENR   AHB3 peripheral clock enable in low power mode register
+//	0x060 32  APB1LPENR   APB1 peripheral clock enable in low power mode register
+//	0x064 32  APB2LPENR   APB2 peripheral clock enabled in low power mode register
+//	0x070 32  BDCR        Backup domain control register
+//	0x074 32  CSR         clock control & status register
+//	0x080 32  SSCGR       spread spectrum clock generation register
+//	0x084 32  PLLI2SCFGR  PLLI2S configuration register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package rcc
 
 const (

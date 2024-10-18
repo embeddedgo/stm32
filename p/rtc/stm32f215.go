@@ -5,24 +5,29 @@
 // Package rtc provides access to the registers of the RTC peripheral.
 //
 // Instances:
-//  RTC  RTC_BASE  -  RTC_WKUP,RTC_ALARM  Real-time clock
+//
+//	RTC  RTC_BASE  -  RTC_WKUP,RTC_ALARM  Real-time clock
+//
 // Registers:
-//  0x000 32  TR             time register
-//  0x004 32  DR             date register
-//  0x008 32  CR             control register
-//  0x00C 32  ISR            initialization and status register
-//  0x010 32  PRER           prescaler register
-//  0x014 32  WUTR           wakeup timer register
-//  0x018 32  CALIBR         calibration register
-//  0x01C 32  ALRMAR(ALRMR)  alarm A register
-//  0x020 32  ALRMBR(ALRMR)  alarm B register
-//  0x024 32  WPR            write protection register
-//  0x030 32  TSTR(TR)       time stamp time register
-//  0x034 32  TSDR(DR)       time stamp date register
-//  0x040 32  TAFCR          tamper and alternate function configuration register
-//  0x050 32  BKPR[20]       backup register
+//
+//	0x000 32  TR             time register
+//	0x004 32  DR             date register
+//	0x008 32  CR             control register
+//	0x00C 32  ISR            initialization and status register
+//	0x010 32  PRER           prescaler register
+//	0x014 32  WUTR           wakeup timer register
+//	0x018 32  CALIBR         calibration register
+//	0x01C 32  ALRMAR(ALRMR)  alarm A register
+//	0x020 32  ALRMBR(ALRMR)  alarm B register
+//	0x024 32  WPR            write protection register
+//	0x030 32  TSTR(TR)       time stamp time register
+//	0x034 32  TSDR(DR)       time stamp date register
+//	0x040 32  TAFCR          tamper and alternate function configuration register
+//	0x050 32  BKPR[20]       backup register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package rtc
 
 const (

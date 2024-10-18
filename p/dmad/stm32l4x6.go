@@ -5,33 +5,38 @@
 // Package dmad provides access to the registers of the DMA2D peripheral.
 //
 // Instances:
-//  DMA2D  DMA2D_BASE  AHB1  DMA2D  DMA2D controller
+//
+//	DMA2D  DMA2D_BASE  AHB1  DMA2D  DMA2D controller
+//
 // Registers:
-//  0x000 32  CR       control register
-//  0x004 32  ISR      Interrupt Status Register
-//  0x008 32  IFCR     interrupt flag clear register
-//  0x00C 32  FGMAR    foreground memory address register
-//  0x010 32  FGOR     foreground offset register
-//  0x014 32  BGMAR    background memory address register
-//  0x018 32  BGOR     background offset register
-//  0x01C 32  FGPFCCR  foreground PFC control register
-//  0x020 32  FGCOLR   foreground color register
-//  0x024 32  BGPFCCR  background PFC control register
-//  0x028 32  BGCOLR   background color register
-//  0x02C 32  FGCMAR   foreground CLUT memory address register
-//  0x030 32  BGCMAR   background CLUT memory address register
-//  0x034 32  OPFCCR   output PFC control register
-//  0x038 32  OCOLR    output color register
-//  0x03C 32  OMAR     output memory address register
-//  0x040 32  OOR      output offset register
-//  0x044 32  NLR      number of line register
-//  0x048 32  LWR      line watermark register
-//  0x04C 32  AMTCR    AHB master timer configuration register
-//  0x400 32  FGCLUT   FGCLUT
-//  0x800 32  BGCLUT   BGCLUT
+//
+//	0x000 32  CR       control register
+//	0x004 32  ISR      Interrupt Status Register
+//	0x008 32  IFCR     interrupt flag clear register
+//	0x00C 32  FGMAR    foreground memory address register
+//	0x010 32  FGOR     foreground offset register
+//	0x014 32  BGMAR    background memory address register
+//	0x018 32  BGOR     background offset register
+//	0x01C 32  FGPFCCR  foreground PFC control register
+//	0x020 32  FGCOLR   foreground color register
+//	0x024 32  BGPFCCR  background PFC control register
+//	0x028 32  BGCOLR   background color register
+//	0x02C 32  FGCMAR   foreground CLUT memory address register
+//	0x030 32  BGCMAR   background CLUT memory address register
+//	0x034 32  OPFCCR   output PFC control register
+//	0x038 32  OCOLR    output color register
+//	0x03C 32  OMAR     output memory address register
+//	0x040 32  OOR      output offset register
+//	0x044 32  NLR      number of line register
+//	0x048 32  LWR      line watermark register
+//	0x04C 32  AMTCR    AHB master timer configuration register
+//	0x400 32  FGCLUT   FGCLUT
+//	0x800 32  BGCLUT   BGCLUT
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/bus
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/bus
+//	github.com/embeddedgo/stm32/p/mmap
 package dmad
 
 const (

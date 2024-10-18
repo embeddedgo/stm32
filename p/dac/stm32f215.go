@@ -5,25 +5,30 @@
 // Package dac provides access to the registers of the DAC peripheral.
 //
 // Instances:
-//  DAC  DAC_BASE  APB1  TIM6_DAC*  Digital-to-analog converter
+//
+//	DAC  DAC_BASE  APB1  TIM6_DAC*  Digital-to-analog converter
+//
 // Registers:
-//  0x000 32  CR       control register
-//  0x004 32  SWTRIGR  software trigger register
-//  0x008 32  DHR12R1  channel1 12-bit right-aligned data holding register
-//  0x00C 32  DHR12L1  channel1 12-bit left aligned data holding register
-//  0x010 32  DHR8R1   channel1 8-bit right aligned data holding register
-//  0x014 32  DHR12R2  channel2 12-bit right aligned data holding register
-//  0x018 32  DHR12L2  channel2 12-bit left aligned data holding register
-//  0x01C 32  DHR8R2   channel2 8-bit right-aligned data holding register
-//  0x020 32  DHR12RD  Dual DAC 12-bit right-aligned data holding register
-//  0x024 32  DHR12LD  DUAL DAC 12-bit left aligned data holding register
-//  0x028 32  DHR8RD   DUAL DAC 8-bit right aligned data holding register
-//  0x02C 32  DOR1     channel1 data output register
-//  0x030 32  DOR2     channel2 data output register
-//  0x034 32  SR       status register
+//
+//	0x000 32  CR       control register
+//	0x004 32  SWTRIGR  software trigger register
+//	0x008 32  DHR12R1  channel1 12-bit right-aligned data holding register
+//	0x00C 32  DHR12L1  channel1 12-bit left aligned data holding register
+//	0x010 32  DHR8R1   channel1 8-bit right aligned data holding register
+//	0x014 32  DHR12R2  channel2 12-bit right aligned data holding register
+//	0x018 32  DHR12L2  channel2 12-bit left aligned data holding register
+//	0x01C 32  DHR8R2   channel2 8-bit right-aligned data holding register
+//	0x020 32  DHR12RD  Dual DAC 12-bit right-aligned data holding register
+//	0x024 32  DHR12LD  DUAL DAC 12-bit left aligned data holding register
+//	0x028 32  DHR8RD   DUAL DAC 8-bit right aligned data holding register
+//	0x02C 32  DOR1     channel1 data output register
+//	0x030 32  DOR2     channel2 data output register
+//	0x034 32  SR       status register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/bus
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/bus
+//	github.com/embeddedgo/stm32/p/mmap
 package dac
 
 const (

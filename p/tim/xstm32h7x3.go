@@ -36,7 +36,7 @@ type Periph struct {
 	_     uint32
 	CCMR3 mmio.R32[CCMR3]
 	CCR5  mmio.R32[uint32]
-	CRR6  mmio.R32[CRR6]
+	CCR6  mmio.R32[uint32]
 	AF1   mmio.R32[AF1]
 	AF2   mmio.R32[AF2]
 	TISEL mmio.R32[TISEL]
@@ -250,10 +250,6 @@ func OC6M_(p *Periph) mmio.RM32[CCMR3]  { return mmio.RM32[CCMR3]{&p.CCMR3, OC6M
 func OC6CE_(p *Periph) mmio.RM32[CCMR3] { return mmio.RM32[CCMR3]{&p.CCMR3, OC6CE} }
 func OC5M3_(p *Periph) mmio.RM32[CCMR3] { return mmio.RM32[CCMR3]{&p.CCMR3, OC5M3} }
 func OC6M3_(p *Periph) mmio.RM32[CCMR3] { return mmio.RM32[CCMR3]{&p.CCMR3, OC6M3} }
-
-type CRR6 uint32
-
-func CCR6_(p *Periph) mmio.RM32[CRR6] { return mmio.RM32[CRR6]{&p.CRR6, CCR6} }
 
 type AF1 uint32
 

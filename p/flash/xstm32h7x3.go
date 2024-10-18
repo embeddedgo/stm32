@@ -23,7 +23,6 @@ type Periph struct {
 	OPTSR_PRG  mmio.R32[OPTSR]
 	OPTCCR     mmio.R32[OPTCCR]
 	PRAR_CUR1  mmio.R32[PRAR]
-	PRAR_PRG2  mmio.R32[PRAR_PRG2]
 	PRAR_PRG1  mmio.R32[PRAR]
 	SCAR_CUR1  mmio.R32[SCAR]
 	SCAR_PRG1  mmio.R32[SCAR]
@@ -31,7 +30,7 @@ type Periph struct {
 	WPSN_PRG1R mmio.R32[WPSN]
 	BOOT_CURR  mmio.R32[BOOT]
 	BOOT_PRGR  mmio.R32[BOOT]
-	_          uint32
+	_          [2]uint32
 	CRCCR1     mmio.R32[CRCCR1]
 	CRCSADD1R  mmio.R32[CRCSADD1R]
 	CRCEADD1R  mmio.R32[CRCEADD1R]
@@ -70,27 +69,29 @@ func INCERRIE1_(p *Periph) mmio.RM32[CR1]   { return mmio.RM32[CR1]{&p.CR1, INCE
 func OPERRIE1_(p *Periph) mmio.RM32[CR1]    { return mmio.RM32[CR1]{&p.CR1, OPERRIE1} }
 func RDPERRIE1_(p *Periph) mmio.RM32[CR1]   { return mmio.RM32[CR1]{&p.CR1, RDPERRIE1} }
 func RDSERRIE1_(p *Periph) mmio.RM32[CR1]   { return mmio.RM32[CR1]{&p.CR1, RDSERRIE1} }
-func SNECCERRIE1_(p *Periph) mmio.RM32[CR1] { return mmio.RM32[CR1]{&p.CR1, SNECCERRIE1} }
+func SNECCERR1_(p *Periph) mmio.RM32[CR1]   { return mmio.RM32[CR1]{&p.CR1, SNECCERR1} }
 func DBECCERRIE1_(p *Periph) mmio.RM32[CR1] { return mmio.RM32[CR1]{&p.CR1, DBECCERRIE1} }
 func CRCENDIE1_(p *Periph) mmio.RM32[CR1]   { return mmio.RM32[CR1]{&p.CR1, CRCENDIE1} }
+func CRCRDERRIE1_(p *Periph) mmio.RM32[CR1] { return mmio.RM32[CR1]{&p.CR1, CRCRDERRIE1} }
 
 type SR1 uint32
 
-func BSY1_(p *Periph) mmio.RM32[SR1]       { return mmio.RM32[SR1]{&p.SR1, BSY1} }
-func WBNE1_(p *Periph) mmio.RM32[SR1]      { return mmio.RM32[SR1]{&p.SR1, WBNE1} }
-func QW1_(p *Periph) mmio.RM32[SR1]        { return mmio.RM32[SR1]{&p.SR1, QW1} }
-func CRC_BUSY1_(p *Periph) mmio.RM32[SR1]  { return mmio.RM32[SR1]{&p.SR1, CRC_BUSY1} }
-func EOP1_(p *Periph) mmio.RM32[SR1]       { return mmio.RM32[SR1]{&p.SR1, EOP1} }
-func WRPERR1_(p *Periph) mmio.RM32[SR1]    { return mmio.RM32[SR1]{&p.SR1, WRPERR1} }
-func PGSERR1_(p *Periph) mmio.RM32[SR1]    { return mmio.RM32[SR1]{&p.SR1, PGSERR1} }
-func STRBERR1_(p *Periph) mmio.RM32[SR1]   { return mmio.RM32[SR1]{&p.SR1, STRBERR1} }
-func INCERR1_(p *Periph) mmio.RM32[SR1]    { return mmio.RM32[SR1]{&p.SR1, INCERR1} }
-func OPERR1_(p *Periph) mmio.RM32[SR1]     { return mmio.RM32[SR1]{&p.SR1, OPERR1} }
-func RDPERR1_(p *Periph) mmio.RM32[SR1]    { return mmio.RM32[SR1]{&p.SR1, RDPERR1} }
-func RDSERR1_(p *Periph) mmio.RM32[SR1]    { return mmio.RM32[SR1]{&p.SR1, RDSERR1} }
-func SNECCERR11_(p *Periph) mmio.RM32[SR1] { return mmio.RM32[SR1]{&p.SR1, SNECCERR11} }
-func DBECCERR1_(p *Periph) mmio.RM32[SR1]  { return mmio.RM32[SR1]{&p.SR1, DBECCERR1} }
-func CRCEND1_(p *Periph) mmio.RM32[SR1]    { return mmio.RM32[SR1]{&p.SR1, CRCEND1} }
+func BSY1_(p *Periph) mmio.RM32[SR1]      { return mmio.RM32[SR1]{&p.SR1, BSY1} }
+func WBNE1_(p *Periph) mmio.RM32[SR1]     { return mmio.RM32[SR1]{&p.SR1, WBNE1} }
+func QW1_(p *Periph) mmio.RM32[SR1]       { return mmio.RM32[SR1]{&p.SR1, QW1} }
+func CRC_BUSY1_(p *Periph) mmio.RM32[SR1] { return mmio.RM32[SR1]{&p.SR1, CRC_BUSY1} }
+func EOP1_(p *Periph) mmio.RM32[SR1]      { return mmio.RM32[SR1]{&p.SR1, EOP1} }
+func WRPERR1_(p *Periph) mmio.RM32[SR1]   { return mmio.RM32[SR1]{&p.SR1, WRPERR1} }
+func PGSERR1_(p *Periph) mmio.RM32[SR1]   { return mmio.RM32[SR1]{&p.SR1, PGSERR1} }
+func STRBERR1_(p *Periph) mmio.RM32[SR1]  { return mmio.RM32[SR1]{&p.SR1, STRBERR1} }
+func INCERR1_(p *Periph) mmio.RM32[SR1]   { return mmio.RM32[SR1]{&p.SR1, INCERR1} }
+func OPERR1_(p *Periph) mmio.RM32[SR1]    { return mmio.RM32[SR1]{&p.SR1, OPERR1} }
+func RDPERR1_(p *Periph) mmio.RM32[SR1]   { return mmio.RM32[SR1]{&p.SR1, RDPERR1} }
+func RDSERR1_(p *Periph) mmio.RM32[SR1]   { return mmio.RM32[SR1]{&p.SR1, RDSERR1} }
+func SNECCERR_(p *Periph) mmio.RM32[SR1]  { return mmio.RM32[SR1]{&p.SR1, SNECCERR} }
+func DBECCERR1_(p *Periph) mmio.RM32[SR1] { return mmio.RM32[SR1]{&p.SR1, DBECCERR1} }
+func CRCEND1_(p *Periph) mmio.RM32[SR1]   { return mmio.RM32[SR1]{&p.SR1, CRCEND1} }
+func CRCRDERR1_(p *Periph) mmio.RM32[SR1] { return mmio.RM32[SR1]{&p.SR1, CRCRDERR1} }
 
 type CCR1 uint32
 
@@ -105,6 +106,7 @@ func CLR_RDSERR1_(p *Periph) mmio.RM32[CCR1]   { return mmio.RM32[CCR1]{&p.CCR1,
 func CLR_SNECCERR1_(p *Periph) mmio.RM32[CCR1] { return mmio.RM32[CCR1]{&p.CCR1, CLR_SNECCERR1} }
 func CLR_DBECCERR1_(p *Periph) mmio.RM32[CCR1] { return mmio.RM32[CCR1]{&p.CCR1, CLR_DBECCERR1} }
 func CLR_CRCEND1_(p *Periph) mmio.RM32[CCR1]   { return mmio.RM32[CCR1]{&p.CCR1, CLR_CRCEND1} }
+func CLR_CRCRDERR1_(p *Periph) mmio.RM32[CCR1] { return mmio.RM32[CCR1]{&p.CCR1, CLR_CRCRDERR1} }
 
 type OPTCR uint32
 
@@ -123,16 +125,6 @@ func CLR_OPTCHANGEERR_(p *Periph) mmio.RM32[OPTCCR] {
 }
 
 type PRAR uint32
-
-type PRAR_PRG2 uint32
-
-func PROT_AREA_START2_(p *Periph) mmio.RM32[PRAR_PRG2] {
-	return mmio.RM32[PRAR_PRG2]{&p.PRAR_PRG2, PROT_AREA_START2}
-}
-func PROT_AREA_END2_(p *Periph) mmio.RM32[PRAR_PRG2] {
-	return mmio.RM32[PRAR_PRG2]{&p.PRAR_PRG2, PROT_AREA_END2}
-}
-func DMEP2_(p *Periph) mmio.RM32[PRAR_PRG2] { return mmio.RM32[PRAR_PRG2]{&p.PRAR_PRG2, DMEP2} }
 
 type SCAR uint32
 

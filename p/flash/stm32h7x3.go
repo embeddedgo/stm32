@@ -5,39 +5,43 @@
 // Package flash provides access to the registers of the Flash peripheral.
 //
 // Instances:
-//  FLASH1  Flash_BASE        -  FLASH
-//  FLASH2  Flash_BASE+0x100  -  FLASH
+//
+//	FLASH1  Flash_BASE        -  FLASH
+//	FLASH2  Flash_BASE+0x100  -  FLASH
+//
 // Registers:
-//  0x000 32  ACR               Access control register
-//  0x004 32  KEYR1             FLASH key register for bank 1
-//  0x008 32  OPTKEYR           FLASH option key register
-//  0x00C 32  CR1               FLASH control register for bank 1
-//  0x010 32  SR1               FLASH status register for bank 1
-//  0x014 32  CCR1              FLASH clear control register for bank 1
-//  0x018 32  OPTCR             FLASH option control register
-//  0x01C 32  OPTSR_CUR(OPTSR)  FLASH option status register
-//  0x020 32  OPTSR_PRG(OPTSR)  FLASH option status register
-//  0x024 32  OPTCCR            FLASH option clear control register
-//  0x028 32  PRAR_CUR1(PRAR)   FLASH protection address for bank 1
-//  0x02C 32  PRAR_PRG2         FLASH protection address for bank 2
-//  0x02C 32  PRAR_PRG1(PRAR)   FLASH protection address for bank 1
-//  0x030 32  SCAR_CUR1(SCAR)   FLASH secure address for bank 1
-//  0x034 32  SCAR_PRG1(SCAR)   FLASH secure address for bank 1
-//  0x038 32  WPSN_CUR1R(WPSN)  FLASH write sector protection for bank 1
-//  0x03C 32  WPSN_PRG1R(WPSN)  FLASH write sector protection for bank 1
-//  0x040 32  BOOT_CURR(BOOT)   FLASH register with boot address
-//  0x044 32  BOOT_PRGR(BOOT)   FLASH register with boot address
-//  0x050 32  CRCCR1            FLASH CRC control register for bank 1
-//  0x054 32  CRCSADD1R         FLASH CRC start address register for bank 1
-//  0x058 32  CRCEADD1R         FLASH CRC end address register for bank 1
-//  0x05C 32  CRCDATAR          FLASH CRC data register
-//  0x060 32  ECC_FA1R          FLASH ECC fail address for bank 1
+//
+//	0x000 32  ACR               Access control register
+//	0x004 32  KEYR1             FLASH key register for bank 1
+//	0x008 32  OPTKEYR           FLASH option key register
+//	0x00C 32  CR1               FLASH control register for bank 1
+//	0x010 32  SR1               FLASH status register for bank 1
+//	0x014 32  CCR1              FLASH clear control register for bank 1
+//	0x018 32  OPTCR             FLASH option control register
+//	0x01C 32  OPTSR_CUR(OPTSR)  FLASH option status register
+//	0x020 32  OPTSR_PRG(OPTSR)  FLASH option status register
+//	0x024 32  OPTCCR            FLASH option clear control register
+//	0x028 32  PRAR_CUR1(PRAR)   FLASH protection address for bank 1
+//	0x02C 32  PRAR_PRG1(PRAR)   FLASH protection address for bank 1
+//	0x030 32  SCAR_CUR1(SCAR)   FLASH secure address for bank 1
+//	0x034 32  SCAR_PRG1(SCAR)   FLASH secure address for bank 1
+//	0x038 32  WPSN_CUR1R(WPSN)  FLASH write sector protection for bank 1
+//	0x03C 32  WPSN_PRG1R(WPSN)  FLASH write sector protection for bank 1
+//	0x040 32  BOOT_CURR(BOOT)   FLASH register with boot address
+//	0x044 32  BOOT_PRGR(BOOT)   FLASH register with boot address
+//	0x050 32  CRCCR1            FLASH CRC control register for bank 1
+//	0x054 32  CRCSADD1R         FLASH CRC start address register for bank 1
+//	0x058 32  CRCEADD1R         FLASH CRC end address register for bank 1
+//	0x05C 32  CRCDATAR          FLASH CRC data register
+//	0x060 32  ECC_FA1R          FLASH ECC fail address for bank 1
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package flash
 
 const (
-	LATENCY    ACR = 0x07 << 0 //+ Read latency
+	LATENCY    ACR = 0x0F << 0 //+ Read latency
 	WRHIGHFREQ ACR = 0x03 << 4 //+ Flash signal delay
 )
 
@@ -64,9 +68,10 @@ const (
 	OPERRIE1    CR1 = 0x01 << 22 //+ Bank 1 write/erase error interrupt enable bit
 	RDPERRIE1   CR1 = 0x01 << 23 //+ Bank 1 read protection error interrupt enable bit
 	RDSERRIE1   CR1 = 0x01 << 24 //+ Bank 1 secure error interrupt enable bit
-	SNECCERRIE1 CR1 = 0x01 << 25 //+ Bank 1 ECC single correction error interrupt enable bit
+	SNECCERR1   CR1 = 0x01 << 25 //+ Bank 1 ECC single correction error interrupt enable bit
 	DBECCERRIE1 CR1 = 0x01 << 26 //+ Bank 1 ECC double detection error interrupt enable bit
 	CRCENDIE1   CR1 = 0x01 << 27 //+ Bank 1 end of CRC calculation interrupt enable bit
+	CRCRDERRIE1 CR1 = 0x01 << 28 //+ Bank 1 CRC read error interrupt enable bit When CRCRDERRIE1 bit is set to 1, an interrupt is generated when a protected area (PCROP or secure-only) has been detected during the last CRC computation on bank 1. CRCRDERRIE1 can be programmed only when LOCK1 is cleared to 0.
 )
 
 const (
@@ -87,45 +92,48 @@ const (
 	OPERRIE1n    = 22
 	RDPERRIE1n   = 23
 	RDSERRIE1n   = 24
-	SNECCERRIE1n = 25
+	SNECCERR1n   = 25
 	DBECCERRIE1n = 26
 	CRCENDIE1n   = 27
+	CRCRDERRIE1n = 28
 )
 
 const (
-	BSY1       SR1 = 0x01 << 0  //+ Bank 1 ongoing program flag
-	WBNE1      SR1 = 0x01 << 1  //+ Bank 1 write buffer not empty flag
-	QW1        SR1 = 0x01 << 2  //+ Bank 1 wait queue flag
-	CRC_BUSY1  SR1 = 0x01 << 3  //+ Bank 1 CRC busy flag
-	EOP1       SR1 = 0x01 << 16 //+ Bank 1 end-of-program flag
-	WRPERR1    SR1 = 0x01 << 17 //+ Bank 1 write protection error flag
-	PGSERR1    SR1 = 0x01 << 18 //+ Bank 1 programming sequence error flag
-	STRBERR1   SR1 = 0x01 << 19 //+ Bank 1 strobe error flag
-	INCERR1    SR1 = 0x01 << 21 //+ Bank 1 inconsistency error flag
-	OPERR1     SR1 = 0x01 << 22 //+ Bank 1 write/erase error flag
-	RDPERR1    SR1 = 0x01 << 23 //+ Bank 1 read protection error flag
-	RDSERR1    SR1 = 0x01 << 24 //+ Bank 1 secure error flag
-	SNECCERR11 SR1 = 0x01 << 25 //+ Bank 1 single correction error flag
-	DBECCERR1  SR1 = 0x01 << 26 //+ Bank 1 ECC double detection error flag
-	CRCEND1    SR1 = 0x01 << 27 //+ Bank 1 CRC-complete flag
+	BSY1      SR1 = 0x01 << 0  //+ Bank 1 ongoing program flag
+	WBNE1     SR1 = 0x01 << 1  //+ Bank 1 write buffer not empty flag
+	QW1       SR1 = 0x01 << 2  //+ Bank 1 wait queue flag
+	CRC_BUSY1 SR1 = 0x01 << 3  //+ Bank 1 CRC busy flag
+	EOP1      SR1 = 0x01 << 16 //+ Bank 1 end-of-program flag
+	WRPERR1   SR1 = 0x01 << 17 //+ Bank 1 write protection error flag
+	PGSERR1   SR1 = 0x01 << 18 //+ Bank 1 programming sequence error flag
+	STRBERR1  SR1 = 0x01 << 19 //+ Bank 1 strobe error flag
+	INCERR1   SR1 = 0x01 << 21 //+ Bank 1 inconsistency error flag
+	OPERR1    SR1 = 0x01 << 22 //+ Bank 1 write/erase error flag
+	RDPERR1   SR1 = 0x01 << 23 //+ Bank 1 read protection error flag
+	RDSERR1   SR1 = 0x01 << 24 //+ Bank 1 secure error flag
+	SNECCERR  SR1 = 0x01 << 25 //+ Bank 1 single correction error flag
+	DBECCERR1 SR1 = 0x01 << 26 //+ Bank 1 ECC double detection error flag
+	CRCEND1   SR1 = 0x01 << 27 //+ Bank 1 CRC-complete flag
+	CRCRDERR1 SR1 = 0x01 << 28 //+ Bank 1 CRC read error flag CRCRDERR1 flag is raised when a word is found read protected during a CRC operation on bank 1. An interrupt is generated if CRCRDIE1 and CRCEND1 are set to 1. Writing 1 to CLR_CRCRDERR1 bit in FLASH_CCR1 register clears CRCRDERR1. Note: This flag is valid only when CRCEND1 bit is set to 1
 )
 
 const (
-	BSY1n       = 0
-	WBNE1n      = 1
-	QW1n        = 2
-	CRC_BUSY1n  = 3
-	EOP1n       = 16
-	WRPERR1n    = 17
-	PGSERR1n    = 18
-	STRBERR1n   = 19
-	INCERR1n    = 21
-	OPERR1n     = 22
-	RDPERR1n    = 23
-	RDSERR1n    = 24
-	SNECCERR11n = 25
-	DBECCERR1n  = 26
-	CRCEND1n    = 27
+	BSY1n      = 0
+	WBNE1n     = 1
+	QW1n       = 2
+	CRC_BUSY1n = 3
+	EOP1n      = 16
+	WRPERR1n   = 17
+	PGSERR1n   = 18
+	STRBERR1n  = 19
+	INCERR1n   = 21
+	OPERR1n    = 22
+	RDPERR1n   = 23
+	RDSERR1n   = 24
+	SNECCERRn  = 25
+	DBECCERR1n = 26
+	CRCEND1n   = 27
+	CRCRDERR1n = 28
 )
 
 const (
@@ -140,6 +148,7 @@ const (
 	CLR_SNECCERR1 CCR1 = 0x01 << 25 //+ Bank 1 SNECCERR1 flag clear bit
 	CLR_DBECCERR1 CCR1 = 0x01 << 26 //+ Bank 1 DBECCERR1 flag clear bit
 	CLR_CRCEND1   CCR1 = 0x01 << 27 //+ Bank 1 CRCEND1 flag clear bit
+	CLR_CRCRDERR1 CCR1 = 0x01 << 28 //+ Bank 1 CRCRDERR1 flag clear bit Setting this bit to 1 resets to 0 CRCRDERR1 flag in FLASH_SR1 register.
 )
 
 const (
@@ -154,6 +163,7 @@ const (
 	CLR_SNECCERR1n = 25
 	CLR_DBECCERR1n = 26
 	CLR_CRCEND1n   = 27
+	CLR_CRCRDERR1n = 28
 )
 
 const (
@@ -175,16 +185,14 @@ const (
 const (
 	OPT_BUSY      OPTSR = 0x01 << 0  //+ Option byte change ongoing flag
 	BOR_LEV       OPTSR = 0x03 << 2  //+ Brownout level option status bit
-	IWDG1_HW      OPTSR = 0x01 << 4  //+ IWDG1 control option status bit
-	nRST_STOP_D1  OPTSR = 0x01 << 6  //+ D1 DStop entry reset option status bit
-	nRST_STBY_D1  OPTSR = 0x01 << 7  //+ D1 DStandby entry reset option status bit
+	IWDG1_SW      OPTSR = 0x01 << 4  //+ IWDG1 control option status bit
+	NRST_STOP_D1  OPTSR = 0x01 << 6  //+ D1 DStop entry reset option status bit
+	NRST_STBY_D1  OPTSR = 0x01 << 7  //+ D1 DStandby entry reset option status bit
 	RDP           OPTSR = 0xFF << 8  //+ Readout protection level option status byte
-	FZ_IWDG_STOP  OPTSR = 0x01 << 17 //+ IWDG Stop mode freeze option status bit
-	FZ_IWDG_SDBY  OPTSR = 0x01 << 18 //+ IWDG Standby mode freeze option status bit
+	IWDG_FZ_STOP  OPTSR = 0x01 << 17 //+ IWDG Stop mode freeze option status bit
+	IWDG_FZ_SDBY  OPTSR = 0x01 << 18 //+ IWDG Standby mode freeze option status bit
 	ST_RAM_SIZE   OPTSR = 0x03 << 19 //+ DTCM RAM size option status
 	SECURITY      OPTSR = 0x01 << 21 //+ Security enable option status bit
-	RSS1          OPTSR = 0x01 << 26 //+ User option bit 1
-	PERSO_OK      OPTSR = 0x01 << 28 //+ Device personalization status bit
 	IO_HSLV       OPTSR = 0x01 << 29 //+ I/O high-speed at low-voltage status bit (PRODUCT_BELOW_25V)
 	OPTCHANGEERR  OPTSR = 0x01 << 30 //+ Option byte change error flag
 	SWAP_BANK_OPT OPTSR = 0x01 << 31 //+ Bank swapping option status bit
@@ -193,16 +201,14 @@ const (
 const (
 	OPT_BUSYn      = 0
 	BOR_LEVn       = 2
-	IWDG1_HWn      = 4
-	nRST_STOP_D1n  = 6
-	nRST_STBY_D1n  = 7
+	IWDG1_SWn      = 4
+	NRST_STOP_D1n  = 6
+	NRST_STBY_D1n  = 7
 	RDPn           = 8
-	FZ_IWDG_STOPn  = 17
-	FZ_IWDG_SDBYn  = 18
+	IWDG_FZ_STOPn  = 17
+	IWDG_FZ_SDBYn  = 18
 	ST_RAM_SIZEn   = 19
 	SECURITYn      = 21
-	RSS1n          = 26
-	PERSO_OKn      = 28
 	IO_HSLVn       = 29
 	OPTCHANGEERRn  = 30
 	SWAP_BANK_OPTn = 31
@@ -226,18 +232,6 @@ const (
 	PROT_AREA_START1n = 0
 	PROT_AREA_END1n   = 16
 	DMEP1n            = 31
-)
-
-const (
-	PROT_AREA_START2 PRAR_PRG2 = 0xFFF << 0  //+ Bank 2 lowest PCROP protected address configuration
-	PROT_AREA_END2   PRAR_PRG2 = 0xFFF << 16 //+ Bank 2 highest PCROP protected address configuration
-	DMEP2            PRAR_PRG2 = 0x01 << 31  //+ Bank 2 PCROP protected erase enable option configuration bit
-)
-
-const (
-	PROT_AREA_START2n = 0
-	PROT_AREA_END2n   = 16
-	DMEP2n            = 31
 )
 
 const (
@@ -293,19 +287,19 @@ const (
 )
 
 const (
-	CRC_START_ADDR CRCSADD1R = 0xFFFFFFFF << 0 //+ CRC start address on bank 1
+	CRC_START_ADDR CRCSADD1R = 0x3FFFF << 2 //+ CRC start address on bank 1
 )
 
 const (
-	CRC_START_ADDRn = 0
+	CRC_START_ADDRn = 2
 )
 
 const (
-	CRC_END_ADDR CRCEADD1R = 0xFFFFFFFF << 0 //+ CRC end address on bank 1
+	CRC_END_ADDR CRCEADD1R = 0x3FFFF << 2 //+ CRC end address on bank 1
 )
 
 const (
-	CRC_END_ADDRn = 0
+	CRC_END_ADDRn = 2
 )
 
 const (

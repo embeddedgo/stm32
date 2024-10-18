@@ -5,100 +5,105 @@
 // Package ethernet_mac provides access to the registers of the Ethernet_MAC peripheral.
 //
 // Instances:
-//  Ethernet_MAC  Ethernet_MAC_BASE  -  ETH  Ethernet: media access control (MAC)
+//
+//	Ethernet_MAC  Ethernet_MAC_BASE  -  ETH  Ethernet: media access control (MAC)
+//
 // Registers:
-//  0x000 32  MACCR                               Operating mode configuration register
-//  0x004 32  MACECR                              Extended operating mode configuration register
-//  0x008 32  MACPFR                              Packet filtering control register
-//  0x00C 32  MACWTR                              Watchdog timeout register
-//  0x010 32  MACHT0R                             Hash Table 0 register
-//  0x014 32  MACHT1R                             Hash Table 1 register
-//  0x050 32  MACVTR                              VLAN tag register
-//  0x058 32  MACVHTR                             VLAN Hash table register
-//  0x060 32  MACVIR                              VLAN inclusion register
-//  0x064 32  MACIVIR                             Inner VLAN inclusion register
-//  0x070 32  MACQTxFCR                           Tx Queue flow control register
-//  0x090 32  MACRxFCR                            Rx flow control register
-//  0x0B0 32  MACISR                              Interrupt status register
-//  0x0B4 32  MACIER                              Interrupt enable register
-//  0x0B8 32  MACRxTxSR                           Rx Tx status register
-//  0x0C0 32  MACPCSR                             PMT control status register
-//  0x0C4 32  MACRWKPFR                           Remove wakeup packet filter register
-//  0x0D0 32  MACLCSR                             LPI control status register
-//  0x0D4 32  MACLTCR                             LPI timers control register
-//  0x0D8 32  MACLETR                             LPI entry timer register
-//  0x0DC 32  MAC1USTCR                           1-microsecond-tick counter register
-//  0x110 32  MACVR                               Version register
-//  0x114 32  MACDR                               Debug register
-//  0x120 32  MACHWF1R                            HW feature 1 register
-//  0x124 32  MACHWF2R                            HW feature 2 register
-//  0x200 32  MACMDIOAR                           MDIO address register
-//  0x204 32  MACMDIODR                           MDIO data register
-//  0x300 32  MACA0HR                             Address 0 high register
-//  0x304 32  MACA0LR                             Address 0 low register
-//  0x308 32  MACA1HR                             Address 1 high register
-//  0x30C 32  MACA1LR                             Address 1 low register
-//  0x310 32  MACA2HR                             Address 2 high register
-//  0x314 32  MACA2LR                             Address 2 low register
-//  0x318 32  MACA3HR                             Address 3 high register
-//  0x31C 32  MACA3LR                             Address 3 low register
-//  0x700 32  MMC_CONTROL                         MMC control register
-//  0x704 32  MMC_RX_INTERRUPT                    MMC Rx interrupt register
-//  0x708 32  MMC_TX_INTERRUPT                    MMC Tx interrupt register
-//  0x70C 32  MMC_RX_INTERRUPT_MASK               MMC Rx interrupt mask register
-//  0x710 32  MMC_TX_INTERRUPT_MASK               MMC Tx interrupt mask register
-//  0x74C 32  TX_SINGLE_COLLISION_GOOD_PACKETS    Tx single collision good packets register
-//  0x750 32  TX_MULTIPLE_COLLISION_GOOD_PACKETS  Tx multiple collision good packets register
-//  0x768 32  TX_PACKET_COUNT_GOOD                Tx packet count good register
-//  0x794 32  RX_CRC_ERROR_PACKETS                Rx CRC error packets register
-//  0x798 32  RX_ALIGNMENT_ERROR_PACKETS          Rx alignment error packets register
-//  0x7C4 32  RX_UNICAST_PACKETS_GOOD             Rx unicast packets good register
-//  0x7EC 32  TX_LPI_USEC_CNTR                    Tx LPI microsecond timer register
-//  0x7F0 32  TX_LPI_TRAN_CNTR                    Tx LPI transition counter register
-//  0x7F4 32  RX_LPI_USEC_CNTR                    Rx LPI microsecond counter register
-//  0x7F8 32  RX_LPI_TRAN_CNTR                    Rx LPI transition counter register
-//  0x900 32  MACL3L4C0R                          L3 and L4 control 0 register
-//  0x904 32  MACL4A0R                            Layer4 address filter 0 register
-//  0x910 32  MACL3A00R                           MACL3A00R
-//  0x914 32  MACL3A10R                           Layer3 address 1 filter 0 register
-//  0x918 32  MACL3A20                            Layer3 Address 2 filter 0 register
-//  0x91C 32  MACL3A30                            Layer3 Address 3 filter 0 register
-//  0x930 32  MACL3L4C1R                          L3 and L4 control 1 register
-//  0x934 32  MACL4A1R                            Layer 4 address filter 1 register
-//  0x940 32  MACL3A01R                           Layer3 address 0 filter 1 Register
-//  0x944 32  MACL3A11R                           Layer3 address 1 filter 1 register
-//  0x948 32  MACL3A21R                           Layer3 address 2 filter 1 Register
-//  0x94C 32  MACL3A31R                           Layer3 address 3 filter 1 register
-//  0xAE0 32  MACARPAR                            ARP address register
-//  0xB00 32  MACTSCR                             Timestamp control Register
-//  0xB04 32  MACSSIR                             Sub-second increment register
-//  0xB08 32  MACSTSR                             System time seconds register
-//  0xB0C 32  MACSTNR                             System time nanoseconds register
-//  0xB10 32  MACSTSUR                            System time seconds update register
-//  0xB14 32  MACSTNUR                            System time nanoseconds update register
-//  0xB18 32  MACTSAR                             Timestamp addend register
-//  0xB20 32  MACTSSR                             Timestamp status register
-//  0xB30 32  MACTxTSSNR                          Tx timestamp status nanoseconds register
-//  0xB34 32  MACTxTSSSR                          Tx timestamp status seconds register
-//  0xB40 32  MACACR                              Auxiliary control register
-//  0xB48 32  MACATSNR                            Auxiliary timestamp nanoseconds register
-//  0xB4C 32  MACATSSR                            Auxiliary timestamp seconds register
-//  0xB50 32  MACTSIACR                           Timestamp Ingress asymmetric correction register
-//  0xB54 32  MACTSEACR                           Timestamp Egress asymmetric correction register
-//  0xB58 32  MACTSICNR                           Timestamp Ingress correction nanosecond register
-//  0xB5C 32  MACTSECNR                           Timestamp Egress correction nanosecond register
-//  0xB70 32  MACPPSCR                            PPS control register
-//  0xB80 32  MACPPSTTSR                          PPS target time seconds register
-//  0xB84 32  MACPPSTTNR                          PPS target time nanoseconds register
-//  0xB88 32  MACPPSIR                            PPS interval register
-//  0xB8C 32  MACPPSWR                            PPS width register
-//  0xBC0 32  MACPOCR                             PTP Offload control register
-//  0xBC4 32  MACSPI0R                            PTP Source Port Identity 0 Register
-//  0xBC8 32  MACSPI1R                            PTP Source port identity 1 register
-//  0xBCC 32  MACSPI2R                            PTP Source port identity 2 register
-//  0xBD0 32  MACLMIR                             Log message interval register
+//
+//	0x000 32  MACCR                               Operating mode configuration register
+//	0x004 32  MACECR                              Extended operating mode configuration register
+//	0x008 32  MACPFR                              Packet filtering control register
+//	0x00C 32  MACWTR                              Watchdog timeout register
+//	0x010 32  MACHT0R                             Hash Table 0 register
+//	0x014 32  MACHT1R                             Hash Table 1 register
+//	0x050 32  MACVTR                              VLAN tag register
+//	0x058 32  MACVHTR                             VLAN Hash table register
+//	0x060 32  MACVIR                              VLAN inclusion register
+//	0x064 32  MACIVIR                             Inner VLAN inclusion register
+//	0x070 32  MACQTxFCR                           Tx Queue flow control register
+//	0x090 32  MACRxFCR                            Rx flow control register
+//	0x0B0 32  MACISR                              Interrupt status register
+//	0x0B4 32  MACIER                              Interrupt enable register
+//	0x0B8 32  MACRxTxSR                           Rx Tx status register
+//	0x0C0 32  MACPCSR                             PMT control status register
+//	0x0C4 32  MACRWKPFR                           Remove wakeup packet filter register
+//	0x0D0 32  MACLCSR                             LPI control status register
+//	0x0D4 32  MACLTCR                             LPI timers control register
+//	0x0D8 32  MACLETR                             LPI entry timer register
+//	0x0DC 32  MAC1USTCR                           1-microsecond-tick counter register
+//	0x110 32  MACVR                               Version register
+//	0x114 32  MACDR                               Debug register
+//	0x120 32  MACHWF1R                            HW feature 1 register
+//	0x124 32  MACHWF2R                            HW feature 2 register
+//	0x200 32  MACMDIOAR                           MDIO address register
+//	0x204 32  MACMDIODR                           MDIO data register
+//	0x300 32  MACA0HR                             Address 0 high register
+//	0x304 32  MACA0LR                             Address 0 low register
+//	0x308 32  MACA1HR                             Address 1 high register
+//	0x30C 32  MACA1LR                             Address 1 low register
+//	0x310 32  MACA2HR                             Address 2 high register
+//	0x314 32  MACA2LR                             Address 2 low register
+//	0x318 32  MACA3HR                             Address 3 high register
+//	0x31C 32  MACA3LR                             Address 3 low register
+//	0x700 32  MMC_CONTROL                         MMC control register
+//	0x704 32  MMC_RX_INTERRUPT                    MMC Rx interrupt register
+//	0x708 32  MMC_TX_INTERRUPT                    MMC Tx interrupt register
+//	0x70C 32  MMC_RX_INTERRUPT_MASK               MMC Rx interrupt mask register
+//	0x710 32  MMC_TX_INTERRUPT_MASK               MMC Tx interrupt mask register
+//	0x74C 32  TX_SINGLE_COLLISION_GOOD_PACKETS    Tx single collision good packets register
+//	0x750 32  TX_MULTIPLE_COLLISION_GOOD_PACKETS  Tx multiple collision good packets register
+//	0x768 32  TX_PACKET_COUNT_GOOD                Tx packet count good register
+//	0x794 32  RX_CRC_ERROR_PACKETS                Rx CRC error packets register
+//	0x798 32  RX_ALIGNMENT_ERROR_PACKETS          Rx alignment error packets register
+//	0x7C4 32  RX_UNICAST_PACKETS_GOOD             Rx unicast packets good register
+//	0x7EC 32  TX_LPI_USEC_CNTR                    Tx LPI microsecond timer register
+//	0x7F0 32  TX_LPI_TRAN_CNTR                    Tx LPI transition counter register
+//	0x7F4 32  RX_LPI_USEC_CNTR                    Rx LPI microsecond counter register
+//	0x7F8 32  RX_LPI_TRAN_CNTR                    Rx LPI transition counter register
+//	0x900 32  MACL3L4C0R                          L3 and L4 control 0 register
+//	0x904 32  MACL4A0R                            Layer4 address filter 0 register
+//	0x910 32  MACL3A00R                           MACL3A00R
+//	0x914 32  MACL3A10R                           Layer3 address 1 filter 0 register
+//	0x918 32  MACL3A20                            Layer3 Address 2 filter 0 register
+//	0x91C 32  MACL3A30                            Layer3 Address 3 filter 0 register
+//	0x930 32  MACL3L4C1R                          L3 and L4 control 1 register
+//	0x934 32  MACL4A1R                            Layer 4 address filter 1 register
+//	0x940 32  MACL3A01R                           Layer3 address 0 filter 1 Register
+//	0x944 32  MACL3A11R                           Layer3 address 1 filter 1 register
+//	0x948 32  MACL3A21R                           Layer3 address 2 filter 1 Register
+//	0x94C 32  MACL3A31R                           Layer3 address 3 filter 1 register
+//	0xAE0 32  MACARPAR                            ARP address register
+//	0xB00 32  MACTSCR                             Timestamp control Register
+//	0xB04 32  MACSSIR                             Sub-second increment register
+//	0xB08 32  MACSTSR                             System time seconds register
+//	0xB0C 32  MACSTNR                             System time nanoseconds register
+//	0xB10 32  MACSTSUR                            System time seconds update register
+//	0xB14 32  MACSTNUR                            System time nanoseconds update register
+//	0xB18 32  MACTSAR                             Timestamp addend register
+//	0xB20 32  MACTSSR                             Timestamp status register
+//	0xB30 32  MACTxTSSNR                          Tx timestamp status nanoseconds register
+//	0xB34 32  MACTxTSSSR                          Tx timestamp status seconds register
+//	0xB40 32  MACACR                              Auxiliary control register
+//	0xB48 32  MACATSNR                            Auxiliary timestamp nanoseconds register
+//	0xB4C 32  MACATSSR                            Auxiliary timestamp seconds register
+//	0xB50 32  MACTSIACR                           Timestamp Ingress asymmetric correction register
+//	0xB54 32  MACTSEACR                           Timestamp Egress asymmetric correction register
+//	0xB58 32  MACTSICNR                           Timestamp Ingress correction nanosecond register
+//	0xB5C 32  MACTSECNR                           Timestamp Egress correction nanosecond register
+//	0xB70 32  MACPPSCR                            PPS control register
+//	0xB80 32  MACPPSTTSR                          PPS target time seconds register
+//	0xB84 32  MACPPSTTNR                          PPS target time nanoseconds register
+//	0xB88 32  MACPPSIR                            PPS interval register
+//	0xB8C 32  MACPPSWR                            PPS width register
+//	0xBC0 32  MACPOCR                             PTP Offload control register
+//	0xBC4 32  MACSPI0R                            PTP Source Port Identity 0 Register
+//	0xBC8 32  MACSPI1R                            PTP Source port identity 1 register
+//	0xBCC 32  MACSPI2R                            PTP Source port identity 2 register
+//	0xBD0 32  MACLMIR                             Log message interval register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package ethernet_mac
 
 const (

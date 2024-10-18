@@ -5,24 +5,29 @@
 // Package scb provides access to the registers of the SCB peripheral.
 //
 // Instances:
-//  SCB  SCB_BASE  -  -  System control block
+//
+//	SCB  SCB_BASE  -  -  System control block
+//
 // Registers:
-//  0x000 32  CPUID                 CPUID base register
-//  0x004 32  ICSR                  Interrupt control and state register
-//  0x008 32  VTOR                  Vector table offset register
-//  0x00C 32  AIRCR                 Application interrupt and reset control register
-//  0x010 32  SCR                   System control register
-//  0x014 32  CCR                   Configuration and control register
-//  0x018 32  SHPR1                 System handler priority registers
-//  0x01C 32  SHPR2                 System handler priority registers
-//  0x020 32  SHPR3                 System handler priority registers
-//  0x024 32  SHCRS                 System handler control and state register
-//  0x028 32  CFSR_UFSR_BFSR_MMFSR  Configurable fault status register
-//  0x02C 32  HFSR                  Hard fault status register
-//  0x034 32  MMFAR                 Memory management fault address register
-//  0x038 32  BFAR                  Bus fault address register
+//
+//	0x000 32  CPUID                 CPUID base register
+//	0x004 32  ICSR                  Interrupt control and state register
+//	0x008 32  VTOR                  Vector table offset register
+//	0x00C 32  AIRCR                 Application interrupt and reset control register
+//	0x010 32  SCR                   System control register
+//	0x014 32  CCR                   Configuration and control register
+//	0x018 32  SHPR1                 System handler priority registers
+//	0x01C 32  SHPR2                 System handler priority registers
+//	0x020 32  SHPR3                 System handler priority registers
+//	0x024 32  SHCRS                 System handler control and state register
+//	0x028 32  CFSR_UFSR_BFSR_MMFSR  Configurable fault status register
+//	0x02C 32  HFSR                  Hard fault status register
+//	0x034 32  MMFAR                 Memory management fault address register
+//	0x038 32  BFAR                  Bus fault address register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package scb
 
 const (

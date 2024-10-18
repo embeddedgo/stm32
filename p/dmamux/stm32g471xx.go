@@ -5,35 +5,40 @@
 // Package dmamux provides access to the registers of the DMAMUX peripheral.
 //
 // Instances:
-//  DMAMUX  DMAMUX_BASE  AHB1  DMAMUX_OVR
+//
+//	DMAMUX  DMAMUX_BASE  AHB1  DMAMUX_OVR
+//
 // Registers:
-//  0x000 32  C0CR   DMAMux - DMA request line multiplexer channel x control register
-//  0x004 32  C1CR   DMAMux - DMA request line multiplexer channel x control register
-//  0x008 32  C2CR   DMAMux - DMA request line multiplexer channel x control register
-//  0x00C 32  C3CR   DMAMux - DMA request line multiplexer channel x control register
-//  0x010 32  C4CR   DMAMux - DMA request line multiplexer channel x control register
-//  0x014 32  C5CR   DMAMux - DMA request line multiplexer channel x control register
-//  0x018 32  C6CR   DMAMux - DMA request line multiplexer channel x control register
-//  0x01C 32  C7CR   DMAMux - DMA request line multiplexer channel x control register
-//  0x020 32  C8CR   DMAMux - DMA request line multiplexer channel x control register
-//  0x024 32  C9CR   DMAMux - DMA request line multiplexer channel x control register
-//  0x028 32  C10CR  DMAMux - DMA request line multiplexer channel x control register
-//  0x02C 32  C11CR  DMAMux - DMA request line multiplexer channel x control register
-//  0x030 32  C12CR  DMAMux - DMA request line multiplexer channel x control register
-//  0x034 32  C13CR  DMAMux - DMA request line multiplexer channel x control register
-//  0x038 32  C14CR  DMAMux - DMA request line multiplexer channel x control register
-//  0x03C 32  C15CR  DMAMux - DMA request line multiplexer channel x control register
-//  0x080 32  CSR    DMAMUX request line multiplexer interrupt channel status register
-//  0x084 32  CFR    DMAMUX request line multiplexer interrupt clear flag register
-//  0x100 32  RG0CR  DMAMux - DMA request generator channel x control register
-//  0x104 32  RG1CR  DMAMux - DMA request generator channel x control register
-//  0x108 32  RG2CR  DMAMux - DMA request generator channel x control register
-//  0x10C 32  RG3CR  DMAMux - DMA request generator channel x control register
-//  0x140 32  RGSR   DMAMux - DMA request generator status register
-//  0x144 32  RGCFR  DMAMux - DMA request generator clear flag register
+//
+//	0x000 32  C0CR   DMAMux - DMA request line multiplexer channel x control register
+//	0x004 32  C1CR   DMAMux - DMA request line multiplexer channel x control register
+//	0x008 32  C2CR   DMAMux - DMA request line multiplexer channel x control register
+//	0x00C 32  C3CR   DMAMux - DMA request line multiplexer channel x control register
+//	0x010 32  C4CR   DMAMux - DMA request line multiplexer channel x control register
+//	0x014 32  C5CR   DMAMux - DMA request line multiplexer channel x control register
+//	0x018 32  C6CR   DMAMux - DMA request line multiplexer channel x control register
+//	0x01C 32  C7CR   DMAMux - DMA request line multiplexer channel x control register
+//	0x020 32  C8CR   DMAMux - DMA request line multiplexer channel x control register
+//	0x024 32  C9CR   DMAMux - DMA request line multiplexer channel x control register
+//	0x028 32  C10CR  DMAMux - DMA request line multiplexer channel x control register
+//	0x02C 32  C11CR  DMAMux - DMA request line multiplexer channel x control register
+//	0x030 32  C12CR  DMAMux - DMA request line multiplexer channel x control register
+//	0x034 32  C13CR  DMAMux - DMA request line multiplexer channel x control register
+//	0x038 32  C14CR  DMAMux - DMA request line multiplexer channel x control register
+//	0x03C 32  C15CR  DMAMux - DMA request line multiplexer channel x control register
+//	0x080 32  CSR    DMAMUX request line multiplexer interrupt channel status register
+//	0x084 32  CFR    DMAMUX request line multiplexer interrupt clear flag register
+//	0x100 32  RG0CR  DMAMux - DMA request generator channel x control register
+//	0x104 32  RG1CR  DMAMux - DMA request generator channel x control register
+//	0x108 32  RG2CR  DMAMux - DMA request generator channel x control register
+//	0x10C 32  RG3CR  DMAMux - DMA request generator channel x control register
+//	0x140 32  RGSR   DMAMux - DMA request generator status register
+//	0x144 32  RGCFR  DMAMux - DMA request generator clear flag register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/bus
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/bus
+//	github.com/embeddedgo/stm32/p/mmap
 package dmamux
 
 const (

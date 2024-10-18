@@ -5,16 +5,21 @@
 // Package flash provides access to the registers of the FLASH peripheral.
 //
 // Instances:
-//  FLASH  FLASH_BASE  -  FLASH
+//
+//	FLASH  FLASH_BASE  -  FLASH
+//
 // Registers:
-//  0x000 32  ACR      Flash access control register
-//  0x004 32  KEYR     Flash key register
-//  0x008 32  OPTKEYR  Flash option key register
-//  0x00C 32  SR       Status register
-//  0x010 32  CR       Control register
-//  0x014 32  OPTCR    Flash option control register
+//
+//	0x000 32  ACR      Flash access control register
+//	0x004 32  KEYR     Flash key register
+//	0x008 32  OPTKEYR  Flash option key register
+//	0x00C 32  SR       Status register
+//	0x010 32  CR       Control register
+//	0x014 32  OPTCR    Flash option control register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package flash
 
 const (

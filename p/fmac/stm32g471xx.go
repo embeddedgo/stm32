@@ -5,19 +5,24 @@
 // Package fmac provides access to the registers of the FMAC peripheral.
 //
 // Instances:
-//  FMAC  FMAC_BASE  AHB1  FMAC  Filter Math Accelerator
+//
+//	FMAC  FMAC_BASE  AHB1  FMAC  Filter Math Accelerator
+//
 // Registers:
-//  0x000 32  X1BUFCFG  FMAC X1 Buffer Configuration register
-//  0x004 32  X2BUFCFG  FMAC X2 Buffer Configuration register
-//  0x008 32  YBUFCFG   FMAC Y Buffer Configuration register
-//  0x00C 32  PARAM     FMAC Parameter register
-//  0x010 32  CR        FMAC Control register
-//  0x014 32  SR        FMAC Status register
-//  0x018 32  WDATA     FMAC Write Data register
-//  0x01C 32  RDATA     FMAC Read Data register
+//
+//	0x000 32  X1BUFCFG  FMAC X1 Buffer Configuration register
+//	0x004 32  X2BUFCFG  FMAC X2 Buffer Configuration register
+//	0x008 32  YBUFCFG   FMAC Y Buffer Configuration register
+//	0x00C 32  PARAM     FMAC Parameter register
+//	0x010 32  CR        FMAC Control register
+//	0x014 32  SR        FMAC Status register
+//	0x018 32  WDATA     FMAC Write Data register
+//	0x01C 32  RDATA     FMAC Read Data register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/bus
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/bus
+//	github.com/embeddedgo/stm32/p/mmap
 package fmac
 
 const (

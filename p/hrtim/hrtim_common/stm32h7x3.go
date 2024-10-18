@@ -5,35 +5,40 @@
 // Package hrtim_common provides access to the registers of the HRTIM_Common peripheral.
 //
 // Instances:
-//  HRTIM_Common  HRTIM_Common_BASE  -  HRTIM_TIME  High Resolution Timer: Common functions
+//
+//	HRTIM_Common  HRTIM_Common_BASE  -  HRTIM_TIME  High Resolution Timer: Common functions
+//
 // Registers:
-//  0x000 32  CR1      Control Register 1
-//  0x004 32  CR2      Control Register 2
-//  0x008 32  ISR      Interrupt Status Register
-//  0x00C 32  ICR      Interrupt Clear Register
-//  0x010 32  IER      Interrupt Enable Register
-//  0x014 32  OENR     Output Enable Register
-//  0x018 32  DISR     DISR
-//  0x01C 32  ODSR     Output Disable Status Register
-//  0x020 32  BMCR     Burst Mode Control Register
-//  0x024 32  BMTRG    BMTRG
-//  0x028 32  BMCMPR6  BMCMPR6
-//  0x02C 32  BMPER    Burst Mode Period Register
-//  0x030 32  EECR1    Timer External Event Control Register 1
-//  0x034 32  EECR2    Timer External Event Control Register 2
-//  0x038 32  EECR3    Timer External Event Control Register 3
-//  0x03C 32  ADC1R    ADC Trigger 1 Register
-//  0x040 32  ADC2R    ADC Trigger 2 Register
-//  0x044 32  ADC3R    ADC Trigger 3 Register
-//  0x048 32  ADC4R    ADC Trigger 4 Register
-//  0x04C 32  DLLCR    DLL Control Register
-//  0x050 32  FLTINR1  HRTIM Fault Input Register 1
-//  0x054 32  FLTINR2  HRTIM Fault Input Register 2
-//  0x058 32  BDMUPDR  BDMUPDR
-//  0x05C 32  BDTxUPR  Burst DMA Timerx update Register
-//  0x060 32  BDMADR   Burst DMA Data Register
+//
+//	0x000 32  CR1      Control Register 1
+//	0x004 32  CR2      Control Register 2
+//	0x008 32  ISR      Interrupt Status Register
+//	0x00C 32  ICR      Interrupt Clear Register
+//	0x010 32  IER      Interrupt Enable Register
+//	0x014 32  OENR     Output Enable Register
+//	0x018 32  DISR     DISR
+//	0x01C 32  ODSR     Output Disable Status Register
+//	0x020 32  BMCR     Burst Mode Control Register
+//	0x024 32  BMTRG    BMTRG
+//	0x028 32  BMCMPR6  BMCMPR6
+//	0x02C 32  BMPER    Burst Mode Period Register
+//	0x030 32  EECR1    Timer External Event Control Register 1
+//	0x034 32  EECR2    Timer External Event Control Register 2
+//	0x038 32  EECR3    Timer External Event Control Register 3
+//	0x03C 32  ADC1R    ADC Trigger 1 Register
+//	0x040 32  ADC2R    ADC Trigger 2 Register
+//	0x044 32  ADC3R    ADC Trigger 3 Register
+//	0x048 32  ADC4R    ADC Trigger 4 Register
+//	0x04C 32  DLLCR    DLL Control Register
+//	0x050 32  FLTINR1  HRTIM Fault Input Register 1
+//	0x054 32  FLTINR2  HRTIM Fault Input Register 2
+//	0x058 32  BDMUPDR  BDMUPDR
+//	0x05C 32  BDTxUPR  Burst DMA Timerx update Register
+//	0x060 32  BDMADR   Burst DMA Data Register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package hrtim_common
 
 const (

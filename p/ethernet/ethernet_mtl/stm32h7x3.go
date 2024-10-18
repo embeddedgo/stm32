@@ -5,19 +5,24 @@
 // Package ethernet_mtl provides access to the registers of the Ethernet_MTL peripheral.
 //
 // Instances:
-//  Ethernet_MTL  Ethernet_MTL_BASE  -  -  Ethernet: MTL mode register (MTL)
+//
+//	Ethernet_MTL  Ethernet_MTL_BASE  -  -  Ethernet: MTL mode register (MTL)
+//
 // Registers:
-//  0x000 32  MTLOMR       Operating mode Register
-//  0x020 32  MTLISR       Interrupt status Register
-//  0x100 32  MTLTxQOMR    Tx queue operating mode Register
-//  0x104 32  MTLTxQUR     Tx queue underflow register
-//  0x108 32  MTLTxQDR     Tx queue debug Register
-//  0x12C 32  MTLQICSR     Queue interrupt control status Register
-//  0x130 32  MTLRxQOMR    Rx queue operating mode register
-//  0x134 32  MTLRxQMPOCR  Rx queue missed packet and overflow counter register
-//  0x138 32  MTLRxQDR     Rx queue debug register
+//
+//	0x000 32  MTLOMR       Operating mode Register
+//	0x020 32  MTLISR       Interrupt status Register
+//	0x100 32  MTLTxQOMR    Tx queue operating mode Register
+//	0x104 32  MTLTxQUR     Tx queue underflow register
+//	0x108 32  MTLTxQDR     Tx queue debug Register
+//	0x12C 32  MTLQICSR     Queue interrupt control status Register
+//	0x130 32  MTLRxQOMR    Rx queue operating mode register
+//	0x134 32  MTLRxQMPOCR  Rx queue missed packet and overflow counter register
+//	0x138 32  MTLRxQDR     Rx queue debug register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package ethernet_mtl
 
 const (

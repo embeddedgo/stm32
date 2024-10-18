@@ -5,75 +5,80 @@
 // Package fdcan provides access to the registers of the FDCAN peripheral.
 //
 // Instances:
-//  FDCAN1  FDCAN1_BASE  -  FDCAN1_IT0,FDCAN1_IT1,FDCAN_CAL  FDCAN1
-//  FDCAN2  FDCAN2_BASE  -  FDCAN2_IT0,FDCAN2_IT1            FDCAN1
+//
+//	FDCAN1  FDCAN1_BASE  -  FDCAN1_IT0,FDCAN1_IT1,FDCAN_CAL  FDCAN1
+//	FDCAN2  FDCAN2_BASE  -  FDCAN2_IT0,FDCAN2_IT1            FDCAN1
+//
 // Registers:
-//  0x000 32  FDCAN_CREL    FDCAN Core Release Register
-//  0x004 32  FDCAN_ENDN    FDCAN Core Release Register
-//  0x00C 32  FDCAN_DBTP    FDCAN Data Bit Timing and Prescaler Register
-//  0x010 32  FDCAN_TEST    FDCAN Test Register
-//  0x014 32  FDCAN_RWD     FDCAN RAM Watchdog Register
-//  0x018 32  FDCAN_CCCR    FDCAN CC Control Register
-//  0x01C 32  FDCAN_NBTP    FDCAN Nominal Bit Timing and Prescaler Register
-//  0x020 32  FDCAN_TSCC    FDCAN Timestamp Counter Configuration Register
-//  0x024 32  FDCAN_TSCV    FDCAN Timestamp Counter Value Register
-//  0x028 32  FDCAN_TOCC    FDCAN Timeout Counter Configuration Register
-//  0x02C 32  FDCAN_TOCV    FDCAN Timeout Counter Value Register
-//  0x040 32  FDCAN_ECR     FDCAN Error Counter Register
-//  0x044 32  FDCAN_PSR     FDCAN Protocol Status Register
-//  0x048 32  FDCAN_TDCR    FDCAN Transmitter Delay Compensation Register
-//  0x050 32  FDCAN_IR      FDCAN Interrupt Register
-//  0x054 32  FDCAN_IE      FDCAN Interrupt Enable Register
-//  0x058 32  FDCAN_ILS     FDCAN Interrupt Line Select Register
-//  0x05C 32  FDCAN_ILE     FDCAN Interrupt Line Enable Register
-//  0x080 32  FDCAN_GFC     FDCAN Global Filter Configuration Register
-//  0x084 32  FDCAN_SIDFC   FDCAN Standard ID Filter Configuration Register
-//  0x088 32  FDCAN_XIDFC   FDCAN Extended ID Filter Configuration Register
-//  0x090 32  FDCAN_XIDAM   FDCAN Extended ID and Mask Register
-//  0x094 32  FDCAN_HPMS    FDCAN High Priority Message Status Register
-//  0x098 32  FDCAN_NDAT1   FDCAN New Data 1 Register
-//  0x09C 32  FDCAN_NDAT2   FDCAN New Data 2 Register
-//  0x0A0 32  FDCAN_RXF0C   FDCAN Rx FIFO 0 Configuration Register
-//  0x0A4 32  FDCAN_RXF0S   FDCAN Rx FIFO 0 Status Register
-//  0x0A8 32  FDCAN_RXF0A   CAN Rx FIFO 0 Acknowledge Register
-//  0x0AC 32  FDCAN_RXBC    FDCAN Rx Buffer Configuration Register
-//  0x0B0 32  FDCAN_RXF1C   FDCAN Rx FIFO 1 Configuration Register
-//  0x0B4 32  FDCAN_RXF1S   FDCAN Rx FIFO 1 Status Register
-//  0x0B8 32  FDCAN_RXF1A   FDCAN Rx FIFO 1 Acknowledge Register
-//  0x0BC 32  FDCAN_RXESC   FDCAN Rx Buffer Element Size Configuration Register
-//  0x0C0 32  FDCAN_TXBC    FDCAN Tx Buffer Configuration Register
-//  0x0C4 32  FDCAN_TXFQS   FDCAN Tx FIFO/Queue Status Register
-//  0x0C8 32  FDCAN_TXESC   FDCAN Tx Buffer Element Size Configuration Register
-//  0x0CC 32  FDCAN_TXBRP   FDCAN Tx Buffer Request Pending Register
-//  0x0D0 32  FDCAN_TXBAR   FDCAN Tx Buffer Add Request Register
-//  0x0D4 32  FDCAN_TXBCR   FDCAN Tx Buffer Cancellation Request Register
-//  0x0D8 32  FDCAN_TXBTO   FDCAN Tx Buffer Transmission Occurred Register
-//  0x0DC 32  FDCAN_TXBCF   FDCAN Tx Buffer Cancellation Finished Register
-//  0x0E0 32  FDCAN_TXBTIE  FDCAN Tx Buffer Transmission Interrupt Enable Register
-//  0x0E4 32  FDCAN_TXBCIE  FDCAN Tx Buffer Cancellation Finished Interrupt Enable Register
-//  0x0F0 32  FDCAN_TXEFC   FDCAN Tx Event FIFO Configuration Register
-//  0x0F4 32  FDCAN_TXEFS   FDCAN Tx Event FIFO Status Register
-//  0x0F8 32  FDCAN_TXEFA   FDCAN Tx Event FIFO Acknowledge Register
-//  0x100 32  FDCAN_TTTMC   FDCAN TT Trigger Memory Configuration Register
-//  0x104 32  FDCAN_TTRMC   FDCAN TT Reference Message Configuration Register
-//  0x108 32  FDCAN_TTOCF   FDCAN TT Operation Configuration Register
-//  0x10C 32  FDCAN_TTMLM   FDCAN TT Matrix Limits Register
-//  0x110 32  FDCAN_TURCF   FDCAN TUR Configuration Register
-//  0x114 32  FDCAN_TTOCN   FDCAN TT Operation Control Register
-//  0x118 32  CAN_TTGTP     FDCAN TT Global Time Preset Register
-//  0x11C 32  FDCAN_TTTMK   FDCAN TT Time Mark Register
-//  0x120 32  FDCAN_TTIR    FDCAN TT Interrupt Register
-//  0x124 32  FDCAN_TTIE    FDCAN TT Interrupt Enable Register
-//  0x128 32  FDCAN_TTILS   FDCAN TT Interrupt Line Select Register
-//  0x12C 32  FDCAN_TTOST   FDCAN TT Operation Status Register
-//  0x130 32  FDCAN_TURNA   FDCAN TUR Numerator Actual Register
-//  0x134 32  FDCAN_TTLGT   FDCAN TT Local and Global Time Register
-//  0x138 32  FDCAN_TTCTC   FDCAN TT Cycle Time and Count Register
-//  0x13C 32  FDCAN_TTCPT   FDCAN TT Capture Time Register
-//  0x140 32  FDCAN_TTCSM   FDCAN TT Cycle Sync Mark Register
-//  0x300 32  FDCAN_TTTS    FDCAN TT Trigger Select Register
+//
+//	0x000 32  FDCAN_CREL    FDCAN Core Release Register
+//	0x004 32  FDCAN_ENDN    FDCAN Core Release Register
+//	0x00C 32  FDCAN_DBTP    FDCAN Data Bit Timing and Prescaler Register
+//	0x010 32  FDCAN_TEST    FDCAN Test Register
+//	0x014 32  FDCAN_RWD     FDCAN RAM Watchdog Register
+//	0x018 32  FDCAN_CCCR    FDCAN CC Control Register
+//	0x01C 32  FDCAN_NBTP    FDCAN Nominal Bit Timing and Prescaler Register
+//	0x020 32  FDCAN_TSCC    FDCAN Timestamp Counter Configuration Register
+//	0x024 32  FDCAN_TSCV    FDCAN Timestamp Counter Value Register
+//	0x028 32  FDCAN_TOCC    FDCAN Timeout Counter Configuration Register
+//	0x02C 32  FDCAN_TOCV    FDCAN Timeout Counter Value Register
+//	0x040 32  FDCAN_ECR     FDCAN Error Counter Register
+//	0x044 32  FDCAN_PSR     FDCAN Protocol Status Register
+//	0x048 32  FDCAN_TDCR    FDCAN Transmitter Delay Compensation Register
+//	0x050 32  FDCAN_IR      FDCAN Interrupt Register
+//	0x054 32  FDCAN_IE      FDCAN Interrupt Enable Register
+//	0x058 32  FDCAN_ILS     FDCAN Interrupt Line Select Register
+//	0x05C 32  FDCAN_ILE     FDCAN Interrupt Line Enable Register
+//	0x080 32  FDCAN_GFC     FDCAN Global Filter Configuration Register
+//	0x084 32  FDCAN_SIDFC   FDCAN Standard ID Filter Configuration Register
+//	0x088 32  FDCAN_XIDFC   FDCAN Extended ID Filter Configuration Register
+//	0x090 32  FDCAN_XIDAM   FDCAN Extended ID and Mask Register
+//	0x094 32  FDCAN_HPMS    FDCAN High Priority Message Status Register
+//	0x098 32  FDCAN_NDAT1   FDCAN New Data 1 Register
+//	0x09C 32  FDCAN_NDAT2   FDCAN New Data 2 Register
+//	0x0A0 32  FDCAN_RXF0C   FDCAN Rx FIFO 0 Configuration Register
+//	0x0A4 32  FDCAN_RXF0S   FDCAN Rx FIFO 0 Status Register
+//	0x0A8 32  FDCAN_RXF0A   CAN Rx FIFO 0 Acknowledge Register
+//	0x0AC 32  FDCAN_RXBC    FDCAN Rx Buffer Configuration Register
+//	0x0B0 32  FDCAN_RXF1C   FDCAN Rx FIFO 1 Configuration Register
+//	0x0B4 32  FDCAN_RXF1S   FDCAN Rx FIFO 1 Status Register
+//	0x0B8 32  FDCAN_RXF1A   FDCAN Rx FIFO 1 Acknowledge Register
+//	0x0BC 32  FDCAN_RXESC   FDCAN Rx Buffer Element Size Configuration Register
+//	0x0C0 32  FDCAN_TXBC    FDCAN Tx Buffer Configuration Register
+//	0x0C4 32  FDCAN_TXFQS   FDCAN Tx FIFO/Queue Status Register
+//	0x0C8 32  FDCAN_TXESC   FDCAN Tx Buffer Element Size Configuration Register
+//	0x0CC 32  FDCAN_TXBRP   FDCAN Tx Buffer Request Pending Register
+//	0x0D0 32  FDCAN_TXBAR   FDCAN Tx Buffer Add Request Register
+//	0x0D4 32  FDCAN_TXBCR   FDCAN Tx Buffer Cancellation Request Register
+//	0x0D8 32  FDCAN_TXBTO   FDCAN Tx Buffer Transmission Occurred Register
+//	0x0DC 32  FDCAN_TXBCF   FDCAN Tx Buffer Cancellation Finished Register
+//	0x0E0 32  FDCAN_TXBTIE  FDCAN Tx Buffer Transmission Interrupt Enable Register
+//	0x0E4 32  FDCAN_TXBCIE  FDCAN Tx Buffer Cancellation Finished Interrupt Enable Register
+//	0x0F0 32  FDCAN_TXEFC   FDCAN Tx Event FIFO Configuration Register
+//	0x0F4 32  FDCAN_TXEFS   FDCAN Tx Event FIFO Status Register
+//	0x0F8 32  FDCAN_TXEFA   FDCAN Tx Event FIFO Acknowledge Register
+//	0x100 32  FDCAN_TTTMC   FDCAN TT Trigger Memory Configuration Register
+//	0x104 32  FDCAN_TTRMC   FDCAN TT Reference Message Configuration Register
+//	0x108 32  FDCAN_TTOCF   FDCAN TT Operation Configuration Register
+//	0x10C 32  FDCAN_TTMLM   FDCAN TT Matrix Limits Register
+//	0x110 32  FDCAN_TURCF   FDCAN TUR Configuration Register
+//	0x114 32  FDCAN_TTOCN   FDCAN TT Operation Control Register
+//	0x118 32  CAN_TTGTP     FDCAN TT Global Time Preset Register
+//	0x11C 32  FDCAN_TTTMK   FDCAN TT Time Mark Register
+//	0x120 32  FDCAN_TTIR    FDCAN TT Interrupt Register
+//	0x124 32  FDCAN_TTIE    FDCAN TT Interrupt Enable Register
+//	0x128 32  FDCAN_TTILS   FDCAN TT Interrupt Line Select Register
+//	0x12C 32  FDCAN_TTOST   FDCAN TT Operation Status Register
+//	0x130 32  FDCAN_TURNA   FDCAN TUR Numerator Actual Register
+//	0x134 32  FDCAN_TTLGT   FDCAN TT Local and Global Time Register
+//	0x138 32  FDCAN_TTCTC   FDCAN TT Cycle Time and Count Register
+//	0x13C 32  FDCAN_TTCPT   FDCAN TT Capture Time Register
+//	0x140 32  FDCAN_TTCSM   FDCAN TT Cycle Sync Mark Register
+//	0x300 32  FDCAN_TTTS    FDCAN TT Trigger Select Register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package fdcan
 
 const (
@@ -879,6 +884,7 @@ const (
 const (
 	EFFL FDCAN_TXEFS = 0x3F << 0  //+ Event FIFO Fill Level
 	EFGI FDCAN_TXEFS = 0x1F << 8  //+ Event FIFO Get Index.
+	EFPI FDCAN_TXEFS = 0x1F << 16 //+ Event FIFO put index.
 	EFF  FDCAN_TXEFS = 0x01 << 24 //+ Event FIFO Full.
 	TEFL FDCAN_TXEFS = 0x01 << 25 //+ Tx Event FIFO Element Lost.
 )
@@ -886,6 +892,7 @@ const (
 const (
 	EFFLn = 0
 	EFGIn = 8
+	EFPIn = 16
 	EFFn  = 24
 	TEFLn = 25
 )

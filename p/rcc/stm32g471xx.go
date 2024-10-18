@@ -5,40 +5,45 @@
 // Package rcc provides access to the registers of the RCC peripheral.
 //
 // Instances:
-//  RCC  RCC_BASE  -  RCC  Reset and clock control
+//
+//	RCC  RCC_BASE  -  RCC  Reset and clock control
+//
 // Registers:
-//  0x000 32  CR          Clock control register
-//  0x004 32  ICSCR       Internal clock sources calibration register
-//  0x008 32  CFGR        Clock configuration register
-//  0x00C 32  PLLSYSCFGR  PLL configuration register
-//  0x018 32  CIER        Clock interrupt enable register
-//  0x01C 32  CIFR        Clock interrupt flag register
-//  0x020 32  CICR        Clock interrupt clear register
-//  0x028 32  AHB1RSTR    AHB1 peripheral reset register
-//  0x02C 32  AHB2RSTR    AHB2 peripheral reset register
-//  0x030 32  AHB3RSTR    AHB3 peripheral reset register
-//  0x038 32  APB1RSTR1   APB1 peripheral reset register 1
-//  0x03C 32  APB1RSTR2   APB1 peripheral reset register 2
-//  0x040 32  APB2RSTR    APB2 peripheral reset register
-//  0x048 32  AHB1ENR     AHB1 peripheral clock enable register
-//  0x04C 32  AHB2ENR     AHB2 peripheral clock enable register
-//  0x050 32  AHB3ENR     AHB3 peripheral clock enable register
-//  0x058 32  APB1ENR1    APB1ENR1
-//  0x05C 32  APB1ENR2    APB1 peripheral clock enable register 2
-//  0x060 32  APB2ENR     APB2ENR
-//  0x068 32  AHB1SMENR   AHB1 peripheral clocks enable in Sleep and Stop modes register
-//  0x06C 32  AHB2SMENR   AHB2 peripheral clocks enable in Sleep and Stop modes register
-//  0x070 32  AHB3SMENR   AHB3 peripheral clocks enable in Sleep and Stop modes register
-//  0x078 32  APB1SMENR1  APB1SMENR1
-//  0x07C 32  APB1SMENR2  APB1 peripheral clocks enable in Sleep and Stop modes register 2
-//  0x080 32  APB2SMENR   APB2SMENR
-//  0x088 32  CCIPR1      CCIPR
-//  0x090 32  BDCR        BDCR
-//  0x094 32  CSR         CSR
-//  0x098 32  CRRCR       Clock recovery RC register
-//  0x09C 32  CCIPR2      Peripherals independent clock configuration register
+//
+//	0x000 32  CR          Clock control register
+//	0x004 32  ICSCR       Internal clock sources calibration register
+//	0x008 32  CFGR        Clock configuration register
+//	0x00C 32  PLLSYSCFGR  PLL configuration register
+//	0x018 32  CIER        Clock interrupt enable register
+//	0x01C 32  CIFR        Clock interrupt flag register
+//	0x020 32  CICR        Clock interrupt clear register
+//	0x028 32  AHB1RSTR    AHB1 peripheral reset register
+//	0x02C 32  AHB2RSTR    AHB2 peripheral reset register
+//	0x030 32  AHB3RSTR    AHB3 peripheral reset register
+//	0x038 32  APB1RSTR1   APB1 peripheral reset register 1
+//	0x03C 32  APB1RSTR2   APB1 peripheral reset register 2
+//	0x040 32  APB2RSTR    APB2 peripheral reset register
+//	0x048 32  AHB1ENR     AHB1 peripheral clock enable register
+//	0x04C 32  AHB2ENR     AHB2 peripheral clock enable register
+//	0x050 32  AHB3ENR     AHB3 peripheral clock enable register
+//	0x058 32  APB1ENR1    APB1ENR1
+//	0x05C 32  APB1ENR2    APB1 peripheral clock enable register 2
+//	0x060 32  APB2ENR     APB2ENR
+//	0x068 32  AHB1SMENR   AHB1 peripheral clocks enable in Sleep and Stop modes register
+//	0x06C 32  AHB2SMENR   AHB2 peripheral clocks enable in Sleep and Stop modes register
+//	0x070 32  AHB3SMENR   AHB3 peripheral clocks enable in Sleep and Stop modes register
+//	0x078 32  APB1SMENR1  APB1SMENR1
+//	0x07C 32  APB1SMENR2  APB1 peripheral clocks enable in Sleep and Stop modes register 2
+//	0x080 32  APB2SMENR   APB2SMENR
+//	0x088 32  CCIPR1      CCIPR
+//	0x090 32  BDCR        BDCR
+//	0x094 32  CSR         CSR
+//	0x098 32  CRRCR       Clock recovery RC register
+//	0x09C 32  CCIPR2      Peripherals independent clock configuration register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package rcc
 
 const (
@@ -76,13 +81,21 @@ const (
 )
 
 const (
-	SW     CFGR = 0x03 << 0  //+ System clock switch
-	SWS    CFGR = 0x03 << 2  //+ System clock switch status
-	HPRE   CFGR = 0x0F << 4  //+ AHB prescaler
-	PPRE1  CFGR = 0x07 << 8  //+ PB low-speed prescaler (APB1)
-	PPRE2  CFGR = 0x07 << 11 //+ APB high-speed prescaler (APB2)
-	MCOSEL CFGR = 0x0F << 24 //+ Microcontroller clock output
-	MCOPRE CFGR = 0x07 << 28 //+ Microcontroller clock output prescaler
+	SW       CFGR = 0x03 << 0  //+ System clock switch
+	SW_HSI   CFGR = 0x00 << 0  //  HSI oscillator selected as system clock
+	SW_CSI   CFGR = 0x01 << 0  //  CSI oscillator selected as system clock
+	SW_HSE   CFGR = 0x02 << 0  //  HSE oscillator selected as system clock
+	SW_PLL1  CFGR = 0x03 << 0  //  PLL1 selected as system clock
+	SWS      CFGR = 0x03 << 2  //+ System clock switch status
+	SWS_HSI  CFGR = 0x00 << 2  //  HSI oscillator used as system clock
+	SWS_CSI  CFGR = 0x01 << 2  //  CSI oscillator used as system clock
+	SWS_HSE  CFGR = 0x02 << 2  //  HSE oscillator used as system clock
+	SWS_PLL1 CFGR = 0x03 << 2  //  PLL1 used as system clock
+	HPRE     CFGR = 0x0F << 4  //+ AHB prescaler
+	PPRE1    CFGR = 0x07 << 8  //+ PB low-speed prescaler (APB1)
+	PPRE2    CFGR = 0x07 << 11 //+ APB high-speed prescaler (APB2)
+	MCOSEL   CFGR = 0x0F << 24 //+ Microcontroller clock output
+	MCOPRE   CFGR = 0x07 << 28 //+ Microcontroller clock output prescaler
 )
 
 const (

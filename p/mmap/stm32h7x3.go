@@ -5,11 +5,6 @@
 // Package mmap provides base memory adresses for all peripherals.
 package mmap
 
-// AC
-const (
-	AC_BASE uintptr = 0xE000EF90 // Access control
-)
-
 // ADC
 const (
 	ADC1_BASE         uintptr = 0x40022000 // Analog to Digital Converter
@@ -57,6 +52,11 @@ const (
 // DAC
 const (
 	DAC_BASE uintptr = 0x40007400 // DAC
+)
+
+// DBGMCU
+const (
+	DBGMCU_BASE uintptr = 0x5C001000 // Microcontroller Debug Unit
 )
 
 // DCMI
@@ -115,12 +115,6 @@ const (
 // FMC
 const (
 	FMC_BASE uintptr = 0x52004000 // FMC
-)
-
-// FPU
-const (
-	FPU_BASE       uintptr = 0xE000EF34 // Floting point unit
-	FPU_CPACR_BASE uintptr = 0xE000ED88 // Floating point unit CPACR
 )
 
 // Flash
@@ -211,25 +205,9 @@ const (
 	MDMA_BASE uintptr = 0x52000000 // MDMA
 )
 
-// MPU
-const (
-	MPU_BASE uintptr = 0xE000ED90 // Memory protection unit
-)
-
-// NVIC
-const (
-	NVIC_BASE      uintptr = 0xE000E100 // Nested Vectored Interrupt Controller
-	NVIC_STIR_BASE uintptr = 0xE000EF00 // Nested vectored interrupt controller
-)
-
 // OPAMP
 const (
 	OPAMP_BASE uintptr = 0x40009000 // Operational amplifiers
-)
-
-// PF
-const (
-	PF_BASE uintptr = 0xE000ED78 // Processor features
 )
 
 // PWR
@@ -240,6 +218,13 @@ const (
 // QUADSPI
 const (
 	QUADSPI_BASE uintptr = 0x52005000 // QUADSPI
+)
+
+// RAMECC
+const (
+	RAMECC1_BASE uintptr = 0x52009000 // ECC controller is associated to each RAM area
+	RAMECC2_BASE uintptr = 0x48023000 // ECC controller is associated to each RAM area
+	RAMECC3_BASE uintptr = 0x58027000 // ECC controller is associated to each RAM area
 )
 
 // RCC
@@ -265,12 +250,6 @@ const (
 	SAI4_BASE uintptr = 0x58005400 // SAI
 )
 
-// SCB
-const (
-	SCB_BASE       uintptr = 0xE000ED00 // System control block
-	SCB_ACTRL_BASE uintptr = 0xE000E008 // System control block ACTLR
-)
-
 // SDMMC
 const (
 	SDMMC1_BASE uintptr = 0x52007000 // SDMMC1
@@ -290,11 +269,6 @@ const (
 	SPI4_BASE uintptr = 0x40013400 // Serial peripheral interface
 	SPI5_BASE uintptr = 0x40015000 // Serial peripheral interface
 	SPI6_BASE uintptr = 0x58001400 // Serial peripheral interface
-)
-
-// STK
-const (
-	STK_BASE uintptr = 0xE000E010 // SysTick timer
 )
 
 // SWPMI

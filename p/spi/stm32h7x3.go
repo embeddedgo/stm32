@@ -5,30 +5,35 @@
 // Package spi provides access to the registers of the SPI peripheral.
 //
 // Instances:
-//  SPI1  SPI1_BASE  APB2  SPI1  Serial peripheral interface
-//  SPI2  SPI2_BASE  APB1  SPI2  Serial peripheral interface
-//  SPI3  SPI3_BASE  APB1  SPI3  Serial peripheral interface
-//  SPI4  SPI4_BASE  APB2  SPI4  Serial peripheral interface
-//  SPI5  SPI5_BASE  APB2  SPI5  Serial peripheral interface
-//  SPI6  SPI6_BASE  APB4  SPI6  Serial peripheral interface
+//
+//	SPI1  SPI1_BASE  APB2  SPI1  Serial peripheral interface
+//	SPI2  SPI2_BASE  APB1  SPI2  Serial peripheral interface
+//	SPI3  SPI3_BASE  APB1  SPI3  Serial peripheral interface
+//	SPI4  SPI4_BASE  APB2  SPI4  Serial peripheral interface
+//	SPI5  SPI5_BASE  APB2  SPI5  Serial peripheral interface
+//	SPI6  SPI6_BASE  APB4  SPI6  Serial peripheral interface
+//
 // Registers:
-//  0x000 32  CR1      control register 1
-//  0x004 32  CR2      control register 2
-//  0x008 32  CFG1     configuration register 1
-//  0x00C 32  CFG2     configuration register 2
-//  0x010 32  IER      Interrupt Enable Register
-//  0x014 32  SR       Status Register
-//  0x018 32  IFCR     Interrupt/Status Flags Clear Register
-//  0x020 32  TXDR     Transmit Data Register
-//  0x030 32  RXDR     Receive Data Register
-//  0x040 32  CRCPOLY  Polynomial Register
-//  0x044 32  TXCRC    Transmitter CRC Register
-//  0x048 32  RXCRC    Receiver CRC Register
-//  0x04C 32  UDRDR    Underrun Data Register
-//  0x050 32  CGFR     configuration register
+//
+//	0x000 32  CR1      control register 1
+//	0x004 32  CR2      control register 2
+//	0x008 32  CFG1     configuration register 1
+//	0x00C 32  CFG2     configuration register 2
+//	0x010 32  IER      Interrupt Enable Register
+//	0x014 32  SR       Status Register
+//	0x018 32  IFCR     Interrupt/Status Flags Clear Register
+//	0x020 32  TXDR     Transmit Data Register
+//	0x030 32  RXDR     Receive Data Register
+//	0x040 32  CRCPOLY  Polynomial Register
+//	0x044 32  TXCRC    Transmitter CRC Register
+//	0x048 32  RXCRC    Receiver CRC Register
+//	0x04C 32  UDRDR    Underrun Data Register
+//	0x050 32  CGFR     configuration register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/bus
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/bus
+//	github.com/embeddedgo/stm32/p/mmap
 package spi
 
 const (
@@ -213,54 +218,6 @@ const (
 	MODFCn  = 9
 	TSERFCn = 10
 	SUSPCn  = 11
-)
-
-const (
-	TXDR TXDR = 0xFFFFFFFF << 0 //+ Transmit data register
-)
-
-const (
-	TXDRn = 0
-)
-
-const (
-	RXDR RXDR = 0xFFFFFFFF << 0 //+ Receive data register
-)
-
-const (
-	RXDRn = 0
-)
-
-const (
-	CRCPOLY CRCPOLY = 0xFFFFFFFF << 0 //+ CRC polynomial register
-)
-
-const (
-	CRCPOLYn = 0
-)
-
-const (
-	TXCRC TXCRC = 0xFFFFFFFF << 0 //+ CRC register for transmitter
-)
-
-const (
-	TXCRCn = 0
-)
-
-const (
-	RXCRC RXCRC = 0xFFFFFFFF << 0 //+ CRC register for receiver
-)
-
-const (
-	RXCRCn = 0
-)
-
-const (
-	UDRDR UDRDR = 0xFFFFFFFF << 0 //+ Data at slave underrun condition
-)
-
-const (
-	UDRDRn = 0
 )
 
 const (

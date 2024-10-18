@@ -5,11 +5,16 @@
 // Package otg_fs_pwrclk provides access to the registers of the OTG_FS_PWRCLK peripheral.
 //
 // Instances:
-//  OTG_FS_PWRCLK  OTG_FS_PWRCLK_BASE  -  -  USB on the go full speed
+//
+//	OTG_FS_PWRCLK  OTG_FS_PWRCLK_BASE  -  -  USB on the go full speed
+//
 // Registers:
-//  0x000 32  FS_PCGCCTL  OTG_FS power and clock gating control register
+//
+//	0x000 32  FS_PCGCCTL  OTG_FS power and clock gating control register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package otg_fs_pwrclk
 
 const (

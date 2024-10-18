@@ -5,11 +5,16 @@
 // Package fpu_cpacr provides access to the registers of the FPU_CPACR peripheral.
 //
 // Instances:
-//  FPU_CPACR  FPU_CPACR_BASE  -  -  Floating point unit CPACR
+//
+//	FPU_CPACR  FPU_CPACR_BASE  -  -  Floating point unit CPACR
+//
 // Registers:
-//  0x000 32  CPACR  Coprocessor access control register
+//
+//	0x000 32  CPACR  Coprocessor access control register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package fpu_cpacr
 
 const (

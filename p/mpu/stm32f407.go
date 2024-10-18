@@ -5,15 +5,20 @@
 // Package mpu provides access to the registers of the MPU peripheral.
 //
 // Instances:
-//  MPU  MPU_BASE  -  -  Memory protection unit
+//
+//	MPU  MPU_BASE  -  -  Memory protection unit
+//
 // Registers:
-//  0x000 32  MPU_TYPER  MPU type register
-//  0x004 32  MPU_CTRL   MPU control register
-//  0x008 32  MPU_RNR    MPU region number register
-//  0x00C 32  MPU_RBAR   MPU region base address register
-//  0x010 32  MPU_RASR   MPU region attribute and size register
+//
+//	0x000 32  MPU_TYPER  MPU type register
+//	0x004 32  MPU_CTRL   MPU control register
+//	0x008 32  MPU_RNR    MPU region number register
+//	0x00C 32  MPU_RBAR   MPU region base address register
+//	0x010 32  MPU_RASR   MPU region attribute and size register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package mpu
 
 const (

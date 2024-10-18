@@ -5,26 +5,31 @@
 // Package sdio provides access to the registers of the SDIO peripheral.
 //
 // Instances:
-//  SDIO  SDIO_BASE  APB2  SDIO  Secure digital input/output interface
+//
+//	SDIO  SDIO_BASE  APB2  SDIO  Secure digital input/output interface
+//
 // Registers:
-//  0x000 32  POWER    power control register
-//  0x004 32  CLKCR    SDI clock control register
-//  0x008 32  ARG      argument register
-//  0x00C 32  CMD      command register
-//  0x010 32  RESPCMD  command response register
-//  0x014 32  RESP[4]  response registers
-//  0x024 32  DTIMER   data timer register
-//  0x028 32  DLEN     data length register
-//  0x02C 32  DCTRL    data control register
-//  0x030 32  DCOUNT   data counter register
-//  0x034 32  STA      status register
-//  0x038 32  ICR      interrupt clear register
-//  0x03C 32  MASK     mask register
-//  0x048 32  FIFOCNT  FIFO counter register
-//  0x080 32  FIFO     data FIFO register
+//
+//	0x000 32  POWER    power control register
+//	0x004 32  CLKCR    SDI clock control register
+//	0x008 32  ARG      argument register
+//	0x00C 32  CMD      command register
+//	0x010 32  RESPCMD  command response register
+//	0x014 32  RESP[4]  response registers
+//	0x024 32  DTIMER   data timer register
+//	0x028 32  DLEN     data length register
+//	0x02C 32  DCTRL    data control register
+//	0x030 32  DCOUNT   data counter register
+//	0x034 32  STA      status register
+//	0x038 32  ICR      interrupt clear register
+//	0x03C 32  MASK     mask register
+//	0x048 32  FIFOCNT  FIFO counter register
+//	0x080 32  FIFO     data FIFO register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/bus
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/bus
+//	github.com/embeddedgo/stm32/p/mmap
 package sdio
 
 const (

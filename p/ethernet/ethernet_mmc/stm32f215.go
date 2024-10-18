@@ -5,21 +5,26 @@
 // Package ethernet_mmc provides access to the registers of the Ethernet_MMC peripheral.
 //
 // Instances:
-//  Ethernet_MMC  Ethernet_MMC_BASE  -  -  Ethernet: MAC management counters
+//
+//	Ethernet_MMC  Ethernet_MMC_BASE  -  -  Ethernet: MAC management counters
+//
 // Registers:
-//  0x000 32  MMCCR        Ethernet MMC control register
-//  0x004 32  MMCRIR       Ethernet MMC receive interrupt register
-//  0x008 32  MMCTIR       Ethernet MMC transmit interrupt register
-//  0x00C 32  MMCRIMR      Ethernet MMC receive interrupt mask register
-//  0x010 32  MMCTIMR      Ethernet MMC transmit interrupt mask register
-//  0x04C 32  MMCTGFSCCR   Ethernet MMC transmitted good frames after a single collision counter
-//  0x050 32  MMCTGFMSCCR  Ethernet MMC transmitted good frames after more than a single collision
-//  0x068 32  MMCTGFCR     Ethernet MMC transmitted good frames counter register
-//  0x094 32  MMCRFCECR    Ethernet MMC received frames with CRC error counter register
-//  0x098 32  MMCRFAECR    Ethernet MMC received frames with alignment error counter register
-//  0x0C4 32  MMCRGUFCR    MMC received good unicast frames counter register
+//
+//	0x000 32  MMCCR        Ethernet MMC control register
+//	0x004 32  MMCRIR       Ethernet MMC receive interrupt register
+//	0x008 32  MMCTIR       Ethernet MMC transmit interrupt register
+//	0x00C 32  MMCRIMR      Ethernet MMC receive interrupt mask register
+//	0x010 32  MMCTIMR      Ethernet MMC transmit interrupt mask register
+//	0x04C 32  MMCTGFSCCR   Ethernet MMC transmitted good frames after a single collision counter
+//	0x050 32  MMCTGFMSCCR  Ethernet MMC transmitted good frames after more than a single collision
+//	0x068 32  MMCTGFCR     Ethernet MMC transmitted good frames counter register
+//	0x094 32  MMCRFCECR    Ethernet MMC received frames with CRC error counter register
+//	0x098 32  MMCRFAECR    Ethernet MMC received frames with alignment error counter register
+//	0x0C4 32  MMCRGUFCR    MMC received good unicast frames counter register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package ethernet_mmc
 
 const (

@@ -5,21 +5,26 @@
 // Package hrtim_master provides access to the registers of the HRTIM_Master peripheral.
 //
 // Instances:
-//  HRTIM_Master  HRTIM_Master_BASE  -  -  High Resolution Timer: Master Timers
+//
+//	HRTIM_Master  HRTIM_Master_BASE  -  -  High Resolution Timer: Master Timers
+//
 // Registers:
-//  0x000 32  MCR     Master Timer Control Register
-//  0x004 32  MISR    Master Timer Interrupt Status Register
-//  0x008 32  MICR    Master Timer Interrupt Clear Register
-//  0x00C 32  MDIER4  MDIER4
-//  0x010 32  MCNTR   Master Timer Counter Register
-//  0x014 32  MPER    Master Timer Period Register
-//  0x018 32  MREP    Master Timer Repetition Register
-//  0x01C 32  MCMP1R  Master Timer Compare 1 Register
-//  0x024 32  MCMP2R  Master Timer Compare 2 Register
-//  0x028 32  MCMP3R  Master Timer Compare 3 Register
-//  0x02C 32  MCMP4R  Master Timer Compare 4 Register
+//
+//	0x000 32  MCR     Master Timer Control Register
+//	0x004 32  MISR    Master Timer Interrupt Status Register
+//	0x008 32  MICR    Master Timer Interrupt Clear Register
+//	0x00C 32  MDIER4  MDIER4
+//	0x010 32  MCNTR   Master Timer Counter Register
+//	0x014 32  MPER    Master Timer Period Register
+//	0x018 32  MREP    Master Timer Repetition Register
+//	0x01C 32  MCMP1R  Master Timer Compare 1 Register
+//	0x024 32  MCMP2R  Master Timer Compare 2 Register
+//	0x028 32  MCMP3R  Master Timer Compare 3 Register
+//	0x02C 32  MCMP4R  Master Timer Compare 4 Register
+//
 // Import:
-//  github.com/embeddedgo/stm32/p/mmap
+//
+//	github.com/embeddedgo/stm32/p/mmap
 package hrtim_master
 
 const (
