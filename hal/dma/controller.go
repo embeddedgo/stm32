@@ -15,24 +15,26 @@ func DMA(n int) *Controller {
 	return controller(n)
 }
 
-// EnableClock enables clock for port p.
-// lp determines whether the clock remains on in low power (sleep) mode.
+// EnableClock enables clock to the DMA controller. The lp parameter determines
+// whether the clock remains on in the low power (sleep) mode.
 func (d *Controller) EnableClock(lp bool) {
 	d.enableClock(lp)
 }
 
+// DisableClock disables clock to the DMA controller.
 func (d *Controller) DisableClock() {
 	d.disableClock()
 }
 
+// Reset resets the DMA controller.
 func (d *Controller) Reset() {
 	d.reset()
 }
 
-// Channel returns the value that represents sn-th stream (channel in F1/Lx
-// series nomenclature) with cn-th request channel (ignored in case of F1/Lx
-// series). Channels with the same sn points to the same DMA stream so they can
-// not be used concurently.
+// Channel returns the value that represents the sn stream (F1/Lx DMA channel)
+// together with the connected to it cn request channel (ignored for F1/Lx).
+// Channels with the same sn points to the same DMA stream so they can't be
+// used at the same time.
 func (d *Controller) Channel(sn, rn int) Channel {
 	return d.channel(sn, rn)
 }
@@ -158,7 +160,7 @@ const (
 	MB16 Mode = mb4  // Memory burst transfer, 4 beats.
 )
 
-// Setup configures channel.
+// Setup configures the DMA channel channel.
 func (c Channel) Setup(m Mode) {
 	c.setup(m)
 }

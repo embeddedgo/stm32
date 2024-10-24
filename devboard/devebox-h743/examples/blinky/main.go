@@ -13,9 +13,9 @@ import (
 
 func delay() {
 	if buttons.K1.Read() != 0 {
-		time.Sleep(time.Second / 3)
+		time.Sleep(time.Second / 8)
 	} else {
-		time.Sleep(time.Second)
+		time.Sleep(time.Second / 2)
 	}
 }
 
