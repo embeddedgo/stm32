@@ -147,6 +147,8 @@ const (
 	incP = 1 << 9  // pinc
 	incM = 1 << 10 // minc
 
+	trbuf = 1 << 20 // UART/USART/LPUART transfers. H7 only
+
 	pb4  = 1 << 21
 	pb8  = 2 << 21
 	pb16 = 3 << 21

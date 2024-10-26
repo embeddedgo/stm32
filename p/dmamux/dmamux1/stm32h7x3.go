@@ -10,34 +10,12 @@
 //
 // Registers:
 //
-//	0x000 32  DMAMUX_C0CR
-//	0x004 32  DMAMUX_C1CR
-//	0x008 32  DMAMUX_C2CR
-//	0x00C 32  DMAMUX_C3CR
-//	0x010 32  DMAMUX_C4CR
-//	0x014 32  DMAMUX_C5CR
-//	0x018 32  DMAMUX_C6CR
-//	0x01C 32  DMAMUX_C7CR
-//	0x020 32  DMAMUX_C8CR
-//	0x024 32  DMAMUX_C9CR
-//	0x028 32  DMAMUX_C10CR
-//	0x02C 32  DMAMUX_C11CR
-//	0x030 32  DMAMUX_C12CR
-//	0x034 32  DMAMUX_C13CR
-//	0x038 32  DMAMUX_C14CR
-//	0x03C 32  DMAMUX_C15CR
-//	0x080 32  DMAMUX_CSR
-//	0x084 32  DMAMUX_CFR
-//	0x100 32  DMAMUX_RG0CR
-//	0x104 32  DMAMUX_RG1CR
-//	0x108 32  DMAMUX_RG2CR
-//	0x10C 32  DMAMUX_RG3CR
-//	0x110 32  DMAMUX_RG4CR
-//	0x114 32  DMAMUX_RG5CR
-//	0x118 32  DMAMUX_RG6CR
-//	0x11C 32  DMAMUX_RG7CR
-//	0x140 32  DMAMUX_RGSR
-//	0x144 32  DMAMUX_RGCFR
+//	0x000 32  CCR[16]      DMA request line multiplexer channel x control register
+//	0x080 32  CSR          DMA request line multiplexer interrupt channel status register
+//	0x084 32  CFR(CSR)     DMA request line multiplexer interrupt clear flag register
+//	0x100 32  RGCR[8]      DMA request generator channel x control register
+//	0x140 32  RGSR         DMA request generator status register
+//	0x144 32  RGCFR(RGSR)  DMA request generator clear flag register
 //
 // Import:
 //
@@ -45,23 +23,17 @@
 package dmamux1
 
 const (
-	DMAREQ_ID DMAMUX_C0CR = 0x7F << 0  //+ DMA request identification Selects the input DMA request. See the DMAMUX table about assignments of multiplexer inputs to resources.
-	SOIE      DMAMUX_C0CR = 0x01 << 8  //+ Synchronization overrun interrupt enable
-	B_0x0     DMAMUX_C0CR = 0x00 << 8  //  Interrupt disabled
-	B_0x1     DMAMUX_C0CR = 0x01 << 8  //  Interrupt enabled
-	EGE       DMAMUX_C0CR = 0x01 << 9  //+ Event generation enable
-	B_0x0     DMAMUX_C0CR = 0x00 << 9  //  Event generation disabled
-	B_0x1     DMAMUX_C0CR = 0x01 << 9  //  Event generation enabled
-	SE        DMAMUX_C0CR = 0x01 << 16 //+ Synchronization enable
-	B_0x0     DMAMUX_C0CR = 0x00 << 16 //  Synchronization disabled
-	B_0x1     DMAMUX_C0CR = 0x01 << 16 //  Synchronization enabled
-	SPOL      DMAMUX_C0CR = 0x03 << 17 //+ Synchronization polarity Defines the edge polarity of the selected synchronization input:
-	B_0x0     DMAMUX_C0CR = 0x00 << 17 //  No event, i.e. no synchronization nor detection.
-	B_0x1     DMAMUX_C0CR = 0x01 << 17 //  Rising edge
-	B_0x2     DMAMUX_C0CR = 0x02 << 17 //  Falling edge
-	B_0x3     DMAMUX_C0CR = 0x03 << 17 //  Rising and falling edges
-	NBREQ     DMAMUX_C0CR = 0x1F << 19 //+ Number of DMA requests minus 1 to forward Defines the number of DMA requests to forward to the DMA controller after a synchronization event, and/or the number of DMA requests before an output event is generated. This field shall only be written when both SE and EGE bits are low.
-	SYNC_ID   DMAMUX_C0CR = 0x07 << 24 //+ Synchronization identification Selects the synchronization input (see inputs to resources).
+	DMAREQ_ID    CCR = 0x7F << 0  //+ DMA request identification Selects the input DMA request. See the DMAMUX table about assignments of multiplexer inputs to resources.
+	SOIE         CCR = 0x01 << 8  //+ Synchronization overrun interrupt enable
+	EGE          CCR = 0x01 << 9  //+ Event generation enable
+	SE           CCR = 0x01 << 16 //+ Synchronization enable
+	SPOL         CCR = 0x03 << 17 //+ Synchronization polarity Defines the edge polarity of the selected synchronization input:
+	SPOL_NONE    CCR = 0x00 << 17 //  No event, i.e. no synchronization nor detection.
+	SPOL_RISING  CCR = 0x01 << 17 //  Rising edge
+	SPOL_FALLING CCR = 0x02 << 17 //  Falling edge
+	SPOL_BOTH    CCR = 0x03 << 17 //  Rising and falling edges
+	NBREQ        CCR = 0x1F << 19 //+ Number of DMA requests minus 1 to forward Defines the number of DMA requests to forward to the DMA controller after a synchronization event, and/or the number of DMA requests before an output event is generated. This field shall only be written when both SE and EGE bits are low.
+	SYNC_ID      CCR = 0x07 << 24 //+ Synchronization identification Selects the synchronization input (see inputs to resources).
 )
 
 const (
@@ -75,472 +47,22 @@ const (
 )
 
 const (
-	DMAREQ_ID DMAMUX_C1CR = 0x7F << 0  //+ DMA request identification Selects the input DMA request. See the DMAMUX table about assignments of multiplexer inputs to resources.
-	SOIE      DMAMUX_C1CR = 0x01 << 8  //+ Synchronization overrun interrupt enable
-	B_0x0     DMAMUX_C1CR = 0x00 << 8  //  Interrupt disabled
-	B_0x1     DMAMUX_C1CR = 0x01 << 8  //  Interrupt enabled
-	EGE       DMAMUX_C1CR = 0x01 << 9  //+ Event generation enable
-	B_0x0     DMAMUX_C1CR = 0x00 << 9  //  Event generation disabled
-	B_0x1     DMAMUX_C1CR = 0x01 << 9  //  Event generation enabled
-	SE        DMAMUX_C1CR = 0x01 << 16 //+ Synchronization enable
-	B_0x0     DMAMUX_C1CR = 0x00 << 16 //  Synchronization disabled
-	B_0x1     DMAMUX_C1CR = 0x01 << 16 //  Synchronization enabled
-	SPOL      DMAMUX_C1CR = 0x03 << 17 //+ Synchronization polarity Defines the edge polarity of the selected synchronization input:
-	B_0x0     DMAMUX_C1CR = 0x00 << 17 //  No event, i.e. no synchronization nor detection.
-	B_0x1     DMAMUX_C1CR = 0x01 << 17 //  Rising edge
-	B_0x2     DMAMUX_C1CR = 0x02 << 17 //  Falling edge
-	B_0x3     DMAMUX_C1CR = 0x03 << 17 //  Rising and falling edges
-	NBREQ     DMAMUX_C1CR = 0x1F << 19 //+ Number of DMA requests minus 1 to forward Defines the number of DMA requests to forward to the DMA controller after a synchronization event, and/or the number of DMA requests before an output event is generated. This field shall only be written when both SE and EGE bits are low.
-	SYNC_ID   DMAMUX_C1CR = 0x07 << 24 //+ Synchronization identification Selects the synchronization input (see inputs to resources).
-)
-
-const (
-	DMAREQ_IDn = 0
-	SOIEn      = 8
-	EGEn       = 9
-	SEn        = 16
-	SPOLn      = 17
-	NBREQn     = 19
-	SYNC_IDn   = 24
-)
-
-const (
-	DMAREQ_ID DMAMUX_C2CR = 0x7F << 0  //+ DMA request identification Selects the input DMA request. See the DMAMUX table about assignments of multiplexer inputs to resources.
-	SOIE      DMAMUX_C2CR = 0x01 << 8  //+ Synchronization overrun interrupt enable
-	B_0x0     DMAMUX_C2CR = 0x00 << 8  //  Interrupt disabled
-	B_0x1     DMAMUX_C2CR = 0x01 << 8  //  Interrupt enabled
-	EGE       DMAMUX_C2CR = 0x01 << 9  //+ Event generation enable
-	B_0x0     DMAMUX_C2CR = 0x00 << 9  //  Event generation disabled
-	B_0x1     DMAMUX_C2CR = 0x01 << 9  //  Event generation enabled
-	SE        DMAMUX_C2CR = 0x01 << 16 //+ Synchronization enable
-	B_0x0     DMAMUX_C2CR = 0x00 << 16 //  Synchronization disabled
-	B_0x1     DMAMUX_C2CR = 0x01 << 16 //  Synchronization enabled
-	SPOL      DMAMUX_C2CR = 0x03 << 17 //+ Synchronization polarity Defines the edge polarity of the selected synchronization input:
-	B_0x0     DMAMUX_C2CR = 0x00 << 17 //  No event, i.e. no synchronization nor detection.
-	B_0x1     DMAMUX_C2CR = 0x01 << 17 //  Rising edge
-	B_0x2     DMAMUX_C2CR = 0x02 << 17 //  Falling edge
-	B_0x3     DMAMUX_C2CR = 0x03 << 17 //  Rising and falling edges
-	NBREQ     DMAMUX_C2CR = 0x1F << 19 //+ Number of DMA requests minus 1 to forward Defines the number of DMA requests to forward to the DMA controller after a synchronization event, and/or the number of DMA requests before an output event is generated. This field shall only be written when both SE and EGE bits are low.
-	SYNC_ID   DMAMUX_C2CR = 0x07 << 24 //+ Synchronization identification Selects the synchronization input (see inputs to resources).
-)
-
-const (
-	DMAREQ_IDn = 0
-	SOIEn      = 8
-	EGEn       = 9
-	SEn        = 16
-	SPOLn      = 17
-	NBREQn     = 19
-	SYNC_IDn   = 24
-)
-
-const (
-	DMAREQ_ID DMAMUX_C3CR = 0x7F << 0  //+ DMA request identification Selects the input DMA request. See the DMAMUX table about assignments of multiplexer inputs to resources.
-	SOIE      DMAMUX_C3CR = 0x01 << 8  //+ Synchronization overrun interrupt enable
-	B_0x0     DMAMUX_C3CR = 0x00 << 8  //  Interrupt disabled
-	B_0x1     DMAMUX_C3CR = 0x01 << 8  //  Interrupt enabled
-	EGE       DMAMUX_C3CR = 0x01 << 9  //+ Event generation enable
-	B_0x0     DMAMUX_C3CR = 0x00 << 9  //  Event generation disabled
-	B_0x1     DMAMUX_C3CR = 0x01 << 9  //  Event generation enabled
-	SE        DMAMUX_C3CR = 0x01 << 16 //+ Synchronization enable
-	B_0x0     DMAMUX_C3CR = 0x00 << 16 //  Synchronization disabled
-	B_0x1     DMAMUX_C3CR = 0x01 << 16 //  Synchronization enabled
-	SPOL      DMAMUX_C3CR = 0x03 << 17 //+ Synchronization polarity Defines the edge polarity of the selected synchronization input:
-	B_0x0     DMAMUX_C3CR = 0x00 << 17 //  No event, i.e. no synchronization nor detection.
-	B_0x1     DMAMUX_C3CR = 0x01 << 17 //  Rising edge
-	B_0x2     DMAMUX_C3CR = 0x02 << 17 //  Falling edge
-	B_0x3     DMAMUX_C3CR = 0x03 << 17 //  Rising and falling edges
-	NBREQ     DMAMUX_C3CR = 0x1F << 19 //+ Number of DMA requests minus 1 to forward Defines the number of DMA requests to forward to the DMA controller after a synchronization event, and/or the number of DMA requests before an output event is generated. This field shall only be written when both SE and EGE bits are low.
-	SYNC_ID   DMAMUX_C3CR = 0x07 << 24 //+ Synchronization identification Selects the synchronization input (see inputs to resources).
-)
-
-const (
-	DMAREQ_IDn = 0
-	SOIEn      = 8
-	EGEn       = 9
-	SEn        = 16
-	SPOLn      = 17
-	NBREQn     = 19
-	SYNC_IDn   = 24
-)
-
-const (
-	DMAREQ_ID DMAMUX_C4CR = 0x7F << 0  //+ DMA request identification Selects the input DMA request. See the DMAMUX table about assignments of multiplexer inputs to resources.
-	SOIE      DMAMUX_C4CR = 0x01 << 8  //+ Synchronization overrun interrupt enable
-	B_0x0     DMAMUX_C4CR = 0x00 << 8  //  Interrupt disabled
-	B_0x1     DMAMUX_C4CR = 0x01 << 8  //  Interrupt enabled
-	EGE       DMAMUX_C4CR = 0x01 << 9  //+ Event generation enable
-	B_0x0     DMAMUX_C4CR = 0x00 << 9  //  Event generation disabled
-	B_0x1     DMAMUX_C4CR = 0x01 << 9  //  Event generation enabled
-	SE        DMAMUX_C4CR = 0x01 << 16 //+ Synchronization enable
-	B_0x0     DMAMUX_C4CR = 0x00 << 16 //  Synchronization disabled
-	B_0x1     DMAMUX_C4CR = 0x01 << 16 //  Synchronization enabled
-	SPOL      DMAMUX_C4CR = 0x03 << 17 //+ Synchronization polarity Defines the edge polarity of the selected synchronization input:
-	B_0x0     DMAMUX_C4CR = 0x00 << 17 //  No event, i.e. no synchronization nor detection.
-	B_0x1     DMAMUX_C4CR = 0x01 << 17 //  Rising edge
-	B_0x2     DMAMUX_C4CR = 0x02 << 17 //  Falling edge
-	B_0x3     DMAMUX_C4CR = 0x03 << 17 //  Rising and falling edges
-	NBREQ     DMAMUX_C4CR = 0x1F << 19 //+ Number of DMA requests minus 1 to forward Defines the number of DMA requests to forward to the DMA controller after a synchronization event, and/or the number of DMA requests before an output event is generated. This field shall only be written when both SE and EGE bits are low.
-	SYNC_ID   DMAMUX_C4CR = 0x07 << 24 //+ Synchronization identification Selects the synchronization input (see inputs to resources).
-)
-
-const (
-	DMAREQ_IDn = 0
-	SOIEn      = 8
-	EGEn       = 9
-	SEn        = 16
-	SPOLn      = 17
-	NBREQn     = 19
-	SYNC_IDn   = 24
-)
-
-const (
-	DMAREQ_ID DMAMUX_C5CR = 0x7F << 0  //+ DMA request identification Selects the input DMA request. See the DMAMUX table about assignments of multiplexer inputs to resources.
-	SOIE      DMAMUX_C5CR = 0x01 << 8  //+ Synchronization overrun interrupt enable
-	B_0x0     DMAMUX_C5CR = 0x00 << 8  //  Interrupt disabled
-	B_0x1     DMAMUX_C5CR = 0x01 << 8  //  Interrupt enabled
-	EGE       DMAMUX_C5CR = 0x01 << 9  //+ Event generation enable
-	B_0x0     DMAMUX_C5CR = 0x00 << 9  //  Event generation disabled
-	B_0x1     DMAMUX_C5CR = 0x01 << 9  //  Event generation enabled
-	SE        DMAMUX_C5CR = 0x01 << 16 //+ Synchronization enable
-	B_0x0     DMAMUX_C5CR = 0x00 << 16 //  Synchronization disabled
-	B_0x1     DMAMUX_C5CR = 0x01 << 16 //  Synchronization enabled
-	SPOL      DMAMUX_C5CR = 0x03 << 17 //+ Synchronization polarity Defines the edge polarity of the selected synchronization input:
-	B_0x0     DMAMUX_C5CR = 0x00 << 17 //  No event, i.e. no synchronization nor detection.
-	B_0x1     DMAMUX_C5CR = 0x01 << 17 //  Rising edge
-	B_0x2     DMAMUX_C5CR = 0x02 << 17 //  Falling edge
-	B_0x3     DMAMUX_C5CR = 0x03 << 17 //  Rising and falling edges
-	NBREQ     DMAMUX_C5CR = 0x1F << 19 //+ Number of DMA requests minus 1 to forward Defines the number of DMA requests to forward to the DMA controller after a synchronization event, and/or the number of DMA requests before an output event is generated. This field shall only be written when both SE and EGE bits are low.
-	SYNC_ID   DMAMUX_C5CR = 0x07 << 24 //+ Synchronization identification Selects the synchronization input (see inputs to resources).
-)
-
-const (
-	DMAREQ_IDn = 0
-	SOIEn      = 8
-	EGEn       = 9
-	SEn        = 16
-	SPOLn      = 17
-	NBREQn     = 19
-	SYNC_IDn   = 24
-)
-
-const (
-	DMAREQ_ID DMAMUX_C6CR = 0x7F << 0  //+ DMA request identification Selects the input DMA request. See the DMAMUX table about assignments of multiplexer inputs to resources.
-	SOIE      DMAMUX_C6CR = 0x01 << 8  //+ Synchronization overrun interrupt enable
-	B_0x0     DMAMUX_C6CR = 0x00 << 8  //  Interrupt disabled
-	B_0x1     DMAMUX_C6CR = 0x01 << 8  //  Interrupt enabled
-	EGE       DMAMUX_C6CR = 0x01 << 9  //+ Event generation enable
-	B_0x0     DMAMUX_C6CR = 0x00 << 9  //  Event generation disabled
-	B_0x1     DMAMUX_C6CR = 0x01 << 9  //  Event generation enabled
-	SE        DMAMUX_C6CR = 0x01 << 16 //+ Synchronization enable
-	B_0x0     DMAMUX_C6CR = 0x00 << 16 //  Synchronization disabled
-	B_0x1     DMAMUX_C6CR = 0x01 << 16 //  Synchronization enabled
-	SPOL      DMAMUX_C6CR = 0x03 << 17 //+ Synchronization polarity Defines the edge polarity of the selected synchronization input:
-	B_0x0     DMAMUX_C6CR = 0x00 << 17 //  No event, i.e. no synchronization nor detection.
-	B_0x1     DMAMUX_C6CR = 0x01 << 17 //  Rising edge
-	B_0x2     DMAMUX_C6CR = 0x02 << 17 //  Falling edge
-	B_0x3     DMAMUX_C6CR = 0x03 << 17 //  Rising and falling edges
-	NBREQ     DMAMUX_C6CR = 0x1F << 19 //+ Number of DMA requests minus 1 to forward Defines the number of DMA requests to forward to the DMA controller after a synchronization event, and/or the number of DMA requests before an output event is generated. This field shall only be written when both SE and EGE bits are low.
-	SYNC_ID   DMAMUX_C6CR = 0x07 << 24 //+ Synchronization identification Selects the synchronization input (see inputs to resources).
-)
-
-const (
-	DMAREQ_IDn = 0
-	SOIEn      = 8
-	EGEn       = 9
-	SEn        = 16
-	SPOLn      = 17
-	NBREQn     = 19
-	SYNC_IDn   = 24
-)
-
-const (
-	DMAREQ_ID DMAMUX_C7CR = 0x7F << 0  //+ DMA request identification Selects the input DMA request. See the DMAMUX table about assignments of multiplexer inputs to resources.
-	SOIE      DMAMUX_C7CR = 0x01 << 8  //+ Synchronization overrun interrupt enable
-	B_0x0     DMAMUX_C7CR = 0x00 << 8  //  Interrupt disabled
-	B_0x1     DMAMUX_C7CR = 0x01 << 8  //  Interrupt enabled
-	EGE       DMAMUX_C7CR = 0x01 << 9  //+ Event generation enable
-	B_0x0     DMAMUX_C7CR = 0x00 << 9  //  Event generation disabled
-	B_0x1     DMAMUX_C7CR = 0x01 << 9  //  Event generation enabled
-	SE        DMAMUX_C7CR = 0x01 << 16 //+ Synchronization enable
-	B_0x0     DMAMUX_C7CR = 0x00 << 16 //  Synchronization disabled
-	B_0x1     DMAMUX_C7CR = 0x01 << 16 //  Synchronization enabled
-	SPOL      DMAMUX_C7CR = 0x03 << 17 //+ Synchronization polarity Defines the edge polarity of the selected synchronization input:
-	B_0x0     DMAMUX_C7CR = 0x00 << 17 //  No event, i.e. no synchronization nor detection.
-	B_0x1     DMAMUX_C7CR = 0x01 << 17 //  Rising edge
-	B_0x2     DMAMUX_C7CR = 0x02 << 17 //  Falling edge
-	B_0x3     DMAMUX_C7CR = 0x03 << 17 //  Rising and falling edges
-	NBREQ     DMAMUX_C7CR = 0x1F << 19 //+ Number of DMA requests minus 1 to forward Defines the number of DMA requests to forward to the DMA controller after a synchronization event, and/or the number of DMA requests before an output event is generated. This field shall only be written when both SE and EGE bits are low.
-	SYNC_ID   DMAMUX_C7CR = 0x07 << 24 //+ Synchronization identification Selects the synchronization input (see inputs to resources).
-)
-
-const (
-	DMAREQ_IDn = 0
-	SOIEn      = 8
-	EGEn       = 9
-	SEn        = 16
-	SPOLn      = 17
-	NBREQn     = 19
-	SYNC_IDn   = 24
-)
-
-const (
-	DMAREQ_ID DMAMUX_C8CR = 0x7F << 0  //+ DMA request identification Selects the input DMA request. See the DMAMUX table about assignments of multiplexer inputs to resources.
-	SOIE      DMAMUX_C8CR = 0x01 << 8  //+ Synchronization overrun interrupt enable
-	B_0x0     DMAMUX_C8CR = 0x00 << 8  //  Interrupt disabled
-	B_0x1     DMAMUX_C8CR = 0x01 << 8  //  Interrupt enabled
-	EGE       DMAMUX_C8CR = 0x01 << 9  //+ Event generation enable
-	B_0x0     DMAMUX_C8CR = 0x00 << 9  //  Event generation disabled
-	B_0x1     DMAMUX_C8CR = 0x01 << 9  //  Event generation enabled
-	SE        DMAMUX_C8CR = 0x01 << 16 //+ Synchronization enable
-	B_0x0     DMAMUX_C8CR = 0x00 << 16 //  Synchronization disabled
-	B_0x1     DMAMUX_C8CR = 0x01 << 16 //  Synchronization enabled
-	SPOL      DMAMUX_C8CR = 0x03 << 17 //+ Synchronization polarity Defines the edge polarity of the selected synchronization input:
-	B_0x0     DMAMUX_C8CR = 0x00 << 17 //  No event, i.e. no synchronization nor detection.
-	B_0x1     DMAMUX_C8CR = 0x01 << 17 //  Rising edge
-	B_0x2     DMAMUX_C8CR = 0x02 << 17 //  Falling edge
-	B_0x3     DMAMUX_C8CR = 0x03 << 17 //  Rising and falling edges
-	NBREQ     DMAMUX_C8CR = 0x1F << 19 //+ Number of DMA requests minus 1 to forward Defines the number of DMA requests to forward to the DMA controller after a synchronization event, and/or the number of DMA requests before an output event is generated. This field shall only be written when both SE and EGE bits are low.
-	SYNC_ID   DMAMUX_C8CR = 0x07 << 24 //+ Synchronization identification Selects the synchronization input (see inputs to resources).
-)
-
-const (
-	DMAREQ_IDn = 0
-	SOIEn      = 8
-	EGEn       = 9
-	SEn        = 16
-	SPOLn      = 17
-	NBREQn     = 19
-	SYNC_IDn   = 24
-)
-
-const (
-	DMAREQ_ID DMAMUX_C9CR = 0x7F << 0  //+ DMA request identification Selects the input DMA request. See the DMAMUX table about assignments of multiplexer inputs to resources.
-	SOIE      DMAMUX_C9CR = 0x01 << 8  //+ Synchronization overrun interrupt enable
-	B_0x0     DMAMUX_C9CR = 0x00 << 8  //  Interrupt disabled
-	B_0x1     DMAMUX_C9CR = 0x01 << 8  //  Interrupt enabled
-	EGE       DMAMUX_C9CR = 0x01 << 9  //+ Event generation enable
-	B_0x0     DMAMUX_C9CR = 0x00 << 9  //  Event generation disabled
-	B_0x1     DMAMUX_C9CR = 0x01 << 9  //  Event generation enabled
-	SE        DMAMUX_C9CR = 0x01 << 16 //+ Synchronization enable
-	B_0x0     DMAMUX_C9CR = 0x00 << 16 //  Synchronization disabled
-	B_0x1     DMAMUX_C9CR = 0x01 << 16 //  Synchronization enabled
-	SPOL      DMAMUX_C9CR = 0x03 << 17 //+ Synchronization polarity Defines the edge polarity of the selected synchronization input:
-	B_0x0     DMAMUX_C9CR = 0x00 << 17 //  No event, i.e. no synchronization nor detection.
-	B_0x1     DMAMUX_C9CR = 0x01 << 17 //  Rising edge
-	B_0x2     DMAMUX_C9CR = 0x02 << 17 //  Falling edge
-	B_0x3     DMAMUX_C9CR = 0x03 << 17 //  Rising and falling edges
-	NBREQ     DMAMUX_C9CR = 0x1F << 19 //+ Number of DMA requests minus 1 to forward Defines the number of DMA requests to forward to the DMA controller after a synchronization event, and/or the number of DMA requests before an output event is generated. This field shall only be written when both SE and EGE bits are low.
-	SYNC_ID   DMAMUX_C9CR = 0x07 << 24 //+ Synchronization identification Selects the synchronization input (see inputs to resources).
-)
-
-const (
-	DMAREQ_IDn = 0
-	SOIEn      = 8
-	EGEn       = 9
-	SEn        = 16
-	SPOLn      = 17
-	NBREQn     = 19
-	SYNC_IDn   = 24
-)
-
-const (
-	DMAREQ_ID DMAMUX_C10CR = 0x7F << 0  //+ DMA request identification Selects the input DMA request. See the DMAMUX table about assignments of multiplexer inputs to resources.
-	SOIE      DMAMUX_C10CR = 0x01 << 8  //+ Synchronization overrun interrupt enable
-	B_0x0     DMAMUX_C10CR = 0x00 << 8  //  Interrupt disabled
-	B_0x1     DMAMUX_C10CR = 0x01 << 8  //  Interrupt enabled
-	EGE       DMAMUX_C10CR = 0x01 << 9  //+ Event generation enable
-	B_0x0     DMAMUX_C10CR = 0x00 << 9  //  Event generation disabled
-	B_0x1     DMAMUX_C10CR = 0x01 << 9  //  Event generation enabled
-	SE        DMAMUX_C10CR = 0x01 << 16 //+ Synchronization enable
-	B_0x0     DMAMUX_C10CR = 0x00 << 16 //  Synchronization disabled
-	B_0x1     DMAMUX_C10CR = 0x01 << 16 //  Synchronization enabled
-	SPOL      DMAMUX_C10CR = 0x03 << 17 //+ Synchronization polarity Defines the edge polarity of the selected synchronization input:
-	B_0x0     DMAMUX_C10CR = 0x00 << 17 //  No event, i.e. no synchronization nor detection.
-	B_0x1     DMAMUX_C10CR = 0x01 << 17 //  Rising edge
-	B_0x2     DMAMUX_C10CR = 0x02 << 17 //  Falling edge
-	B_0x3     DMAMUX_C10CR = 0x03 << 17 //  Rising and falling edges
-	NBREQ     DMAMUX_C10CR = 0x1F << 19 //+ Number of DMA requests minus 1 to forward Defines the number of DMA requests to forward to the DMA controller after a synchronization event, and/or the number of DMA requests before an output event is generated. This field shall only be written when both SE and EGE bits are low.
-	SYNC_ID   DMAMUX_C10CR = 0x07 << 24 //+ Synchronization identification Selects the synchronization input (see inputs to resources).
-)
-
-const (
-	DMAREQ_IDn = 0
-	SOIEn      = 8
-	EGEn       = 9
-	SEn        = 16
-	SPOLn      = 17
-	NBREQn     = 19
-	SYNC_IDn   = 24
-)
-
-const (
-	DMAREQ_ID DMAMUX_C11CR = 0x7F << 0  //+ DMA request identification Selects the input DMA request. See the DMAMUX table about assignments of multiplexer inputs to resources.
-	SOIE      DMAMUX_C11CR = 0x01 << 8  //+ Synchronization overrun interrupt enable
-	B_0x0     DMAMUX_C11CR = 0x00 << 8  //  Interrupt disabled
-	B_0x1     DMAMUX_C11CR = 0x01 << 8  //  Interrupt enabled
-	EGE       DMAMUX_C11CR = 0x01 << 9  //+ Event generation enable
-	B_0x0     DMAMUX_C11CR = 0x00 << 9  //  Event generation disabled
-	B_0x1     DMAMUX_C11CR = 0x01 << 9  //  Event generation enabled
-	SE        DMAMUX_C11CR = 0x01 << 16 //+ Synchronization enable
-	B_0x0     DMAMUX_C11CR = 0x00 << 16 //  Synchronization disabled
-	B_0x1     DMAMUX_C11CR = 0x01 << 16 //  Synchronization enabled
-	SPOL      DMAMUX_C11CR = 0x03 << 17 //+ Synchronization polarity Defines the edge polarity of the selected synchronization input:
-	B_0x0     DMAMUX_C11CR = 0x00 << 17 //  No event, i.e. no synchronization nor detection.
-	B_0x1     DMAMUX_C11CR = 0x01 << 17 //  Rising edge
-	B_0x2     DMAMUX_C11CR = 0x02 << 17 //  Falling edge
-	B_0x3     DMAMUX_C11CR = 0x03 << 17 //  Rising and falling edges
-	NBREQ     DMAMUX_C11CR = 0x1F << 19 //+ Number of DMA requests minus 1 to forward Defines the number of DMA requests to forward to the DMA controller after a synchronization event, and/or the number of DMA requests before an output event is generated. This field shall only be written when both SE and EGE bits are low.
-	SYNC_ID   DMAMUX_C11CR = 0x07 << 24 //+ Synchronization identification Selects the synchronization input (see inputs to resources).
-)
-
-const (
-	DMAREQ_IDn = 0
-	SOIEn      = 8
-	EGEn       = 9
-	SEn        = 16
-	SPOLn      = 17
-	NBREQn     = 19
-	SYNC_IDn   = 24
-)
-
-const (
-	DMAREQ_ID DMAMUX_C12CR = 0x7F << 0  //+ DMA request identification Selects the input DMA request. See the DMAMUX table about assignments of multiplexer inputs to resources.
-	SOIE      DMAMUX_C12CR = 0x01 << 8  //+ Synchronization overrun interrupt enable
-	B_0x0     DMAMUX_C12CR = 0x00 << 8  //  Interrupt disabled
-	B_0x1     DMAMUX_C12CR = 0x01 << 8  //  Interrupt enabled
-	EGE       DMAMUX_C12CR = 0x01 << 9  //+ Event generation enable
-	B_0x0     DMAMUX_C12CR = 0x00 << 9  //  Event generation disabled
-	B_0x1     DMAMUX_C12CR = 0x01 << 9  //  Event generation enabled
-	SE        DMAMUX_C12CR = 0x01 << 16 //+ Synchronization enable
-	B_0x0     DMAMUX_C12CR = 0x00 << 16 //  Synchronization disabled
-	B_0x1     DMAMUX_C12CR = 0x01 << 16 //  Synchronization enabled
-	SPOL      DMAMUX_C12CR = 0x03 << 17 //+ Synchronization polarity Defines the edge polarity of the selected synchronization input:
-	B_0x0     DMAMUX_C12CR = 0x00 << 17 //  No event, i.e. no synchronization nor detection.
-	B_0x1     DMAMUX_C12CR = 0x01 << 17 //  Rising edge
-	B_0x2     DMAMUX_C12CR = 0x02 << 17 //  Falling edge
-	B_0x3     DMAMUX_C12CR = 0x03 << 17 //  Rising and falling edges
-	NBREQ     DMAMUX_C12CR = 0x1F << 19 //+ Number of DMA requests minus 1 to forward Defines the number of DMA requests to forward to the DMA controller after a synchronization event, and/or the number of DMA requests before an output event is generated. This field shall only be written when both SE and EGE bits are low.
-	SYNC_ID   DMAMUX_C12CR = 0x07 << 24 //+ Synchronization identification Selects the synchronization input (see inputs to resources).
-)
-
-const (
-	DMAREQ_IDn = 0
-	SOIEn      = 8
-	EGEn       = 9
-	SEn        = 16
-	SPOLn      = 17
-	NBREQn     = 19
-	SYNC_IDn   = 24
-)
-
-const (
-	DMAREQ_ID DMAMUX_C13CR = 0x7F << 0  //+ DMA request identification Selects the input DMA request. See the DMAMUX table about assignments of multiplexer inputs to resources.
-	SOIE      DMAMUX_C13CR = 0x01 << 8  //+ Synchronization overrun interrupt enable
-	B_0x0     DMAMUX_C13CR = 0x00 << 8  //  Interrupt disabled
-	B_0x1     DMAMUX_C13CR = 0x01 << 8  //  Interrupt enabled
-	EGE       DMAMUX_C13CR = 0x01 << 9  //+ Event generation enable
-	B_0x0     DMAMUX_C13CR = 0x00 << 9  //  Event generation disabled
-	B_0x1     DMAMUX_C13CR = 0x01 << 9  //  Event generation enabled
-	SE        DMAMUX_C13CR = 0x01 << 16 //+ Synchronization enable
-	B_0x0     DMAMUX_C13CR = 0x00 << 16 //  Synchronization disabled
-	B_0x1     DMAMUX_C13CR = 0x01 << 16 //  Synchronization enabled
-	SPOL      DMAMUX_C13CR = 0x03 << 17 //+ Synchronization polarity Defines the edge polarity of the selected synchronization input:
-	B_0x0     DMAMUX_C13CR = 0x00 << 17 //  No event, i.e. no synchronization nor detection.
-	B_0x1     DMAMUX_C13CR = 0x01 << 17 //  Rising edge
-	B_0x2     DMAMUX_C13CR = 0x02 << 17 //  Falling edge
-	B_0x3     DMAMUX_C13CR = 0x03 << 17 //  Rising and falling edges
-	NBREQ     DMAMUX_C13CR = 0x1F << 19 //+ Number of DMA requests minus 1 to forward Defines the number of DMA requests to forward to the DMA controller after a synchronization event, and/or the number of DMA requests before an output event is generated. This field shall only be written when both SE and EGE bits are low.
-	SYNC_ID   DMAMUX_C13CR = 0x07 << 24 //+ Synchronization identification Selects the synchronization input (see inputs to resources).
-)
-
-const (
-	DMAREQ_IDn = 0
-	SOIEn      = 8
-	EGEn       = 9
-	SEn        = 16
-	SPOLn      = 17
-	NBREQn     = 19
-	SYNC_IDn   = 24
-)
-
-const (
-	DMAREQ_ID DMAMUX_C14CR = 0x7F << 0  //+ DMA request identification Selects the input DMA request. See the DMAMUX table about assignments of multiplexer inputs to resources.
-	SOIE      DMAMUX_C14CR = 0x01 << 8  //+ Synchronization overrun interrupt enable
-	B_0x0     DMAMUX_C14CR = 0x00 << 8  //  Interrupt disabled
-	B_0x1     DMAMUX_C14CR = 0x01 << 8  //  Interrupt enabled
-	EGE       DMAMUX_C14CR = 0x01 << 9  //+ Event generation enable
-	B_0x0     DMAMUX_C14CR = 0x00 << 9  //  Event generation disabled
-	B_0x1     DMAMUX_C14CR = 0x01 << 9  //  Event generation enabled
-	SE        DMAMUX_C14CR = 0x01 << 16 //+ Synchronization enable
-	B_0x0     DMAMUX_C14CR = 0x00 << 16 //  Synchronization disabled
-	B_0x1     DMAMUX_C14CR = 0x01 << 16 //  Synchronization enabled
-	SPOL      DMAMUX_C14CR = 0x03 << 17 //+ Synchronization polarity Defines the edge polarity of the selected synchronization input:
-	B_0x0     DMAMUX_C14CR = 0x00 << 17 //  No event, i.e. no synchronization nor detection.
-	B_0x1     DMAMUX_C14CR = 0x01 << 17 //  Rising edge
-	B_0x2     DMAMUX_C14CR = 0x02 << 17 //  Falling edge
-	B_0x3     DMAMUX_C14CR = 0x03 << 17 //  Rising and falling edges
-	NBREQ     DMAMUX_C14CR = 0x1F << 19 //+ Number of DMA requests minus 1 to forward Defines the number of DMA requests to forward to the DMA controller after a synchronization event, and/or the number of DMA requests before an output event is generated. This field shall only be written when both SE and EGE bits are low.
-	SYNC_ID   DMAMUX_C14CR = 0x07 << 24 //+ Synchronization identification Selects the synchronization input (see inputs to resources).
-)
-
-const (
-	DMAREQ_IDn = 0
-	SOIEn      = 8
-	EGEn       = 9
-	SEn        = 16
-	SPOLn      = 17
-	NBREQn     = 19
-	SYNC_IDn   = 24
-)
-
-const (
-	DMAREQ_ID DMAMUX_C15CR = 0x7F << 0  //+ DMA request identification Selects the input DMA request. See the DMAMUX table about assignments of multiplexer inputs to resources.
-	SOIE      DMAMUX_C15CR = 0x01 << 8  //+ Synchronization overrun interrupt enable
-	B_0x0     DMAMUX_C15CR = 0x00 << 8  //  Interrupt disabled
-	B_0x1     DMAMUX_C15CR = 0x01 << 8  //  Interrupt enabled
-	EGE       DMAMUX_C15CR = 0x01 << 9  //+ Event generation enable
-	B_0x0     DMAMUX_C15CR = 0x00 << 9  //  Event generation disabled
-	B_0x1     DMAMUX_C15CR = 0x01 << 9  //  Event generation enabled
-	SE        DMAMUX_C15CR = 0x01 << 16 //+ Synchronization enable
-	B_0x0     DMAMUX_C15CR = 0x00 << 16 //  Synchronization disabled
-	B_0x1     DMAMUX_C15CR = 0x01 << 16 //  Synchronization enabled
-	SPOL      DMAMUX_C15CR = 0x03 << 17 //+ Synchronization polarity Defines the edge polarity of the selected synchronization input:
-	B_0x0     DMAMUX_C15CR = 0x00 << 17 //  No event, i.e. no synchronization nor detection.
-	B_0x1     DMAMUX_C15CR = 0x01 << 17 //  Rising edge
-	B_0x2     DMAMUX_C15CR = 0x02 << 17 //  Falling edge
-	B_0x3     DMAMUX_C15CR = 0x03 << 17 //  Rising and falling edges
-	NBREQ     DMAMUX_C15CR = 0x1F << 19 //+ Number of DMA requests minus 1 to forward Defines the number of DMA requests to forward to the DMA controller after a synchronization event, and/or the number of DMA requests before an output event is generated. This field shall only be written when both SE and EGE bits are low.
-	SYNC_ID   DMAMUX_C15CR = 0x07 << 24 //+ Synchronization identification Selects the synchronization input (see inputs to resources).
-)
-
-const (
-	DMAREQ_IDn = 0
-	SOIEn      = 8
-	EGEn       = 9
-	SEn        = 16
-	SPOLn      = 17
-	NBREQn     = 19
-	SYNC_IDn   = 24
-)
-
-const (
-	SOF0  DMAMUX_CSR = 0x01 << 0  //+ Synchronization overrun event flag The flag is set when a synchronization event occurs on a DMA request line multiplexer channel x, while the DMA request counter value is lower than NBREQ. The flag is cleared by writing 1 to the corresponding CSOFx bit in DMAMUX_CFR register. For DMAMUX2 bits 15:8 are reserved, keep them at reset value.
-	SOF1  DMAMUX_CSR = 0x01 << 1  //+ Synchronization overrun event flag The flag is set when a synchronization event occurs on a DMA request line multiplexer channel x, while the DMA request counter value is lower than NBREQ. The flag is cleared by writing 1 to the corresponding CSOFx bit in DMAMUX_CFR register. For DMAMUX2 bits 15:8 are reserved, keep them at reset value.
-	SOF2  DMAMUX_CSR = 0x01 << 2  //+ Synchronization overrun event flag The flag is set when a synchronization event occurs on a DMA request line multiplexer channel x, while the DMA request counter value is lower than NBREQ. The flag is cleared by writing 1 to the corresponding CSOFx bit in DMAMUX_CFR register. For DMAMUX2 bits 15:8 are reserved, keep them at reset value.
-	SOF3  DMAMUX_CSR = 0x01 << 3  //+ Synchronization overrun event flag The flag is set when a synchronization event occurs on a DMA request line multiplexer channel x, while the DMA request counter value is lower than NBREQ. The flag is cleared by writing 1 to the corresponding CSOFx bit in DMAMUX_CFR register. For DMAMUX2 bits 15:8 are reserved, keep them at reset value.
-	SOF4  DMAMUX_CSR = 0x01 << 4  //+ Synchronization overrun event flag The flag is set when a synchronization event occurs on a DMA request line multiplexer channel x, while the DMA request counter value is lower than NBREQ. The flag is cleared by writing 1 to the corresponding CSOFx bit in DMAMUX_CFR register. For DMAMUX2 bits 15:8 are reserved, keep them at reset value.
-	SOF5  DMAMUX_CSR = 0x01 << 5  //+ Synchronization overrun event flag The flag is set when a synchronization event occurs on a DMA request line multiplexer channel x, while the DMA request counter value is lower than NBREQ. The flag is cleared by writing 1 to the corresponding CSOFx bit in DMAMUX_CFR register. For DMAMUX2 bits 15:8 are reserved, keep them at reset value.
-	SOF6  DMAMUX_CSR = 0x01 << 6  //+ Synchronization overrun event flag The flag is set when a synchronization event occurs on a DMA request line multiplexer channel x, while the DMA request counter value is lower than NBREQ. The flag is cleared by writing 1 to the corresponding CSOFx bit in DMAMUX_CFR register. For DMAMUX2 bits 15:8 are reserved, keep them at reset value.
-	SOF7  DMAMUX_CSR = 0x01 << 7  //+ Synchronization overrun event flag The flag is set when a synchronization event occurs on a DMA request line multiplexer channel x, while the DMA request counter value is lower than NBREQ. The flag is cleared by writing 1 to the corresponding CSOFx bit in DMAMUX_CFR register. For DMAMUX2 bits 15:8 are reserved, keep them at reset value.
-	SOF8  DMAMUX_CSR = 0x01 << 8  //+ Synchronization overrun event flag The flag is set when a synchronization event occurs on a DMA request line multiplexer channel x, while the DMA request counter value is lower than NBREQ. The flag is cleared by writing 1 to the corresponding CSOFx bit in DMAMUX_CFR register. For DMAMUX2 bits 15:8 are reserved, keep them at reset value.
-	SOF9  DMAMUX_CSR = 0x01 << 9  //+ Synchronization overrun event flag The flag is set when a synchronization event occurs on a DMA request line multiplexer channel x, while the DMA request counter value is lower than NBREQ. The flag is cleared by writing 1 to the corresponding CSOFx bit in DMAMUX_CFR register. For DMAMUX2 bits 15:8 are reserved, keep them at reset value.
-	SOF10 DMAMUX_CSR = 0x01 << 10 //+ Synchronization overrun event flag The flag is set when a synchronization event occurs on a DMA request line multiplexer channel x, while the DMA request counter value is lower than NBREQ. The flag is cleared by writing 1 to the corresponding CSOFx bit in DMAMUX_CFR register. For DMAMUX2 bits 15:8 are reserved, keep them at reset value.
-	SOF11 DMAMUX_CSR = 0x01 << 11 //+ Synchronization overrun event flag The flag is set when a synchronization event occurs on a DMA request line multiplexer channel x, while the DMA request counter value is lower than NBREQ. The flag is cleared by writing 1 to the corresponding CSOFx bit in DMAMUX_CFR register. For DMAMUX2 bits 15:8 are reserved, keep them at reset value.
-	SOF12 DMAMUX_CSR = 0x01 << 12 //+ Synchronization overrun event flag The flag is set when a synchronization event occurs on a DMA request line multiplexer channel x, while the DMA request counter value is lower than NBREQ. The flag is cleared by writing 1 to the corresponding CSOFx bit in DMAMUX_CFR register. For DMAMUX2 bits 15:8 are reserved, keep them at reset value.
-	SOF13 DMAMUX_CSR = 0x01 << 13 //+ Synchronization overrun event flag The flag is set when a synchronization event occurs on a DMA request line multiplexer channel x, while the DMA request counter value is lower than NBREQ. The flag is cleared by writing 1 to the corresponding CSOFx bit in DMAMUX_CFR register. For DMAMUX2 bits 15:8 are reserved, keep them at reset value.
-	SOF14 DMAMUX_CSR = 0x01 << 14 //+ Synchronization overrun event flag The flag is set when a synchronization event occurs on a DMA request line multiplexer channel x, while the DMA request counter value is lower than NBREQ. The flag is cleared by writing 1 to the corresponding CSOFx bit in DMAMUX_CFR register. For DMAMUX2 bits 15:8 are reserved, keep them at reset value.
-	SOF15 DMAMUX_CSR = 0x01 << 15 //+ Synchronization overrun event flag The flag is set when a synchronization event occurs on a DMA request line multiplexer channel x, while the DMA request counter value is lower than NBREQ. The flag is cleared by writing 1 to the corresponding CSOFx bit in DMAMUX_CFR register. For DMAMUX2 bits 15:8 are reserved, keep them at reset value.
+	SOF0  CSR = 0x01 << 0  //+ Synchronization overrun event flag The flag is set when a synchronization event occurs on a DMA request line multiplexer channel x, while the DMA request counter value is lower than NBREQ. The flag is cleared by writing 1 to the corresponding CSOFx bit in DMAMUX_CFR register. For DMAMUX2 bits 15:8 are reserved, keep them at reset value.
+	SOF1  CSR = 0x01 << 1  //+ Synchronization overrun event flag The flag is set when a synchronization event occurs on a DMA request line multiplexer channel x, while the DMA request counter value is lower than NBREQ. The flag is cleared by writing 1 to the corresponding CSOFx bit in DMAMUX_CFR register. For DMAMUX2 bits 15:8 are reserved, keep them at reset value.
+	SOF2  CSR = 0x01 << 2  //+ Synchronization overrun event flag The flag is set when a synchronization event occurs on a DMA request line multiplexer channel x, while the DMA request counter value is lower than NBREQ. The flag is cleared by writing 1 to the corresponding CSOFx bit in DMAMUX_CFR register. For DMAMUX2 bits 15:8 are reserved, keep them at reset value.
+	SOF3  CSR = 0x01 << 3  //+ Synchronization overrun event flag The flag is set when a synchronization event occurs on a DMA request line multiplexer channel x, while the DMA request counter value is lower than NBREQ. The flag is cleared by writing 1 to the corresponding CSOFx bit in DMAMUX_CFR register. For DMAMUX2 bits 15:8 are reserved, keep them at reset value.
+	SOF4  CSR = 0x01 << 4  //+ Synchronization overrun event flag The flag is set when a synchronization event occurs on a DMA request line multiplexer channel x, while the DMA request counter value is lower than NBREQ. The flag is cleared by writing 1 to the corresponding CSOFx bit in DMAMUX_CFR register. For DMAMUX2 bits 15:8 are reserved, keep them at reset value.
+	SOF5  CSR = 0x01 << 5  //+ Synchronization overrun event flag The flag is set when a synchronization event occurs on a DMA request line multiplexer channel x, while the DMA request counter value is lower than NBREQ. The flag is cleared by writing 1 to the corresponding CSOFx bit in DMAMUX_CFR register. For DMAMUX2 bits 15:8 are reserved, keep them at reset value.
+	SOF6  CSR = 0x01 << 6  //+ Synchronization overrun event flag The flag is set when a synchronization event occurs on a DMA request line multiplexer channel x, while the DMA request counter value is lower than NBREQ. The flag is cleared by writing 1 to the corresponding CSOFx bit in DMAMUX_CFR register. For DMAMUX2 bits 15:8 are reserved, keep them at reset value.
+	SOF7  CSR = 0x01 << 7  //+ Synchronization overrun event flag The flag is set when a synchronization event occurs on a DMA request line multiplexer channel x, while the DMA request counter value is lower than NBREQ. The flag is cleared by writing 1 to the corresponding CSOFx bit in DMAMUX_CFR register. For DMAMUX2 bits 15:8 are reserved, keep them at reset value.
+	SOF8  CSR = 0x01 << 8  //+ Synchronization overrun event flag The flag is set when a synchronization event occurs on a DMA request line multiplexer channel x, while the DMA request counter value is lower than NBREQ. The flag is cleared by writing 1 to the corresponding CSOFx bit in DMAMUX_CFR register. For DMAMUX2 bits 15:8 are reserved, keep them at reset value.
+	SOF9  CSR = 0x01 << 9  //+ Synchronization overrun event flag The flag is set when a synchronization event occurs on a DMA request line multiplexer channel x, while the DMA request counter value is lower than NBREQ. The flag is cleared by writing 1 to the corresponding CSOFx bit in DMAMUX_CFR register. For DMAMUX2 bits 15:8 are reserved, keep them at reset value.
+	SOF10 CSR = 0x01 << 10 //+ Synchronization overrun event flag The flag is set when a synchronization event occurs on a DMA request line multiplexer channel x, while the DMA request counter value is lower than NBREQ. The flag is cleared by writing 1 to the corresponding CSOFx bit in DMAMUX_CFR register. For DMAMUX2 bits 15:8 are reserved, keep them at reset value.
+	SOF11 CSR = 0x01 << 11 //+ Synchronization overrun event flag The flag is set when a synchronization event occurs on a DMA request line multiplexer channel x, while the DMA request counter value is lower than NBREQ. The flag is cleared by writing 1 to the corresponding CSOFx bit in DMAMUX_CFR register. For DMAMUX2 bits 15:8 are reserved, keep them at reset value.
+	SOF12 CSR = 0x01 << 12 //+ Synchronization overrun event flag The flag is set when a synchronization event occurs on a DMA request line multiplexer channel x, while the DMA request counter value is lower than NBREQ. The flag is cleared by writing 1 to the corresponding CSOFx bit in DMAMUX_CFR register. For DMAMUX2 bits 15:8 are reserved, keep them at reset value.
+	SOF13 CSR = 0x01 << 13 //+ Synchronization overrun event flag The flag is set when a synchronization event occurs on a DMA request line multiplexer channel x, while the DMA request counter value is lower than NBREQ. The flag is cleared by writing 1 to the corresponding CSOFx bit in DMAMUX_CFR register. For DMAMUX2 bits 15:8 are reserved, keep them at reset value.
+	SOF14 CSR = 0x01 << 14 //+ Synchronization overrun event flag The flag is set when a synchronization event occurs on a DMA request line multiplexer channel x, while the DMA request counter value is lower than NBREQ. The flag is cleared by writing 1 to the corresponding CSOFx bit in DMAMUX_CFR register. For DMAMUX2 bits 15:8 are reserved, keep them at reset value.
+	SOF15 CSR = 0x01 << 15 //+ Synchronization overrun event flag The flag is set when a synchronization event occurs on a DMA request line multiplexer channel x, while the DMA request counter value is lower than NBREQ. The flag is cleared by writing 1 to the corresponding CSOFx bit in DMAMUX_CFR register. For DMAMUX2 bits 15:8 are reserved, keep them at reset value.
 )
 
 const (
@@ -563,57 +85,15 @@ const (
 )
 
 const (
-	CSOF0  DMAMUX_CFR = 0x01 << 0  //+ Clear synchronization overrun event flag Writing 1 in each bit clears the corresponding overrun flag SOFx in the DMAMUX_CSR register.
-	CSOF1  DMAMUX_CFR = 0x01 << 1  //+ Clear synchronization overrun event flag Writing 1 in each bit clears the corresponding overrun flag SOFx in the DMAMUX_CSR register.
-	CSOF2  DMAMUX_CFR = 0x01 << 2  //+ Clear synchronization overrun event flag Writing 1 in each bit clears the corresponding overrun flag SOFx in the DMAMUX_CSR register.
-	CSOF3  DMAMUX_CFR = 0x01 << 3  //+ Clear synchronization overrun event flag Writing 1 in each bit clears the corresponding overrun flag SOFx in the DMAMUX_CSR register.
-	CSOF4  DMAMUX_CFR = 0x01 << 4  //+ Clear synchronization overrun event flag Writing 1 in each bit clears the corresponding overrun flag SOFx in the DMAMUX_CSR register.
-	CSOF5  DMAMUX_CFR = 0x01 << 5  //+ Clear synchronization overrun event flag Writing 1 in each bit clears the corresponding overrun flag SOFx in the DMAMUX_CSR register.
-	CSOF6  DMAMUX_CFR = 0x01 << 6  //+ Clear synchronization overrun event flag Writing 1 in each bit clears the corresponding overrun flag SOFx in the DMAMUX_CSR register.
-	CSOF7  DMAMUX_CFR = 0x01 << 7  //+ Clear synchronization overrun event flag Writing 1 in each bit clears the corresponding overrun flag SOFx in the DMAMUX_CSR register.
-	CSOF8  DMAMUX_CFR = 0x01 << 8  //+ Clear synchronization overrun event flag Writing 1 in each bit clears the corresponding overrun flag SOFx in the DMAMUX_CSR register.
-	CSOF9  DMAMUX_CFR = 0x01 << 9  //+ Clear synchronization overrun event flag Writing 1 in each bit clears the corresponding overrun flag SOFx in the DMAMUX_CSR register.
-	CSOF10 DMAMUX_CFR = 0x01 << 10 //+ Clear synchronization overrun event flag Writing 1 in each bit clears the corresponding overrun flag SOFx in the DMAMUX_CSR register.
-	CSOF11 DMAMUX_CFR = 0x01 << 11 //+ Clear synchronization overrun event flag Writing 1 in each bit clears the corresponding overrun flag SOFx in the DMAMUX_CSR register.
-	CSOF12 DMAMUX_CFR = 0x01 << 12 //+ Clear synchronization overrun event flag Writing 1 in each bit clears the corresponding overrun flag SOFx in the DMAMUX_CSR register.
-	CSOF13 DMAMUX_CFR = 0x01 << 13 //+ Clear synchronization overrun event flag Writing 1 in each bit clears the corresponding overrun flag SOFx in the DMAMUX_CSR register.
-	CSOF14 DMAMUX_CFR = 0x01 << 14 //+ Clear synchronization overrun event flag Writing 1 in each bit clears the corresponding overrun flag SOFx in the DMAMUX_CSR register.
-	CSOF15 DMAMUX_CFR = 0x01 << 15 //+ Clear synchronization overrun event flag Writing 1 in each bit clears the corresponding overrun flag SOFx in the DMAMUX_CSR register.
-)
-
-const (
-	CSOF0n  = 0
-	CSOF1n  = 1
-	CSOF2n  = 2
-	CSOF3n  = 3
-	CSOF4n  = 4
-	CSOF5n  = 5
-	CSOF6n  = 6
-	CSOF7n  = 7
-	CSOF8n  = 8
-	CSOF9n  = 9
-	CSOF10n = 10
-	CSOF11n = 11
-	CSOF12n = 12
-	CSOF13n = 13
-	CSOF14n = 14
-	CSOF15n = 15
-)
-
-const (
-	SIG_ID DMAMUX_RG0CR = 0x07 << 0  //+ Signal identification Selects the DMA request trigger input used for the channel x of the DMA request generator
-	OIE    DMAMUX_RG0CR = 0x01 << 8  //+ Trigger overrun interrupt enable
-	B_0x0  DMAMUX_RG0CR = 0x00 << 8  //  Interrupt on a trigger overrun event occurrence is disabled
-	B_0x1  DMAMUX_RG0CR = 0x01 << 8  //  Interrupt on a trigger overrun event occurrence is enabled
-	GE     DMAMUX_RG0CR = 0x01 << 16 //+ DMA request generator channel x enable
-	B_0x0  DMAMUX_RG0CR = 0x00 << 16 //  DMA request generator channel x disabled
-	B_0x1  DMAMUX_RG0CR = 0x01 << 16 //  DMA request generator channel x enabled
-	GPOL   DMAMUX_RG0CR = 0x03 << 17 //+ DMA request generator trigger polarity Defines the edge polarity of the selected trigger input
-	B_0x0  DMAMUX_RG0CR = 0x00 << 17 //  No event, i.e. no trigger detection nor generation.
-	B_0x1  DMAMUX_RG0CR = 0x01 << 17 //  Rising edge
-	B_0x2  DMAMUX_RG0CR = 0x02 << 17 //  Falling edge
-	B_0x3  DMAMUX_RG0CR = 0x03 << 17 //  Rising and falling edges
-	GNBREQ DMAMUX_RG0CR = 0x1F << 19 //+ Number of DMA requests to be generated (minus 1) Defines the number of DMA requests to be generated after a trigger event. The actual number of generated DMA requests is GNBREQ +1. Note: This field must be written only when GE bit is disabled.
+	SIG_ID       RGCR = 0x07 << 0  //+ Signal identification Selects the DMA request trigger input used for the channel x of the DMA request generator
+	OIE          RGCR = 0x01 << 8  //+ Trigger overrun interrupt enable
+	GE           RGCR = 0x01 << 16 //+ DMA request generator channel x enable
+	GPOL         RGCR = 0x03 << 17 //+ DMA request generator trigger polarity Defines the edge polarity of the selected trigger input
+	GPOL_NONE    RGCR = 0x00 << 17 //  No event, i.e. no synchronization nor detection.
+	GPOL_RISING  RGCR = 0x01 << 17 //  Rising edge
+	GPOL_FALLING RGCR = 0x02 << 17 //  Falling edge
+	GPOL_BOTH    RGCR = 0x03 << 17 //  Rising and falling edges
+	GNBREQ       RGCR = 0x1F << 19 //+ Number of DMA requests to be generated (minus 1) Defines the number of DMA requests to be generated after a trigger event. The actual number of generated DMA requests is GNBREQ +1. Note: This field must be written only when GE bit is disabled.
 )
 
 const (
@@ -625,182 +105,14 @@ const (
 )
 
 const (
-	SIG_ID DMAMUX_RG1CR = 0x07 << 0  //+ Signal identification Selects the DMA request trigger input used for the channel x of the DMA request generator
-	OIE    DMAMUX_RG1CR = 0x01 << 8  //+ Trigger overrun interrupt enable
-	B_0x0  DMAMUX_RG1CR = 0x00 << 8  //  Interrupt on a trigger overrun event occurrence is disabled
-	B_0x1  DMAMUX_RG1CR = 0x01 << 8  //  Interrupt on a trigger overrun event occurrence is enabled
-	GE     DMAMUX_RG1CR = 0x01 << 16 //+ DMA request generator channel x enable
-	B_0x0  DMAMUX_RG1CR = 0x00 << 16 //  DMA request generator channel x disabled
-	B_0x1  DMAMUX_RG1CR = 0x01 << 16 //  DMA request generator channel x enabled
-	GPOL   DMAMUX_RG1CR = 0x03 << 17 //+ DMA request generator trigger polarity Defines the edge polarity of the selected trigger input
-	B_0x0  DMAMUX_RG1CR = 0x00 << 17 //  No event, i.e. no trigger detection nor generation.
-	B_0x1  DMAMUX_RG1CR = 0x01 << 17 //  Rising edge
-	B_0x2  DMAMUX_RG1CR = 0x02 << 17 //  Falling edge
-	B_0x3  DMAMUX_RG1CR = 0x03 << 17 //  Rising and falling edges
-	GNBREQ DMAMUX_RG1CR = 0x1F << 19 //+ Number of DMA requests to be generated (minus 1) Defines the number of DMA requests to be generated after a trigger event. The actual number of generated DMA requests is GNBREQ +1. Note: This field must be written only when GE bit is disabled.
-)
-
-const (
-	SIG_IDn = 0
-	OIEn    = 8
-	GEn     = 16
-	GPOLn   = 17
-	GNBREQn = 19
-)
-
-const (
-	SIG_ID DMAMUX_RG2CR = 0x07 << 0  //+ Signal identification Selects the DMA request trigger input used for the channel x of the DMA request generator
-	OIE    DMAMUX_RG2CR = 0x01 << 8  //+ Trigger overrun interrupt enable
-	B_0x0  DMAMUX_RG2CR = 0x00 << 8  //  Interrupt on a trigger overrun event occurrence is disabled
-	B_0x1  DMAMUX_RG2CR = 0x01 << 8  //  Interrupt on a trigger overrun event occurrence is enabled
-	GE     DMAMUX_RG2CR = 0x01 << 16 //+ DMA request generator channel x enable
-	B_0x0  DMAMUX_RG2CR = 0x00 << 16 //  DMA request generator channel x disabled
-	B_0x1  DMAMUX_RG2CR = 0x01 << 16 //  DMA request generator channel x enabled
-	GPOL   DMAMUX_RG2CR = 0x03 << 17 //+ DMA request generator trigger polarity Defines the edge polarity of the selected trigger input
-	B_0x0  DMAMUX_RG2CR = 0x00 << 17 //  No event, i.e. no trigger detection nor generation.
-	B_0x1  DMAMUX_RG2CR = 0x01 << 17 //  Rising edge
-	B_0x2  DMAMUX_RG2CR = 0x02 << 17 //  Falling edge
-	B_0x3  DMAMUX_RG2CR = 0x03 << 17 //  Rising and falling edges
-	GNBREQ DMAMUX_RG2CR = 0x1F << 19 //+ Number of DMA requests to be generated (minus 1) Defines the number of DMA requests to be generated after a trigger event. The actual number of generated DMA requests is GNBREQ +1. Note: This field must be written only when GE bit is disabled.
-)
-
-const (
-	SIG_IDn = 0
-	OIEn    = 8
-	GEn     = 16
-	GPOLn   = 17
-	GNBREQn = 19
-)
-
-const (
-	SIG_ID DMAMUX_RG3CR = 0x07 << 0  //+ Signal identification Selects the DMA request trigger input used for the channel x of the DMA request generator
-	OIE    DMAMUX_RG3CR = 0x01 << 8  //+ Trigger overrun interrupt enable
-	B_0x0  DMAMUX_RG3CR = 0x00 << 8  //  Interrupt on a trigger overrun event occurrence is disabled
-	B_0x1  DMAMUX_RG3CR = 0x01 << 8  //  Interrupt on a trigger overrun event occurrence is enabled
-	GE     DMAMUX_RG3CR = 0x01 << 16 //+ DMA request generator channel x enable
-	B_0x0  DMAMUX_RG3CR = 0x00 << 16 //  DMA request generator channel x disabled
-	B_0x1  DMAMUX_RG3CR = 0x01 << 16 //  DMA request generator channel x enabled
-	GPOL   DMAMUX_RG3CR = 0x03 << 17 //+ DMA request generator trigger polarity Defines the edge polarity of the selected trigger input
-	B_0x0  DMAMUX_RG3CR = 0x00 << 17 //  No event, i.e. no trigger detection nor generation.
-	B_0x1  DMAMUX_RG3CR = 0x01 << 17 //  Rising edge
-	B_0x2  DMAMUX_RG3CR = 0x02 << 17 //  Falling edge
-	B_0x3  DMAMUX_RG3CR = 0x03 << 17 //  Rising and falling edges
-	GNBREQ DMAMUX_RG3CR = 0x1F << 19 //+ Number of DMA requests to be generated (minus 1) Defines the number of DMA requests to be generated after a trigger event. The actual number of generated DMA requests is GNBREQ +1. Note: This field must be written only when GE bit is disabled.
-)
-
-const (
-	SIG_IDn = 0
-	OIEn    = 8
-	GEn     = 16
-	GPOLn   = 17
-	GNBREQn = 19
-)
-
-const (
-	SIG_ID DMAMUX_RG4CR = 0x07 << 0  //+ Signal identification Selects the DMA request trigger input used for the channel x of the DMA request generator
-	OIE    DMAMUX_RG4CR = 0x01 << 8  //+ Trigger overrun interrupt enable
-	B_0x0  DMAMUX_RG4CR = 0x00 << 8  //  Interrupt on a trigger overrun event occurrence is disabled
-	B_0x1  DMAMUX_RG4CR = 0x01 << 8  //  Interrupt on a trigger overrun event occurrence is enabled
-	GE     DMAMUX_RG4CR = 0x01 << 16 //+ DMA request generator channel x enable
-	B_0x0  DMAMUX_RG4CR = 0x00 << 16 //  DMA request generator channel x disabled
-	B_0x1  DMAMUX_RG4CR = 0x01 << 16 //  DMA request generator channel x enabled
-	GPOL   DMAMUX_RG4CR = 0x03 << 17 //+ DMA request generator trigger polarity Defines the edge polarity of the selected trigger input
-	B_0x0  DMAMUX_RG4CR = 0x00 << 17 //  No event, i.e. no trigger detection nor generation.
-	B_0x1  DMAMUX_RG4CR = 0x01 << 17 //  Rising edge
-	B_0x2  DMAMUX_RG4CR = 0x02 << 17 //  Falling edge
-	B_0x3  DMAMUX_RG4CR = 0x03 << 17 //  Rising and falling edges
-	GNBREQ DMAMUX_RG4CR = 0x1F << 19 //+ Number of DMA requests to be generated (minus 1) Defines the number of DMA requests to be generated after a trigger event. The actual number of generated DMA requests is GNBREQ +1. Note: This field must be written only when GE bit is disabled.
-)
-
-const (
-	SIG_IDn = 0
-	OIEn    = 8
-	GEn     = 16
-	GPOLn   = 17
-	GNBREQn = 19
-)
-
-const (
-	SIG_ID DMAMUX_RG5CR = 0x07 << 0  //+ Signal identification Selects the DMA request trigger input used for the channel x of the DMA request generator
-	OIE    DMAMUX_RG5CR = 0x01 << 8  //+ Trigger overrun interrupt enable
-	B_0x0  DMAMUX_RG5CR = 0x00 << 8  //  Interrupt on a trigger overrun event occurrence is disabled
-	B_0x1  DMAMUX_RG5CR = 0x01 << 8  //  Interrupt on a trigger overrun event occurrence is enabled
-	GE     DMAMUX_RG5CR = 0x01 << 16 //+ DMA request generator channel x enable
-	B_0x0  DMAMUX_RG5CR = 0x00 << 16 //  DMA request generator channel x disabled
-	B_0x1  DMAMUX_RG5CR = 0x01 << 16 //  DMA request generator channel x enabled
-	GPOL   DMAMUX_RG5CR = 0x03 << 17 //+ DMA request generator trigger polarity Defines the edge polarity of the selected trigger input
-	B_0x0  DMAMUX_RG5CR = 0x00 << 17 //  No event, i.e. no trigger detection nor generation.
-	B_0x1  DMAMUX_RG5CR = 0x01 << 17 //  Rising edge
-	B_0x2  DMAMUX_RG5CR = 0x02 << 17 //  Falling edge
-	B_0x3  DMAMUX_RG5CR = 0x03 << 17 //  Rising and falling edges
-	GNBREQ DMAMUX_RG5CR = 0x1F << 19 //+ Number of DMA requests to be generated (minus 1) Defines the number of DMA requests to be generated after a trigger event. The actual number of generated DMA requests is GNBREQ +1. Note: This field must be written only when GE bit is disabled.
-)
-
-const (
-	SIG_IDn = 0
-	OIEn    = 8
-	GEn     = 16
-	GPOLn   = 17
-	GNBREQn = 19
-)
-
-const (
-	SIG_ID DMAMUX_RG6CR = 0x07 << 0  //+ Signal identification Selects the DMA request trigger input used for the channel x of the DMA request generator
-	OIE    DMAMUX_RG6CR = 0x01 << 8  //+ Trigger overrun interrupt enable
-	B_0x0  DMAMUX_RG6CR = 0x00 << 8  //  Interrupt on a trigger overrun event occurrence is disabled
-	B_0x1  DMAMUX_RG6CR = 0x01 << 8  //  Interrupt on a trigger overrun event occurrence is enabled
-	GE     DMAMUX_RG6CR = 0x01 << 16 //+ DMA request generator channel x enable
-	B_0x0  DMAMUX_RG6CR = 0x00 << 16 //  DMA request generator channel x disabled
-	B_0x1  DMAMUX_RG6CR = 0x01 << 16 //  DMA request generator channel x enabled
-	GPOL   DMAMUX_RG6CR = 0x03 << 17 //+ DMA request generator trigger polarity Defines the edge polarity of the selected trigger input
-	B_0x0  DMAMUX_RG6CR = 0x00 << 17 //  No event, i.e. no trigger detection nor generation.
-	B_0x1  DMAMUX_RG6CR = 0x01 << 17 //  Rising edge
-	B_0x2  DMAMUX_RG6CR = 0x02 << 17 //  Falling edge
-	B_0x3  DMAMUX_RG6CR = 0x03 << 17 //  Rising and falling edges
-	GNBREQ DMAMUX_RG6CR = 0x1F << 19 //+ Number of DMA requests to be generated (minus 1) Defines the number of DMA requests to be generated after a trigger event. The actual number of generated DMA requests is GNBREQ +1. Note: This field must be written only when GE bit is disabled.
-)
-
-const (
-	SIG_IDn = 0
-	OIEn    = 8
-	GEn     = 16
-	GPOLn   = 17
-	GNBREQn = 19
-)
-
-const (
-	SIG_ID DMAMUX_RG7CR = 0x07 << 0  //+ Signal identification Selects the DMA request trigger input used for the channel x of the DMA request generator
-	OIE    DMAMUX_RG7CR = 0x01 << 8  //+ Trigger overrun interrupt enable
-	B_0x0  DMAMUX_RG7CR = 0x00 << 8  //  Interrupt on a trigger overrun event occurrence is disabled
-	B_0x1  DMAMUX_RG7CR = 0x01 << 8  //  Interrupt on a trigger overrun event occurrence is enabled
-	GE     DMAMUX_RG7CR = 0x01 << 16 //+ DMA request generator channel x enable
-	B_0x0  DMAMUX_RG7CR = 0x00 << 16 //  DMA request generator channel x disabled
-	B_0x1  DMAMUX_RG7CR = 0x01 << 16 //  DMA request generator channel x enabled
-	GPOL   DMAMUX_RG7CR = 0x03 << 17 //+ DMA request generator trigger polarity Defines the edge polarity of the selected trigger input
-	B_0x0  DMAMUX_RG7CR = 0x00 << 17 //  No event, i.e. no trigger detection nor generation.
-	B_0x1  DMAMUX_RG7CR = 0x01 << 17 //  Rising edge
-	B_0x2  DMAMUX_RG7CR = 0x02 << 17 //  Falling edge
-	B_0x3  DMAMUX_RG7CR = 0x03 << 17 //  Rising and falling edges
-	GNBREQ DMAMUX_RG7CR = 0x1F << 19 //+ Number of DMA requests to be generated (minus 1) Defines the number of DMA requests to be generated after a trigger event. The actual number of generated DMA requests is GNBREQ +1. Note: This field must be written only when GE bit is disabled.
-)
-
-const (
-	SIG_IDn = 0
-	OIEn    = 8
-	GEn     = 16
-	GPOLn   = 17
-	GNBREQn = 19
-)
-
-const (
-	OF0 DMAMUX_RGSR = 0x01 << 0 //+ [:0]: Trigger overrun event flag The flag is set when a new trigger event occurs on DMA request generator channel x, before the request counter underrun (the internal request counter programmed via the GNBREQ field of the DMAMUX_RGxCR register). The flag is cleared by writing 1 to the corresponding COFx bit in the DMAMUX_RGCFR register.
-	OF1 DMAMUX_RGSR = 0x01 << 1 //+ [:0]: Trigger overrun event flag The flag is set when a new trigger event occurs on DMA request generator channel x, before the request counter underrun (the internal request counter programmed via the GNBREQ field of the DMAMUX_RGxCR register). The flag is cleared by writing 1 to the corresponding COFx bit in the DMAMUX_RGCFR register.
-	OF2 DMAMUX_RGSR = 0x01 << 2 //+ [:0]: Trigger overrun event flag The flag is set when a new trigger event occurs on DMA request generator channel x, before the request counter underrun (the internal request counter programmed via the GNBREQ field of the DMAMUX_RGxCR register). The flag is cleared by writing 1 to the corresponding COFx bit in the DMAMUX_RGCFR register.
-	OF3 DMAMUX_RGSR = 0x01 << 3 //+ [:0]: Trigger overrun event flag The flag is set when a new trigger event occurs on DMA request generator channel x, before the request counter underrun (the internal request counter programmed via the GNBREQ field of the DMAMUX_RGxCR register). The flag is cleared by writing 1 to the corresponding COFx bit in the DMAMUX_RGCFR register.
-	OF4 DMAMUX_RGSR = 0x01 << 4 //+ [:0]: Trigger overrun event flag The flag is set when a new trigger event occurs on DMA request generator channel x, before the request counter underrun (the internal request counter programmed via the GNBREQ field of the DMAMUX_RGxCR register). The flag is cleared by writing 1 to the corresponding COFx bit in the DMAMUX_RGCFR register.
-	OF5 DMAMUX_RGSR = 0x01 << 5 //+ [:0]: Trigger overrun event flag The flag is set when a new trigger event occurs on DMA request generator channel x, before the request counter underrun (the internal request counter programmed via the GNBREQ field of the DMAMUX_RGxCR register). The flag is cleared by writing 1 to the corresponding COFx bit in the DMAMUX_RGCFR register.
-	OF6 DMAMUX_RGSR = 0x01 << 6 //+ [:0]: Trigger overrun event flag The flag is set when a new trigger event occurs on DMA request generator channel x, before the request counter underrun (the internal request counter programmed via the GNBREQ field of the DMAMUX_RGxCR register). The flag is cleared by writing 1 to the corresponding COFx bit in the DMAMUX_RGCFR register.
-	OF7 DMAMUX_RGSR = 0x01 << 7 //+ [:0]: Trigger overrun event flag The flag is set when a new trigger event occurs on DMA request generator channel x, before the request counter underrun (the internal request counter programmed via the GNBREQ field of the DMAMUX_RGxCR register). The flag is cleared by writing 1 to the corresponding COFx bit in the DMAMUX_RGCFR register.
+	OF0 RGSR = 0x01 << 0 //+ [:0]: Trigger overrun event flag The flag is set when a new trigger event occurs on DMA request generator channel x, before the request counter underrun (the internal request counter programmed via the GNBREQ field of the DMAMUX_RGxCR register). The flag is cleared by writing 1 to the corresponding COFx bit in the DMAMUX_RGCFR register.
+	OF1 RGSR = 0x01 << 1 //+ [:0]: Trigger overrun event flag The flag is set when a new trigger event occurs on DMA request generator channel x, before the request counter underrun (the internal request counter programmed via the GNBREQ field of the DMAMUX_RGxCR register). The flag is cleared by writing 1 to the corresponding COFx bit in the DMAMUX_RGCFR register.
+	OF2 RGSR = 0x01 << 2 //+ [:0]: Trigger overrun event flag The flag is set when a new trigger event occurs on DMA request generator channel x, before the request counter underrun (the internal request counter programmed via the GNBREQ field of the DMAMUX_RGxCR register). The flag is cleared by writing 1 to the corresponding COFx bit in the DMAMUX_RGCFR register.
+	OF3 RGSR = 0x01 << 3 //+ [:0]: Trigger overrun event flag The flag is set when a new trigger event occurs on DMA request generator channel x, before the request counter underrun (the internal request counter programmed via the GNBREQ field of the DMAMUX_RGxCR register). The flag is cleared by writing 1 to the corresponding COFx bit in the DMAMUX_RGCFR register.
+	OF4 RGSR = 0x01 << 4 //+ [:0]: Trigger overrun event flag The flag is set when a new trigger event occurs on DMA request generator channel x, before the request counter underrun (the internal request counter programmed via the GNBREQ field of the DMAMUX_RGxCR register). The flag is cleared by writing 1 to the corresponding COFx bit in the DMAMUX_RGCFR register.
+	OF5 RGSR = 0x01 << 5 //+ [:0]: Trigger overrun event flag The flag is set when a new trigger event occurs on DMA request generator channel x, before the request counter underrun (the internal request counter programmed via the GNBREQ field of the DMAMUX_RGxCR register). The flag is cleared by writing 1 to the corresponding COFx bit in the DMAMUX_RGCFR register.
+	OF6 RGSR = 0x01 << 6 //+ [:0]: Trigger overrun event flag The flag is set when a new trigger event occurs on DMA request generator channel x, before the request counter underrun (the internal request counter programmed via the GNBREQ field of the DMAMUX_RGxCR register). The flag is cleared by writing 1 to the corresponding COFx bit in the DMAMUX_RGCFR register.
+	OF7 RGSR = 0x01 << 7 //+ [:0]: Trigger overrun event flag The flag is set when a new trigger event occurs on DMA request generator channel x, before the request counter underrun (the internal request counter programmed via the GNBREQ field of the DMAMUX_RGxCR register). The flag is cleared by writing 1 to the corresponding COFx bit in the DMAMUX_RGCFR register.
 )
 
 const (
@@ -812,26 +124,4 @@ const (
 	OF5n = 5
 	OF6n = 6
 	OF7n = 7
-)
-
-const (
-	COF0 DMAMUX_RGCFR = 0x01 << 0 //+ Clear trigger overrun event flag Writing 1 in each bit clears the corresponding overrun flag OFx in the DMAMUX_RGSR register.
-	COF1 DMAMUX_RGCFR = 0x01 << 1 //+ Clear trigger overrun event flag Writing 1 in each bit clears the corresponding overrun flag OFx in the DMAMUX_RGSR register.
-	COF2 DMAMUX_RGCFR = 0x01 << 2 //+ Clear trigger overrun event flag Writing 1 in each bit clears the corresponding overrun flag OFx in the DMAMUX_RGSR register.
-	COF3 DMAMUX_RGCFR = 0x01 << 3 //+ Clear trigger overrun event flag Writing 1 in each bit clears the corresponding overrun flag OFx in the DMAMUX_RGSR register.
-	COF4 DMAMUX_RGCFR = 0x01 << 4 //+ Clear trigger overrun event flag Writing 1 in each bit clears the corresponding overrun flag OFx in the DMAMUX_RGSR register.
-	COF5 DMAMUX_RGCFR = 0x01 << 5 //+ Clear trigger overrun event flag Writing 1 in each bit clears the corresponding overrun flag OFx in the DMAMUX_RGSR register.
-	COF6 DMAMUX_RGCFR = 0x01 << 6 //+ Clear trigger overrun event flag Writing 1 in each bit clears the corresponding overrun flag OFx in the DMAMUX_RGSR register.
-	COF7 DMAMUX_RGCFR = 0x01 << 7 //+ Clear trigger overrun event flag Writing 1 in each bit clears the corresponding overrun flag OFx in the DMAMUX_RGSR register.
-)
-
-const (
-	COF0n = 0
-	COF1n = 1
-	COF2n = 2
-	COF3n = 3
-	COF4n = 4
-	COF5n = 5
-	COF6n = 6
-	COF7n = 7
 )
