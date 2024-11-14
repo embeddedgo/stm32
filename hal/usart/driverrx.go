@@ -5,14 +5,21 @@
 package usart
 
 import (
+	"embedded/rtos"
 	"runtime"
 	"unsafe"
 
 	"github.com/embeddedgo/stm32/hal/dma"
 )
 
+func cacheInval(buf []byte) {
+	rtos.CacheMaint(rtos.DCacheInval, unsafe.Pointer(&buf[0]), len(buf))
+}
+
 // EnableRx enables the UART receive. It allocates an internal ring buffer of
-// bufLen size. In most cases bufLen = 64 is good choise (minimum is 2).
+// bufLen size. In most cases bufLen = 64 is good choise (minimum is 2). If the
+// CPU has the data cache the buffer is rounded up and aligned to the cache line
+// size.
 //
 // EnableRx setups Rx DMA channel in circular mode and enables it to continuous
 // reception of data. Driver assumes that it has exclusive access to the
@@ -38,9 +45,16 @@ func (d *Driver) EnableRx(bufLen int) {
 			panic("enabled before")
 		}
 		if bufLen < 2 {
-			panic("rxbuf too short")
+			bufLen = 2
 		}
-		d.rxBuf = make([]byte, bufLen)
+		const alignMask = dma.MemAlign - 1
+		if alignMask != 0 {
+			bufLen = (bufLen + alignMask) &^ alignMask
+		}
+		d.rxBuf = dma.MakeSlice[byte](bufLen, bufLen)
+		if dma.CacheMaint {
+			cacheInval(d.rxBuf)
+		}
 	}
 	ch := d.rxDMA
 	d.p.cr1.SetBits(re)
@@ -109,7 +123,6 @@ func (d *Driver) disableRxIRQ() {
 
 // Read implements io.Reader interface.
 func (d *Driver) Read(buf []byte) (n int, err error) {
-start:
 	dmap, tc, e := dmaPos(d)
 	if e != 0 {
 		return 0, e
@@ -131,6 +144,9 @@ again:
 		}
 		n = copy(buf, d.rxBuf[d.rxp:])
 		if n < len(buf) {
+			if dma.CacheMaint {
+				cacheInval(d.rxBuf)
+			}
 			n += copy(buf[n:], d.rxBuf[:dmap])
 		}
 	case dmap == d.rxp: // no new data in the ring buffer
@@ -150,17 +166,24 @@ again:
 		if !d.rxReady.Sleep(d.timeoutRx) {
 			return 0, ErrTimeout
 		}
-		// BUG: There is a race between this goroutine awakened by the
-		// RxNotEmpty IRQ and the DMA controller handling the same RxNotEmpty
-		// request. If the DMA won't be able to handle it before this goroutine
-		// perform again the above (second) dmaPos check it'll sleep again,
-		// possibly forever, waiting for the next RxNotEmpty event.
-		goto start
+		// wait for the DMA to read any data to the d.rxBuf
+		for {
+			dmap, tc, e = dmaPos(d)
+			if e != 0 {
+				return 0, e
+			}
+			if dmap != d.rxp {
+				goto again
+			}
+		}
 	default: // DMA position is in between d.rxp and the end of d.rxBuf
 		n = copy(buf, d.rxBuf[d.rxp:dmap])
 	}
 	d.rxp += n
 	if d.rxp >= len(d.rxBuf) {
+		if dma.CacheMaint && d.rxp == len(d.rxBuf) {
+			cacheInval(d.rxBuf)
+		}
 		d.rxp -= len(d.rxBuf)
 		d.rxDMA.Clear(dma.Complete, 0)
 	}

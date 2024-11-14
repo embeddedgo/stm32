@@ -148,3 +148,15 @@ func (c Channel) SetMux(mux Mux) {
 	dn := (c.h&^0x3ff - mmap.DMA1_BASE) / 0x400
 	dmamux1.DMAMUX1().CCR[dn*8+sn].Store(dmamux1.CCR(mux))
 }
+
+/*
+
+See imxrt.
+
+var chanMask uint32 = 0xffff
+
+func (d *Controller) AllocChannel() Channel {
+
+}
+
+*/

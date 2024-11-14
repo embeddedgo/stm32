@@ -60,7 +60,11 @@ func (d *Driver) WriteString(s string) (n int, err error) {
 		return
 	}
 	ch := d.txDMA
-	ptr := *(*uintptr)(unsafe.Pointer(&s))
+	p := unsafe.Pointer(unsafe.StringData(s))
+	if dma.CacheMaint {
+		rtos.CacheMaint(rtos.DCacheFlush, p, len(s)) // BUG: can affect neighboring DMA buffer
+	}
+	ptr := uintptr(p)
 	for {
 		m := len(s) - n
 		if m == 0 {

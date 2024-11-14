@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-// +build stm32l4x6
+//go:build stm32h7x3 || stm32l4x6
 
 package usart
 
@@ -16,17 +16,18 @@ import (
 )
 
 type registers struct {
-	cr1  mmio.U32
-	cr2  mmio.U32
-	cr3  mmio.U32
-	brr  mmio.U32
-	gtpr mmio.U32
-	rtor mmio.U32
-	rqr  mmio.U32
-	sr   mmio.U32
-	icr  mmio.U32
-	rdr  mmio.U32
-	tdr  mmio.U32
+	cr1   mmio.U32
+	cr2   mmio.U32
+	cr3   mmio.U32
+	brr   mmio.U32
+	gtpr  mmio.U32
+	rtor  mmio.U32
+	rqr   mmio.U32
+	sr    mmio.U32
+	icr   mmio.U32
+	rdr   mmio.U32
+	tdr   mmio.U32
+	presc mmio.U32 // H7 only
 }
 
 const (

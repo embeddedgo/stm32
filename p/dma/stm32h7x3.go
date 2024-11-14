@@ -6,8 +6,8 @@
 //
 // Instances:
 //
-//	DMA1  DMA1_BASE  AHB1  DMA_STR0,DMA_STR1,DMA1_STR7                                                                                                   DMA controller
-//	DMA2  DMA2_BASE  AHB1  DMA_STR2,DMA_STR3,DMA_STR4,DMA_STR5,DMA_STR6,DMA2_STR0,DMA2_STR1,DMA2_STR2,DMA2_STR3,DMA2_STR4,DMA2_STR5,DMA2_STR6,DMA2_STR7  DMA controller
+//	DMA1  DMA1_BASE  AHB1  DMA1_STR0,DMA1_STR1,DMA1_STR7                                                                                                      DMA controller
+//	DMA2  DMA2_BASE  AHB1  DMA1_STR2,DMA1_STR3,DMA1_STR4,DMA1_STR5,DMA1_STR6,DMA2_STR0,DMA2_STR1,DMA2_STR2,DMA2_STR3,DMA2_STR4,DMA2_STR5,DMA2_STR6,DMA2_STR7  DMA controller
 //
 // Registers:
 //

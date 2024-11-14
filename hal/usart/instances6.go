@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-//+build stm32l4x6
+//go:build stm32l4x6
 
 package usart
 

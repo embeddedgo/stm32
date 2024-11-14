@@ -25,23 +25,29 @@ func AlignOffsets(ptr unsafe.Pointer, size uintptr) (start, end uintptr) {
 }
 
 func alloc(size uintptr) unsafe.Pointer {
-	size = (size + (cacheLineSize - 1)) &^ (cacheLineSize - 1)
-	size += cacheLineSize // extra space for address alignment
+	size = (size + (MemAlign - 1)) &^ (MemAlign - 1)
+	size += MemAlign // extra space for address alignment
 	buf := make([]byte, size)
 	addr := uintptr(unsafe.Pointer(&buf[0]))
-	addr = (addr + (cacheLineSize - 1)) &^ (cacheLineSize - 1)
+	addr = (addr + (MemAlign - 1)) &^ (MemAlign - 1)
 	return unsafe.Pointer(addr)
 }
 
 // New works like new(T) but guarantees that the allocated variable has the
 // prefered DMA alignment (see MemAlign).
 func New[T any]() (ptr *T) {
+	if MemAlign == 1 {
+		return new(T)
+	}
 	return (*T)(alloc(unsafe.Sizeof(*ptr)))
 }
 
 // MakeSlice works like make([]T, len, cap) but guarantees that the returned
 // slice has the prefered DMA alignment (see MemAlign).
 func MakeSlice[T any](len, cap int) (slice []T) {
+	if MemAlign == 1 {
+		return make([]T, len, cap)
+	}
 	ptr := alloc(unsafe.Sizeof(slice[0]) * uintptr(cap))
 	return unsafe.Slice((*T)(ptr), cap)[:len]
 }
