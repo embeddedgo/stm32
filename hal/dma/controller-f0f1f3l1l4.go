@@ -43,17 +43,18 @@ const (
 
 // unsupported
 const (
-	ft1  = 0
-	ft2  = 0
-	ft3  = 0
-	ft4  = 0
-	pb4  = 0
-	pb8  = 0
-	pb16 = 0
-	mb4  = 0
-	mb8  = 0
-	mb16 = 0
-	pfc  = 0
+	ft1   = 0
+	ft2   = 0
+	ft3   = 0
+	ft4   = 0
+	trbuf = 0
+	pb4   = 0
+	pb8   = 0
+	pb16  = 0
+	mb4   = 0
+	mb8   = 0
+	mb16  = 0
+	pfc   = 0
 )
 
 func (d *Controller) channel(cn, rn int) Channel {

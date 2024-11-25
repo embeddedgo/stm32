@@ -32,14 +32,15 @@ type registers struct {
 
 const (
 	// cr1
-	ue    = 1 << 0
-	re    = 1 << 2
-	te    = 1 << 3
-	ps    = 1 << 9
-	pce   = 1 << 10
-	m0    = 1 << 12
-	over8 = 1 << 15
-	m1    = 1 << 28
+	ue     = 1 << 0
+	re     = 1 << 2
+	te     = 1 << 3
+	ps     = 1 << 9
+	pce    = 1 << 10
+	m0     = 1 << 12
+	over8  = 1 << 15
+	m1     = 1 << 28
+	fifoen = 1 << 29 // H7 only
 
 	// cr2
 	lbdie    = 1 << 6

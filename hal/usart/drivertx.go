@@ -18,7 +18,7 @@ import (
 func (d *Driver) EnableTx() {
 	d.p.cr1.SetBits(te)
 	d.p.cr3.SetBits(dmat)
-	setupDMA(d.txDMA, dma.MTP|dma.IncM|dma.FT4, tdr(d.p).Addr())
+	setupDMA(d.txDMA, dma.MTP|dma.IncM|dma.FT4|dma.TrBuf, tdr(d.p).Addr())
 }
 
 // DisableTx disables Tx part of the USART peripheral.

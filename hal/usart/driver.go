@@ -11,6 +11,7 @@ import (
 	"unsafe"
 
 	"github.com/embeddedgo/stm32/hal/dma"
+	"github.com/embeddedgo/stm32/hal/internal"
 )
 
 type DriverError uint8
@@ -117,6 +118,9 @@ func (d *Driver) Disable() {
 // SetConfig configures UART.
 func (d *Driver) SetConfig(conf Config) {
 	c := conf & (Word7b | Word9b | ParOdd)
+	if internal.H7 {
+		c |= fifoen
+	}
 	d.p.SetConf1(Conf1(c))
 	c = conf & (Stop0b5 | Stop1b5 | Stop2b | SwapRxTx | InvRx | InvTx | InvData | InvBits | AutoBR)
 	d.p.SetConf2(Conf2(c >> 1))

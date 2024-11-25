@@ -123,6 +123,7 @@ func (c Channel) IRQEnabled() (Event, Error) {
 // mention it, but IRQ can be not generated if an event was asserted before
 // enable IRQ for it. So always enable IRQs before channel. Typically, the
 // correct sequence is as follows:
+//
 //	c.Clear(EvAll, ErrAll)
 //	c.EnableIRQ(ev, err)
 //	c.Enable()
@@ -151,6 +152,8 @@ const (
 	FT2 Mode = ft2 // FIFO mode, threshold 2/4.
 	FT3 Mode = ft3 // FIFO mode, threshold 3/4.
 	FT4 Mode = ft4 // FIFO mode, threshold 4/4.
+
+	TrBuf Mode = trbuf // Bufferable transfers. H7 only, for UART/USART/LPUART.
 
 	PB4  Mode = pb4  // Peripheral burst transfer, 4 beats.
 	PB8  Mode = pb8  // Peripheral burst transfer, 8 beats.
