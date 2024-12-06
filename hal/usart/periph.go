@@ -42,13 +42,13 @@ type Event uint16
 
 const (
 	Idle       = Event(1 << 4) // IDLE line detected
-	RxNotEmpty = Event(1 << 5) // read data register not empty
+	RxNotEmpty = Event(1 << 5) // read data register/FIFO not empty
 	TxDone     = Event(1 << 6) // transmission complete
-	TxEmpty    = Event(1 << 7) // transmit data register empty
+	TxNotFull  = Event(1 << 7) // transmit data register/FIFO not full
 	LINBreak   = Event(1 << 8) // LIN break detection flag
 	CTST       = Event(1 << 9) // CTS toggle
 
-	EvAll = Idle | RxNotEmpty | TxDone | TxEmpty | LINBreak | CTST
+	EvAll = Idle | RxNotEmpty | TxDone | TxNotFull | LINBreak | CTST
 )
 
 // Error is a bitmask that describes errors that can be detected by USART
@@ -107,7 +107,7 @@ func (p *Periph) Clear(ev Event, err Error) {
 
 // EnableIRQ enables generating interrupts by specified events.
 func (p *Periph) EnableIRQ(e Event) {
-	if cr1e := e & (Idle | RxNotEmpty | TxDone | TxEmpty); cr1e != 0 {
+	if cr1e := e & (Idle | RxNotEmpty | TxDone | TxNotFull); cr1e != 0 {
 		p.cr1.SetBits(uint32(cr1e))
 	}
 	if e&LINBreak != 0 {
@@ -120,7 +120,7 @@ func (p *Periph) EnableIRQ(e Event) {
 
 // DisableIRQ disables generating interrupts by specified events.
 func (p *Periph) DisableIRQ(e Event) {
-	if cr1e := e & (Idle | RxNotEmpty | TxDone | TxEmpty); cr1e != 0 {
+	if cr1e := e & (Idle | RxNotEmpty | TxDone | TxNotFull); cr1e != 0 {
 		p.cr1.ClearBits(uint32(cr1e))
 	}
 	if e&LINBreak != 0 {
@@ -223,7 +223,7 @@ const (
 	NACK   Conf3 = nack   // Smart Card auto-retry mode in case of NACK
 	SCEN   Conf3 = scen   // Smart Card mode
 	DMAR   Conf3 = dmar   // RxNotEmpty event generates DMA request
-	DMAT   Conf3 = dmat   // TxEmpty event generates DMA request
+	DMAT   Conf3 = dmat   // TxNotFull event generates DMA request
 	RTSE   Conf3 = rtse   // hardware RTS signal
 	CTSE   Conf3 = ctse   // hardware CTS signal
 	OneBit Conf3 = onebit // one-bit sampling (noise detection disabled)

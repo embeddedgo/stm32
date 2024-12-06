@@ -32,69 +32,90 @@ func (d *Driver) DisableTx() {
 	d.p.cr1.ClearBits(te)
 }
 
+func waitTxNotFull(p *Periph) {
+	for {
+		ev, _ := p.Status()
+		if ev&TxNotFull != 0 {
+			break
+		}
+	}
+}
+
 // WriteByte implements io.ByteWriter interface.
 func (d *Driver) WriteByte(b byte) error {
 	p := d.p
-	for {
-		if ev, _ := p.Status(); ev&TxEmpty != 0 {
-			break
-		}
-		runtime.Gosched()
-	}
+	waitTxNotFull(p)
 	p.Store(uint32(b))
 	return nil
 }
 
-// WriteString implements io.StringWriter interface.
-func (d *Driver) WriteString(s string) (n int, err error) {
+func write(p *Periph, s []byte) {
+	for _, b := range s {
+		waitTxNotFull(p)
+		p.Store(uint32(b))
+	}
+}
+
+// Write implements io.Writer interface.
+func (d *Driver) Write(s []byte) (n int, err error) {
 	if len(s) == 0 {
 		return
 	}
 	if rtos.HandlerMode() {
-		return sysWrite(d, s)
+		sysWrite(d, s)
+		return len(s), nil
 	}
-	if len(s) == 1 {
-		if err = d.WriteByte(s[0]); err == nil {
-			n = 1
+	if len(s) >= 2*dma.MemAlign {
+		p := unsafe.Pointer(&s[0])
+		ds, de := dma.AlignOffsets(p, uintptr(len(s)))
+		dmaStart := int(ds)
+		dmaEnd := int(de)
+		dmaPtr := unsafe.Add(p, ds)
+		dmaN := dmaEnd - dmaStart
+		if dmaStart != 0 {
+			n = dmaStart
+			write(d.p, s[:dmaStart])
 		}
-		return
+		s = s[dmaEnd:]
+		ch := d.txDMA
+		if dma.CacheMaint {
+			rtos.CacheMaint(rtos.DCacheFlush, dmaPtr, dmaN)
+		}
+		up := uintptr(dmaPtr)
+		for dmaN != 0 {
+			m := dmaN
+			if m > 0xffff {
+				m = 0xffff
+			}
+			dmaN -= m
+			d.txDone.Clear()
+			clear(d.p, TxDone, 0) // Clear TC.
+			startDMA(ch, up, m, true)
+			up += uintptr(m)
+			n += m
+			done := d.txDone.Sleep(d.timeoutTx)
+			ch.Disable() // to be compatible with STM32F1.
+			if !done {
+				ch.DisableIRQ(dma.EvAll, dma.ErrAll)
+				return n - ch.Len(), ErrTimeout
+			}
+			// there is no USART errors for Tx, only DMA errors matter
+			_, e := ch.Status()
+			if e &^= dma.ErrFIFO; e != 0 {
+				return n - ch.Len(), e
+			}
+		}
 	}
-	ch := d.txDMA
-	p := unsafe.Pointer(unsafe.StringData(s))
-	if dma.CacheMaint {
-		rtos.CacheMaint(rtos.DCacheFlush, p, len(s)) // BUG: can affect neighboring DMA buffer
-	}
-	ptr := uintptr(p)
-	for {
-		m := len(s) - n
-		if m == 0 {
-			break
-		}
-		if m > 0xffff {
-			m = 0xffff
-		}
-		d.txDone.Clear()
-		clear(d.p, TxDone, 0) // Clear TC.
-		startDMA(ch, ptr+uintptr(n), m, true)
-		n += m
-		done := d.txDone.Sleep(d.timeoutTx)
-		ch.Disable() // to be compatible with STM32F1.
-		if !done {
-			ch.DisableIRQ(dma.EvAll, dma.ErrAll)
-			return n - ch.Len(), ErrTimeout
-		}
-		// there is no USART errors for Tx, only DMA errors matter
-		_, e := ch.Status()
-		if e &^= dma.ErrFIFO; e != 0 {
-			return n - ch.Len(), e
-		}
+	if len(s) != 0 {
+		write(d.p, s)
+		n += len(s)
 	}
 	return
 }
 
-// Write implements io.Writer interface.
-func (d *Driver) Write(p []byte) (int, error) {
-	return d.WriteString(*(*string)(unsafe.Pointer(&p)))
+// WriteString implements io.StringWriter interface.
+func (d *Driver) WriteString(s string) (int, error) {
+	return d.Write(unsafe.Slice(unsafe.StringData(s), len(s)))
 }
 
 // TxDMAISR is an interrupt handler for Tx DMA channel IRQ. The DMA interrupt is
@@ -111,28 +132,17 @@ func (d *Driver) TxDMAISR() {
 // sysWrite is called in handler mode. It is used by print and println mainly
 // to print a stack trace before system halt so it disables DMA to interrupt any
 // possible active transfer.
-func sysWrite(d *Driver, s string) (int, error) {
+func sysWrite(d *Driver, s []byte) {
 	d.txDMA.DisableIRQ(dma.EvAll, dma.ErrAll)
 	d.txDMA.Disable()
 	p := d.p
-	for i := 0; i < len(s); i++ {
-		c := s[i]
-		if c == '\n' {
+	for _, b := range s {
+		if b == '\n' {
 			// convert "\n" to "\r\n"
-			waitTxEmpty(d.p)
+			waitTxNotFull(d.p)
 			p.Store('\r')
 		}
-		waitTxEmpty(d.p)
-		p.Store(uint32(c))
-	}
-	return len(s), nil
-}
-
-func waitTxEmpty(p *Periph) {
-	for {
-		ev, _ := p.Status()
-		if ev&TxEmpty != 0 {
-			break
-		}
+		waitTxNotFull(d.p)
+		p.Store(uint32(b))
 	}
 }
