@@ -17,7 +17,6 @@ import (
 // peripheral and Tx DMA channel between EnableTx and DisableTx.
 func (d *Driver) EnableTx() {
 	d.p.cr1.SetBits(te)
-	d.p.cr3.SetBits(dmat)
 	setupDMA(d.txDMA, dma.MTP|dma.IncM|dma.FT4|dma.TrBuf, tdr(d.p).Addr())
 }
 
@@ -91,10 +90,12 @@ func (d *Driver) Write(s []byte) (n int, err error) {
 			d.txDone.Clear()
 			clear(d.p, TxDone, 0) // Clear TC.
 			startDMA(ch, up, m, true)
+			d.p.cr3.SetBits(dmat)
 			up += uintptr(m)
 			n += m
 			done := d.txDone.Sleep(d.timeoutTx)
-			ch.Disable() // to be compatible with STM32F1.
+			d.p.cr3.ClearBits(dmat) // avoid requests during non-DMA transfers
+			ch.Disable()            // to be compatible with STM32F1.
 			if !done {
 				ch.DisableIRQ(dma.EvAll, dma.ErrAll)
 				return n - ch.Len(), ErrTimeout

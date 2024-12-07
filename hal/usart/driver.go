@@ -5,7 +5,6 @@
 package usart
 
 import (
-	"embedded/mmio"
 	"embedded/rtos"
 	"time"
 	"unsafe"
@@ -155,6 +154,5 @@ func startDMA(ch dma.Channel, maddr uintptr, mlen int, irq bool) {
 	if irq {
 		ch.EnableIRQ(dma.Complete, dma.ErrAll&^dma.ErrFIFO)
 	}
-	mmio.MB() // ensure the data in RAM are ready; BUG: not enough with D-cache
 	ch.Enable()
 }

@@ -9,6 +9,8 @@ package dma
 import (
 	"embedded/mmio"
 	"unsafe"
+
+	"github.com/embeddedgo/stm32/hal/internal"
 )
 
 type stream struct {
@@ -159,7 +161,10 @@ const (
 )
 
 func (c Channel) setup(m Mode) {
-	const mask = pfc | dir | circ | incP | incM | pburst | mburst | chsel
+	mask := uint32(pfc | dir | circ | incP | incM | pburst | mburst | chsel)
+	if internal.H7 {
+		mask |= trbuf
+	}
 	cr := uint32(cnum(c))<<25 | uint32(m)
 	s := st(c)
 	s.cr.StoreBits(mask, cr)
