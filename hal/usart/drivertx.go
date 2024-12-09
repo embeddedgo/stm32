@@ -10,25 +10,27 @@ import (
 	"unsafe"
 
 	"github.com/embeddedgo/stm32/hal/dma"
+	"github.com/embeddedgo/stm32/hal/internal"
 )
 
 // EnableTx enables Tx part of the USART peripheral and setups Tx DMA channel.
 // Driver assumes that it has exclusive access to the underlying USART
 // peripheral and Tx DMA channel between EnableTx and DisableTx.
 func (d *Driver) EnableTx() {
-	d.p.cr1.SetBits(te)
+	internal.AtomicStoreBits(&d.p.cr1, te, te)
 	setupDMA(d.txDMA, dma.MTP|dma.IncM|dma.FT4|dma.TrBuf, tdr(d.p).Addr())
 }
 
 // DisableTx disables Tx part of the USART peripheral.
 func (d *Driver) DisableTx() {
+	p := d.p
 	for {
-		if ev, _ := d.p.Status(); ev&TxDone != 0 {
+		if ev, _ := p.Status(); ev&TxDone != 0 {
 			break
 		}
 		runtime.Gosched()
 	}
-	d.p.cr1.ClearBits(te)
+	internal.AtomicStoreBits(&p.cr1, te, 0)
 }
 
 func waitTxNotFull(p *Periph) {
@@ -64,16 +66,17 @@ func (d *Driver) Write(s []byte) (n int, err error) {
 		sysWrite(d, s)
 		return len(s), nil
 	}
+	p := d.p
 	if len(s) >= 2*dma.MemAlign {
-		p := unsafe.Pointer(&s[0])
-		ds, de := dma.AlignOffsets(p, uintptr(len(s)))
+		ptr := unsafe.Pointer(&s[0])
+		ds, de := dma.AlignOffsets(ptr, uintptr(len(s)))
 		dmaStart := int(ds)
 		dmaEnd := int(de)
-		dmaPtr := unsafe.Add(p, ds)
+		dmaPtr := unsafe.Add(ptr, dmaStart)
 		dmaN := dmaEnd - dmaStart
 		if dmaStart != 0 {
 			n = dmaStart
-			write(d.p, s[:dmaStart])
+			write(p, s[:dmaStart])
 		}
 		s = s[dmaEnd:]
 		ch := d.txDMA
@@ -88,14 +91,14 @@ func (d *Driver) Write(s []byte) (n int, err error) {
 			}
 			dmaN -= m
 			d.txDone.Clear()
-			clear(d.p, TxDone, 0) // Clear TC.
+			clear(p, TxDone, 0) // Clear TC.
 			startDMA(ch, up, m, true)
-			d.p.cr3.SetBits(dmat)
+			internal.AtomicStoreBits(&p.cr3, dmat, dmat)
 			up += uintptr(m)
 			n += m
 			done := d.txDone.Sleep(d.timeoutTx)
-			d.p.cr3.ClearBits(dmat) // avoid requests during non-DMA transfers
-			ch.Disable()            // to be compatible with STM32F1.
+			internal.AtomicStoreBits(&p.cr3, dmat, 0) // avoid false requests
+			ch.Disable() // to be compatible with STM32F1.
 			if !done {
 				ch.DisableIRQ(dma.EvAll, dma.ErrAll)
 				return n - ch.Len(), ErrTimeout
@@ -108,7 +111,7 @@ func (d *Driver) Write(s []byte) (n int, err error) {
 		}
 	}
 	if len(s) != 0 {
-		write(d.p, s)
+		write(p, s)
 		n += len(s)
 	}
 	return

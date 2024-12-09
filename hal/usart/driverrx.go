@@ -5,61 +5,59 @@
 package usart
 
 import (
-	"embedded/rtos"
 	"runtime"
 	"unsafe"
 
 	"github.com/embeddedgo/stm32/hal/dma"
+	"github.com/embeddedgo/stm32/hal/internal"
+	"github.com/embeddedgo/stm32/hal/mem/nocache"
 )
 
-func cacheInval(buf []byte) {
-	rtos.CacheMaint(rtos.DCacheInval, unsafe.Pointer(&buf[0]), len(buf))
-}
-
-// EnableRx enables the UART receive. It allocates an internal ring buffer of
-// bufLen size. In most cases bufLen = 64 is good choise (minimum is 2). If the
-// CPU has the data cache the buffer is rounded up and aligned to the cache line
-// size.
+// EnableRx enables the UART receive part. It allocates an internal ring buffer
+// of bufLen size. In most cases bufLen=64 is good choise (minimum is 2). Use
+// bufLen=0 to reenable the UART with the previous buffer size.
 //
 // EnableRx setups Rx DMA channel in circular mode and enables it to continuous
-// reception of data. Driver assumes that it has exclusive access to the
-// underlying USART peripheral and Rx DMA channel between EnableRx and
-// DisableRx.
+// reception of data. Driver assumes that it has exclusive access to the Rx part
+// of the underlying USART peripheral and the Rx DMA channel between EnableRx
+// and DisableRx.
 //
-// The Rx algorithm and the DMA configuration is optimized for speed. The DMA is
-// allowed to copy any received data to the internal ring buffer. If there is
-// no room for new data the DMA overwrites the oldest. The detection of buffer
-// overflow is weak (some cases may not be detected).
+// The Rx algorithm and the DMA configuration is optimized for speed. The DMA
+// copies received data to the internal ring buffer. If there is no room for new
+// data the DMA overwrites the oldest ones. The detection of buffer overflow is
+// weak (some cases may not be detected).
 //
-// You can not rely on the error reporting at all. The detected UART errors are
-// asynchronous with the received data and can be used only as an indicator of
-// poor connection quality. The ErrBufOverflow indicates that the rxbuf is too
-// small or the data processing is too slow. You cannot determine which data has
-// been affected (use other techniques to ensure data integrity).
+// You can not rely on the error reporting by read methods at all. The detected
+// UART errors are asynchronous with the received data and can be used only as
+// an indicator of poor connection quality. The ErrBufOverflow error indicates
+// that the rxbuf is too small or the data processing is too slow. You cannot
+// determine which data has been affected by an error (use other techniques to
+// ensure data integrity).
 //
-// As the DMA reads any received data it does not make much sense to enable
+// As the DMA is usded to receive data it does not make much sense to enable
 // hardware RTS signaling unless the DMA is very busy.
 func (d *Driver) EnableRx(bufLen int) {
-	if bufLen == 0 || len(d.rxBuf)+bufLen != 0 {
-		if d.rxBuf != nil {
-			panic("enabled before")
+	if len(d.rxBuf) != 0 {
+		panic("enabled before")
+	}
+	if cap(d.rxBuf) >= bufLen {
+		if bufLen == 0 {
+			bufLen = cap(d.rxBuf)
+		} else if bufLen < 2 {
+			bufLen = 2
 		}
+		d.rxBuf = d.rxBuf[:bufLen]
+	} else {
 		if bufLen < 2 {
 			bufLen = 2
 		}
-		const alignMask = dma.MemAlign - 1
-		if alignMask != 0 {
-			bufLen = (bufLen + alignMask) &^ alignMask
-		}
-		d.rxBuf = dma.MakeSlice[byte](bufLen, bufLen)
-		if dma.CacheMaint {
-			cacheInval(d.rxBuf)
-		}
+		d.rxBuf = nocache.MakeSlice[byte](1, bufLen, bufLen)
 	}
+	p := d.p
 	ch := d.rxDMA
-	d.p.cr1.SetBits(re)
-	d.p.cr3.SetBits(dmar)
-	setupDMA(ch, dma.PTM|dma.IncM|dma.Circ|dma.TrBuf, rdr(d.p).Addr())
+	internal.AtomicStoreBits(&p.cr1, re, re)
+	internal.AtomicStoreBits(&p.cr3, dmar, dmar)
+	setupDMA(ch, dma.PTM|dma.IncM|dma.Circ|dma.TrBuf, rdr(p).Addr())
 	startDMA(ch, uintptr(unsafe.Pointer(&d.rxBuf[0])), len(d.rxBuf), false)
 }
 
@@ -69,9 +67,9 @@ func (d *Driver) DisableRx() {
 	ch := d.rxDMA
 	ch.Disable()
 	ch.DisableIRQ(dma.EvAll, dma.ErrAll)
-	d.p.cr1.ClearBits(re)
-	d.p.cr3.ClearBits(dmar)
-	d.rxBuf = nil
+	internal.AtomicStoreBits(&d.p.cr3, dmar, 0)
+	internal.AtomicStoreBits(&d.p.cr1, re, 0)
+	d.rxBuf = d.rxBuf[:0]
 	d.rxp = 0
 	// wait for DMA to really stop
 	for ch.Enabled() {
@@ -144,9 +142,6 @@ again:
 		}
 		n = copy(buf, d.rxBuf[d.rxp:])
 		if n < len(buf) {
-			if dma.CacheMaint {
-				cacheInval(d.rxBuf)
-			}
 			n += copy(buf[n:], d.rxBuf[:dmap])
 		}
 	case dmap == d.rxp: // no new data in the ring buffer
@@ -181,9 +176,6 @@ again:
 	}
 	d.rxp += n
 	if d.rxp >= len(d.rxBuf) {
-		if dma.CacheMaint && d.rxp == len(d.rxBuf) {
-			cacheInval(d.rxBuf)
-		}
 		d.rxp -= len(d.rxBuf)
 		d.rxDMA.Clear(dma.Complete, 0)
 	}

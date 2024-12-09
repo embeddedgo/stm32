@@ -16,18 +16,18 @@ import (
 )
 
 type registers struct {
-	cr1   mmio.U32
-	cr2   mmio.U32
-	cr3   mmio.U32
-	brr   mmio.U32
-	gtpr  mmio.U32
-	rtor  mmio.U32
-	rqr   mmio.U32
-	sr    mmio.U32
-	icr   mmio.U32
-	rdr   mmio.U32
-	tdr   mmio.U32
-	presc mmio.U32 // H7 only
+	cr1   mmio.R32[uint32]
+	cr2   mmio.R32[uint32]
+	cr3   mmio.R32[uint32]
+	brr   mmio.R32[uint32]
+	gtpr  mmio.R32[uint32]
+	rtor  mmio.R32[uint32]
+	rqr   mmio.R32[uint32]
+	sr    mmio.R32[uint32]
+	icr   mmio.R32[uint32]
+	rdr   mmio.R32[uint32]
+	tdr   mmio.R32[uint32]
+	presc mmio.R32[uint32] // H7 only
 }
 
 const (
@@ -88,11 +88,11 @@ func clear(p *Periph, ev Event, err Error) {
 	}
 }
 
-func tdr(p *Periph) *mmio.U32 {
+func tdr(p *Periph) *mmio.R32[uint32] {
 	return &p.tdr
 }
 
-func rdr(p *Periph) *mmio.U32 {
+func rdr(p *Periph) *mmio.R32[uint32] {
 	return &p.rdr
 }
 
