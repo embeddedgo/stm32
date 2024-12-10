@@ -130,7 +130,7 @@ func (c Channel) setup(m Mode) {
 	const mask = mtp | mtm | circ | incP | incM | pl
 	ch(c).cr.StoreBits(mask, uint32(m))
 	n := 4 * cnum(c)
-	internal.AtomicStoreBits(&regs(c).cselr, 0xf<<n, rnum(c)<<n)
+	internal.ExclusiveStoreBits(&regs(c).cselr, 0xf<<n, rnum(c)<<n)
 }
 
 const (

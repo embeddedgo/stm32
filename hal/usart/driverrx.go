@@ -55,8 +55,8 @@ func (d *Driver) EnableRx(bufLen int) {
 	}
 	p := d.p
 	ch := d.rxDMA
-	internal.AtomicStoreBits(&p.cr1, re, re)
-	internal.AtomicStoreBits(&p.cr3, dmar, dmar)
+	internal.ExclusiveStoreBits(&p.cr1, re, re)
+	internal.ExclusiveStoreBits(&p.cr3, dmar, dmar)
 	setupDMA(ch, dma.PTM|dma.IncM|dma.Circ|dma.TrBuf, rdr(p).Addr())
 	startDMA(ch, uintptr(unsafe.Pointer(&d.rxBuf[0])), len(d.rxBuf), false)
 }
@@ -67,8 +67,8 @@ func (d *Driver) DisableRx() {
 	ch := d.rxDMA
 	ch.Disable()
 	ch.DisableIRQ(dma.EvAll, dma.ErrAll)
-	internal.AtomicStoreBits(&d.p.cr3, dmar, 0)
-	internal.AtomicStoreBits(&d.p.cr1, re, 0)
+	internal.ExclusiveStoreBits(&d.p.cr3, dmar, 0)
+	internal.ExclusiveStoreBits(&d.p.cr1, re, 0)
 	d.rxBuf = d.rxBuf[:0]
 	d.rxp = 0
 	// wait for DMA to really stop

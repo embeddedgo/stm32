@@ -22,8 +22,8 @@ func EnableClock(addr unsafe.Pointer, lp bool) {
 	enr := (*mmio.R32[uint32])(unsafe.Pointer(rcc.RCC().APB1ENR.Addr() + rn*2))
 	lpenr := (*mmio.R32[uint32])(unsafe.Pointer(rcc.RCC().APB1LPENR.Addr() + rn*2))
 	mask := uint32(1) << bn
-	internal.AtomicStoreBits(enr, mask, mask)
-	internal.AtomicStoreBits(lpenr, mask, internal.BoolUint32(lp)<<bn)
+	internal.ExclusiveStoreBits(enr, mask, mask)
+	internal.ExclusiveStoreBits(lpenr, mask, internal.BoolUint32(lp)<<bn)
 	lpenr.Load() // RCC delay (workaround for silicon bugs)
 }
 
@@ -33,7 +33,7 @@ func DisableClock(addr unsafe.Pointer) {
 		panic("bad periph addr")
 	}
 	enr := (*mmio.R32[uint32])(unsafe.Pointer(rcc.RCC().APB1ENR.Addr() + rn*2))
-	internal.AtomicStoreBits(enr, 1<<bn, 0)
+	internal.ExclusiveStoreBits(enr, 1<<bn, 0)
 	enr.Load() // RCC delay (workaround for silicon bugs)
 }
 
@@ -44,7 +44,7 @@ func Reset(addr unsafe.Pointer) {
 	}
 	rstr := (*mmio.R32[uint32])(unsafe.Pointer(rcc.RCC().APB1RSTR.Addr() + rn*2))
 	mask := uint32(1) << bn
-	internal.AtomicStoreBits(rstr, mask, mask)
-	internal.AtomicStoreBits(rstr, mask, 0)
+	internal.ExclusiveStoreBits(rstr, mask, mask)
+	internal.ExclusiveStoreBits(rstr, mask, 0)
 	rstr.Load() // RCC delay (workaround for silicon bugs)
 }

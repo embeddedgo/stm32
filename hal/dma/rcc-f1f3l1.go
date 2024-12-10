@@ -14,12 +14,12 @@ import (
 
 func (p *DMA) enableClock(_ bool) {
 	mask := uint32(1) << (rcc.DMA1ENn + d.num())
-	internal.AtomicStoreBits(&rcc.RCC().AHBENR, mask, mask)
+	internal.ExclusiveStoreBits(&rcc.RCC().AHBENR, mask, mask)
 	rcc.RCC().AHBENR.Load() // RCC delay (workaround for silicon bugs)
 }
 
 func (p *DMA) disableClock() {
-	internal.AtomicClearBits(&rcc.RCC().AHBENR, 1<<(rcc.DMA1ENn+d.num()))
+	internal.ExclusiveStoreBits(&rcc.RCC().AHBENR, 1<<(rcc.DMA1ENn+d.num()))
 }
 
 func (p *DMA) reset() {}

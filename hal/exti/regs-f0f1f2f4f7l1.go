@@ -18,11 +18,11 @@ func riseTrigEnabled() Lines {
 }
 
 func enableRiseTrig(li Lines) {
-	internal.AtomicStoreBits(&exti.EXTI().RTSR, uint32(li), uint32(li))
+	internal.ExclusiveStoreBits(&exti.EXTI().RTSR, uint32(li), uint32(li))
 }
 
 func disableRiseTrig(li Lines) {
-	internal.AtomicStoreBits(&exti.EXTI().RTSR, uint32(li), 0)
+	internal.ExclusiveStoreBits(&exti.EXTI().RTSR, uint32(li), 0)
 }
 
 func fallTrigEnabled() Lines {
@@ -30,11 +30,11 @@ func fallTrigEnabled() Lines {
 }
 
 func enableFallTrig(li Lines) {
-	internal.AtomicStoreBits(&exti.EXTI().FTSR, uint32(li), uint32(li))
+	internal.ExclusiveStoreBits(&exti.EXTI().FTSR, uint32(li), uint32(li))
 }
 
 func disableFallTrig(li Lines) {
-	internal.AtomicStoreBits(&exti.EXTI().FTSR, uint32(li), 0)
+	internal.ExclusiveStoreBits(&exti.EXTI().FTSR, uint32(li), 0)
 }
 
 func trigger(li Lines) {
@@ -46,11 +46,11 @@ func irqEnabled() Lines {
 }
 
 func enableIRQ(li Lines) {
-	internal.AtomicStoreBits(&exti.EXTI().IMR, uint32(li), uint32(li))
+	internal.ExclusiveStoreBits(&exti.EXTI().IMR, uint32(li), uint32(li))
 }
 
 func disableIRQ(li Lines) {
-	internal.AtomicStoreBits(&exti.EXTI().IMR, uint32(li), 0)
+	internal.ExclusiveStoreBits(&exti.EXTI().IMR, uint32(li), 0)
 }
 
 func eventEnabled() Lines {
@@ -58,11 +58,11 @@ func eventEnabled() Lines {
 }
 
 func enableEvent(li Lines) {
-	internal.AtomicStoreBits(&exti.EXTI().EMR, uint32(li), uint32(li))
+	internal.ExclusiveStoreBits(&exti.EXTI().EMR, uint32(li), uint32(li))
 }
 
 func disableEvent(li Lines) {
-	internal.AtomicStoreBits(&exti.EXTI().EMR, uint32(li), 0)
+	internal.ExclusiveStoreBits(&exti.EXTI().EMR, uint32(li), 0)
 }
 
 func pending() Lines {

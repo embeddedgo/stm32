@@ -63,6 +63,7 @@ const (
 	datainv  = 0
 	msbfirst = 0
 	abren    = 0
+	fifoen   = 0
 )
 
 func busForAddr(p *Periph) bus.Bus {

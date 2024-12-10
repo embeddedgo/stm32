@@ -7,7 +7,7 @@
 package nocache
 
 import (
-	"embedded/mmio"
+	"embedded/arch/cortexm/mpu"
 	"embedded/rtos"
 	"runtime"
 	"sync/atomic"
@@ -24,30 +24,15 @@ const (
 var free = base
 
 func init() {
-	// TODO: use mpu package (see internal/cpu/cortexm/mpu)
-	const (
-		ENA   = 1 << 0
-		B     = 1 << 16
-		C     = 1 << 17
-		S     = 1 << 18
-		TEX1  = 1 << 19
-		Arwrw = 3 << 24
-	)
-	const VALID = 1 << 4
-	rbar := (*mmio.R32[uint32])(unsafe.Pointer(uintptr(0xE000ED90 + 3*4)))
-	rasr := (*mmio.R32[uint32])(unsafe.Pointer(uintptr(0xE000ED90 + 4*4)))
-
 	runtime.LockOSThread()
 	pl, _ := rtos.SetPrivLevel(0)
 
-	rbar.Store(uint32(base) | VALID | 7)               // tasker uses regions 0-3
-	rasr.Store(ENA | (logSiz-1)<<1 | Arwrw | S | TEX1) // normal noncacheable
-	//rasr.Store(ENA | (logSiz-1)<<1 | Arwrw | B) // normal noncacheable
+	mpu.SetRegion(base|mpu.VALID|7, mpu.ENA|mpu.SIZE(logSiz)|mpu.Arwrw|mpu.TEX1)
 
 	rtos.SetPrivLevel(pl)
 	runtime.UnlockOSThread()
 
-	runtime_memclrNoHeapPointers(unsafe.Pointer(base), 1<<logSiz)
+	clear((*[1 << logSiz]byte)(unsafe.Pointer(base))[:])
 }
 
 func alloc(align, size uintptr) unsafe.Pointer {
@@ -63,6 +48,3 @@ func alloc(align, size uintptr) unsafe.Pointer {
 		}
 	}
 }
-
-//go:linkname runtime_memclrNoHeapPointers runtime.memclrNoHeapPointers
-func runtime_memclrNoHeapPointers(ptr unsafe.Pointer, n uintptr)

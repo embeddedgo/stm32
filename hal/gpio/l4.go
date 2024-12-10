@@ -25,11 +25,11 @@ func enreg() *mmio.R32[rcc.AHB2ENR]   { return &rcc.RCC().AHB2ENR }
 func rstreg() *mmio.R32[rcc.AHB2RSTR] { return &rcc.RCC().AHB2RSTR }
 
 func lpenaclk(pnum uint) {
-	internal.AtomicStoreBits(&rcc.RCC().AHB2SMENR, rcc.GPIOASMEN<<pnum, rcc.GPIOASMEN<<pnum)
+	internal.ExclusiveStoreBits(&rcc.RCC().AHB2SMENR, rcc.GPIOASMEN<<pnum, rcc.GPIOASMEN<<pnum)
 }
 
 func lpdisclk(pnum uint) {
-	internal.AtomicStoreBits(&rcc.RCC().AHB2SMENR, rcc.GPIOASMEN<<pnum, 0)
+	internal.ExclusiveStoreBits(&rcc.RCC().AHB2SMENR, rcc.GPIOASMEN<<pnum, 0)
 }
 
 const (

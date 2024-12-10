@@ -19,10 +19,10 @@ func exticr(n int) *mmio.R32[uint32] {
 }
 
 func exticrEna() {
-	internal.AtomicStoreBits(&rcc.RCC().APB2ENR, rcc.SYSCFGEN, rcc.SYSCFGEN)
+	internal.ExclusiveStoreBits(&rcc.RCC().APB2ENR, rcc.SYSCFGEN, rcc.SYSCFGEN)
 	rcc.RCC().APB2ENR.Load()
 }
 
 func exticrDis() {
-	internal.AtomicStoreBits(&rcc.RCC().APB2ENR, rcc.SYSCFGEN, 0)
+	internal.ExclusiveStoreBits(&rcc.RCC().APB2ENR, rcc.SYSCFGEN, 0)
 }

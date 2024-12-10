@@ -12,12 +12,12 @@ import (
 )
 
 func (d *Controller) enableClock(_ bool) {
-	internal.AtomicSetBits(&rcc.RCC().AHBENR.U32, uint32(1)<<rcc.DMAENn)
+	internal.ExclusiveStoreBits(&rcc.RCC().AHBENR.U32, uint32(1)<<rcc.DMAENn)
 	rcc.RCC().AHBENR.Load() // RCC delay (workaround for silicon bugs)
 }
 
 func (d *Controller) disableClock() {
-	internal.AtomicClearBits(&rcc.RCC().AHBENR.U32, uint32(1)<<rcc.DMAENn)
+	internal.ExclusiveStoreBits(&rcc.RCC().AHBENR.U32, uint32(1)<<rcc.DMAENn)
 }
 
 func (d *Controller) reset() {}

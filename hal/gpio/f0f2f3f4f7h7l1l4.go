@@ -44,7 +44,7 @@ const (
 
 func enableClock(p *Port, lp bool) {
 	pnum := portnum(p)
-	internal.AtomicStoreBits(enreg(), rcc.GPIOAEN<<pnum, rcc.GPIOAEN<<pnum)
+	internal.ExclusiveStoreBits(enreg(), rcc.GPIOAEN<<pnum, rcc.GPIOAEN<<pnum)
 	if lp {
 		lpenaclk(pnum)
 	} else {
@@ -54,14 +54,14 @@ func enableClock(p *Port, lp bool) {
 }
 
 func disableClock(p *Port) {
-	internal.AtomicStoreBits(enreg(), rcc.GPIOAEN<<portnum(p), 0)
+	internal.ExclusiveStoreBits(enreg(), rcc.GPIOAEN<<portnum(p), 0)
 }
 
 func reset(p *Port) {
 	pnum := portnum(p)
 	mask := rcc.GPIOARST << pnum
-	internal.AtomicStoreBits(rstreg(), mask, mask)
-	internal.AtomicStoreBits(rstreg(), mask, 0)
+	internal.ExclusiveStoreBits(rstreg(), mask, mask)
+	internal.ExclusiveStoreBits(rstreg(), mask, 0)
 }
 
 func setup(p *Port, n int, cfg *Config) {

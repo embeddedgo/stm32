@@ -14,19 +14,19 @@ import (
 func (d *Controller) enableClock(lp bool) {
 	n := d.num()
 	mask := rcc.AHB1ENR(1) << (rcc.DMA1ENn + n)
-	internal.AtomicStoreBits(&rcc.RCC().AHB1ENR, mask, mask)
+	internal.ExclusiveStoreBits(&rcc.RCC().AHB1ENR, mask, mask)
 
 	n += rcc.DMA1LPENn
-	internal.AtomicStoreBits(&rcc.RCC().AHB1LPENR, 1<<n, rcc.AHB1LPENR(internal.BoolUint32(lp)<<n))
+	internal.ExclusiveStoreBits(&rcc.RCC().AHB1LPENR, 1<<n, rcc.AHB1LPENR(internal.BoolUint32(lp)<<n))
 	rcc.RCC().AHB1LPENR.Load() // RCC delay (workaround for silicon bugs)
 }
 
 func (d *Controller) disableClock() {
-	internal.AtomicStoreBits(&rcc.RCC().AHB1ENR, 1<<(rcc.DMA1ENn+d.num()), 0)
+	internal.ExclusiveStoreBits(&rcc.RCC().AHB1ENR, 1<<(rcc.DMA1ENn+d.num()), 0)
 }
 
 func (d *Controller) reset() {
 	mask := rcc.AHB1RSTR(1) << (rcc.DMA1RSTn + d.num())
-	internal.AtomicStoreBits(&rcc.RCC().AHB1RSTR, mask, mask)
-	internal.AtomicStoreBits(&rcc.RCC().AHB1RSTR, mask, 0)
+	internal.ExclusiveStoreBits(&rcc.RCC().AHB1RSTR, mask, mask)
+	internal.ExclusiveStoreBits(&rcc.RCC().AHB1RSTR, mask, 0)
 }

@@ -17,7 +17,7 @@ import (
 // Driver assumes that it has exclusive access to the underlying USART
 // peripheral and Tx DMA channel between EnableTx and DisableTx.
 func (d *Driver) EnableTx() {
-	internal.AtomicStoreBits(&d.p.cr1, te, te)
+	internal.ExclusiveStoreBits(&d.p.cr1, te, te)
 	setupDMA(d.txDMA, dma.MTP|dma.IncM|dma.FT4|dma.TrBuf, tdr(d.p).Addr())
 }
 
@@ -30,7 +30,7 @@ func (d *Driver) DisableTx() {
 		}
 		runtime.Gosched()
 	}
-	internal.AtomicStoreBits(&p.cr1, te, 0)
+	internal.ExclusiveStoreBits(&p.cr1, te, 0)
 }
 
 func waitTxNotFull(p *Periph) {
@@ -83,6 +83,7 @@ func (d *Driver) Write(s []byte) (n int, err error) {
 		if dma.CacheMaint {
 			rtos.CacheMaint(rtos.DCacheFlush, dmaPtr, dmaN)
 		}
+		internal.ExclusiveStoreBits(&p.cr3, dmat, dmat)
 		up := uintptr(dmaPtr)
 		for dmaN != 0 {
 			m := dmaN
@@ -93,22 +94,27 @@ func (d *Driver) Write(s []byte) (n int, err error) {
 			d.txDone.Clear()
 			clear(p, TxDone, 0) // Clear TC.
 			startDMA(ch, up, m, true)
-			internal.AtomicStoreBits(&p.cr3, dmat, dmat)
 			up += uintptr(m)
 			n += m
 			done := d.txDone.Sleep(d.timeoutTx)
-			internal.AtomicStoreBits(&p.cr3, dmat, 0) // avoid false requests
 			ch.Disable() // to be compatible with STM32F1.
 			if !done {
 				ch.DisableIRQ(dma.EvAll, dma.ErrAll)
-				return n - ch.Len(), ErrTimeout
+				n -= ch.Len()
+				err = ErrTimeout
+				s = nil
+				break
 			}
 			// there is no USART errors for Tx, only DMA errors matter
 			_, e := ch.Status()
 			if e &^= dma.ErrFIFO; e != 0 {
-				return n - ch.Len(), e
+				n -= ch.Len()
+				err = e
+				s = nil
+				break
 			}
 		}
+		internal.ExclusiveStoreBits(&p.cr3, dmat, 0) // avoid false requests
 	}
 	if len(s) != 0 {
 		write(p, s)

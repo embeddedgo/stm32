@@ -13,16 +13,16 @@ import (
 
 func (d *Controller) enableClock(_ bool) {
 	mask := rcc.AHB1ENR(1) << (rcc.DMA1ENn + d.num())
-	internal.AtomicStoreBits(&rcc.RCC().AHB1ENR, mask, mask)
+	internal.ExclusiveStoreBits(&rcc.RCC().AHB1ENR, mask, mask)
 	rcc.RCC().AHB1ENR.Load() // RCC delay (workaround for silicon bugs)
 }
 
 func (d *Controller) disableClock() {
-	internal.AtomicStoreBits(&rcc.RCC().AHB1ENR, 1<<(rcc.DMA1ENn+d.num()), 0)
+	internal.ExclusiveStoreBits(&rcc.RCC().AHB1ENR, 1<<(rcc.DMA1ENn+d.num()), 0)
 }
 
 func (d *Controller) reset() {
 	mask := rcc.AHB1RSTR(1) << (rcc.DMA1RSTn + d.num())
-	internal.AtomicStoreBits(&rcc.RCC().AHB1RSTR, mask, mask)
-	internal.AtomicStoreBits(&rcc.RCC().AHB1RSTR, mask, 0)
+	internal.ExclusiveStoreBits(&rcc.RCC().AHB1RSTR, mask, mask)
+	internal.ExclusiveStoreBits(&rcc.RCC().AHB1RSTR, mask, 0)
 }
