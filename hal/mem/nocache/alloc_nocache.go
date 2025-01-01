@@ -7,7 +7,7 @@
 package nocache
 
 import (
-	"embedded/arch/cortexm/mpu"
+	"embedded/arch/cortexm/mpu/mpu7"
 	"embedded/rtos"
 	"runtime"
 	"sync/atomic"
@@ -27,7 +27,7 @@ func init() {
 	runtime.LockOSThread()
 	pl, _ := rtos.SetPrivLevel(0)
 
-	mpu.SetRegion(base|mpu.VALID|7, mpu.ENA|mpu.SIZE(logSiz)|mpu.Arwrw|mpu.TEX1)
+	mpu7.SetRegion(base|mpu7.VALID|7, mpu7.ENA|mpu7.SIZE(logSiz)|mpu7.Arwrw|mpu7.TEX1)
 
 	rtos.SetPrivLevel(pl)
 	runtime.UnlockOSThread()
