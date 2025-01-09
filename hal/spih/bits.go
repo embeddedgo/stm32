@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package spi
+package spih
 
 const (
 	SPE      CR1 = 0x01 << 0  //+ Serial Peripheral Enable
