@@ -53,7 +53,7 @@ func main() {
 	// Override UsePin settings
 	owTxRx.Setup(&gpio.Config{Mode: gpio.Alt, Driver: gpio.OpenDrain})
 
-	owm := onewire.Master{owdci.SetupUSART(ow)}
+	owm := onewire.Master{DCI: owdci.SetupUSART(ow)}
 
 	dtypes := []onewire.Type{onewire.DS18S20, onewire.DS18B20, onewire.DS1822}
 
