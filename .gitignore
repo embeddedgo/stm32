@@ -2,3 +2,4 @@
 *.bin
 zisrnames.go
 core
+oocd.log
