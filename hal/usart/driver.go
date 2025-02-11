@@ -131,14 +131,13 @@ func (d *Driver) SetBaudrate(baudrate int) {
 	d.p.SetBaudrate(baudrate)
 }
 
-// Setup enables clock source, resets UART, configures and enables it. You
-// still need to enable Tx and/or Rx before use it.
+// Setup enables clock source, resets UART and configures it. You still need to
+// enable Tx and/or Rx before use it.
 func (d *Driver) Setup(conf Config, baudrate int) {
 	d.p.EnableClock(true)
 	d.p.Reset()
 	d.p.SetBaudrate(baudrate)
 	d.SetConfig(conf)
-	d.Enable()
 }
 
 func setupDMA(ch dma.Channel, mode dma.Mode, paddr uintptr) {

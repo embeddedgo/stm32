@@ -17,7 +17,7 @@ import (
 // Driver assumes that it has exclusive access to the underlying USART
 // peripheral and Tx DMA channel between EnableTx and DisableTx.
 func (d *Driver) EnableTx() {
-	internal.ExclusiveStoreBits(&d.p.cr1, te, te)
+	internal.ExclusiveStoreBits(&d.p.cr1, ue|te, ue|te)
 	setupDMA(d.txDMA, dma.MTP|dma.IncM|dma.FT4|dma.TrBuf, tdr(d.p).Addr())
 }
 

@@ -55,7 +55,7 @@ func (d *Driver) EnableRx(bufLen int) {
 	}
 	p := d.p
 	ch := d.rxDMA
-	internal.ExclusiveStoreBits(&p.cr1, re, re)
+	internal.ExclusiveStoreBits(&p.cr1, ue|re, ue|re)
 	internal.ExclusiveStoreBits(&p.cr3, dmar, dmar)
 	setupDMA(ch, dma.PTM|dma.IncM|dma.Circ|dma.TrBuf, rdr(p).Addr())
 	startDMA(ch, uintptr(unsafe.Pointer(&d.rxBuf[0])), len(d.rxBuf), false)

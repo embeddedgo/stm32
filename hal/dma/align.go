@@ -12,7 +12,7 @@ import "unsafe"
 const MemAlign = cacheLineSize
 
 // A CacheMaint indicates whether DMA requires cache maintenance.
-const CacheMaint = cacheMaint
+const CacheMaint bool = cacheMaint
 
 // AlignOffsets calculatest the start and end offsets to the MemAlign aligned
 // portion of the memory described by ptr and size.
