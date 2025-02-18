@@ -105,6 +105,13 @@ func altFunc(p *Periph, pin gpio.Pin) gpio.AltFunc {
 			return gpio.AF3
 		}
 		return gpio.AF7
+	case UART4():
+		if pin.Port().Num() == 0 && (pin.Num() == 12 || pin.Num() == 14) {
+			return gpio.AF6 // H7 specific
+		}
+		return gpio.AF8
+	case USART6():
+		return gpio.AF7
 	default: // UART4, UART5, LPUART1
 		return gpio.AF8
 	}
