@@ -80,12 +80,10 @@ func (d *Driver) DisableRx() {
 
 // DiscardRx discards all rceived data.
 func (d *Driver) DiscardRx() {
-	rxBuf := d.rxBuf
 	d.DisableRx()
-	d.rxBuf = rxBuf
 	d.Periph().Status()
 	d.Periph().Load()
-	d.EnableRx(-len(rxBuf))
+	d.EnableRx(0)
 }
 
 // dmaPos returns the current Rx DMA position, tc extends the positon
