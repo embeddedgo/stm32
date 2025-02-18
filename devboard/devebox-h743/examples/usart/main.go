@@ -19,8 +19,8 @@ func main() {
 	// GPIO pins assignment
 	pa := gpio.PA()
 	pa.EnableClock(true)
-	tx := pa.Pin(9)  // CN5 D8
-	rx := pa.Pin(10) // CN9 D2
+	tx := pa.Pin(9)
+	rx := pa.Pin(10)
 
 	// Configure and enable USART
 	u := usart1.Driver()
