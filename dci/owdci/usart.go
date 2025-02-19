@@ -38,7 +38,7 @@ func checkErr(d *usart.Driver, err error) error {
 
 func (dci *USART) Reset() error {
 	d := usartDrv(dci)
-	d.Periph().SetBaudrate(9600)
+	d.SetBaudrate(9600)
 	err := d.WriteByte(0xf0)
 	if err != nil {
 		return err

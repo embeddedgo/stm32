@@ -81,8 +81,17 @@ func (d *Driver) DisableRx() {
 // DiscardRx discards all rceived data.
 func (d *Driver) DiscardRx() {
 	d.DisableRx()
-	d.Periph().Status()
-	d.Periph().Load()
+	p := d.Periph()
+	for {
+		ev, err := p.Status()
+		if err != 0 {
+			d.p.Clear(0, err)
+		}
+		if ev&RxNotEmpty == 0 {
+			break
+		}
+		p.Load()
+	}
 	d.EnableRx(0)
 }
 

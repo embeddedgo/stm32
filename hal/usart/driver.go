@@ -127,8 +127,15 @@ func (d *Driver) SetConfig(conf Config) {
 	d.p.SetConf3(Conf3(c << 1))
 }
 
+// SetBaudrate sets the baudrate used by UART. It disables the UART peripheral
+// before sand
 func (d *Driver) SetBaudrate(baudrate int) {
-	d.p.SetBaudrate(baudrate)
+	p := d.p
+	cr1 := p.cr1.Load()
+	// BUG? Should we check if TxDone flag is set? Is it set if no Tx occured?
+	p.cr1.Store(cr1 &^ ue)
+	p.SetBaudrate(baudrate)
+	p.cr1.Store(cr1)
 }
 
 // Setup enables clock source, resets UART and configures it. You still need to
