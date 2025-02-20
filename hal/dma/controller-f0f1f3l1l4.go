@@ -68,9 +68,8 @@ func (d *Controller) channel(cn, rn int) Channel {
 	paddr := uintptr(unsafe.Pointer(&d.c[cn])) &^ 0x3ff
 	return Channel{paddr | uintptr(rn)<<4 | 8 | uintptr(cn)}
 }
-
-func regs(c Channel) *registers {
-	return (*registers)(unsafe.Pointer(c.h &^ 0xff))
+func cctrl(c Channel) *Controller {
+	return (*Controller)(unsafe.Pointer(c.h &^ 0xff))
 }
 
 func ch(c Channel) *channel {
@@ -93,13 +92,13 @@ const (
 )
 
 func (c Channel) status() byte {
-	isr := regs(c).isr.Load()
+	isr := cctrl(c).isr.Load()
 	return byte(isr >> (cnum(c) * 4) & 0xf)
 }
 
 func (c Channel) clear(flags byte) {
 	mask := uint32(flags&0xf) << (cnum(c) * 4)
-	regs(c).ifcr.Store(mask)
+	cctrl(c).ifcr.Store(mask)
 }
 
 func (c Channel) enable() {
@@ -130,7 +129,7 @@ func (c Channel) setup(m Mode) {
 	const mask = mtp | mtm | circ | incP | incM | pl
 	ch(c).cr.StoreBits(mask, uint32(m))
 	n := 4 * cnum(c)
-	internal.ExclusiveStoreBits(&regs(c).cselr, 0xf<<n, rnum(c)<<n)
+	internal.ExclusiveStoreBits(&cctrl(c).cselr, 0xf<<n, rnum(c)<<n)
 }
 
 const (

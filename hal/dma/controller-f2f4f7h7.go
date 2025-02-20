@@ -55,8 +55,8 @@ func (d *Controller) channel(sn, cn int) Channel {
 	return Channel{uintptr(unsafe.Pointer(&d.s[sn])) | uintptr(cn)}
 }
 
-func regs(c Channel) *registers {
-	return (*registers)(unsafe.Pointer(c.h &^ 0x3ff))
+func cctrl(c Channel) *Controller {
+	return (*Controller)(unsafe.Pointer(c.h &^ 0x3ff))
 }
 
 func st(c Channel) *stream {
@@ -86,7 +86,7 @@ const (
 
 func (c Channel) status() uint8 {
 	n := snum(c)
-	isr := &regs(c).isr[n/4]
+	isr := &cctrl(c).isr[n/4]
 	n = n % 4 * 6
 	if n > 6 {
 		n += 4
@@ -96,7 +96,7 @@ func (c Channel) status() uint8 {
 
 func (c Channel) clear(flags byte) {
 	n := snum(c)
-	ifcr := &regs(c).ifcr[n/4]
+	ifcr := &cctrl(c).ifcr[n/4]
 	n = n % 4 * 6
 	if n > 6 {
 		n += 4

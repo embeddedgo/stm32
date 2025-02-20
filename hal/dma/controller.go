@@ -217,3 +217,8 @@ func (c Channel) SetAddrP(a unsafe.Pointer) {
 func (c Channel) SetAddrM(a unsafe.Pointer) {
 	c.setAddrM(a)
 }
+
+// Controller returns the DMA controller that this channel belongs to.
+func (c Channel) Controller() *Controller {
+	return cctrl(c)
+}

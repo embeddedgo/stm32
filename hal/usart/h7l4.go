@@ -110,9 +110,9 @@ func altFunc(p *Periph, pin gpio.Pin) gpio.AltFunc {
 			return gpio.AF6 // H7 specific
 		}
 		return gpio.AF8
-	case USART6():
-		return gpio.AF7
-	default: // UART4, UART5, LPUART1
+	case UART4(), UART5(), LPUART1():
 		return gpio.AF8
+	default: // USART6 in H7
+		return gpio.AF7
 	}
 }
