@@ -48,13 +48,9 @@ func main() {
 	con.EnableTx()
 
 	// 1-Wire driver
-	ow := usart6.Driver()
-	ow.UsePin(owTxRx, usart.TXD)
-	// Override UsePin settings
-	owTxRx.Setup(&gpio.Config{Mode: gpio.Alt, Driver: gpio.OpenDrain})
+	owm := onewire.Master{DCI: owdci.SetupUSART(usart6.Driver(), owTxRx)}
 
-	owm := onewire.Master{DCI: owdci.SetupUSART(ow)}
-
+	// Support temperature sensor types.
 	dtypes := []onewire.Type{onewire.DS18S20, onewire.DS18B20, onewire.DS1822}
 
 start:

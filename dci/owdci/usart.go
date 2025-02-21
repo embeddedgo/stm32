@@ -10,6 +10,7 @@ import (
 	"time"
 
 	"github.com/embeddedgo/onewire"
+	"github.com/embeddedgo/stm32/hal/gpio"
 	"github.com/embeddedgo/stm32/hal/usart"
 )
 
@@ -19,7 +20,10 @@ type USART usart.Driver
 func usartDrv(dci *USART) *usart.Driver { return (*usart.Driver)(dci) }
 
 // SetupUSART configures d to be used as onewire.DCI.
-func SetupUSART(d *usart.Driver) *USART {
+func SetupUSART(d *usart.Driver, pin gpio.Pin) *USART {
+	d.UsePin(pin, usart.TXD)
+	pin.Setup(&gpio.Config{Mode: gpio.Alt, Driver: gpio.OpenDrain})
+
 	d.Setup(usart.Word8b|usart.HalfDuplex, 115200)
 	p := d.Periph()
 	p.SetConf3(p.Conf3() | usart.OneBit) // disables noise detection
