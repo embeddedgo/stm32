@@ -12,7 +12,7 @@ import (
 )
 
 func (d *Controller) enableClock(lp bool) {
-	n := d.num()
+	n := dnum(d)
 	mask := rcc.AHB1ENR(1) << (rcc.DMA1ENn + n)
 	internal.ExclusiveStoreBits(&rcc.RCC().AHB1ENR, mask, mask)
 
@@ -22,11 +22,11 @@ func (d *Controller) enableClock(lp bool) {
 }
 
 func (d *Controller) disableClock() {
-	internal.ExclusiveStoreBits(&rcc.RCC().AHB1ENR, 1<<(rcc.DMA1ENn+d.num()), 0)
+	internal.ExclusiveStoreBits(&rcc.RCC().AHB1ENR, 1<<(rcc.DMA1ENn+dnum(d)), 0)
 }
 
 func (d *Controller) reset() {
-	mask := rcc.AHB1RSTR(1) << (rcc.DMA1RSTn + d.num())
+	mask := rcc.AHB1RSTR(1) << (rcc.DMA1RSTn + dnum(d))
 	internal.ExclusiveStoreBits(&rcc.RCC().AHB1RSTR, mask, mask)
 	internal.ExclusiveStoreBits(&rcc.RCC().AHB1RSTR, mask, 0)
 }

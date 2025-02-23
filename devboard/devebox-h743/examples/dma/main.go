@@ -10,7 +10,7 @@ import (
 	"unsafe"
 
 	"github.com/embeddedgo/stm32/hal/dma"
-	"github.com/embeddedgo/stm32/hal/irq"
+	"github.com/embeddedgo/stm32/hal/dma/dmairq"
 
 	"github.com/embeddedgo/stm32/devboard/devebox-h743/board/leds"
 )
@@ -38,8 +38,8 @@ func copyDMA(dst, src unsafe.Pointer, n int, mode dma.Mode) dma.Error {
 func main() {
 	d := dma.DMA(2)
 	d.EnableClock(true)
-	ch = d.Channel(0, 0)
-	irq.DMA2_STR0.Enable(rtos.IntPrioLow, 0)
+	ch = d.AllocChannel()
+	dmairq.SetISR(ch, dmaisr)
 
 	n := 4000
 	src := dma.MakeSlice[uint32](n, n)
@@ -72,8 +72,8 @@ func main() {
 
 }
 
-//go:interrupthandler
-func DMA2_STR0_Handler() {
+//go:nosplit
+func dmaisr() {
 	ch.DisableIRQ(dma.EvAll, dma.ErrAll)
 	ch.Disable()
 	tce.Wakeup()

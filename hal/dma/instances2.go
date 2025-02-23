@@ -12,8 +12,8 @@ import (
 	"github.com/embeddedgo/stm32/p/mmap"
 )
 
-func (d *Controller) num() uint {
-	return uint((uintptr(unsafe.Pointer(d)) - mmap.DMA1_BASE) / 0x400)
+func dnum(d *Controller) int {
+	return int((uintptr(unsafe.Pointer(d)) - mmap.DMA1_BASE) / 0x400)
 }
 
 func controller(n int) *Controller {

@@ -45,6 +45,7 @@ const (
 	dmdis = 1 << 2
 )
 
+//go:nosplit
 func (d *Controller) channel(sn, cn int) Channel {
 	if uint(sn) > 7 {
 		panic("bad stream")
@@ -55,20 +56,27 @@ func (d *Controller) channel(sn, cn int) Channel {
 	return Channel{uintptr(unsafe.Pointer(&d.s[sn])) | uintptr(cn)}
 }
 
+//go:nosplit
 func cctrl(c Channel) *Controller {
 	return (*Controller)(unsafe.Pointer(c.h &^ 0x3ff))
 }
 
+//go:nosplit
 func st(c Channel) *stream {
 	return (*stream)(unsafe.Pointer(c.h &^ 7))
 }
 
+//go:nosplit
 func snum(c Channel) uintptr {
 	off := c.h & 0x3ff
 	step := unsafe.Sizeof(stream{})
 	return (off - 0x10) / step
 }
 
+//go:nosplit
+func csnum(c Channel) uintptr { return snum(c) }
+
+//go:nosplit
 func cnum(c Channel) int {
 	return int(c.h & 7)
 }
@@ -84,6 +92,7 @@ const (
 	flmask = fferr | dmerr | trerr | htce | trce
 )
 
+//go:nosplit
 func (c Channel) status() uint8 {
 	n := snum(c)
 	isr := &cctrl(c).isr[n/4]
@@ -94,6 +103,7 @@ func (c Channel) status() uint8 {
 	return uint8(isr.Load() >> n & flmask)
 }
 
+//go:nosplit
 func (c Channel) clear(flags byte) {
 	n := snum(c)
 	ifcr := &cctrl(c).ifcr[n/4]
@@ -104,10 +114,12 @@ func (c Channel) clear(flags byte) {
 	ifcr.Store(uint32(flags&flmask) << n)
 }
 
+//go:nosplit
 func (c Channel) enable() {
 	st(c).cr.SetBits(en)
 }
 
+//go:nosplit
 func (c Channel) disable() {
 	st(c).cr.ClearBits(en)
 }
@@ -116,22 +128,25 @@ func (c Channel) enabled() bool {
 	return st(c).cr.LoadBits(en) != 0
 }
 
+//go:nosplit
 func (c Channel) irqEnabled() byte {
 	s := st(c)
-	ev := byte(s.cr.Load()&irqs<<1) | byte(s.fcr.Load()>>7&1)
+	ev := byte(s.cr.Load() & irqs << 1) //| byte(s.fcr.Load()>>7&1)
 	return ev
 }
 
+//go:nosplit
 func (c Channel) enableIRQ(flags byte) {
 	s := st(c)
 	s.cr.SetBits(uint32(flags) >> 1 & irqs)
 	//s.fcr.SetBits(uint32(flags) & 1 << 7) do not use
 }
 
+//go:nosplit
 func (c Channel) disableIRQ(flags byte) {
 	s := st(c)
 	s.cr.ClearBits(uint32(flags) >> 1 & irqs)
-	s.fcr.ClearBits(uint32(flags) & 1 << 7)
+	//s.fcr.ClearBits(uint32(flags) & 1 << 7)
 }
 
 const (
@@ -160,6 +175,7 @@ const (
 	mb16 = 3 << 23
 )
 
+//go:nosplit
 func (c Channel) setup(m Mode) {
 	mask := uint32(pfc | dir | circ | incP | incM | pburst | mburst | chsel)
 	if internal.H7 {
@@ -177,14 +193,17 @@ const (
 	prioV = 3
 )
 
+//go:nosplit
 func (c Channel) setPrio(prio Prio) {
 	st(c).cr.StoreBits(pl, uint32(prio)<<16)
 }
 
+//go:nosplit
 func (c Channel) prio() Prio {
 	return Prio(st(c).cr.LoadBits(pl) >> 16)
 }
 
+//go:nosplit
 func (c Channel) wordSize() (p, m uintptr) {
 	cr := uintptr(st(c).cr.Load())
 	p = 1 << (cr >> 11 & 3)
@@ -192,23 +211,28 @@ func (c Channel) wordSize() (p, m uintptr) {
 	return
 }
 
+//go:nosplit
 func (c Channel) setWordSize(p, m uintptr) {
 	cr := p&6<<10 | m&6<<12
 	st(c).cr.StoreBits(0x7800, uint32(cr))
 }
 
+//go:nosplit
 func (c Channel) len() int {
 	return int(st(c).ndtr.Load() & 0xFFFF)
 }
 
+//go:nosplit
 func (c Channel) setLen(n int) {
 	st(c).ndtr.Store(uint32(n) & 0xFFFF)
 }
 
+//go:nosplit
 func (c Channel) setAddrP(a unsafe.Pointer) {
 	st(c).par.Store(uint32(uintptr(a)))
 }
 
+//go:nosplit
 func (c Channel) setAddrM(a unsafe.Pointer) {
 	st(c).m0ar.Store(uint32(uintptr(a)))
 }

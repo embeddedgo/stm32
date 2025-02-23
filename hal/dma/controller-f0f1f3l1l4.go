@@ -57,6 +57,7 @@ const (
 	pfc   = 0
 )
 
+//go:nosplit
 func (d *Controller) channel(cn, rn int) Channel {
 	cn-- // channels are numbered from 1
 	if uint(cn) > 6 {
@@ -68,16 +69,25 @@ func (d *Controller) channel(cn, rn int) Channel {
 	paddr := uintptr(unsafe.Pointer(&d.c[cn])) &^ 0x3ff
 	return Channel{paddr | uintptr(rn)<<4 | 8 | uintptr(cn)}
 }
+
+//go:nosplit
 func cctrl(c Channel) *Controller {
 	return (*Controller)(unsafe.Pointer(c.h &^ 0xff))
 }
 
+//go:nosplit
 func ch(c Channel) *channel {
 	addr := c.h&^0xf7 + c.h&7*unsafe.Sizeof(channel{})
 	return (*channel)(unsafe.Pointer(addr))
 }
 
+//go:nosplit
 func cnum(c Channel) uintptr { return c.h & 7 }
+
+//go:nosplit
+func csnum(c Channel) uintptr { return c.h & 7 }
+
+//go:nosplit
 func rnum(c Channel) uint32  { return uint32(c.h >> 4 & 15) }
 
 const (
@@ -91,40 +101,49 @@ const (
 	dmerr = 0
 )
 
+//go:nosplit
 func (c Channel) status() byte {
 	isr := cctrl(c).isr.Load()
 	return byte(isr >> (cnum(c) * 4) & 0xf)
 }
 
+//go:nosplit
 func (c Channel) clear(flags byte) {
 	mask := uint32(flags&0xf) << (cnum(c) * 4)
 	cctrl(c).ifcr.Store(mask)
 }
 
+//go:nosplit
 func (c Channel) enable() {
 	ch(c).cr.SetBits(en)
 }
 
+//go:nosplit
 func (c Channel) disable() {
 	ch(c).cr.ClearBits(en)
 }
 
+//go:nosplit
 func (c Channel) enabled() bool {
 	return ch(c).cr.LoadBits(en) != 0
 }
 
+//go:nosplit
 func (c Channel) irqEnabled() byte {
 	return byte(ch(c).cr.LoadBits(irqs))
 }
 
+//go:nosplit
 func (c Channel) enableIRQ(flags byte) {
 	ch(c).cr.SetBits(uint32(flags) & irqs)
 }
 
+//go:nosplit
 func (c Channel) disableIRQ(flags byte) {
 	ch(c).cr.ClearBits(uint32(flags) & irqs)
 }
 
+//go:nosplit
 func (c Channel) setup(m Mode) {
 	const mask = mtp | mtm | circ | incP | incM | pl
 	ch(c).cr.StoreBits(mask, uint32(m))
@@ -138,14 +157,17 @@ const (
 	prioV = 3
 )
 
+//go:nosplit
 func (c Channel) setPrio(prio Prio) {
 	ch(c).cr.StoreBits(pl, uint32(prio)<<12)
 }
 
+//go:nosplit
 func (c Channel) prio() Prio {
 	return Prio(ch(c).cr.LoadBits(pl) >> 12)
 }
 
+//go:nosplit
 func (c Channel) wordSize() (p, m uintptr) {
 	ccr := uintptr(ch(c).cr.Load())
 	p = 1 << (ccr >> 8 & 3)
@@ -153,23 +175,28 @@ func (c Channel) wordSize() (p, m uintptr) {
 	return
 }
 
+//go:nosplit
 func (c Channel) setWordSize(p, m uintptr) {
 	pm := p&6<<7 | m&6<<9
 	ch(c).cr.StoreBits(0xf00, uint32(pm))
 }
 
+//go:nosplit
 func (c Channel) len() int {
 	return int(ch(c).ndtr.Load() & 0xFFFF)
 }
 
+//go:nosplit
 func (c Channel) setLen(n int) {
 	ch(c).ndtr.Store(uint32(n) & 0xFFFF)
 }
 
+//go:nosplit
 func (c Channel) setAddrP(a unsafe.Pointer) {
 	ch(c).par.Store(uint32(uintptr(a)))
 }
 
+//go:nosplit
 func (c Channel) setAddrM(a unsafe.Pointer) {
 	ch(c).mar.Store(uint32(uintptr(a)))
 }

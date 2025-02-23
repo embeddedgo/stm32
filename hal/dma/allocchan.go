@@ -20,7 +20,7 @@ var chanAlloc = struct {
 // an unused channel.
 func (d *Controller) AllocChannel() (ch Channel) {
 	sn := 0
-	cam := &chanAlloc.mask[d.num()]
+	cam := &chanAlloc.mask[dnum(d)]
 	chanAlloc.mx.Lock()
 	if *cam != 0 {
 		mask := uint8(1)
@@ -43,9 +43,9 @@ func (d *Controller) AllocChannel() (ch Channel) {
 
 // Free
 func (c Channel) Free() {
-	mask := uint8(1 << cnum(c))
+	mask := uint8(1 << csnum(c))
 	d := cctrl(c)
-	cam := &chanAlloc.mask[d.num()]
+	cam := &chanAlloc.mask[dnum(d)]
 	chanAlloc.mx.Lock()
 	*cam |= mask
 	if *cam == 0xff {

@@ -12,9 +12,11 @@ import (
 	"stm32/hal/raw/mmap"
 )
 
+func dnum(d *Controller) int { return 0 }
+
 func controller(n int) *Controller {
 	if uint(n) != 1 {
 		panic("bad DMA number")
 	}
-	return (*Controller)(unsafe.Pointer(mmap.DMA1_BASE)
+	return (*Controller)(unsafe.Pointer(mmap.DMA1_BASE))
 }

@@ -11,8 +11,13 @@ type Controller struct {
 }
 
 // DMA returns n-th DMA controller. The first controller number is 1.
+//go:nosplit
 func DMA(n int) *Controller {
 	return controller(n)
+}
+
+func (d *Controller) Num() int {
+	return int(dnum(d) + 1)
 }
 
 // EnableClock enables clock to the DMA controller. The lp parameter determines
@@ -27,6 +32,7 @@ func (d *Controller) DisableClock() {
 }
 
 // Reset resets the DMA controller.
+//go:nosplit
 func (d *Controller) Reset() {
 	d.reset()
 }
@@ -35,12 +41,18 @@ func (d *Controller) Reset() {
 // together with the connected to it cn request channel (ignored for F1/Lx).
 // Channels with the same sn points to the same DMA stream so they can't be
 // used at the same time.
+//go:nosplit
 func (d *Controller) Channel(sn, rn int) Channel {
 	return d.channel(sn, rn)
 }
 
 type Channel struct {
 	h uintptr
+}
+
+//go:nosplit
+func (c Channel) Num() int {
+	return int(csnum(c))
 }
 
 type Event uint8
@@ -87,33 +99,39 @@ func (err Error) Error() string {
 }
 
 // Status returns current event and error flags.
+//go:nosplit
 func (c Channel) Status() (Event, Error) {
 	flags := c.status()
 	return Event(flags) & EvAll, Error(flags) & ErrAll
 }
 
 // Clear clears specified flags.
+//go:nosplit
 func (c Channel) Clear(ev Event, err Error) {
 	c.clear(byte(ev) | byte(err))
 }
 
 // Enable enables the channel c. All events and errors should be cleared
 // before call this method.
+//go:nosplit
 func (c Channel) Enable() {
 	c.enable()
 }
 
 // Disable disables channel.
+//go:nosplit
 func (c Channel) Disable() {
 	c.disable()
 }
 
 // Returns true if channel is enabled.
+//go:nosplit
 func (c Channel) Enabled() bool {
 	return c.enabled()
 }
 
 // IRQEnabled returns events that are enabled to generate interrupt requests.
+//go:nosplit
 func (c Channel) IRQEnabled() (Event, Error) {
 	flags := c.irqEnabled()
 	return Event(flags) & EvAll, Error(flags) & ErrAll
@@ -127,11 +145,13 @@ func (c Channel) IRQEnabled() (Event, Error) {
 //	c.Clear(EvAll, ErrAll)
 //	c.EnableIRQ(ev, err)
 //	c.Enable()
+//go:nosplit
 func (c Channel) EnableIRQ(ev Event, err Error) {
 	c.enableIRQ(byte(ev) | byte(err))
 }
 
 // DisableIRQ disables IRQs generation by ev, err.
+//go:nosplit
 func (c Channel) DisableIRQ(ev Event, err Error) {
 	c.disableIRQ(byte(ev) | byte(err))
 }
@@ -164,6 +184,7 @@ const (
 )
 
 // Setup configures the DMA channel channel.
+//go:nosplit
 func (c Channel) Setup(m Mode) {
 	c.setup(m)
 }
@@ -178,47 +199,56 @@ const (
 	VeryHigh Prio = prioV // Very high priority.
 )
 
+//go:nosplit
 func (c Channel) SetPrio(prio Prio) {
 	c.setPrio(prio)
 }
 
+//go:nosplit
 func (c Channel) Prio() Prio {
 	return c.prio()
 }
 
 // WordSize returns the current word size (in bytes) for peripheral and memory
 // side of transfer.
+//go:nosplit
 func (c Channel) WordSize() (p, m uintptr) {
 	return c.wordSize()
 }
 
 // SetWordSize sets the word size (in bytes) for peripheral and memory side of
 // transfer.
+//go:nosplit
 func (c Channel) SetWordSize(p, m uintptr) {
 	c.setWordSize(p, m)
 }
 
 // Len returns current number of words to transfer.
+//go:nosplit
 func (c Channel) Len() int {
 	return c.len()
 }
 
 // SetLen sets number of words to transfer (n <= 65535).
+//go:nosplit
 func (c Channel) SetLen(n int) {
 	c.setLen(n)
 }
 
 // SetAddrP sets peripheral address (or memory source address in case of MTM).
+//go:nosplit
 func (c Channel) SetAddrP(a unsafe.Pointer) {
 	c.setAddrP(a)
 }
 
 // SetAddrM sets memory address.
+//go:nosplit
 func (c Channel) SetAddrM(a unsafe.Pointer) {
 	c.setAddrM(a)
 }
 
 // Controller returns the DMA controller that this channel belongs to.
+//go:nosplit
 func (c Channel) Controller() *Controller {
 	return cctrl(c)
 }

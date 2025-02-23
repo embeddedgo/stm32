@@ -4,7 +4,7 @@
 
 //go:build stm32h7x3
 
-package usart1
+package usart2
 
 import (
 	"embedded/rtos"
@@ -20,15 +20,15 @@ func setupDriver() {
 	d := dma.DMA(1)
 	d.EnableClock(true)
 	rxdma := d.AllocChannel()
-	rxdma.SetMux(dma.USART1_RX)
+	rxdma.SetMux(dma.USART2_RX)
 	txdma := d.AllocChannel()
-	txdma.SetMux(dma.USART1_TX)
-	driver = usart.NewDriver(usart.USART1(), rxdma, txdma)
-	irq.USART1.Enable(rtos.IntPrioLow, 0)
+	txdma.SetMux(dma.USART2_TX)
+	driver = usart.NewDriver(usart.USART2(), rxdma, txdma)
+	irq.USART2.Enable(rtos.IntPrioLow, 0)
 	dmairq.SetISR(txdma, driver.TxDMAISR)
 }
 
 //go:interrupthandler
-func _USART1_Handler() { driver.RxISR() }
+func _USART2_Handler() { driver.RxISR() }
 
-//go:linkname _USART1_Handler IRQ37_Handler
+//go:linkname _USART2_Handler IRQ38_Handler
