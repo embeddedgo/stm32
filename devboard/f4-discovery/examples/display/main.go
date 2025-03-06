@@ -69,7 +69,7 @@ func main() {
 
 	disp := dp.New(dci)
 	for {
-		examples.RotateDisplay(disp)
+		//examples.RotateDisplay(disp)
 		//examples.DrawText(disp)
 		examples.GraphicsTest(disp)
 	}
