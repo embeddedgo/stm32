@@ -43,6 +43,10 @@ type Channel struct {
 	h uintptr
 }
 
+func (c Channel) IsValid() bool {
+	return c.h != 0
+}
+
 type Event uint8
 
 const (

@@ -15,20 +15,20 @@
 //
 // Registers:
 //
-//	0x000 32  CR1      control register 1
-//	0x004 32  CR2      control register 2
-//	0x008 32  CFG1     configuration register 1
-//	0x00C 32  CFG2     configuration register 2
-//	0x010 32  IER      Interrupt Enable Register
-//	0x014 32  SR       Status Register
-//	0x018 32  IFCR     Interrupt/Status Flags Clear Register
-//	0x020 32  TXDR     Transmit Data Register
-//	0x030 32  RXDR     Receive Data Register
-//	0x040 32  CRCPOLY  Polynomial Register
-//	0x044 32  TXCRC    Transmitter CRC Register
-//	0x048 32  RXCRC    Receiver CRC Register
-//	0x04C 32  UDRDR    Underrun Data Register
-//	0x050 32  CGFR     configuration register
+//	0x000 32  CR1       control register 1
+//	0x004 32  CR2       control register 2
+//	0x008 32  CFG1      configuration register 1
+//	0x00C 32  CFG2      configuration register 2
+//	0x010 32  IER(SR)   Interrupt Enable Register
+//	0x014 32  SR        Status Register
+//	0x018 32  IFCR(SR)  Interrupt/Status Flags Clear Register
+//	0x020 32  TXDR      Transmit Data Register
+//	0x030 32  RXDR      Receive Data Register
+//	0x040 32  CRCPOLY   Polynomial Register
+//	0x044 32  TXCRC     Transmitter CRC Register
+//	0x048 32  RXCRC     Receiver CRC Register
+//	0x04C 32  UDRDR     Underrun Data Register
+//	0x050 32  CGFR      configuration register
 //
 // Import:
 //
@@ -131,34 +131,6 @@ const (
 )
 
 const (
-	RXPIE   IER = 0x01 << 0  //+ RXP Interrupt Enable
-	TXPIE   IER = 0x01 << 1  //+ TXP interrupt enable
-	DPXPIE  IER = 0x01 << 2  //+ DXP interrupt enabled
-	EOTIE   IER = 0x01 << 3  //+ EOT, SUSP and TXC interrupt enable
-	TXTFIE  IER = 0x01 << 4  //+ TXTFIE interrupt enable
-	UDRIE   IER = 0x01 << 5  //+ UDR interrupt enable
-	OVRIE   IER = 0x01 << 6  //+ OVR interrupt enable
-	CRCEIE  IER = 0x01 << 7  //+ CRC Interrupt enable
-	TIFREIE IER = 0x01 << 8  //+ TIFRE interrupt enable
-	MODFIE  IER = 0x01 << 9  //+ Mode Fault interrupt enable
-	TSERFIE IER = 0x01 << 10 //+ Additional number of transactions reload interrupt enable
-)
-
-const (
-	RXPIEn   = 0
-	TXPIEn   = 1
-	DPXPIEn  = 2
-	EOTIEn   = 3
-	TXTFIEn  = 4
-	UDRIEn   = 5
-	OVRIEn   = 6
-	CRCEIEn  = 7
-	TIFREIEn = 8
-	MODFIEn  = 9
-	TSERFIEn = 10
-)
-
-const (
 	RXP    SR = 0x01 << 0    //+ Rx-Packet available
 	TXP    SR = 0x01 << 1    //+ Tx-Packet space available
 	DXP    SR = 0x01 << 2    //+ Duplex Packet
@@ -194,30 +166,6 @@ const (
 	RXPLVLn = 13
 	RXWNEn  = 15
 	CTSIZEn = 16
-)
-
-const (
-	EOTC   IFCR = 0x01 << 3  //+ End Of Transfer flag clear
-	TXTFC  IFCR = 0x01 << 4  //+ Transmission Transfer Filled flag clear
-	UDRC   IFCR = 0x01 << 5  //+ Underrun flag clear
-	OVRC   IFCR = 0x01 << 6  //+ Overrun flag clear
-	CRCEC  IFCR = 0x01 << 7  //+ CRC Error flag clear
-	TIFREC IFCR = 0x01 << 8  //+ TI frame format error flag clear
-	MODFC  IFCR = 0x01 << 9  //+ Mode Fault flag clear
-	TSERFC IFCR = 0x01 << 10 //+ TSERFC flag clear
-	SUSPC  IFCR = 0x01 << 11 //+ SUSPend flag clear
-)
-
-const (
-	EOTCn   = 3
-	TXTFCn  = 4
-	UDRCn   = 5
-	OVRCn   = 6
-	CRCECn  = 7
-	TIFRECn = 8
-	MODFCn  = 9
-	TSERFCn = 10
-	SUSPCn  = 11
 )
 
 const (
