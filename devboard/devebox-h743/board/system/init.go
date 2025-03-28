@@ -10,8 +10,19 @@ import (
 )
 
 func init() {
-	// 480 MHz not supported, requires disabling Vcore overdrive before any WFE instruction
-	system.SetupPLL(25, 5, 80, 1, 2, 2) // 400 MHz
+	// 480 MHz CPU clock not supported, requires disabling Vcore overdrive
+	// before any WFE instruction
+
+	// PLL1 configuration (TODO: PLL2 and PLL3)
+	const (
+		osc = 25 // MHz
+		m   = 5  // ref_ck = osc / 5 = 5 MHz
+		n   = 80 // Fvco = ref_ck * n = 400 MHz
+		p   = 1  // p_ck = Fvco / p = 400 MHz (CPU)
+		q   = 2  // q_ck = Fvco / q = 200 MHz (SPI(I2S)1,2,3, SAI)
+		r   = 2  // r_ck = Fvco / r = 200 MHz (trace port)
+	)
+	system.SetupPLL(osc, m, n, p, q, r)
 	systick.Setup(2e6)
 	//rtcst.Setup(rtcst.LSE, 1, 32768)
 }

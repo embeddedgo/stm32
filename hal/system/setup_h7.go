@@ -30,6 +30,10 @@ import (
 //
 // Negative clksrc selects HSI as PLL clock source and setups its frequency to
 // (-clksrc) MHz (allowed values -8, -16, -32, -64).
+//
+// The PLL input clock is ref_ck = |clksrc| / M and must be 1..16 MHz. The VCO
+// freq is Fvco = ref_ck * N and must be 150..420 MHz for ref_ck <= 2 MHz or
+// 192..960 MHz for ref_ck >= 2 MHz.
 func SetupPLL(clksrc, M, N, P, Q, R int) {
 	RCC := rcc.RCC()
 
