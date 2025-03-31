@@ -2,8 +2,13 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+//go:build stm32h7x3
+
 package spih
 
+type CR1 uint32
+
+// CR1 bits
 const (
 	SPE      CR1 = 0x01 << 0  //+ Serial Peripheral Enable
 	MASRX    CR1 = 0x01 << 8  //+ Master automatic SUSP in Receive mode
@@ -30,9 +35,10 @@ const (
 	IOLOCKn   = 16
 )
 
+// CR2 bits
 const (
-	TSIZE CR2 = 0xFFFF << 0  //+ Number of data at current transfer
-	TSER  CR2 = 0xFFFF << 16 //+ Number of data transfer extension to be reload into TSIZE just when a previous
+	TSIZE uint32 = 0xFFFF << 0  //+ Number of data at current transfer
+	TSER  uint32 = 0xFFFF << 16 //+ Number of data transfer extension to be reload into TSIZE just when a previous
 )
 
 const (
@@ -40,6 +46,9 @@ const (
 	TSERn  = 16
 )
 
+type CFG1 uint32
+
+// CFG1 bits
 const (
 	DSIZE   CFG1 = 0x1F << 0  //+ Number of bits in at single SPI data frame
 	FTHVL   CFG1 = 0x0F << 5  //+ threshold level
@@ -64,6 +73,9 @@ const (
 	MBRn     = 28
 )
 
+type CFG2 uint32
+
+// CFG2 bits
 const (
 	MSSI    CFG2 = 0x0F << 0  //+ Master SS Idleness
 	MIDI    CFG2 = 0x0F << 4  //+ Master Inter-Data Idleness
@@ -98,34 +110,9 @@ const (
 	AFCNTRn  = 31
 )
 
-const (
-	RXPIE   IER = 0x01 << 0  //+ RXP Interrupt Enable
-	TXPIE   IER = 0x01 << 1  //+ TXP interrupt enable
-	DPXPIE  IER = 0x01 << 2  //+ DXP interrupt enabled
-	EOTIE   IER = 0x01 << 3  //+ EOT, SUSP and TXC interrupt enable
-	TXTFIE  IER = 0x01 << 4  //+ TXTFIE interrupt enable
-	UDRIE   IER = 0x01 << 5  //+ UDR interrupt enable
-	OVRIE   IER = 0x01 << 6  //+ OVR interrupt enable
-	CRCEIE  IER = 0x01 << 7  //+ CRC Interrupt enable
-	TIFREIE IER = 0x01 << 8  //+ TIFRE interrupt enable
-	MODFIE  IER = 0x01 << 9  //+ Mode Fault interrupt enable
-	TSERFIE IER = 0x01 << 10 //+ Additional number of transactions reload interrupt enable
-)
+type SR uint32
 
-const (
-	RXPIEn   = 0
-	TXPIEn   = 1
-	DPXPIEn  = 2
-	EOTIEn   = 3
-	TXTFIEn  = 4
-	UDRIEn   = 5
-	OVRIEn   = 6
-	CRCEIEn  = 7
-	TIFREIEn = 8
-	MODFIEn  = 9
-	TSERFIEn = 10
-)
-
+// SR bits
 const (
 	RXP    SR = 0x01 << 0    //+ Rx-Packet available
 	TXP    SR = 0x01 << 1    //+ Tx-Packet space available
@@ -164,30 +151,9 @@ const (
 	CTSIZEn = 16
 )
 
-const (
-	EOTC   IFCR = 0x01 << 3  //+ End Of Transfer flag clear
-	TXTFC  IFCR = 0x01 << 4  //+ Transmission Transfer Filled flag clear
-	UDRC   IFCR = 0x01 << 5  //+ Underrun flag clear
-	OVRC   IFCR = 0x01 << 6  //+ Overrun flag clear
-	CRCEC  IFCR = 0x01 << 7  //+ CRC Error flag clear
-	TIFREC IFCR = 0x01 << 8  //+ TI frame format error flag clear
-	MODFC  IFCR = 0x01 << 9  //+ Mode Fault flag clear
-	TSERFC IFCR = 0x01 << 10 //+ TSERFC flag clear
-	SUSPC  IFCR = 0x01 << 11 //+ SUSPend flag clear
-)
+type CGFR uint32
 
-const (
-	EOTCn   = 3
-	TXTFCn  = 4
-	UDRCn   = 5
-	OVRCn   = 6
-	CRCECn  = 7
-	TIFRECn = 8
-	MODFCn  = 9
-	TSERFCn = 10
-	SUSPCn  = 11
-)
-
+// CGFR bits
 const (
 	I2SMOD  CGFR = 0x01 << 0  //+ I2S mode selection
 	I2SCFG  CGFR = 0x07 << 1  //+ I2S configuration mode

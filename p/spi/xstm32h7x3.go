@@ -17,9 +17,9 @@ type Periph struct {
 	CR2     mmio.R32[CR2]
 	CFG1    mmio.R32[CFG1]
 	CFG2    mmio.R32[CFG2]
-	IER     mmio.R32[IER]
+	IER     mmio.R32[SR]
 	SR      mmio.R32[SR]
-	IFCR    mmio.R32[IFCR]
+	IFCR    mmio.R32[SR]
 	_       uint32
 	TXDR    mmio.R32[uint32]
 	_       [3]uint32
@@ -101,50 +101,7 @@ func SSOE_(p *Periph) mmio.RM32[CFG2]    { return mmio.RM32[CFG2]{&p.CFG2, SSOE}
 func SSOM_(p *Periph) mmio.RM32[CFG2]    { return mmio.RM32[CFG2]{&p.CFG2, SSOM} }
 func AFCNTR_(p *Periph) mmio.RM32[CFG2]  { return mmio.RM32[CFG2]{&p.CFG2, AFCNTR} }
 
-type IER uint32
-
-func RXPIE_(p *Periph) mmio.RM32[IER]   { return mmio.RM32[IER]{&p.IER, RXPIE} }
-func TXPIE_(p *Periph) mmio.RM32[IER]   { return mmio.RM32[IER]{&p.IER, TXPIE} }
-func DPXPIE_(p *Periph) mmio.RM32[IER]  { return mmio.RM32[IER]{&p.IER, DPXPIE} }
-func EOTIE_(p *Periph) mmio.RM32[IER]   { return mmio.RM32[IER]{&p.IER, EOTIE} }
-func TXTFIE_(p *Periph) mmio.RM32[IER]  { return mmio.RM32[IER]{&p.IER, TXTFIE} }
-func UDRIE_(p *Periph) mmio.RM32[IER]   { return mmio.RM32[IER]{&p.IER, UDRIE} }
-func OVRIE_(p *Periph) mmio.RM32[IER]   { return mmio.RM32[IER]{&p.IER, OVRIE} }
-func CRCEIE_(p *Periph) mmio.RM32[IER]  { return mmio.RM32[IER]{&p.IER, CRCEIE} }
-func TIFREIE_(p *Periph) mmio.RM32[IER] { return mmio.RM32[IER]{&p.IER, TIFREIE} }
-func MODFIE_(p *Periph) mmio.RM32[IER]  { return mmio.RM32[IER]{&p.IER, MODFIE} }
-func TSERFIE_(p *Periph) mmio.RM32[IER] { return mmio.RM32[IER]{&p.IER, TSERFIE} }
-
 type SR uint32
-
-func RXP_(p *Periph) mmio.RM32[SR]    { return mmio.RM32[SR]{&p.SR, RXP} }
-func TXP_(p *Periph) mmio.RM32[SR]    { return mmio.RM32[SR]{&p.SR, TXP} }
-func DXP_(p *Periph) mmio.RM32[SR]    { return mmio.RM32[SR]{&p.SR, DXP} }
-func EOT_(p *Periph) mmio.RM32[SR]    { return mmio.RM32[SR]{&p.SR, EOT} }
-func TXTF_(p *Periph) mmio.RM32[SR]   { return mmio.RM32[SR]{&p.SR, TXTF} }
-func UDR_(p *Periph) mmio.RM32[SR]    { return mmio.RM32[SR]{&p.SR, UDR} }
-func OVR_(p *Periph) mmio.RM32[SR]    { return mmio.RM32[SR]{&p.SR, OVR} }
-func CRCE_(p *Periph) mmio.RM32[SR]   { return mmio.RM32[SR]{&p.SR, CRCE} }
-func TIFRE_(p *Periph) mmio.RM32[SR]  { return mmio.RM32[SR]{&p.SR, TIFRE} }
-func MODF_(p *Periph) mmio.RM32[SR]   { return mmio.RM32[SR]{&p.SR, MODF} }
-func TSERF_(p *Periph) mmio.RM32[SR]  { return mmio.RM32[SR]{&p.SR, TSERF} }
-func SUSP_(p *Periph) mmio.RM32[SR]   { return mmio.RM32[SR]{&p.SR, SUSP} }
-func TXC_(p *Periph) mmio.RM32[SR]    { return mmio.RM32[SR]{&p.SR, TXC} }
-func RXPLVL_(p *Periph) mmio.RM32[SR] { return mmio.RM32[SR]{&p.SR, RXPLVL} }
-func RXWNE_(p *Periph) mmio.RM32[SR]  { return mmio.RM32[SR]{&p.SR, RXWNE} }
-func CTSIZE_(p *Periph) mmio.RM32[SR] { return mmio.RM32[SR]{&p.SR, CTSIZE} }
-
-type IFCR uint32
-
-func EOTC_(p *Periph) mmio.RM32[IFCR]   { return mmio.RM32[IFCR]{&p.IFCR, EOTC} }
-func TXTFC_(p *Periph) mmio.RM32[IFCR]  { return mmio.RM32[IFCR]{&p.IFCR, TXTFC} }
-func UDRC_(p *Periph) mmio.RM32[IFCR]   { return mmio.RM32[IFCR]{&p.IFCR, UDRC} }
-func OVRC_(p *Periph) mmio.RM32[IFCR]   { return mmio.RM32[IFCR]{&p.IFCR, OVRC} }
-func CRCEC_(p *Periph) mmio.RM32[IFCR]  { return mmio.RM32[IFCR]{&p.IFCR, CRCEC} }
-func TIFREC_(p *Periph) mmio.RM32[IFCR] { return mmio.RM32[IFCR]{&p.IFCR, TIFREC} }
-func MODFC_(p *Periph) mmio.RM32[IFCR]  { return mmio.RM32[IFCR]{&p.IFCR, MODFC} }
-func TSERFC_(p *Periph) mmio.RM32[IFCR] { return mmio.RM32[IFCR]{&p.IFCR, TSERFC} }
-func SUSPC_(p *Periph) mmio.RM32[IFCR]  { return mmio.RM32[IFCR]{&p.IFCR, SUSPC} }
 
 type CGFR uint32
 

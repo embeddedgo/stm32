@@ -19,7 +19,7 @@ func init() {
 		m   = 5  // ref_ck = osc / 5 = 5 MHz
 		n   = 80 // Fvco = ref_ck * n = 400 MHz
 		p   = 1  // p_ck = Fvco / p = 400 MHz (CPU)
-		q   = 2  // q_ck = Fvco / q = 200 MHz (SPI(I2S)1,2,3, SAI)
+		q   = 4  // q_ck = Fvco / q = 100 MHz (VCO1: SPI123<=200MHz, SAI<=150MHz)
 		r   = 2  // r_ck = Fvco / r = 200 MHz (trace port)
 	)
 	system.SetupPLL(osc, m, n, p, q, r)

@@ -10,7 +10,6 @@ package system
 import (
 	"runtime"
 
-	//"github.com/embeddedgo/stm32/p/bus"
 	"github.com/embeddedgo/stm32/p/bus"
 	"github.com/embeddedgo/stm32/p/flash"
 	"github.com/embeddedgo/stm32/p/pwr"
