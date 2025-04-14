@@ -5,10 +5,8 @@
 package main
 
 import (
-	"embedded/mmio"
 	"fmt"
 	"time"
-	"unsafe"
 
 	"github.com/embeddedgo/stm32/hal/dma"
 	"github.com/embeddedgo/stm32/hal/gpio"
@@ -17,7 +15,6 @@ import (
 	"github.com/embeddedgo/stm32/hal/usart"
 	"github.com/embeddedgo/stm32/hal/usart/usart1"
 
-	"github.com/embeddedgo/stm32/devboard/devebox-h743/board/leds"
 	_ "github.com/embeddedgo/stm32/devboard/devebox-h743/board/leds"
 	_ "github.com/embeddedgo/stm32/devboard/devebox-h743/board/system"
 )
@@ -45,6 +42,7 @@ func main() {
 
 	// Serial console
 	uartcon.Setup(usart1.Driver(), conRx, conTx, usart.Word8b, 115200, "USART1")
+
 	outCfg := gpio.Config{Mode: gpio.Alt, Speed: gpio.VeryHigh}
 	csn.Setup(&outCfg)
 	csn.SetAltFunc(gpio.AF5)
@@ -56,37 +54,54 @@ func main() {
 	miso.SetAltFunc(gpio.AF5)
 
 	d := spih.NewMaster(spih.SPI(2), dma.Channel{}, dma.Channel{})
-	baudrate = d.Setup(spih.Word8b, 400e3)
-	p := d.Periph()
+	d.Setup(spih.Word8b, 400e3)
 
-	txdr := (*mmio.U8)(unsafe.Pointer(&p.TXDR))
-	rxdr := (*mmio.U8)(unsafe.Pointer(&p.RXDR))
+	var (
+		out [17]byte
+		in  [20]byte
+	)
+
 	for i := 0; ; i++ {
-		fmt.Print(i, ": ")
-		p.CR2.Store(8)
-		d.Enable()
-		txdr.Store(byte(i))
-		txdr.Store(byte(i - 1))
-		txdr.Store(byte(i - 2))
-		p.TXDR.Store(uint32(i))
-		txdr.Store(byte(i - 3))
-		for p.SR.LoadBits(spih.RXP) == 0 {
+		for k := range out {
+			out[k] = byte(i + k)
 		}
-		buf[0] = rxdr.Load()
-		buf[1] = rxdr.Load()
-		buf[2] = rxdr.Load()
-		for p.SR.LoadBits(spih.RXP) == 0 {
-		}
-		v := p.RXDR.Load()
-		buf[3] = byte(v)
-		buf[4] = byte(v >> 8)
-		buf[5] = byte(v >> 16)
-		buf[6] = byte(v >> 24)
-		for p.SR.LoadBits(spih.RXP) == 0 {
-		}
-		buf[7] = rxdr.Load()
-		d.Disable()
-		leds.User.Toggle()
-		time.Sleep(time.Second / 4)
+		n := d.WriteRead(out, in)
+		fmt.Println(n, in[:n])
+		time.Sleep(time.Second)
 	}
+
+	/*
+	   p := d.Periph()
+	   txdr := (*mmio.U8)(unsafe.Pointer(&p.TXDR))
+	   rxdr := (*mmio.U8)(unsafe.Pointer(&p.RXDR))
+
+	   	for i := 0; ; i++ {
+	   		fmt.Print(i, ": ")
+	   		p.CR2.Store(8)
+	   		d.Enable()
+	   		txdr.Store(byte(i))
+	   		txdr.Store(byte(i - 1))
+	   		txdr.Store(byte(i - 2))
+	   		p.TXDR.Store(uint32(i))
+	   		txdr.Store(byte(i - 3))
+	   		for p.SR.LoadBits(spih.RXP) == 0 {
+	   		}
+	   		buf[0] = rxdr.Load()
+	   		buf[1] = rxdr.Load()
+	   		buf[2] = rxdr.Load()
+	   		for p.SR.LoadBits(spih.RXP) == 0 {
+	   		}
+	   		v := p.RXDR.Load()
+	   		buf[3] = byte(v)
+	   		buf[4] = byte(v >> 8)
+	   		buf[5] = byte(v >> 16)
+	   		buf[6] = byte(v >> 24)
+	   		for p.SR.LoadBits(spih.RXP) == 0 {
+	   		}
+	   		buf[7] = rxdr.Load()
+	   		d.Disable()
+	   		leds.User.Toggle()
+	   		time.Sleep(time.Second / 4)
+	   	}
+	*/
 }
