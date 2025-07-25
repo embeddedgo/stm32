@@ -4,4 +4,4 @@ TARGET=stm32f4x
 TRACECLKIN=168000000
 RESET=none
 
-. $(emgo env GOROOT)/../scripts/load-oocd.sh
+. ../../../../scripts/load-oocd.sh

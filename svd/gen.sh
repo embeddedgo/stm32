@@ -14,7 +14,7 @@ for p in dma dmamux dmamux/dmamux1 dmamux/dmamux2 exti flash gpio pwr rcc rtc sp
 		GOTARGET=$(basename $f .go)
 		case $GOTARGET in
 		stm32f*|stm32l*|stm32h*)
-			GOOS=noos GOARCH=thumb $(emgo env GOROOT)/bin/go build -tags $GOTARGET
+			GOTOOLCHAIN=go1.24.5-embedded GOOS=noos GOARCH=thumb go build -tags $GOTARGET
 			;;
 		esac
 	done

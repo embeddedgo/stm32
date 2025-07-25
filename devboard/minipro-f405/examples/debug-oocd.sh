@@ -3,4 +3,4 @@
 TARGET=stm32f4x
 RESET=none
 
-. $(emgo env GOROOT)/../scripts/debug-oocd.sh
+. ../../../../scripts/debug-oocd.sh
