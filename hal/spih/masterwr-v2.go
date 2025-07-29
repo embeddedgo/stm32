@@ -37,8 +37,8 @@ func masterWriteRead(d *Master, out, in unsafe.Pointer, n int) {
 		p.CR1.Store(masterEnable|CSTART)
 
 		// Fill the Tx FIFO.
-		for m != 0 && p.SR.Load(TXP)  != 0 {
-			p.TXDR.
+		for m != 0 && p.SR.Load(TXP) != 0 {
+			//p.TXDR.
 		}
 
 		m = 0
