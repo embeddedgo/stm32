@@ -50,13 +50,13 @@ func main() {
 	time.Sleep(time.Millisecond)
 	reset.Set()
 
-	dp := displays.Adafruit_0i96_128x64_OLED_SSD1306()
-	//dp := displays.Adafruit_1i5_128x128_OLED_SSD1351()
-	//dp := displays.Adafruit_1i54_240x240_IPS_ST7789()
-	//dp := displays.Adafruit_2i8_240x320_TFT_ILI9341()
-	//dp := displays.ERTFTM_1i54_240x240_IPS_ST7789()
-	//dp := displays.MSP4022_4i0_320x480_TFT_ILI9486()
-	//dp := displays.Waveshare_1i5_128x128_OLED_SSD1351()
+	dp := displays.Adafruit_0i96_128x64_OLED_SSD1306
+	//dp := displays.Adafruit_1i5_128x128_OLED_SSD1351
+	//dp := displays.Adafruit_1i54_240x240_IPS_ST7789
+	//dp := displays.Adafruit_2i8_240x320_TFT_ILI9341
+	//dp := displays.ERTFTM_1i54_240x240_IPS_ST7789
+	//dp := displays.MSP4022_4i0_320x480_TFT_ILI9486
+	//dp := displays.Waveshare_1i5_128x128_OLED_SSD1351
 
 	// Most of the displays accept significant overclocking.
 	//dp.MaxReadClk *= 2
